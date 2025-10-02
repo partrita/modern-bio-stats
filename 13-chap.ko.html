@@ -1,0 +1,2111 @@
+<!DOCTYPE html>
+
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta charset="utf-8"/>
+<meta content="quarto-1.7.31" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0, user-scalable=yes" name="viewport"/>
+<title>13  Design of High Throughput Experiments and their Analyses – Modern Statistics for Modern Biology</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta content="./" name="quarto:offset"/>
+<link href="./imgs/msmb-favicon.png" rel="icon" type="image/png"/>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet"/>
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-af5ec82acda093b5ee751184164e9432.css" id="quarto-text-highlighting-styles" rel="stylesheet"/>
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet"/>
+<link append-hash="true" data-mode="light" href="site_libs/bootstrap/bootstrap-d63985d606c7f07261ad561a6cfde940.min.css" id="quarto-bootstrap" rel="stylesheet"/>
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet"/>
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"/>
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+<link href="msmb.css" rel="stylesheet"/>
+<meta content="13  Design of High Throughput Experiments and their Analyses – Modern Statistics for Modern Biology" property="og:title"/>
+<meta content="If you are a biologist and want to get the best out of the powerful methods of modern computational statistics, this is your book." property="og:description"/>
+<meta content="https://www.huber.embl.de/msmb/imgs/maizeDarwin.png" property="og:image"/>
+<meta content="Modern Statistics for Modern Biology" property="og:site_name"/>
+<meta content="13  Design of High Throughput Experiments and their Analyses – Modern Statistics for Modern Biology" name="twitter:title"/>
+<meta content="If you are a biologist and want to get the best out of the powerful methods of modern computational statistics, this is your book." name="twitter:description"/>
+<meta content="https://www.huber.embl.de/msmb/imgs/maizeDarwin.png" name="twitter:image"/>
+<meta content="summary" name="twitter:card"/>
+<script type="text/javascript">
+  var _paq = _paq || [];
+  
+  // Call disableCookies before calling trackPageView 
+  _paq.push(['disableCookies']);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u='//tr-denbi.embl.de/heimdall/';
+    _paq.push(['setTrackerUrl', u+'p.php']);
+    _paq.push(['setSiteId', '26']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'p.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+</head>
+<body class="floating nav-fixed slimcontent quarto-light">
+<div id="quarto-search-results"></div>
+<header class="headroom fixed-top" id="quarto-header">
+<nav class="navbar navbar-expand-lg" data-bs-theme="dark">
+<div class="navbar-container container-fluid">
+<div class="navbar-brand-container mx-auto">
+<a class="navbar-brand" href="./index.html">
+<span class="navbar-title">현대 생물학에 대한 현대 통계</span>
+</a>
+</div>
+<div class="" id="quarto-search" title="Search"></div>
+<button aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbarCollapse" data-bs-toggle="collapse" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }" role="menu" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarCollapse">
+<ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item dropdown">
+<a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="nav-menu-chapters" role="link">
+<span class="menu-text">챕터</span>
+</a>
+<ul aria-labelledby="nav-menu-chapters" class="dropdown-menu dropdown-menu-end">
+<li>
+<a class="dropdown-item" href="./index.html">
+<span class="dropdown-text">집</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./00-chap.html">
+<span class="dropdown-text">소개</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./01-chap.html">
+<span class="dropdown-text">개별 데이터에 대한 생성 모델</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./02-chap.html">
+<span class="dropdown-text">통계 모델링</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./03-chap.html">
+<span class="dropdown-text">데이터 시각화</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./04-chap.html">
+<span class="dropdown-text">혼합 모델</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./05-chap.html">
+<span class="dropdown-text">클러스터링</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./06-chap.html">
+<span class="dropdown-text">테스트</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./07-chap.html">
+<span class="dropdown-text">다변량 분석</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./08-chap.html">
+<span class="dropdown-text">고 처리량 수 데이터 및 일반화 된 선형 모델</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./09-chap.html">
+<span class="dropdown-text">이종 데이터를위한 다변량 방법</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./10-chap.html">
+<span class="dropdown-text">네트워크와 나무</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./11-chap.html">
+<span class="dropdown-text">이미지 데이터</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./12-chap.html">
+<span class="dropdown-text">감독 학습</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./13-chap.html">
+<span class="dropdown-text">높은 처리량 실험 및 분석의 설계</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./14-chap.html">
+<span class="dropdown-text">통계적 일치</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./15-chap.html">
+<span class="dropdown-text">감사의 말</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./16-chap.html">
+<span class="dropdown-text">참조</span></a>
+</li>
+</ul>
+</li>
+</ul>
+</div> <!-- /navcollapse -->
+<div class="quarto-navbar-tools">
+</div>
+</div> <!-- /container-fluid -->
+</nav>
+</header>
+<!-- content -->
+<div class="quarto-container page-columns page-rows-contents page-layout-article page-navbar" id="quarto-content">
+<!-- sidebar -->
+<nav class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" id="quarto-sidebar">
+<nav class="toc-active" id="TOC" role="doc-toc">
+<h2 id="toc-title">섹션</h2>
+<ul class="collapse">
+<li><a class="nav-link active" data-scroll-target="#goals-for-this-chapter" href="#goals-for-this-chapter" id="toc-goals-for-this-chapter"><span class="header-section-number">13.1</span>이 장의 목표</a></li>
+<li><a class="nav-link" data-scroll-target="#sec-design-typesexps" href="#sec-design-typesexps" id="toc-sec-design-typesexps"><span class="header-section-number">13.2</span>실험의 유형</a></li>
+<li><a class="nav-link" data-scroll-target="#partitioning-error-bias-and-noise" href="#partitioning-error-bias-and-noise" id="toc-partitioning-error-bias-and-noise"><span class="header-section-number">13.3</span>분할 오류 : 바이어스 및 노이즈</a></li>
+<li><a class="nav-link" data-scroll-target="#basic-principles-in-the-design-of-experiments" href="#basic-principles-in-the-design-of-experiments" id="toc-basic-principles-in-the-design-of-experiments"><span class="header-section-number">13.4</span>실험 설계의 기본 원리</a></li>
+<li><a class="nav-link" data-scroll-target="#mean-variance-relationships-and-variance-stabilizing-transformations" href="#mean-variance-relationships-and-variance-stabilizing-transformations" id="toc-mean-variance-relationships-and-variance-stabilizing-transformations"><span class="header-section-number">13.5</span>평균 분산 관계 및 분산 안정화 변환</a></li>
+<li><a class="nav-link" data-scroll-target="#sec-design-quality" href="#sec-design-quality" id="toc-sec-design-quality"><span class="header-section-number">13.6</span>데이터 품질 평가 및 품질 관리</a></li>
+<li><a class="nav-link" data-scroll-target="#longitudinal-data" href="#longitudinal-data" id="toc-longitudinal-data"><span class="header-section-number">13.7</span>종 방향 데이터</a></li>
+<li><a class="nav-link" data-scroll-target="#data-integration-use-everything-you-could-know" href="#data-integration-use-everything-you-could-know" id="toc-data-integration-use-everything-you-could-know"><span class="header-section-number">13.8</span>데이터 통합 ​​: 당신이 알고있는 모든 것을 사용하십시오</a></li>
+<li><a class="nav-link" data-scroll-target="#sharpen-your-tools-reproducible-research" href="#sharpen-your-tools-reproducible-research" id="toc-sharpen-your-tools-reproducible-research"><span class="header-section-number">13.9</span>도구를 연마하십시오 : 재현 가능한 연구</a></li>
+<li><a class="nav-link" data-scroll-target="#sec-design-datarep" href="#sec-design-datarep" id="toc-sec-design-datarep"><span class="header-section-number">13.10</span>데이터 표현</a></li>
+<li><a class="nav-link" data-scroll-target="#tidy-data-using-it-wisely" href="#tidy-data-using-it-wisely" id="toc-tidy-data-using-it-wisely"><span class="header-section-number">13.11</span>Tidy Data - 현명하게 사용합니다</a></li>
+<li><a class="nav-link" data-scroll-target="#leaky-pipelines-and-statistical-sufficiency" href="#leaky-pipelines-and-statistical-sufficiency" id="toc-leaky-pipelines-and-statistical-sufficiency"><span class="header-section-number">13.12</span>누수 파이프 라인 및 통계적 충분 성</a></li>
+<li><a class="nav-link" data-scroll-target="#sec-design-efficient" href="#sec-design-efficient" id="toc-sec-design-efficient"><span class="header-section-number">13.13</span>효율적인 컴퓨팅</a></li>
+<li><a class="nav-link" data-scroll-target="#summary-of-this-chapter" href="#summary-of-this-chapter" id="toc-summary-of-this-chapter"><span class="header-section-number">13.14</span>이 장의 요약</a></li>
+<li><a class="nav-link" data-scroll-target="#sec-design-furtherreading" href="#sec-design-furtherreading" id="toc-sec-design-furtherreading"><span class="header-section-number">13.15</span>추가 독서</a></li>
+<li><a class="nav-link" data-scroll-target="#exercises" href="#exercises" id="toc-exercises"><span class="header-section-number">13.16</span>수업 과정</a></li>
+</ul>
+</nav>
+</nav>
+<div class="quarto-sidebar-collapse-item" data-bs-target=".quarto-sidebar-collapse-item" data-bs-toggle="collapse" id="quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+<div class="sidebar margin-sidebar zindex-bottom" id="quarto-margin-sidebar">
+</div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+<header class="quarto-title-block default" id="title-block-header">
+<div class="quarto-title">
+<h1 class="title"><span class="quarto-section-identifier" id="sec-design"><span class="chapter-number">13</span>  <span class="chapter-title">높은 처리량 실험 및 분석의 설계</span></span></h1>
+</div>
+<div class="quarto-title-meta">
+</div>
+</header>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a class="lightbox" data-gallery="quarto-lightbox-gallery-1" href="imgs/RAFisherSmoking.png"><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="imgs/RAFisherSmoking.png"/></a></p>
+</figure>
+</div>
+</div></div></div>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a class="lightbox" data-gallery="quarto-lightbox-gallery-2" href="imgs/dailies_icon.png"><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="imgs/dailies_icon.png"/></a></p>
+</figure>
+</div>
+</div></div></div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="margin-aside">마찬가지로 영화 감독이 너무 많은 영상에 영향을 미치기 전에 잠재적 인 조명 또는 촬영 문제를 수정하기 위해 매일 보는 것과 마찬가지로 데이터를보기 전에 실험의 모든 실행이 완료 될 때까지 기다리지 않는 것이 좋습니다. 중간 데이터 분석 및 시각화는 예상치 못한 변동 소스를 추적하고 프로토콜을 조정할 수 있습니다. 순차적 실험 설계에 대해서는 많은 것이 알려져 있습니다<span class="citation" data-cites="mead1990design">(<a href="16-chap.html#ref-mead1990design" role="doc-biblioref">미드 1990</a>))</span>그러나 더 실용적으로 설정하더라도 변동의 원인을 알고 조정하는 것이 중요합니다.</span></div></div>
+<p>우리는 이제 다양한 생물학적 데이터 세트와 데이터 유형과 분석 방법을 보았습니다. 이 책을 마무리하기 위해 우리는 우리가 배운 일반적인 교훈을 되 찾습니다. 좋은 조언의 세 가지 훌륭한 조언은 다음과 같습니다.</p>
+<ul>
+<li><p><strong>분석하는 방법?</strong>R.A. 피셔, 실험 디자인의 아버지 중 하나<span class="citation" data-cites="fisher1935design">(<a href="16-chap.html#ref-fisher1935design" role="doc-biblioref">피셔 1935</a>))</span>다음과 같이 인용됩니다.<em>실험이 완료된 후 통계 학자와 상담하는 것은 종종 사후 검사를 수행하도록 요청하는 것입니다. 그는 아마도 실험이 어떻게 죽었는지 말할 수 있습니다</em><a class="footnote-ref" href="#fn1" id="fnref1" role="doc-noteref"><sup>1</sup></a>. 따라서 분석을 염두에두고 이미 실험을 설계하는 것이 중요합니다. 데이터가 획득 한 후에 만 ​​데이터를 분석하는 방법에 대해 생각하지 마십시오.</p></li>
+<li><p><strong>언제?</strong>Dailies : 첫 번째 데이터를 획득하자마자 분석부터 시작하십시오. 모든 것이 수집 될 때까지 기다리지 말고 문제 해결하기에는 너무 늦습니다.</p></li>
+<li><p><strong>무엇?</strong>데이터를 분석하는 동안 종이 작성을 시작하십시오. 글을 쓰고 결과와 결론을 제시하려고 한 후에 만 ​​올바르게 지원하기 위해해야 ​​할 일을 알게됩니다.</p></li>
+</ul>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>1938 년 최초의 인도 통계 의회에 대한 대통령 연설. Sankhya 4, 14-17.</p></div></div><section class="level2" data-number="13.1" id="goals-for-this-chapter">
+<h2 class="anchored" data-anchor-id="goals-for-this-chapter" data-number="13.1"><span class="header-section-number">13.1</span>이 장의 목표</h2>
+<p>이 장에서는 다음과 같습니다.</p>
+<ul>
+<li><p>어떤 유형의 실험이 있는지, 그리고 각각의 다양한 제어 금액에 대한 간단한 분류를 개발하십시오.</p></li>
+<li><p>오류, 노이즈 및 바이어스와 같은 다양한 유형의 변동성을 구별하는 방법을 요약하십시오.</p></li>
+<li><p>혼란, 의존성, 배치 효과와 같은 걱정해야 할 사항에 대해 토론하십시오. 우리는 유명한 질문을 할 것입니다.<em>얼마나 많은 복제가 있습니까?</em>.</p></li>
+<li><p>평균 분산 관계의 필수 아이디어와 그들이 데이터를 변환할지 여부와 방법에 대해 알려주는 방법을 요약하십시오.</p></li>
+<li><p>계산 기술과 도구는 작업을 완료하는 데 필수적입니다. 효율적인 워크 플로 설계, 데이터 표현 및 계산에 대해 논의 할 것입니다.</p></li>
+<li><p>분석 워크 플로우에서 데이터 요약 단계와 충분한 질문에 대해 알아 보려고 노력하십시오. 따라서 일부 단계에서 중요한 정보를 버리지 않도록하기 위해 중요한 정보를 버리지 않아 다운 스트림이 누락되어 어려움을 겪게됩니다.</p></li>
+</ul>
+</section>
+<section class="level2 page-columns page-full" data-number="13.2" id="sec-design-typesexps">
+<h2 class="anchored" data-anchor-id="sec-design-typesexps" data-number="13.2"><span class="header-section-number">13.2</span>실험의 유형</h2>
+<section class="level4 unnumbered page-columns page-full" id="the-art-of-good-enough.">
+<h4 class="unnumbered anchored" data-anchor-id="the-art-of-good-enough.">“충분히 좋다”의 예술.</h4>
+<p>우리는 우리의 자원이 유한하고 악기가 완벽하지 않으며 현실 세계가 복잡하다는 사실을 다루기 위해 실험 설계가 필요합니다. 그럼에도 불구하고 우리는 최고의 결과를 얻고 싶습니다. 이것은 항상 어려운 결정과 트레이드 오프를 초래합니다.<strong>실험 설계</strong>그러한 결정을 합리화하는 것을 목표로합니다. 우리의 실험 중재와 측정 기기는 정밀도와 정확성이 제한되어 있습니다. 종종 우리는 처음에 이러한 한계를 알지 못하고 수집해야합니다.<strong>예비 데이터</strong>그들을 추정합니다. 우리는 직접적으로 관심의 현상을 간접적으로 관찰 할 수 있습니다. 우리의 치료 조건은 바람직하지 않지만 부작용을 피하기가 어려울 수 있으며, 우리의 측정은 신호 또는 "배경 노이즈"와 겹쳐 질 수 있습니다. 샘플 크기는 실용적이고 경제적 인 이유로 제한됩니다. 비현실적인 이상을 처방 할 때는 거의 없습니다. 우리는 실용적이고 실행 가능한 선택을해야합니다. 인용문<span class="citation" data-cites="Bacher:GB:2016">(<a href="16-chap.html#ref-Bacher:GB:2016" role="doc-biblioref">Bacher 및 Kendziorski 2016</a>))</span>이를 명확하게 설명합니다.“일반적으로 잘 설계된 실험은 충분히 구동되는 실험이며, 연구중인 효과에 대한 다중 설명에 대한 기회를 최소화하기 위해 측정에 체계적으로 영향을 줄 수있는 기술적 인공물 및 생물학적 특징이 다른 방식으로 균형 잡히거나 무작위 배정되거나 제어되는 실험입니다.</p>
+<p>우선, 각각 다른 유형의 실험에 대해 논의하겠습니다.</p>
+<p>a<strong>통제 된 실험</strong>, 우리는 연구중인 (모델) 시스템, 환경 조건, 실험적 판독 값과 같은 모든 관련 변수를 제어 할 수 있습니다. 예를 들어, 우리는 정의 된 매체, 온도 및 대기에서 실험실 조건에서 성격화 된 세포주를 가질 수 있으며, 정확한 양의 약물을 투여 할 것이며, 72H 후에 우리는 특정 경로 리포터의 활동을 측정합니다.</p>
+<p>a<strong>공부하다</strong>, 우리는 통제력이 적습니다 : 측정 된 결과에 영향을 줄 수있는 중요한 조건은 일반적으로 윤리적 우려 나 물류 제약으로 인해 연구원을 통제하지 않습니다. 예를 들어, 생태 현장 연구에서 이것은 날씨, 영양 자원의 가용성 또는 포식자의 활동 일 수 있습니다. 에서<strong>관찰 연구</strong>관심 변수조차도 연구원에 의해 통제되지 않습니다. 예를 들어, 임상 시험에서 이것은 개별 피험자를 그룹에 할당하는 것일 수 있습니다. 혼란에 대한 많은 가능성이 있기 때문에 (<a class="quarto-xref" href="#sec-design-confounding"><span>섹션 13.4.1</span></a>), 관찰 연구의 해석은 어려울 수 있습니다. 여기에 오래된 격언의 "상관 관계가 원인이 아님"이 있습니다.</p>
+<p>a<strong>무작위 대조 시험</strong>, 우리는 여전히 결과에 영향을 미치는 많은 요인에 대한 통제력 부족을 다루어야하지만, 관심 변수 (예 : 임상 시험에서의 치료 유형)의 할당을 통제하므로, 충분한 표본 크기로 모든 성가신 효과가 평균적이며 관찰 된 효과는 실제로 중재에 인과 적으로 할당 될 수 있다고 기대할 수 있습니다. 그러한 시험은 보통입니다<strong>전망</strong><a class="footnote-ref" href="#fn2" id="fnref2" role="doc-noteref"><sup>2</sup></a>, 즉, 환자를 그룹에 할당 할 때 결과는 알려져 있지 않다.</p>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>반의어는 후 향적이다. 관찰 연구는 전향 적이거나 회고 될 수 있습니다.</p></div></div><p>에이<strong>메타 분석</strong>몇 가지 이전 실험 또는 연구에 대한 관찰 연구입니다. 메타 분석의 한 가지 동기는 효과적인 샘플 크기를 증가시켜 전력을 높이는 것입니다. 다른 하나는 연구원 편견이나 다른 편견으로 고통 받거나, 힘을 쏟거나, 그렇지 않으면 결함이 있거나 무작위 일 수있는 개별 실험이나 연구의 한계를 극복하는 것입니다. 희망은 많은 연구에서 결과를 모아서 그러한 "학습 수준"문제가 평균화되기를 희망합니다.</p>
+</section>
+</section>
+<section class="level2 page-columns page-full" data-number="13.3" id="partitioning-error-bias-and-noise">
+<h2 class="anchored" data-anchor-id="partitioning-error-bias-and-noise" data-number="13.3"><span class="header-section-number">13.3</span>분할 오류 : 바이어스 및 노이즈</h2>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a class="lightbox" data-gallery="quarto-lightbox-gallery-3" href="imgs/devil.png" title="Statisticians use the term error for any deviations of a measured value from the true value. This is different from the everyday use of the word. In statistics, error is an unavoidable aspect of life. It is not “bad”, it is something to be cherished, reckoned with, tamed and controlled."><img alt="Statisticians use the term error for any deviations of a measured value from the true value. This is different from the everyday use of the word. In statistics, error is an unavoidable aspect of life. It is not “bad”, it is something to be cherished, reckoned with, tamed and controlled." class="img-fluid quarto-figure quarto-figure-center figure-img" src="imgs/devil.png" width="123"/></a></p>
+</figure>
+</div>
+<figcaption>통계 학자는이 용어를 사용합니다<strong>오류</strong>실제 값에서 측정 된 값의 편차. 이것은 단어의 일상적인 사용과 다릅니다. 통계에서 오류는 피할 수없는 삶의 측면입니다. 그것은 "나쁜"것이 아니며, 소중히 여기고, 길들여지고, 길들여지고 통제해야 할 것입니다.</figcaption>
+</figure>
+</div>
+</div></div></div>
+<p>우리는 두 가지 유형의 오류를 크게 구별합니다. 우리가 부르는 첫 번째<strong>소음</strong>, 우리가 충분한 복제를 수행하면“평균 아웃”. 두 번째는 우리가 부릅니다<strong>편견</strong>, 남아; 더 많은 복제로 인해 더욱 분명해집니다. 황소의 눈을 상기하십시오<a class="quarto-xref" href="12-chap.html#fig-supervised-bullseye">수치<span>12.18</span></a>: 하단 패널에는 소음이 많지만 편견은 없으며 포인트 구름의 중심이 올바른 위치에 있습니다. 상단 패널에는 노이즈가 훨씬 적지 만 바이어스가 훨씬 적습니다. 복제의 양은 포인트의 중심이 잘못된 위치에 있다는 사실을 해결하지 못할 것입니다.</p>
+<p>바이어스는 노이즈보다 다루기가 더 어렵다 : 노이즈는 복제를 보면서 쉽게 인식되며, 점점 더 많은 복제를 분석함에 따라 평균이 평균화됩니다. 바이어스를 사용하면 그것이 존재한다는 것을 인식하기 어려울 수 있으며, 일반적으로 일부 정량적 모델로 그것을 측정하고 조정하는 방법을 찾아야합니다.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-design-bias">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">질문 13.1</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>높은 처리량 데이터에서 편향을 모델링 한 이전 장에서 두 가지 예를 제공하십시오.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout" class="callout-header d-flex align-content-center" data-bs-target=".callout-2-contents" data-bs-toggle="collapse">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">해결책</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div class="callout-2-contents callout-collapse collapse" id="callout-2">
+<div class="callout-body-container callout-body">
+<p>예를 들어,<a class="quarto-xref" href="08-chap.html"><span>8 장</span></a>, 우리는 Gamma-Pooisson 분포로 샘플링 노이즈를 모델링했으며 라이브러리 크기 요인과 시퀀싱 깊이 바이어스를 추정하고 차동 표현을 테스트 할 때 고려했습니다. 또한 일반화 된 선형 모델에 차단 계수를 도입하여 사용 된 두 가지 다른 프로토콜 (단일 엔드, 페어링 엔드)으로 인한 샘플링 편향을 모델링했습니다.</p>
+</div>
+</div>
+</div>
+<section class="level3 page-columns page-full" data-number="13.3.1" id="error-models-noise-is-in-the-eye-of-the-beholder">
+<h3 class="anchored" data-anchor-id="error-models-noise-is-in-the-eye-of-the-beholder" data-number="13.3.1"><span class="header-section-number">13.3.1</span>오류 모델 : 노이즈는 보는 사람의 눈에 있습니다.</h3>
+<p>DNA- 정치를 포함하는 대부분의 생화학 적 또는 물리적 과정의 효율은 그들의 서열 함량에 의존한다. 예를 들어, 긴 동지애자 스트레칭, 팔린 드롬, 전체 또는 로컬 GC 함량의 발생은 PCR의 효율 또는 중합체가 나노 포어를 통해 어떻게 당겨지는 지에 대한 역학을 수정할 수 있습니다. 그러한 효과의 크기와 특성은 모델링하기가 어렵습니다. 농도, 온도, 효소 등과 같은 요인에 미묘한 방법으로 의존합니다. 따라서 RNA-Seq 데이터를 볼 때 GC 함량을 노이즈 또는 편견으로 취급해야합니까?</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-design-DESeq2">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">질문 13.2</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>어떻게<strong><a href="https://bioconductor.org/packages/DESeq2/">deseq2</a></strong>메소드이 문제를 해결 하시겠습니까?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout" class="callout-header d-flex align-content-center" data-bs-target=".callout-4-contents" data-bs-toggle="collapse">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">해결책</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div class="callout-4-contents callout-collapse collapse" id="callout-4">
+<div class="callout-body-container callout-body">
+<p><strong><a href="https://bioconductor.org/packages/DESeq2/">deseq2</a></strong>두 옵션을 모두 제공합니다. 크기 요인이 샘플 당 샘플 샘플링 바이어스를 모델링하는 데 사용되는 경우 이러한 효과는 명시 적으로 모델링되지 않습니다.</p>
+<!--```{r}
+#| child: devil.qmd
+#| fig-cap: "Remember that the noun *sample* here, by convention, refers to one column of the count matrix, e.g., one sequencing library corresponding to one replicate of one biological condition. The same term (here as the verb form *sampling*) is also used in its more general, statistical sense, as in \"a sample of data from a distribution\". There is no easy way around this ambiguity, so we just need to be aware of it."
+```-->
+<p><em>메모:</em>그런 다음, 각 유전자에 대해, 그러한 편향은 모든 샘플에서 동일한 방식으로 수에 영향을 미치므로, 차등 발현 분석을 목적으로 취약하다고 가정한다. 그러한 효과가 샘플-특이 적 인 정도까지, 그들은 노이즈로 취급된다. 그러나 비네팅에 설명 된대로<strong><a href="https://bioconductor.org/packages/DESeq2/">deseq2</a></strong>또한 샘플을 지정할 수 있습니다.<em>그리고</em>매트릭스에 대한 유전자-의존적 정규화 인자, 그리고 이들은 그러한 바이어스의 명시 적 추정치를 포함하기위한 것이다.</p>
+<p>명사를 기억하십시오<em>견본</em>여기서, 컨벤션에 의해, 예를 들어, 하나의 생물학적 조건의 하나의 복제에 대응하는 하나의 시퀀싱 라이브러리와 같은 카운트 행렬의 한 열을 지칭한다. 같은 용어 (여기서 동사 형태로<em>견본 추출</em>)는 또한“분포의 데이터 샘플”에서와 같이보다 일반적인 통계적 의미로 사용됩니다. 이 모호성 주위에는 쉬운 방법이 없으므로 우리는 그것을 알고 있어야합니다.</p>
+</div>
+</div>
+</div>
+<p>공식 오류 모델은 변동성을 노이즈 및 바이어스로 분해하는 데 도움이 될 수 있습니다. 만난 표준 분해를 ANOVA (분산 분석)라고합니다. 이러한 유형의 모델에서, 변동성은 사각형의 합으로 측정되며 그 기원에 따라 배분됩니다. 예를 들어, 선형 판별 분석 (LDA)에서 감독 분류를 수행 할 때<a class="quarto-xref" href="12-chap.html"><span>12 장</span></a>, 우리는 총 사각형의 총 합을 계산했습니다<span class="math inline">\(기음\)</span>~처럼</p>
+<p><span class="anchored-eq" data-anchor-id="eq-qodlethcursg" id="eq-qodlethcursg"><span class="math display">\ [
+c _ {\ text {total}} = c _ {\ text {groups}} + c _ {\ text {그룹 간}}.
+\ tag {13.1} \]</span></span></p>
+<p>그러나 일반적으로 이러한 분해를 수행하는 여러 가지 방법이 있습니다. 한 단계에서 그룹 내 변동으로 간주되는 효과 (노이즈)는 오른쪽 (서브) 그룹이 할당되면 그룹 간 효과로 간주 될 수 있습니다.</p>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a class="lightbox" data-gallery="quarto-lightbox-gallery-4" href="imgs/devil.png" title="Maybe this is akin to the vision of “personalized medicine”: better patient stratification that converts within group variation (incl. unsuccessful or unnecessary treatments) into between groups variation (where every group gets exactly what they need)."><img alt="Maybe this is akin to the vision of “personalized medicine”: better patient stratification that converts within group variation (incl. unsuccessful or unnecessary treatments) into between groups variation (where every group gets exactly what they need)." class="img-fluid quarto-figure quarto-figure-center figure-img" src="imgs/devil.png" width="123"/></a></p>
+</figure>
+</div>
+<figcaption>어쩌면 이것은“개인화 된 약”의 비전과 유사합니다. 그룹 변이 내에서 (실패하거나 불필요한 치료를 포함하여) 그룹 변이 (모든 그룹이 필요한 것을 정확하게 얻는)로 전환하는 더 나은 환자 계층화.</figcaption>
+</figure>
+</div>
+</div></div></div>
+<section class="level4 unnumbered page-columns page-full" id="determinism-versus-chance.">
+<h4 class="unnumbered anchored" data-anchor-id="determinism-versus-chance.">결정론 대 기회.</h4>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-cointosser3-web">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-cointosser3-web-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-5" href="imgs/cointosser3_web.jpg" title="Figure 13.1: A carefully constructed coin tossing machine can be made to provide deterministic coin flips."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="imgs/cointosser3_web.jpg"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-cointosser3-web-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 13.1 : 결정 론적 코인 플립을 제공하기 위해 신중하게 구성된 동전 던지기 기계를 만들 수 있습니다.</figcaption>
+</figure>
+</div>
+</div></div></div>
+<p>모든 사람은 동전 던지기의 결과를 무작위로 생각하므로 소음의 완벽한 예입니다. 그러나 코인 플립의 초기 조건을 세 심하게 등록하고 기계식 방정식을 해결했다면 어느 쪽이 올라올 확률이 높은지 예측할 수 있습니다.<span class="citation" data-cites="Diaconis-Montgomery-Holmes-2007">(<a href="16-chap.html#ref-Diaconis-Montgomery-Holmes-2007" role="doc-biblioref">Diaconis, Holmes 및 Montgomery 2007</a>))</span>.</p>
+<p>따라서 특정 효과 나 프로세스 여부를 묻지 않고<em>~이다</em>무작위 또는 결정 론적,<em>우리는 걱정합니다</em>결정적으로 (편견으로), 또는 세부 사항을 무시하는지 여부를 확률로 취급하고 확률 론적 모델링 (노이즈)을 사용하십시오. 이런 의미에서, 확률 론적 모델은 우리의 무지를 정량화하고 불확실성을 길들이는 방법입니다.</p>
+</section>
+<section class="level4 unnumbered" id="latent-factors.">
+<h4 class="unnumbered anchored" data-anchor-id="latent-factors.">잠재 요인.</h4>
+<p>때때로 우리는 예를 들어, 다른 시약 배치가 실험의 다른 단계에서 사용되었을 때 편향을 유발하는 요인에 대해 명시 적으로 알고 있습니다. 우리는 이것을 부릅니다<strong>배치 효과</strong> <span class="citation" data-cites="Leek:2010:batch">(<a href="16-chap.html#ref-Leek:2010:batch" role="doc-biblioref">Jeffrey T. Leek et al. 2010 년</a>))</span>. 다른 때에, 우리는 그러한 요인들이 작동 중이지만 명시 적 기록이 없을 것으로 예상 할 수 있습니다. 우리는 이것을 부릅니다<strong>잠재 요인</strong>. 우리는 그것들을 소음에 추가하는 것으로 취급 할 수 있으며<a class="quarto-xref" href="04-chap.html"><span>4 장</span></a>혼합 모델을 사용하여 그렇게하는 방법을 보았습니다. 그러나 이것은 충분하지 않을 수 있습니다. 고차원 데이터를 사용하면 잠재 요인으로 인한 소음이 상관 관계가있는 경향이 있으며, 이는 유망한 추론이 잘못 될 수 있습니다.<span class="citation" data-cites="Leek:2010:batch">(<a href="16-chap.html#ref-Leek:2010:batch" role="doc-biblioref">Jeffrey T. Leek et al. 2010 년</a>))</span>. 좋은 소식은 데이터의 잠재 요인을 추정하기 위해 동일한 상관 관계를 이용하여 편견으로 모델링하여 노이즈를 줄일 수 있다는 것입니다.<span class="citation" data-cites="LeekStorey:2007 Stegle:2010">(<a href="16-chap.html#ref-LeekStorey:2007" role="doc-biblioref">Jeffrey T. Leek and Storey 2007</a>; <a href="16-chap.html#ref-Stegle:2010" role="doc-biblioref">스티칭 et al. 2010 년</a>))</span>.</p>
+</section>
+</section>
+<section class="level3" data-number="13.3.2" id="biological-versus-technical-replicates">
+<h3 class="anchored" data-anchor-id="biological-versus-technical-replicates" data-number="13.3.2"><span class="header-section-number">13.3.2</span>생물학적 대 기술적 복제</h3>
+<div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-design-weight">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">질문 13.3</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>체중 감량 약물이 효과가 있는지 테스트하고 싶다고 상상해보십시오. 다음 연구 설계 중 어느 것을 사용 하시겠습니까?</p>
+<ul>
+<li><p>사람은 밀리그램 정밀도로 무게를두고 20 회 반복됩니다. 그는 다이어트를 따르고 4 주 후에 다시 20 회 반복되었다.</p></li>
+<li><p>10 명이 욕실 규모로 한 번 무게를두고 숫자를보고합니다. 4 주 후, 그들은 스스로 무게를두고 다시보고합니다.</p></li>
+</ul>
+<p>확실히 첫 번째 옵션은 오래된 장비에서 10 개가 아닌 매우 정확한 기기에 20 회 복제되므로 더 나은 옵션이 더 좋습니다.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout" class="callout-header d-flex align-content-center" data-bs-target=".callout-6-contents" data-bs-toggle="collapse">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">해결책</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div class="callout-6-contents callout-collapse collapse" id="callout-6">
+<div class="callout-body-container callout-body">
+<p>우리가 여기있는 것은<strong>인위적인</strong>~ 대<strong>생물학적 복제</strong>. 복제 수는 어떤 유형의 변화에 ​​영향을 미치는지보다 덜 중요합니다. 첫 번째 디자인의 20 개 복제는 우리가 이미 알고있는 충분한 정밀도로 우리가 알고있는 것을 다시 측정하는 데 낭비됩니다. 훨씬 더 중요한 질문은 다른 사람들에게 효과가 어떻게 일반화 되는가 - 두 번째 디자인으로 해결되기 시작하지만 실제로는 더 많은 사람들이 필요할 것입니다.</p>
+<!--```{r}
+#| child: devil.qmd
+#| fig-cap: "Inference or generalizations can only be made to a wider population if we have a representative, randomized sample of that population in our study. In the first case if a weight loss occurs, one could only infer about that person at that time."
+```-->
+<p><em>메모:</em>우리가 연구에서 해당 인구의 대표, 무작위 표본이있는 경우 더 넓은 인구에게만 추론 또는 일반화 할 수 있습니다. 첫 번째 경우 체중 감량이 발생하면 그 당시에 그 사람에 대해서만 추론 할 수 있습니다.</p>
+</div>
+</div>
+</div>
+<p>생물학적 실험에서 유사한 질문이 발생합니다. 예를 들어, 동일한 세포주에서 5 개의 복제를 수행합니까, 아니면 3 개의 다른 세포주에서 각각 복제합니까?</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-design-1kG">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">질문 13.4</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>1000 Genomes Project에서 사용하는 시퀀싱 기술로 신뢰할 수있는 변형 호출의 경우<span class="math inline">\ (30 \ times \)</span>게놈 당 범위. 그러나 생산 된 데이터의 평균 깊이는 1,092 명의 개인의 경우 5.1입니다.<span class="citation" data-cites="1000Genomes">(<a href="16-chap.html#ref-1000Genomes" role="doc-biblioref">1000 Genomes Project Consortium 2012</a>))</span>. 그 연구 설계가 왜 선택 되었습니까?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout" class="callout-header d-flex align-content-center" data-bs-target=".callout-8-contents" data-bs-toggle="collapse">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">해결책</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div class="callout-8-contents callout-collapse collapse" id="callout-8">
+<div class="callout-body-container callout-body">
+<p>이 프로젝트의 목표는 일반적인 유전자 변이, 즉 인구에서 1% 이상의 유병률을 가진 변이체를 찾는 것이 었습니다. 개별 사람들의 고문 유전자형을 부르는 것은 아닙니다. 따라서, 적용 범위가 적은 개인보다 적은 수의 개인보다 적은 범위 (5x에서 1092 명)를 가진 더 많은 개인을 샘플링하는 것이 더 비용 효율적이었다 (예 : 30x). 이런 식으로, 일반적인 변형은 여전히<span class="math inline">\ (&gt; = 30 \)</span>적용 범위 (<span class="math inline">\ (1092 \ times 1 \% \ times 5 = 55 \)</span>), 그들은 1000 명 중 몇 명에 존재하기 때문에 더 많은 사람들이 발견 될 것이며, 인구 빈도에 대한 더 정확한 추정치가있을 것입니다.</p>
+</div>
+</div>
+</div>
+<p>기술 대 생물학적 복제 용어는 일부 가치가 있지만 종종 너무 거칠다. 관찰 된 효과는 다양한 수준에서 일반화되거나 일반화되지 않을 수 있습니다. 다른 실험실, 하나의 실험실 내 다른 운영자, 다른 기술, 동일한 기술의 다른 기계, 프로토콜의 다른 변형, 다른 균주, 쓰레기, 성별, 개별 동물 등. 복제 수준을 더 명시 적으로 이름을 지정하는 것이 좋습니다.</p>
+</section>
+<section class="level3 page-columns page-full" data-number="13.3.3" id="units-vs.-fold-changes">
+<h3 class="anchored" data-anchor-id="units-vs.-fold-changes" data-number="13.3.3"><span class="header-section-number">13.3.3</span>단위 대 주름 변경</h3>
+<p>물리학의 측정은 일반적으로 SI의 배수로보고됩니다.<a class="footnote-ref" href="#fn3" id="fnref3" role="doc-noteref"><sup>3</sup></a>미터, 킬로그램, 초와 같은 단위. 하나의 악기를 사용하여 호주의 실험실에서 미터로 측정 한 길이는 1 년 후 캐나다의 실험실에서 다른 악기를 사용하거나 멀리 떨어진 은하계의 외계인 과학자들에 의해 직접 비교할 수 있습니다. 생물학에서는 표준화 된 측정을하는 것이 거의 가능하거나 실용적이지 않습니다. 여기서 상황은 인체 부품 (Feets, Inces 등)이 길이 측정에 사용되는 경우 와이 신체 부위의 크기가 은하와 은하는 물론 다른 도시와 국가마다 다른 곳과 비슷합니다.</p>
+<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>국제 단위 시스템 (프랑스 단위 시스템)</p></div></div><p>생물 학자들은 종종 측정 값을 일부 지역적이고 다소 임시 참조의 다중 (즉, 폴드 변화)로보고합니다. 이것의 도전은 접힘 변화와 비율이 비율이라는 것입니다. 분모는 임의의 변수 (실험실에서 실험실에서 실험에서 실험으로 변경됨)로, 실험 사이의 높은 불안정성과 매우 불평등 한 차이를 생성 할 수 있습니다. 이 장의 뒷부분에서 변환 및 충분 성 섹션을 참조하십시오. 실험 별 샘플링 바이어스로 인해 보편적 인 단위로 번역되지 않는 겉보기에 절대적인 값이 존재하는 경우에도 (예를 들어, RNA-Seq 실험에서 TPKM 값), 그들은 종종 정밀도의 표시가 부족합니다.</p>
+</section>
+<section class="level3" data-number="13.3.4" id="regular-and-catastrophic-noise">
+<h3 class="anchored" data-anchor-id="regular-and-catastrophic-noise" data-number="13.3.4"><span class="header-section-number">13.3.4</span>규칙적이고 치명적인 소음</h3>
+<p>정기적 인 노이즈는 독립적 인 정규 분포, 독소 또는 감마 - 포이슨 또는 라플라스와 같은 혼합물과 같은 간단한 확률 모델로 모델링 할 수 있습니다. 우리는 비교적 간단한 방법을 사용하여 데이터 분석에서 이러한 노이즈를 고려하고 매우 크거나 작은 값의 확률을 계산할 수 있습니다. 현실 세계에서 이것은 스토리의 일부일뿐입니다. 측정은 완전히 크기가 떨어질 수 있으며 (샘플 스왑, 오염 또는 소프트웨어 버그) 동시에 모든 마이크로 테이터 플레이트가 나빠져서 측정 된 모든 데이터에 영향을 미쳤습니다). 이러한 이벤트는 모델을 모델링하기가 어렵거나 교정하기도 어렵습니다.이를 다룰 수있는 가장 좋은 기회는 데이터 품질 평가, 특이 치 감지 및 문서화 된 제거입니다.</p>
+</section>
+</section>
+<section class="level2 page-columns page-full" data-number="13.4" id="basic-principles-in-the-design-of-experiments">
+<h2 class="anchored" data-anchor-id="basic-principles-in-the-design-of-experiments" data-number="13.4"><span class="header-section-number">13.4</span>실험 설계의 기본 원리</h2>
+<section class="level3 page-columns page-full" data-number="13.4.1" id="sec-design-confounding">
+<h3 class="anchored" data-anchor-id="sec-design-confounding" data-number="13.4.1"><span class="header-section-number">13.4.1</span>혼란</h3>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-confounding-1">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-confounding-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-6" href="13-chap_files/figure-html/fig-confounding-1-1.png" title="Figure 13.2: Comparison of a (hypothetical) biomarker between samples from disease and healthy states. If we are only given the information shown in the left panel, we might conclude that this biomarker performs well in detecting the disease. If, in addition, we are told that the data were acquired in two separate batches (e.g., different labs, different machines, different time points) as indicated in the panel on the right hand side, the conclusion will be different."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="13-chap_files/figure-html/fig-confounding-1-1.png" width="340"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-confounding-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 13.2 : 질병과 건강 상태의 샘플 사이의 (가상) 바이오 마커 비교. 왼쪽 패널에 표시된 정보 만 제공되면이 바이오 마커가 질병을 감지하는 데 잘 작동한다고 결론을 내릴 수 있습니다. 또한 오른쪽의 패널에 표시된 것처럼 데이터가 두 개의 별도 배치 (예 : 다른 실험실, 다른 기계, 다른 시점)로 획득 된 경우 결론은 다를 것입니다.</figcaption>
+</figure>
+</div>
+</div></div></div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-design-vishealthydisease">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">질문 13.5</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>표시된 데이터를 고려하십시오<a class="quarto-xref" href="#fig-confounding-1">수치<span>13.2</span></a>. 바이오 마커 수준에서 관찰 된 차이가 질병 대 건강에 따라 또는 배치로 인한 것인지 어떻게 결정할 수 있습니까?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout" class="callout-header d-flex align-content-center" data-bs-target=".callout-10-contents" data-bs-toggle="collapse">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">해결책</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div class="callout-10-contents callout-collapse collapse" id="callout-10">
+<div class="callout-body-container callout-body">
+<p>이 데이터에서 알 수 없습니다. 두 변수는 혼란스러워집니다.</p>
+</div>
+</div>
+</div>
+<p><strong>혼란</strong>생물학적 변수와 기술적 변수 사이에있을뿐만 아니라 더 미묘 할 수도 있습니다. 예를 들어, 바이오 마커는 질병과 직접 관련이 없을 수 있습니다. 그것은 질병 (다른 것들뿐만 아니라 다른 것들) 또는 질병 (많은 다른 것들)으로 인한 염증을 일으키는 라이프 스타일의 마커 일 수 있습니다.</p>
+</section>
+<section class="level3 page-columns page-full" data-number="13.4.2" id="effect-size-and-replicates">
+<h3 class="anchored" data-anchor-id="effect-size-and-replicates" data-number="13.4.2"><span class="header-section-number">13.4.2</span>효과 크기와 복제</h3>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-Avicenna">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Avicenna-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-7" href="imgs/Avicenna.png" title="Figure 13.3: Confounding is the reason that one of the seven rules of experimental design listed by the Persian physician-scientist Abu ’Ali al-Husayn ibn Sina (Avicenna) around AD 1020 was “to study one possible cause of a disease at a time” [@Stigler:sevenpillars]."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="imgs/Avicenna.png"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-Avicenna-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 13.3 : 혼란은 페르시아 의사 과학자가 나열한 실험 설계 규칙 중 하나입니다.<a href="https://en.wikipedia.org/wiki/Avicenna">Abu 'Ali al-Husayn Ibn Sina (Avicenna)</a>AD 1020경은“한 번에 질병의 한 가지 가능한 원인을 연구하는 것”이었다.<span class="citation" data-cites="Stigler:sevenpillars">(<a href="16-chap.html#ref-Stigler:sevenpillars" role="doc-biblioref">Stigler 2016</a>))</span>.
+</figcaption>
+</figure>
+</div>
+</div></div></div>
+<p>효과 크기는 빨간색 화살표에서 보여주는 것처럼 그룹 센터 간의 차이입니다.<a class="quarto-xref" href="#fig-effectsize">수치<span>13.4</span></a>. 각 그룹에서 더 큰 표본 크기는 각 그룹의 위치와 효과 크기가 알려진 정밀도를 증가시켜 차이를 감지하기위한 힘을 증가시킵니다 (<a class="quarto-xref" href="#fig-comparesamplesize">수치<span>13.5</span></a>). 한편, 건강 상태와 질병 상태 사이의 개별 샘플을 구별하기위한 진단으로서 바이오 마커의 성능은 그룹 내 분포 (및 두 상태의 상대적 유병률)에 의존하며 복제에 의해 개선되지 않습니다.</p>
+<div class="cell page-columns page-full" data-layout-align="center" data-warning.known="All aesthetics have length">
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-effectsize">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-effectsize-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-8" href="13-chap_files/figure-html/fig-effectsize-1.png" title="Figure 13.4: The red arrow shows the effect size, as measured by the difference between the centers of the two groups. Here we locate the centers by the medians; sometimes the mean is used."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="13-chap_files/figure-html/fig-effectsize-1.png" style="width:50.0%"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-effectsize-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 13.4 : 빨간색 화살표는 두 그룹의 중심 간의 차이에 의해 측정 된 효과 크기를 보여줍니다. 여기서 우리는 중앙값에 의해 센터를 찾습니다. 때로는 평균이 사용됩니다.</figcaption>
+</figure>
+</div>
+</div></div></div>
+<div class="cell page-columns page-full" data-layout-align="center" data-warning.known="All aesthetics have length">
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-comparesamplesize">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-comparesamplesize-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-9" href="13-chap_files/figure-html/fig-comparesamplesize-1.png" title="Figure 13.5: On the left, the boxplot was created with samples of size 6. On the right the sample sizes are 60. The measurements have the same underlying error distribution in both cases."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="13-chap_files/figure-html/fig-comparesamplesize-1.png" width="296"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-comparesamplesize-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 13.5 : 왼쪽에서 BoxPlot은 크기 6의 샘플로 만들어졌습니다. 오른쪽에서 샘플 크기는 60입니다. 측정은 두 경우 모두에서 동일한 기본 오류 분포를 갖습니다.</figcaption>
+</figure>
+</div>
+</div></div></div>
+</section>
+<section class="level3 page-columns page-full" data-number="13.4.3" id="sec-design-hotellingweighting">
+<h3 class="anchored" data-anchor-id="sec-design-hotellingweighting" data-number="13.4.3"><span class="header-section-number">13.4.3</span>영리한 조합 : Hotelling의 가중 예제</h3>
+<p>사용 가능한 리소스에서 최상의 데이터를 얻으려면 취소 및 대칭을 활용하는 것이 중요한 측면입니다. 다음은 Hotelling이 어떻게 개선 된 계량 체계를 고안했는지에 대한 유명한 그림입니다. 우리가 8 개의 알 수없는 무게 세트를 받았다고 가정 해<span class="math inline">))</span>. 다음 코드에서는 R의 임의 번호 생성기를 사용하여 이러한 실제 가중치 세트를 시뮬레이션합니다.</p>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-balance">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-balance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-10" href="imgs/balancechem.png" title="Figure 13.6: The example in this section uses the pharmacist’s balance weighing analogy introduced by Yates and developed by @Hotelling1944 and @Mood1946."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="imgs/balancechem.png"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-balance-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 13.6 :이 섹션의 예는 예이츠가 도입하고 개발 한 약사의 균형 계량 비유를 사용합니다.<span class="citation" data-cites="Hotelling1944">호텔 (호텔<a href="16-chap.html#ref-Hotelling1944" role="doc-biblioref">1944</a>))</span>그리고<span class="citation" data-cites="Mood1946">분위기 (<a href="16-chap.html#ref-Mood1946" role="doc-biblioref">1946</a>))</span>.
+</figcaption>
+</figure>
+</div>
+</div></div></div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a>세타<span class="ot">=</span> <span class="fu">둥근</span>(<span class="dv">2</span> <span class="sc">*</span> <span class="fu">견본</span>(<span class="dv">8</span>,,,<span class="dv">8</span>))<span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">8</span>)), <span class="dv">1</span>))</span>
+<span id="cb1-2"><a aria-hidden="true" href="#cb1-2" tabindex="-1"></a>세타</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10.7 13.4 16.4 3.9 8.5 16.0 1.2 4.4</code></pre>
+</div>
+</div>
+<p><strong>방법 1</strong>: 8 개의 계량을 사용하여 순진한 방법. 우리가 약사의 균형을 사용한다고 가정합니다 (<a class="quarto-xref" href="#fig-balance">수치<span>13.6</span></a>) 각 체중의 무게<span class="math inline">\ (\ theta_i \)</span>개별적으로 표준 편차가 0.1로 정상적으로 배포 된 오류. 오류 벡터를 계산합니다<code>오류 1</code>다음과 같이 사각형의 합계.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a>엑스<span class="ot">=</span>세타<span class="sc">+</span> <span class="fu">rnorm</span>(<span class="fu">길이</span>(theta),<span class="dv">0</span>,,,<span class="fl">0.1</span>))</span>
+<span id="cb3-2"><a aria-hidden="true" href="#cb3-2" tabindex="-1"></a>엑스</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10.513279 13.268145 16.507673 3.881881 8.395974 16.073952 1.131341
+[8] 4.289040</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-hidden="true" href="#cb5-1" tabindex="-1"></a>오류 1<span class="ot">=</span>엑스<span class="sc">-</span>세타</span>
+<span id="cb5-2"><a aria-hidden="true" href="#cb5-2" tabindex="-1"></a>오류 1</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.18672051 -0.13185519 0.10767279 -0.01811869 -0.10402607 0.07395242
+[7] -0.06865871 -0.11095993</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a aria-hidden="true" href="#cb7-1" tabindex="-1"></a><span class="fu">합집합</span>(오류 1<span class="sc">^</span><span class="dv">2</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.09748857</code></pre>
+</div>
+</div>
+<p><strong>방법 2</strong>: 8 가지 계량을 사용하는 Hotelling의 방법. 이 방법은 Hadamard 매트릭스를 기반으로하며 여기에서 계산합니다.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a aria-hidden="true" href="#cb9-1" tabindex="-1"></a><span class="fu">도서관</span>(<span class="st">"조사"</span>))</span>
+<span id="cb9-2"><a aria-hidden="true" href="#cb9-2" tabindex="-1"></a>H8<span class="ot">=</span> <span class="fu">하다마르</span>(<span class="dv">6</span>))</span>
+<span id="cb9-3"><a aria-hidden="true" href="#cb9-3" tabindex="-1"></a>Coef8<span class="ot">=</span> <span class="dv">2</span><span class="sc">*</span>H8<span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb9-4"><a aria-hidden="true" href="#cb9-4" tabindex="-1"></a>Coef8</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[, 1] [, 2] [, 3] [, 4] [, 5] [, 6] [, 7] [, 8]
+[1,] 1 1 1 1 1 1 1 1
+[2,] 1-1 1-1 1-1 1-1
+[3,] 1 1 -1-1 1 1 -1-1
+[4,] 1-1 -1 1 1 -1-1 1
+[5,] 1 1 1 -1 -1 -1-1
+[6,] 1-1 1-1 -1 1-1 1
+[7,] 1 1 -1 -1 -1 -1 1 1 1
+[8,] 1-1 -1 1 -1 1 1-1</code></pre>
+</div>
+</div>
+<p>우리는 사용합니다<code>Coef8</code>새로운 계량 체계의 계수로서, 다음과 같이 : 매트릭스의 첫 번째 열은 모든 가중치를 균형의 한쪽에 넣고 무게를 측정하도록 지시합니다. 결과를 호출하십시오<code>Y [1]</code>. 두 번째 열은 균형과 가중치 2, 4, 6, 8의 한쪽에 무게 1, 3, 5, 7을 다른쪽에 배치하도록 지시합니다. 그런 다음 차이를 측정하고 결과를 호출합니다<code>Y [2]</code>. 그리고 8 개의 모든 열에 대해<code>Coef8</code>. 필요한 계산을 아래와 같이 매트릭스 곱셈 형태로 표현할 수 있습니다.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a aria-hidden="true" href="#cb11-1" tabindex="-1"></a>와이<span class="ot">=</span>세타<span class="sc">%*%</span>Coef8<span class="sc">+</span> <span class="fu">rnorm</span>(<span class="fu">길이</span>(theta),<span class="dv">0</span>,,,<span class="fl">0.1</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+</div>
+<p>첫 번째 방법에서와 같이, 8 개의 중량 측정 각각은 표준 편차가 0.1의 정상 오차를 갖습니다.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-design-theta">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">질문 13.6</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>확인하십시오<code>Coef8</code>전체 요인에 대한 - 직교 매트릭스<span class="math inline">\ (c^t c = \ lambda \ mathbb {1} \)</span>일부<span class="math inline">\ (\ lambda \ in \ mathbb {r} \)</span>).</p></li>
+<li><p>우리가 곱하면 확인하십시오<code>세타</code>~와 함께<code>Coef8</code>타임스<code>Coef8</code>전환 및 8로 나누어 봅니다<code>세타</code>다시.</p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout" class="callout-header d-flex align-content-center" data-bs-target=".callout-12-contents" data-bs-toggle="collapse">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">해결책</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div class="callout-12-contents callout-collapse collapse" id="callout-12">
+<div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a aria-hidden="true" href="#cb12-1" tabindex="-1"></a>Coef8<span class="sc">%*%</span> <span class="fu">티</span>(coef8)</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[, 1] [, 2] [, 3] [, 4] [, 5] [, 6] [, 7] [, 8]
+[1,] 8 0 0 0 0 0 0
+[2,] 0 8 0 0 0 0 0
+[3,] 0 8 0 0 0 0 0
+[4,] 0 0 8 0 0 0 0
+[5,] 0 0 0 8 0 0 0
+[6,] 0 0 0 0 8 0 0
+[7,] 0 0 0 0 0 8 0
+[8,] 0 0 0 0 0 8</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a aria-hidden="true" href="#cb14-1" tabindex="-1"></a>세타<span class="sc">%*%</span>Coef8<span class="sc">%*%</span> <span class="fu">티</span>(coef8)<span class="sc">/</span> <span class="fu">NCOL</span>(coef8)</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[, 1] [, 2] [, 3] [, 4] [, 5] [, 6] [, 7] [, 8]
+[1,] 10.7 13.4 16.4 3.9 8.5 16 1.2 4.4</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>우리는이 결과를 결합하여 추정합니다<code>세타</code>직교를 사용합니다<code>Coef8</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a aria-hidden="true" href="#cb16-1" tabindex="-1"></a>thetahat<span class="ot">=</span>와이<span class="sc">%*%</span> <span class="fu">티</span>(coef8)<span class="sc">/</span> <span class="fu">NCOL</span>(coef8)</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+</div>
+<p>우리는 진실을 알고 있기 때문에<span class="math inline">\ (\ theta \)</span>, 우리는 오류와 사각형의 합을 계산할 수 있습니다.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a aria-hidden="true" href="#cb17-1" tabindex="-1"></a>오류 2<span class="ot">=</span> <span class="fu">as.vector</span>(thetahat)<span class="sc">-</span>세타</span>
+<span id="cb17-2"><a aria-hidden="true" href="#cb17-2" tabindex="-1"></a>오류 2</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.005213746 0.025216488 0.003201562 0.033880188 -0.029459127
+[6] -0.043173774 0.083202870 -0.025818188</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a aria-hidden="true" href="#cb19-1" tabindex="-1"></a><span class="fu">합집합</span>(오류 2<span class="sc">^</span><span class="dv">2</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.01214228</code></pre>
+</div>
+</div>
+<p>우리는 여기서 제곱의 합이 첫 번째 절차보다 실질적으로 작다는 것을 알 수 있습니다. 우리는 운이 좋았습니까?</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-design-Hotelling">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">질문 13.7</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><p>위의 실험을 반복하십시오. b = 10000 회, 매번 다른<code>세타</code>두 체계에서 제곱 오류 합계의 샘플링 분포를 살펴보십시오.</p></li>
+<li><p>두 분산 사이의 관계는 무엇이라고 생각하십니까?</p></li>
+</ol>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout" class="callout-header d-flex align-content-center" data-bs-target=".callout-14-contents" data-bs-toggle="collapse">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">해결책</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div class="callout-14-contents callout-collapse collapse" id="callout-14">
+<div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a aria-hidden="true" href="#cb21-1" tabindex="-1"></a>비<span class="ot">=</span> <span class="dv">10000</span></span>
+<span id="cb21-2"><a aria-hidden="true" href="#cb21-2" tabindex="-1"></a>TC<span class="ot">=</span> <span class="fu">티</span>(coef8)<span class="sc">/</span> <span class="fu">NCOL</span>(coef8)</span>
+<span id="cb21-3"><a aria-hidden="true" href="#cb21-3" tabindex="-1"></a>SSE<span class="ot">=</span> <span class="fu">뒤로 젖히다</span>(b, {</span>
+<span id="cb21-4"><a aria-hidden="true" href="#cb21-4" tabindex="-1"></a>세타<span class="ot">=</span> <span class="fu">둥근</span>(<span class="dv">2</span> <span class="sc">*</span> <span class="fu">견본</span>(<span class="dv">8</span>,,,<span class="dv">8</span>)))<span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">8</span>),)<span class="dv">1</span>))</span>
+<span id="cb21-5"><a aria-hidden="true" href="#cb21-5" tabindex="-1"></a>엑스<span class="ot">=</span>세타<span class="sc">+</span> <span class="fu">rnorm</span>(<span class="fu">길이</span>(theta),<span class="dv">0</span>,,,<span class="fl">0.1</span>))</span>
+<span id="cb21-6"><a aria-hidden="true" href="#cb21-6" tabindex="-1"></a>err1<span class="ot">=</span> <span class="fu">합집합</span>((엑스<span class="sc">-</span>세타)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb21-7"><a aria-hidden="true" href="#cb21-7" tabindex="-1"></a>와이<span class="ot">=</span>Coef8<span class="sc">%*%</span>세타<span class="sc">+</span> <span class="fu">rnorm</span>(<span class="fu">길이</span>(theta),<span class="dv">0</span>,,,<span class="fl">0.1</span>))</span>
+<span id="cb21-8"><a aria-hidden="true" href="#cb21-8" tabindex="-1"></a>thetahat<span class="ot">=</span>TC<span class="sc">%*%</span>와이</span>
+<span id="cb21-9"><a aria-hidden="true" href="#cb21-9" tabindex="-1"></a>err2<span class="ot">=</span> <span class="fu">합집합</span>(thetahat<span class="sc">-</span>세타)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb21-10"><a aria-hidden="true" href="#cb21-10" tabindex="-1"></a>  <span class="fu">기음</span>(err1, err2)</span>
+<span id="cb21-11"><a aria-hidden="true" href="#cb21-11" tabindex="-1"></a>})</span>
+<span id="cb21-12"><a aria-hidden="true" href="#cb21-12" tabindex="-1"></a><span class="fu">Rowmeans</span>(SSE)</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.079591221 0.009954419</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a aria-hidden="true" href="#cb23-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">티블</span>(<span class="at">lr =</span> <span class="fu">로그 2</span>(sse [<span class="dv">1</span>,]<span class="sc">/</span>SSE [<span class="dv">2</span>,])),<span class="fu">AES</span>(<span class="at">x =</span>LR))<span class="sc">+</span></span>
+<span id="cb23-2"><a aria-hidden="true" href="#cb23-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">빈 =</span> <span class="dv">50</span>))<span class="sc">+</span></span>
+<span id="cb23-3"><a aria-hidden="true" href="#cb23-3" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">로그 2</span>(<span class="dv">8</span>),)<span class="at">col =</span> <span class="st">"주황색"</span>))<span class="sc">+</span></span>
+<span id="cb23-4"><a aria-hidden="true" href="#cb23-4" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"SSE의 Log2 비율, 방법 1 vs 2"</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-logsseratios">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-logsseratios-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-11" href="13-chap_files/figure-html/fig-logsseratios-1.png" title="Figure 13.7: Logarithm (base 2) of the ratios of sum of squared error for the two methods. The vertical orange line corresponds to 8."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="13-chap_files/figure-html/fig-logsseratios-1.png" style="width:50.0%"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-logsseratios-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 13.7 : 두 가지 방법에 대한 제곱 오차의 합계 비율의 로그 (기본 2). 수직 주황색 선은 8에 해당합니다.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>두 번째 계획은 더 많습니다<strong>효율적인</strong>측정에 의해 생성 된 오차가 8 배 낮은 정사각형의 합이 있기 때문에 첫 번째 계수보다 8의 계수보다.<a class="quarto-xref" href="#fig-logsseratios">수치<span>13.7</span></a>).</p>
+</div>
+</div>
+</div>
+<p>이 예는 한 실험에서 측정을 결합하고 유사한 그룹 간의 비교를 통해 정확도를 높이고 비용을 줄일 수있는 기회가 여러 수량을 확인해야 함을 보여줍니다.</p>
+<p>이븐시나 (Ibn Sina)의 규칙은 최적의 디자인이 한 번에 한 가지 요소 만 변할 수 있다는 규칙은 20 세기에 라 피셔 (Ra Fisher)에 의해 대체되었다. 그는 대비가 신중하게 설계되는 한, 조합의 요소를 수정하고 결론에 도달 할 수 있고 계량 예에서와 같이 더 나은 결론을 내릴 수 있다는 것을 깨달았다.</p>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-blockbox">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-blockbox-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-12" href="13-chap_files/figure-html/fig-blockbox-1.png" title="Figure 13.8: On the left, two samples each of size 6 are being compared. On the right, the same data are shown, but colored by the time of data collection. We note a tendency of the data to fall into blocks according to these times. Because of this, comparison between the groups is diluted. This effect can be mitigated by comparing within times, i.,e., by blocking into three groups. Paired analysis, such as demonstrated in Questions wrn-design-paired—wrn-design-powerPairedUnpaired, is a special case of blocking."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="13-chap_files/figure-html/fig-blockbox-1.png" width="340"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-blockbox-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 13.8 : 왼쪽에서는 크기 6 각각의 샘플이 비교되고 있습니다. 오른쪽에는 동일한 데이터가 표시되지만 데이터 수집 시간에 따라 채색됩니다. 우리는이 시간에 따라 데이터가 블록에 빠지는 경향이 있습니다. 이로 인해 그룹 간의 비교가 희석됩니다. 이 효과는 세 그룹으로 차단함으로써 시간, 즉, 예를 들어 비교함으로써 완화 될 수있다. 질문에서 시연 된 쌍의 분석<a class="quarto-xref" href="#wrn-design-paired"><span>13.8</span></a>-<a class="quarto-xref" href="#wrn-design-powerPairedUnpaired"><span>13.10</span></a>, 특별한 차단의 경우입니다.</figcaption>
+</figure>
+</div>
+</div></div></div>
+</section>
+<section class="level3 page-columns page-full" data-number="13.4.4" id="blocking-and-pairing">
+<h3 class="anchored" data-anchor-id="blocking-and-pairing" data-number="13.4.4"><span class="header-section-number">13.4.4</span>차단 및 페어링</h3>
+<p>다윈은 옥수수 성장이 토양의 구성과 냄비의 습도에 의해 영향을 받는다고 의심했다. 이런 이유로, 교차 수분 씨앗에서 자란 식물을 자체 수분 씨앗에서 자란 식물과 비교하고 싶을 때, 그는 15 개의 냄비 각각에 각 유형의 묘목을 하나씩 심었습니다. 다윈의 각 냄비<em>Zea Mays</em>실험은 블록이며, 관심 요소 (수분 방법) 만<strong>치료</strong>, 각 블록 내에서 다릅니다 (<a class="quarto-xref" href="#fig-maizedarwin">수치<span>13.9</span></a>).</p>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-maizedarwin">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-maizedarwin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-13" href="imgs/maizeDarwin.png" title="Figure 13.9: A paired experiment is the simplest case of blocking."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="imgs/maizeDarwin.png"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-maizedarwin-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 13.9 : 쌍을 이루는 실험은 가장 간단한 차단 사례입니다.</figcaption>
+</figure>
+</div>
+</div></div></div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="margin-aside">사실, Ra Fisher는 다윈의 실험을 비판했다. 예를 들어 냄비의 한쪽이 더 많은 햇빛을 받았다면 이것은 교차 효과와의 "측면"효과의 혼란을 유발했을 수 있습니다. 동전을 뒤집어 냄비의 측면을 무작위 화하는 것이 바람직했을 것입니다.</span></div></div>
+<p><em>당신이 할 수있는 것을 차단하고, 당신이 할 수없는 것을 무작위 화하십시오.</em><br/>(George Box, 1978)</p>
+<section class="level4 unnumbered" id="comparing-a-paired-versus-an-unpaired-design">
+<h4 class="unnumbered anchored" data-anchor-id="comparing-a-paired-versus-an-unpaired-design">쌍과 짝을 이루지 않은 디자인 비교</h4>
+<p>다양한 가능한 디자인을 비교할 때 우리는 그렇게합니다<strong>전원 시뮬레이션</strong>우리가 본 것과 비슷합니다<a class="quarto-xref" href="01-chap.html"><span>1 장</span></a>. 각 그룹에서 샘플 크기가 15이고<strong>효과 크기</strong>0.2입니다. 또한 측정의 표준 편차에 대해 가정해야합니다. 여기서 두 그룹 모두 동일한 SD = 0.25를 가지고 있고 데이터를 시뮬레이션한다고 가정합니다.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a aria-hidden="true" href="#cb24-1" tabindex="-1"></a>N<span class="ot">=</span> <span class="dv">15</span></span>
+<span id="cb24-2"><a aria-hidden="true" href="#cb24-2" tabindex="-1"></a>효과<span class="ot">=</span> <span class="fl">0.2</span></span>
+<span id="cb24-3"><a aria-hidden="true" href="#cb24-3" tabindex="-1"></a>냄비<span class="ot">=</span> <span class="fu">rnorm</span>(N,<span class="dv">0</span>,,,<span class="dv">1</span>))</span>
+<span id="cb24-4"><a aria-hidden="true" href="#cb24-4" tabindex="-1"></a>소음<span class="ot">=</span> <span class="fu">rnorm</span>(N,<span class="dv">0</span>,,,<span class="fl">0.25</span>))</span>
+<span id="cb24-5"><a aria-hidden="true" href="#cb24-5" tabindex="-1"></a>Noisa<span class="ot">=</span> <span class="fu">rnorm</span>(N,<span class="dv">0</span>,,,<span class="fl">0.25</span>))</span>
+<span id="cb24-6"><a aria-hidden="true" href="#cb24-6" tabindex="-1"></a>잡종<span class="ot">=</span>냄비<span class="sc">+</span>효과<span class="sc">+</span>소음</span>
+<span id="cb24-7"><a aria-hidden="true" href="#cb24-7" tabindex="-1"></a>자동차로<span class="ot">=</span>냄비<span class="sc">+</span>Noisa</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-design-paired">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">질문 13.8</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>간단한 것을 모두 수행하십시오<span class="math inline">\(티\)</span>-테스트와 쌍<span class="math inline">\(티\)</span>-시험. 이 경우 어느 것이 더 강력합니까?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout" class="callout-header d-flex align-content-center" data-bs-target=".callout-16-contents" data-bs-toggle="collapse">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">해결책</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div class="callout-16-contents callout-collapse collapse" id="callout-16">
+<div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a aria-hidden="true" href="#cb25-1" tabindex="-1"></a><span class="fu">t.test</span>(하이브리드, Autoz,<span class="at">쌍을 이루었습니다</span> <span class="cn">거짓</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>두 개의 샘플 t- 검정
+
+데이터 : 하이브리드 및 autoz
+t = 0.77183, df = 26.012, p- 값 = 0.4472
+대체 가설 : 평균의 진정한 차이는 0과 같지 않습니다.
+95 % 신뢰 구간 :
+ -0.3145706 0.6928591
+샘플 추정치 :
+x 평균의 평균 y 
+0.5073519 0.3182076</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a aria-hidden="true" href="#cb27-1" tabindex="-1"></a><span class="fu">t.test</span>(하이브리드, Autoz,<span class="at">쌍을 이루었습니다</span> <span class="cn">진실</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>페어링 된 t- 검정
+
+데이터 : 하이브리드 및 autoz
+t = 1.8783, df = 14, p- 값 = 0.08133
+대체 가설 : 진정한 평균 차이는 0과 같지 않습니다.
+95 % 신뢰 구간 :
+ -0.02683705 0.40512561
+샘플 추정치 :
+평균 차이 
+      0.1891443</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>어쩌면 우리는 여기서 시뮬레이션 된 데이터로 운이 좋았습니까?</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-design-pairedboot">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">질문 13.9</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>일반적으로 어떤 방법이 더 강력한 지 확인하십시오. 위의 계산을 반복하십시오<span class="math inline">\ (1000 \)</span>이 1000 개의 시험에 대한 평균 거부 확률을 계산하고, 오 탐지 긍정적 속도를 사용하여 계산합니다.<span class="math inline">\ (\ alpha = 0.05 \)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout" class="callout-header d-flex align-content-center" data-bs-target=".callout-18-contents" data-bs-toggle="collapse">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">해결책</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div class="callout-18-contents callout-collapse collapse" id="callout-18">
+<div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a aria-hidden="true" href="#cb29-1" tabindex="-1"></a>비<span class="ot">=</span> <span class="dv">1000</span></span>
+<span id="cb29-2"><a aria-hidden="true" href="#cb29-2" tabindex="-1"></a>알파<span class="ot">=</span> <span class="fl">0.05</span></span>
+<span id="cb29-3"><a aria-hidden="true" href="#cb29-3" tabindex="-1"></a>무엇<span class="ot">=</span> <span class="fu">기음</span>(<span class="cn">거짓</span>,,,<span class="cn">진실</span>))</span>
+<span id="cb29-4"><a aria-hidden="true" href="#cb29-4" tabindex="-1"></a>베트남 후 증후군<span class="ot">=</span> <span class="fu">뒤로 젖히다</span>(b, {</span>
+<span id="cb29-5"><a aria-hidden="true" href="#cb29-5" tabindex="-1"></a>냄비<span class="ot">=</span> <span class="fu">rnorm</span>(N,<span class="dv">0</span>,,,<span class="dv">1</span>))</span>
+<span id="cb29-6"><a aria-hidden="true" href="#cb29-6" tabindex="-1"></a>소음<span class="ot">=</span> <span class="fu">rnorm</span>(N,<span class="dv">0</span>,,,<span class="fl">0.25</span>))</span>
+<span id="cb29-7"><a aria-hidden="true" href="#cb29-7" tabindex="-1"></a>Noisa<span class="ot">=</span> <span class="fu">rnorm</span>(N,<span class="dv">0</span>,,,<span class="fl">0.25</span>))</span>
+<span id="cb29-8"><a aria-hidden="true" href="#cb29-8" tabindex="-1"></a>잡종<span class="ot">=</span>냄비<span class="sc">+</span>효과<span class="sc">+</span>소음</span>
+<span id="cb29-9"><a aria-hidden="true" href="#cb29-9" tabindex="-1"></a>자동차로<span class="ot">=</span>냄비<span class="sc">+</span>Noisa</span>
+<span id="cb29-10"><a aria-hidden="true" href="#cb29-10" tabindex="-1"></a>  <span class="fu">vapply</span>(무엇,</span>
+<span id="cb29-11"><a aria-hidden="true" href="#cb29-11" tabindex="-1"></a>    <span class="cf">기능</span>(페어)</span>
+<span id="cb29-12"><a aria-hidden="true" href="#cb29-12" tabindex="-1"></a>      <span class="fu">t.test</span>(하이브리드, Autoz,<span class="at">쌍을 이루었습니다</span>짝을 이루는)<span class="sc">$</span>p.Value,</span>
+<span id="cb29-13"><a aria-hidden="true" href="#cb29-13" tabindex="-1"></a>    <span class="fu">더블</span>(<span class="dv">1</span>)))<span class="sc">|&gt;</span> <span class="fu">setNames</span>(<span class="fu">반죽</span>(무엇))</span>
+<span id="cb29-14"><a aria-hidden="true" href="#cb29-14" tabindex="-1"></a>})</span>
+<span id="cb29-15"><a aria-hidden="true" href="#cb29-15" tabindex="-1"></a><span class="fu">Rowmeans</span>(베트남 후 증후군<span class="sc">&lt;=</span>알파)</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>잘못된 사실 
+0.000 0.532</code></pre>
+</div>
+</div>
+<p>두 방법을 사용하여 얻은 p- 값을 비교할 수 있습니다 (<a class="quarto-xref" href="#fig-pvaluescompare-1">수치<span>13.10</span></a>).</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a aria-hidden="true" href="#cb31-1" tabindex="-1"></a>시간제 노동자<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="fu">as.data.frame</span>(<span class="fu">티</span>(베트남 후 증후군)),<span class="at">cols =</span> <span class="fu">모든 것</span>(), <span class="at">names_to =</span> <span class="st">"페어링"</span>))<span class="sc">|&gt;</span></span>
+<span id="cb31-2"><a aria-hidden="true" href="#cb31-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">AES</span>(<span class="at">x =</span>값,<span class="at">fill =</span>페어링)))<span class="sc">+</span></span>
+<span id="cb31-3"><a aria-hidden="true" href="#cb31-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.01</span>,,,<span class="at">경계 =</span> <span class="dv">0</span>,,,<span class="at">알파 =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-pvaluescompare-1">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-pvaluescompare-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-14" href="13-chap_files/figure-html/fig-pvaluescompare-1-1.png" title="Figure 13.10: Results from the power calculation, comparing the p-value distributions from the ordinary unpaired and the paired t-test."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="13-chap_files/figure-html/fig-pvaluescompare-1-1.png" style="width:50.0%"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pvaluescompare-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 13.10 : 전력 계산 결과, 평범한 짝을 이루지 않은 P- 값 분포와 쌍을 이루는 결과<span class="math inline">\(티\)</span>-시험.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-design-powerPairedUnpaired">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">질문 13.10</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p>효과 크기, 샘플 크기, 냄비 효과의 크기 (표준 편차로 측정), 노이즈 표준 편차 및 샘플 크기에 대한 두 가지 유형의 테스트의 힘을 비교하는 함수를 작성하십시오.</p></li>
+<li><p>기능을 사용하여 표준 편차 (냄비 또는 소음) 중 어느 것이 쌍을 이루어 생성 된 개선에 가장 큰 영향을 미치는지 알아냅니다.<span class="math inline">\ (n = 15 \)</span>.</p></li>
+<li><p>얼마나 큰<span class="math inline">\(N\)</span>두 표준 편차가 모두 0.5 인 경우 80%의 전력을 얻으십시오.</p></li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout" class="callout-header d-flex align-content-center" data-bs-target=".callout-20-contents" data-bs-toggle="collapse">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">해결책</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div class="callout-20-contents callout-collapse collapse" id="callout-20">
+<div class="callout-body-container callout-body">
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a aria-hidden="true" href="#cb32-1" tabindex="-1"></a>파워 비교<span class="ot">=</span> <span class="cf">기능</span>(<span class="at">효과 =</span> <span class="fl">0.2</span>,,,<span class="at">n =</span> <span class="dv">15</span>,,,<span class="at">알파 =</span> <span class="fl">0.05</span>,,,</span>
+<span id="cb32-2"><a aria-hidden="true" href="#cb32-2" tabindex="-1"></a>sdnoise, sdpots,<span class="at">b =</span> <span class="dv">1000</span>) {</span>
+<span id="cb32-3"><a aria-hidden="true" href="#cb32-3" tabindex="-1"></a>무엇<span class="ot">=</span> <span class="fu">기음</span>(<span class="cn">거짓</span>,,,<span class="cn">진실</span>))</span>
+<span id="cb32-4"><a aria-hidden="true" href="#cb32-4" tabindex="-1"></a>베트남 후 증후군<span class="ot">=</span> <span class="fu">뒤로 젖히다</span>(b, {</span>
+<span id="cb32-5"><a aria-hidden="true" href="#cb32-5" tabindex="-1"></a>냄비<span class="ot">=</span> <span class="fu">rnorm</span>(N,<span class="dv">0</span>, sdpots)</span>
+<span id="cb32-6"><a aria-hidden="true" href="#cb32-6" tabindex="-1"></a>소음<span class="ot">=</span> <span class="fu">rnorm</span>(N,<span class="dv">0</span>, sdnoise)</span>
+<span id="cb32-7"><a aria-hidden="true" href="#cb32-7" tabindex="-1"></a>Noisa<span class="ot">=</span> <span class="fu">rnorm</span>(N,<span class="dv">0</span>, sdnoise)</span>
+<span id="cb32-8"><a aria-hidden="true" href="#cb32-8" tabindex="-1"></a>잡종<span class="ot">=</span>냄비<span class="sc">+</span>효과<span class="sc">+</span>소음</span>
+<span id="cb32-9"><a aria-hidden="true" href="#cb32-9" tabindex="-1"></a>자동차로<span class="ot">=</span>냄비<span class="sc">+</span>Noisa</span>
+<span id="cb32-10"><a aria-hidden="true" href="#cb32-10" tabindex="-1"></a>    <span class="fu">vapply</span>(무엇,</span>
+<span id="cb32-11"><a aria-hidden="true" href="#cb32-11" tabindex="-1"></a>      <span class="cf">기능</span>(페어)</span>
+<span id="cb32-12"><a aria-hidden="true" href="#cb32-12" tabindex="-1"></a>        <span class="fu">t.test</span>(하이브리드, Autoz,<span class="at">쌍을 이루었습니다</span>짝을 이루는)<span class="sc">$</span>p.Value,</span>
+<span id="cb32-13"><a aria-hidden="true" href="#cb32-13" tabindex="-1"></a>      <span class="fu">더블</span>(<span class="dv">1</span>)))<span class="sc">|&gt;</span> <span class="fu">setNames</span>(<span class="fu">반죽</span>(무엇))</span>
+<span id="cb32-14"><a aria-hidden="true" href="#cb32-14" tabindex="-1"></a>  })</span>
+<span id="cb32-15"><a aria-hidden="true" href="#cb32-15" tabindex="-1"></a>  <span class="fu">Rowmeans</span>(베트남 후 증후군<span class="sc">&lt;=</span>알파)</span>
+<span id="cb32-16"><a aria-hidden="true" href="#cb32-16" tabindex="-1"></a>}</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+</div>
+<p>다음은 냄비 효과가 노이즈 표준 편차에 비해 작을 때는 짝을 이루는 데 거의 차이가 없음을 보여주는 몇 가지 시뮬레이션입니다. 냄비 효과가 크면 페어링은 큰 차이를 만듭니다.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a aria-hidden="true" href="#cb33-1" tabindex="-1"></a><span class="fu">파워 비교</span>(<span class="at">sdpots =</span> <span class="fl">0.5</span>,,,<span class="at">sdnoise =</span> <span class="fl">0.25</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>잘못된 사실 
+0.034 0.533</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a aria-hidden="true" href="#cb35-1" tabindex="-1"></a><span class="fu">파워 비교</span>(<span class="at">sdpots =</span> <span class="fl">0.25</span>,,,<span class="at">sdnoise =</span> <span class="fl">0.25</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>잘못된 사실 
+0.242 0.524</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a aria-hidden="true" href="#cb37-1" tabindex="-1"></a><span class="fu">파워 비교</span>(<span class="at">sdpots =</span> <span class="fl">0.1</span>,,,<span class="at">sdnoise =</span> <span class="fl">0.25</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>잘못된 사실 
+0.510 0.534</code></pre>
+</div>
+</div>
+<p>각 유형의 100 개 식물과 0.5의 표준 편차의 경우, 페어링 된 테스트의 전력은 약 80%입니다.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a aria-hidden="true" href="#cb39-1" tabindex="-1"></a><span class="fu">파워 비교</span>(<span class="at">sdpots =</span> <span class="fl">0.5</span>,,,<span class="at">sdnoise =</span> <span class="fl">0.5</span>,,,<span class="at">n =</span> <span class="dv">100</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>잘못된 사실 
+0.513 0.796</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-design-whatwhenpairing">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">질문 13.11</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>쌍을 이루는 디자인</strong>예를 들어, 쌍둥이 연구 또는 치료 전후 환자의 연구와 같은 관찰의 자연스러운 쌍을 고려하십시오. 페어링을 사용할 수 없을 때 무엇을 할 수 있습니까?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout" class="callout-header d-flex align-content-center" data-bs-target=".callout-22-contents" data-bs-toggle="collapse">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">해결책</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div class="callout-22-contents callout-collapse collapse" id="callout-22">
+<div class="callout-body-container callout-body">
+<p><strong>일치하는 디자인</strong>일치하는 연령, 성별, 배경 건강 등을 통해 가능한 한 많은 유사성을 가진 피험자 쌍을 만들어보십시오. 하나는 치료되고, 다른 하나는 대조군 역할을합니다.</p>
+</div>
+</div>
+</div>
+<p>에이<strong>균형 잡힌 디자인</strong>모든 다른 요인 조합이 동일한 수의 관찰 복제를 갖는 실험 설계입니다. 각 요인의 효과를 식별 할 수 있습니다. 성가신 요인이있는 경우 관심있는 요소와 균형을 잡는 것이 좋습니다. 때때로 이것은 물류 또는 경제적 이유에 대해 불편하거나 실용적이지 않지만 분석가들은 얇은 얼음에 있으며주의를 기울여야합니다.</p>
+</section>
+<section class="level4 unnumbered" id="randomization">
+<h4 class="unnumbered anchored" data-anchor-id="randomization">무작위 배정</h4>
+<p>종종 우리는 어떤 Nuisance 요소가 중요한지 알지 못하거나 미리 계획 할 수 없습니다. 그러한 경우, 무작위 배정은 실질적인 전략입니다. 적어도 충분한 표본 크기의 한계에서는 성가신 요인의 영향이 평균해야합니다.</p>
+<p>무작위 배정은 또한 무의식적 편견을 줄이는 데 도움이 될 수 있습니다. 예를 들어, 그룹 중 하나의 샘플이 나오기가 매우 어려운 경우 다른 그룹의 샘플에 비해 처리 할 때 더 조심해야 할 수도 있습니다. 불행히도 이것은 측정 결과를 편향시켜 비교를 무효화 할 수 있습니다. 보다<span class="citation" data-cites="senn2004randomization">젠 (Senn)<a href="16-chap.html#ref-senn2004randomization" role="doc-biblioref">2004</a>))</span>간단한 무작위 화를 개선하려고 할 때 발생하는 일부 함정에 대한 광범위한 논의.</p>
+</section>
+</section>
+<section class="level3 page-columns page-full" data-number="13.4.5" id="how-many-replicates-do-i-need">
+<h3 class="anchored" data-anchor-id="how-many-replicates-do-i-need" data-number="13.4.5"><span class="header-section-number">13.4.5</span>얼마나 많은 복제물이 필요합니까?</h3>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a class="lightbox" data-gallery="quarto-lightbox-gallery-15" href="imgs/devil.png" title="Beware of underpowered me-too studies."><img alt="Beware of underpowered me-too studies." class="img-fluid quarto-figure quarto-figure-center figure-img" src="imgs/devil.png" width="123"/></a></p>
+</figure>
+</div>
+<figcaption>저의 힘든 저의 연구를 조심하십시오.</figcaption>
+</figure>
+</div>
+</div></div></div>
+<p>~ 안에<a class="quarto-xref" href="01-chap.html#sec-generative-SimulatingForPower"><span>섹션 1.4.1</span></a>우리는 대안을 알고 있다는 점을 감안할 때 80% 진정한 양성 속도를 달성하기 위해 얼마나 많은 뉴클레오티드가 필요한지 계산하는 시뮬레이션 실험을 보여주었습니다. 이제 실험 대 연구에 대한 논의를 기억하십시오<a class="quarto-xref" href="#sec-design-typesexps"><span>섹션 13.2</span></a>. 세포주 실험의 경우, 우리는 이미 하나의 복제에서 올바른 결과를 얻을 수 있습니다. 보통 우리는 확실히 두세 가지를 할 것입니다. 반면에, 두 개의 대체 약물이 환자에 미치는 영향을 비교하는 연구의 경우, 우리의 직관은 통제되지 않은 변동성이 너무 많아서 결과에 대해 확신 할 수있을 때까지 수십 명의 환자가 필요할 수 있음을 알려줍니다. 필요한 복제 수는 상황에 따라 다릅니다. 통제되지 않은 변동성의 양과<strong>효과 크기</strong>. 실용적인 접근 방식은 비슷한 일을 한 이전의 성공적인 (또는 실패한) 실험이나 연구를 확인하고 계획된 연구의 힘을 추정하기 위해 시뮬레이션, 서브 샘플링 또는 부트 스트랩을 사용하는 것입니다.</p>
+<section class="level4 unnumbered page-columns page-full" id="power-depends-on-sample-sizes-effect-sizes-and-variability.">
+<h4 class="unnumbered anchored" data-anchor-id="power-depends-on-sample-sizes-effect-sizes-and-variability.">전력은 샘플 크기, 효과 크기 및 변동성에 따라 다릅니다.</h4>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-elephant">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-elephant-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-16" href="imgs/African_Bush_Elephant.jpg" title="Figure 13.11: The elephant in the room with power calculations is the effect size. Especially in ’omics studies, when we are screening thousands of genes (or other features) for differences, we rarely have a precise idea of what effect size to expect. However, even so, power calculations are useful for order-of-magnitude calculations, or for qualitative comparisons such as shown in this section for paired versus unpaired tests. Source: Wikimedia CH."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="imgs/African_Bush_Elephant.jpg"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-elephant-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 13.11 : 전력 계산이있는 방에있는 코끼리는 효과 크기입니다. 특히 Omics 연구에서, 차이를 위해 수천 개의 유전자 (또는 다른 특징)를 선별 할 때, 우리는 어떤 효과가 예상되는지에 대한 정확한 아이디어를 거의 갖지 않습니다. 그러나 그럼에도 불구하고 전력 계산은 크기 순서 계산 또는 쌍을 이루지 않은 테스트에 대해이 섹션에 표시된 것과 같은 질적 비교에 유용합니다. 원천:<a href="https://en.wikipedia.org/wiki/Elephant">Wikimedia ch</a>.
+</figcaption>
+</figure>
+</div>
+</div></div></div>
+<p>패키지<strong><a href="https://cran.r-project.org/web/packages/pwr/">pwr</a></strong>표준을 수행하기위한 기능을 제공합니다<strong>전력 계산</strong>. 이러한 계산에는 샘플 크기, 효과 크기, 유의 수준 (False Positive Rate) 및 가설을 거부 할 확률 (진정한 긍정적 속도) 등 4 가지 수량이 있습니다. 기능<code>pwr.2p.test</code>,,,<code>pwr.chisq.test</code>,,,<code>pwr.f2.test</code>키스quared 테스트 및 일반적인 선형 테스트의 두 가지 비율 테스트 계산을 제공합니다.</p>
+<p>다음은 두 샘플의 전력 계산의 예입니다.<span class="math inline">\(티\)</span>-테스트<span class="math inline">\ (n = 15 \)</span>. 이 기능에는 몇 가지 인수가 필요합니다.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a aria-hidden="true" href="#cb41-1" tabindex="-1"></a><span class="fu">도서관</span>(<span class="st">"pwr"</span>))</span>
+<span id="cb41-2"><a aria-hidden="true" href="#cb41-2" tabindex="-1"></a><span class="fu">str</span>(pwr.t.test)</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>함수 (n = null, d = null, sig.level = 0.05, power = null, type = c ( "two.sample", 
+    "One.Sample", "Paired"), Alternative = C ( "Two.sided", "Less", "Greater"))))</code></pre>
+</div>
+</div>
+<p>전력 및 효과 크기 값으로 함수를 호출하면 필요한 샘플 크기를 반환하거나 샘플 크기 및 효과 크기를 지정하면 전원을 반환합니다.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a aria-hidden="true" href="#cb43-1" tabindex="-1"></a><span class="fu">pwr.t.test</span>(<span class="at">n =</span> <span class="dv">15</span>,,,<span class="at">d =</span> <span class="fl">0.4</span>,,,<span class="at">sig.level =</span> <span class="fl">0.05</span>,,,<span class="at">유형 =</span> <span class="st">"2.sample"</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>2- 표본 T 테스트 전원 계산 
+
+              n = 15
+              d = 0.4
+      sig.level = 0.05
+          전원 = 0.1848496
+    대안 = 2.sided
+
+참고 : n은 * 각 * 그룹의 숫자입니다</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a aria-hidden="true" href="#cb45-1" tabindex="-1"></a><span class="fu">pwr.t.test</span>(<span class="at">n =</span> <span class="dv">15</span>,,,<span class="at">d =</span> <span class="fl">0.4</span>,,,<span class="at">sig.level =</span> <span class="fl">0.05</span>,,,<span class="at">유형 =</span> <span class="st">"페어링"</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>쌍 t 테스트 전원 계산 
+
+              n = 15
+              d = 0.4
+      sig.level = 0.05
+          전원 = 0.3031649
+    대안 = 2.sided
+
+참고 : n은 *쌍 *입니다 *</code></pre>
+</div>
+</div>
+<p>주어진 효과 크기를 감지하기 위해 어떤 샘플 크기가 필요한지 알고 싶다면 다음과 같습니다.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a aria-hidden="true" href="#cb47-1" tabindex="-1"></a><span class="fu">pwr.t.test</span>(<span class="at">d =</span> <span class="fl">0.4</span>,,,<span class="at">sig.level =</span> <span class="fl">0.05</span>,,,<span class="at">유형 =</span> <span class="st">"2.sample"</span>,,,<span class="at">Power =</span><span class="fl">0.8</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>2- 표본 T 테스트 전원 계산 
+
+              n = 99.08032
+              d = 0.4
+      sig.level = 0.05
+          전원 = 0.8
+    대안 = 2.sided
+
+참고 : n은 * 각 * 그룹의 숫자입니다</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a aria-hidden="true" href="#cb49-1" tabindex="-1"></a><span class="fu">pwr.t.test</span>(<span class="at">d =</span> <span class="fl">0.4</span>,,,<span class="at">sig.level =</span> <span class="fl">0.05</span>,,,<span class="at">유형 =</span> <span class="st">"페어링"</span>,,,<span class="at">Power =</span><span class="fl">0.8</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>쌍 t 테스트 전원 계산 
+
+              n = 51.00945
+              d = 0.4
+      sig.level = 0.05
+          전원 = 0.8
+    대안 = 2.sided
+
+참고 : n은 *쌍 *입니다 *</code></pre>
+</div>
+</div>
+<p>우리는 페어링 된 테스트를 사용하지 않을 때 동일한 전력에 대해 약 2 배의 관찰이 필요하다는 것을 알 수 있습니다.</p>
+</section>
+<section class="level4 unnumbered page-columns page-full" id="sec-design-effectivesamplesize">
+<h4 class="unnumbered anchored" data-anchor-id="sec-design-effectivesamplesize">효과적인 샘플 크기</h4>
+<p>독립적 인 관찰 샘플은 동일한 수의 종속 관찰보다 유익합니다. 사람들의 문을 두드리고 질문을함으로써 의견 여론 조사를하고 싶다고 가정 해 봅시다. 첫 번째 시나리오에서는 선택합니다<span class="math inline">\(N\)</span>사람들<span class="math inline">\(N\)</span>전국의 임의의 장소. 두 번째 시나리오에서 여행 시간을 절약하기 위해<span class="math inline">\ (N/3 \)</span>임의의 장소 와이 각 인터뷰에서 서로 옆집에 사는 세 사람. 두 경우 모두 투표 한 사람들의 수는 다음과 같습니다<span class="math inline">\(N\)</span>그러나 우리가 같은 동네에 사는 사람들이 같은 의견을 가질 가능성이 더 높다고 가정하면 두 번째 시나리오의 데이터는 (긍정적으로) 상관됩니다. 이를 탐색하려면 시뮬레이션을하겠습니다.</p>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a aria-hidden="true" href="#cb51-1" tabindex="-1"></a>도폴<span class="ot">=</span> <span class="cf">기능</span>(<span class="at">n =</span> <span class="dv">100</span>,,,<span class="at">numpeoplepolled =</span> <span class="dv">12</span>) {</span>
+<span id="cb51-2"><a aria-hidden="true" href="#cb51-2" tabindex="-1"></a>의견<span class="ot">=</span> <span class="fu">종류</span>(<span class="fu">rnorm</span>(N))</span>
+<span id="cb51-3"><a aria-hidden="true" href="#cb51-3" tabindex="-1"></a>i1<span class="ot">=</span> <span class="fu">견본</span>(n, numpeoplepolled)</span>
+<span id="cb51-4"><a aria-hidden="true" href="#cb51-4" tabindex="-1"></a>i2<span class="ot">=</span> <span class="fu">견본</span>(<span class="fu">서열</span>(<span class="dv">3</span>, N,<span class="at">by =</span> <span class="dv">3</span>), numpeoplepolled<span class="sc">/</span> <span class="dv">3</span>))</span>
+<span id="cb51-5"><a aria-hidden="true" href="#cb51-5" tabindex="-1"></a>i2<span class="ot">=</span> <span class="fu">기음</span>(i2, i2<span class="sc">-</span> <span class="dv">1</span>, i2<span class="sc">-</span> <span class="dv">2</span>))</span>
+<span id="cb51-6"><a aria-hidden="true" href="#cb51-6" tabindex="-1"></a>  <span class="fu">기음</span>(<span class="at">독립 =</span> <span class="fu">평균</span>(의견 [i1]),<span class="at">상관 관계 =</span> <span class="fu">평균</span>(의견 [i2]))</span>
+<span id="cb51-7"><a aria-hidden="true" href="#cb51-7" tabindex="-1"></a>}</span>
+<span id="cb51-8"><a aria-hidden="true" href="#cb51-8" tabindex="-1"></a>응답<span class="ot">=</span> <span class="fu">뒤로 젖히다</span>(<span class="dv">5000</span>,,,<span class="fu">도폴</span>())</span>
+<span id="cb51-9"><a aria-hidden="true" href="#cb51-9" tabindex="-1"></a></span>
+<span id="cb51-10"><a aria-hidden="true" href="#cb51-10" tabindex="-1"></a>시간제 노동자<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="fu">as.data.frame</span>(<span class="fu">티</span>(응답)),</span>
+<span id="cb51-11"><a aria-hidden="true" href="#cb51-11" tabindex="-1"></a>        <span class="at">cols =</span> <span class="fu">모든 것</span>(), <span class="at">names_to =</span> <span class="st">"설계"</span>))<span class="sc">|&gt;</span></span>
+<span id="cb51-12"><a aria-hidden="true" href="#cb51-12" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">AES</span>(<span class="at">x =</span>값,<span class="at">col =</span>설계))<span class="sc">+</span> <span class="fu">geom_density</span>() <span class="sc">+</span></span>
+<span id="cb51-13"><a aria-hidden="true" href="#cb51-13" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>))<span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"여론 조사 결과"</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-effective-sample-size-sim-1">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-effective-sample-size-sim-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-17" href="13-chap_files/figure-html/fig-effective-sample-size-sim-1-1.png" title="Figure 13.12: Density estimates for the polling result using the two sampling methods. The correlated method has higher spread. The truth is indicated by the vertical line."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="13-chap_files/figure-html/fig-effective-sample-size-sim-1-1.png" width="320"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-effective-sample-size-sim-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 13.12 : 두 샘플링 방법을 사용한 폴링 결과의 밀도 추정치. 상관 된 방법은 스프레드가 더 높습니다. 진실은 수직선으로 표시됩니다.</figcaption>
+</figure>
+</div>
+</div></div></div>
+<p>이 나라에는 100 명이 있으며 그 중 첫 번째 접근 방식에<code>i1</code>) 우리는 무작위로 샘플링했다. 두 번째 접근법에서, 우리는 4 명과 각각의 이웃을 샘플링한다.<code>i2</code>). 우리의 경우“의견”은 평균 0과 표준 편차를 가진 모집단에 일반적으로 분포 된 실수입니다.<code>도폴</code>기능. 출력이 표시됩니다<a class="quarto-xref" href="#fig-effective-sample-size-sim-1">수치<span>13.12</span></a>.</p>
+</section>
+</section>
+</section>
+<section class="level2" data-number="13.5" id="mean-variance-relationships-and-variance-stabilizing-transformations">
+<h2 class="anchored" data-anchor-id="mean-variance-relationships-and-variance-stabilizing-transformations" data-number="13.5"><span class="header-section-number">13.5</span>평균 분산 관계 및 분산 안정화 변환</h2>
+<p>장에서<a class="quarto-xref" href="04-chap.html"><span>4</span></a>그리고<a class="quarto-xref" href="08-chap.html"><span>8</span></a>우리는 측정의 분산이 전체적으로 더 유사한 방식으로 정량적 측정 공간을 압축하거나 확장하는 데이터 변환의 예를 보았습니다. 따라서 복제 측정 간의 분산은 더 이상 평균값에 크게 의존하지 않습니다.</p>
+<p>데이터의 평균 분산 관계<em>~ 전에</em>변환은 원칙적으로 어떤 기능 일 수 있지만, 많은 경우에, 다음과 같은 프로토 타입 관계가 적어도 거의 발견됩니다.</p>
+<ol type="1">
+<li><p>상수 : 분산은 평균과 무관하며<span class="math inline">\ (v (m) = c \)</span>.</p></li>
+<li><p>Poisson : 분산은 평균에 비례합니다.<span class="math inline">\ (v (m) = am \)</span>.</p></li>
+<li><p>2 차 : 표준 편차는 평균에 비례하므로 분산이 2 차적으로 증가합니다.<span class="math inline">\ (v (m) = bm^2 \)</span>.</p></li>
+</ol>
+<p>여기<span class="math inline">\ (v (m) \)</span>차이의 추세를 설명하는 기능입니다.<span class="math inline">\(다섯\)</span>평균의 함수로<span class="math inline">\(중\)</span>. 실수<span class="math inline">\ (a, b, c \ ge0 \)</span>평균 외에 분산에 영향을 미치는 매개 변수화 요소.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-design-assayexamples">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">질문 13.12</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>데이터가 이러한 유형의 평균 분산 관계를 보여주는 생물학적 분석 또는 측정 기술에 대한 예를 제시하십시오.</p>
+</div>
+</div>
+<p>실제 데이터는 또한 이들의 조합에 의해 영향을받을 수 있습니다. 예를 들어, DNA 마이크로 어레이의 경우, 형광 강도는 신호와 크게 독립적 인 배경 노이즈와 표준 편차가 신호에 비례하는 곱셈 노이즈의 조합에 적용됩니다.<span class="citation" data-cites="RockeDurbin:2001">(<a href="16-chap.html#ref-RockeDurbin:2001" role="doc-biblioref">Rocke and Durbin 2001</a>))</span>. 따라서 평균 분산 관계는 다음과 같습니다<span class="math inline">\ (v (m) = bm^2+c \)</span>. 밝은 반점의 경우 (큰<span class="math inline">\(중\)</span>), 곱셈 노이즈가 지배적입니다 (<span class="math inline">\ (bm^2 \)</span>), 희미한 사람의 경우 배경<span class="math inline">\(기음\)</span>.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-design-vst">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">질문 13.13</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>분산 안정화 변환을 적용하는 요점은 무엇입니까?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout" class="callout-header d-flex align-content-center" data-bs-target=".callout-25-contents" data-bs-toggle="collapse">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">해결책</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div class="callout-25-contents callout-collapse collapse" id="callout-25">
+<div class="callout-body-container callout-body">
+<p>변환 된 척도에서 데이터를 분석하는 것은 다음과 같습니다.</p>
+<ul>
+<li><p>플롯의 물리 공간이 데이터 범위에서 더 "공정하게"사용되므로 시각화를 향상시킵니다. 히트 맵의 경우 색상 공간에도 비슷한 인수가 적용됩니다.</p></li>
+<li><p>결과는 몇몇 매우 고도로 발현 된 유전자의 신호에 의해 지배적이지 않고 동적 범위에 걸쳐 많은 유전자로부터 더 균일하게 균일하게 지배적이기 때문에 상관 관계에 기초한 PCA 또는 클러스터링과 같은 안수 방법의 결과를 향상시킨다.</p></li>
+<li><p>동일하게 분포 된 (따라서 호모 스케디 스틱) 노이즈를 가정하는 통계 모델의 추정치와 추정치를 향상시킵니다.</p></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section class="level2 page-columns page-full" data-number="13.6" id="sec-design-quality">
+<h2 class="anchored" data-anchor-id="sec-design-quality" data-number="13.6"><span class="header-section-number">13.6</span>데이터 품질 평가 및 품질 관리</h2>
+<p>데이터 품질 평가 (QA) - 데이터 품질을 측정하고 모니터링하기 위해 취한 데이터 품질 평가 (QA) 및 품질 관리 (QC) - 잘못된 데이터를 다시 모집합니다. 이러한 활동은 변환, 요약, 모델 피팅, 가설 테스트 또는 "HITS"에 대한 스크리닝에 대한 원시 데이터를 조립하는 것부터 분석의 모든 단계에 퍼져 있습니다. QA 관련 질문에는 다음이 포함됩니다.</p>
+<ul>
+<li><p>변수의 한계 분포는 어떻게 보입니까 (히스토그램, ECDF 플롯)?</p></li>
+<li><p>공동 분포는 어떻게 보이나요 (산란 플롯, 쌍 플롯)?</p></li>
+<li><p>복제는 얼마나 잘 동의합니까 (다른 생물학적 조건에 비해)? 여러 조건 사이의 차이의 크기가 그럴듯합니까?</p></li>
+<li><p>배치 효과의 증거가 있습니까? 이는 실험 시약, 프로토콜 또는 환경 적 요인의 변화로 인해 범주 형 (단계적) 또는 연속 (점진적) 특성 일 수 있습니다. 이러한 효과와 관련된 요인은 명시 적으로 알려 지거나, 무방운 및 잠재적이며, 종종 그 사이 어딘가에 있습니다 (예 : 측정기구가 시간이 지남에 따라 천천히 저하되어 시간을 기록했지만 실제로 분해가 얼마나 나쁜지 정확히 알지 못합니다).</p></li>
+</ul>
+<p>마지막 두 질문, 히트 맵, 주요 구성 요소 플롯 및 기타 안수 음모 (장에서 볼 수 있듯이<a class="quarto-xref" href="07-chap.html"><span>7</span></a>그리고<a class="quarto-xref" href="09-chap.html"><span>9</span></a>) 유용합니다.</p>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-1896-Ford-Quadricycle">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-1896-Ford-Quadricycle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-18" href="imgs/1896_Ford_Quadricycle.jpeg" title="Figure 13.13: Henry Ford’s (possibly apocryphal) quote: “If I had asked people what they wanted, they would have said faster horses.” expresses the view of quality as fitness for purpose, versus adherence to specifications. (Source: Ford)"><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="imgs/1896_Ford_Quadricycle.jpeg"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-1896-Ford-Quadricycle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 13.13 : Henry Ford (아마도 묵시적) 인용문 :“사람들에게 원하는 것을 물었다면 더 빨리 말을했을 것입니다.” 품질의 견해를 다음과 같이 표현합니다<strong>목적을위한 피트니스</strong>, 사양 준수 대. (<a href="https://corporate.ford.com/history.html">출처 : 포드</a>))</figcaption>
+</figure>
+</div>
+</div></div></div>
+<p>정의하기는 쉽지 않습니다<strong>품질</strong>그리고 단어는 많은 의미와 함께 사용됩니다. 우리에게 가장 적합한 것은입니다<strong>목적을위한 피트니스</strong><a class="footnote-ref" href="#fn4" id="fnref4" role="doc-noteref"><sup>4</sup></a>그리고 이것은 규범 적 사양을 기반으로하는 다른 품질의 다른 정의와 대조됩니다. 예를 들어, RNA-Seq 데이터를 사용한 차등 발현 분석에서, 우리의 목적은 두 생물학적 조건 사이에서 차별적으로 발현 된 유전자의 검출 일 수있다. 우리는 읽기 수, 읽기 길이, 기본 호출 품질, 정렬 된 판독의 일부와 같은 사양을 확인할 수 있지만 궁극적으로 이러한 측정 값은 우리의 목적에 거의 영향을 미치지 않습니다. 요점은 예를 들어 샘플 스왑 또는 열화로 인해 예상대로 작동하지 않는 샘플의 식별입니다. 또는 제대로 측정되지 않은 유전자. 우리는 이것에 대한 예를 보았습니다<a class="quarto-xref" href="08-chap.html#sec-countdata-dealingCooks"><span>섹션 8.10.3</span></a>. 유용한 플롯에는 안수 플롯이 포함됩니다<a class="quarto-xref" href="08-chap.html#fig-countdata-PCA">수치<span>8.6</span></a>, 및 히트 맵과 같은<a class="quarto-xref" href="08-chap.html#fig-figHeatmap-1">수치<span>8.7</span></a>. 에이<strong>품질 메트릭</strong>우리가 품질을 측정하는 데 사용하는 모든 가치이며 명시 적 품질 메트릭을 사용하면 QA/QC를 자동화하는 데 도움이됩니다.</p>
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup> <a class="uri" href="http://en.wikipedia.org/wiki/Quality_%28business%29">http://en.wikipedia.org/wiki/quality_%28business%29</a></p></div></div></section>
+<section class="level2 page-columns page-full" data-number="13.7" id="longitudinal-data">
+<h2 class="anchored" data-anchor-id="longitudinal-data" data-number="13.7"><span class="header-section-number">13.7</span>종 방향 데이터</h2>
+<p><strong>종 방향 데이터</strong><a class="footnote-ref" href="#fn5" id="fnref5" role="doc-noteref"><sup>5</sup></a>공변량으로 시간이 있습니다. 첫 번째 질문은 우리가 소수의 시점을보고 있는지 여부입니다. 세포주의 반응은 약물에 노출 된 후 48H, 72H 및 96H를 측정 한 후 또는 길고 밀도가 높은 시계열 - 전기 생리학의 패치 클램프 데이터 또는 생명 세포 현미경의 영화를 측정했습니다.</p>
+<div class="no-row-height column-margin column-container"><div id="fn5"><p><sup>5</sup>관련이 있지만 다른 개념은입니다<em>생존 데이터</em>, 시간은 결과 변수입니다.</p></div></div><p>첫 번째 경우, 시간은 일반적으로 또 다른 개별 실험 요소라고 생각합니다. 아마도 실험자가 어떤 것이 가장 유용한 결과를 줄 것인지 확신하지 못했기 때문에 여러 시점이 선택되었을 것입니다. 그런 다음 최고의 시점을 식별하고 그에 초점을 맞출 수 있습니다. 데이터에 따라 다른 시점은“더 많은”복제로 유효성 검사에 사용될 수 있습니다. 실험을 설계 할 때, 우리는 예를 들어 섭동 직후에 가장 많이 발생할 것으로 예상 할 때이 기간을 더 밀도로 다루려고 노력할 것입니다.</p>
+<p>스크리닝 맥락에서, 우리는 어떤 시점에 관계없이 어떤 영향을 미치는지 물어볼 수 있습니다.<span class="math inline">\(에프\)</span>-시험. 그런 다음 다른 시점에서 측정 사이의 종속성을 설명하고 그에 따라 널 분포를 결정해야합니다.</p>
+<p>두 번째 경우 시계열의 경우 동적 모델을 데이터에 맞출 수 있습니다. 우리는 쓸 수 있습니다<span class="math inline">\ (x (t) \)</span>for the<em>상태</em>시간에 우리 시스템의<span class="math inline">\(티\)</span>, 그리고 우리는 여부에 따라 많은 선택이 있습니다</p>
+<ul>
+<li><p><span class="math inline">\(엑스\)</span>연속적이거나 이산적이며</p></li>
+<li><p>그만큼<em>역학</em>~의<span class="math inline">\(엑스\)</span><a class="footnote-ref" href="#fn6" id="fnref6" role="doc-noteref"><sup>6</sup></a>결정 론적이거나 확률 적이며</p></li>
+<li><p>역학은 매끄럽고/또는 점프하며</p></li>
+<li><p>우리는 관찰합니다<span class="math inline">\(엑스\)</span>직접 또는 시끄러운 및/또는 감소 된 버전<span class="math inline">\ (y = g (x)+\ varepsilon \)</span><a class="footnote-ref" href="#fn7" id="fnref7" role="doc-noteref"><sup>7</sup></a>그것의.</p></li>
+</ul>
+<div class="no-row-height column-margin column-container"><div id="fn6"><p><sup>6</sup>의 가치<span class="math inline">\ (x (t+\ delta t) \)</span>주어진<span class="math inline">\ (x (t) \)</span>다시 말해, 시간적 진화</p></div><div id="fn7"><p><sup>7</sup>여기<span class="math inline">\(g\)</span>예를 들어 벡터 값의 변수를 삭제하여 정보를 풀어주는 함수를 나타냅니다.<span class="math inline">\(엑스\)</span>, 그리고<span class="math inline">\ (\ varepsilon \)</span>소음 용어입니다.</p></div></div><p>우리는 포함하여 많은 모델링 도구가 있습니다</p>
+<ul>
+<li><p>Markov 모델 : 개별 상태 공간; 역학은 확률 론적이며 상태를 점프하여 발생합니다.</p></li>
+<li><p>일반 또는 부분 미분 방정식 : 연속 상태 공간; 역학은 결정적이고 매끄럽고, 물리 또는 화학에 뿌리를 둔 첫 번째 원칙에서 파생 된 미분 방정식으로 설명됩니다.</p></li>
+<li><p>마스터 방정식, Fokker-Planck 방정식 : 역학은 확률 론적이며 확률 분포에 대한 (부분) 미분 방정식으로 설명됩니다.<span class="math inline">\(엑스\)</span>공간과 시간에.</p></li>
+<li><p>조각상의 결정 론적 확률 적 과정 : 위의 조합, 프로세스의 샘플에는 결정 론적, 부드러운 움직임과 가끔씩 점프가 포함됩니다.</p></li>
+</ul>
+<p>우리가 관찰하지 않으면<span class="math inline">\(엑스\)</span>직접적이지만 시끄럽고 요약 된 버전 만 있습니다<span class="math inline">\(와이\)</span>, 마르코프 모델의 경우, 형식주의<strong>숨겨진 마르코프 모델</strong> <span class="citation" data-cites="DEKM">(<a href="16-chap.html#ref-DEKM" role="doc-biblioref">더빈 et al. 1998</a>))</span>그러한 모델에 맞는 것은 비교적 간단하게 만듭니다. 다른 유형의 프로세스의 경우, 유사한 접근법이 가능하지만 기술적으로 더 까다 롭고 전문 문헌을 언급합니다.</p>
+<p>보다 데이터 중심 (모델 중심이 아닌)보기가 아닌 시계열 데이터 분석 방법은 다음과 같습니다.</p>
+<ul>
+<li><p>비모수 적 평활화와 클러스터링 또는 프로토 타입 모양으로의 분류</p></li>
+<li><p>변경점 감지</p></li>
+<li><p>자동 회귀 모델</p></li>
+<li><p>푸리에 및 웨이블릿 분해</p></li>
+</ul>
+<p>이 책의 범위를 벗어나 세부 사항으로 들어가기 위해서는 많은 선택이 있습니다.<a class="footnote-ref" href="#fn8" id="fnref8" role="doc-noteref"><sup>8</sup></a>. 많은 방법이 물리, 경제학 또는 신호 처리에서 시작 되었으므로이 분야에서 문헌을 스캔하는 것이 좋습니다.</p>
+<div class="no-row-height column-margin column-container"><div id="fn8"><p><sup>8</sup>시작점 중 하나는 CRAN TaskView입니다<a class="uri" href="https://cran.r-project.org/web/views/TimeSeries.html">https://cran.r-project.org/web/views/timeseries.html</a>.</p></div></div></section>
+<section class="level2 page-columns page-full" data-number="13.8" id="data-integration-use-everything-you-could-know">
+<h2 class="anchored" data-anchor-id="data-integration-use-everything-you-could-know" data-number="13.8"><span class="header-section-number">13.8</span>데이터 통합 ​​: 당신이 알고있는 모든 것을 사용하십시오</h2>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a class="lightbox" data-gallery="quarto-lightbox-gallery-19" href="imgs/devil.png" title="Don’t pretend you are dumb."><img alt="Don’t pretend you are dumb." class="img-fluid quarto-figure quarto-figure-center figure-img" src="imgs/devil.png" width="123"/></a></p>
+</figure>
+</div>
+<figcaption>당신이 멍청한 척하지 마십시오.</figcaption>
+</figure>
+</div>
+</div></div></div>
+<p>이미 알려진 내용을 참조하지 않고 당면한 데이터를 분석하는 겉보기에는 "편견없는"접근 방식의 매력이 있습니다. 이러한 경향은 통계적 방법이 종종 일반적이고 자체 포함되도록 개발되었다는 사실에 의해 강화됩니다. 예를 들어, 응용 프로그램의 행과 열이 무엇을 의미하는지에 대한 구체적인 참조, 또는 다른 관련 데이터가 무엇인지에 대한 구체적인 참조없이 일반 매트릭스의 작동으로 일반 매트릭스의 작동으로 개발되었습니다.</p>
+<p>일반적인 접근 방식은 시작하는 좋은 방법이며, 간단하고 고도로 구동되는 분석을 위해서는 이러한 접근 방식이 해결 될 수 있습니다. 그러나 종종 낭비입니다. 미분 발현에 대한 RNA-Seq 실험의 예를 상기하십시오. 우리가 챕터에서 본 것처럼<a class="quarto-xref" href="06-chap.html"><span>6</span></a>그리고<a class="quarto-xref" href="08-chap.html"><span>8</span></a>, 우리는 신호 강도에 관계없이 기록 된 각 유전자에 대한 가설 테스트를 수행 할 수 있습니다.<a class="footnote-ref" href="#fn9" id="fnref9" role="doc-noteref"><sup>9</sup></a>또는 다른 것, 그런 다음 모든 테스트를 동일하게 처리하는 다중 테스트 방법 (즉, 교환 가능)을 실행하십시오. 그러나 이것은 비효율적입니다 : 우리는 전력이 낮거나 이전의 확률이 높은 가설을 필터링하거나 다운 웨이트 팅하여 탐지 전력을 향상시킬 수 있습니다.<span class="math inline">\ (\ pi_0 \)</span>진실이라는 것.</p>
+<div class="no-row-height column-margin column-container"><div id="fn9"><p><sup>9</sup>즉, 평균 읽기 수</p></div></div><p>마찬가지로, 단일 p- 값의 해석에서, 우리는 우리가 아는 다른 모든 것을 무시할 필요가 없으며, 예를 들어, 무엇이든지 맹목적으로 5% 컷오프를 고수 할 필요가 없지만, 오히려 시험의 힘과<span class="math inline">\ (\ pi_0 \)</span>해석을 안내하십시오<span class="citation" data-cites="Altman:PoS:2017">(<a href="16-chap.html#ref-Altman:PoS:2017" role="doc-biblioref">Altman 및 Krzywinski 2017</a>))</span>.</p>
+<p>잘못 배치 된 객관성의 다른 잠재적 예는 다음과 같습니다.</p>
+<ul>
+<li><p>고차원 회귀 또는 분류에서 처벌 또는 기능 선택. 예를 들어 모든 기능을 동일하게 처리하는 체계를 쉽게 사용하기 쉽습니다. 예를 들어, 모든 기능을 모두 평균 및 단위 분산으로 표준화합니다. 그러나 언젠가 우리는 일부 클래스의 기능이 다른 클래스보다 유익한 정보가있을 가능성이 있음을 알고 있습니다.<span class="citation" data-cites="Wiel:StatMed:2016">(<a href="16-chap.html#ref-Wiel:StatMed:2016" role="doc-biblioref">Wiel et al. 2016</a>))</span>. 우리는 또한 그래프 나 네트워크를 사용하여 "기타"데이터를 나타내고 그룹 또는 그래프 Lasso와 같은 접근 방식을 사용할 수 있습니다.<span class="citation" data-cites="Jacob:GroupLasso:2009">(<a href="16-chap.html#ref-Jacob:GroupLasso:2009" role="doc-biblioref">Jacob, Obozinski 및 Vert 2009</a>))</span>고차원 모델링에서 처벌을 구성합니다.</p></li>
+<li><p>관심있는 대상 (샘플, 유전자 또는 서열)의 감독되지 않은 클러스터링 및 과도한 대표 주석에 대한 후속 검색. 우리는 이들과 다른 주파수를 클러스터링 알고리즘에 다른 불확실성을 통합하여 더 나을 수 있습니다. 우리는 확률과 유사성을 사용하여 클러스터 구성원이 무작위로 선택된 두 개체보다 유사한 지 확인할 수 있습니다.<span class="citation" data-cites="dada2">(<a href="16-chap.html#ref-dada2" role="doc-biblioref">Callahan et al. 2016</a>))</span>.</p></li>
+</ul>
+<p>분석을 시작할 때는 단일 방법을 적용하고 간단한 결과를 얻음으로써 거의 수행되지 않을 것으로 예상하는 것이 중요합니다. 우리는 다른 관련 데이터 세트를 파고 결과의 확인 (또는 다른)을 찾아 추가 해석을 받아야합니다. 유전자 세트 강화 분석이 예를 들어 있습니다. 데이터를 분석하고 관심 비교와 관련된 유전자 목록을 찾은 후에는 다른 유전자 목록과 겹치게됩니다.<a href="http://software.broadinstitute.org/gsea/msigdb">분자 서명 데이터베이스</a> <span class="citation" data-cites="MSigDB">(<a href="16-chap.html#ref-MSigDB" role="doc-biblioref">Liberzon et al. 2011</a>))</span>관련된 더 넓은 생물학적 과정을 탐색하기 위해; 또는 규제 수준을보고있는 데이터 세트를로드 할 수 있습니다.<a class="footnote-ref" href="#fn10" id="fnref10" role="doc-noteref"><sup>10</sup></a>컨텍스트를 찾기 위해 우리의 상향 스트림 또는 다운 스트림.</p>
+<div class="no-row-height column-margin column-container"><div id="fn10"><p><sup>10</sup>게놈, 염색질 상태, 전사, mRNA 수명주기, 번역, 단백질 수명주기, 국소화 및 상호 작용; 대사 산물,<span class="math inline">\ (... \)</span></p></div></div></section>
+<section class="level2 page-columns page-full" data-number="13.9" id="sharpen-your-tools-reproducible-research">
+<h2 class="anchored" data-anchor-id="sharpen-your-tools-reproducible-research" data-number="13.9"><span class="header-section-number">13.9</span>도구를 연마하십시오 : 재현 가능한 연구</h2>
+<p>분석 프로젝트는 종종 간단한 스크립트로 시작하여 몇 가지 초기 아이디어를 시도하고 파일럿 데이터의 품질을 탐색합니다. 그런 다음 더 많은 아이디어가 추가되고 더 많은 데이터가 들어오고 다른 데이터 세트가 통합되고 더 많은 사람들이 참여하게됩니다. 결국 논문은 작성되어야하고, 수치는 '적절하게'수행되며, 과학적 기록을 위해 분석을 저장하고 무결성을 기록합니다. 다음은 그러한 과정에 도움이 될 수있는 몇 가지 원칙입니다.<a class="footnote-ref" href="#fn11" id="fnref11" role="doc-noteref"><sup>11</sup></a>.</p>
+<div class="no-row-height column-margin column-container"><div id="fn11"><p><sup>11</sup>데이터 관리, 프로그래밍, 동료와의 협력, 프로젝트 조직, 작업 추적 및 원고 작성 등 연구자들을위한 훌륭한 컴퓨팅 관행에 대한 우수하고 매우 읽기 쉬운 개요는<span class="citation" data-cites="Wilson:Goodenough:2017">윌슨 등 (<a href="16-chap.html#ref-Wilson:Goodenough:2017" role="doc-biblioref">2017</a>))</span>.</p></div></div><p><strong>통합 개발 환경을 사용하십시오.</strong> <strong>rstudio</strong>훌륭한 선택입니다. EMAC 또는 Eclipse와 같은 다른 플랫폼도 있습니다.</p>
+<p><strong>문맹 프로그래밍을 사용하십시오</strong>다음과 같은 도구<strong>rmarkdown</strong>또는 Jupyter. 소스 코드 또는 별도의 readme 파일에 설명에 설명 및 사용 지침을 매장하는 것보다 더 읽기 쉽습니다 (또한이 문서에 그림과 테이블을 직접 포함시킬 수 있습니다. 이러한 문서는 논문의 보충 자료에 대한 좋은 출발점입니다. 또한, 그들은 협력자에게 분석을보고하는 데 좋습니다.<strong>데이터 형식 및 소프트웨어의 리엔지니어링을 예상하십시오.</strong>데이터를 표현하고 구조화하는 방법의 첫 번째 버전은 분석 워크 플로우가 프로젝트가 발전함에 따라 프로젝트를 지원할 수 없습니다. 두려워하지 마십시오<a class="footnote-ref" href="#fn12" id="fnref12" role="doc-noteref"><sup>12</sup></a>깨끗한 컷과 재 설계를 위해 많은 어색한 데이터 조작이나 반복 단계를 수행한다는 것을 알게 되 자마자. 지금은 잘 투자 한 시간입니다. 거의 항상 버그를 발굴하는 데 도움이됩니다.</p>
+<div class="no-row-height column-margin column-container"><div id="fn12"><p><sup>12</sup>전문가들도 다음과 같이합니다. "Google의 대부분의 소프트웨어는 몇 년마다 다시 작성됩니다."<span class="citation" data-cites="Henderson:2017:SoftwareEngineeringGoogle">(<a href="16-chap.html#ref-Henderson:2017:SoftwareEngineeringGoogle" role="doc-biblioref">헨더슨 2017</a>))</span></p></div></div><p><strong>기존 도구를 재사용하십시오.</strong>바퀴를 재발 명하지 마십시오. 당신의 시간은 실제로 새로운 것들에 더 잘 보냅니다. 자체 제작 된 "휴리스틱"또는 임시 "단축"을 사용하기 전에 몇 분 동안 이와 같은 일이 끝나지 않았는지 확인하는 데 몇 분을 보내십시오. 종종 그렇지 않은 경우가 많으며 때로는 깨끗하고 확장 가능하며 이미 테스트 된 솔루션이 있습니다.</p>
+<p><strong>버전 제어를 사용하십시오</strong>, 와 같은 . 배우는 데 시간이 걸리지 만 이번에는 잘 투자됩니다. 장기적으로는 버전 번호, 스위치 등으로 진화하는 코드를 관리하려는 모든 자체적으로 자란 시도보다 무한히 더 나을 것입니다. 또한 이는 코드에 대한 협업 작업을위한 가장 큰 옵션이며, 특히 서버가 개인 컴퓨터와 구별되는 경우 코드베이스의 추가 백업을 제공합니다.</p>
+<p><strong>기능을 사용하십시오</strong>복사를하는 대신 (또는 반복적으로<code>원천</code>-ing) 코드 스트레칭.</p>
+<p><strong>R 패키지 시스템을 사용하십시오.</strong>곧 다른 스크립트간에 공유하려는 반복 기능 또는 가변 정의에 주목할 것입니다. r 함수를 사용하는 것이 좋습니다<code>원천</code>처음에는 관리하기 위해서는 자신의 패키지로 옮기기가 너무 이르지 않습니다. 최근에는 다른 기능을 사용하는 방법을 설명하는 이메일이나 코드 댓글을 작성하기 시작했습니다. 기존 코드를 R 패키지로 조립하는 것은 어렵지 않으며 표준화 된 문서 방법을 포함하여 많은 제품을 제공하며 코드 사용 예제, 코드 테스트, 버전 작성 및 다른 사람에게 제공합니다. 그리고 곧 네임 스페이스 사용의 이점에 감사하게 될 것입니다.</p>
+<p><strong>원시 데이터 파일의 위치를 ​​중앙 집중화하고 중간 데이터의 파생을 자동화하십시오.</strong>입력 데이터를 전문적으로 백업 된 중앙화 된 파일 서버에 저장하십시오. 파일을 읽기 전용으로 표시하십시오. 원시 파일에서 파생 된 데이터 (예 : 정규화, 요약, 변환 등)를 계산하기위한 명확하고 선형 워크 플로우를 사용하고 별도의 디렉토리에 저장하십시오. 이 워크 플로우를 여러 번 실행해야 할 것으로 예상합니다.<a class="footnote-ref" href="#fn13" id="fnref13" role="doc-noteref"><sup>13</sup></a>및 버전. 사용하십시오<strong><a href="https://bioconductor.org/packages/BiocFileCache/">Biocfilecache</a></strong>개인용 컴퓨터에서 이러한 파일을 미러링하는 패키지<a class="footnote-ref" href="#fn14" id="fnref14" role="doc-noteref"><sup>14</sup></a>.</p>
+<div class="no-row-height column-margin column-container"><div id="fn13"><p><sup>13</sup>최종 데이터가 얼기 전 마지막, 마지막 시간보다 항상…</p></div><div id="fn14"><p><sup>14</sup>보다 기본적인 대안은 유용성입니다. 일부 조직이 제공하는 인기있는 솔루션은 다음을 기반으로합니다.<a href="https://owncloud.org">OWNCLOUD</a>. 상업용 옵션에는 Dropbox, Google Drive 등이 포함됩니다.</p></div><div id="fn15"><p><sup>15</sup>컴퓨터 과학에서 용어<em>데이터웨어 하우스</em>때때로 그러한 개념에 사용됩니다.</p></div></div><p><strong>요리 레시피의 관점에서 생각하고 자동화하려고 노력하십시오.</strong>여러 다른 데이터 유형을 모으는 다운 스트림 분석 아이디어를 개발할 때는 데이터 유형 특정 형식에서 새로운 시간마다 기계 학습 또는 일반적인 통계 방법에 적합한 표현으로 변환하는 것을 원하지 않습니다. 가지고있다<em>레시피</em>다른 재료를 조립하고 쉽게 소비 할 수있는 것으로 요리하는 스크립트<a class="footnote-ref" href="#fn15" id="fnref15" role="doc-noteref"><sup>15</sup></a>매트릭스, 데이터 프레임 또는 바이오 컨덕터<em>요약 경험</em>.</p>
+<p><strong>모든 분석의 색인이있는 하이퍼 링크 웹 페이지를 유지하십시오.</strong>이는 공동 작업자 (특히 웹 브라우저를 통해 페이지와 분석에 액세스 할 수있는 경우) 및 논문의 방법 부분에 대한 좋은 출발점이기도합니다. 연대순 또는 논리적 순서 또는 두 가지의 조합으로 구조화하십시오.</p>
+</section>
+<section class="level2 page-columns page-full" data-number="13.10" id="sec-design-datarep">
+<h2 class="anchored" data-anchor-id="sec-design-datarep" data-number="13.10"><span class="header-section-number">13.10</span>데이터 표현</h2>
+<p>분석 또는 시각화를위한 데이터를 준비하는 경우 종종 분석 알고리즘 또는 그래픽 루틴에 적합한 모양과 형식이 될 때까지 많은 셔플 링이 포함됩니다. 우리가 본 것처럼<a class="quarto-xref" href="03-chap.html"><span>3 장</span></a>,,,<strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong>측정 레코드 당 1 행으로 DataFrame 객체의 데이터를 좋아합니다. 이 선택의 이유는 Hadley Wickham의 논문에서 잘 설명되어 있습니다.<strong>깔끔한 데이터</strong> <span class="citation" data-cites="Wickham:TidyData">(<a href="16-chap.html#ref-Wickham:TidyData" role="doc-biblioref">Wickham 2014</a>))</span>.</p>
+<section class="level3 page-columns page-full" data-number="13.10.1" id="wide-vs-long-table-format">
+<h3 class="anchored" data-anchor-id="wide-vs-long-table-format" data-number="13.10.1"><span class="header-section-number">13.10.1</span>넓은 대 긴 테이블 형식</h3>
+<p>Hiiragi 데이터를 상기하십시오 (우주 이유로 우리는 4 개의 유전자 만 선택하고 처음 5 개의 열만 인쇄합니다.<code>XWDF</code>) : :</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a aria-hidden="true" href="#cb52-1" tabindex="-1"></a><span class="fu">도서관</span>(<span class="st">"magrittr"</span>))</span>
+<span id="cb52-2"><a aria-hidden="true" href="#cb52-2" tabindex="-1"></a><span class="fu">데이터</span>(<span class="st">"엑스"</span>,,,<span class="at">패키지 =</span> <span class="st">"Hiiragi2013"</span>))</span>
+<span id="cb52-3"><a aria-hidden="true" href="#cb52-3" tabindex="-1"></a>XWDF<span class="ot">=</span> <span class="fu">티블</span>(</span>
+<span id="cb52-4"><a aria-hidden="true" href="#cb52-4" tabindex="-1"></a>  <span class="at">프로브 =</span> <span class="fu">기음</span>(<span class="st">"1420085_at"</span>,,,<span class="st">"1418863_at"</span>,,,<span class="st">"1425463_at"</span>,,,<span class="st">"1416967_at"</span>),)</span>
+<span id="cb52-5"><a aria-hidden="true" href="#cb52-5" tabindex="-1"></a>  <span class="at">기호 =</span> <span class="fu">기음</span>(      <span class="st">"FGF4"</span>,,,<span class="st">"Gata4"</span>,,,<span class="st">"Gata6"</span>,,,<span class="st">"sox2"</span>)))</span>
+<span id="cb52-6"><a aria-hidden="true" href="#cb52-6" tabindex="-1"></a>XWDF<span class="sc">%&lt;&gt;%</span> <span class="fu">bind_cols</span>(<span class="fu">as_tibble</span>(바이오베이스<span class="sc">::</span><span class="fu">exprs</span>(X) [XWDF<span class="sc">$</span>프로브,]))</span>
+<span id="cb52-7"><a aria-hidden="true" href="#cb52-7" tabindex="-1"></a><span class="fu">어둑한</span>(XWDF)</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4 103</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a aria-hidden="true" href="#cb54-1" tabindex="-1"></a>xwdf [,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]]</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># tibble : 4 × 5
+  프로브 기호`1 e3.25```2 E3.25``` 3 E3.25 '
+  &lt;CHR&gt; &lt;CHR&gt; &lt;DBL&gt; &lt;DBL&gt; &lt;DBL&gt;
+1 1420085_AT FGF4 3.03 9.29 2.94
+2 1418863_AT GATA4 4.84 5.53 4.42
+3 1425463_at Gata6 5.50 6.16 4.58
+4 1416967_at Sox2 1.73 9.70 4.16</code></pre>
+</div>
+</div>
+<p>이 데이터 프레임의 각 행은 선택된 유전자 중 하나에 해당합니다. 처음 두 열에는 Affymetrix 프로브 식별자와 유전자 기호가 포함됩니다. 나머지 101 개의 열은 각 샘플마다 측정 된 표현식 값을보고합니다. 샘플 식별자는 샘플을 채취 한 시점의 정보와 함께 열 이름에 연결된 문자열로 기록됩니다. 이것은 데이터 테이블의 예입니다<strong>넓은 형식</strong>. 이제 우리에게 전화합시다<code>pivot_longer</code>기능<strong><a href="https://cran.r-project.org/web/packages/tidyr/">시간제 노동자</a></strong>포장하고 출력을 살펴보십시오.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a aria-hidden="true" href="#cb56-1" tabindex="-1"></a><span class="fu">도서관</span>(<span class="st">"정돈하다"</span>))</span>
+<span id="cb56-2"><a aria-hidden="true" href="#cb56-2" tabindex="-1"></a>xldf<span class="ot">=</span> <span class="fu">pivot_longer</span>(XWDF,<span class="at">cols =</span> <span class="sc">!</span><span class="fu">all_of</span>(<span class="fu">기음</span>(<span class="st">"조사"</span>,,,<span class="st">"상징"</span>)),</span>
+<span id="cb56-3"><a aria-hidden="true" href="#cb56-3" tabindex="-1"></a>                          <span class="at">names_to =</span> <span class="st">"견본"</span>))</span>
+<span id="cb56-4"><a aria-hidden="true" href="#cb56-4" tabindex="-1"></a><span class="fu">어둑한</span>(xldf)</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 404 4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a aria-hidden="true" href="#cb58-1" tabindex="-1"></a><span class="fu">머리</span>(xldf)</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># tibble : 6 × 4
+  프로브 심볼 샘플 값
+  &lt;CHR&gt; &lt;CHR&gt; &lt;CH&gt; &lt;DBL&gt;
+1 1420085_AT FGF4 1 E3.25 3.03
+2 1420085_AT FGF4 2 E3.25 9.29
+3 1420085_AT FGF4 3 E3.25 2.94
+4 1420085_AT FGF4 4 E3.25 9.72
+5 1420085_AT FGF4 5 E3.25 8.92
+6 1420085_AT FGF4 6 E3.25 11.3</code></pre>
+</div>
+</div>
+<p>~ 안에<code>xldf</code>, 각 행은 열에 저장된 404 측정 값 중 정확히 하나에 해당합니다.<code>값</code>. 그런 다음 추가 열이 있습니다<code>조사</code>,,,<code>상징</code>그리고<code>견본</code>관련 공변량을 저장하는. 이것은의 사례입니다<strong>긴 형식</strong>.</p>
+<p>~ 안에<code>XWDF</code>, 일부 열은 모든 샘플 (즉,)의 데이터를 나타냅니다.<code>조사</code>그리고<code>상징</code>), 다른 열 (표현식 측정이있는)에는 샘플과 관련된 정보가 포함되어 있습니다. 우리는 어떻게 든 데이터 프레임을 해석 할 때 이것을“알아야”해야합니다. 이것이 Hadley Wickham이 부르는 것입니다<strong>어수선한 데이터</strong><a class="footnote-ref" href="#fn16" id="fnref16" role="doc-noteref"><sup>16</sup></a>. 대조적으로, 깔끔한 데이터 프레임에서<code>xldf</code>각 행은 정확히 하나의 관찰을 형성하고 그 값은 이름이 지정된 열에 있습니다.<code>값</code>그리고 그 관찰과 관련된 다른 모든 정보는 같은 행의 다른 컬럼에 있습니다. 예를 들어 Ensembl 유전자 식별자 또는 염색체 위치를 추가하려면 간단히 추가 할 수 있습니다. 마찬가지로 추가 유전자 나 추가 샘플의 데이터를 추가하려면 해당 행을<code>xldf</code>. 어느 쪽이든, 우리는 기존 코드를 중단하지 않을 것이라고 가정 할 수 있습니다. 이것은 대조적입니다<code>XWDF</code>, 기존 코드를 추가하면 기존 코드가 무효화 될 수 있습니다. 데이터 열이 측정 된 값과 공변량 열을 어떻게 구별하는지 확신 할 수 없습니다.</p>
+<div class="no-row-height column-margin column-container"><div id="fn16"><p><sup>16</sup> <a href="http://en.wikipedia.org/wiki/Anna_Karenina_principle">Anna Karenina 원칙을 상기하십시오. 데이터가 어수선한 방법에는 여러 가지가 있습니다.</a></p></div></div><p>또한 프로브 식별자, 유전자 기호 또는 샘플 또는 실제로 다른 공변량에 의해 서브 세트는 간단하며 항상 동일하게 사용할 수 있습니다.<code>dplyr :: 필터</code>통사론. 대조적으로<code>XWDF</code>, 우리는 서브셋 샘플이 컬럼 서브 세트에 달하는 반면, 서브 세트는 유전자를 행 서브 세트에 적용한다는 것을 기억해야한다.</p>
+<p>hiiragi 데이터는 그 외에도 또 다른 자연스럽게 와이드 형식 표현을 가지고 있습니다.<code>XWDF</code>: 다른 샘플의 유전자 당 하나의 행과 컬럼 대신 샘플 당 하나의 행과 다른 유전자의 열이있는 데이터 프레임에 데이터를 가질 수도 있습니다. 이러한 넓은 표현은 모두 유용 할 수 있습니다. 예를 들어, 산점도를 사용하여 생산하려는 경우<code>ggplot2</code>두 샘플 사이의 모든 유전자의 발현 값 또는 두 유전자 사이의 모든 샘플 중 하나 또는 다른 넓은 형식 중 하나 또는 다른 하나를 사용해야합니다.</p>
+<p>긴 형식에서 광범위한 형식으로 변환하려면 (중 하나)를 사용할 수 있습니다.<code>pivot_wider</code>기능<strong><a href="https://cran.r-project.org/web/packages/tidyr/">시간제 노동자</a></strong>패키지 - 보완<code>pivot_longer</code>위에서 이미 사용한 기능.</p>
+</section>
+</section>
+<section class="level2 page-columns page-full" data-number="13.11" id="tidy-data-using-it-wisely">
+<h2 class="anchored" data-anchor-id="tidy-data-using-it-wisely" data-number="13.11"><span class="header-section-number">13.11</span>Tidy Data - 현명하게 사용합니다</h2>
+<p>깔끔한 데이터<span class="citation" data-cites="Wickham:TidyData">(<a href="16-chap.html#ref-Wickham:TidyData" role="doc-biblioref">Wickham 2014</a>))</span>,,,</p>
+<ol type="1">
+<li><p>각 변수는 열을 형성하고</p></li>
+<li><p>각 관찰은 행을 형성하고</p></li>
+<li><p>각 유형의 관찰 단위는 테이블을 형성합니다.</p></li>
+</ol>
+<p>의 성공<a href="https://www.tidyverse.org">이상적인</a>근본적인 아이디어의 힘과 구현의 품질을 증명합니다. 이 책의 코드의 대부분은 이러한 아이디어를 채택했으며 Tidyverse를 사용합니다.</p>
+<p>그럼에도 불구하고, 긴 형식의 데이터 프레임은 만병 통치약이 아닙니다. 명심해야 할 몇 가지 사항은 다음과 같습니다.</p>
+<p><strong>효율성과 무결성.</strong>4 개의 프로브 유전자 기호 관계가 있지만, 우리는 404 번의 행에 반복적으로 저장하고 있습니다.<code>xldf</code>. 이 경우 추가 스토리지 비용은 무시할 수 있습니다. 다른 경우에는 더 상당 할 수 있습니다. 더 중요한 것은 정보의 확산입니다.<code>xldf</code>그리고 그것이 사용하는 모든 프로브 유전자 기호 관계를 알고 싶어합니다. 우리는 데이터 프레임의 많은 사본 에서이 정보를 다시 수집해야합니다. 우리는 추가 점검없이 정보의 중복 사본이 서로 일치하는지 확신 할 수 없습니다. 정보를 업데이트하려면 여러 곳에서 정보를 변경해야합니다. 이것은 물체와 같은 워크 플로 디자인을 말합니다.<code>xldf</code>장기 데이터 저장에는 사용되지 않지만보다 정규화 된 비교적 늦은 분석 단계에서 조립됩니다.<a class="footnote-ref" href="#fn17" id="fnref17" role="doc-noteref"><sup>17</sup></a>기본 데이터 객체가 포함 된 데이터 컨테이너.</p>
+<div class="no-row-height column-margin column-container"><div id="fn17"><p><sup>17</sup>데이터 정규화는 중복성을 줄이고 무결성을 향상시키기 위해 데이터베이스를 구성하는 프로세스입니다. 예 : 참조<a class="uri" href="https://en.wikipedia.org/wiki/Database_normalization">https://en.wikipedia.org/wiki/database_normalization</a>.</p></div></div><p><strong>계약 부족 및 표준화.</strong>우리가 같은 개체에서 작동하는 함수를 작성할 때<code>xldf</code>, 우리는 열을 보장하지 않습니다<code>조사</code>실제로 유효한 프로브 식별자를 포함합니다. 그러한 칼럼도 존재하지 않습니다. 프로그래밍 방식으로“물체가<code>xldf</code>”Tidyverse. Object Oriented (OO) 프로그래밍 및 R의 화신 S4는 그러한 질문을 해결합니다. 예를 들어, 위에서 언급 한 검사는<code>유효한 보도</code>적절하게 정의 된 클래스를위한 방법, 클래스 정의는“개체와 같은 개념을 공식화합니다.<code>xldf</code>". 이러한 문제를 해결하는 것은 바이오 컨덕터에서 데이터 구조의 객체 지향 설계 뒤에 있습니다.<em>요약 경험</em>수업. OO 데이터 표현의 다른 잠재적으로 유용한 기능으로는 다음과 같습니다</p>
+<ul>
+<li><p>구현 및 캡슐화에서 인터페이스의 추상화 : 사용자는 정의 된 채널을 통해서만 데이터에 액세스하고 데이터가 "내부"저장되는 방법을 볼 필요가 없습니다. 즉, 사용자 수준 코드를 깨지 않고 내부를 변경하고 최적화 할 수 있습니다.</p></li>
+<li><p>다형성 : 같은 이름으로 다른 기능을 가질 수 있습니다.<code>구성</code>또는<code>필터</code>, 다른 클래스의 객체에 대해, R은 전화 할 것을 파악합니다.</p></li>
+<li><p>상속 : 간단한 데이터 표현을보다 복잡한 데이터 표현으로 구축 할 수 있습니다.</p></li>
+<li><p>반사 및 자체 문서 : 프로그래밍 방식의 쿼리를 객체로 보내서 자체에 대한 정보를 요청할 수 있습니다.</p></li>
+</ul>
+<p>이 모든 것을 사용하면 인프라 및 "관료주의"에 대한 초기 투자 비용이 더 높음에도 불구하고 빌딩 블록의 구현 세부 사항보다는 큰 그림 기능에 중점을 둔 높은 수준의 코드를보다 쉽게 ​​작성할 수 있습니다.</p>
+<p><strong>데이터 출처 및 메타 데이터.</strong>물체에는 분명한 장소가 없습니다<code>xldf</code>데이터 출처에 대한 정보 (예 : 실험을 수행 한 사람, 게시 된 곳, 데이터가 다운로드 된 곳 또는 우리가보고있는 데이터 버전)에 대한 정보를 추가하려면 (데이터 버그가 존재합니다.<span class="math inline">\ (... \)</span>). 단위 및 분석 유형과 같은 열에 대한 설명도 없습니다. 다시, 바이오 컨덕터의 데이터 클래스는 이러한 요구를 해결하려고 노력합니다.</p>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-leakypipeline">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-leakypipeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-20" href="imgs/leakypipeline.png" title="Figure 13.14: Sequential data analyses workflows can be leaky. If insufficient information is passed from one stage to the next, the procedure can end up being suboptimal and losing power."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="imgs/leakypipeline.png"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-leakypipeline-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 13.14 : 순차 데이터 분석 워크 플로우가 누출 될 수 있습니다. 불충분 한 정보가 한 단계에서 다음 단계로 전달되면, 절차는 차선책과 힘을 잃을 수 있습니다.</figcaption>
+</figure>
+</div>
+</div></div></div>
+<p><strong>매트릭스와 같은 데이터.</strong>생물학의 많은 데이터 세트는 여러 특징 (예를 들어, 유전자; 전통적으로 매트릭스의 행)이 여러 샘플 (전통적으로 매트릭스의 열)에 대해 분석 되었기 때문에 자연 매트릭스 유사 구조를 가지고 있습니다. 매트릭스를 긴 형태로 풀어주십시오<code>xldf</code>일부 작업 (예 : PCA, SVD, 기능 또는 샘플 클러스터링)을 더 어색하게 만듭니다.</p>
+</section>
+<section class="level2 page-columns page-full" data-number="13.12" id="leaky-pipelines-and-statistical-sufficiency">
+<h2 class="anchored" data-anchor-id="leaky-pipelines-and-statistical-sufficiency" data-number="13.12"><span class="header-section-number">13.12</span>누수 파이프 라인 및 통계적 충분 성</h2>
+<p>고 처리량 생물학의 데이터 분석 파이프 라인은 종종 데이터를 연속적으로 요약하고 압축하는 'Funnel'으로 작동합니다. 고 처리량 시퀀싱에서, 우리는 유량 셀의 현미경 이미지로 시작하고, 시퀀싱 읽기를 도출하기위한베이스 호출을 수행 한 다음, 참조로 정렬 한 다음 각 위치에 대해 정렬 된 읽기 만 계산하고, 유전자 (또는 다른 종류의 영역)에 대한 위치를 요약 한 다음 라이브러리 크기에 의해 이들 숫자를“정상화”하여 각 단계에서 정보를 제공합니다. 당면한 임무<a class="footnote-ref" href="#fn18" id="fnref18" role="doc-noteref"><sup>18</sup></a>. 별도의 개발자의 일련의 구성 요소에서 데이터 파이프 라인을 구축하면 문제가 특히 급성입니다.</p>
+<div class="no-row-height column-margin column-container"><div id="fn18"><p><sup>18</sup>예를 들어, 우리가 본 RNA-Seq 차등 발현 분석의 경우<a class="quarto-xref" href="08-chap.html"><span>8 장</span></a>, 우리는 "정규화 된"버전이 아닌 실제 읽기 수가 필요했습니다. 일부 분석의 경우 유전자 수준의 요약으로 충분할 수 있습니다. 다른 방법으로는 엑손 또는 이소 형 수준을보고 싶습니다.</p></div></div><p>통계 학자는 특정 요약이 데이터의 모든 관련 정보를 재구성 할 수 있는지 여부에 대한 개념을 가지고 있습니다.<strong>충분하다</strong>. 알려진 수의 시험을 사용한 Bernoulli 랜덤 실험에서<span class="math inline">\(N\)</span>, 성공의 수는 성공 확률을 추정하기에 충분한 통계입니다.<span class="math inline">\(피\)</span>.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-design-fourstatmarkovchain">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">질문 13.14</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>우리가 본 것과 같은 4 개의 State Markov 체인 (a, c, g, t)에서<a class="quarto-xref" href="#sec-design"><span>13 장</span></a>, 전이 확률 추정에 대한 충분한 통계는 무엇입니까?</p>
+</div>
+</div>
+<p>EM 알고리즘을 사용할 때 우리가 본 것과 비슷한 반복적 인 접근 방식은 때때로 정보 손실을 피할 수 있습니다. 예를 들어, 질량 분광법 데이터를 분석 할 때 첫 번째 실행은 모든 샘플에 대해 개별적으로 피크에서 추측합니다. 이 예비 스펙트럼 스포팅 후, 다른 반복을 통해 다른 샘플에서 강도를 빌려서 간과되었을 수있는 스펙트럼을 발견 할 수 있습니다 (노이즈처럼 보였습니다).</p>
+</section>
+<section class="level2 page-columns page-full" data-number="13.13" id="sec-design-efficient">
+<h2 class="anchored" data-anchor-id="sec-design-efficient" data-number="13.13"><span class="header-section-number">13.13</span>효율적인 컴퓨팅</h2>
+<p>데이터 수집 기술의 급속한 진전은 큰 데이터 세트로 이어지고 이들을 다루는 것은 어려운 일입니다. 빅 데이터 및 확장 성을 위해 설계된 소프트웨어 기술로 바로 뛰어 들고 싶은 유혹이 있습니다. 그러나 일반적으로 먼저 한 걸음 물러서는 것이 더 도움이됩니다. 소프트웨어 엔지니어는 위험을 알고 있습니다<strong>조기 최적화</strong>, 또는 John Tukey를 역설적으로 표현합니다<a class="footnote-ref" href="#fn19" id="fnref19" role="doc-noteref"><sup>19</sup></a>: "올바른 문제에 대한 느리고 서투른 솔루션은 잘못된 문제에 대한 빠르고 확장 가능한 솔루션보다 더 가치가 있습니다." 때때로, 좋은 전략은 확장 성과 성능을 추구하기 전에 데이터의 하위 집합에서 올바른 솔루션이 무엇인지 파악하는 것입니다.</p>
+<div class="no-row-height column-margin column-container"><div id="fn19"><p><sup>19</sup> <a class="uri" href="http://stats.stackexchange.com/a/744">http://stats.stackexchange.com/a/744</a></p></div></div><p>CPU 시간과 비교하여 자신의 시간의 가치를 명심하는 것도 좋습니다. 더 긴 계산 비용으로도 코드를 개발하는 데 시간을 절약 할 수 있다면 가치있는 트레이드 오프가 될 수 있습니다.</p>
+<p>이 모든 것을 고려한 결과, 성능에 대해 이야기합시다. R은 기억이 느리고 낭비되는 것으로 유명하며, 다른 플랫폼을 선택하는 데 동기를 부여하기 위해 인식이 호출됩니다. 경우에 따라, 이것은 정당화됩니다. 아무도 짧은 읽기 정렬기를 쓰는 것을 옹호하지 않을 것입니다. 또는 R에서 자율 주행 자동차의 조향 논리를 옹호하지는 않지만 통계 분석의 경우 이러한 개념 중 하나 이상을 사용하여 매우 효율적인 코드를 작성할 수 있습니다.</p>
+<p><strong>벡터화</strong>. 동일한 결과를 컴퓨팅하는 다음과 같은 대안 선택을 고려하십시오.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a aria-hidden="true" href="#cb60-1" tabindex="-1"></a>에이<span class="ot">=</span> <span class="fu">runif</span>(<span class="fl">1e6</span>))</span>
+<span id="cb60-2"><a aria-hidden="true" href="#cb60-2" tabindex="-1"></a>비<span class="ot">=</span> <span class="fu">runif</span>(<span class="fu">길이</span>(에이))</span>
+<span id="cb60-3"><a aria-hidden="true" href="#cb60-3" tabindex="-1"></a><span class="fu">System.Time</span>({</span>
+<span id="cb60-4"><a aria-hidden="true" href="#cb60-4" tabindex="-1"></a>Z1<span class="ot">=</span> <span class="fu">숫자</span>(<span class="fu">길이</span>(에이))</span>
+<span id="cb60-5"><a aria-hidden="true" href="#cb60-5" tabindex="-1"></a>  <span class="cf">~을 위한</span>(나<span class="cf">~에</span> <span class="fu">서열</span>(<span class="at">함께 =</span>에이))</span>
+<span id="cb60-6"><a aria-hidden="true" href="#cb60-6" tabindex="-1"></a>Z1 [I]<span class="ot">=</span>일체 포함]<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span>B [I]</span>
+<span id="cb60-7"><a aria-hidden="true" href="#cb60-7" tabindex="-1"></a>})</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>사용자 시스템이 경과했습니다 
+  0.076 0.001 0.076</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a aria-hidden="true" href="#cb62-1" tabindex="-1"></a><span class="fu">System.Time</span>({</span>
+<span id="cb62-2"><a aria-hidden="true" href="#cb62-2" tabindex="-1"></a>Z2<span class="ot">=</span>에이<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span>비</span>
+<span id="cb62-3"><a aria-hidden="true" href="#cb62-3" tabindex="-1"></a>})</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>사용자 시스템이 경과했습니다 
+  0.003 0.000 0.003</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a aria-hidden="true" href="#cb64-1" tabindex="-1"></a><span class="fu">동일한</span>(Z1, Z2)</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 사실</code></pre>
+</div>
+</div>
+<p>벡터 화 된 버전 (<code>Z2</code>) 명시 적으로 인덱싱 된 것보다 몇 배 더 빠릅니다 (<code>Z1</code>)) 읽기가 더 쉽습니다. 때로는 인덱스로 공식화 된 알고리즘을 변환하는 것이 조금 더 어렵습니다.<code>만약에</code>-조건 또는 인덱스 계산 인 경우<code>나</code>인덱스 결과가 포함됩니다<code>I-1</code>. 벡터화 된 조건부와 같은 언어 구성<code>ifelse</code>, 다음과 같은 함수로 벡터의 이동<code>선두</code>그리고<code>지연</code>에서<strong><a href="https://cran.r-project.org/web/packages/dplyr/">dplyr</a></strong>패키지 및 일반적으로 인프라<strong><a href="https://cran.r-project.org/web/packages/dplyr/">dplyr</a></strong>전체 데이터 프레임에서 계산을 표현하도록 설계된 (행별로 행이 아닌) 도움이 될 수 있습니다.</p>
+<p><strong>병렬화</strong>. R과의 계산을 병렬화하는 것은 쉽게 입력, 출력 및 부작용이없는 함수로 계산을 표현하는 것이 당연한 기능이기 때문에 쉽습니다. 평행 화 컴퓨팅을 지원하기위한 R 패키지 및 기능의 환경은 빠르게 움직입니다. 그만큼<a href="https://cran.r-project.org/web/views/HighPerformanceComputing.html">Cran Task View "고성능 및 병렬 컴퓨팅"</a>그리고 패키지<strong><a href="https://bioconductor.org/packages/BiocParallel/">바이오 파라렐</a></strong>좋은 출발점입니다.</p>
+<p><strong>메모리 외 다타 및 청킹</strong>. 일부 데이터 세트는 너무 커서 RAM (Random Access Memory)에로드하고 한 번에 모두 조작합니다. 청킹은 데이터를 관리 가능한 부분 ( "청크")으로 분할 한 다음 대량 저장에서 각 부분을 순차적으로로드하고, 계산하고, 결과를 저장하고, 다음을로드하기 전에 RAM에서 부분을 제거합니다. R은 또한 관계형 데이터베이스 관리 시스템 (<strong><a href="https://cran.r-project.org/web/packages/DBI/">DBI</a></strong>패키지) 또는 in<a href="https://support.hdfgroup.org/HDF5">HDF5</a>(그만큼<strong><a href="https://bioconductor.org/packages/rhdf5/">RHDF5</a></strong>패키지). 생체 전도체 프로젝트는 클래스를 제공합니다<em>요약 경험</em>빅 데이터 매트릭스를 RAM 또는 HDF5 백엔드 에이 클래스의 객체 사용자에게 투명한 방식으로 저장할 수 있습니다.</p>
+<p><strong>하위 수준의 언어를 신중하게 사용합니다</strong>. 그만큼<strong><a href="https://cran.r-project.org/web/packages/Rcpp/">RCPP</a></strong>패키지를 사용하면 코드의 일부를 C ++로 쉽게 작성하고 R 코드 내에 원활하게 포함시킬 수 있습니다. C ++ 클래스 아래와 같은 많은 편리한 포장지가 제공됩니다.<code>숫자 벡터</code>그것은 R 클래스를 감싸고 있습니다<em>숫자</em>벡터.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a aria-hidden="true" href="#cb66-1" tabindex="-1"></a><span class="fu">도서관</span>(<span class="st">"RCPP"</span>))</span>
+<span id="cb66-2"><a aria-hidden="true" href="#cb66-2" tabindex="-1"></a><span class="fu">CPPFunction</span>(<span class="st">"</span></span>
+<span id="cb66-3"><a aria-hidden="true" href="#cb66-3" tabindex="-1"></a><span class="st">NumericVector MyFun (NumericVector X, NumericVector y) {</span></span>
+<span id="cb66-4"><a aria-hidden="true" href="#cb66-4" tabindex="-1"></a><span class="st">int n = x.size ();</span></span>
+<span id="cb66-5"><a aria-hidden="true" href="#cb66-5" tabindex="-1"></a><span class="st">숫자 벡터 아웃 (n);</span></span>
+<span id="cb66-6"><a aria-hidden="true" href="#cb66-6" tabindex="-1"></a><span class="st">for (int i = 0; i &lt;n; ++ i) {</span></span>
+<span id="cb66-7"><a aria-hidden="true" href="#cb66-7" tabindex="-1"></a><span class="st">out [i] = pow (x [i], 2) * y [i];</span></span>
+<span id="cb66-8"><a aria-hidden="true" href="#cb66-8" tabindex="-1"></a><span class="st">    }</span></span>
+<span id="cb66-9"><a aria-hidden="true" href="#cb66-9" tabindex="-1"></a><span class="st">돌아 오십시오.</span></span>
+<span id="cb66-10"><a aria-hidden="true" href="#cb66-10" tabindex="-1"></a><span class="st">} "</span>))</span>
+<span id="cb66-11"><a aria-hidden="true" href="#cb66-11" tabindex="-1"></a>Z3<span class="ot">=</span> <span class="fu">Myfun</span>(A, B)</span>
+<span id="cb66-12"><a aria-hidden="true" href="#cb66-12" tabindex="-1"></a><span class="fu">동일한</span>(Z1, Z3)</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 사실</code></pre>
+</div>
+</div>
+<p>실제로 위의 코드에는 길이에 대한 검사도 포함되어야합니다.<code>와이</code>. 여기서는 C ++ 코드를 제공했습니다<strong><a href="https://cran.r-project.org/web/packages/Rcpp/">RCPP</a></strong>r 문자 벡터로서, 이것은 짧은 주사에 편리합니다. 더 큰 기능의 경우 C ++ 코드를 추가 파일에 저장할 수 있습니다. 물론 아이디어는 C ++로 많은 코드를 작성하는 것이 아니라 가장 중요한 부분 만 작성하는 것입니다.</p>
+</section>
+<section class="level2" data-number="13.14" id="summary-of-this-chapter">
+<h2 class="anchored" data-anchor-id="summary-of-this-chapter" data-number="13.14"><span class="header-section-number">13.14</span>이 장의 요약</h2>
+<p>이 마지막 장에서 우리는 책 전체에 팝업 된 개념과 아이디어를 수집, 일반화 및 정렬하려고 노력했으며, 유익한 실험이나 연구를 설계하고 효과적으로 분석하는 데 도움이 될 수 있습니다. 이러한 아이디어 중 일부는 직관적이고 자연 스럽습니다. 다른 사람들은 아마도 Hotelling의 가중치 예제와 같은 직관적이지 않을 것입니다.<a class="quarto-xref" href="#sec-design-hotellingweighting"><span>섹션 13.4.3</span></a>. 공식적인 수학적 추론이 필요합니다. 분석 계산을 수행 할 수없는 경우에도 기존의 유사한 데이터를 시뮬레이션하거나 계산하여 다른 비록 디자인 선택을 벤치마킹하기 위해 유사한 데이터를 계산할 수 있습니다.</p>
+<p>예를 들어, 다른 아이디어에는 징계와 예측이 필요합니다. 예를 들어,“Dailies”는 실험 캠페인의 열기에서 쉽게 잊혀지거나 합리화 될 수 있으며, 다른 많은 우려는 우리의 시간과 관심을 위해 경쟁 할 수 있습니다. 당신은 당신의 부엌을 깔끔하게 유지하거나 개별적으로 건강하게 먹는 것을 건너 뛰면서 멀어 질 수 있습니다. 일반적인 접근법으로 권장하지 않습니다.</p>
+<p>우리는 컴퓨팅 관행의 중요성을 강조했습니다. 이 책 전체에서, 렌더링 된 코드의 수량과 거의 모든 "라이브"데이터 시각화를 통해, 우리는 계산 분석을 설정하는 방법에 대한 많은 예를 보았습니다. 그럼에도 불구하고, 자신의 데이터에 대해 자신의 분석을 실행하는 것은 책에서 계산을 따르는 것과는 매우 다른 것입니다. 요리 책을 읽는 것과 마찬가지로 연회 준비 또는 단 하나의 요리와는 매우 다릅니다. 더욱 장비하기 위해, 우리는 언급 된 자원을 적극 권장합니다.<a class="quarto-xref" href="#sec-design-furtherreading"><span>섹션 13.15</span></a>. 그리고 우리는 당신에게 좋은 요리를 기원합니다!</p>
+</section>
+<section class="level2" data-number="13.15" id="sec-design-furtherreading">
+<h2 class="anchored" data-anchor-id="sec-design-furtherreading" data-number="13.15"><span class="header-section-number">13.15</span>추가 독서</h2>
+<ul>
+<li><p>이 장은 단지 실용적이고 간단한 소개를 제시했습니다.<em>실험 설계</em>. 실험 설정에 대한 자세한 조언을 제공하는 많은 책장 치료가 있습니다.<em>혼란을 피하십시오</em>그리고<em>전원을 최적화하십시오</em> <span class="citation" data-cites="wu2011experiments box1978statistics glass2007experimental">(<a href="16-chap.html#ref-wu2011experiments" role="doc-biblioref">우와 하마다 2011</a>; <a href="16-chap.html#ref-box1978statistics" role="doc-biblioref">Box, Hunter 및 Hunter 1978</a>; <a href="16-chap.html#ref-glass2007experimental" role="doc-biblioref">유리 2007</a>))</span>.</p></li>
+<li><p>우리는보다 정교한 절차의 표면을 긁지 않았습니다. 예를 들어 결정을 내릴 수있는 일련의 실험을 설정할 가능성이있는 경우 공부해야합니다.<strong>순차적 디자인</strong> <span class="citation" data-cites="Lai:2001">(<a href="16-chap.html#ref-Lai:2001" role="doc-biblioref">2001 년까지</a>))</span>. 탐험<em>복잡한 응답 표면</em>"좋은"시작점을 선택한 다음 연속적인 결과를 사용하여 추가 포인트를 선택하면 매우 효과적 일 수 있습니다.<span class="citation" data-cites="Box:1987">Box, Draper 등 (<a href="16-chap.html#ref-Box:1987" role="doc-biblioref">1987</a>))</span>귀중한 자원입니다.</p></li>
+<li><p><span class="citation" data-cites="Bioconductor">Gentleman et al. (<a href="16-chap.html#ref-Bioconductor" role="doc-biblioref">2004</a>))</span>뒤에있는 아이디어를 설명하십시오<em>생체 전도체</em>데이터 구조 및 소프트웨어 설계 및<span class="citation" data-cites="Huber:2015">Huber et al. (<a href="16-chap.html#ref-Huber:2015" role="doc-biblioref">2015</a>))</span>바이오 컨덕터가 사용자 및 개발자를위한 협업 소프트웨어 개발을 지원하는 방법에 대한 업데이트를 제공합니다.</p></li>
+<li><p><strong>git과 github</strong>. Jenny Bryan의 웹 사이트<a href="http://happygitwithr.com">사용자를위한 행복한 git 및 github</a>R과 함께 버전 제어를 사용하는 데 대한 훌륭한 소개입니다.</p></li>
+<li><p><span class="citation" data-cites="Wickham:TidyData">위엄 (Wickham)<a href="16-chap.html#ref-Wickham:TidyData" role="doc-biblioref">2014</a>))</span>원칙을 설명합니다<em>깔끔한 데이터</em>.</p></li>
+<li><p><em>충분한 관행</em>. <span class="citation" data-cites="Wilson:Goodenough:2017">윌슨 등 (<a href="16-chap.html#ref-Wilson:Goodenough:2017" role="doc-biblioref">2017</a>))</span>과학 컴퓨팅에서 성공하는 방법에 대한 실용적이고 현명한 권장 사항을 제공하십시오.</p></li>
+<li><p>매뉴얼<a href="https://cran.r-project.org/doc/manuals/r-release/R-exts.html">R 확장자 작성</a>궁극적 인 참조입니다<em>R 패키지 작성자</em>. 바이오 컨덕터와 함께 소비 될 수 있습니다<a href="https://www.bioconductor.org/developers/package-guidelines">패키지 지침</a>.</p></li>
+</ul>
+</section>
+<section class="level2" data-number="13.16" id="exercises">
+<h2 class="anchored" data-anchor-id="exercises" data-number="13.16"><span class="header-section-number">13.16</span>수업 과정</h2>
+<div class="callout callout-style-default callout-important no-icon callout-titled" id="imp-design-powerLaplace">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">운동 13.1</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>측정이 대칭 라플라스 분포에 따른 소음에 영향을 받는다는 점을 감안할 때 필요한 피험자 수를 결정하기 위해 시뮬레이션 실험을 설정하십시오 (정의 된 정상 분포의 무한 혼합물<a class="quarto-xref" href="04-chap.html"><span>4 장</span></a>). 가능한 노이즈 레벨과 효과 크기가 다른 테이블을 설정해야합니다.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled" id="imp-design-vignetteseq">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">운동 13.2</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>바이오 컨덕터 패키지를 사용하십시오<strong><a href="https://bioconductor.org/packages/PROPER/">적절한</a></strong>RNA-Seq 실험의 샘플 수를 결정하고 결과를<strong><a href="https://bioconductor.org/packages/RNASeqPower/">rnaseqpower</a></strong>바이오 컨덕터 패키지.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled" id="imp-design-modelmatrix">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">운동 13.3</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>R을 확인하십시오<code>model.matrix</code>기능. 수동 페이지를 읽고 그곳에 주어진 예제를 탐색하십시오.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled" id="imp-design-package">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">운동 13.4</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>최근 데이터 분석 중 하나로 돌아가서 R 패키지로 조립하십시오.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div aria-controls="callout-31" aria-expanded="false" aria-label="Toggle callout" class="callout-header d-flex align-content-center" data-bs-target=".callout-31-contents" data-bs-toggle="collapse">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">해결책</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div class="callout-31-contents callout-collapse collapse" id="callout-31">
+<div class="callout-body-container callout-body">
+<ul>
+<li><p>하나 이상의 반복 작업 (예 : 플롯)을 함수로 수집하여 수동 페이지로 문서화하십시오 (사용할 수 있습니다.<strong><a href="https://cran.r-project.org/web/packages/roxygen2/">roxygen2</a></strong>).</p></li>
+<li><p>아래에 데이터 세트를 추가하십시오<code>데이터</code>또는<code>inst/extdata</code>디렉토리.</p></li>
+<li><p>아직 해당 형식이 아닌 경우 분석 스크립트를 RmarkDown으로 변환하십시오.</p></li>
+<li><p>달리다<code>R CMD 빌드</code>그리고<code>R CMD 확인</code>모든 오류와 경고가 사라질 때까지.</p></li>
+</ul>
+<p>간단한 소개가 여기에 제공됩니다.<a class="uri" href="https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch">https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch</a>, 미래의 세부 사항은 매뉴얼에 있습니다<a href="https://cran.r-project.org/doc/manuals/r-release/R-exts.html">R 확장자 작성</a>R의 모든 설치와 함께 제공됩니다.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled" id="imp-design-github">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">운동 13.5</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>GitHub에서 계정을 열고 패키지를 업로드하십시오. 힌트 : Jenny Bryan 's의 지침을 따르십시오<a href="http://happygitwithr.com">사용자를위한 행복한 git 및 github</a>대지.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled" id="imp-design-renjin">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">운동 13.6</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>확인하십시오<em>Renjin</em>프로젝트와<strong>Renjin</strong>패키지. 컴파일 된 코드를 비교하십시오<code>Renjin</code>기본 R 코드와 코드가 C/C ++로 변환됩니다.<strong><a href="https://cran.r-project.org/web/packages/Rcpp/">RCPP</a></strong>위와 같이.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div aria-controls="callout-34" aria-expanded="false" aria-label="Toggle callout" class="callout-header d-flex align-content-center" data-bs-target=".callout-34-contents" data-bs-toggle="collapse">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">해결책</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div class="callout-34-contents callout-collapse collapse" id="callout-34">
+<div class="callout-body-container callout-body">
+<p>요점을 참조하십시오<a class="uri" href="https://gist.github.com/wolfganghuber/909e14e45af6888eec384b82682b3766">https://gist.github.com/wolfganghuber/909E14E45AF6888EEC384B82682B3766</a>.</p>
+</div>
+</div>
+</div>
+<div class="references csl-bib-body hanging-indent" data-entry-spacing="0" id="refs" role="list" style="display: none">
+<div class="csl-entry" id="ref-1000Genomes" role="listitem">1000 게놈 프로젝트 컨소시엄. 2012.<span>"1,092 개의 인간 게놈에서 유전자 변이에 대한 통합 된지도."</span> <em>자연</em>491 (7422) : 56–65.</div>
+<div class="csl-entry" id="ref-Altman:PoS:2017" role="listitem">Altman, Naomi 및 Martin Krzywinski. 2017.<span>"유의점 : P 값 해석."</span> <em>자연<span>중</span>이방</em>14 (3) : 213–14.<a href="https://doi.org/10.1038/nmeth.4210">https://doi.org/10.1038/nmeth.4210</a>.
+</div>
+<div class="csl-entry" id="ref-Bacher:GB:2016" role="listitem">Bacher, Rhonda 및 Christina Kendziorski. 2016.<span>“단일 세포의 설계 및 계산 분석<span>RNA</span>-시합 실험.”</span> <em>게놈 생물학</em>17 (1) : 1.</div>
+<div class="csl-entry" id="ref-Box:1987" role="listitem">Box, George EP, Norman Richard Draper 등. 1987.<em>경험적 모델 구축 및 응답 표면</em>. vol. 424. Wiley New York.</div>
+<div class="csl-entry" id="ref-box1978statistics" role="listitem">Box, George EP, William G Hunter 및 J Stuart Hunter. 1978.<em>실험자를위한 통계 : 설계, 데이터 분석 및 모델 구축 소개</em>. John Wiley &amp; Sons.</div>
+<div class="csl-entry" id="ref-dada2" role="listitem">Callahan, Benjamin J, Paul J McMurdie, Michael J Rosen, Andrew W Han, Amy J Johnson 및 Susan P Holmes. 2016.<span>"<span>dada2</span>: <span>시간</span>Amplicon 데이터의 이웃 해상도 샘플 추론.”</span> <em>자연 방법</em>, 1–4.</div>
+<div class="csl-entry" id="ref-Diaconis-Montgomery-Holmes-2007" role="listitem">Diaconis, Persi, Susan Holmes 및 Richard Montgomery. 2007.<span>"동전 던지기의 동적 편견."</span> <em>시암 리뷰</em>49 (2) : 211–35.</div>
+<div class="csl-entry" id="ref-DEKM" role="listitem">Durbin, Richard, Sean Eddy, Anders Krogh 및 Graeme Mitchison. 1998.<em>생물학적 서열 분석</em>. 케임브리지 대학교 출판부.</div>
+<div class="csl-entry" id="ref-fisher1935design" role="listitem">Fisher, Ronald Aylmer. 1935.<em>실험의 설계</em>. 올리버 &amp; 보이드.</div>
+<div class="csl-entry" id="ref-Bioconductor" role="listitem">Gentleman, Robert C, Vincent J Carey, Douglas M Bates, Ben Bolstad, Marcel Dettling, Sandrine Dudit, Byron Ellis 등. 2004.<span>"바이오 컨덕터 : 계산 생물학 및 생물 정보학을위한 개방형 소프트웨어 개발."</span> <em>게놈 생물학</em>5 (10) : R80.<a href="https://doi.org/10.1186/gb-2004-5-10-r80">https://doi.org/10.1186/GB-2004-5-10-R80</a>.
+</div>
+<div class="csl-entry" id="ref-glass2007experimental" role="listitem">Glass, David J. 2007.<em>생물 학자를위한 실험 설계</em>. 콜드 스프링 하버 실험실 언론.</div>
+<div class="csl-entry" id="ref-Henderson:2017:SoftwareEngineeringGoogle" role="listitem">헨더슨, 퍼거스. 2017.<span>"<span class="nocase">Google의 소프트웨어 엔지니어링</span>.”</span> <em>Arxiv e 프린트</em>. <a href="https://arxiv.org/abs/1702.01715">https://arxiv.org/abs/1702.01715</a>.
+</div>
+<div class="csl-entry" id="ref-Hotelling1944" role="listitem">Hotelling, Harold. 1944.<span>"계량 및 기타 실험 기술의 일부 개선."</span> <em>수학적 통계의 연대기</em>15 (3) : 297–306.</div>
+<div class="csl-entry" id="ref-Huber:2015" role="listitem">Huber, Wolfgang, Vincent J Carey, Robert Gentleman, Simon Anders, Marc Carlson, Benilton S Carvalho, Hector Corrada Bravo 등. 2015.<span>“고 처리량 게놈 분석을 조정합니다<span>생체 전도체</span>.”</span> <em>자연 방법</em>12 (2) : 115–21.</div>
+<div class="csl-entry" id="ref-Jacob:GroupLasso:2009" role="listitem">Jacob, Laurent, Guillaume Obozinski 및 Jean-Philippe Vert. 2009 년.<span>"오버랩 및 그래프 라소를 가진 그룹 라소."</span>~ 안에<em>머신 러닝에 관한 제 26 차 연례 국제 회의 절차</em>, 433–40. ACM.</div>
+<div class="csl-entry" id="ref-Lai:2001" role="listitem">Lai, Tze Leung. 2001.<em>순차적 분석</em>. 와일리 온라인 도서관.</div>
+<div class="csl-entry" id="ref-Leek:2010:batch" role="listitem">Leek, Jeffrey T, Robert B Scharpf, Héctor Corrade Bravo, David Simcha, Benjamin Langmead, W Evan Johnson, Donald Geman, Keith Baggerly 및 Rafael A Irizarry. 2010 년.<span>"고 처리량 데이터에서 배치 효과의 광범위하고 중요한 영향을 해결합니다."</span> <em>자연은 유전학을 검토합니다</em>11 (10) : 733–39.</div>
+<div class="csl-entry" id="ref-LeekStorey:2007" role="listitem">Leek, Jeffrey T. 및 John D. Storey. 2007.<span>"<span class="nocase"><span>기음</span>대리 변수 분석에 의한 유전자 발현 연구에서의 적절한 이질성</span>.”</span> <em>PLOS 유전학</em>3 (9) : 1724–35.</div>
+<div class="csl-entry" id="ref-MSigDB" role="listitem">Liberzon, Arthur, Aravind Subramanian, Reid Pinchback, Helga Thorvaldsdóttir, Pablo Tamayo 및 Jill P Mesirov. 2011.<span>“분자 서명 데이터베이스 (<span>MIGDB</span>) 3.0.”</span> <em>생물 정보학</em>27 (12) : 1739–40.</div>
+<div class="csl-entry" id="ref-mead1990design" role="listitem">미드, 로저. 1990.<em>실험 설계 : 실제 응용을위한 통계 원리</em>. 케임브리지 대학교 출판부.</div>
+<div class="csl-entry" id="ref-Mood1946" role="listitem">분위기, Alexander M. 1946.<span>"Hotelling의 계량 문제에."</span> <em>수학적 통계의 연대기</em>, 432–46.</div>
+<div class="csl-entry" id="ref-RockeDurbin:2001" role="listitem">Rocke, David M 및 Blythe Durbin. 2001.<span>"유전자 발현 어레이의 측정 오류 모델."</span> <em>전산 생물학 저널</em>8 (6) : 557–69.</div>
+<div class="csl-entry" id="ref-senn2004randomization" role="listitem">Senn, Stephen. 2004.<span>"임상 시험에서 무작위 화와 부가성에 관한 논란."</span> <em>의학 통계</em>23 : 3729–53.</div>
+<div class="csl-entry" id="ref-Stegle:2010" role="listitem">Stegle, O., L. Parts, R. Durbin 및 J. Winn. 2010 년.<span>"<span class="nocase"><span>에이</span> <span>비</span>유전자 발현 수준에서 복잡한 비 유전자 인자를 설명하기위한 아야스 프레임 워크<span>큐</span><span>티</span><span>엘</span>연구</span>.”</span> <em>PLOS 계산 생물학</em>6 (5) : E1000770.</div>
+<div class="csl-entry" id="ref-Stigler:sevenpillars" role="listitem">Stigler, Stephen M. 2016.<em>통계적 지혜의 일곱 기둥</em>. 하버드 대학교 출판부.</div>
+<div class="csl-entry" id="ref-Wickham:TidyData" role="listitem">위엄, 해들리. 2014.<span>"깔끔한 데이터."</span> <em>통계 소프트웨어 저널</em>59 (10).</div>
+<div class="csl-entry" id="ref-Wiel:StatMed:2016" role="listitem">Waling, Mark A, Tone G Len, Wina Desile, West N Worners 및 Saskiia M Wilting. 2016.<span>"공동 데이터를 사용하여 더 나은 예측 : 적응 형 그룹 규산 릿지 회귀."</span> <em>의학 통계</em>35 (3) : 368–81.</div>
+<div class="csl-entry" id="ref-Wilson:Goodenough:2017" role="listitem">Wilson, Greg, Jennifer Bryan, Karen Cranston, Justin Kitzes, Lex Nederbragt 및 Tracy K. Teal. 2017.<span>"과학 컴퓨팅에서 충분한 관행."</span>Francis Ouellette에 의해 편집 됨.<em><span>plos</span> <span>기음</span>계약<span>비</span>iology</em>13 (6) : E1005510.<a href="https://doi.org/10.1371/journal.pcbi.1005510">https://doi.org/10.1371/journal.pcbi.1005510</a>.
+</div>
+<div class="csl-entry" id="ref-wu2011experiments" role="listitem">Wu, CF Jeff 및 Michael S Hamada. 2011.<em>실험 : 계획, 분석 및 최적화</em>. vol. 552. John Wiley &amp; Sons.</div>
+</div>
+</section>
+<p>R 버전 4.5.1 (2025-06-13)을 사용하여 2025-09-01에 01:33에 구축 된 페이지</p></main> <!-- /main --><p class="build-date">이 책의 온라인 버전을 유지 관리하는 지원은 다음과 같습니다.<a href="http://www.denbi.de">de.nbi</a>
+<img src="imgs/denbi.png" style="vertical-align: text-top;height: 16px"/><br/>웹 사이트 지원은 msmith@embl.de로 문의하십시오<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+  const anchorJS_eq = new window.AnchorJS();
+  anchorJS_eq.options = {
+    placement: 'left',
+    class: 'eq-link',
+    icon: icon
+  };
+  anchorJS_eq.add('.anchored-eq');
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/www\.huber\.embl\.de\/msmb");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</p></div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+</body></html>

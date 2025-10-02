@@ -1,0 +1,86 @@
+For Sonia, Sara, Agnès, Johnny, Camille  
+\\(...\\) and the “girls” who make me love the life sciences.
+
+For Alexander and Daniel.
+
+This work would not be imaginable without the R language and environment for
+statistical computing, the Comprehensive R Archive Network (CRAN) and the
+Bioconductor project. We thank everyone who has contributed to these projects.
+Today virtually every statistical algorithm, every imaginable interface for
+data handling and visualization, and many methods from all over computer
+science and mathematics are readily accessible through these projects.
+
+We thank JJ Allaire and the RStudio (since 2022: Posit) team for making
+available such a powerful development environment and many useful R packages,
+which we have greatly enjoyed when writing this book. This includes the quarto
+publishing system, which builds upon knitr and pandoc.
+
+We particularly thank the Bioconductor project, powered by its amazing
+community of developers, for fostering interoperability, scalability and
+usability of R-based methods for genome-scale data, for making a vast range of
+biological data and annotation resources easy to work with in R, and for
+orchestrating collaborative, distributed development – all these aspects are
+essential for the complex biological data analysis workflows that you will see
+in this book.
+
+We are grateful to the package developers we have worked with and whose
+packages play at center stage in the different chapters of this book,
+including [Simon Anders](https://orcid.org/0000-0003-4868-1805), [Ben
+Callahan](https://callahanlab.cvm.ncsu.edu/), [Michael
+Love](https://mikelove.github.io/), [Joey
+McMurdie](https://github.com/joey711), [Andrzej Oleś](https://www.geog.uni-
+heidelberg.de/gis/oles.html). [Trevor Martin](http://trevormmartin.com/) was a
+student in Stats 366 at Stanford in 2012 and co-taught the class with Susan in
+2013, 2014 and 2015. As a graduate student in genetics, he brought many of the
+examples to life and participated in earlier versions of the material we
+present here. We are thankful for his help and perspective. Teaching
+assistants for Stats 366 who have helped develop exercises and questions
+include Austen Head, Haben Michael, [Julia
+Fukuyama](https://jfukuyama.github.io/), [Lan Huong
+Nguyen](https://nlhuong.github.io/), [Christof
+Seiler](https://christofseiler.github.io/) and [Nikolaos
+Ignatiadis](https://nignatiadis.github.io/). Their enthusiasm for making
+interesting quizzes and lab material helped nurture students from a wide range
+of backgrounds on the arduous journey of approaching challenging new concepts
+within a computational environment that has tremendous power, yet can also be
+overwhelming.
+
+Many students have provided valuable feedback over the years, and we are
+grateful for their many questions and quizzical looks that fed our motivation
+to keep evolving this course. In particular, we have received extensive
+feedback from Jessica Grembi, Kris Sankaran, Varun Gupta and Chao Jiang.
+
+[Mike Smith](https://msmith.de/) has created the infrastructure for the online
+HTML version that you are currently perusing, including a continuous
+integration framework that enables us to continually update the book and see
+the changes online within minutes, and the R package msmbstyle that was used
+for rendering the print version of the book and the first years of the HTML
+version. We thank [Helena Lucia Crowell](https://helenalc.github.io/) for her
+excellent work porting the book’s sources from Sweave to quarto. [Sviatoslav
+Kharuk](https://sviatkh.github.io/) made further improvements. We are very
+grateful for their help and responsiveness.
+
+We thank [Lorraine Garchery](https://histoires-de-lorraine.fr/) for design of
+the cover art both for the printed and online version.
+
+We thank David Tranah and Diana Gillooly from Cambridge University press for
+their constant effort helping us to make the book grammatically correct,
+aesthetically attractive and pedagogically coherent. Much potential for
+improvement remains, the responsibility for which stays with us.
+
+We thank our family and supporters who have encouraged us and provided
+feedback on preliminary chapters: David Relman, Alfred Spormann, Catherine
+Blish, Don Knuth, Persi Diaconis, Gretchen and Barry Mazur, …..
+
+Susan Holmes, Stanford  
+Wolfgang Huber, Heidelberg  
+  
+  
+  
+The following readers contributed to improvements of the online version by
+pointing out typos and opportunities for clarification: Eva-Maria Geissen,
+Nick Cox, Constantin Ahlmann-Eltze, Tümay Capraz, Irilenia Nobeli, Asger
+Hobolth, Iulian Ichim, …
+
+Page built at 01:33 on 2025-09-01 using R version 4.5.1 (2025-06-13)
+

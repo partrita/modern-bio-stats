@@ -1,0 +1,868 @@
+1000 Genomes Project Consortium. 2012. “An Integrated Map of Genetic Variation
+from 1,092 Human Genomes.” _Nature_ 491 (7422): 56–65.
+
+Abbott, Edwin A. 1884. _Flatland: A Romance of Many Dimensions_. OUP Oxford.
+
+Agresti, Alan. 2007. _An Introduction to Categorical Data Analysis_. John
+Wiley.
+
+Altman, Naomi, and Martin Krzywinski. 2017. “Points of Significance:
+Interpreting p Values.” _Nature Methods_ 14 (3): 213–14.
+<https://doi.org/10.1038/nmeth.4210>.
+
+Ambroise, Christophe, and Geoffrey J. McLachlan. 2002. “Selection Bias in Gene
+Extraction on the Basis of Microarray Gene-Expression Data.” _PNAS_ 99 (10):
+6562–66.
+
+Anders, Simon, and Wolfgang Huber. 2010. “Differential Expression Analysis for
+Sequence Count Data.” _Genome Biology_ 11: R106.
+<http://genomebiology.com/2010/11/10/R106>.
+
+Anders, Simon, Alejandro Reyes, and Wolfgang Huber. 2012. “Detecting
+differential usage of exons from RNA-Seq data.” _Genome Research_ 22 (10):
+2008–17.
+
+Anscombe, Francis J. 1948. “The Transformation of Poisson, Binomial and
+Negative-Binomial Data.” _Biometrika_ , 246–54.
+
+Aure, Miriam Ragle, Valeria Vitelli, Sandra Jernström, Surendra Kumar, Marit
+Krohn, Eldri U Due, Tonje Husby Haukaas, et al. 2017. “Integrative Clustering
+Reveals a Novel Split in the Luminal A Subtype of Breast Cancer with Impact on
+Outcome.” _Breast Cancer Research_ 19 (1): 44.
+
+Bacher, Rhonda, and Christina Kendziorski. 2016. “Design and Computational
+Analysis of Single-Cell RNA-Sequencing Experiments.” _Genome Biology_ 17 (1):
+1.
+
+Baddeley, Adrain, Jesper Moller, and Rasmus Waagepetersen. 2000. “Non- and
+Semiparametric Estimation of Interaction in Inhomogeneous Point Patterns.”
+_Statistica Neerlandica_ 54: 329–50.
+
+Baddeley, Adrian J. 1998. “Spatial Sampling and Censoring.” In _Stochastic
+Geometry: Likelihood and Computation_ , edited by O. E. Barndorff-Nielsen, W.
+S. Kendall, and M. N. M. van Lieshout, 37–78. Chapman; Hall.
+
+Beisser, Daniela, Gunnar W Klau, Thomas Dandekar, Tobias Müller, and Marcus T
+Dittrich. 2010. “BioNet: An R-Package for the Functional Analysis of
+Biological Networks.” _Bioinformatics_ 26 (8): 1129–30.
+
+Belkin, Mikhail, and Partha Niyogi. 2003. “Laplacian Eigenmaps for
+Dimensionality Reduction and Data Representation.” _Neural Computation_ 15
+(6): 1373–96.
+
+Bellman, Richard Ernest. 1961. _Adaptive Control Processes: A Guided Tour_.
+Princeton University Press.
+
+Bendall, Sean C, Garry P Nolan, Mario Roederer, and Pratip K Chattopadhyay.
+2012. “A Deep Profiler’s Guide to Cytometry.” _Trends in Immunology_ 33 (7):
+323–32.
+
+Bengio, Yoshua, Jean-François Paiement, Pascal Vincent, Olivier Delalleau,
+Nicolas Le Roux, and Marie Ouimet. 2004. “Out-of-Sample Extensions for LLE,
+Isomap, MDS, Eigenmaps, and Spectral Clustering.” _Advances in Neural
+Information Processing Systems_ 16: 177–84.
+
+Benjamini, Yoav, and Marina Bogomolov. 2014. “Selective Inference on Multiple
+Families of Hypotheses.” _Journal of the Royal Statistical Society: Series B_
+76 (1): 297–318.
+
+Benjamini, Yoav, and Yosef Hochberg. 1995. “Controlling the False Discovery
+Rate: A Practical and Powerful Approach to Multiple Testing.” _Journal of the
+Royal Statistical Society B_ 57: 289–300.
+
+Benjamini, Yoav, and Daniel Yekutieli. 2003. “Hierarchical FDR Testing of
+Trees of Hypotheses.” Technical report, Department of Statistics; Operations
+Research, Tel Aviv University.
+
+Berg, Stuart, Dominik Kutra, Thorben Kroeger, Christoph N Straehle, Bernhard X
+Kausler, Carsten Haubold, Martin Schiegg, et al. 2019. “Ilastik: Interactive
+Machine Learning for (Bio)image Analysis.” _Nature Methods_ 16 (12): 1226–32.
+
+Bhattacharya, Bhaswar B. 2015. “Power of Graph-Based Two-Sample Tests.” _arXiv
+Preprint arXiv:1508.07530_.
+
+Bishop, Christopher M. 2006. _Pattern Recognition and Machine Learning_.
+Springer.
+
+Boland, Michael V., and Robert F. Murphy. 2001. “A neural network classifier
+capable of recognizing the patterns of all major subcellular structures in
+fluorescence microscope images of HeLa cells.” _Bioinformatics_ 17 (12):
+1213–23.
+
+Bouckaert, Remco, Joseph Heled, Denise Kühnert, Tim Vaughan, Chieh-Hsi Wu,
+Dong Xie, Marc A Suchard, Andrew Rambaut, and Alexei J Drummond. 2014\. “BEAST
+2: A Software Platform for Bayesian Evolutionary Analysis.” _PLoS
+Computational Biology_ 10 (4): e1003537.
+
+Box, George EP, Norman Richard Draper, et al. 1987. _Empirical Model-Building
+and Response Surfaces_. Vol. 424. Wiley New York.
+
+Box, George EP, William G Hunter, and J Stuart Hunter. 1978. _Statistics for
+Experimenters: An Introduction to Design, Data Analysis, and Model Building_.
+John Wiley & Sons.
+
+Braak, Cajo ter. 1985. “Correspondence Analysis of Incidence and Abundance
+Data: Properties in Terms of a Unimodal Respose.” _Biometrics_ 41 (January).
+
+Brodie, Eoin L, Todd Z DeSantis, Dominique C Joyner, Seung M Baek, Joern T
+Larsen, Gary L Andersen, Terry C Hazen, et al. 2006. “Application of a High-
+Density Oligonucleotide Microarray Approach to Study Bacterial Population
+Dynamics During Uranium Reduction and Reoxidation.” _Applied and Environmental
+Microbiology_ 72 (9): 6288–98.
+
+Bronštein, Il’ja N., and Konstantin A Semendjajew. 1979. _Taschenbuch Der
+Mathematik_. B.G. Teubner Verlagsgesellschaft, Leipzig; Verlag Nauka, Moscow.
+
+Brooks, Angela N, Li Yang, Michael O Duff, Kasper D Hansen, Jung W Park,
+Sandrine Dudoit, Steven E Brenner, and Brenton R Graveley. 2011. “Conservation
+of an RNA Regulatory Map Between Drosophila and Mammals.” _Genome Research_ ,
+193–202. <https://doi.org/10.1101/gr.108662.110>.
+
+Bulmer, Michael George. 2003. _Francis Galton: Pioneer of Heredity and
+Biometry_. JHU Press.
+
+Callahan, Ben J, Kris Sankaran, Julia A Fukuyama, Paul J McMurdie, and Susan P
+Holmes. 2016. “Bioconductor Workflow for Microbiome Data Analysis: From Raw
+Reads to Community Analyses.” _F1000Research_ 5\.
+
+Callahan, Benjamin J, Paul J McMurdie, and Susan P Holmes. 2017. “Exact
+Sequence Variants Should Replace Operational Taxonomic Units in Marker Gene
+Data Analysis.” _ISME Journal_ , 1–5.
+
+Callahan, Benjamin J, Paul J McMurdie, Michael J Rosen, Andrew W Han, Amy J
+Johnson, and Susan P Holmes. 2016. “DADA2: High Resolution Sample Inference
+from Amplicon Data.” _Nature Methods_ , 1–4.
+
+Cannings, Chris, and Anthony WF Edwards. 1968. “Natural Selection and the de
+Finetti Diagram.” _Annals of Human Genetics_ 31 (4): 421–28.
+
+Caporaso, J. G., J. Kuczynski, J. Stombaugh, K. Bittinger, F. D. Bushman, E.
+K. Costello, N. Fierer, et al. 2010. “QIIME Allows Analysis of High-Throughput
+Community Sequencing Data.” _Nature Methods_ 7 (5): 335–36.
+
+Carpenter, Anne E, Thouis R Jones, Michael R Lamprecht, Colin Clarke, In Han
+Kang, Ola Friman, David A Guertin, Joo Han Chang, Robert A Lindquist, and
+Jason Moffat. 2006. “CellProfiler: Image Analysis Software for Identifying and
+Quantifying Cell Phenotypes.” _Genome Biology_ 7: R100.
+
+Carr, Daniel B, Richard J Littlefield, WL Nicholson, and JS Littlefield.
+1987\. “Scatterplot Matrix Techniques for Large N.” _Journal of the American
+Statistical Association_ 82 (398): 424–36.
+
+Chakerian, John, and Susan Holmes. 2012. “Computational Tools for Evaluating
+Phylogenetic and Hierarchical Clustering Trees.” _Journal of Computational and
+Graphical Statistics_ 21 (3): 581–99.
+
+Chaumont, Fabrice de, Stéphane Dallongeville, Nicolas Chenouard, Nicolas
+Hervé, Sorin Pop, Thomas Provoost, Vannary Meas-Yedid, et al. 2012. “Icy: an
+open bioimage informatics platform for extended reproducible research.”
+_Nature Methods_ 9: 690–96.
+
+Chen, Min, Yang Xie, and Michael Story. 2011. “An Exponential-Gamma
+Convolution Model for Background Correction of Illumina BeadArray Data.”
+_Communications in Statistics-Theory and Methods_ 40 (17): 3055–69.
+
+Chessel, Daniel, Anne Dufour, and Jean Thioulouse. 2004. “The ade4 Package -
+i: One-Table Methods.” _R News_ 4 (1): 5–10.
+<http://CRAN.R-project.org/doc/Rnews/>.
+
+Chiu, Sung Nok, Dietrich Stoyan, Wilfrid S. Kendall, and Joseph Mecke. 2013\.
+_Stochastic Geometry and Its Applications_. Springer.
+
+Clemmensen, Line, Trevor Hastie, Daniela Witten, and Bjarne Ersbøll. 2011\.
+“Sparse Discriminant Analysis.” _Technometrics_ 53: 406–13.
+
+Cleveland, William S. 1988. _The Collected Works of John w. Tukey: Graphics
+1965-1985_. Vol. 5. CRC Press.
+
+Cleveland, William S., Marylyn E. McGill, and Robert McGill. 1988. “The Shape
+Parameter of a Two-Variable Graph.” _Journal of the American Statistical
+Association_ 83: 289–300.
+
+Cole, J. R., Q. Wang, E. Cardenas, J. Fish, B. Chai, R. J. Farris, A. S.
+Kulam-Syed-Mohideen, et al. 2009. “The Ribosomal Database Project: Improved
+Alignments and New Tools for rRNA Analysis.” _Nucleic Acids Research_ 37
+(Supplement 1): D141–45.
+
+Cook, R. Dennis. 1977. “Detection of Influential Observation in Linear
+Regression.” _Technometrics_.
+
+Cressie, Noel A. 1991. _Statistics for Spatial Data_. John Wiley; Sons.
+
+Diaconis, Persi, and David Freedman. 1980. “Finite Exchangeable Sequences.”
+_The Annals of Probability_ , 745–64.
+
+Diaconis, Persi, Sharad Goel, and Susan Holmes. 2008. “Horseshoes in
+Multidimensional Scaling and Kernel Methods.” _Annals of Applied Statistics_
+2: 777. <https://doi.org/DOI:10.1214/08-AOAS165>.
+
+Diaconis, Persi, and Susan Holmes. 1994. “Gray Codes for Randomization
+Procedures.” _Statistics and Computing_ 4 (4): 287–302.
+
+Diaconis, Persi, Susan Holmes, and Richard Montgomery. 2007. “Dynamical Bias
+in the Coin Toss.” _SIAM Review_ 49 (2): 211–35.
+
+Diday, Edwin, and M Paula Brito. 1989. “Symbolic Cluster Analysis.” In
+_Conceptual and Numerical Analysis of Data_ , 45–84. Springer.
+
+Diggle, Peter J. 2013. _Statistical Analysis of Spatial and Spatio-Temporal
+Point Patterns_. Chapman; Hall/CRCs.
+
+DiGiulio, Daniel B., Benjamin J. Callahan, Paul J. McMurdie, Elizabeth K.
+Costello, Deirdre J. Lyelle, Anna Robaczewska, Christine L. Sun, et al. 2015.
+“Temporal and Spatial Variation of the Human Microbiota During Pregnancy.”
+_PNAS_.
+
+Dundar, Murat, Ferit Akova, Halid Z. Yerebakan, and Bartek Rajwa. 2014. “A
+Non-Parametric Bayesian Model for Joint Cell Clustering and Cluster Matching:
+Identification of Anomalous Sample Phenotypes with Random Effects.” _BMC
+Bioinformatics_ 15 (1): 1–15. <https://doi.org/10.1186/1471-2105-15-314>.
+
+Durbin, Richard, Sean Eddy, Anders Krogh, and Graeme Mitchison. 1998.
+_Biological Sequence Analysis_. Cambridge University Press.
+
+Efron, Bradley. 2010. _Large-Scale Inference: Empirical Bayes Methods for
+Estimation, Testing, and Prediction_. Cambridge University Press.
+
+Efron, Bradley, and Robert J Tibshirani. 1994. _An Introduction to the
+Bootstrap_. CRC press.
+
+Efron, B., and R. Tibshirani. 1993. _An Introduction to the Bootstrap_.
+Chapman & Hall/CRC.
+
+Ekman, Gosta. 1954. “Dimensions of Color Vision.” _The Journal of Psychology_
+38 (2): 467–74.
+
+Elson, D, and E Chargaff. 1952. “On the Desoxyribonucleic Acid Content of Sea
+Urchin Gametes.” _Experientia_ 8 (4): 143–45.
+
+Felsenstein, Joseph. 2004. _Inferring Phylogenies_. Boston: Sinauer.
+
+Finetti, Bruno de. 1926. “Considerazioni Matematiche Sull’ereditarieta
+Mendeliana.” _Metron_ 6: 3–41.
+
+Fisher, Ronald Aylmer. 1935. _The Design of Experiments_. Oliver & Boyd.
+
+Flury, Bernard. 1997. _A First Course in Multivariate Statistics_. Springer.
+
+Freedman, David A. 1991. “Statistical Models and Shoe Leather.” _Sociological
+Methodology_ 21 (2): 291–313.
+
+Freedman, David, Robert Pisani, and Roger Purves. 1997. _Statistics_. New
+York, NY: WW Norton.
+
+Friedman, Jerome H. 1997. “On Bias, Variance, 0/1—Loss, and the Curse-of-
+Dimensionality.” _Data Mining and Knowledge Discovery_ 1: 55–77.
+
+Friedman, Jerome H, and Lawrence C Rafsky. 1979. “Multivariate Generalizations
+of the Wald-Wolfowitz and Smirnov Two-Sample Tests.” _The Annals of
+Statistics_ , 697–717.
+
+Fukuyama, Julia, Paul J McMurdie, Les Dethlefsen, David A Relman, and Susan
+Holmes. 2012. “Comparisons of Distance Methods for Combining Covariates and
+Abundances in Microbiome Studies.” In _Pac Symp Biocomput_. World Scientific.
+
+Gentleman, Robert C, Vincent J Carey, Douglas M Bates, Ben Bolstad, Marcel
+Dettling, Sandrine Dudoit, Byron Ellis, et al. 2004. “Bioconductor: Open
+Software Development for Computational Biology and Bioinformatics.” _Genome
+Biology_ 5 (10): R80. <https://doi.org/10.1186/gb-2004-5-10-r80>.
+
+Glass, David J. 2007. _Experimental Design for Biologists_. Cold Spring Harbor
+Laboratory Press.
+
+Goslee, Sarah C, Dean L Urban, et al. 2007. “The Ecodist Package for
+Dissimilarity-Based Analysis of Ecological Data.” _Journal of Statistical
+Software_ 22 (7): 1–19.
+
+Grantham, Richard, Christian Gautier, Manolo Gouy, M Jacobzone, and R Mercier.
+1981. “Codon Catalog Usage Is a Genome Strategy Modulated for Gene
+Expressivity.” _Nucleic Acids Research_ 9 (1): 213–13.
+
+Greenacre, Michael J. 2007. _Correspondence Analysis in Practice_. Chapman &
+Hall.
+
+Grolemund, Garrett, and Hadley Wickham. 2017. _R for Data Science_. O’Reilly.
+
+Grün, Bettina, Theresa Scharl, and Friedrich Leisch. 2012. “Modelling Time
+Course Gene Expression Data with Finite Mixtures of Linear Additive Models.”
+_Bioinformatics_ 28 (2): 222–28.
+<https://doi.org/10.1093/bioinformatics/btr653>.
+
+Guillot, Gilles, and François Rousset. 2013. “Dismantling the Mantel Tests.”
+_Methods in Ecology and Evolution_ 4 (4): 336–44.
+
+Hallett, Robin M, Anna Dvorkin-Gheva, Anita Bane, and John A Hassell. 2012\.
+“A Gene Signature for Predicting Outcome in Patients with Basal-Like Breast
+Cancer.” _Scientific Reports_ 2\.
+
+Hastie, Trevor, and Werner Stuetzle. 1989. “Principal Curves.” _Journal of the
+American Statistical Association_ 84 (406): 502–16.
+
+Hastie, Trevor, Robert Tibshirani, and Jerome Friedman. 2008. _The Elements of
+Statistical Learning_. 2^{\text{nd}} ed. Springer.
+
+Head, Megan L, Luke Holman, Rob Lanfear, Andrew T Kahn, and Michael D
+Jennions. 2015. “The Extent and Consequences of p-Hacking in Science.” _PLoS
+Biology_ 13 (3): e1002106.
+
+Held, M., M. H. A. Schmitz, B. Fischer, T. Walter, B. Neumann, M. H. Olma, M.
+Peter, J. Ellenberg, and D. W. Gerlich. 2010. “CellCognition: Time-Resolved
+Phenotype Annotation in High-Throughput Live Cell Imaging.” _Nature Methods_
+7: 747\.
+
+Helmholtz, H. von. 1867. _Handbuch Der Physiologischen Optik_. Leipzig:
+Leopold Voss.
+
+Henderson, Fergus. 2017. “Software Engineering at Google.” _ArXiv e-Prints_.
+<https://arxiv.org/abs/1702.01715>.
+
+Hoeting, Jennifer A, David Madigan, Adrian E Raftery, and Chris T Volinsky.
+1999. “Bayesian Model Averaging: A Tutorial.” _Statistical Science_ , 382–401.
+
+Holmes - Junca, Susan. 1985. “Outils Informatiques Pour l’évaluation de La
+Pertinence d’un résultat En Analyse Des Données.” PhD thesis, Université
+Montpellier II, France.
+
+Holmes, Susan. 1999. “Phylogenetic Trees: An Overview.” In _Statistics and
+Genetics_ , 81–118. IMA 112. New York: Springer.
+
+———. 2003a. “Bootstrapping Phylogenetic Trees: Theory and Methods.”
+_Statistical Science_ 18 (2): 241–55.
+
+———. 2003b. “Statistics for phylogenetic trees.” _Theoretical Population
+Biology_ 63 (1): 17–32.
+
+———. 2006. “Multivariate Analysis: The French way.” In _Probability and
+Statistics: Essays in Honor of David a. Freedman_ , edited by D. Nolan and T.
+P. Speed. Vol. 56. IMS Lecture Notes–Monograph Series. Beachwood, OH: IMS.
+<http://www.imstat.org/publications/lecnotes.htm>.
+
+———. 2018. “Statistical Proof? The Problem of Irreproducibility.” _Bulletin of
+the AMS_ 55 (1): 31–55.
+
+Holmes, Susan, Alexander V Alekseyenko, Alden Timme, Tyrrell Nelson, Pankaj
+Jay Pasricha, and Alfred Spormann. 2011. “Visualization and Statistical
+Comparisons of Microbial Communities Using r Packages on Phylochip Data.” In
+_Pacific Symposium on Biocomputing_ , 142–53. World Scientific.
+
+Holmes, Susan, Michael He, Tong Xu, and Peter P Lee. 2005. “Memory t Cells
+Have Gene Expression Patterns Intermediate Between Naive and Effector.” _PNAS_
+102 (15): 5519–23.
+
+Holmes, Susan, Adam Kapelner, and Peter P Lee. 2009. “An Interactive Java
+Statistical Image Segmentation System: GemIdent.” _Journal of Statistical
+Software_ 30 (10).
+
+Hornik, Kurt. 2005. “A CLUE for CLUster Ensembles.” _Journal of Statistical
+Software_ 14 (12).
+
+Hotelling, Harold. 1933. “Analysis of a Complex of Statistical Variables into
+Principal Components.” _Journal of Educational Psychology_ 24 (6): 417–41.
+
+———. 1944. “Some Improvements in Weighing and Other Experimental Techniques.”
+_The Annals of Mathematical Statistics_ 15 (3): 297–306.
+
+Huber, Peter J. 1964. “Robust Estimation of a Location Parameter.” _The Annals
+of Mathematical Statistics_ 35: 73–101.
+
+Huber, Wolfgang, Vincent J Carey, Robert Gentleman, Simon Anders, Marc
+Carlson, Benilton S Carvalho, Hector Corrada Bravo, et al. 2015.
+“Orchestrating High-Throughput Genomic Analysis with Bioconductor.” _Nature
+Methods_ 12 (2): 115–21.
+
+Hulett, Henry R, William A Bonner, Janet Barrett, and Leonard A Herzenberg.
+1969. “Cell Sorting: Automated Separation of Mammalian Cells as a Function of
+Intracellular Fluorescence.” _Science_ 166 (3906): 747–49.
+
+Ideker, Trey, Owen Ozier, Benno Schwikowski, and Andrew F Siegel. 2002.
+“Discovering Regulatory and Signalling Circuits in Molecular Interaction
+Networks.” _Bioinformatics_ 18 Suppl 1 (January): S233–40.
+<http://bioinformatics.oxfordjournals.org/cgi/reprint/18/suppl\_1/S233>.
+
+Ignatiadis, Nikolaos, and Wolfgang Huber. 2021. “Covariate Powered Cross-
+Weighted Multiple Testing.” _Journal of the Royal Statistical Society: Series
+B_ 83: 720–51. <https://doi.org/10.1111/rssb.12411>.
+
+Ignatiadis, Nikolaos, Bernd Klaus, Judith Zaugg, and Wolfgang Huber. 2016\.
+“Data-Driven Hypothesis Weighting Increases Detection Power in Genome-Scale
+Multiple Testing.” _Nature Methods_ 13: 577–80.
+
+Ihaka, Ross. 2003. “Color for Presentation Graphics.” In _Proceedings of the
+3rd International Workshop on Distributed Statistical Computing_ , edited by
+Kurt Hornik and Friedrich Leisch. Vienna, Austria:
+http://www.r-project.org/conferences/DSC-2003/Proceedings/; ISSN 1609-395X.
+
+Ihaka, Ross, and Robert Gentleman. 1996. “R: A Language for Data Analysis and
+Graphics.” _Journal of Computational and Graphical Statistics_ 5 (3): 299–314.
+
+Irizarry, R. A., B. Hobbs, F. Collin, Y. D. Beazer-Barclay, K. J. Antonellis,
+U. Scherf, and T. P. Speed. 2003. “Exploration, Normalization, and Summaries
+of High Density Oligonucleotide Array Probe Level Data.” _Biostatistics_ 4
+(2): 249–64.
+
+Irizarry, Rafael A, Hao Wu, and Andrew P Feinberg. 2009. “A Species-
+Generalized Probabilistic Model-Based Definition of CpG Islands.” _Mammalian
+Genome_ 20 (9-10): 674–80.
+
+Izenman, Alan Julian. 2008. “Nonlinear Dimensionality Reduction and Manifold
+Learning.” In _Modern Multivariate Statistical Techniques: Regression,
+Classification, and Manifold Learning_ , 597–632. New York, NY: Springer New
+York.
+
+Jacob, Laurent, Guillaume Obozinski, and Jean-Philippe Vert. 2009. “Group
+Lasso with Overlap and Graph Lasso.” In _Proceedings of the 26th Annual
+International Conference on Machine Learning_ , 433–40. ACM.
+
+James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2013\.
+_An Introduction to Statistical Learning_. Springer.
+
+Jolicoeur, Pierre, and James E Mosimann. 1960. “Size and Shape Variation in
+the Painted Turtle. A Principal Component Analysis.” _Growth_ 24: 339–54.
+
+Jolliffe, Ian. 2002. _Principal Component Analysis_. Wiley Online Library.
+
+Jones, T., A. Carpenter, and P. Golland. 2005. “Voronoi-Based Segmentation of
+Cells on Image Manifolds.” _Computer Vision for Biomedical Image Applications_
+, 535.
+
+Josse, Julie, and Susan Holmes. 2016. “Measuring Multivariate Association and
+Beyond.” _Statistics Surveys_ 10: 132–67.
+
+Kahneman, Daniel. 2011. _Thinking, Fast and Slow_. Macmillan.
+
+Kashyap, Purna C, Angela Marcobal, Luke K Ursell, Samuel A Smits, Erica D
+Sonnenburg, Elizabeth K Costello, Steven K Higginbottom, et al. 2013.
+“Genetically Dictated Change in Host Mucus Carbohydrate Landscape Exerts a
+Diet-Dependent Effect on the Gut Microbiota.” _PNAS_ 110 (42): 17059–64.
+
+Kaufman, Leonard, and Peter J Rousseeuw. 2009. _Finding Groups in Data: An
+Introduction to Cluster Analysis_. Vol. 344. John Wiley & Sons.
+
+Kendall, David. 1969. “Incidence Matrices, Interval Graphs and Seriation in
+Archeology.” _Pacific Journal of Mathematics_ 28 (3): 565–70.
+
+Kéry, Marc, and J Andrew Royle. 2015. _Applied Hierarchical Modeling in
+Ecology: Analysis of Distribution, Abundance and Species Richness in r and
+BUGS: Volume 1: Prelude and Static Models_. Academic Press.
+
+Korthauer, K., P. K. Kimes, C. Duvallet, A. Reyes, A. Subramanian, M. Teng, C.
+Shukla, E. J. Alm, and S. C. Hicks. 2019. “A practical guide to methods
+controlling false discoveries in computational biology.” _Genome Biology_ 20
+(1): 118.
+
+Kozich, James J, Sarah L Westcott, Nielson T Baxter, Sarah K Highlander, and
+Patrick D Schloss. 2013. “Development of a Dual-Index Sequencing Strategy and
+Curation Pipeline for Analyzing Amplicon Sequence Data on the MiSeq Illumina
+Sequencing Platform.” _Applied and Environmental Microbiology_ 79 (17):
+5112–20.
+
+Kristiansson, Erik, Michael Thorsen, Markus J Tamás, and Olle Nerman. 2009\.
+“Evolutionary Forces Act on Promoter Length: Identification of Enriched Cis-
+Regulatory Elements.” _Molecular Biology and Evolution_ 26 (6): 1299–1307.
+
+Kuan, Pei Fen, Dongjun Chung, Guangjin Pan, James A Thomson, Ron Stewart, and
+Sündüz Keleş. 2011. “A Statistical Framework for the Analysis of ChIP-Seq
+Data.” _Journal of the American Statistical Association_ 106 (495): 891–903.
+
+Lai, Tze Leung. 2001. _Sequential Analysis_. Wiley Online Library.
+
+Lange, Kenneth. 2016. _MM Optimization Algorithms_. SIAM.
+
+Laufer, Christina, Bernd Fischer, Maximilian Billmann, Wolfgang Huber, and
+Michael Boutros. 2013. “Mapping genetic interactions in human cancer cells
+with RNAi and multiparametric phenotyping.” _Nature Methods_ 10: 427–31.
+
+Lawrence, Michael S., Petar Stojanov, Paz Polak, Gregory V. Kryukov, Kristian
+Cibulskis, Andrey Sivachenko, Scott L. Carter, et al. 2013. “Mutational
+Heterogeneity in Cancer and the Search for New Cancer-Associated Genes.”
+_Nature_ 499 (7457): 214–18. <https://doi.org/10.1038/nature12213>.
+
+Leek, Jeffrey T, Robert B Scharpf, Héctor Corrada Bravo, David Simcha,
+Benjamin Langmead, W Evan Johnson, Donald Geman, Keith Baggerly, and Rafael A
+Irizarry. 2010. “Tackling the Widespread and Critical Impact of Batch Effects
+in High-Throughput Data.” _Nature Reviews Genetics_ 11 (10): 733–39.
+
+Leek, Jeffrey T., and John D. Storey. 2007. “Capturing heterogeneity in gene
+expression studies by surrogate variable analysis.” _PLoS Genetics_ 3 (9):
+1724–35.
+
+Li, Wen-Hsiung. 1997. _Molecular Evolution._ Sinauer Associates Incorporated.
+
+Li, Wen-Hsiung, and Dan Graur. 1991. _Fundamentals of Molecular Evolution_.
+Vol. 48. Sinauer Associates Sunderland, MA.
+
+Liberzon, Arthur, Aravind Subramanian, Reid Pinchback, Helga Thorvaldsdóttir,
+Pablo Tamayo, and Jill P Mesirov. 2011. “Molecular Signatures Database
+(MSigDB) 3.0.” _Bioinformatics_ 27 (12): 1739–40.
+
+Love, Michael I., Simon Anders, Vladislav Kim, and Wolfgang Huber. 2015. “RNA-
+Seq Workflow: Gene-Level Exploratory Analysis and Differential Expression.”
+_F1000Research_ 4 (1070). <https://doi.org/10.12688/f1000research.7035.1>.
+
+Love, Michael I, Wolfgang Huber, and Simon Anders. 2014. “Moderated Estimation
+of Fold Change and Dispersion for RNA-seq Data with DESeq2.” _Gnome Biology_
+15 (12): 1–21.
+
+Mandal, Rakesh, Sophie St-Hilaire, John G Kie, and DeWayne Derryberry. 2009\.
+“Spatial Trends of Breast and Prostate Cancers in the United States Between
+2000 and 2005.” _International Journal of Health Geographics_ 8 (1): 53.
+
+Mardia, Kanti, John T Kent, and John M Bibby. 1979. _Multiariate Analysis_.
+New York: Academic Press.
+
+Marin, Jean-Michel, and Christian Robert. 2007. _Bayesian Core: A Practical
+Approach to Computational Bayesian Statistics_. Springer Science & Business
+Media.
+
+McCormick Jr, William T, Paul J Schweitzer, and Thomas W White. 1972. “Problem
+Decomposition and Data Reorganization by a Clustering Technique.” _Operations
+Research_ 20 (5): 993–1009.
+
+McElreath, Richard. 2015. _Statistical Rethinking: A Bayesian Course with
+Examples in R and Stan_. Chapman; Hall/CRC.
+
+McLachlan, Geoffrey, and Thriyambakam Krishnan. 2007. _The EM Algorithm and
+Extensions_. Vol. 382. John Wiley & Sons.
+
+McLachlan, Geoffrey, and David Peel. 2004. _Finite Mixture Models_. John Wiley
+& Sons.
+
+McMurdie, Paul J, and Susan Holmes. 2014. “Waste Not, Want Not: Why Rarefying
+Microbiome Data Is Inadmissible.” _PLoS Computational Biology_ 10 (4):
+e1003531.
+
+———. 2015. “Shiny-Phyloseq: Web Application for Interactive Microbiome
+Analysis with Provenance Tracking.” _Bioinformatics_ 31 (2): 282–83.
+
+Mead, Roger. 1990. _The Design of Experiments: Statistical Principles for
+Practical Applications_. Cambridge University Press.
+
+Moignard, Victoria, Steven Woodhouse, Laleh Haghverdi, Andrew J Lilly, Yosuke
+Tanaka, Adam C Wilkinson, Florian Buettner, et al. 2015. “Decoding the
+Regulatory Network of Early Blood Development from Single-Cell Gene Expression
+Measurements.” _Nature Biotechnology_.
+
+Mollon, John. 1995. “Seeing Colour.” In _Colour: Art and Science_ , edited by
+T. Lamb and J. Bourriau. Cambridge Unversity Press.
+
+Mood, Alexander M. 1946. “On Hotelling’s Weighing Problem.” _The Annals of
+Mathematical Statistics_ , 432–46.
+
+Mossel, Elchanan. 2003. “On the Impossibility of Reconstructing Ancestral Data
+and Phylogenies.” _Journal of Computational Biology_ 10 (5): 669–76.
+
+Mourant, AE, Ada Kopec, and K Domaniewska-Sobczak. 1976. “The Distribution of
+the Human Blood Groups 2nd Edition.” Oxford University Press London.
+
+Müllner, Daniel. 2013. “Fastcluster: Fast Hierarchical, Agglomerative
+Clustering Routines for r and Python.” _Journal of Statistical Software_ 53
+(9): 1–18.
+
+Nacu, Serban, Rebecca Critchley-Thorne, Peter Lee, and Susan Holmes. 2007\.
+“Gene Expression Network Analysis and Applications to Immunology.”
+_Bioinformatics_ 23 (7, 7): 850–58.
+<https://doi.org/10.1093/bioinformatics/btm019>.
+
+Nelson, Tyrell A, Susan Holmes, Alexander Alekseyenko, Masha Shenoy, Todd
+DeSantis, Cindy Wu, Gary Andersen, et al. 2010. “PhyloChip Microarray Analysis
+Reveals Altered Gastrointestinal Microbial Communities in a Rat Model of
+Colonic Hypersensitivity.” _Neurogastroenterology & Motility_.
+
+Neumann, B., T. Walter, J. K. Heriche, J. Bulkescher, H. Erfle, C. Conrad, P.
+Rogers, et al. 2010. “Phenotypic profiling of the human genome by time-lapse
+microscopy reveals cell division genes.” _Nature_ 464 (7289): 721–27.
+
+Neyman, Jerzy, and Egon S Pearson. 1936. _Sufficient Statistics and Uniformly
+Most Powerful Tests of Statistical Hypotheses_. University California Press.
+
+Nolan, Daniel J, Michael Ginsberg, Edo Israely, Brisa Palikuqi, Michael G
+Poulos, Daylon James, Bi-Sen Ding, et al. 2013. “Molecular Signatures of
+Tissue-Specific Microvascular Endothelial Cell Heterogeneity in Organ
+Maintenance and Regeneration.” _Developmental Cell_ 26 (2): 204–19.
+
+O’Neill, Kieran, Nima Aghaeepour, Josef Špidlen, and Ryan Brinkman. 2013\.
+“Flow Cytometry Bioinformatics.” _PLoS Computational Biology_ 9 (12):
+e1003365.
+
+Ohnishi, Y., W. Huber, A. Tsumura, M. Kang, P. Xenopoulos, K. Kurimoto, A. K.
+Oles, et al. 2014. “Cell-to-Cell Expression Variability Followed by Signal
+Reinforcement Progressively Segregates Early Mouse Lineages.” _Nature Cell
+Biology_ 16 (1): 27–37.
+
+Ozsolak, Fatih, and Patrice M Milos. 2011. “RNA sequencing: advances,
+challenges and opportunities.” _Nature Reviews Genetics_ 12: 87–98.
+
+Pagès, Jérôme. 2016. _Multiple Factor Analysis by Example Using R_. CRC Press.
+
+Paradis, Emmanuel. 2011. _Analysis of Phylogenetics and Evolution with r_.
+Springer Science & Business Media.
+
+Pau, Grégoire, Florian Fuchs, Oleg Sklyar, Michael Boutros, and Wolfgang
+Huber. 2010. “EBImage R Package for Image Processing with Applications to
+Cellular Phenotypes.” _Bioinformatics_ 26 (7): 979–81.
+
+Pearson, Karl. 1901. “LIII. On Lines and Planes of Closest Fit to Systems of
+Points in Space.” _The London, Edinburgh, and Dublin Philosophical Magazine
+and Journal of Science_ 2 (11): 559–72.
+
+Perraudeau, Fanny, Davide Risso, Kelly Street, Elizabeth Purdom, and Sandrine
+Dudoit. 2017. “Bioconductor Workflow for Single-Cell RNA Sequencing:
+Normalization, Dimensionality Reduction, Clustering, and Lineage Inference.”
+_F1000Research_ 6\.
+
+Perrière, Guy, and Jean Thioulouse. 2002. “Use and Misuse of Correspondence
+Analysis in Codon Usage Studies.” _Nucleic Acids Research_ 30 (20): 4548–55.
+
+Pounds, Stan, and Stephan W Morris. 2003. “Estimating the Occurrence of False
+Positives and False Negatives in Microarray Studies by Approximating and
+Partitioning the Empirical Distribution of p-Values.” _Bioinformatics_ 19
+(10): 1236–42.
+
+Prentice, IC. 1977. “Non-Metric Ordination Methods in Ecology.” _The Journal
+of Ecology_ , 85–94.
+
+Purdom, Elizabeth. 2010. “Analysis of a Data Matrix and a Graph: Metagenomic
+Data and the Phylogenetic Tree.” _Annals of Applied Statistics_ , July.
+
+Purdom, Elizabeth, and Susan P Holmes. 2005. “Error Distribution for Gene
+Expression Data.” _Statistical Applications in Genetics and Molecular Biology_
+4 (1).
+
+Rajaram, S., B. Pavie, L. F. Wu, and S. J. Altschuler. 2012. “PhenoRipper:
+software for rapidly profiling microscopy images.” _Nature Methods_ 9: 635–37.
+
+Reaven, GM, and RG Miller. 1979. “An Attempt to Define the Nature of Chemical
+Diabetes Using a Multidimensional Analysis.” _Diabetologia_ 16 (1): 17–24.
+
+Reyes, Alejandro, Simon Anders, Robert J. Weatheritt, Toby J. Gibson, Lars M.
+Steinmetz, and Wolfgang Huber. 2013. “Drift and Conservation of Differential
+Exon Usage Across Tissues in Primate Species.” _Proceedings of the National
+Academy of Sciences_ 110 (38): 15377–82.
+<https://doi.org/10.1073/pnas.1307202110>.
+
+Reyes, Alejandro, and Wolfgang Huber. 2017. “Alternative Start and Termination
+Sites of Transcription Drive Most Transcript Isoform Differences Across Human
+Tissues.” _Nucleic Acids Research_ 46 (2): 582–92.
+<https://doi.org/10.1093/nar/gkx1165>.
+
+Rhee, Soo-Yon, Matthew J Gonzales, Rami Kantor, Bradley J Betts, Jaideep
+Ravela, and Robert W Shafer. 2003. “Human Immunodeficiency Virus Reverse
+Transcriptase and Protease Sequence Database.” _Nucleic Acids Research_ 31
+(1): 298–303.
+
+Rice, John. 2006. _Mathematical Statistics and Data Analysis_. Cengage
+Learning.
+
+Ripley, B. D. 1988. _Statistical Inference for Spatial Processes._ Cambridge
+University Press.
+
+Robert, Christian, and George Casella. 2009. _Introducing Monte Carlo Methods
+with R_. Springer Science & Business Media.
+
+Robins, Garry, Tom Snijders, Peng Wang, Mark Handcock, and Philippa Pattison.
+2007. “Recent Developments in Exponential Random Graph (p*) Models for Social
+Networks.” _Social Networks_ 29 (2): 192–215.
+
+Robinson, M. D., D. J. McCarthy, and G. K. Smyth. 2009. “edgeR: A Bioconductor
+Package for Differential Expression Analysis of Digital Gene Expression Data.”
+_Bioinformatics_ 26 (1): 139–40.
+<https://doi.org/10.1093/bioinformatics/btp616>.
+
+Rocke, David M, and Blythe Durbin. 2001. “A Model for Measurement Error for
+Gene Expression Arrays.” _Journal of Computational Biology_ 8 (6): 557–69.
+
+Ronquist, Fredrik, Maxim Teslenko, Paul van der Mark, Daniel L Ayres, Aaron
+Darling, Sebastian Höhna, Bret Larget, Liang Liu, Marc A Suchard, and John P
+Huelsenbeck. 2012. “MrBayes 3.2: Efficient Bayesian Phylogenetic Inference and
+Model Choice Across a Large Model Space.” _Systematic Biology_ 61 (3): 539–42.
+
+Rosen, Michael J, Benjamin J Callahan, Daniel S Fisher, and Susan P Holmes.
+2012. “Denoising PCR-Amplified Metagenome Data.” _BMC Bioinformatics_ 13 (1):
+283.
+
+Rousseeuw, Peter J. 1987. “Silhouettes: A Graphical Aid to the Interpretation
+and Validation of Cluster Analysis.” _Journal of Computational and Applied
+Mathematics_ 20: 53–65.
+
+Rousseeuw, Peter J., and Annick M. Leroy. 1987. _Robust Regression and Outlier
+Detection_. Wiley. <https://doi.org/10.1002/0471725382>.
+
+Roweis, Sam T, and Lawrence K Saul. 2000. “Nonlinear Dimensionality Reduction
+by Locally Linear Embedding.” _Science_ 290 (5500): 2323–26.
+
+Russ, John C., and F. Brent Neal. 2015. _The Image Processing Handbook_. 7th
+ed. CRC Press;
+
+Sankaran, Kris, and Susan Holmes. 2014. “structSSI: Simultaneous and Selective
+Inference for Grouped or Hierarchically Structured Data.” _Journal of
+Statistical Software_ 59 (1): 1–21.
+
+Schilling, Mark F. 1986. “Multivariate Two-Sample Tests Based on Nearest
+Neighbors.” _Journal of the American Statistical Association_ 81 (395):
+799–806.
+
+Schindelin, Johannes, Ignacio Arganda-Carreras, Erwin Frise, Verena Kaynig,
+Mark Longair, Tobias Pietzsch, Stephan Preibisch, et al. 2012. “Fiji: an open-
+source platform for biological-image analysis.” _Nature Methods_ 9: 676–82.
+
+Schloss, P D, S L Westcott, T Ryabin, J R Hall, M Hartmann, E B Hollister, R A
+Lesniewski, et al. 2009. “Introducing mothur: Open-Source, Platform-
+Independent, Community-Supported Software for Describing and Comparing
+Microbial Communities.” _Applied and Environmental Microbiology_ 75 (23):
+7537–41.
+
+Schloss, P. D., A. M. Schuber, J. P. Zackular, K. D. Iverson, Young V. B., and
+Petrosino J. F. 2012. “Stabilization of the Murine Gut Microbiome Following
+Weaning.” _Gut Microbes_ 3 (4): 383–93.
+
+Schölkopf, Bernhard, Koji Tsuda, and Jean-Philippe Vert. 2004. _Kernel Methods
+in Computational Biology_. MIT press.
+
+Schweder, T., and E. Spjøtvoll. 1982. “Plots of P-values to Evaluate Many
+Tests Simultaneously.” _Biometrika_ 69: 493–502.
+<https://doi.org/10.1093/biomet/69.3.493>.
+
+Senn, Stephen. 2004. “Controversies Concerning Randomization and Additivity in
+Clinical Trials.” _Statistics in Medicine_ 23: 3729–53.
+
+Serra, Jean. 1983. _Image Analysis and Mathematical Morphology_. Academic
+Press.
+
+Setiadi, A Francesca, Nelson C Ray, Holbrook E Kohrt, Adam Kapelner, Valeria
+Carcamo-Cavazos, Edina B Levic, Sina Yadegarynia, et al. 2010. “Quantitative,
+Architectural Analysis of Immune Cell Subsets in Tumor-Draining Lymph Nodes
+from Breast Cancer Patients and Healthy Lymph Nodes.” _PLoS One_ 5 (8):
+e12420.
+
+Shalizi, Cosma. 2017. _Advanced Data Analysis from an Elementary Point of
+View_. Cambridge University Press.
+<https://www.stat.cmu.edu/~cshalizi/ADAfaEPoV/ADAfaEPoV.pdf>.
+
+Slonim, Noam, Gurinder Singh Atwal, Gašper Tkačik, and William Bialek. 2005\.
+“Information-Based Clustering.” _PNAS_ 102 (51): 18297–302.
+
+Stegle, O., L. Parts, R. Durbin, and J. Winn. 2010. “A Bayesian framework to
+account for complex non-genetic factors in gene expression levels greatly
+increases power in eQTL studies.” _PLoS Computational Biology_ 6 (5):
+e1000770.
+
+Steijger, T., J. F. Abril, P. G. Engstrom, F. Kokocinski, T. J. Hubbard, R.
+Guigo, J. Harrow, et al. 2013. “Assessment of transcript reconstruction
+methods for RNA-seq.” _Nature Methods_ 10 (12): 1177–84.
+
+Stigler, Stephen M. 2016. _The Seven Pillars of Statistical Wisdom_. Harvard
+University Press.
+
+Storey, John D. 2003. “The Positive False Discovery Rate: A Bayesian
+Interpretation and the q-Value.” _The Annals of Statistics_ 31 (6).
+<https://doi.org/10.1214/aos/1074290335>.
+
+Strang, Gilbert. 2009. _Introduction to Linear Algebra_. Fourth. Wellesley-
+Cambridge Press.
+
+Tenenbaum, Joshua B, Vin De Silva, and John C Langford. 2000. “A Global
+Geometric Framework for Nonlinear Dimensionality Reduction.” _Science_ 290
+(5500): 2319–23.
+
+Tibshirani, Robert. 1996. “Regression Shrinkage and Selection via the Lasso.”
+_Journal of the Royal Statistical Society. Series B (Methodological)_ ,
+267–88.
+
+Tibshirani, Robert, Guenther Walther, and Trevor Hastie. 2001. “Estimating the
+Number of Clusters in a Data Set via the Gap Statistic.” _JRSSB_ 63 (2):
+411–23.
+
+Trosset, Michael W, and Carey E Priebe. 2008. “The Out-of-Sample Problem for
+Classical Multidimensional Scaling.” _Computational Statistics & Data
+Analysis_ 52 (10): 4635–42.
+
+Tseng, George C, and Wing H Wong. 2005. “Tight Clustering: A Resampling-Based
+Approach for Identifying Stable and Tight Patterns in Data.” _Biometrics_ 61
+(1): 10–16.
+
+Tukey, John W. 1977. “Exploratory Data Analysis.” _Massachusetts: Addison-
+Wesley_.
+
+Tversky, Amos, and Daniel Kahneman. 1974. “Heuristics and Biases: Judgement
+Under Uncertainty.” _Science_ 185: 1124–30.
+
+———. 1975. “Judgment Under Uncertainty: Heuristics and Biases.” In _Utility,
+Probability, and Human Decision Making_ , 141–62. Springer.
+
+Verhulst, Pierre-François. 1845. “Recherches mathématiques Sur La Loi
+d’accroissement de La Population.” _Nouveaux Mémoires de l’Académie Royale Des
+Sciences Et Belles-Lettres de Bruxelles_ 18: 1–42.
+
+Vetterli, Martin, Jelena Kovačević, and Vivek Goyal. 2014. _Foundations of
+Signal Processing_. Cambridge University Press.
+
+Wang, Q., G. M. Garrity, J. M. Tiedje, and J. R. Cole. 2007. “Naive Bayesian
+Classifier for Rapid Assignment of rRNA Sequences into the New Bacterial
+Taxonomy.” _Applied and Environmental Microbiology_ 73 (16): 5261.
+
+Wasserstein, Ronald L, and Nicole A Lazar. 2016. “The ASA’s Statement on
+p-Values: Context, Process, and Purpose.” _The American Statistician_.
+
+Wertheim, Joel O, and Michael Worobey. 2009. “Dating the Age of the SIV
+Lineages That Gave Rise to HIV-1 and HIV-2.” _PLoS Computational Biology_ 5
+(5): e1000377.
+
+Wickham, Hadley. 2010. “A Layered Grammar of Graphics.” _Journal of
+Computational and Graphical Statistics_ 19 (1): 3–28.
+
+———. 2014. “Tidy Data.” _Journal of Statistical Software_ 59 (10).
+
+———. 2016. _Ggplot2: Elegant Graphics for Data Analysis_. Springer New York.
+<http://had.co.nz/ggplot2/book>.
+
+Wiel, Mark A, Tonje G Lien, Wina Verlaat, Wessel N Wieringen, and Saskia M
+Wilting. 2016. “Better Prediction by Use of Co-Data: Adaptive Group-
+Regularized Ridge Regression.” _Statistics in Medicine_ 35 (3): 368–81.
+
+Wilkinson, Leland. 1999. “Dot Plots.” _The American Statistician_ 53 (3): 276.
+
+———. 2005. _The Grammar of Graphics_. Springer.
+
+Wills, Quin F, Kenneth J Livak, Alex J Tipping, Tariq Enver, Andrew J Goldson,
+Darren W Sexton, and Chris Holmes. 2013. “Single-Cell Gene Expression Analysis
+Reveals Genetic Associations Masked in Whole-Tissue Experiments.” _Nature
+Biotechnology_ 31 (8): 748–52.
+
+Wilson, Greg, Jennifer Bryan, Karen Cranston, Justin Kitzes, Lex Nederbragt,
+and Tracy K. Teal. 2017. “Good Enough Practices in Scientific Computing.”
+Edited by Francis Ouellette. _PLOS Computational Biology_ 13 (6): e1005510.
+<https://doi.org/10.1371/journal.pcbi.1005510>.
+
+Witten, Daniela M, and Robert Tibshirani. 2011. “Penalized Classification
+Using Fisher’s Linear Discriminant.” _JRSSB_ 73 (5): 753–72.
+
+Witten, Daniela M, Robert Tibshirani, and Trevor Hastie. 2009. “A Penalized
+Matrix Decomposition, with Applications to Sparse Principal Components and
+Canonical Correlation Analysis.” _Biostatistics_ , kxp008.
+
+Wright, Erik S. 2015. “DECIPHER: Harnessing Local Sequence Context to Improve
+Protein Multiple Sequence Alignment.” _BMC Bioinformatics_ 16 (1): 1.
+
+Wu, CF Jeff, and Michael S Hamada. 2011. _Experiments: Planning, Analysis, and
+Optimization_. Vol. 552. John Wiley & Sons.
+
+Yu, Hongxiang, Diana L Simons, Ilana Segall, Valeria Carcamo-Cavazos, Erich J
+Schwartz, Ning Yan, Neta S Zuckerman, et al. 2012. “PRC2/EED-EZH2 Complex Is
+up-Regulated in Breast Cancer Lymph Node Metastasis Compared to Primary Tumor
+and Correlates with Tumor Proliferation in Situ.” _PloS One_ 7 (12): e51239.
+
+Zeileis, Achim, Christian Kleiber, and Simon Jackman. 2008. “Regression Models
+for Count Data in R.” _Journal of Statistical Software_ 27 (8).
+<http://www.jstatsoft.org/v27/i08/>.
+
+Zeller, Georg, Julien Tap, Anita Y Voigt, Shinichi Sunagawa, Jens Roat
+Kultima, Paul I Costea, Aurélien Amiot, et al. 2014. “Potential of Fecal
+Microbiota for Early-Stage Detection of Colorectal Cancer.” _Molecular Systems
+Biology_ 10 (11): 766. <https://doi.org/10.15252/msb.20145645>.
+
+Zou, Hui, Trevor Hastie, and Robert Tibshirani. 2006. “Sparse Principal
+Component Analysis.” _Journal of Computational and Graphical Statistics_ 15
+(2): 265–86.
+
+Page built at 01:33 on 2025-09-01 using R version 4.5.1 (2025-06-13)
+

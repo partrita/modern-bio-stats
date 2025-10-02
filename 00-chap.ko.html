@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta charset="utf-8"/>
+<meta content="quarto-1.7.31" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0, user-scalable=yes" name="viewport"/>
+<title>Introduction – Modern Statistics for Modern Biology</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta content="./" name="quarto:offset"/>
+<link href="./imgs/msmb-favicon.png" rel="icon" type="image/png"/>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet"/>
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-af5ec82acda093b5ee751184164e9432.css" id="quarto-text-highlighting-styles" rel="stylesheet"/>
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet"/>
+<link append-hash="true" data-mode="light" href="site_libs/bootstrap/bootstrap-d63985d606c7f07261ad561a6cfde940.min.css" id="quarto-bootstrap" rel="stylesheet"/>
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet"/>
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"/>
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+<link href="msmb.css" rel="stylesheet"/>
+<meta content="Introduction – Modern Statistics for Modern Biology" property="og:title"/>
+<meta content="If you are a biologist and want to get the best out of the powerful methods of modern computational statistics, this is your book." property="og:description"/>
+<meta content="https://www.huber.embl.de/msmb/imgs/MSMB-Cover2-smallest.jpg" property="og:image"/>
+<meta content="Modern Statistics for Modern Biology" property="og:site_name"/>
+<meta content="Introduction – Modern Statistics for Modern Biology" name="twitter:title"/>
+<meta content="If you are a biologist and want to get the best out of the powerful methods of modern computational statistics, this is your book." name="twitter:description"/>
+<meta content="https://www.huber.embl.de/msmb/imgs/MSMB-Cover2-smallest.jpg" name="twitter:image"/>
+<meta content="summary" name="twitter:card"/>
+<script type="text/javascript">
+  var _paq = _paq || [];
+  
+  // Call disableCookies before calling trackPageView 
+  _paq.push(['disableCookies']);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u='//tr-denbi.embl.de/heimdall/';
+    _paq.push(['setTrackerUrl', u+'p.php']);
+    _paq.push(['setSiteId', '26']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'p.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+</head>
+<body class="floating nav-fixed slimcontent quarto-light">
+<div id="quarto-search-results"></div>
+<header class="headroom fixed-top" id="quarto-header">
+<nav class="navbar navbar-expand-lg" data-bs-theme="dark">
+<div class="navbar-container container-fluid">
+<div class="navbar-brand-container mx-auto">
+<a class="navbar-brand" href="./index.html">
+<span class="navbar-title">현대 생물학에 대한 현대 통계</span>
+</a>
+</div>
+<div class="" id="quarto-search" title="Search"></div>
+<button aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbarCollapse" data-bs-toggle="collapse" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }" role="menu" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarCollapse">
+<ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item dropdown">
+<a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="nav-menu-chapters" role="link">
+<span class="menu-text">챕터</span>
+</a>
+<ul aria-labelledby="nav-menu-chapters" class="dropdown-menu dropdown-menu-end">
+<li>
+<a class="dropdown-item" href="./index.html">
+<span class="dropdown-text">집</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./00-chap.html">
+<span class="dropdown-text">소개</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./01-chap.html">
+<span class="dropdown-text">개별 데이터에 대한 생성 모델</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./02-chap.html">
+<span class="dropdown-text">통계 모델링</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./03-chap.html">
+<span class="dropdown-text">데이터 시각화</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./04-chap.html">
+<span class="dropdown-text">혼합 모델</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./05-chap.html">
+<span class="dropdown-text">클러스터링</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./06-chap.html">
+<span class="dropdown-text">테스트</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./07-chap.html">
+<span class="dropdown-text">다변량 분석</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./08-chap.html">
+<span class="dropdown-text">고 처리량 수 데이터 및 일반화 된 선형 모델</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./09-chap.html">
+<span class="dropdown-text">이종 데이터를위한 다변량 방법</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./10-chap.html">
+<span class="dropdown-text">네트워크와 나무</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./11-chap.html">
+<span class="dropdown-text">이미지 데이터</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./12-chap.html">
+<span class="dropdown-text">감독 학습</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./13-chap.html">
+<span class="dropdown-text">높은 처리량 실험 및 분석의 설계</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./14-chap.html">
+<span class="dropdown-text">통계적 일치</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./15-chap.html">
+<span class="dropdown-text">감사의 말</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./16-chap.html">
+<span class="dropdown-text">참조</span></a>
+</li>
+</ul>
+</li>
+</ul>
+</div> <!-- /navcollapse -->
+<div class="quarto-navbar-tools">
+</div>
+</div> <!-- /container-fluid -->
+</nav>
+</header>
+<!-- content -->
+<div class="quarto-container page-columns page-rows-contents page-layout-article page-navbar" id="quarto-content">
+<!-- sidebar -->
+<nav class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" id="quarto-sidebar">
+<nav class="toc-active" id="TOC" role="doc-toc">
+<h2 id="toc-title">섹션</h2>
+<ul class="collapse">
+<li><a class="nav-link active" data-scroll-target="#the-challenge-heterogeneity" href="#the-challenge-heterogeneity" id="toc-the-challenge-heterogeneity">도전 : 이질성</a></li>
+<li><a class="nav-link" data-scroll-target="#whats-in-this-book" href="#whats-in-this-book" id="toc-whats-in-this-book">이 책은 무엇입니까?</a></li>
+<li><a class="nav-link" data-scroll-target="#computational-tools-for-modern-biologists" href="#computational-tools-for-modern-biologists" id="toc-computational-tools-for-modern-biologists">현대 생물 학자를위한 계산 도구</a></li>
+</ul>
+</nav>
+</nav>
+<div class="quarto-sidebar-collapse-item" data-bs-target=".quarto-sidebar-collapse-item" data-bs-toggle="collapse" id="quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+<div class="sidebar margin-sidebar zindex-bottom" id="quarto-margin-sidebar">
+</div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+<header class="quarto-title-block default" id="title-block-header">
+<div class="quarto-title">
+<h1 class="title">소개</h1>
+</div>
+<div class="quarto-title-meta">
+</div>
+</header>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a class="lightbox" data-gallery="quarto-lightbox-gallery-1" href="imgs/WringingFlood_web.png"><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="imgs/WringingFlood_web.png"/></a></p>
+</figure>
+</div>
+</div></div></div>
+<p>두 인스턴스<em>현대의</em>이 책의 제목에서 생물학적 데이터 분석에서 최근 두 가지 주요 혁명을 반영합니다.</p>
+<ul>
+<li><p>생물학, 이전에는 드문 드문 과학, 종종 질적 데이터만이 정량적 데이터의 생산이 고 에너지 물리학 또는 천문학과 동등하고 데이터가 더 이질적이고 복잡한 분야로 바뀌 었습니다.</p></li>
+<li><p>20 세기에 확률 이론 및 미적분학을위한 적용 지점이되었으며, 종종 표기법이 적재되고 가설 테스트에 중점을두고 인식 된 통계는 컴퓨터의 편재성과 기계가 읽을 수있는 형태의 데이터에 의해 변형되었습니다. 탐색 적 데이터 분석, 시각화, 리샘플링, 시뮬레이션, 빈번한 데이터 분석을 통해 베이지안 아이디어 및 방법의 실용적 혼성화가 도구 세트의 일부가되었습니다.</p></li>
+</ul>
+<p>이 책의 목표는 생물학적 연구에서 일하는 과학자들이 실험과 다른 사용 가능한 데이터를 최대한 활용하는 데 필요한 중요한 아이디어와 방법을 빠르게 배울 수 있도록하는 것입니다. 이 책은 실습 접근 방식을 취합니다. 이야기는 질문 클래스 또는 특정 데이터 유형에 의해 주도됩니다. 방법과 이론은 알아야 할 필요성에 따라 소개됩니다. 우리는 첫 번째 원칙을 체계적으로 추론하려고하지 않습니다. 이 책은 종종 독자들을 수영장에 던지고 너무 많은 세부 사항에도 불구하고 수영을 할 수 있기를 바랍니다.</p>
+<p>이 책은 결코 기본 이론, 즉 확률, 선형 대수, 미적분학, 컴퓨터 과학, 데이터베이스, 다변량 통계에 대한 체계적인 훈련을 대체하지 않습니다. 이러한 훈련에는 많은 학기가 필요합니다. 아마도이 책은 당신의 식욕 이이 분야 중 하나와 더 깊이 관여 할 것입니다.</p>
+<section class="level2" id="the-challenge-heterogeneity">
+<h2 class="anchored" data-anchor-id="the-challenge-heterogeneity">도전 : 이질성</h2>
+<p>모든 생물학적 시스템이나 유기체는 수만 개의 구성 요소로 구성되며, 이는 다른 상태에 있으며 여러 가지 방식으로 상호 작용할 수 있습니다. 현대 생물학은 포괄적 인 포괄적 인 시스템을 획득함으로써 이러한 시스템을 이해하는 것을 목표로하며, 이는 여러 공변량과 상호 작용을 통해 시간 및 공간적 맥락에서 고차원 적 데이터를 의미합니다. 이 복잡성을 다루는 것이 우리의 주요 도전이 될 것입니다. 여기에는 실제, 생물학적 복잡성뿐만 아니라 우리가 항상 불완전한기구로 얻을 수있는 데이터의 실질적인 복잡성과 이질성이 포함됩니다.</p>
+<p>생물학적 데이터는 핵산 및 단백질 서열, 직사각형 테이블, 다중 테이블, 연속 변수, 배치 인자, 표현형 이미지, 공간 좌표로 모든 종류의 형태로 제공됩니다. 실험실 실험에서 측정 된 데이터 외에도 임상 데이터, 환경 관찰, 공간 시간의 측정, 네트워크 및 계보 트리 및 무료 텍스트 또는 제어 어휘로 생물학적 데이터베이스에서 이전에 누적 된 지식의 힙이 있습니다.<span class="math inline">\ (... \)</span></p>
+<blockquote class="blockquote">
+<p>"균질 한 데이터는 모두 비슷합니다. 모든 이종 데이터는 자체적으로 이질적입니다." Anna Karenina 원칙.</p>
+</blockquote>
+<p>이 책의 계산 플랫폼으로서 우리의 선택을 동기를 부여하는 것은 이질성입니다.</p>
+</section>
+<section class="level2 page-columns page-full" id="whats-in-this-book">
+<h2 class="anchored" data-anchor-id="whats-in-this-book">이 책은 무엇입니까?</h2>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-Fisher">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-Fisher-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-2" href="imgs/FisherParadigm.png" title="Figure 1: The hypothesis testing paradigm recommended by R.A. Fisher starts with the formulation of a null hypothesis and the design of an experiment before the collection of any data. We could think in a similarly schematic way about model fitting: just replace Hypothesis H0 by Parametric Model and  by Fit Parameters."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="imgs/FisherParadigm.png"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-Fisher-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 1 : R.A.가 권장하는 가설 테스트 패러다임 Fisher는 귀무 가설의 공식화와 모든 데이터를 수집하기 전에 실험의 설계로 시작합니다. 우리는 모델 피팅에 대해 비슷한 회로도로 생각할 수 있습니다.<em>가설 H0</em>~에 의해<em>파라 메트릭 모델</em>그리고 by<em>매개 변수에 맞습니다</em></figcaption>
+</figure>
+</div>
+</div></div></div>
+<p><a class="quarto-xref" href="#fig-Fisher">수치<span>1</span></a>통계 데이터 분석의 순차적 관점을 간략하게 설명합니다. 1930 년대의 중요성과 가설 테스트에 대한 획기적인 작업에 의해 동기 부여<span class="citation" data-cites="fisher1935design">피셔 (Fisher)<a href="16-chap.html#ref-fisher1935design" role="doc-biblioref">1935</a>))</span>그리고<span class="citation" data-cites="Neyman1936">Neyman과 Pearson (<a href="16-chap.html#ref-Neyman1936" role="doc-biblioref">1936</a>))</span>, 수학적 형식, 특히 가설 (null 또는 대안) 하에서 테스트 통계 분포를 계산하거나 분포 가정을 설정하고 분석 근사치를 검색 할 수있는 부분에 적합합니다.</p>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-iterative">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-iterative-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-3" href="imgs/iterativeparadigm.png" title="Figure 2: J.W. Tukey recommended starting any analysis with the data and wrote: “No catalogue of techniques can convey a willingness to look for what can be seen, whether or not anticipated.” [@Holmes1985]."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="imgs/iterativeparadigm.png"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-iterative-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 2 : J.W. Tukey는 데이터로 분석을 시작할 것을 권장하고 다음과 같이 썼습니다.<span class="citation" data-cites="Holmes1985"><a href="16-chap.html#ref-Holmes1985" role="doc-biblioref">홈즈 - Junca 1985</a>))</span></figcaption>
+</figure>
+</div>
+</div></div></div>
+<p>진정한 과학적 발견은 풍자 만화 방식으로 거의 작동하지 않습니다.<a class="quarto-xref" href="#fig-Fisher">수치<span>1</span></a><span class="citation" data-cites="Tukey77">튜키 (<a href="16-chap.html#ref-Tukey77" role="doc-biblioref">1977</a>))</span>두 가지 별도의 접근법을 강조했습니다. 처음으로 그는 불렀다<strong>탐색 적 데이터 분석</strong><strong>에다</strong>). EDA는 데이터 자체를 사용하여 통계 분석을 수행하는 방법을 결정합니다. EDA는 데이터 시각화를 기반으로 한 다음<strong>확인 데이터 분석</strong>(CDA) : 가설 중심의 추론 적 방법은 이상적으로 강력해야하며 복잡한 가정에 의존해서는 안됩니다. Tukey는 반복적 인 접근 방식을 추천했습니다<a class="quarto-xref" href="#fig-iterative">수치<span>2</span></a>이를 통해 다른 해상도와 다른 관점에서 데이터를 볼 수 있습니다. 이를 통해 데이터에 대한 우리의 이해와 기본 자연 현상을 연속적으로 개선 할 수 있습니다.</p>
+<p>1990 년대 후반의 생물학은 큰 것을 높였습니다.<span class="math inline">\(피\)</span>, 작은-<span class="math inline">\(N\)</span>문제 : 유전자 발현 데이터 세트를 고려하십시오<span class="math inline">\ (n = 200 \)</span>환자 유래 조직 샘플 켜짐<span class="math inline">\ (P = 200000 \)</span>유전자. 예를 들어 질병 유형 또는 결과를<span class="math inline">\ (20000 \)</span>유전자 또는 특징은 잠재적 인 모델 매개 변수 수가 측정 수보다 큰 크기 순서 일 수 있기 때문에 즉시 문제를 해결합니다. 문제는 유래합니다<em>비 식별 가능성</em>매개 변수 또는<em>지나치게 적합합니다</em>. 적어도 이것은 일반적인 다변량 선형 모델과 같은 일반적인 모델의 경우입니다. 통계 학자들은 정규화 기술의 사용을 통해 희소성을 요구함으로써 상황을 해결할 수 있음을 깨달았습니다.<span class="citation" data-cites="HastieTibshiraniFriedman"><a href="16-chap.html#ref-HastieTibshiraniFriedman" role="doc-biblioref">Hastie, Tibshirani 및 Friedman 2008</a>))</span>, 즉, 많은 잠재적 매개 변수가 0 또는 적어도 그에 가깝도록 요구함으로써.</p>
+<p>Sparsity 원칙의 일반화는 고차원 통계에서 가장 강력한 최근 아이디어 중 하나를 호출함으로써 달성됩니다.<strong>경험적 베이</strong>: 우리는 모든 매개 변수를 처음부터 배우려고하지 않고, 그 그룹이 비슷하거나 동일하다는 사실을 사용합니다. 긴 치료법이 몇 가지 있습니다<span class="citation" data-cites="Efron2010"><a href="16-chap.html#ref-Efron2010" role="doc-biblioref">Efron 2010</a>))</span>현대 추정 및 가설 테스트에 필수적인 대규모 추론의 주제. 2010 년대에 컴퓨터 과학자들은 매개 변수 식별 가능성이나 독창성에 대해 너무 걱정하지 않고 때때로 놀라운 예측 품질을 제공 할 수있는“심층 신경망”을 공학하는 방법을 발견했습니다.</p>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a class="lightbox" data-gallery="quarto-lightbox-gallery-4" href="imgs/roulette.png"><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="imgs/roulette.png" width="113"/></a></p>
+</figure>
+</div>
+</div></div></div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="margin-aside">Monte Carlo 근사 방법을 사용할 때 룰렛 아이콘을 사용하여 식별합니다. 이 방법의 이름은 카지노 게임의 임의성과 유사한 임의성을 사용하기 때문에 사용됩니다. 아이러니하게도, 많은 카지노 게임의 경우, 승리 확률은 분석적으로 알려지지 않았으며 카지노는 자체 경험적 데이터를 사용하여 승리 확률을 평가합니다.</span></div></div>
+<p><em>시뮬레이션</em>우리가 필요로하는 많은 결과가 표준 분석 접근법의 범위를 피할 때이 책에서 필수적인 역할을합니다. 다시 말해, 시뮬레이션은“종이와 연필 수학”에 의해 트랙 가능한 방법 만 고려할 수 있고, 단순화 가정이나 근사화의 적절성에 대해 걱정할 수 없게됩니다.</p>
+<p>이 책에서 우리는 이러한 광범위한 개발과 현재의 생물학적 연구에 대한 적용을 다루려고 노력합니다. 우리는 RNA-Seq, 유량-사이토 트리, 분류 풍부, 이미징 데이터 및 단일 세포 측정을 포함하여 현대 생물 학자들이 다루어야 할 다양한 유형의 데이터를 다룹니다. 우리는 통계에 대한 사전 공식 교육이 없다고 가정합니다. 그러나 R에 대한 친숙 함과 수학적 및 분석적 사고에 참여하려는 의지가 필요합니다.</p>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a class="lightbox" data-gallery="quarto-lightbox-gallery-5" href="imgs/devil.png" title="We will put notes and extra information under the devil icon, this is the devil who looks after the details."><img alt="We will put notes and extra information under the devil icon, this is the devil who looks after the details." class="img-fluid quarto-figure quarto-figure-center figure-img" src="imgs/devil.png" width="123"/></a></p>
+</figure>
+</div>
+<figcaption>우리는 악마 아이콘 아래에 메모와 추가 정보를 넣을 것입니다. 이것은 세부 사항을 돌보는 악마입니다.</figcaption>
+</figure>
+</div>
+</div></div></div>
+<p>다음에 요약 된 바와 같이, 책의 장은 서로를 기반으로하지만 합리적으로 자체 포함되므로 별도로 연구 할 수도 있습니다. 각 장은 동기와 목표 섹션으로 시작합니다. 텍스트의 질문은 당신이 따라 가고 있는지 확인하는 데 도움이됩니다. 텍스트에는 전체 R 코드 예제가 포함되어 있습니다. HTML에서 R 코드를 긁어 내거나 책에서 수동으로 복사 할 필요가 없습니다. R 파일 (확장자<code>.아르 자형</code>)이 웹 사이트에서. 각 장은 주요 요점과 일련의 연습에 대한 요약으로 끝납니다.</p>
+<p><em>생성 모델</em>우리의 기본 빌딩 블록입니다. 복잡한 데이터에 대한 결론을 도출하기 위해이 상황에서 생성 된 데이터에 대한 간단한 모델을 갖는 것이 유용한 경향이 있습니다. 우리는 확률 이론과 생성 모델의 사용을 통해이를 수행합니다.<a class="quarto-xref" href="01-chap.html"><span>1 개별 데이터에 대한 생성 모델</span></a>. 우리는 면역학 및 DNA 분석의 예를 사용하여 생물학적 데이터에 대한 유용한 생성 모델과 같은 이항, 다중 및 포아송 랜덤 변수를 설명 할 것입니다.</p>
+<p>특정 모델에서 데이터가 어떻게 보일지 알게되면 뒤로 작업을 시작할 수 있습니다. 일부 데이터가 주어지면 어떤 모델이 설명 할 수 있습니까? 이것<em>상향식 접근</em>통계적 사고의 핵심이며, 우리는 그것을<a class="quarto-xref" href="02-chap.html"><span>2 통계 모델링</span></a></p>
+<p>우리는의 주요 역할을 보았다<em>제도법</em>Tukey의 계획에서 (<a class="quarto-xref" href="#fig-iterative">수치<span>2</span></a>), 그리고 우리는 데이터를 시각화하는 방법을 배울 것입니다.<a class="quarto-xref" href="03-chap.html"><span>3 데이터 시각화</span></a>. 그래픽의 문법을 사용합니다<a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></p>
+<p>실제 생물학적 데이터는 종종 우리가 다룰 수있는 것보다 더 복잡한 분포 특성을 가지고 있습니다.<a class="quarto-xref" href="01-chap.html"><span>1 개별 데이터에 대한 생성 모델</span></a>. 우리는 사용할 것입니다<em>혼합물</em>, 우리가 탐구합니다<a class="quarto-xref" href="04-chap.html"><span>4 혼합물 모델</span></a>; 이를 통해 이기종 생물학적 데이터에 대한 사실적인 모델을 구축하고 적절한 분산 안정화 변환을 선택하기위한 탄탄한 기초를 제공 할 수 있습니다.</p>
+<p>생물학의 크고 매트릭스와 같은 데이터 세트는 자연스럽게 자신을 빌려줍니다.<em>클러스터링</em>: 매트릭스 행 (특징) 사이의 거리 측정을 정의하면 발현 패턴의 유사성과 유사하게 컬럼 (환자 샘플)에 의해 유전자를 클러스터링하고 그룹화 할 수 있습니다. 클러스터링을 다룰 것입니다<a class="quarto-xref" href="05-chap.html"><span>5 클러스터링</span></a>. 클러스터링은 거리에만 의존하기 때문에 객체와 거리가 정의 된 한 매트릭스 모양이 아닌 데이터에도 적용 할 수도 있습니다.</p>
+<p>EDA의 경로를 따라 간단한 매트릭스에 대한 가장 근본적인 비 감독 분석 방법을 다룹니다.<em>주요 구성 요소 분석</em>- 안에<a class="quarto-xref" href="07-chap.html"><span>7 다변량 분석</span></a>. 우리는 여러 데이터 유형을 결합하는 이질적인 데이터로 전환합니다.<a class="quarto-xref" href="09-chap.html"><span>9 이종 데이터에 대한 다변량 방법</span></a>. 거기에서 단일 셀 데이터의 계수에 대한 비 감독되지 않은 방법이 표시됩니다. 또한 다변량 접근법의 일반화를 사용하는 방법을 다룰 것입니다.<a class="quarto-xref" href="07-chap.html"><span>7 다변량 분석</span></a>동일한 관찰 단위에 기록 된 범주 형 변수 및 다중 분석의 조합.</p>
+<p>기본 가설 테스트 워크 플로우<a class="quarto-xref" href="#fig-Fisher">수치<span>1</span></a>설명됩니다<a class="quarto-xref" href="06-chap.html"><span>6 테스트</span></a>. 우리는 기회를 사용하여 가장 일반적인 쿼리 중 하나에 적용합니다.<span class="math inline">\ (n \ times p \)</span>-Datasets : 어떤 유전자 (특징)가 있습니다<em>관련</em>예를 들어, 질병 유형 또는 결과의 샘플의 특정 특성? 그러나 기존의 유의 임계 값은 많은 스퓨리어스 연관성으로 이어질 것입니다.<span class="math inline">\ (\ alpha = 0.05 \)</span>우리는 기대합니다<span class="math inline">\ (p \ alpha = 1000 \)</span>아무것도없는 경우 거짓 긍정<span class="math inline">\ (P = 200000 \)</span>기능에는 진정한 연관성이 있습니다. 따라서 우리는 또한 여러 테스트를 처리해야합니다.</p>
+<p>통계에서 가장 유익한 아이디어 중 하나는 분산 분해 또는 분산 분석 (ANOVA)입니다. 선형 모델과 일반화 된 선형 모델의 프레임 워크에서이를 탐색 할 것입니다.<a class="quarto-xref" href="08-chap.html"><span>8 고 처리량 수 데이터 및 일반화 된 선형 모델</span></a>. RNA-Seq 실험에서 예제 데이터를 가져 오기 때문에 그러한 카운트 데이터에 대한 모델과 개념을 논의 할 수있는 기회도 제공합니다.<em>견고성</em></p>
+<p>생물학의 진화에 비추어 제외하고는 의미가 없습니다.<a class="footnote-ref" href="#fn1" id="fnref1" role="doc-noteref"><sup>1</sup></a>및 진화 관계는 계통 발생 나무에 유용하게 인코딩됩니다. 우리는 네트워크와 나무를 탐색 할 것입니다<a class="quarto-xref" href="10-chap.html"><span>10 개의 네트워크와 나무</span></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>Theodosius Dobzhansky,<a class="uri" href="https://en.wikipedia.org/wiki/Nothing_in_Biology_Makes_Sense_Except_in_the_Light_of_Evolution">https://en.wikipedia.org/wiki/nothing_in_biology_makes_sense_except_in_the_light_of_evolution</a></p></div></div><p>생물학의 풍부한 데이터 소스는 이미지이며<a class="quarto-xref" href="11-chap.html"><span>11 이미지 데이터</span></a>우리는 이미지 및 공간 통계에서 기능 추출을 탐색하여 모든 종류의 이기종 데이터 유형에 대해 EDA를 수행하려는 의지를 강화합니다.</p>
+<p>~ 안에<a class="quarto-xref" href="12-chap.html"><span>12 감독 학습</span></a>, 우리는 감독 학습을 살펴 봅니다. 각 객체에 대한 다변량 기능 세트가 주어지면 다른 클래스의 객체를 구별하기 위해 알고리즘을 훈련시킵니다. 저 차원 기능 벡터 및 선형 방법으로 간단하게 시작한 다음 고차원 설정에서 분류 문제 중 일부를 앞으로 나아갑니다. 여기서 우리는‘ '클래식’감독 학습에 중점을 둡니다. 여기서 (적어도 개념적으로) 지상 진실 분류의 훈련 세트를 알고리즘에 동시에 배울 수 있습니다. 우리는 (아직…) 강화 학습을 다루지 않습니다. 한 또는 여러 에이전트가 연속적으로 행동을 수행하고 이에 대한 피드백을 받음으로써 소위 환경과 상호 작용함으로써 학습하는보다 유연한 프레임 워크입니다. 그래서 개념이 있습니다<em>시간</em>그리고<em>상태</em>그 프레임 워크에서.</p>
+<p>우리는 마무리합니다<a class="quarto-xref" href="13-chap.html"><span>13 높은 처리량 실험 및 분석의 설계</span></a>실험 설계 및 데이터 분석의 모범 사례에 대한 고려 사항. 이를 위해 우리는 이전 장의 과정에서 배운 것을 사용하고 반영 할 것입니다.</p>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-structuralescal">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-structuralescal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-6" href="imgs/structuralescal.png" title="Figure 3: Analyzing data is not a one step process. Each step involves visualizing and decomposing some of the complexity in the data. Tukey’s iterative data structuration can be conceptualized as Total=V_1+V_2+V_3"><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="imgs/structuralescal.png"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-structuralescal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 3 : 데이터 분석은 1 단계 프로세스가 아닙니다. 각 단계에는 데이터의 복잡성을 시각화하고 분해하는 것이 포함됩니다. Tukey의 반복 데이터 구조는 개념화 할 수 있습니다<span class="math inline">\ (Total = V_1+V_2+V_3 \)</span>
+</figcaption>
+</figure>
+</div>
+</div></div></div>
+</section>
+<section class="level2 page-columns page-full" id="computational-tools-for-modern-biologists">
+<h2 class="anchored" data-anchor-id="computational-tools-for-modern-biologists">현대 생물 학자를위한 계산 도구</h2>
+<p>우리가 반복해서 볼 수 있듯이 분석 접근법, 도구 및 선택은 마니 폴드입니다. 우리의 작업은 신중한 레코드를 재현 가능한 스크립트 형식으로 유지 하여만 검증 될 수 있습니다. R과 생체 전도체는 그러한 플랫폼을 제공합니다.</p>
+<p>우리는 다양한 유형의 데이터, 질문 및 통계적 방법을 실시하고 있지만, 생물학적 데이터 인프라 및 바이오 컨덕터 프로젝트의 전문 방법 패키지에 의해 향상된 R 프로그래밍 언어 및 통계 환경 (R 프로그래밍 언어 및 통계 환경)을 유지함으로써 일관된 계산 접근 방식을 유지합니다. 독자는 책을 사용하기 전에 R에 대한 친숙 함을 습득하여 시작해야합니다. 좋은 책과 온라인 리소스가 많이 있습니다. 그들 중 하나는<span class="citation" data-cites="Wickham:r4ds">Grolemund와 Wickham (<a href="16-chap.html#ref-Wickham:r4ds" role="doc-biblioref">2017</a>))</span>, 온라인<a class="uri" href="http://r4ds.had.co.nz">http://r4ds.had.co.nz</a></p>
+<div class="page-columns page-full"><p>R 코드는이 책의 주요 구성 요소입니다. 텍스트 설명을 명시 적으로 만드는 방법입니다. 본질적 으로이 책의 모든 데이터 시각화는 표시된 코드로 제작되며 독자는 이러한 모든 수치와 다른 결과를 복제 할 수 있어야합니다.</p><div class="no-row-height column-margin column-container"><span class="margin-aside">모든 코드가 HTML 페이지에 표시되는 것은 아닙니다. 특히 코드가 길고 교육 목표에 직접적으로 도움이되지 않는 경우. 그러나 모든 코드는이 웹 페이지에서 제공하는 .r 파일에서 사용할 수 있습니다.</span></div></div>
+<p>R에 익숙 하다고도 책의 모든 코드 라인을 즉시 이해하지 못하더라도 걱정하지 마십시오. 우리는 코드를 명시 적으로 유지하고 잠재적으로 도전적인 장소에서 팁과 힌트를 주려고했지만</p>
+<ul>
+<li><p>이전에 보지 못했고 신비로운 일을하는 기능이 있습니다.</p></li>
+<li><p>당신이 이해하지 못하는 복잡한 r 표현이 있습니다 (아마도<code>적용하다</code>-기능 또는 데이터 조작<strong><a href="https://cran.r-project.org/web/packages/dplyr/">dplyr</a></strong>패키지).</p></li>
+</ul>
+<p>당황하지 말 것. 신비한 기능을 위해서는 수동 페이지를 살펴보십시오. rstudio를 열고 객체 탐색기를 사용하여 표현식에 들어가는 변수와 나오는 변수를보십시오. 표현을 분할하여 중간 값을보십시오.</p>
+<p>장에서<a class="quarto-xref" href="01-chap.html"><span>1 개별 데이터에 대한 생성 모델</span></a>그리고<a class="quarto-xref" href="02-chap.html"><span>2 통계 모델링</span></a>, 우리는 사용합니다<strong><a href="https://cran.r-project.org/web/packages/base/">베이스</a></strong>경량 플롯 및 데이터 조작에 대한 R 기능. 보다 정교한 작업이 연속적으로 필요하므로<strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong>그래픽을 만드는 방법<a class="quarto-xref" href="03-chap.html"><span>3 데이터 시각화</span></a>. 제한된 명령 세트 만 사용하여 정교한 플롯을 생성 할 수있는 그래픽 개념의 강력한 문법 외에도<strong><a href="https://cran.r-project.org/web/packages/dplyr/">dplyr</a></strong>데이터 조작 방식.</p>
+<section class="level4 page-columns page-full" id="why-r-and-bioconductor">
+<h4 class="anchored" data-anchor-id="why-r-and-bioconductor">왜 R과 생체 전도체인가?</h4>
+<div class="page-columns page-full"><p>R에 대한 모든 분석을 제시하기로 선택한 이유는 여러 가지가 있습니다.<span class="citation" data-cites="RlangB"><a href="16-chap.html#ref-RlangB" role="doc-biblioref">Isaac and Gentleman 1996</a>))</span>생물 형도<span class="citation" data-cites="Huber:2015"><a href="16-chap.html#ref-Huber:2015" role="doc-biblioref">Huber et al. 2015</a>))</span>플랫폼 :</p><div class="no-row-height column-margin column-container"><span class="margin-aside">다운로드<a href="http://cran.us.r-project.org/">아르 자형</a>그리고<a href="http://www.rstudio.com/">rstudio</a>책의 코드를 따르려면.</span></div></div>
+<p><strong>최첨단 솔루션.</strong>오버의 가용성<span class="math inline">\ (10,000 \)</span>패키지는 가장 최근의 개발을 포함하여 거의 모든 통계 방법을 사용할 수 있도록합니다. 또한 컴퓨터 과학, 수학, 기계 학습, 데이터 관리, 시각화 및 인터넷 기술의 많은 방법에 대한 구현 또는 인터페이스가 있습니다. 이것은 손가락 끝에서 전문가들에 의해 수천 년간의 일을합니다.</p>
+<p><strong>오픈 소스 및 지역 사회 소유.</strong>R과 Bioconductor는 대규모 개발자 커뮤니티에 의해 협력 적으로 구축되었습니다. 수천 명의 사용자가 끊임없이 시도하고 테스트합니다.</p>
+<p><strong>데이터 입력 및 rangling.</strong>바이오 컨덕터 패키지는 현대 생물학에 사용되는 측정 기기에 의해 생성 된 많은 데이터 유형 및 형식의 읽기뿐만 아니라 필요한 기술 별 "사전 처리"루틴을 읽습니다. 커뮤니티는 기기 시장의 빠른 발전과 함께 이러한 최신 정보를 적극적으로 유지하고 있습니다.</p>
+<p><strong>시뮬레이션.</strong>알려진 모든 통계 분포에 대한 임의의 숫자 생성기와 선형 대수, 최적화 등에 대한 강력한 숫자 루틴이 있습니다.</p>
+<p><strong>시각화 및 프레젠테이션.</strong>R은 매력적이고 출판 품질 그래픽을 만들 수 있습니다. 우리는 헌신했습니다<a class="quarto-xref" href="03-chap.html"><span>3 데이터 시각화</span></a>이것에 대해 책 전체에서 데이터 시각화를 광범위하게 연습합니다.</p>
+<p><strong>사용하기 쉬운 대화식 개발 환경.</strong> <strong>rstudio</strong>사용하기 쉽고 재미 있으며 R의 프로그래밍의 모든 측면을 도와줍니다.<a class="quarto-xref" href="#fig-iterative">수치<span>2</span></a></p>
+<p><strong>재현성.</strong>실험실 작업의 표준 모범 사례 인 실험실 노트북과 동일하게, 우리는 R Markdown 또는 Quarto 형식으로 작성된 계산 일기의 사용을 옹호합니다. 우리는 사용합니다<strong><a href="https://quarto.org/">쿼터</a></strong>이 파일을 읽기 쉬운 HTML 또는 PDF 문서로 변환하는 시스템. 이것들은 본격적인 과학 기사 나 보충제가 될 수 있습니다. 버전 제어 시스템과 함께이 접근 방식은 변경 사항을 추적하는 데 도움이됩니다.</p>
+<p><strong>협업 환경.</strong>Quarto는 코드, 텍스트, 그림 및 테이블이 포함 된 웹 사이트를 최소 작업으로 제작할 수 있습니다.</p>
+<p><strong>풍부한 데이터 구조.</strong>바이오 컨덕터 프로젝트는 복잡한 생물학적 데이터 세트를 나타 내기 위해 특수 데이터 컨테이너를 정의했습니다. 이러한 데이터는 데이터를 일관되고 안전하며 사용하기 쉽게 유지하는 데 도움이됩니다.</p>
+<p><strong>상호 운용성 및 분산 개발.</strong>생체 전도체에는 특히 광범위한 기능을 다루지 만 공통 데이터 컨테이너로 인해 여전히 상호 작용하는 다양한 저자의 패키지가 포함되어 있습니다.</p>
+<p><strong>선적 서류 비치.</strong>많은 R 패키지에는 기능 매뉴얼 페이지 및 비네팅에 훌륭한 설명서가 제공됩니다. 비네팅은 일반적으로 패키지의 가장 좋은 출발점입니다. 패키지가하는 일에 대한 높은 수준의 이야기를 제공하는 반면 수동 페이지는 각 기능의 입력, 출력 및 내부 작업에 대한 자세한 정보를 제공합니다. R 및 Bioconductor 작업의 여러 측면에 대한 온라인 자습서, FEA 및 메일 링리스트가 있습니다.</p>
+<p><strong>고급 언어.</strong>R은 해석 된 고급 언어입니다. LISP와 기능적 프로그래밍 기능의 근본은 코드가 데이터이며 계산할 수 있음을 의미하므로 효율적인 프로그래밍을 가능하게하고 재미 있습니다. 이러한 기능은 강력한 도메인 특정 언어를 구성하는 것을 용이하게합니다<a class="footnote-ref" href="#fn2" id="fnref2" role="doc-noteref"><sup>2</sup></a>. R은 고정 된 언어가 아닙니다. 역사를 통해 적극적으로 진화하고 있으며 지속적으로 개선되고 있습니다.</p>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>예를 들어 R의 공식 인터페이스, 그래픽 문법이 있습니다.<strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong>, 데이터 조작 기능<strong><a href="https://cran.r-project.org/web/packages/dplyr/">dplyr</a></strong>그리고 R 마크 다운.</p></div></div><div class="references csl-bib-body hanging-indent" data-entry-spacing="0" id="refs" role="list" style="display: none">
+<div class="csl-entry" id="ref-Efron2010" role="listitem">에프론, 브래들리. 2010 년.<em>대규모 추론 : 경험적<span>비</span>Ayes 추정, 테스트 및 예측 방법</em>. 케임브리지 대학교 출판부.</div>
+<div class="csl-entry" id="ref-fisher1935design" role="listitem">Fisher, Ronald Aylmer. 1935.<em>실험의 설계</em>. 올리버 &amp; 보이드.</div>
+<div class="csl-entry" id="ref-Wickham:r4ds" role="listitem">Grolemund, Garrett 및 Hadley Wickham. 2017.<em><span>아르 자형</span>데이터 과학</em>. 오라일리.</div>
+<div class="csl-entry" id="ref-HastieTibshiraniFriedman" role="listitem">Hastie, Trevor, Robert Tibshirani 및 Jerome Friedman. 2008.<em>통계 학습의 요소</em>. 2^{\ text {nd}} ed. 뛰는 것.</div>
+<div class="csl-entry" id="ref-Holmes1985" role="listitem">홈즈 - Junca, Susan. 1985.<span>"IT 도구<span>그리고</span>r의 방출 평가<span>그리고</span>데이터 분석의 술이트<span>그리고</span>es.”</span>박사 학위 논문, Université Montpellier II, 프랑스.</div>
+<div class="csl-entry" id="ref-Huber:2015" role="listitem">Huber, Wolfgang, Vincent J Carey, Robert Gentleman, Simon Anders, Marc Carlson, Benilton S Carvalho, Hector Corrada Bravo 등. 2015.<span>“고 처리량 게놈 분석을 조정합니다<span>생체 전도체</span></span> <em>자연 방법</em>12 (2) : 115–21.</div>
+<div class="csl-entry" id="ref-RlangB" role="listitem">Ihaka, Ross 및 Robert Gentleman. 1996.<span>"R : 데이터 분석 및 그래픽을위한 언어."</span> <em>계산 및 그래픽 통계 저널</em>5 (3) : 299–314.</div>
+<div class="csl-entry" id="ref-Neyman1936" role="listitem">Neyman, Jerzy 및 Egon S Pearson. 1936.<em>통계 가설의 충분한 통계 및 균일하게 가장 강력한 테스트</em>. University California Press.</div>
+<div class="csl-entry" id="ref-Tukey77" role="listitem">Tukey, John W. 1977.<span>"탐색 적 데이터 분석."</span> <em>매사추세츠 : 애디슨 웨슬리</em></div>
+</div>
+</section>
+</section>
+<p>R 버전 4.5.1 (2025-06-13)을 사용하여 2025-09-01에 01:33에 구축 된 페이지</p></main> <!-- /main --><p class="build-date">이 책의 온라인 버전을 유지 관리하는 지원은 다음과 같습니다.<a href="http://www.denbi.de">de.nbi</a>
+<img src="imgs/denbi.png" style="vertical-align: text-top;height: 16px"/><br/>웹 사이트 지원은 msmith@embl.de로 문의하십시오<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+  const anchorJS_eq = new window.AnchorJS();
+  anchorJS_eq.options = {
+    placement: 'left',
+    class: 'eq-link',
+    icon: icon
+  };
+  anchorJS_eq.add('.anchored-eq');
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/www\.huber\.embl\.de\/msmb");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</p></div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+</body></html>

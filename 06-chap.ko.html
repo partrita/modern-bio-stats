@@ -1,0 +1,2094 @@
+<!DOCTYPE html>
+
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta charset="utf-8"/>
+<meta content="quarto-1.7.31" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0, user-scalable=yes" name="viewport"/>
+<title>6  Testing – Modern Statistics for Modern Biology</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta content="./" name="quarto:offset"/>
+<link href="./imgs/msmb-favicon.png" rel="icon" type="image/png"/>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet"/>
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-af5ec82acda093b5ee751184164e9432.css" id="quarto-text-highlighting-styles" rel="stylesheet"/>
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet"/>
+<link append-hash="true" data-mode="light" href="site_libs/bootstrap/bootstrap-d63985d606c7f07261ad561a6cfde940.min.css" id="quarto-bootstrap" rel="stylesheet"/>
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet"/>
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"/>
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+<link href="msmb.css" rel="stylesheet"/>
+<meta content="6  Testing – Modern Statistics for Modern Biology" property="og:title"/>
+<meta content="If you are a biologist and want to get the best out of the powerful methods of modern computational statistics, this is your book." property="og:description"/>
+<meta content="https://www.huber.embl.de/msmb/imgs/active-substance-discovery-robot-screening-robot-sm.jpeg" property="og:image"/>
+<meta content="Modern Statistics for Modern Biology" property="og:site_name"/>
+<meta content="6  Testing – Modern Statistics for Modern Biology" name="twitter:title"/>
+<meta content="If you are a biologist and want to get the best out of the powerful methods of modern computational statistics, this is your book." name="twitter:description"/>
+<meta content="https://www.huber.embl.de/msmb/imgs/active-substance-discovery-robot-screening-robot-sm.jpeg" name="twitter:image"/>
+<meta content="summary" name="twitter:card"/>
+<script type="text/javascript">
+  var _paq = _paq || [];
+  
+  // Call disableCookies before calling trackPageView 
+  _paq.push(['disableCookies']);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u='//tr-denbi.embl.de/heimdall/';
+    _paq.push(['setTrackerUrl', u+'p.php']);
+    _paq.push(['setSiteId', '26']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'p.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+</head>
+<body class="floating nav-fixed slimcontent quarto-light">
+<div id="quarto-search-results"></div>
+<header class="headroom fixed-top" id="quarto-header">
+<nav class="navbar navbar-expand-lg" data-bs-theme="dark">
+<div class="navbar-container container-fluid">
+<div class="navbar-brand-container mx-auto">
+<a class="navbar-brand" href="./index.html">
+<span class="navbar-title">현대 생물학에 대한 현대 통계</span>
+</a>
+</div>
+<div class="" id="quarto-search" title="Search"></div>
+<button aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbarCollapse" data-bs-toggle="collapse" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }" role="menu" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarCollapse">
+<ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item dropdown">
+<a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="nav-menu-chapters" role="link">
+<span class="menu-text">챕터</span>
+</a>
+<ul aria-labelledby="nav-menu-chapters" class="dropdown-menu dropdown-menu-end">
+<li>
+<a class="dropdown-item" href="./index.html">
+<span class="dropdown-text">집</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./00-chap.html">
+<span class="dropdown-text">소개</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./01-chap.html">
+<span class="dropdown-text">개별 데이터에 대한 생성 모델</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./02-chap.html">
+<span class="dropdown-text">통계 모델링</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./03-chap.html">
+<span class="dropdown-text">데이터 시각화</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./04-chap.html">
+<span class="dropdown-text">혼합 모델</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./05-chap.html">
+<span class="dropdown-text">클러스터링</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./06-chap.html">
+<span class="dropdown-text">테스트</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./07-chap.html">
+<span class="dropdown-text">다변량 분석</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./08-chap.html">
+<span class="dropdown-text">고 처리량 수 데이터 및 일반화 된 선형 모델</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./09-chap.html">
+<span class="dropdown-text">이종 데이터를위한 다변량 방법</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./10-chap.html">
+<span class="dropdown-text">네트워크와 나무</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./11-chap.html">
+<span class="dropdown-text">이미지 데이터</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./12-chap.html">
+<span class="dropdown-text">감독 학습</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./13-chap.html">
+<span class="dropdown-text">높은 처리량 실험 및 분석의 설계</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./14-chap.html">
+<span class="dropdown-text">통계적 일치</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./15-chap.html">
+<span class="dropdown-text">감사의 말</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./16-chap.html">
+<span class="dropdown-text">참조</span></a>
+</li>
+</ul>
+</li>
+</ul>
+</div> <!-- /navcollapse -->
+<div class="quarto-navbar-tools">
+</div>
+</div> <!-- /container-fluid -->
+</nav>
+</header>
+<!-- content -->
+<div class="quarto-container page-columns page-rows-contents page-layout-article page-navbar" id="quarto-content">
+<!-- sidebar -->
+<nav class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" id="quarto-sidebar">
+<nav class="toc-active" id="TOC" role="doc-toc">
+<h2 id="toc-title">섹션</h2>
+<ul class="collapse">
+<li><a class="nav-link active" data-scroll-target="#goals-for-this-chapter" href="#goals-for-this-chapter" id="toc-goals-for-this-chapter"><span class="header-section-number">6.1</span>이 장의 목표</a></li>
+<li><a class="nav-link" data-scroll-target="#sec-cointossing" href="#sec-cointossing" id="toc-sec-cointossing"><span class="header-section-number">6.2</span>예 : 동전 던지기</a></li>
+<li><a class="nav-link" data-scroll-target="#sec-fivesteps" href="#sec-fivesteps" id="toc-sec-fivesteps"><span class="header-section-number">6.3</span>가설 테스트의 다섯 단계</a></li>
+<li><a class="nav-link" data-scroll-target="#sec-testing-typesoferror" href="#sec-testing-typesoferror" id="toc-sec-testing-typesoferror"><span class="header-section-number">6.4</span>오류 유형</a></li>
+<li><a class="nav-link" data-scroll-target="#sec-testing-ttest" href="#sec-testing-ttest" id="toc-sec-testing-ttest"><span class="header-section-number">6.5</span>t- 검정</a></li>
+<li><a class="nav-link" data-scroll-target="#sec-pvaluehack" href="#sec-pvaluehack" id="toc-sec-pvaluehack"><span class="header-section-number">6.6</span>P- 값 해킹</a></li>
+<li><a class="nav-link" data-scroll-target="#multiple-testing" href="#multiple-testing" id="toc-multiple-testing"><span class="header-section-number">6.7</span>다중 테스트</a></li>
+<li><a class="nav-link" data-scroll-target="#sec-testing-FWER" href="#sec-testing-FWER" id="toc-sec-testing-FWER"><span class="header-section-number">6.8</span>가족의 현명한 오류율</a></li>
+<li><a class="nav-link" data-scroll-target="#the-false-discovery-rate" href="#the-false-discovery-rate" id="toc-the-false-discovery-rate"><span class="header-section-number">6.9</span>잘못된 발견 률</a></li>
+<li><a class="nav-link" data-scroll-target="#sec-testing-localfdr" href="#sec-testing-localfdr" id="toc-sec-testing-localfdr"><span class="header-section-number">6.10</span>지역 FDR</a></li>
+<li><a class="nav-link" data-scroll-target="#independent-hypothesis-weighting" href="#independent-hypothesis-weighting" id="toc-independent-hypothesis-weighting"><span class="header-section-number">6.11</span>독립적 인 가설 가중치</a></li>
+<li><a class="nav-link" data-scroll-target="#summary-of-this-chapter" href="#summary-of-this-chapter" id="toc-summary-of-this-chapter"><span class="header-section-number">6.12</span>이 장의 요약</a></li>
+<li><a class="nav-link" data-scroll-target="#further-reading" href="#further-reading" id="toc-further-reading"><span class="header-section-number">6.13</span>추가 독서</a></li>
+<li><a class="nav-link" data-scroll-target="#exercises" href="#exercises" id="toc-exercises"><span class="header-section-number">6.14</span>수업 과정</a></li>
+</ul>
+</nav>
+</nav>
+<div class="quarto-sidebar-collapse-item" data-bs-target=".quarto-sidebar-collapse-item" data-bs-toggle="collapse" id="quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+<div class="sidebar margin-sidebar zindex-bottom" id="quarto-margin-sidebar">
+</div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+<header class="quarto-title-block default" id="title-block-header">
+<div class="quarto-title">
+<h1 class="title"><span class="quarto-section-identifier" id="sec-testing"><span class="chapter-number">6</span>  <span class="chapter-title">테스트</span></span></h1>
+</div>
+<div class="quarto-title-meta">
+</div>
+</header>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a class="lightbox" data-gallery="quarto-lightbox-gallery-1" href="imgs/xkcdmulttest-newspapertitle.png"><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="imgs/xkcdmulttest-newspapertitle.png"/></a></p>
+</figure>
+</div>
+</div></div></div>
+<p>가설 테스트는 과학의 요인 중 하나입니다. 유한 한 데이터 샘플을 기반으로 결론을 내리거나 결정을 내릴 수있는 방법입니다. 예를 들어, 질병에 대한 새로운 치료법은 일반적으로 치료가 다른 이용 가능한 옵션에 비해 더 나은 효능을 갖는지 여부와 부작용의 상충 관계를 결정하는 임상 시험을 기반으로 승인됩니다. 이러한 시험은 비싸고 시간이 오래 걸릴 수 있습니다. 따라서, 우리가 등록 할 수있는 환자의 수는 제한적이며, 우리는 제한된 관찰 된 환자 반응 샘플을 기반으로합니다. 환자의 반응은 치료뿐만 아니라 우리의 통제 이외의 다른 많은 요인에 의존하기 때문에 데이터는 시끄 럽습니다. 샘플 크기는 우리가 신뢰할 수있는 결론을 내릴 수있을 정도로 커야합니다. 반면에, 우리는 예를 들어 약물을 필요보다 더 비싼 것으로 만들거나 혜택을받을 환자를 거부함으로써 귀중한 자원이나 시간을 낭비하지 않도록 너무 크지 않아야합니다.새로운 약물 접근. 가설 테스트의 기계는 이러한 응용 분야를 염두에두고 크게 개발되었지만 오늘날에는 훨씬 더 널리 사용됩니다.</p>
+<p>생물학적 데이터 분석 (및 다른 많은 분야에서<a class="footnote-ref" href="#fn1" id="fnref1" role="doc-noteref"><sup>1</sup></a>) 우리는 가설 테스트가 수천 또는 수백만 건의 가능한 가설을 스크리닝하여 추종할만한 가치를 찾는 것을 볼 수 있습니다. 예를 들어, 연구자들은 표현형과의 연관성 또는 질병과의 연관성을위한 유전자 발현 수준의 유전자 변이를 선별합니다. 여기서,“가치있는”은 종종“통계적으로 유의미한”것으로 해석되지만, 두 개념은 분명히 동일하지 않습니다. 통계적 중요성이 흥미로운 것을 찾기 위해 데이터 중심 결정을 내리는 데 필요한 조건이라고 말하는 것은 아마도 공정하지만 분명히 충분하지는 않습니다. 어쨌든, 이러한 대규모 협회 스크리닝은 다중 가설 테스트와 밀접한 관련이 있습니다.</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>신용 카드 사기 감지, 이메일 스팸 탐지,<span class="math inline">\ (... \)</span></p></div></div><section class="level2 page-columns page-full" data-number="6.1" id="goals-for-this-chapter">
+<h2 class="anchored" data-anchor-id="goals-for-this-chapter" data-number="6.1"><span class="header-section-number">6.1</span>이 장의 목표</h2>
+<p>이 장에서는 다음과 같습니다.</p>
+<ul>
+<li><p>가설 테스트의 통계 기계, 어휘, 목적 및 강점과 한계에 익숙해집니다.</p></li>
+<li><p>다중 테스트가 무엇을 의미하는지 이해하십시오.</p></li>
+<li><p>다중 테스트는 문제가 아니라 단일 테스트의 많은 한계를 극복하기 때문에 기회입니다.</p></li>
+<li><p>잘못된 발견 률을 이해하십시오.</p></li>
+<li><p>진단 음모를 만드는 방법을 배우십시오.</p></li>
+<li><p>가설 가중치를 사용하여 분석의 힘을 높이십시오.</p></li>
+</ul>
+<section class="level3 page-columns page-full" data-number="6.1.1" id="drinking-from-the-firehose">
+<h3 class="anchored" data-anchor-id="drinking-from-the-firehose" data-number="6.1.1"><span class="header-section-number">6.1.1</span>소방에서 술을 마시고 있습니다</h3>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-active-substance-discovery-robot-screening-robot">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-active-substance-discovery-robot-screening-robot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-2" href="imgs/active-substance-discovery-robot-screening-robot.jpg" title="Figure 6.1: High-throughput data in modern biology are screened for associations with millions of hypothesis tests. (Source: Bayer)"><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="imgs/active-substance-discovery-robot-screening-robot.jpg"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-active-substance-discovery-robot-screening-robot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 6.1 : 현대 생물학의 고 처리량 데이터는 수백만 개의 가설 테스트와 연관성을 선별합니다. (<a href="https://www.research.bayer.com/en/automated-search-for-active-ingredients-with-robots.aspx">출처 : 바이엘</a>))</figcaption>
+</figure>
+</div>
+</div></div></div>
+<p>불확실성을 갖는 통계 테스트 (불확실성)가 단일 결정을 내릴 때 어려운 과제를 제시 한 다음, 유전체학, 또는 "빅 데이터"를 사용하는 경우 자신을 자극하는 경우, 한 번이 아니라 수천 또는 수백만 번을 달성해야합니다. ~ 안에<a class="quarto-xref" href="02-chap.html"><span>2 장</span></a>, 우리는 에피토프 탐지의 예와 하나뿐만 아니라 여러 위치를 고려하는 데있어 도전을 보았습니다. 마찬가지로, 전체 게놈 시퀀싱에서, 우리는 당면한 DNA 시퀀싱 데이터의 차이와 참조 서열 (또는 또 다른 시퀀싱 데이터 세트)의 증거를 위해 게놈의 모든 위치를 스캔합니다. 이는 인간 데이터를보고 있다면 60 억 개의 테스트를 수행합니다! 유전자 또는 화학적 화합물 스크리닝에서, 우리는 대조군과 비교하여 분석의 영향에 대해 각 시약을 테스트합니다. 수백만 개의 테스트가 아니라면 수만 명입니다. ~ 안에<a class="quarto-xref" href="08-chap.html"><span>8 장</span></a>, 우리는 분석 된 수천 개의 유전자 각각에 가설 테스트를 적용함으로써 미분 발현에 대한 RNA-Seq 데이터를 분석 할 것이다.</p>
+</section>
+<section class="level3" data-number="6.1.2" id="testing-versus-classification">
+<h3 class="anchored" data-anchor-id="testing-versus-classification" data-number="6.1.2"><span class="header-section-number">6.1.2</span>테스트 대 분류</h3>
+<p>우리가 연구하는 일부 세포가 세포 상태 A 또는 B에 있는지 여부를 결정하기 위해 마커 분자의 풍부 수준을 측정했다고 가정 해 봅시다. 먼저, 우리는 사전 가정이 없으며 데이터를 사용하여 두 결과 사이에 다소 대칭적인 선택을하고 싶다고 생각해 보자. 이것은 a입니다<em>분류</em>일. 우리는 분류를 다룰 것입니다<a class="quarto-xref" href="12-chap.html"><span>12 장</span></a>. 이 장에서는 비대칭 사례를 고려합니다. 이미 알고있는 것에 기초하여 (우리는 이것을 우리의<em>이전의</em>지식), 세포 상태 A는 우세이며 "기본값"입니다. 충분한 증거가있는 경우에만 B에 전화 할 것입니다. 어쩌면 B는 드물고 비정상적이며 흥미롭고, 그것을 발견하면 더 연구하기 위해 자원을 저 지르겠습니다. 반면에 A는 흥미롭지 않으며 후속 한 후속 조치를 요구하지 않습니다. 그러한 경우, 가설 테스트의 기계는 우리를위한 것입니다.</p>
+<p>공식적으로 가설 테스트와 분류 사이에는 많은 유사점이 있습니다. 두 경우 모두 데이터를 사용하여 몇 가지 가능한 결정 중에서 선택하는 것을 목표로합니다. 구별은 퍼지가 될 수 있으며 가설 테스트를 특별한 분류 사례로 생각할 수도 있습니다. 그러나이 두 가지 접근법은 다른 목표와 근본적인 가정을 맞이합니다. 통계적 결정 문제가 발생하면 어떤 접근법이 더 적절한 지 확인하는 것이 유용 할 수 있습니다.</p>
+</section>
+<section class="level3 page-columns page-full" data-number="6.1.3" id="false-discovery-rate-or-p-value">
+<h3 class="anchored" data-anchor-id="false-discovery-rate-or-p-value" data-number="6.1.3"><span class="header-section-number">6.1.3</span>허위 발견 속도 또는 p- 값?</h3>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-testing-FDRvspstatic1">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-testing-FDRvspstatic1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-3" href="06-chap_files/figure-html/fig-testing-FDRvspstatic1-1.png" title="Figure 6.2: Making a binary (yes/no) decision. Here, we call the two possible decisions “positive” and “negative” based on some continuous-valued score x, shown along the x-axis. The curve shaded in blue shows the distribution density of x for one of the classes (the negatives), the curve shaded in red, for the other class (the positives). The distributions are distinctive (the red values are generally lower), but have some overlap. The vertical black bar marks some choice of a decision boundary, which results in four possible outcomes highlighted by the color key."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="06-chap_files/figure-html/fig-testing-FDRvspstatic1-1.png" width="448"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-testing-FDRvspstatic1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 6.2 : 이진 (예/아니오) 결정. 여기서는 지속적인 값 점수를 기준으로 두 가지 가능한 결정을 "긍정적"과 "부정"이라고합니다.<span class="math inline">\(엑스\)</span>,<span class="math inline">\(엑스\)</span>-중심선. 파란색으로 음영 처리 된 곡선은 분포 밀도를 보여줍니다.<span class="math inline">\(엑스\)</span>클래스 중 하나 (네거티브)의 경우, 곡선은 빨간색으로 음영 처리되어 있으며 다른 클래스 (양성). 분포는 독특하지만 (빨간색 값은 일반적으로 더 낮습니다), 약간의 겹침이 있습니다. 수직 검은 색 막대는 결정 경계를 선택하여 색상 키에 의해 강조된 4 가지 가능한 결과를 초래합니다.</figcaption>
+</figure>
+</div>
+</div></div></div>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-testing-FDRvspstatic2">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-testing-FDRvspstatic2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-4" href="06-chap_files/figure-html/fig-testing-FDRvspstatic2-1.png" title="Figure 6.3: Analogous to Figure fig-testing-FDRvspstatic1, but now we have transformed x from its original range to the range [0,1] using a non-linear, strictly increasing transformation function p=f(x), which we chose such that the resulting blue distribution is uniform. Such a function always exists: it is the cumulative distribution function of x (we have seen it in sec-graphics-ecdf). We call the result a p-value. The definition of the FDR in Equation eq-testing-simplefdr applies equally well in Figure fig-testing-FDRvspstatic1 and here."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="06-chap_files/figure-html/fig-testing-FDRvspstatic2-1.png" width="448"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-testing-FDRvspstatic2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 6.3 : 유사합니다<a class="quarto-xref" href="#fig-testing-FDRvspstatic1">수치<span class="anchored-eq" data-anchor-id="eq-testing">6.2</span></a>그러나 지금 우리는 변화했습니다<span class="math inline">\(엑스\)</span>원래 범위에서 범위까지<span class="math inline">\ ([0,1] \)</span>비선형, 엄격하게 증가하는 변환 기능을 사용합니다<span class="math inline">\ (p = f (x) \)</span>결과적으로 파란색 분포가 균일하도록 선택했습니다. 그러한 기능은 항상 존재합니다 : 그것은 누적 분포 함수입니다.<span class="math inline">\(엑스\)</span>(우리는 그것을 보았습니다<a class="quarto-xref" href="03-chap.html#sec-graphics-ecdf"><span>섹션 3.6.7</span></a>). 결과를 a<strong>p- 값</strong>. FDR의 정의<a class="quarto-xref" href="#eq-testing-simplefdr">방정식<span>6.2</span></a>똑같이 잘 적용됩니다<a class="quarto-xref" href="#fig-testing-FDRvspstatic1">수치<span>6.2</span></a>그리고 여기.</figcaption>
+</figure>
+</div>
+</div></div></div>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-testing-FDRvspanim">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-testing-FDRvspanim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-5" href="06-chap_files/figure-html/fig-testing-FDRvspanim-1.gif" title="Figure 6.4: The animation highlights the analogies between using a generic score x (as in Figure fig-testing-FDRvspstatic1) and a p-value from a formal hypothesis test (as in Figure fig-testing-FDRvspstatic2) for decision making. We will come back to these concepts in terms of the two-group model in sec-testing-localfdr and Figure fig-testing-lfdr."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="06-chap_files/figure-html/fig-testing-FDRvspanim-1.gif"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-testing-FDRvspanim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 6.4 : 애니메이션은 일반 점수 사용 간의 유사성을 강조합니다.<span class="math inline">\(엑스\)</span>(에서와 같이<a class="quarto-xref" href="#fig-testing-FDRvspstatic1">수치<span>6.2</span></a>) 및 공식 가설 테스트의 P- 값 (<a class="quarto-xref" href="#fig-testing-FDRvspstatic2">수치<span>6.3</span></a>) 의사 결정을 위해. 우리는 두 그룹 모델의 관점 에서이 개념으로 돌아올 것입니다.<a class="quarto-xref" href="#sec-testing-localfdr"><span>섹션 6.10</span></a>그리고<a class="quarto-xref" href="#fig-testing-lfdr">수치<span>6.17</span></a>.
+</figcaption>
+</figure>
+</div>
+</div></div></div>
+<p>가설 테스트는 전통적으로 p- 값으로 먼저 가르쳐졌으며, 그것들을 기본적이고 기본 개념으로 소개했습니다. 그런 다음 다중 테스트 및 허위 발견 률이 도출 된 추가 아이디어로 제시되었습니다. 그렇게하는 좋은 수학적이고 실용적인 이유가 있으며,이 장의 나머지 부분은이 전통을 따릅니다. 그러나이 선입견 섹션에서 우리는 잘못된 발견 률이 실제로 더 직관적 인 개념이며 실제로 더 유용한 경향이 있음을 지적하고 싶습니다. P- 값은 더 추상적이며, 종종 무엇을 해야하는지 명확하지 않으므로 의사 결정에 사용하려는 사람들을 계속 혼란스럽게합니다. 따라서 여기에 더 교육적이되고, 주문을 되돌리고, 먼저 허위 발견 률에 대해 배우려는 시도가 있습니다. 그런 다음 p- 값을 두 번째로 최고라고 생각할 수 있습니다. 허위 발견 속도에 액세스 할 수없는 경우에 사용해야합니다.</p>
+<p>고려하다<a class="quarto-xref" href="#fig-testing-FDRvspstatic1">수치<span>6.2</span></a>이진 결정 문제를 나타냅니다. 우리가 a라고 부르라고 가정 해 봅시다<em>발견</em>요약 통계가있을 때마다<span class="math inline">\(엑스\)</span>특히 작습니다. 즉, 수직 검은 색 막대의 왼쪽에 떨어질 때<a class="footnote-ref" href="#fn2" id="fnref2" role="doc-noteref"><sup>2</sup></a>. 그럼<em>허위 발견 률</em><a class="footnote-ref" href="#fn3" id="fnref3" role="doc-noteref"><sup>3</sup></a>(FDR)은 단순히 모든 발견 중에서 허위 발견의 일부입니다.</p>
+<div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>이것은“일반성의 상실없이”입니다. 우리는 또한<span class="math inline" data-anchor-id="eq-testing">\(엑스\)</span>-축과 높은 점수로 무언가를 발견하고 발견하십시오.</p></div><div id="fn3"><p><sup>3</sup>이것은 다소 비공식적 인 정의입니다. 보다 정확한 정의는 예를 들어 참조하십시오<span class="citation" data-cites="Storey:AnnStat:2003 Efron2010">(<a href="16-chap.html#ref-Storey:AnnStat:2003" role="doc-biblioref">Storey 2003</a>; <a href="16-chap.html#ref-Efron2010" role="doc-biblioref">Efron 2010</a>))</span>그리고<a class="quarto-xref" href="#sec-testing-localfdr"><span>섹션 6.10</span></a>.</p></div></div><p><span id="eq-testing-simplefdr"><span class="math display">\ [
+\ text {fdr} = \ frac {\ text {연한 파란색으로 음영 처리 된 영역}} {\ text {수직 막대 (Light Blue + Strong Red)}}}}}.
+\ tag {6.1} \]</span></span></p>
+<p>FDR은 의사 결정 임계 값 (수직 막대)의 위치뿐만 아니라 두 분포의 모양과 위치 및 상대 크기에 따라 다릅니다. 그림에서<a class="quarto-xref" href="#fig-testing-FDRvspstatic1"><span>6.2</span></a>그리고<a class="quarto-xref" href="#fig-testing-FDRvspstatic2"><span>6.3</span></a>, 전체 파란색 영역은 전체 빨간색 영역보다 두 배나 큽니다. 파란색 클래스가 (이 예에서) 빨간색 클래스보다 두 배 (또는 우선 순위, 2 배)라는 사실을 반영합니다.</p>
+<p>이 정의에는 개념이나 p- 값 계산이 필요하지 않습니다. 임의로 정의 된 점수에 대해 작동합니다<span class="math inline">\(엑스\)</span>. 그러나 세 가지에 대한 지식이 필요합니다.</p>
+<ol type="1">
+<li><p>분포<span class="math inline">\(엑스\)</span>파란색 클래스 (파란색 곡선)에서</p></li>
+<li><p>분포<span class="math inline">\(엑스\)</span>빨간색 클래스 (빨간색 곡선)에서</p></li>
+<li><p>파란색과 빨간색 클래스의 상대 크기.</p></li>
+</ol>
+<p>우리가 이것을 알고 있다면, 우리는 기본적 으로이 시점에서 이루어집니다. 또는 우리는 감독 분류로 넘어갈 수 있습니다<a class="quarto-xref" href="12-chap.html"><span>12 장</span></a>확장을 다루는,<a class="quarto-xref" href="#fig-testing-FDRvspstatic1">수치<span>6.2</span></a>다변량<span class="math inline">\(엑스\)</span>.</p>
+<p>그러나 종종 우리는이 모든 것을 알지 못하며 이것이 가설 테스트의 영역입니다. 특히, 두 클래스 중 하나 (예 : 파란색)가 다른 클래스보다 쉽고 첫 번째 원칙이나 시뮬레이션에서 분포를 파악할 수 있다고 가정합니다. 우리는 그 사실을 사용하여 점수를 변화시킵니다<span class="math inline">\(엑스\)</span>0과 1 사이의 표준화 된 범위 (그림 참조<a class="quarto-xref" href="#fig-testing-FDRvspstatic1"><span>6.2</span></a>-<a class="quarto-xref" href="#fig-testing-FDRvspanim"><span>6.4</span></a>), 우리가 부르는<em>p- 값</em>. 우리는 클래스에 더 멋진 이름을 부여합니다.<em>귀무 가설</em>. 이것은 위 목록에서 지점 1을 다룹니다. 우리는 지점 2를 아는 것을 고집하지 않습니다 (그리고 우리는 또 다른 멋진 이름을 부여합니다.<em>대체 가설</em>, 레드 클래스에). 지점 3의 경우, 우리는 귀무 가설이 대안보다 훨씬 더 널리 퍼져 있고 귀무 가설이 사실이라는 조건 하에서 우리의 계산을 수행한다는 보수적 인 상한을 사용할 수 있습니다. 이것은 가설 테스트에 대한 전통적인 접근법입니다.</p>
+<p>따라서 직관적 인 FDR에 대한 의사 결정을 기반으로하는 대신<a class="quarto-xref" href="#eq-testing-simplefdr">방정식<span>6.2</span></a>), 우리는 그것을 기반으로합니다</p>
+<p><span class="anchored-eq" data-anchor-id="eq-testing" id="eq-testing-simplefdr"><span class="math display">\ [
+\ text {p-value} = \ frac {\ text {가벼운 파란색으로 음영 처리 된 영역}} {\ text {전체 파란색 영역}}.
+\ tag {6.2} \]</span></span></p>
+<p>다시 말해서, p- 값은 다소 복잡한 질문에 대한 정확하고 종종 상대적으로 편한 대답 (그리고 아마도 잘못된 질문)입니다. FDR은 올바른 질문에 대답하지만 우리가 종종 가지고 있지 않은 더 많은 입력이 필요합니다.</p>
+</section>
+<section class="level3" data-number="6.1.4" id="the-multiple-testing-opportunity">
+<h3 class="anchored" data-anchor-id="the-multiple-testing-opportunity" data-number="6.1.4"><span class="header-section-number">6.1.4</span>다중 테스트 기회</h3>
+<p>다중 테스트에 대한 좋은 소식은 다음과 같습니다. 우리가 테스트를 위해 위의 총알 목록에서 항목 2와 3을 모르더라도 (그리고 아마도 우리가 지점 1에 대해 확신이 없더라도<span class="citation" data-cites="Efron2010">(<a href="16-chap.html#ref-Efron2010" role="doc-biblioref">Efron 2010</a>))</span>), 우리는이 정보를 다중성으로부터 추론하고 p- 값을 FDR의 추정치로 변환 할 수 있습니다!</p>
+<p>따라서 여러 테스트는 우리의 추론을 더 좋게 만드는 경향이 있으며 작업이 더 간단합니다. 데이터가 너무 많기 때문에 추상적 인 가정에 의존 할 필요가 없습니다. 테스트 요구 사항이 실제로 데이터에 의해 충족되는지 경험적으로 확인할 수 있습니다. 이 모든 것이 엄청나게 도움이 될 수 있으며 우리는 그것을 얻습니다.<em>왜냐하면</em>다중성의. 따라서 우리는 여러 테스트를 "문제"또는 "부담"이 아니라 기회로 생각해야합니다!</p>
+</section>
+</section>
+<section class="level2 page-columns page-full" data-number="6.2" id="sec-cointossing">
+<h2 class="anchored" data-anchor-id="sec-cointossing" data-number="6.2"><span class="header-section-number">6.2</span>예 : 동전 던지기</h2>
+<p>이제 단일 테스트부터 시작하여 가설 테스트를 시작합시다. 역학을 실제로 이해하려면 가장 간단한 가능한 예 중 하나를 사용합니다. 동전을 뒤집어 공평한 지 확인한다고 가정합니다.<a class="footnote-ref" href="#fn4" id="fnref4" role="doc-noteref"><sup>4</sup></a>. 우리는 동전을 100 번 뒤집고 매번 머리를 올리거나 꼬리를 올렸는지 기록합니다. 따라서 우리는 다음과 같이 보일 수있는 기록이 있습니다.</p>
+<div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>코인 던지기는 본질적으로 중요하기 때문에 코인 던지기를 보지 않지만 (생물학에서 모델 시스템을 사용하는 것처럼) 쉬운 "모델 시스템"이기 때문에 모든 것을 쉽게 계산할 수 있으며 코인 던지기가 무엇인지 이해하기 위해 많은 도메인 지식이 필요하지 않습니다. 모든 중요한 개념이 나오고 더 많은 추가 세부 사항만으로도 다른 응용 프로그램에 적용 할 수 있습니다.</p></div></div><center>hhtththtttttht…</center>
+<p>R에서 시뮬레이션 할 수있는 것은 바이어스 코인을 뒤집고 있다고 가정하자.<code>probhhead</code>1/2와 다릅니다.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">0xdada</span>))</span>
+<span id="cb1-2"><a aria-hidden="true" href="#cb1-2" tabindex="-1"></a>numflips<span class="ot">=</span> <span class="dv">100</span></span>
+<span id="cb1-3"><a aria-hidden="true" href="#cb1-3" tabindex="-1"></a>probhhead<span class="ot">=</span> <span class="fl">0.6</span></span>
+<span id="cb1-4"><a aria-hidden="true" href="#cb1-4" tabindex="-1"></a>코인 플립<span class="ot">=</span> <span class="fu">견본</span>(<span class="fu">기음</span>(<span class="st">"시간"</span>,,,<span class="st">"티"</span>),)<span class="at">크기 =</span>numflips,</span>
+<span id="cb1-5"><a aria-hidden="true" href="#cb1-5" tabindex="-1"></a>  <span class="at">교체 =</span> <span class="cn">진실</span>,,,<span class="at">prob =</span> <span class="fu">기음</span>(Prothead,<span class="dv">1</span> <span class="sc">-</span>probug))))</span>
+<span id="cb1-6"><a aria-hidden="true" href="#cb1-6" tabindex="-1"></a><span class="fu">머리</span>(코인 플립)</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "T" "T" "H" "T" "H" "H"</code></pre>
+</div>
+</div>
+<p>이제 동전이 공정하다면, 우리는 절반의 시간이 머리를 얻을 것으로 예상 할 것입니다. 보자.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a><span class="fu">테이블</span>(코인 플립)</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>코인 플립
+ h t 
+59 41</code></pre>
+</div>
+</div>
+<p>그래서 그것은 50/50과 ​​다릅니다. 우리가 동전이 공정인지 말하지 않고 친구에게 데이터를 보여 주었다고 가정 해 봅시다. 그리고 그들의 이전 가정, 즉 귀무 가설은 동전이 크게 공정하다는 것입니다. 데이터 가이 동전이 공정하지 않다고 결론을 내릴만큼 충분히 강 할 수 있습니까? 그들은 임의의 샘플링 차이가 예상된다는 것을 알고 있습니다. 결정하려면 테스트 통계의 샘플링 분포 (100 코인 토스에서 볼 수있는 총 헤드 수)를 살펴 보겠습니다.<a class="footnote-ref" href="#fn5" id="fnref5" role="doc-noteref"><sup>5</sup></a>. 우리가 본 것처럼<a class="quarto-xref" href="01-chap.html"><span>1 장</span></a>, 숫자,<span class="math inline">\(케이\)</span>, 머리의<span class="math inline">\(N\)</span>동전의 독립적 인 토스입니다</p>
+<div class="no-row-height column-margin column-container"><div id="fn5"><p><sup>5</sup>우리는 실제로 우리가 의미하는 바를 정의하지 않았습니다. 합리적인 정의는 머리와 꼬리도 마찬가지로 가능성이 높으며 각 동전 던지기의 결과는 이전의 것들에 의존하지 않는다는 것입니다. 보다 복잡한 응용을 위해서는 가장 적합한 귀무 가설을 낮추는 데 약간의 생각이 필요할 수 있습니다.</p></div></div><p><span class="anchored-eq" data-anchor-id="eq-testing" id="eq-testing-dbinom"><span class="math display">\ [
+p (k = k \, | \, n, p) = \ left (\ begin {array} {c} n \\ k \ end {array} \ right) p^k \; (1-p)^{n-k},
+\ tag {6.3} \]</span></span></p>
+<p>어디<span class="math inline">\(피\)</span>머리의 확률입니다 (공정한 동전을 가정하면 0.5). 우리는 위의 방정식의 왼쪽을“관찰 된 값에 대한 확률로 읽습니다.<span class="math inline">\(케이\)</span>~이다<span class="math inline">\(케이\)</span>, 값이 주어졌습니다<span class="math inline">\(N\)</span>그리고<span class="math inline">\(피\)</span>”. 통계 학자<a class="footnote-ref" href="#fn6" id="fnref6" role="doc-noteref"><sup>6</sup></a>그리고 우리는 대문자를 사용합니다<span class="math inline">\(케이\)</span>가능한 값 (SO<span class="math inline">\(케이\)</span>0에서 100 사이 일 수 있음) 및 소문자<span class="math inline">\(케이\)</span>관찰 된 값에 대해.</p>
+<div class="no-row-height column-margin column-container"><div id="fn6"><p><sup>6</sup>다시 말해서,<span class="math inline" data-anchor-id="eq-testing">\(케이\)</span>우리의 확률 모델에서 추상적 인 랜덤 변수 인 반면<span class="math inline">\(케이\)</span>실현, 즉 특정 데이터 포인트입니다.</p></div></div><p>우리는 음모를 꾸미고 있습니다<a class="quarto-xref" href="#eq-testing-dbinom">방정식<span>6.3</span></a>~에<a class="quarto-xref" href="#fig-testing-dbinom">수치<span>6.5</span></a>; 좋은 측정을 위해, 우리는 또한 관찰 된 값을 표시합니다<code>Numheads</code>수직 파란색 선이 있습니다.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-hidden="true" href="#cb5-1" tabindex="-1"></a><span class="fu">도서관</span>(<span class="st">"dplyr"</span>))</span>
+<span id="cb5-2"><a aria-hidden="true" href="#cb5-2" tabindex="-1"></a>케이<span class="ot">=</span> <span class="dv">0</span><span class="sc">:</span>numflips</span>
+<span id="cb5-3"><a aria-hidden="true" href="#cb5-3" tabindex="-1"></a>Numheads<span class="ot">=</span> <span class="fu">합집합</span>(코인 플립<span class="sc">==</span> <span class="st">"시간"</span>))</span>
+<span id="cb5-4"><a aria-hidden="true" href="#cb5-4" tabindex="-1"></a>이항식<span class="ot">=</span> <span class="fu">티블</span>(<span class="at">k =</span>케이,</span>
+<span id="cb5-5"><a aria-hidden="true" href="#cb5-5" tabindex="-1"></a>     <span class="at">p =</span> <span class="fu">dbinom</span>(케이,<span class="at">크기 =</span>numflips,<span class="at">prob =</span> <span class="fl">0.5</span>)))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a aria-hidden="true" href="#cb6-1" tabindex="-1"></a><span class="fu">도서관</span>(<span class="st">"ggplot2"</span>))</span>
+<span id="cb6-2"><a aria-hidden="true" href="#cb6-2" tabindex="-1"></a><span class="fu">ggplot</span>(이항식)<span class="sc">+</span></span>
+<span id="cb6-3"><a aria-hidden="true" href="#cb6-3" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">AES</span>(<span class="at">x =</span>케이,<span class="at">y =</span>피),<span class="at">통계 =</span> <span class="st">"신원"</span>))<span class="sc">+</span></span>
+<span id="cb6-4"><a aria-hidden="true" href="#cb6-4" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span>Numheads,<span class="at">col =</span> <span class="st">"파란색"</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-testing-dbinom">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-testing-dbinom-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-6" href="06-chap_files/figure-html/fig-testing-dbinom-1.png" title="Figure 6.5: The binomial distribution for the parameters n=100 and p=0.5, according to Equation eq-testing-dbinom."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="06-chap_files/figure-html/fig-testing-dbinom-1.png" width="280"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-testing-dbinom-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 6.5 : 매개 변수에 대한 이항 분포<span class="math inline" data-anchor-id="eq-testing">\ (n = 100 \)</span>그리고<span class="math inline">\ (p = 0.5 \)</span>, 에 따르면<a class="quarto-xref" href="#eq-testing-dbinom">방정식<span>6.3</span></a>.
+</figcaption>
+</figure>
+</div>
+</div></div></div>
+<p>우리가 몰랐다고 가정 해 봅시다<a class="quarto-xref" href="#eq-testing-dbinom">방정식<span>6.3</span></a>. 우리는 여전히 Monte Carlo 시뮬레이션을 사용하여 다음과 비교할 수있는 것을 제공 할 수 있습니다.</p>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a aria-hidden="true" href="#cb7-1" tabindex="-1"></a>숫자<span class="ot">=</span> <span class="dv">10000</span></span>
+<span id="cb7-2"><a aria-hidden="true" href="#cb7-2" tabindex="-1"></a>결과<span class="ot">=</span> <span class="fu">뒤로 젖히다</span>(numsimulations, {</span>
+<span id="cb7-3"><a aria-hidden="true" href="#cb7-3" tabindex="-1"></a>코인 플립<span class="ot">=</span> <span class="fu">견본</span>(<span class="fu">기음</span>(<span class="st">"시간"</span>,,,<span class="st">"티"</span>),)<span class="at">크기 =</span>numflips,</span>
+<span id="cb7-4"><a aria-hidden="true" href="#cb7-4" tabindex="-1"></a>                     <span class="at">교체 =</span> <span class="cn">진실</span>,,,<span class="at">prob =</span> <span class="fu">기음</span>(<span class="fl">0.5</span>,,,<span class="fl">0.5</span>)))</span>
+<span id="cb7-5"><a aria-hidden="true" href="#cb7-5" tabindex="-1"></a>  <span class="fu">합집합</span>(코인 플립<span class="sc">==</span> <span class="st">"시간"</span>))</span>
+<span id="cb7-6"><a aria-hidden="true" href="#cb7-6" tabindex="-1"></a>})</span>
+<span id="cb7-7"><a aria-hidden="true" href="#cb7-7" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">티블</span>(결과))<span class="sc">+</span> <span class="fu">xlim</span>(<span class="sc">-</span><span class="fl">0.5</span>,,,<span class="fl">100.5</span>))<span class="sc">+</span></span>
+<span id="cb7-8"><a aria-hidden="true" href="#cb7-8" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">AES</span>(<span class="at">x =</span>결과),<span class="at">binwidth =</span> <span class="dv">1</span>,,,<span class="at">중심 =</span> <span class="dv">50</span>))<span class="sc">+</span></span>
+<span id="cb7-9"><a aria-hidden="true" href="#cb7-9" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span>Numheads,<span class="at">col =</span> <span class="st">"파란색"</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-rbinom">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rbinom-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-7" href="06-chap_files/figure-html/fig-rbinom-1.png" title="Figure 6.6: An approximation of the binomial distribution from 10000 simulations (same parameters as Figure fig-testing-dbinom)."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="06-chap_files/figure-html/fig-rbinom-1.png" width="280"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rbinom-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 6.6 : 이항 분포의 근사치<span class="math inline">\ (10000 \)</span>시뮬레이션 (동일한 매개 변수<a class="quarto-xref" href="#fig-testing-dbinom">수치<span>6.5</span></a>).
+</figcaption>
+</figure>
+</div>
+</div></div></div>
+<p>예상 한 바와 같이, 헤드 수는 50, 즉 동전 뒤집기의 절반입니다. 그러나 우리는 50에 가까운 다른 숫자도 가능성이 높다는 것을 알 수 있습니다. 관찰 된 값 (59)이 공정한 동전에서 볼 수있는 값 중 하나인지 또는 예상 값과의 편차가 이미 코인이 편향되어 있다는 확신을 갖기에 충분히 크지는 지 여부를 어떻게 정량화합니까? 우리는 가능한 모든 세트를 나눕니다<span class="math inline">\(케이\)</span>(0 ~ 100) 2 개의 보완 서브 세트에서<strong>거부 지역</strong>그리고 거절이없는 지역. 여기서 우리의 선택<a class="footnote-ref" href="#fn7" id="fnref7" role="doc-noteref"><sup>7</sup></a>거부 영역을 많이 채우는 것입니다.<span class="math inline">\(케이\)</span>귀무 가설을 가정하면 일부 임계 값 미만의 총 확률을 유지하면서 가능한 한<span class="math inline">\ (\ alpha \)</span>(0.05).</p>
+<div class="no-row-height column-margin column-container"><div id="fn7"><p><sup>7</sup>이것에 대해 더<a class="quarto-xref" href="#sec-testing-rejectionregion"><span>섹션 6.3.1</span></a>.</p></div></div><p>아래 코드에서는 기능을 사용합니다<code>마련하다</code>에서<strong><a href="https://cran.r-project.org/web/packages/dplyr/">dplyr</a></strong>P- 값을 최저에서 가장 높은 것으로 정렬하는 패키지는 결과를 다음으로 전달합니다.<code>돌연변이</code>다른 데이터 프레임 열을 추가합니다<code>거부하다</code>그것은 누적 합계를 계산하여 정의됩니다 (<code>CUMSUM</code>p- 값의))<code>알파</code>. 논리 벡터<code>거부하다</code>따라서 표시됩니다<code>진실</code>세트<code>케이</code>총 확률이 낮은 것<code>알파</code>. 이것들은 표시되어 있습니다<a class="quarto-xref" href="#fig-testing-findrej">수치<span>6.7</span></a>그리고 우리는 거부 지역이 인접하지 않다는 것을 알 수 있습니다.<code>케이</code>.</p>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a aria-hidden="true" href="#cb8-1" tabindex="-1"></a><span class="fu">도서관</span>(<span class="st">"dplyr"</span>))</span>
+<span id="cb8-2"><a aria-hidden="true" href="#cb8-2" tabindex="-1"></a>알파<span class="ot">=</span> <span class="fl">0.05</span></span>
+<span id="cb8-3"><a aria-hidden="true" href="#cb8-3" tabindex="-1"></a>이항식<span class="ot">=</span> <span class="fu">마련하다</span>(이항식, p)<span class="sc">|&gt;</span></span>
+<span id="cb8-4"><a aria-hidden="true" href="#cb8-4" tabindex="-1"></a>        <span class="fu">돌연변이</span>(<span class="at">거부 =</span> (<span class="fu">CUMSUM</span>(피)<span class="sc">&lt;=</span>알파))</span>
+<span id="cb8-5"><a aria-hidden="true" href="#cb8-5" tabindex="-1"></a></span>
+<span id="cb8-6"><a aria-hidden="true" href="#cb8-6" tabindex="-1"></a><span class="fu">ggplot</span>(이항식)<span class="sc">+</span></span>
+<span id="cb8-7"><a aria-hidden="true" href="#cb8-7" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="fu">AES</span>(<span class="at">x =</span>케이,<span class="at">y =</span>피,<span class="at">col =</span>거부하다),<span class="at">통계 =</span> <span class="st">"신원"</span>))<span class="sc">+</span></span>
+<span id="cb8-8"><a aria-hidden="true" href="#cb8-8" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(</span>
+<span id="cb8-9"><a aria-hidden="true" href="#cb8-9" tabindex="-1"></a>    <span class="at">값 =</span> <span class="fu">기음</span>(<span class="st">`</span><span class="at">진실</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"빨간색"</span>,,,<span class="st">`</span><span class="at">거짓</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Darkgrey"</span>)))<span class="sc">+</span></span>
+<span id="cb8-10"><a aria-hidden="true" href="#cb8-10" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span>Numheads,<span class="at">col =</span> <span class="st">"파란색"</span>))<span class="sc">+</span></span>
+<span id="cb8-11"><a aria-hidden="true" href="#cb8-11" tabindex="-1"></a>  <span class="fu">주제</span>(<span class="at">LEGEND.POSITION =</span> <span class="st">"없음"</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-testing-findrej">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-testing-findrej-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-8" href="06-chap_files/figure-html/fig-testing-findrej-1.png" title="Figure 6.7: As Figure fig-testing-dbinom, with rejection region (red) that has been chosen such that it contains the maximum number of bins whose total area is at most \alpha=0.05."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="06-chap_files/figure-html/fig-testing-findrej-1.png" width="280"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-testing-findrej-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 6.7 : AS<a class="quarto-xref" href="#fig-testing-dbinom">수치<span>6.5</span></a>, 총 면적이 최대 인 빈의 수를 포함하도록 선택된 거부 영역 (빨간색)의 경우<span class="math inline">\ (\ alpha = 0.05 \)</span>.
+</figcaption>
+</figure>
+</div>
+</div></div></div>
+<p>확률에 대한 명백한 요약은 서투른 것입니다. 우리는 교육학 적 가치를 위해 여기서했습니다. 1 차원 분포의 경우 R은 밀도에 대한 기능뿐만 아니라 (예 :<code>dbinom</code>) 그러나 누적 분포 함수 (<code>pbino</code>), 더 정확하고 빠릅니다<code>CUMSUM</code>확률에 대한. 이들은 실제로 사용해야합니다.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">일</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>거부 영역에 대한 계산을 수행하고<a class="quarto-xref" href="#fig-testing-findrej">수치<span>6.7</span></a>사용하지 않고<code>dbinom</code>그리고<code>CUMSUM</code>, 그리고 사용하여<code>pbino</code>대신에.</p>
+</div>
+</div>
+<p>우리는<a class="quarto-xref" href="#fig-testing-findrej">수치<span>6.7</span></a>관찰 된 값 59는 회색 음영 영역에 있습니다.<em>~ 아니다</em>이 데이터에서 공정한 동전의 귀무 가설을 유의성 수준으로 거부하십시오.<span class="math inline">\ (\ alpha = 0.05 \)</span>.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-testing-norejectnopower">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">질문 6.1</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>귀무 가설을 거부하지 않는다는 사실이 동전이 공정하다는 것을 의미합니까?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-testing-moretossing">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">질문 6.2</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>우리가 더 많은 동전 던지기를했다면 동전이 공평하지 않다는 것을 감지 할 가능성이 더 높을 것입니까? 얼마나?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-testing-rejectreproduce">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">질문 6.3</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>우리가 전체 절차를 반복하고 다시 동전을 100 번 던진다면<em>그 다음에</em>귀무 가설을 거부 하시겠습니까?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-testing-rejectionregionasymmetric">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">질문 6.4</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>거부 영역<a class="quarto-xref" href="#fig-testing-findrej">수치<span>6.7</span></a>비대칭 - 왼쪽 부분은 끝납니다<span class="math inline">\ (k = 40 \)</span>, 올바른 부분은 시작하지만<span class="math inline">\ (k = 61 \)</span>. 그 이유는 무엇입니까? 거부 영역을 정의하는 다른 방법은 무엇입니까?</p>
+</div>
+</div>
+<p>우리는 방금 이항 시험 단계를 거쳤습니다. 실제로, 이것은 R에서 빈번한 활동으로 단일 함수로 싸여 있으며 출력을 결과와 비교할 수 있습니다.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a aria-hidden="true" href="#cb9-1" tabindex="-1"></a><span class="fu">Binom.test</span>(<span class="at">x =</span>Numheads,<span class="at">n =</span>numflips,<span class="at">p =</span> <span class="fl">0.5</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>정확한 이항 테스트
+
+데이터 : Numheads 및 Numflips
+성공 횟수 = 59, 시험 수 = 100, p- 값 = 0.08863
+대안 가설 : 진정한 성공 확률은 0.5와 같지 않습니다.
+95 % 신뢰 구간 :
+ 0.4871442 0.6873800
+샘플 추정치 :
+성공 가능성 
+                  0.59</code></pre>
+</div>
+</div>
+</section>
+<section class="level2 page-columns page-full" data-number="6.3" id="sec-fivesteps">
+<h2 class="anchored" data-anchor-id="sec-fivesteps" data-number="6.3"><span class="header-section-number">6.3</span>가설 테스트의 다섯 단계</h2>
+<p>가설 테스트의 일반적인 원칙을 요약하겠습니다.</p>
+<ol type="1">
+<li><p>관심있는 효과를 결정하고, 적절한 실험 또는 연구를 설계하고, 데이터 요약 기능을 선택하고,<strong>테스트 통계</strong>.</p></li>
+<li><p>설정 a<strong>귀무 가설</strong>, 이것은 당신이<strong>널 분포</strong>, 즉, 검사 통계의 가능한 결과와 귀무 가설이 사실이라는 가정하에 확률.</p></li>
+<li><p>결정하십시오<strong>거부 지역</strong>, 즉, 총 확률이 작은 가능한 결과의 하위 집합<a class="footnote-ref" href="#fn8" id="fnref8" role="doc-noteref"><sup>8</sup></a>.</p></li>
+<li><p>실험을 수행하고 데이터를 수집하십시오<a class="footnote-ref" href="#fn9" id="fnref9" role="doc-noteref"><sup>9</sup></a>; 테스트 통계를 계산하십시오.</p></li>
+<li><p>결정을 내리십시오 : 귀무 가설을 거부하십시오<a class="footnote-ref" href="#fn10" id="fnref10" role="doc-noteref"><sup>10</sup></a>테스트 통계가 거부 영역에있는 경우.</p></li>
+</ol>
+<div class="no-row-height column-margin column-container"><div id="fn8"><p><sup>8</sup>이것에 대해 더<a class="quarto-xref" href="#sec-testing-rejectionregion"><span>섹션 6.3.1</span></a>.</p></div><div id="fn9"><p><sup>9</sup>또는 다른 사람이 이미 수행 한 경우 데이터를 다운로드하십시오.</p></div><div id="fn10"><p><sup>10</sup>즉, 그것이 사실이 아닐 가능성이 없다는 결론을 내립니다.</p></div></div><p>이 이상적인 워크 플로에서 데이터를보기 전에 1 ~ 3 단계에서 모든 중요한 결정을 내리는 방법에 유의하십시오. 우리가 이미 소개에서 언급했듯이 (그림<a class="quarto-xref" href="00-chap.html#fig-Fisher"><span>1</span></a>그리고<a class="quarto-xref" href="00-chap.html#fig-iterative"><span>2</span></a>), 이것은 종종 현실적이지 않습니다. 우리는 또한이 질문으로 돌아올 것입니다<a class="quarto-xref" href="#sec-pvaluehack"><span>섹션 6.6</span></a>.</p>
+<p>우리가 위의 예에서 사용한 귀무 가설에는 또한 이상화가있었습니다. 우리는 공정한 동전의 확률이 정확히 0.5 (예 : 0.500001이 아님)의 확률을 가져야하며 토스 사이에 절대 의존성이 없어야한다고 가정했습니다. 우리는 공기 드래그의 가능한 영향, 동전이 떨어지는 재료의 탄력성 등에 대해 걱정하지 않았습니다. 이것은 우리에게 귀무 가설이 이항 분포와 함께 계산적으로 다루기 쉬웠다는 이점을 주었다. 여기서, 이러한 이상화는 논란의 여지가없는 것처럼 보일 수 있지만, 다른 상황에서는 트랙 가능한 방법과 귀무 가설이 얼마나 현실적인지 사이의 절충이 더 실질적 일 수 있습니다. 문제는 귀무 가설이 너무 이상적으로 시작 되기에는 너무 이상적이라면 거부하는 것이 그다지 흥미롭지 않다는 것입니다. 결과는 오도 될 수 있으며, 우리는 우리의 시간을 낭비하고 있습니다.</p>
+<p>이 예제의 테스트 통계는 총 헤드 수였습니다. 우리가 연속으로 50 개의 꼬리를 관찰 한 다음 50 개의 머리를 연속으로 관찰했다고 가정합니다. 우리의 시험 통계는 결과의 순서를 무시하고, 이것이 완벽하게 공정한 동전이라고 결론을 내릴 것입니다. 그러나 우리가 다른 테스트 통계를 사용했다면, 우리가 두 개의 꼬리를 연속으로 볼 수있는 횟수는이 동전에 대해 재미있는 것이 있다는 것을 알 수 있습니다.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-testing-nulltailspairs">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">질문 6.5</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>이 다른 테스트 통계의 널 분포는 무엇입니까?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-testing-tailspairsalwaysbetter">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">질문 6.6</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>해당 통계에 기반한 테스트가 일반적으로 바람직합니까?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout" class="callout-header d-flex align-content-center" data-bs-target=".callout-8-contents" data-bs-toggle="collapse">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">해결책</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div class="callout-8-contents callout-collapse collapse" id="callout-8">
+<div class="callout-body-container callout-body">
+<p>아니요, 코인 토스 사이의 이러한 상관 관계를 감지 할 수있는 힘이 더 많지만<em>더 적은</em>결과에서 편견을 감지 할 수있는 힘.</p>
+</div>
+</div>
+</div>
+<p>우리가 방금 한 것은 두 가지 다른 클래스를 보는 것입니다.<strong>대체 가설</strong>. 대안의 첫 번째 클래스는 후속 동전 던지기가 여전히 서로 독립적이지만 헤드의 확률은 0.5와 다르다는 것이었다. 두 번째는 헤드의 전체 확률이 여전히 0.5 일 수 있지만 후속 코인 토스는 상관되었다는 것이었다.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-testing-totalnumberheadssufficient">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">질문 6.7</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>충분한 통계의 개념을 상기하십시오<a class="quarto-xref" href="01-chap.html"><span>1 장</span></a>. 헤드의 총 수는 이항 분포에 충분한 통계입니까? 왜 우리의 첫 번째 클래스의 대안에 대한 좋은 테스트 통계가 될 수 있지만 두 번째는 그렇지 않습니까?</p>
+</div>
+</div>
+<p>따라서 일반적으로 여러 가지 가능한 테스트 통계 선택이 있음을 기억합시다 (원칙적으로 데이터의 수치 요약이 될 수 있음). 올바른 선택을하는 것은 좋은 힘으로 시험을받는 데 중요합니다.<a class="footnote-ref" href="#fn11" id="fnref11" role="doc-noteref"><sup>11</sup></a>. 올바른 선택은 우리가 기대하는 대안에 달려 있습니다. 이것은 항상 미리 알기 쉬운 것은 아닙니다.</p>
+<div class="no-row-height column-margin column-container"><div id="fn11"><p><sup>11</sup>보다<a class="quarto-xref" href="01-chap.html#sec-generative-SimulatingForPower"><span class="anchored-eq" data-anchor-id="eq-testing">섹션 1.4.1</span></a>그리고<a class="quarto-xref" href="#sec-testing-typesoferror"><span>6.4</span></a>.</p></div><div id="fn12"><p><sup>12</sup>가정이 필요하지 않습니다<em>정확히</em>사실 - 이론의 예측은 진실의 허용 가능한 근사치가 충분합니다.</p></div></div><p>테스트 통계를 선택하면 널 분포를 계산해야합니다. 연필과 종이 또는 컴퓨터 시뮬레이션으로이를 수행 할 수 있습니다. 연필과 종이 솔루션은 파라 메트릭이며 닫힌 형태의 수학적 표현으로 이어집니다.<a class="quarto-xref" href="#eq-testing-dbinom">방정식<span>6.3</span></a>), 이것은 귀무 가설의 다양한 모델 매개 변수에 대해 보유하고있는 이점이 있습니다 (예 :<span class="math inline">\(N\)</span>,,,<span class="math inline">\(피\)</span>). 특정 매개 변수 세트에 대해 신속하게 계산할 수도 있습니다. 그러나 동전 던지기 예에서만큼 쉬운 것은 아닙니다. 때로는 연필과 종이 용액이 계산하기가 어렵습니다. 다른 경우에는 가정을 단순화해야 할 수도 있습니다. 예는<span class="math inline">\(티\)</span>-스테 틱 (이 장의 뒷부분에서 볼 것입니다). 데이터가 독립적이고 정상적으로 분포되어 있다고 가정하면이를 계산할 수 있습니다. 결과를<span class="math inline">\(티\)</span>-분포. 이러한 모델링 가정은 어느 정도 현실적 일 수 있습니다. Null 분포를 시뮬레이션하면 잠재적으로 더 정확하고 현실적이며 아마도 직관적 인 접근 방식이 제공됩니다. 시뮬레이션의 단점은 오랜 시간이 걸릴 수 있다는 것입니다. 다양한 매개 변수가 결과에 어떤 영향을 미치는지에 대한 체계적인 이해를 얻으려면 추가 작업이 필요합니다. 일반적으로 적용 할 때 파라 메트릭 이론을 사용하는 것이 더 우아합니다.<a class="footnote-ref" href="#fn12" id="fnref12" role="doc-noteref"><sup>12</sup></a>. 당신이 의심 할 때, 시뮬레이션 - 또는 둘 다하십시오.</p>
+<section class="level3 page-columns page-full" data-number="6.3.1" id="sec-testing-rejectionregion">
+<h3 class="anchored" data-anchor-id="sec-testing-rejectionregion" data-number="6.3.1"><span class="header-section-number">6.3.1</span>거부 지역</h3>
+<p>시험에 적합한 거부 영역을 선택하는 방법은 무엇입니까? 첫째, 크기는 얼마입니까? 그것이 당신의 선택입니다<strong>중요 수준</strong>또는 잘못된 긍정적 비율<span class="math inline">\ (\ alpha \)</span>귀무 가설이 사실이더라도 테스트 통계 가이 영역으로 떨어질 확률입니다.<a class="footnote-ref" href="#fn13" id="fnref13" role="doc-noteref"><sup>13</sup></a>.</p>
+<div class="no-row-height column-margin column-container"><div id="fn13"><p><sup>13</sup>충돌 한 특정 질문에 대해 어느 시점에서 어떤 사람들은<span class="math inline">\ (\ alpha = 0.05 \)</span>"작은"으로. 그러나이 숫자에는 특별한 것이 없으며 특정 경우 결정 임계 값에 대한 최선의 선택은 상황에 따라 크게 의존 할 수 있습니다.<span class="citation" data-cites="Wasserstein2016:ASA Altman:PoS:2017">(<a href="16-chap.html#ref-Wasserstein2016:ASA" role="doc-biblioref">Wasserstein과 Lazar 2016</a>; <a href="16-chap.html#ref-Altman:PoS:2017" role="doc-biblioref">Altman 및 Krzywinski 2017</a>))</span>.</p></div></div><p>크기가 주어지면 다음 질문은 모양에 관한 것입니다. 주어진 크기의 경우 일반적으로 여러 가지 가능한 모양이 있습니다. 대체 가설이 사실이라면 시험 통계량이 거부 영역으로 떨어질 확률이 크다는 것이 합리적입니다. 다시 말해, 우리는 테스트가 높은 것을 원합니다.<strong>힘</strong>또는 진정한 긍정적 비율.</p>
+<p>거부 영역을 계산하기 위해 코드에서 사용한 기준<a class="quarto-xref" href="#fig-testing-findrej">수치<span>6.7</span></a>이 지역에 많은 것을 포함하는 것이 었습니다<code>케이</code>가능한 한. 대체 배포에 대한 정보가 없으면 하나입니다.<code>케이</code>다른 것만 큼 좋으며 총 수를 최대화합니다.</p>
+<p>이것의 결과는 그것입니다<a class="quarto-xref" href="#fig-testing-findrej">수치<span>6.7</span></a>거부 영역은 분포의 두 꼬리 사이에 분리됩니다. 불공평 한 동전이 머리 나 꼬리쪽으로 편견이있을 것으로 예상하기 때문입니다. 우리는 모릅니다. 우리가 알고 있다면, 우리는 대신에 우리의 거부 영역을 적절한쪽에 집중시킬 것입니다. 예를 들어 편견이 머리를 향할 것이라고 생각하면 오른쪽 꼬리가 있습니다. 그러한 선택은 또한라고도합니다<em>양면</em>그리고<em>단면</em>테스트. 보다 일반적으로, 대체 분포에 대한 가정이 있다면, 이것은 거부 영역의 형태의 선택에 영향을 줄 수 있습니다.</p>
+</section>
+</section>
+<section class="level2 page-columns page-full" data-number="6.4" id="sec-testing-typesoferror">
+<h2 class="anchored" data-anchor-id="sec-testing-typesoferror" data-number="6.4"><span class="header-section-number">6.4</span>오류 유형</h2>
+<p>테스트의 역학을 시작한 후 우리는 얼마나 잘하고 있는지 평가할 수 있습니다.<a class="quarto-xref" href="#tbl-typesoferror">테이블<span>6.1</span></a>우리가 데이터를 본 후 귀무 가설을 거부할지 여부와의 결정과 현실 (귀무 가설이 사실인지 아닌지) 비교.</p>
+<div class="cell page-columns page-full" data-layout-align="center" data-tbl-cap-location="margin">
+<div class="cell quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-layout-align="center" data-tbl-cap-location="margin" id="tbl-typesoferror">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-typesoferror-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<colgroup>
+<col style="width: 30%"/>
+<col style="width: 34%"/>
+<col style="width: 35%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">테스트 대 현실</th>
+<th style="text-align: left;">귀무 가설은 사실입니다</th>
+<th style="text-align: left;"><span class="math inline">\ (... \)</span>거짓입니다</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>귀무 가설을 거부하십시오</strong></td>
+<td style="text-align: left;">유형 I 오류 (false positive)</td>
+<td style="text-align: left;">진정한 긍정적</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>거부하지 마십시오</strong></td>
+<td style="text-align: left;">진정한 부정</td>
+<td style="text-align: left;">II 형 오류 (False Negative)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-typesoferror-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">표 6.1 : 통계 테스트에서 오류 유형.</figcaption>
+</figure>
+</div>
+</div>
+<p>다른 하나를 증가시키는 비용으로 두 가지 오류 유형 중 하나를 줄일 수 있습니다. 진정한 도전은 두 사람 사이에 허용 가능한 트레이드 오프를 찾는 것입니다. 이것은 예시되어 있습니다<a class="quarto-xref" href="#fig-testing-FDRvspstatic1">수치<span>6.2</span></a>. 우리는 항상 감소 할 수 있습니다<strong>잘못된 긍정적 비율</strong>(FPR) 임계 값을 오른쪽으로 이동시킵니다. 우리는 더“보수적”이 될 수 있습니다. 그러나 이것은 더 높은 가격으로 발생합니다<strong>허위 부정적인 비율</strong>(fnr). 유사하게, 우리는 임계 값을 왼쪽으로 이동시켜 FNR을 줄일 수 있습니다. 그러나 다시, 이것은 더 높은 FPR의 가격으로 발생합니다. 용어에 약간 : FPR은 확률과 동일합니다.<span class="math inline">\ (\ alpha \)</span>우리가 위에서 언급 한.<span class="math inline">\ (1- \ alpha \)</span>또한라고합니다<strong>특성</strong>테스트의. FNR도 때때로 호출됩니다<span class="math inline">\(\베타\)</span>, 그리고<span class="math inline">\ (1- \ 베타 \)</span>그만큼<strong>힘</strong>,,,<strong>감광도</strong>또는<strong>진정한 긍정적 비율</strong>테스트의.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-testing-twosided">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">질문 6.8</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>끝에<a class="quarto-xref" href="#sec-fivesteps"><span>섹션 6.3</span></a>, 우리는 하나의 및 양면 테스트에 대해 배웠습니다. 이 차이가 존재하는 이유는 무엇입니까? 왜 우리는 항상 더 큰 클래스의 대안에 민감한 양면 테스트 만 사용하지 않는 이유는 무엇입니까?</p>
+</div>
+</div>
+</section>
+<section class="level2 page-columns page-full" data-number="6.5" id="sec-testing-ttest">
+<h2 class="anchored" data-anchor-id="sec-testing-ttest" data-number="6.5"><span class="header-section-number">6.5</span>t- 검정</h2>
+<p>많은 실험 측정은 합리적인 수로보고되며, 우리가 할 수있는 가장 간단한 비교는 두 그룹 사이에서, 예를 들어, 그렇지 않은 세포와 비교하여 물질로 처리 된 세포 사이에 있습니다. 그러한 상황에 대한 기본 테스트는 다음과 같습니다<span class="math inline">\(티\)</span>-시험. 테스트 통계는 다음과 같이 정의됩니다</p>
+<p><span class="anchored-eq" data-anchor-id="eq-testing" id="eq-testing-tstat"><span class="math display">\ [
+t = c \; \ frac {m_1-m_2} {s},
+\ tag {6.4} \]</span></span></p>
+<p>어디<span class="math inline">\ (m_1 \)</span>그리고<span class="math inline">\ (m_2 \)</span>두 그룹의 값의 평균이며<span class="math inline">\(에스\)</span>풀링 된 표준 편차입니다<span class="math inline">\(기음\)</span>샘플 크기, 즉 관찰 수에 따라 상수입니다.<span class="math inline">\ (n_1 \)</span>그리고<span class="math inline">\ (n_2 \)</span>두 그룹에서. 공식으로<a class="footnote-ref" href="#fn14" id="fnref14" role="doc-noteref"><sup>14</sup></a>,,,</p>
+<div class="no-row-height column-margin column-container"><div id="fn14"><p><sup>14</sup>모두를 기억하려고 노력해야합니다<a class="quarto-xref" href="#eq-testing-tstat">방정식<span class="anchored-eq" data-anchor-id="eq-testing">6.4</span></a>, 많은 사람들이 바라 보는 데 지나가는 반면<a class="quarto-xref" href="#eq-testing-cttest">방정식<span>6.5</span></a>그들이 필요할 때.</p></div></div><p><span id="eq-testing-cttest"><span class="math display">\ [
+\ 시작 {align}
+m_g &amp; = \ frac {1} {n_g} \ sum_ {i = 1}^{n_g} x_ {g, i} \ quad \ quad \ quad g = 1,2 \\
+s^2 &amp; = \ frac {1} {n_1+n_2-2}
+\ left (\ sum_ {i = 1}^{n_1} \ left (x_ {1, i} - m_1 \ 오른쪽)^2 +
+\ sum_ {j = 1}^{n_2} \ 왼쪽 (x_ {2, j} -M_2 \ 오른쪽)^2 \ 오른쪽) \\
+c &amp; = \ sqrt {\ frac {n_1n_2} {n_1+n_2}}
+\ end {align}
+\ tag {6.5} \]</span></span></p>
+<p>어디<span class="math inline">\ (x_ {g, i} \)</span>입니다<span class="math inline">\ (i^{\ text {th}} \)</span>데이터 포인트<span class="math inline">\ (g^{\ text {th}} \)</span>그룹. 이걸 시도해 봅시다<code>식물 성장</code>R의 데이터<strong>데이터 세트</strong>패키지.</p>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a aria-hidden="true" href="#cb11-1" tabindex="-1"></a><span class="fu">도서관</span>(<span class="st">"ggbeeswarm"</span>))</span>
+<span id="cb11-2"><a aria-hidden="true" href="#cb11-2" tabindex="-1"></a><span class="fu">데이터</span>(<span class="st">"식물 성장"</span>))</span>
+<span id="cb11-3"><a aria-hidden="true" href="#cb11-3" tabindex="-1"></a><span class="fu">ggplot</span>(Plantgrowth,<span class="fu">AES</span>(<span class="at">y =</span>무게,<span class="at">x =</span>그룹,<span class="at">col =</span>그룹))<span class="sc">+</span></span>
+<span id="cb11-4"><a aria-hidden="true" href="#cb11-4" tabindex="-1"></a>  <span class="fu">geom_beeswarm</span>() <span class="sc">+</span> <span class="fu">주제</span>(<span class="at">LEGEND.POSITION =</span> <span class="st">"없음"</span>))</span>
+<span id="cb11-5"><a aria-hidden="true" href="#cb11-5" tabindex="-1"></a>TT<span class="ot">=</span> <span class="fu">~와 함께</span>(Plantgrowth,</span>
+<span id="cb11-6"><a aria-hidden="true" href="#cb11-6" tabindex="-1"></a>       <span class="fu">t.test</span>(무게 [그룹<span class="sc">==</span><span class="st">"Ctrl 키"</span>],,</span>
+<span id="cb11-7"><a aria-hidden="true" href="#cb11-7" tabindex="-1"></a>체중 [그룹<span class="sc">==</span><span class="st">"TRT2"</span>],,</span>
+<span id="cb11-8"><a aria-hidden="true" href="#cb11-8" tabindex="-1"></a>              <span class="at">var.equal =</span> <span class="cn">진실</span>)))</span>
+<span id="cb11-9"><a aria-hidden="true" href="#cb11-9" tabindex="-1"></a>TT</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>두 개의 샘플 t- 검정
+
+데이터 : 무게 [group == "ctrl"] 및 weight [group == "trt2"]
+t = -2.134, df = 18, p- 값 = 0.04685
+대체 가설 : 평균의 진정한 차이는 0과 같지 않습니다.
+95 % 신뢰 구간 :
+ -0.980338117 -0.007661883
+샘플 추정치 :
+x 평균의 평균 y 
+    5.032 5.526</code></pre>
+</div>
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-testing-plantgrowth">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-testing-plantgrowth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-9" href="06-chap_files/figure-html/fig-testing-plantgrowth-1.png" title="Figure 6.8: The PlantGrowth data."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="06-chap_files/figure-html/fig-testing-plantgrowth-1.png" width="240"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-testing-plantgrowth-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 6.8 :<code>식물 성장</code>데이터.</figcaption>
+</figure>
+</div>
+</div></div></div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-testing-othercomparisons">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">질문 6.9</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>비교에서 무엇을 얻습니까?<code>TRT1</code>? 무엇 때문에<code>TRT1</code>~ 대<code>TRT2</code>?</p>
+</div>
+</div>
+<p>p- 값을 계산하기 위해<code>t.test</code>함수는에 대한 점근 이론을 사용합니다<span class="math inline" data-anchor-id="eq-testing">\(티\)</span>-통계량<a class="quarto-xref" href="#eq-testing-tstat">방정식<span>6.4</span></a>; 이 이론은 두 그룹에서 동등한 수단의 귀무 가설에서 통계가 알려진 수학적 분포, 소위 수준을 따른다는 것을 나타냅니다.<span class="math inline">\(티\)</span>-배포<span class="math inline">\ (n_1+n_2-2 \)</span>자유도. 이론은 추가 기술 가정, 즉 데이터가 독립적이며 동일한 표준 편차를 가진 정규 분포에서 나온다는 것을 사용합니다. 우리는 이러한 가정에 대해 걱정할 수 있습니다. 분명히 그들은 유지하지 않습니다 : 무게는 항상 긍정적이고, 정규 분포는 전체 실제 축에 걸쳐 확장됩니다. 문제는 이론적 가정과의 이러한 편차가 실질적인 차이를 만드는지 여부입니다. 순열 테스트를 사용하여이를 파악할 수 있습니다 (순열 테스트의 아이디어에 대해 좀 더 자세히 설명합니다.<a class="quarto-xref" href="#sec-testing-permutationtests"><span>섹션 6.5.1</span></a>).</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-testing-tnull">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">질문 6.10</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>위의 이론 및 시뮬레이션 된 널 분포를 플로팅하십시오.<span class="math inline">\(티\)</span>-과 비슷한 방식으로 테스트<a class="quarto-xref" href="#fig-testing-dbinom">수치<span>6.5</span></a>그리고<a class="quarto-xref" href="#fig-rbinom">수치<span>6.6</span></a>동전 뒤집기.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout" class="callout-header d-flex align-content-center" data-bs-target=".callout-13-contents" data-bs-toggle="collapse">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">해결책</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div class="callout-13-contents callout-collapse collapse" id="callout-13">
+<div class="callout-body-container callout-body">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a aria-hidden="true" href="#cb13-1" tabindex="-1"></a>plgr<span class="ot">=</span>dplyr<span class="sc">::</span><span class="fu">필터</span>(Plant Growth, 그룹<span class="sc">%안에%</span> <span class="fu">기음</span>(<span class="st">"Ctrl 키"</span>,,,<span class="st">"TRT2"</span>)))</span>
+<span id="cb13-2"><a aria-hidden="true" href="#cb13-2" tabindex="-1"></a></span>
+<span id="cb13-3"><a aria-hidden="true" href="#cb13-3" tabindex="-1"></a>알파<span class="ot">=</span> <span class="fl">0.05</span></span>
+<span id="cb13-4"><a aria-hidden="true" href="#cb13-4" tabindex="-1"></a>xrange<span class="ot">=</span> <span class="dv">5</span> <span class="sc">*</span> <span class="fu">기음</span>(<span class="sc">-</span><span class="dv">1</span>,,,<span class="dv">1</span>))</span>
+<span id="cb13-5"><a aria-hidden="true" href="#cb13-5" tabindex="-1"></a>뚜껑<span class="ot">=</span> <span class="cf">기능</span>(엑스)<span class="fu">ifelse</span>(엑스<span class="sc">&lt;</span>xrange [<span class="dv">1</span>], xrange [<span class="dv">1</span>],,<span class="fu">ifelse</span>(엑스<span class="sc">&gt;</span>xrange [<span class="dv">2</span>], xrange [<span class="dv">2</span>], x))</span>
+<span id="cb13-6"><a aria-hidden="true" href="#cb13-6" tabindex="-1"></a></span>
+<span id="cb13-7"><a aria-hidden="true" href="#cb13-7" tabindex="-1"></a>sim_null<span class="ot">=</span> <span class="fu">티블</span>(</span>
+<span id="cb13-8"><a aria-hidden="true" href="#cb13-8" tabindex="-1"></a>  <span class="at">t =</span> <span class="fu">뒤로 젖히다</span>(<span class="dv">10000</span>,,,<span class="fu">t.test</span>(무게<span class="sc">~</span> <span class="fu">견본</span>(그룹),<span class="at">var.equal =</span> <span class="cn">진실</span>,,,<span class="at">데이터 =</span>PLGR)<span class="sc">$</span>통계량)</span>
+<span id="cb13-9"><a aria-hidden="true" href="#cb13-9" tabindex="-1"></a>))</span>
+<span id="cb13-10"><a aria-hidden="true" href="#cb13-10" tabindex="-1"></a>sim_thresh<span class="ot">=</span> <span class="fu">양자</span>(sim_null<span class="sc">$</span>티,<span class="fu">기음</span>(알파<span class="sc">/</span><span class="dv">2</span>,,,<span class="dv">1</span><span class="sc">-</span>알파<span class="sc">/</span><span class="dv">2</span>)))</span>
+<span id="cb13-11"><a aria-hidden="true" href="#cb13-11" tabindex="-1"></a>sim_null<span class="ot">=</span> <span class="fu">돌연변이</span>(sim_null,</span>
+<span id="cb13-12"><a aria-hidden="true" href="#cb13-12" tabindex="-1"></a>  <span class="at">t =</span> <span class="fu">뚜껑</span>(티),<span class="co"># 범위를 벗어난 데이터에 대한 경고를 피하십시오</span></span>
+<span id="cb13-13"><a aria-hidden="true" href="#cb13-13" tabindex="-1"></a>  <span class="at">거부 =</span> <span class="fu">ifelse</span>(티<span class="sc">&lt;=</span>sim_thresh [<span class="dv">1</span>],,<span class="st">"낮은"</span>,,,<span class="fu">ifelse</span>(티<span class="sc">&gt;</span>sim_thresh [<span class="dv">2</span>],,<span class="st">"높은"</span>,,,<span class="st">"없음"</span>)))</span>
+<span id="cb13-14"><a aria-hidden="true" href="#cb13-14" tabindex="-1"></a>))</span>
+<span id="cb13-15"><a aria-hidden="true" href="#cb13-15" tabindex="-1"></a></span>
+<span id="cb13-16"><a aria-hidden="true" href="#cb13-16" tabindex="-1"></a>Theo_thresh<span class="ot">=</span> <span class="fu">QT</span>(<span class="fu">기음</span>(알파<span class="sc">/</span><span class="dv">2</span>,,,<span class="dv">1</span><span class="sc">-</span>알파<span class="sc">/</span><span class="dv">2</span>),)<span class="at">df =</span>  <span class="fu">nrow</span>(PLGR)<span class="sc">-</span> <span class="dv">2</span>))</span>
+<span id="cb13-17"><a aria-hidden="true" href="#cb13-17" tabindex="-1"></a>Theo_null<span class="ot">=</span> <span class="fu">티블</span>(</span>
+<span id="cb13-18"><a aria-hidden="true" href="#cb13-18" tabindex="-1"></a>  <span class="at">t =</span> <span class="fu">서열</span>(<span class="sc">-</span><span class="dv">5</span>,,,<span class="dv">5</span>,,,<span class="at">by =</span> <span class="fl">0.05</span>),)</span>
+<span id="cb13-19"><a aria-hidden="true" href="#cb13-19" tabindex="-1"></a>  <span class="at">밀도 =</span> <span class="fu">DT</span> (<span class="at">x =</span>티,<span class="at">df =</span> <span class="fu">nrow</span>(PLGR)<span class="sc">-</span> <span class="dv">2</span>),)</span>
+<span id="cb13-20"><a aria-hidden="true" href="#cb13-20" tabindex="-1"></a>  <span class="at">거부 =</span> <span class="fu">ifelse</span>(티<span class="sc">&lt;=</span>Theo_thresh [<span class="dv">1</span>],,<span class="st">"낮은"</span>,,,<span class="fu">ifelse</span>(티<span class="sc">&gt;</span>Theo_thresh [<span class="dv">2</span>],,<span class="st">"높은"</span>,,,<span class="st">"없음"</span>)))</span>
+<span id="cb13-21"><a aria-hidden="true" href="#cb13-21" tabindex="-1"></a>))</span>
+<span id="cb13-22"><a aria-hidden="true" href="#cb13-22" tabindex="-1"></a></span>
+<span id="cb13-23"><a aria-hidden="true" href="#cb13-23" tabindex="-1"></a>P1<span class="ot">=</span> <span class="fu">ggplot</span>(sim_null,<span class="fu">AES</span>(<span class="at">x =</span>티,<span class="at">col =</span>거부하다,<span class="at">fill =</span>거부하다))<span class="sc">+</span></span>
+<span id="cb13-24"><a aria-hidden="true" href="#cb13-24" tabindex="-1"></a>       <span class="fu">geom_bar</span>(<span class="at">통계 =</span> <span class="st">"큰 상자"</span>,,,<span class="at">breaks =</span> <span class="fu">서열</span>(<span class="sc">-</span><span class="dv">5</span>,,,<span class="dv">5</span>,,,<span class="at">by =</span> <span class="fl">0.2</span>)))</span>
+<span id="cb13-25"><a aria-hidden="true" href="#cb13-25" tabindex="-1"></a>P2<span class="ot">=</span> <span class="fu">ggplot</span>(Theo_null,<span class="fu">AES</span>(<span class="at">x =</span>티,<span class="at">y =</span>밀도,<span class="at">col =</span>거부하다,<span class="at">fill =</span>거부하다))<span class="sc">+</span></span>
+<span id="cb13-26"><a aria-hidden="true" href="#cb13-26" tabindex="-1"></a>       <span class="fu">geom_area</span>() </span>
+<span id="cb13-27"><a aria-hidden="true" href="#cb13-27" tabindex="-1"></a></span>
+<span id="cb13-28"><a aria-hidden="true" href="#cb13-28" tabindex="-1"></a><span class="cf">~을 위한</span>(피<span class="cf">~에</span> <span class="fu">목록</span>(P1, P2))))</span>
+<span id="cb13-29"><a aria-hidden="true" href="#cb13-29" tabindex="-1"></a>  <span class="fu">인쇄</span>(피<span class="sc">+</span> </span>
+<span id="cb13-30"><a aria-hidden="true" href="#cb13-30" tabindex="-1"></a>        <span class="fu">geom_vline</span>(<span class="at">xintercept =</span>TT<span class="sc">$</span>통계량,<span class="at">col =</span> <span class="st">"#101010"</span>))<span class="sc">+</span></span>
+<span id="cb13-31"><a aria-hidden="true" href="#cb13-31" tabindex="-1"></a>        <span class="fu">scale_colour_manual</span>(<span class="at">값 =</span> <span class="fu">기음</span>(<span class="at">낮음 =</span> <span class="st">"파란색"</span>,,,<span class="at">High =</span> <span class="st">"빨간색"</span>,,,<span class="at">없음 =</span> <span class="st">"Darkgrey"</span>)))<span class="sc">+</span></span>
+<span id="cb13-32"><a aria-hidden="true" href="#cb13-32" tabindex="-1"></a>        <span class="fu">scale_fill_manual</span>(<span class="at">값 =</span> <span class="fu">기음</span>(<span class="at">낮음 =</span> <span class="st">"파란색"</span>,,,<span class="at">High =</span> <span class="st">"빨간색"</span>,,,<span class="at">없음 =</span> <span class="st">"Darkgrey"</span>)))<span class="sc">+</span> </span>
+<span id="cb13-33"><a aria-hidden="true" href="#cb13-33" tabindex="-1"></a>        <span class="fu">xlim</span>(xrange)<span class="sc">+</span> <span class="fu">주제</span>(<span class="at">LEGEND.POSITION =</span> <span class="st">"없음"</span>)))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell quarto-layout-panel" data-layout-align="center" data-layout-ncol="2">
+<div class="quarto-layout-row">
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-testing-tnull-1" width="320">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-testing-tnull-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-10" href="06-chap_files/figure-html/fig-testing-tnull-1.png" title="Figure 6.9: "><img class="img-fluid quarto-figure quarto-figure-center anchored figure-img" id="fig-testing-tnull-1" src="06-chap_files/figure-html/fig-testing-tnull-1.png" width="320"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-testing-tnull-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 6.9</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output-display quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-testing-tnull-2" width="320">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-testing-tnull-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-11" href="06-chap_files/figure-html/fig-testing-tnull-2.png" title="Figure 6.10: "><img class="img-fluid quarto-figure quarto-figure-center anchored figure-img" id="fig-testing-tnull-2" src="06-chap_files/figure-html/fig-testing-tnull-2.png" width="320"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-testing-tnull-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 6.10</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-testing-abst">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">질문 6.11</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>우리가 절대 값을 고려하면 앞의 질문에 대한 해결책이 더 간단 해지겠습니까?<span class="math inline">\(티\)</span>대신<span class="math inline">\(티\)</span>그 자체?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout" class="callout-header d-flex align-content-center" data-bs-target=".callout-15-contents" data-bs-toggle="collapse">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">해결책</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div class="callout-15-contents callout-collapse collapse" id="callout-15">
+<div class="callout-body-container callout-body">
+<p>예, 차이의 징후에 관심이 없다면 직접 작업 할 수 있습니다.<span class="math inline">\ (\ text {abs} (t) \)</span>, 하단 및 상단 대신 단일 거부 영역 만 갖습니다.</p>
+</div>
+</div>
+</div>
+<p>그만큼<span class="math inline">\(티\)</span>-테스트는 여러 맛으로 제공되며, 모두의 매개 변수를 통해 선택할 수 있습니다.<code>t.test</code>기능. 위에서 한 것은 동일한 분산을 가진 양면 양면 2- 샘플이없는 테스트라고합니다.<em>양면</em>처리 된 식물의 중량이 처리되지 않은 식물의 중량보다 크거나 작 으면 귀무 가설을 거부 할 수 있다는 사실을 말합니다.</p>
+<p><em>두 샘플</em><a class="footnote-ref" href="#fn15" id="fnref15" role="doc-noteref"><sup>15</sup></a>우리는 두 그룹의 평균을 서로 비교했음을 나타냅니다. 다른 옵션은 한 그룹의 평균을 주어진 고정 번호와 비교하는 것입니다.</p>
+<div class="no-row-height column-margin column-container"><div id="fn15"><p><sup>15</sup>용어가 혼란 스러울 수 있습니다<em>견본</em>생물학과 통계의 의미가 다릅니다. 생물학에서, 샘플은 분석이 수행되는 단일 시편이다; 통계에서는 측정 세트 (예 :<span class="math inline" data-anchor-id="eq-testing">\ (n_1 \)</span>-튜플<span class="math inline">\ (\ left (x_ {1,1}, ..., x_ {1, n_1} \ 오른쪽) \)</span>~에<a class="quarto-xref" href="#eq-testing-cttest">방정식<span>6.5</span></a>, 이는 여러 생물학적 샘플을 포함 할 수 있습니다. 이 이중 의미가 혼란을 야기 할 수있는 상황에서, 우리는 단일 생물학적 샘플의 데이터를<em>관찰</em>.</p></div></div><p><em>짝을 이루지 않았습니다</em>두 그룹의 측정 값 사이에 직접 1 : 1 매핑이 없음을 의미합니다. 반면에, 처리 전후에 동일한 식물에서 데이터가 측정 된 경우, 절대 중량이 아닌 각 식물 내에서 체중의 변화를 볼 때 페어링 된 테스트가 더 적합합니다.</p>
+<p><em>동일한 분산</em>통계의 방식을 나타냅니다<a class="quarto-xref" href="#eq-testing-tstat">방정식<span>6.4</span></a>계산됩니다. 각 그룹 내의 차이가 거의 동일하다면 그 표현이 가장 적합합니다. 그들이 매우 다르면 대체 형태 (Welch 's<span class="math inline">\(티\)</span>-테스트) 및 관련 점근 적 이론이 존재한다.</p>
+<p><strong>독립 가정</strong>. 이제 독특한 것을 시도해 봅시다 : 데이터를 복제하십시오.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a aria-hidden="true" href="#cb14-1" tabindex="-1"></a><span class="fu">~와 함께</span>(<span class="fu">rbind</span>(Plantgrowth, Plantgrowth),</span>
+<span id="cb14-2"><a aria-hidden="true" href="#cb14-2" tabindex="-1"></a>       <span class="fu">t.test</span>(무게 [그룹<span class="sc">==</span> <span class="st">"Ctrl 키"</span>],,</span>
+<span id="cb14-3"><a aria-hidden="true" href="#cb14-3" tabindex="-1"></a>체중 [그룹<span class="sc">==</span> <span class="st">"TRT2"</span>],,</span>
+<span id="cb14-4"><a aria-hidden="true" href="#cb14-4" tabindex="-1"></a>              <span class="at">var.equal =</span> <span class="cn">진실</span>)))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>두 개의 샘플 t- 검정
+
+데이터 : 무게 [group == "ctrl"] 및 weight [group == "trt2"]
+t = -3.1007, df = 38, p- 값 = 0.003629
+대체 가설 : 평균의 진정한 차이는 0과 같지 않습니다.
+95 % 신뢰 구간 :
+ -0.8165284 -0.1714716
+샘플 추정치 :
+x 평균의 평균 y 
+    5.032 5.526</code></pre>
+</div>
+</div>
+<p>그룹의 추정치가 어떻게 의미 (따라서 차이)가 변하지 않지만 p- 값은 훨씬 작습니다! 우리는 이것으로부터 두 가지를 마무리 할 수 ​​있습니다.</p>
+<ul>
+<li><p>의 힘<span class="math inline">\(티\)</span>-테스트는 샘플 크기에 따라 다릅니다. 근본적인 생물학적 차이가 동일하더라도 더 많은 관측치가있는 데이터 세트는 더 중요한 결과를 제공하는 경향이 있습니다.<a class="footnote-ref" href="#fn16" id="fnref16" role="doc-noteref"><sup>16</sup></a>.</p></li>
+<li><p>측정 간의 독립성을 가정하는 것이 정말 중요합니다. 동일한 데이터의 뻔뻔한 복제는 극단적 인 형태의 종속성이지만, 다른 수준의 복제를 혼합하면 같은 일이 발생합니다. 예를 들어, 8 개의 식물에서 데이터를 가지고 있었지만 각 플랜트에서 동일한 것을 두 번 측정 한 다음 (기술적 복제)가 이제 16 개의 독립적 인 측정이 잘못된 척합니다.</p></li>
+</ul>
+<div class="no-row-height column-margin column-container"><div id="fn16"><p><sup>16</sup>당신은 또한 숫자의 방식에서 이것을 볼 수 있습니다<span class="math inline" data-anchor-id="eq-testing">\ (n_1 \)</span>그리고<span class="math inline">\ (n_2 \)</span>나타납니다<a class="quarto-xref" href="#eq-testing-cttest">방정식<span>6.5</span></a>.</p></div></div><section class="level3 page-columns page-full" data-number="6.5.1" id="sec-testing-permutationtests">
+<h3 class="anchored" data-anchor-id="sec-testing-permutationtests" data-number="6.5.1"><span class="header-section-number">6.5.1</span>순열 테스트</h3>
+<p>우리가 매개 변수의 결과를 대조했을 때 위에서 일어난 일<span class="math inline">\(티\)</span>-적용된 순열 테스트와 관련하여<span class="math inline">\(티\)</span>-통계량? 이것들은 두 가지 다른 테스트임을 인식하는 것이 중요하며, 결과의 유사성은 바람직하지만 우연의 일치입니다. 파라 메트릭 테스트에서, null 분포<span class="math inline">\(티\)</span>-검정 론적 데이터의 가정 된 널 분포에서, 단위 공분산을 사용한 다변량 정규 분포<span class="math inline">\ ((n_1+n_2) \)</span>-차원 공간<span class="math inline">\ (\ mathbb {r}^{n_1+n_2} \)</span>, 그리고 연속적입니다 : the<span class="math inline">\(티\)</span>-분포. 대조적으로, 우리의 테스트 통계의 순열 분포는 유한 한 세트에서 얻은 것처럼 이산적입니다.<span class="math inline">\ ((n_1+n_2)! \)</span>순열<a class="footnote-ref" href="#fn17" id="fnref17" role="doc-noteref"><sup>17</sup></a>데이터의 단일 인스턴스에서 관찰 레이블의<span class="math inline">\ (n_1+n_2 \)</span>관찰). 여기서 우리가 생각하는 것은 귀무 가설에서 변수가<span class="math inline">\ (x_ {1,1}, ..., x_ {1, n_1}, x_ {2,1}, ..., x_ {2, n_2} \)</span>교환 가능합니다. 논리적 으로이 가정은 파라 메트릭 테스트의 가정에 의해 암시되지만 약합니다. 순열 테스트가 사용됩니다<span class="math inline">\(티\)</span>-스테 틱이지만<span class="math inline">\(티\)</span>-분포 (또는 정규 분포). 두 테스트가 우리에게 매우 유사한 결과를 주었다는 사실은 중심 한계 정리의 결과입니다.</p>
+<div class="no-row-height column-margin column-container"><div id="fn17"><p><sup>17</sup>또는 계산 시간을 저장하려는 경우 임의의 하위 집합.</p></div></div></section>
+</section>
+<section class="level2 page-columns page-full" data-number="6.6" id="sec-pvaluehack">
+<h2 class="anchored" data-anchor-id="sec-pvaluehack" data-number="6.6"><span class="header-section-number">6.6</span>P- 값 해킹</h2>
+<p>코인 던지기 예로 돌아가 봅시다. 우리는 귀무 가설 (동전이 공정하다)을 5%의 수준으로 거부하지 않았다. 결국,<code>probhhead</code>0.6 인치로 선택되었습니다<a class="quarto-xref" href="#sec-cointossing"><span>섹션 6.2</span></a>. 이제 다른 테스트 통계를 살펴보기 시작했다고 가정 해 봅시다. 아마도 3 개 이상의 헤드 이상의 연속 시리즈의 수입니다. 또는 처음 50 개의 동전 뒤집기의 헤드 수. 등. 어느 시점에서 우리는 우연히 (결국, p- 값이 귀무 가설에서 0.05보다 작을 확률이 0.05 이하의 가능성이 20 분 중 하나 임) 작은 p- 값을 초래할 수있는 테스트를 발견 할 것입니다. 우리는 방금 불리는 일을했습니다<strong>P- 값 해킹</strong><a class="footnote-ref" href="#fn18" id="fnref18" role="doc-noteref"><sup>18</sup></a> <span class="citation" data-cites="Head:PLoSBiol:2015:pvaluehacking">(<a href="16-chap.html#ref-Head:PLoSBiol:2015:pvaluehacking" role="doc-biblioref">Head et al. 2015</a>))</span>. 당신은 문제가 무엇인지 알 수 있습니다. 우리의 열심에서 우리의 요점을 증명하기 위해 우리는 일부 통계가 우리가 원하는 것을 할 때까지 데이터를 고문했습니다. 관련 전술은입니다<strong>가설 전환</strong>또는<strong>harking</strong>- 결과가 알려진 후 가설 : 우리는 데이터 세트를 가지고있을 것입니다. 아마도 우리는 그것을 조립하는 데 많은 시간과 돈을 투자 했으므로 결과가 필요합니다. 우리는 무언가를보고 할 수있을 때까지 다양한 귀무 가설과 테스트 통계를 제시하고 테스트하고 반복합니다.</p>
+<div class="no-row-height column-margin column-container"><div id="fn18"><p><sup>18</sup> <a class="uri" href="http://fivethirtyeight.com/features/science-isnt-broken">http://fivethirtyeight.com/features/science-isnt-broken</a></p></div></div><p>이 전술은 다음에 설명 된대로 가설 테스트 규칙을 위반합니다.<a class="quarto-xref" href="#sec-fivesteps"><span>섹션 6.3</span></a>, 우리는 가설과 테스트를 선택한 다음 데이터를 수집하는 순차적 절차를 제시했습니다. 그러나 우리가 본 것처럼<a class="quarto-xref" href="02-chap.html"><span>2 장</span></a>, 그러한 전술은 실제로 유혹 할 수 있습니다. 생물학적 데이터를 사용하면 데이터를 "정상화"하고 데이터 변환, 배치 효과를 조정하고 특이 치 제거를 시도하기위한 다양한 선택을하는 경향이 있습니다. 주제는 복잡하고 개방형입니다.<span class="citation" data-cites="Wasserstein2016:ASA">Wasserstein과 Lazar (<a href="16-chap.html#ref-Wasserstein2016:ASA" role="doc-biblioref">2016</a>))</span>과학에서 P- 값이 어떻게 사용되는지와 일부 오해에 대한 문제를 읽을 수있는 짧은 요약을 제공하십시오. 또한 p- 값을 유익하게 사용하는 방법을 강조합니다. 필수 메시지는 다음과 같습니다. 데이터에 대해 완전히 투명하게, 어떤 분석을 시도했는지, 어떻게 수행되었는지. 분석 코드를 제공하십시오. 그러한 맥락 정보 만으로만 p- 값이 유용 할 수 있습니다.</p>
+<p><strong>오류를 피하십시오</strong>. 우리의 통계 테스트는 우리의 귀무 가설이 사실이라는 것을 증명하려고 시도하지 않습니다. 우리는 단순히 그것이 거짓이라는 증거가 있는지 여부를 단순히 말하고 있습니다. 높은 p- 값 인 경우<em>~이었다</em>귀무 가설의 진실을 나타내는, 우리는 완전히 미친 귀무 가설을 공식화하고, 전혀 관련이없는 실험을하고, 소량의 결정적인 데이터를 수집하고, 0과 1 사이의 임의의 숫자 일 수있는 p- 값을 찾을 수 있습니다 (그리고 임계 값보다 높은 확률을 가진 p- 값을 찾으십시오.<span class="math inline">\ (\ alpha \)</span>) 그리고,, 우리의 가설이 시연 될 것입니다!</p>
+</section>
+<section class="level2 page-columns page-full" data-number="6.7" id="multiple-testing">
+<h2 class="anchored" data-anchor-id="multiple-testing" data-number="6.7"><span class="header-section-number">6.7</span>다중 테스트</h2>
+<div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-testing-xkcd882">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">질문 6.12</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>찾다<a href="http://xkcd.com/882">182</a>. 신문은 왜 다른 색상의 결과를보고하지 않았습니까?</p>
+</div>
+</div>
+<p>만화에 설명 된 쿼드는 생물학에서 고 처리량 데이터로 발생합니다. 그리고 힘으로! 당신은 20 가지 색상의 젤리 빈뿐만 아니라, 두 조건 사이의 차등 발현을 테스트 한 20,000 개의 유전자를 다루거나 DNA 돌연변이가 발생했을 수있는 게놈에서 60 억 개의 위치가 있습니다. 그래서 우리는 이것을 어떻게 처리합니까? 통계 테스트 결과와 현실과 관련된 테이블을 다시 살펴 보겠습니다.<a class="quarto-xref" href="#tbl-typesoferror">테이블<span>6.1</span></a>), 이번에는 많은 가설 측면에서 모든 것을 프레임합니다.</p>
+<div class="cell page-columns page-full" data-layout-align="center" data-tbl-cap-location="margin">
+<div class="cell quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-layout-align="center" data-tbl-cap-location="margin" id="tbl-mterrors">
+<figure class="quarto-float quarto-float-tbl figure page-columns page-full">
+<div aria-describedby="tbl-mterrors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">테스트 대 현실</th>
+<th style="text-align: left;">귀무 가설은 사실입니다</th>
+<th style="text-align: left;"><span class="math inline">\ (... \)</span>거짓입니다</th>
+<th style="text-align: left;">총</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>거부</strong></td>
+<td style="text-align: left;"><span class="math inline">\(다섯\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(에스\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(아르 자형\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>거부되지 않았습니다</strong></td>
+<td style="text-align: left;"><span class="math inline">\(유\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(티\)</span></td>
+<td style="text-align: left;"><span class="math inline">\(씨\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>총</strong></td>
+<td style="text-align: left;"><span class="math inline">\ (m_0 \)</span></td>
+<td style="text-align: left;"><span class="math inline">\ (m-m_0 \)</span></td>
+<td style="text-align: left;"><span class="math inline">\(중\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-tbl margin-caption" id="tbl-mterrors-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">표 6.2 : 다중 테스트의 오류 유형. 문자는 각 유형의 오류가 발생하는 횟수를 지정합니다.</figcaption>
+</figure>
+</div>
+</div>
+<ul>
+<li><p><span class="math inline">\(중\)</span>: 총 테스트 수 (및 귀무 가설)</p></li>
+<li><p><span class="math inline">\ (m_0 \)</span>: 진정한 귀무 가설의 수</p></li>
+<li><p><span class="math inline">\ (m-m_0 \)</span>: 거짓 귀무 가설의 수</p></li>
+<li><p><span class="math inline">\(다섯\)</span>: 오 탐지 수 (유형 I 오류 척도)</p></li>
+<li><p><span class="math inline">\(티\)</span>: false negatives 수 (유형 II 오류 척도)</p></li>
+<li><p><span class="math inline">\(에스\)</span>,,,<span class="math inline">\(유\)</span>: 진정한 긍정적 인 수와 진정한 부정</p></li>
+<li><p><span class="math inline">\(아르 자형\)</span>: 거부 수</p></li>
+</ul>
+<p>이 장의 나머지 부분에서는 I 형 및 II 오류를 처리하는 다양한 방법을 살펴 봅니다.</p>
+</section>
+<section class="level2 page-columns page-full" data-number="6.8" id="sec-testing-FWER">
+<h2 class="anchored" data-anchor-id="sec-testing-FWER" data-number="6.8"><span class="header-section-number">6.8</span>가족의 현명한 오류율</h2>
+<p>그만큼<strong>가족 현명한 오류율</strong>(fwer)는 확률입니다<span class="math inline">\ (v&gt; 0 \)</span>, 즉, 우리는 하나 이상의 오 탐지 오류를 만듭니다. 우리는 그것을 잘못된 긍정적 오류를 전혀하지 않는 보완으로 계산할 수 있습니다.<a class="footnote-ref" href="#fn19" id="fnref19" role="doc-noteref"><sup>19</sup></a>.</p>
+<div class="no-row-height column-margin column-container"><div id="fn19"><p><sup>19</sup>독립성을 가정합니다.</p></div></div><p><span class="anchored-eq" data-anchor-id="eq-testing" id="eq-testing-bonferroni"><span class="math display">\ [
+\ 시작 {align}
+p (v&gt; 0) &amp; = 1 -p (\ text {$ m_0 $ nulls의 거부 없음) \\
+       &amp; = 1- (1- \ alpha)^{m_0} \ to 1 \ quad \ text {as} m_0 \ to \ infty.
+\ end {align}
+\ tag {6.6} \]</span></span></p>
+<p>고정 된 경우<span class="math inline">\ (\ alpha \)</span>,이 확률은 즉시 감사합니다<span class="math inline">\ (m_0 \)</span>순서입니다<span class="math inline">\ (1/\ alpha \)</span>그리고 그것은 1로 향합니다<span class="math inline">\ (m_0 \)</span>더 커집니다. 이 관계는 잠재적 일치 데이터베이스가 검색되는 DNA 매칭과 같은 실험에 심각한 결과를 초래할 수 있습니다. 예를 들어, 두 사람의 DNA 프로파일이 임의의 오류로 일치하고 DNA가 800000 프로파일의 데이터베이스에 대해 테스트 될 가능성이있는 백만 명 중 1 명이있는 경우 데이터베이스에 대한 무작위 적중 확률 (즉, IT에 있지 않으면)이 다음과 같습니다.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a aria-hidden="true" href="#cb16-1" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="dv">1</span><span class="sc">/</span><span class="fl">1e6</span>))<span class="sc">^</span><span class="fl">8e5</span></span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5506712</code></pre>
+</div>
+</div>
+<p>꽤 높습니다. 그리고 데이터베이스에 수백만 개의 프로필이 포함되어 있으면 허위 적중은 사실상 피할 수 없습니다.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-testing-fwertendstoone">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">질문 6.13</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>확률을 증명하십시오<a class="quarto-xref" href="#eq-testing-bonferroni">방정식<span>6.6</span></a>실제로 1에 매우 가까워집니다<span class="math inline">\ (m_0 \)</span>크다.</p>
+</div>
+</div>
+<section class="level3 page-columns page-full" data-number="6.8.1" id="bonferroni-method">
+<h3 class="anchored" data-anchor-id="bonferroni-method" data-number="6.8.1"><span class="header-section-number">6.8.1</span>Bonferroni 방법</h3>
+<p>우리는 가설 당 어떻게 선택해야합니까?<span class="math inline">\ (\ alpha \)</span>우리가 fwer 컨트롤을 원한다면? 위의 계산은의 제품을 제안합니다<span class="math inline">\ (\ alpha \)</span>~와 함께<span class="math inline">\ (m_0 \)</span>합리적인 야구장 추정치 일 수 있습니다. 보통 우리는 모릅니다<span class="math inline">\ (m_0 \)</span>그러나 우리는 알고 있습니다<span class="math inline">\(중\)</span>, 이것은 상한입니다<span class="math inline">\ (m_0 \)</span>, 부터<span class="math inline">\ (m_0 \ le m \)</span>. Bonferroni 방법은 단순히 우리가 수준에서 fwer 컨트롤을 원한다면<span class="math inline">\ (\ alpha _ {\ text {fwer}} \)</span>, 우리는 가설 임계 값을 선택해야합니다<span class="math inline">\ (\ alpha = \ alpha _ {\ text {fwer}}/m \)</span>. 예를 들어 확인해 봅시다.</p>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a aria-hidden="true" href="#cb18-1" tabindex="-1"></a>중<span class="ot">=</span> <span class="dv">10000</span></span>
+<span id="cb18-2"><a aria-hidden="true" href="#cb18-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">티블</span>(</span>
+<span id="cb18-3"><a aria-hidden="true" href="#cb18-3" tabindex="-1"></a>  <span class="at">알파 =</span> <span class="fu">서열</span>(<span class="dv">0</span>,,,<span class="fl">7E-6</span>,,,<span class="at">length.out =</span> <span class="dv">100</span>),)</span>
+<span id="cb18-4"><a aria-hidden="true" href="#cb18-4" tabindex="-1"></a>  <span class="at">p =</span> <span class="dv">1</span> <span class="sc">-</span> (<span class="dv">1</span> <span class="sc">-</span>알파)<span class="sc">^</span>중),</span>
+<span id="cb18-5"><a aria-hidden="true" href="#cb18-5" tabindex="-1"></a>  <span class="fu">AES</span>(<span class="at">x =</span>알파,<span class="at">y =</span>피))<span class="sc">+</span>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb18-6"><a aria-hidden="true" href="#cb18-6" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="fu">표현</span>(알파))<span class="sc">+</span></span>
+<span id="cb18-7"><a aria-hidden="true" href="#cb18-7" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"프로브 (거짓 거부 없음)"</span>))<span class="sc">+</span></span>
+<span id="cb18-8"><a aria-hidden="true" href="#cb18-8" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.05</span>,,,<span class="at">col =</span> <span class="st">"빨간색"</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-testing-bonferroni">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-testing-bonferroni-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-12" href="06-chap_files/figure-html/fig-testing-bonferroni-1.png" title="Figure 6.11: Bonferroni method. The plot shows the graph of eq-testing-bonferroni for m=10000 as a function of \alpha."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="06-chap_files/figure-html/fig-testing-bonferroni-1.png" width="240"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-testing-bonferroni-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 6.11 : Bonferroni 방법. 플롯은 그래프를 보여줍니다<a class="quarto-xref" href="#eq-testing-bonferroni"><span>6.6</span></a>~을 위한<span class="math inline">\ (M = 10000 \)</span>의 함수로<span class="math inline">\ (\ alpha \)</span>.
+</figcaption>
+</figure>
+</div>
+</div></div></div>
+<p>~ 안에<a class="quarto-xref" href="#fig-testing-bonferroni">수치<span>6.11</span></a>, 검은 선은 a에서 빨간색 선 (0.05 값에 해당)을 교차합니다.<span class="math inline">\ (\ alpha = 5.13 \ times 10^{-6} \)</span>, 그것은 단지 가치보다 조금 더<span class="math inline">\ (0.05/m \)</span>Bonferroni 방법에 의해 암시됩니다.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-testing-bonferroni">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">질문 6.14</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>두 값이 정확히 같지 않은 이유는 무엇입니까?</p>
+</div>
+</div>
+<p>그러나이 방법의 잠재적 인 단점은<span class="math inline">\ (m_0 \)</span>거부 임계 값은 매우 작습니다. 이것은 우리가 무언가를 감지 할 기회를 원한다면 개별 테스트가 매우 강력해야 함을 의미합니다. 종종 FWER 제어는 너무 엄격하며 데이터를 생성하고 조립하는 데 소요 된 시간과 돈을 비효율적으로 사용하게됩니다. 이제 유형 I 오류를 제어하는 ​​미묘한 방법이 있음을 알 수 있습니다.</p>
+</section>
+</section>
+<section class="level2 page-columns page-full" data-number="6.9" id="the-false-discovery-rate">
+<h2 class="anchored" data-anchor-id="the-false-discovery-rate" data-number="6.9"><span class="header-section-number">6.9</span>잘못된 발견 률</h2>
+<p>몇 가지 데이터를 살펴 보겠습니다. RNA-Seq 데이터 세트를로드합니다<code>기도</code>, 합성 글루코 코르티코이드 인 덱사메타손으로 치료하거나없는 4 개의 1 차 인간기도 평활근 세포주의 유전자 발현 측정 (유전자 수준 수)을 함유한다. 우리는 그것을 사용할 것입니다<strong><a href="https://bioconductor.org/packages/DESeq2/">deseq2</a></strong>보다 자세히 설명 할 방법<a class="quarto-xref" href="08-chap.html"><span>8 장</span></a>현재는 각 유전자에 대한 차등 발현에 대한 시험을 수행한다고 말하면 충분합니다. 개념적으로, 시험 된 귀무 가설은<span class="math inline">\(티\)</span>-세부 사항은 카운트 데이터를 다루고 있기 때문에 세부 사항이 약간 더 관여하지만.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a aria-hidden="true" href="#cb19-1" tabindex="-1"></a><span class="fu">도서관</span>(<span class="st">"deseq2"</span>))</span>
+<span id="cb19-2"><a aria-hidden="true" href="#cb19-2" tabindex="-1"></a><span class="fu">도서관</span>(<span class="st">"기도"</span>))</span>
+<span id="cb19-3"><a aria-hidden="true" href="#cb19-3" tabindex="-1"></a><span class="fu">데이터</span>(<span class="st">"기도"</span>))</span>
+<span id="cb19-4"><a aria-hidden="true" href="#cb19-4" tabindex="-1"></a>아<span class="ot">=</span> <span class="fu">deseqdataset</span>(<span class="at">se =</span>기도,<span class="at">디자인 =</span> <span class="sc">~</span>셀<span class="sc">+</span>덱스)</span>
+<span id="cb19-5"><a aria-hidden="true" href="#cb19-5" tabindex="-1"></a>아<span class="ot">=</span> <span class="fu">Deseq</span>(AW)</span>
+<span id="cb19-6"><a aria-hidden="true" href="#cb19-6" tabindex="-1"></a>어서<span class="ot">=</span> <span class="fu">as.data.frame</span>(<span class="fu">결과</span>(aw))<span class="sc">|&gt;</span>dplyr<span class="sc">::</span><span class="fu">필터</span>(<span class="sc">!</span><span class="fu">is.na</span>(PValue))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">일</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>내용을 살펴보십시오<code>어서</code>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">일</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>(선택 사항) 문의하십시오<strong><a href="https://bioconductor.org/packages/DESeq2/">deseq2</a></strong>비네팅 및/또는<a class="quarto-xref" href="08-chap.html"><span>8 장</span></a>위의 코드 청크가하는 일에 대한 자세한 내용.</p>
+</div>
+</div>
+<section class="level3 page-columns page-full" data-number="6.9.1" id="the-p-value-histogram">
+<h3 class="anchored" data-anchor-id="the-p-value-histogram" data-number="6.9.1"><span class="header-section-number">6.9.1</span>p- 값 히스토그램</h3>
+<p>그만큼<strong>p- 값 히스토그램</strong>여러 테스트가 포함 된 모든 분석에 대한 중요한 정신 점검입니다. 두 가지 구성 요소로 구성된 혼합물입니다.</p>
+<p><strong>널 :</strong>귀무 가설이 사실 인 테스트로 인한 p- 값.</p>
+<p><strong>alt :</strong>귀무 가설이 사실이 아닌 테스트로 인한 p- 값. 이 두 구성 요소의 상대 크기는 실제 널의 분획과 실제 대안에 따라 다릅니다 (즉,<span class="math inline">\ (m_0 \)</span>그리고<span class="math inline">\(중\)</span>), 그리고 종종 히스토그램에서 시각적으로 추정 될 수 있습니다. 우리의 분석이 높은 통계적 전력을 가지고 있다면, 두 번째 구성 요소 ( "ALT")는 대부분 작은 p- 값으로 구성되며, 즉 히스토그램에서 0에 가까운 피크로 나타납니다. 일부 대안의 경우 전력이 높지 않으면이 피크는 오른쪽으로 확장 될 것으로 예상합니다. 즉,“어깨”가 있습니다. "NULL"구성 요소의 경우 (연속 데이터 및 테스트 통계에 대한 P- 값의 정의에 따라) 균일 한 분포를 기대합니다.<span class="math inline">\ ([0,1] \)</span>. 기도 데이터에 대한 p- 값의 히스토그램을 플로팅 해 봅시다.</p>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a aria-hidden="true" href="#cb20-1" tabindex="-1"></a><span class="fu">ggplot</span>(소유하다,<span class="fu">AES</span>(<span class="at">x =</span>PValue))<span class="sc">+</span></span>
+<span id="cb20-2"><a aria-hidden="true" href="#cb20-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.025</span>,,,<span class="at">경계 =</span> <span class="dv">0</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-testing-awpvhist">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-testing-awpvhist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-13" href="06-chap_files/figure-html/fig-testing-awpvhist-1.png" title="Figure 6.12: p-value histogram of for the airway data."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="06-chap_files/figure-html/fig-testing-awpvhist-1.png" width="240"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-testing-awpvhist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 6.12 :에 대한 p- 값 히스토그램<code>기도</code>데이터.</figcaption>
+</figure>
+</div>
+</div></div></div>
+<p>~ 안에<a class="quarto-xref" href="#fig-testing-awpvhist">수치<span>6.12</span></a>우리는 예상되는 혼합물을 봅니다. 또한 Null 구성 요소가 정확히 평평하지 않다는 것을 알 수 있습니다 (균일) : 데이터가 계산되기 때문입니다. 이들은 높을 때 준 연속적인 것처럼 보이지만, 낮은 테스트는 데이터의 불연속성을 계산하고 그 결과 p- 값이 히스토그램의 오른쪽을 향한 스파이크에 나타납니다.</p>
+<p>이제 우리가 p- 값보다 적은 모든 테스트를 거부한다고 가정 해 봅시다.<span class="math inline">\ (\ alpha \)</span>. 우리는<a class="quarto-xref" href="#fig-testing-awpvvisfdr">수치<span>6.13</span></a>다음 코드에 의해 생성됩니다.</p>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a aria-hidden="true" href="#cb21-1" tabindex="-1"></a>알파<span class="ot">=</span>잔디<span class="ot">=</span> <span class="fl">0.025</span></span>
+<span id="cb21-2"><a aria-hidden="true" href="#cb21-2" tabindex="-1"></a>PI0<span class="ot">=</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">평균</span>(an<span class="sc">$</span>PValue<span class="sc">&gt;</span> <span class="fl">0.5</span>))</span>
+<span id="cb21-3"><a aria-hidden="true" href="#cb21-3" tabindex="-1"></a><span class="fu">ggplot</span>(소유하다,</span>
+<span id="cb21-4"><a aria-hidden="true" href="#cb21-4" tabindex="-1"></a>  <span class="fu">AES</span>(<span class="at">x =</span>PValue))<span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span>잔디, 풀,<span class="at">경계 =</span> <span class="dv">0</span>))<span class="sc">+</span></span>
+<span id="cb21-5"><a aria-hidden="true" href="#cb21-5" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span>PI0<span class="sc">*</span>잔디<span class="sc">*</span> <span class="fu">nrow</span>(소유하다),<span class="at">col =</span> <span class="st">"파란색"</span>))<span class="sc">+</span></span>
+<span id="cb21-6"><a aria-hidden="true" href="#cb21-6" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span>알파,<span class="at">col =</span> <span class="st">"빨간색"</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-testing-awpvvisfdr">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-testing-awpvvisfdr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-14" href="06-chap_files/figure-html/fig-testing-awpvvisfdr-1.png" title="Figure 6.13: Visual estimation of the FDR with the p-value histogram."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="06-chap_files/figure-html/fig-testing-awpvvisfdr-1.png" width="240"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-testing-awpvvisfdr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 6.13 : P- 값 히스토그램으로 FDR의 시각적 추정.</figcaption>
+</figure>
+</div>
+</div></div></div>
+<p>우리는 첫 번째 쓰레기통에 4772 p- 값이 있음을 알 수 있습니다.<span class="math inline">\ ([0, \ alpha] \)</span>그중 우리는 945 년경이 널로 기대합니다 (파란색 선으로 표시). 따라서 우리는 거짓 거부의 일부를 다음과 같이 추정 할 수 있습니다.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a aria-hidden="true" href="#cb22-1" tabindex="-1"></a>PI0<span class="sc">*</span>알파<span class="sc">/</span> <span class="fu">평균</span>(an<span class="sc">$</span>PValue<span class="sc">&lt;=</span>알파)</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1980092</code></pre>
+</div>
+</div>
+<p>그만큼<strong>허위 발견 률</strong>(FDR)은 다음과 같이 정의됩니다</p>
+<p><span class="anchored-eq" data-anchor-id="eq-testing" id="eq-testing-deffdr"><span class="math display">\ [
+\ text {fdr} = \ text {e} \! \ left [\ frac {v} {\ max (r, 1)} \ right],
+\ tag {6.7} \]</span></span></p>
+<p>어디<span class="math inline">\(아르 자형\)</span>그리고<span class="math inline">\(다섯\)</span>그렇습니다<a class="quarto-xref" href="#tbl-mterrors">테이블<span>6.2</span></a>. 분모의 표현은 FDR이<span class="math inline">\ (r = 0 \)</span>(이 경우,<span class="math inline">\ (v = 0 \)</span>암시 적으로). 모든 귀무 가설이 사실이라면 FDR이 FWER와 동일하게됩니다.<span class="math inline">\ (v = r \)</span>. <span class="math inline">\ (\ text {e []} \)</span>stands for the<strong>예상 가치</strong>. 즉, FDR은 특정 결과와 관련된 수량이 아님을 의미합니다.<span class="math inline">\(다섯\)</span>그리고<span class="math inline">\(아르 자형\)</span>하나의 특정 실험을 위해. 오히려, 우리의 선택과 관련 거부 규칙을 고려할 때, 그것은 평균입니다.<a class="footnote-ref" href="#fn20" id="fnref20" role="doc-noteref"><sup>20</sup></a>실험의 많은 복제 인스턴스에 비해 평균이 (적어도 개념적으로) 채취되는 거부에서 제 1 형 오류의 비율.</p>
+<div class="no-row-height column-margin column-container"><div id="fn20"><p><sup>20</sup>FDR은 기대 값이므로 최악의 경우 제어를 제공하지 않습니다. 단일 실험에서는 소위 허위 발견 비율 (FDP)이 실현 된 가치입니다.<span class="math inline">\ (v/r \)</span>(없이<span class="math inline">\ (\ text {e []} \)</span>), 훨씬 높거나 낮을 수 있습니다.</p></div></div></section>
+<section class="level3 page-columns page-full" data-number="6.9.2" id="the-benjamini-hochberg-algorithm-for-controlling-the-fdr">
+<h3 class="anchored" data-anchor-id="the-benjamini-hochberg-algorithm-for-controlling-the-fdr" data-number="6.9.2"><span class="header-section-number">6.9.2</span>FDR 제어를위한 Benjamini-Hochberg 알고리즘</h3>
+<p>마지막 섹션의 "시각적 FDR"방법에 대한 더 우아한 대안이 있습니다. 소개 된 절차<span class="citation" data-cites="BH:1995">벤자 미니와 호체버그 (Hochberg) (<a href="16-chap.html#ref-BH:1995" role="doc-biblioref">1995</a>))</span>다음 단계가 있습니다.</p>
+<ul>
+<li><p>먼저, p- 값을 순서대로 주문하고,<span class="math inline">\ (P _ {(1)} ... P _ {(M)} \)</span></p></li>
+<li><p>그런 다음 어떤 선택을 위해<span class="math inline">\ (\ varphi \)</span>(우리의 대상 FDR), 가장 큰 값을 찾으십시오<span class="math inline">\(케이\)</span>만족합니다 :<span class="math inline">\ (p _ {(k)} \ leq \ varphi \, k / m \)</span></p></li>
+<li><p>마지막으로 가설을 거부합니다<span class="math inline">\ (1, ..., k \)</span></p></li>
+</ul>
+<p>간단한 그래픽 그림을 통해 RNA-Seq p- 값에 적용될 때이 절차가 어떻게 작동하는지 알 수 있습니다.</p>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a aria-hidden="true" href="#cb24-1" tabindex="-1"></a>피<span class="ot">=</span> <span class="fl">0.10</span></span>
+<span id="cb24-2"><a aria-hidden="true" href="#cb24-2" tabindex="-1"></a>어서<span class="ot">=</span> <span class="fu">돌연변이</span>(소유하다,<span class="at">순위 =</span> <span class="fu">계급</span>(PValue))</span>
+<span id="cb24-3"><a aria-hidden="true" href="#cb24-3" tabindex="-1"></a>중<span class="ot">=</span> <span class="fu">nrow</span>(소유하다)</span>
+<span id="cb24-4"><a aria-hidden="true" href="#cb24-4" tabindex="-1"></a></span>
+<span id="cb24-5"><a aria-hidden="true" href="#cb24-5" tabindex="-1"></a><span class="fu">ggplot</span>(dplyr<span class="sc">::</span><span class="fu">필터</span>(awde, 순위<span class="sc">&lt;=</span> <span class="dv">7000</span>),)<span class="fu">AES</span>(<span class="at">x =</span>계급,<span class="at">y =</span>PValue))<span class="sc">+</span></span>
+<span id="cb24-6"><a aria-hidden="true" href="#cb24-6" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> <span class="fu">geom_abline</span>(<span class="at">경사 =</span>피<span class="sc">/</span>중,<span class="at">col =</span> <span class="st">"빨간색"</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-testing-BH">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-testing-BH-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-15" href="06-chap_files/figure-html/fig-testing-BH-1.png" title="Figure 6.14: Visualization of the Benjamini-Hochberg procedure. Shown is a zoom-in to the 7000 lowest p-values."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="06-chap_files/figure-html/fig-testing-BH-1.png" width="240"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-testing-BH-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 6.14 : Benjamini-Hochberg 절차의 시각화. 표시는 7000 가장 낮은 p- 값을 확대 한 것입니다.</figcaption>
+</figure>
+</div>
+</div></div></div>
+<p>이 방법은 검은 색 (p- 값)과 빨간색 선 (경사<span class="math inline">\ (\ varphi / m \)</span>) 교차. 그런 다음 모든 테스트를 왼쪽으로 거부합니다.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a aria-hidden="true" href="#cb25-1" tabindex="-1"></a>Kmax<span class="ot">=</span> <span class="fu">~와 함께</span>(<span class="fu">마련하다</span>(awde, Rank),</span>
+<span id="cb25-2"><a aria-hidden="true" href="#cb25-2" tabindex="-1"></a>         <span class="fu">마지막</span>(<span class="fu">어느</span>(PValue<span class="sc">&lt;=</span>피<span class="sc">*</span>계급<span class="sc">/</span>중)))</span>
+<span id="cb25-3"><a aria-hidden="true" href="#cb25-3" tabindex="-1"></a>Kmax</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4099</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-testing-compare">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">질문 6.15</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>값을 비교하십시오<code>Kmax</code>위에서 4772의 수<a class="quarto-xref" href="#fig-testing-awpvvisfdr">수치<span>6.13</span></a>). 왜 다른가요?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-testing-BH">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">질문 6.16</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>옵션과 관련된 코드를보십시오<code>메소드 = "bh"</code>의<code>P.Adjust</code>R과 함께 제공되는 기능은 위에서 한 일과 어떻게 비교됩니까?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-testing-SchwederSpjotvoll">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">질문 6.17</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Schweder와 Spj<span>영형</span>tuly ply</strong>: 그림 1–3 인치를 확인하십시오<span class="citation" data-cites="SchwederSpjotvoll1982">Schweder와 Spjøtvoll (<a href="16-chap.html#ref-SchwederSpjotvoll1982" role="doc-biblioref">1982</a>))</span>. 데이터에 대해 유사한 플롯을 만듭니다<code>어서</code>. 그림과 어떤 관련이 있습니까?<a class="quarto-xref" href="#fig-testing-BH"><span>6.14</span></a>그리고<a class="quarto-xref" href="#fig-testing-awpvvisfdr"><span>6.13</span></a>?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout" class="callout-header d-flex align-content-center" data-bs-target=".callout-24-contents" data-bs-toggle="collapse">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">해결책</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div class="callout-24-contents callout-collapse collapse" id="callout-24">
+<div class="callout-body-container callout-body">
+<p>13 년 전<span class="citation" data-cites="BH:1995">벤자 미니와 호체버그 (Hochberg) (<a href="16-chap.html#ref-BH:1995" role="doc-biblioref">1995</a>))</span>,,,<span class="citation" data-cites="SchwederSpjotvoll1982">Schweder와 Spjøtvoll (<a href="16-chap.html#ref-SchwederSpjotvoll1982" role="doc-biblioref">1982</a>))</span>관찰 된 진단 플롯을 제안했습니다<span class="math inline">\(피\)</span>-진정한 귀무 가설의 비율의 추정을 허용하는 값. 일련의 가설 테스트의 경우<span class="math inline">\ (H_1, ..., H_M \)</span>~와 함께<span class="math inline">\(피\)</span>-값<span class="math inline">\ (p_i \)</span>, 그들은 음모를 제안했습니다</p>
+<p><span class="anchored-eq" data-anchor-id="eq-zuhlkdsaeiov" id="eq-zuhlkdsaeiov"><span class="math display">\ [
+\ left (1-p_i, n (p_i) \ 오른쪽) \ mbox {for} i \ in 1, ..., m,
+\ tag {6.8} \]</span></span></p>
+<p>어디<span class="math inline">\ (n (p) \)</span>수입니다<span class="math inline">\(피\)</span>-값보다 큽니다<span class="math inline">\(피\)</span>. 이 진단 음모의 적용<code>awde $ pvalue</code>표시됩니다<a class="quarto-xref" href="#fig-testing-SchwederSpjotvoll">수치<span>6.15</span></a>. 모든 귀무 가설이 사실 일 때, 각각<span class="math inline">\(피\)</span>-값은 균일하게 분포되어 있습니다<span class="math inline">\ ([0,1] \)</span>결과적으로, 샘플의 경험적 누적 분포<span class="math inline">\ ((P_1, ..., P_M) \)</span>라인에 가까워 질 것으로 예상됩니다<span class="math inline">\ (f (t) = t \)</span>. 대칭에 의해, 동일하게 적용됩니다<span class="math inline">\ ((1 -P_1, ..., 1 -P_M) \)</span>. (일반성 상실없이) 첫 번째<span class="math inline">\ (m_0 \)</span>귀무 가설은 사실입니다<span class="math inline">\ (m-m_0 \)</span>거짓, 경험적 누적 분포입니다<span class="math inline">\ ((1-p_1, ..., 1-p_ {m_0}) \)</span>다시 라인에 가까워 질 것으로 예상됩니다<span class="math inline">\ (f_0 (t) = t \)</span>. 경험적 누적 분포<span class="math inline">\ ((1-p_ {m_0+1}, ..., 1-p_ {m}) \)</span>반면에 기능에 가까울 것으로 예상됩니다.<span class="math inline">\ (f_1 (t) \)</span>아래에 있습니다<span class="math inline">\ (F_0 \)</span>그러나 1 AS로 가파른 증가를 보여줍니다<span class="math inline">\(티\)</span>구혼<span class="math inline">\ (1 \)</span>. 실제로, 우리는 귀무 가설 중 어느 것이 사실인지 알지 못하므로 경험적 누적 분포가 가까워 질 것으로 예상되는 혼합물 만 관찰합니다.</p>
+<p><span class="anchored-eq" data-anchor-id="eq-yrvgmlafuhiw" id="eq-yrvgmlafuhiw"><span class="math display">\ [
+f (t) = \ frac {m_0} {m} f_0 (t) + \ frac {m-m_0} {m} f_1 (t).
+\ tag {6.9} \]</span></span></p>
+<p>이러한 상황이 표시됩니다<a class="quarto-xref" href="#fig-testing-SchwederSpjotvoll">수치<span>6.15</span></a>. 만약에<span class="math inline">\ (f_1 (t)/f_0 (t) \)</span>작게 작습니다<span class="math inline">\(티\)</span>(즉, 테스트에는 합리적인 전력이 있습니다), 혼합물 분획<span class="math inline">\ (\ frac {m_0} {m} \)</span>줄을 플롯의 왼쪽 부분에 장착 한 다음 오른쪽에 높이를 주목하여 추정 할 수 있습니다. 이러한 적합은 빨간색 선으로 표시됩니다. 여기서 우리는 카운트 데이터가 모두 작은 숫자가 아닌 테스트에 중점을 둡니다 (<code>베이스 앤&gt; = 1</code>), 이들에 대해, p- 값 널 분포는 균일 한 균일에 충분히 가깝기 때문에 (즉, 위에서 언급 한파를 보여주지는 않지만) 모든 유전자에 대해 동일한 음모를 만들 수 있습니다.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a aria-hidden="true" href="#cb27-1" tabindex="-1"></a>awdef<span class="ot">=</span>어서<span class="sc">|&gt;</span></span>
+<span id="cb27-2"><a aria-hidden="true" href="#cb27-2" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">필터</span>(기지<span class="sc">&gt; =</span><span class="dv">1</span>))<span class="sc">|&gt;</span> </span>
+<span id="cb27-3"><a aria-hidden="true" href="#cb27-3" tabindex="-1"></a>  <span class="fu">마련하다</span>(PValue)<span class="sc">|&gt;</span></span>
+<span id="cb27-4"><a aria-hidden="true" href="#cb27-4" tabindex="-1"></a>  <span class="fu">돌연변이</span>(<span class="at">oneminusp =</span> <span class="dv">1</span> <span class="sc">-</span>프 베일,</span>
+<span id="cb27-5"><a aria-hidden="true" href="#cb27-5" tabindex="-1"></a>         <span class="at">n =</span> <span class="fu">N</span>() <span class="sc">-</span> <span class="fu">row_number</span>())</span>
+<span id="cb27-6"><a aria-hidden="true" href="#cb27-6" tabindex="-1"></a>JJ<span class="ot">=</span> <span class="fu">둥근</span>(<span class="fu">nrow</span>(awdef)<span class="sc">*</span> <span class="fu">기음</span>(<span class="dv">1</span>,,,<span class="fl">0.5</span>)))</span>
+<span id="cb27-7"><a aria-hidden="true" href="#cb27-7" tabindex="-1"></a>경사<span class="ot">=</span> <span class="fu">~와 함께</span>(awdef,<span class="fu">차이</span>(n [jj])<span class="sc">/</span> <span class="fu">차이</span>(oneminusp [jj]))</span>
+<span id="cb27-8"><a aria-hidden="true" href="#cb27-8" tabindex="-1"></a><span class="fu">ggplot</span>(awdef)<span class="sc">+</span></span>
+<span id="cb27-9"><a aria-hidden="true" href="#cb27-9" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">AES</span>(<span class="at">x =</span>oneMinusp,<span class="at">y =</span>N),<span class="at">크기 =</span> <span class="fl">0.15</span>))<span class="sc">+</span> </span>
+<span id="cb27-10"><a aria-hidden="true" href="#cb27-10" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="fu">표현</span>(<span class="dv">1</span><span class="sc">-</span>p [i]))<span class="sc">+</span></span>
+<span id="cb27-11"><a aria-hidden="true" href="#cb27-11" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="fu">표현</span>(<span class="fu">N</span>(P [i])))<span class="sc">+</span></span>
+<span id="cb27-12"><a aria-hidden="true" href="#cb27-12" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">인터셉트 =</span> <span class="dv">0</span>,,,<span class="at">경사 =</span>경사,<span class="at">col =</span> <span class="st">"Red3"</span>))<span class="sc">+</span></span>
+<span id="cb27-13"><a aria-hidden="true" href="#cb27-13" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span>경사,<span class="at">lineType =</span> <span class="st">"점이 찍힌"</span>))<span class="sc">+</span></span>
+<span id="cb27-14"><a aria-hidden="true" href="#cb27-14" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">1</span>,,,<span class="at">lineType =</span> <span class="st">"점이 찍힌"</span>))<span class="sc">+</span></span>
+<span id="cb27-15"><a aria-hidden="true" href="#cb27-15" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">x =</span> <span class="dv">0</span>,,,<span class="at">y =</span>경사,<span class="at">레이블 =</span> <span class="fu">반죽</span>(<span class="fu">둥근</span>(경사)),</span>
+<span id="cb27-16"><a aria-hidden="true" href="#cb27-16" tabindex="-1"></a>            <span class="at">휠 =</span> <span class="sc">-</span><span class="fl">0.1</span>,,,<span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.25</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-testing-SchwederSpjotvoll">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-testing-SchwederSpjotvoll-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-16" href="06-chap_files/figure-html/fig-testing-SchwederSpjotvoll-1.png" title="Figure 6.15: Schweder and Spjtvoll plot, as described in the answer to Question wrn-testing-SchwederSpjotvoll."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="06-chap_files/figure-html/fig-testing-SchwederSpjotvoll-1.png" style="width:50.0%"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-testing-SchwederSpjotvoll-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 6.15 : 답변에 설명 된대로 Schweder 및 Spjtvoll 플롯<a class="quarto-xref" href="#wrn-testing-SchwederSpjotvoll">질문<span>6.17</span></a>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>22853 행이 있습니다<code>awdef</code>따라서이 간단한 추정치에 따르면, 22853-17302 = 5551 대체 가설이 있습니다.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="level2 page-columns page-full" data-number="6.10" id="sec-testing-localfdr">
+<h2 class="anchored" data-anchor-id="sec-testing-localfdr" data-number="6.10"><span class="header-section-number">6.10</span>지역 FDR</h2>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="cell-output-display page-columns page-full">
+<div class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin" data-fig-align="center" id="fig-testing-sunexplode">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-testing-sunexplode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-17" href="imgs/xkcd1132.png" title="Figure 6.16: From http://xkcd.com/1132 – While the frequentist only has the currently available data, the Bayesian can draw on her understanding of the world or on previous experience. As a Bayesian, she would know enough about physics to understand that our sun’s mass is too small to become a nova. Even if she does not know physics, she might be an empirical Bayesian and draw her prior from a myriad previous days where the sun did not go nova."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="imgs/xkcd1132.png" style="width:75.0%"/></a>
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-testing-sunexplode-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 6.16 :<a href="http://xkcd.com/1132">http://xkcd.com/1132</a>- 빈번 주의자는 현재 이용 가능한 데이터 만 가지고 있지만 베이지안은 세상에 대한 그녀의 이해 나 이전 경험을 활용할 수 있습니다. 베이지안으로서, 그녀는 물리학에 대해 우리의 태양의 덩어리가 너무 작아서 노바가 될 수 없다는 것을 충분히 알 것입니다. 그녀가 물리학을 모르더라도<strong>경험적 베이지안</strong>그리고 태양이 노바에 가지 않은 무수한 전날부터 그녀를 끌어 당기십시오.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>이 장의 오프닝 그림의 XKCD 만화는 오류를 축적하는 방법으로 다중 테스트 문제에 대한 다소 불길한 해석으로 끝납니다.<a class="quarto-xref" href="#fig-testing-sunexplode">수치<span>6.16</span></a>다중 테스트 기회를 강조합니다. 많은 테스트를 할 때 다중성을 사용하여 단일 테스트를 통해 가능한 것 이상의 이해를 높일 수 있습니다.</p>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-testing-lfdr">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-testing-lfdr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-18" href="06-chap_files/figure-html/fig-testing-lfdr-1.png" title="Figure 6.17: Local false discovery rate and the two-group model, with some choice of f_{\text{alt}}(p), and \pi_0=0.6; densities (top) and distribution functions (bottom)."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="06-chap_files/figure-html/fig-testing-lfdr-1.png" width="240"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-testing-lfdr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 6.17 : 로컬 허위 발견 률과 2 그룹 모델,<span class="math inline">\ (f _ {\ text {alt}} (p) \)</span>, 그리고<span class="math inline">\ (\ pi_0 = 0.6 \)</span>; 밀도 (위) 및 분포 함수 (하단).</figcaption>
+</figure>
+</div>
+</div></div></div>
+<p>히스토그램으로 돌아 갑시다<a class="quarto-xref" href="#fig-testing-awpvvisfdr">수치<span>6.13</span></a>. 개념적으로, 우리는 소위 2 그룹 모델의 관점에서 그것을 생각할 수 있습니다.<span class="citation" data-cites="Efron2010">(<a href="16-chap.html#ref-Efron2010" role="doc-biblioref">Efron 2010</a>))</span>:</p>
+<p><span class="anchored-eq" data-anchor-id="eq-testing" id="eq-testing-twogroups"><span class="math display">\ [
+f (p) = \ pi_0 + (1- \ pi_0) f _ {\ text {alt}} (p),
+\ tag {6.10} \]</span></span></p>
+<p>여기,<span class="math inline">\ (f (p) \)</span>분포의 밀도입니다 (히스토그램은 무한한 양의 데이터와 무한한 작은 쓰레기통으로 보이는 것),<span class="math inline">\ (\ pi_0 \)</span>균일 성분의 크기를 나타내는 0과 1 사이의 숫자이며<span class="math inline">\ (f _ {\ text {alt}} \)</span>대체 구성 요소입니다. 우리가 이미 본 것처럼 혼합 모델입니다.<a class="quarto-xref" href="04-chap.html"><span>4 장</span></a>. 혼합물 밀도 및 한계 밀도<span class="math inline">\ (f (p) \)</span>상단 패널에서 시각화됩니다<a class="quarto-xref" href="#fig-testing-lfdr">수치<span>6.17</span></a>: 파란색 영역은 함께 그래프에 해당합니다.<span class="math inline">\ (f _ {\ text {alt}} (p) \)</span>, 회색 영역에 대한 회색 영역<span class="math inline">\ (f _ {\ text {null}} (p) = \ pi_0 \)</span>. 이제 하나의 특정 컷오프를 고려한다면<span class="math inline">\(피\)</span>(말하다,<span class="math inline">\ (p = 0.1 \)</span>에서와 같이<a class="quarto-xref" href="#fig-testing-lfdr">수치<span>6.17</span></a>), 우리는이 컷오프에서 거부 할 수 있다는 가설이 다음과 같이 잘못된 긍정적 일 확률을 계산할 수 있습니다. 우리는 값을 분해합니다<span class="math inline">\(에프\)</span>컷오프 (빨간색 선)에서 Nulls (Light Red,<span class="math inline">\ (\ pi_0 \)</span>) 그리고 대안에서 (어두운 빨간색,<span class="math inline">\ ((1- \ pi_0) f _ {\ text {alt}} (p) \)</span>). 그만큼<strong>현지 허위 발견 률</strong>그때입니다</p>
+<p><span class="anchored-eq" data-anchor-id="eq-fdr" id="eq-fdr-local"><span class="math display">\ [
+\ text {fdr} (p) = \ frac {\ pi_0} {f (p)}.
+\ tag {6.11} \]</span></span></p>
+<p>정의상이 수량은 0과 1 사이입니다.<span class="math inline">\ (\ text {fdr} \)</span>~에<a class="quarto-xref" href="#fig-testing-lfdr">수치<span>6.17</span></a>단조롭게 증가하는 기능입니다<span class="math inline">\(피\)</span>그리고 이것은 우리의 직관과 함께 FDR이 가장 작아야한다는 우리의 직관과 함께합니다.<span class="math inline">\(피\)</span>그리고 오른쪽 끝에서 1에 도달 할 때까지 점차 커집니다. 우리는 빨간색 선뿐만 아니라 곡선 아래 영역에 대해서도 비슷한 분해를 할 수 있습니다. 이것은</p>
+<p><span class="anchored-eq" data-anchor-id="eq-fdr" id="eq-fdr-area"><span class="math display">\ [
+f (p) = \ int_0^p f (t) \, dt,
+\ tag {6.12} \]</span></span></p>
+<p>그리고 어두운 회색 영역의 비율 (즉,<span class="math inline">\ (\ pi_0 \)</span>타임스<span class="math inline">\(피\)</span>) 전체 영역으로<span class="math inline">\ (f (p) \)</span>입니다<strong>꼬리 영역 허위 발견 률</strong>(FDR<a class="footnote-ref" href="#fn21" id="fnref21" role="doc-noteref"><sup>21</sup></a>),)</p>
+<div class="no-row-height column-margin column-container"><div id="fn21"><p><sup>21</sup>이 협약은 지역에 대한 소문자 약어 FDR을 사용하고 두 그룹 모델의 맥락에서 테일 영역 허위 발견 률에 대한 약어 FDR을 사용하는 것입니다.<a class="quarto-xref" href="#eq-testing-twogroups">방정식<span class="anchored-eq" data-anchor-id="eq-fdr">6.10</span></a>. 약어 FDR은 원래 정의에 사용됩니다<a class="quarto-xref" href="#eq-testing-deffdr">방정식<span>6.7</span></a>조금 더 일반적입니다. 즉, 모델링 가정에 의존하지 않습니다.<a class="quarto-xref" href="#eq-testing-twogroups">방정식<span>6.10</span></a>.</p></div></div><p><span id="eq-fdr-tail-area"><span class="math display">\ [
+\ text {fdr} (p) = \ frac {\ pi_0 \, p} {f (p)}.
+\ tag {6.13} \]</span></span></p>
+<p>데이터 버전을 사용하겠습니다<span class="math inline">\(에프\)</span>진단을 위해<a class="quarto-xref" href="#fig-testing-awde-stratified-ecdf">수치<span>6.21</span></a>.</p>
+<p>패키지<strong><a href="https://bioconductor.org/packages/qvalue/">QValue</a></strong>그리고<strong><a href="https://cran.r-project.org/web/packages/fdrtool/">fdrtool</a></strong>이러한 모델을 데이터에 맞출 수있는 시설을 제공합니다.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a aria-hidden="true" href="#cb28-1" tabindex="-1"></a><span class="fu">도서관</span>(<span class="st">"fdrtool"</span>))</span>
+<span id="cb28-2"><a aria-hidden="true" href="#cb28-2" tabindex="-1"></a>피트<span class="ot">=</span> <span class="fu">fdrtool</span>(an<span class="sc">$</span>프 베일,<span class="at">통계 =</span> <span class="st">"PValue"</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+</div>
+<p>~ 안에<strong><a href="https://cran.r-project.org/web/packages/fdrtool/">fdrtool</a></strong>, 우리가 부르는 것<span class="math inline">\ (\ pi_0 \)</span>위의 호출됩니다<code>STA0</code>:</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a aria-hidden="true" href="#cb29-1" tabindex="-1"></a>피트<span class="sc">$</span>param [,<span class="st">"STA0"</span>]]</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>STA0 
+0.8822922</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-testing-fdrtoolplot">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">질문 6.18</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>위의 호출에 의해 생성되는 플롯은 무엇입니까?<code>fdrtool</code>보여주다?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">일</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>다른 요소를 탐색하십시오<em>목록</em> <code>피트</code>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-testing-emoiricalbayes">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">질문 6.19</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>무엇을합니까<em>경험적</em>경험적 베이 즈 방법에서는?</p>
+</div>
+</div>
+<section class="level3" data-number="6.10.1" id="local-versus-total">
+<h3 class="anchored" data-anchor-id="local-versus-total" data-number="6.10.1"><span class="header-section-number">6.10.1</span>지역 대 총</h3>
+<p>FDR (또는 FDR)은 정해진 속성입니다. 다중 테스트 분석 과정에서 작성된 전체 거부 세트에 적용되는 단일 번호입니다. 대조적으로, FDR은 지역 재산입니다. 그것은 개별 가설에 적용됩니다. 상기하다<a class="quarto-xref" href="#fig-testing-lfdr">수치<span>6.17</span></a>, FDR이 각 지점에 대해 계산 된 곳<span class="math inline">\(엑스\)</span>밀도 플롯의 축이있는 반면 FDR은 빨간색 선 왼쪽 영역에 의존합니다.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-testing-economics">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">질문 6.20</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>개념을 확인하십시오<em>총 비용</em>그리고<em>한계 비용</em>경제학. FDR 및 FDR과 비유를 볼 수 있습니까?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div aria-controls="callout-29" aria-expanded="false" aria-label="Toggle callout" class="callout-header d-flex align-content-center" data-bs-target=".callout-29-contents" data-bs-toggle="collapse">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">해결책</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div class="callout-29-contents callout-collapse collapse" id="callout-29">
+<div class="callout-body-container callout-body">
+<p>세트를 생산하는 생산 공정의 경우<span class="math inline">\(중\)</span>제품, 총 비용은 관련된 모든 비용의 합계입니다. 제품의 평균 비용은 가상의 수량이며, 총 비용은<span class="math inline">\(중\)</span>. 한계 비용은 하나의 추가 제품을 만드는 데 드는 비용이며 평균 비용과 매우 다릅니다. 예를 들어, 피아노에서 베토벤 소나타를 연주하는 법을 배우는 데는 실질적인 시간이 걸리지 않을 수 있지만 한 번 더 연주하는 추가 노력이 필요합니다. 한계 비용은 고정 된 (따라서 총) 비용보다 훨씬 적습니다. 평균 비용보다 높은 한계 비용에 대한 예 : 신발을 신고 10km 달리기로 나가는 것은 대부분의 사람들에게 매우 견딜 수있는 (아마도 재미있을 것입니다), 각 추가 10km는 불균형 한 불편 함을 더할 수 있습니다.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="level3" data-number="6.10.2" id="terminology">
+<h3 class="anchored" data-anchor-id="terminology" data-number="6.10.2"><span class="header-section-number">6.10.2</span>술어</h3>
+<p>역사적으로, 용어<em>다중 테스트 수정</em>그리고<em>조정 된 p- 값</em>프로세스 및 출력에 사용되었습니다. 허위 발견 률의 맥락에서,이 용어는 혼란스럽지 않더라도 도움이되지 않습니다. 우리는 그들을 피하는 것을 옹호합니다. 그들은 우리가 p- 값 세트로 시작한다는 것을 암시합니다.<span class="math inline">\ ((P_1, ..., P_M) \)</span>, 일부 표준 절차를 적용하고 "수정 된"또는 "조정 된"p- 값을 얻으십시오.<span class="math inline">\ ((p_1^{\ text {adj}}, ..., p_m^{\ text {adj}}) \)</span>. 그러나 Benjamini-Hochberg 방법의 출력은 p- 값이 아니며 FDR, FDR 또는 FDR도 아닙니다. FDR과 FDR은 설정 속성이며 개별 테스트와 연관시키는 것은 혼란스러운 평균 및 한계 비용만큼이나 의미가 있습니다. FDR 및 FDR은 또한 상당한 양의 모델링 가정에 의존합니다. 다음 세션에서는 Benjamini-Hochberg의 방법이 도시에서 유일한 게임이 아니며 중요하고 유용한 확장이 있다는 것을 알 수 있으며, 이는 여러 테스트 절차에 입력되는 가설과 P- 값 사이의 추정 직접 서신과 출력 사이의 모든 추정 직접 서신을 더 대체합니다.</p>
+</section>
+</section>
+<section class="level2 page-columns page-full" data-number="6.11" id="independent-hypothesis-weighting">
+<h2 class="anchored" data-anchor-id="independent-hypothesis-weighting" data-number="6.11"><span class="header-section-number">6.11</span>독립적 인 가설 가중치</h2>
+<p>우리가 지금까지 본 것처럼 Benjamini-Hochberg 방법과 두 그룹 모델은 암시 적으로<em>교환 가능성</em>가설 중 : 우리가 사용하는 것은 p- 값입니다. 이것을 넘어서, 우리는 추가 정보를 고려하지 않습니다. 이것이 항상 최적의 것은 아니며 여기서는이를 향상시키는 방법을 연구 할 것입니다.</p>
+<p>예를 살펴 보겠습니다. 직관적으로, 더 많은 수의 판독 값을 가진 유전자에 대한 신호 대 잡음비는 읽기가 적은 유전자보다 더 나은 것이되어야하며, 이는 시험의 힘에 영향을 미쳐야합니다. 우리는 관찰에 걸쳐 정규화 된 카운트의 평균을 살펴 봅니다. 에서<strong><a href="https://bioconductor.org/packages/DESeq2/">deseq2</a></strong>이 수량을 패키지라고합니다<code>기지</code>.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a aria-hidden="true" href="#cb31-1" tabindex="-1"></a>어서<span class="sc">$</span>기지 [<span class="dv">1</span>]]</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 708.6022</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a aria-hidden="true" href="#cb33-1" tabindex="-1"></a>CTS<span class="ot">=</span> <span class="fu">계산</span>(아,<span class="at">정규화 =</span> <span class="cn">진실</span>) [) [<span class="dv">1</span>,]</span>
+<span id="cb33-2"><a aria-hidden="true" href="#cb33-2" tabindex="-1"></a>CTS</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>SR1039508 SR1039509 SR1039512 SR1039513 SR1039516 SR1039517 SR1039520 
+  663.3142 499.9070 740.1528 608.9063 966.3137 748.3722 836.2487 
+SR1039521 
+  605.6024</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a aria-hidden="true" href="#cb35-1" tabindex="-1"></a><span class="fu">평균</span>(CTS)</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 708.6022</code></pre>
+</div>
+</div>
+<p>다음으로 우리는 유전자에 걸쳐이 수량의 히스토그램을 생성하고 p- 값 (그림에 대해 음모합니다.<a class="quarto-xref" href="#fig-testing-basemean-hist"><span>6.18</span></a>그리고<a class="quarto-xref" href="#fig-testing-basemean-scp"><span>6.19</span></a>).</p>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a aria-hidden="true" href="#cb37-1" tabindex="-1"></a><span class="fu">ggplot</span>(소유하다,<span class="fu">AES</span>(<span class="at">x =</span> <span class="fu">asinh</span>(Basemean)))<span class="sc">+</span></span>
+<span id="cb37-2"><a aria-hidden="true" href="#cb37-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">빈 =</span> <span class="dv">60</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-testing-basemean-hist">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-testing-basemean-hist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-19" href="06-chap_files/figure-html/fig-testing-basemean-hist-1.png" title="Figure 6.18: Histogram of baseMean. We see that it covers a large dynamic range, from close to 0 to around 330000."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="06-chap_files/figure-html/fig-testing-basemean-hist-1.png" width="240"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-testing-basemean-hist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 6.18 : 히스토그램<code>기지</code>. 우리는 그것이 가깝게 0에서 330000 정도의 큰 다이나믹 레인지를 다루고 있음을 알 수 있습니다.</figcaption>
+</figure>
+</div>
+</div></div></div>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a aria-hidden="true" href="#cb38-1" tabindex="-1"></a><span class="fu">ggplot</span>(소유하다,<span class="fu">AES</span>(<span class="at">x =</span> <span class="fu">계급</span>(기지),<span class="at">y =</span> <span class="sc">-</span><span class="fu">log10</span>(PValue))))<span class="sc">+</span></span>
+<span id="cb38-2"><a aria-hidden="true" href="#cb38-2" tabindex="-1"></a>  <span class="fu">GEOM_HEX</span>(<span class="at">빈 =</span> <span class="dv">60</span>))<span class="sc">+</span></span>
+<span id="cb38-3"><a aria-hidden="true" href="#cb38-3" tabindex="-1"></a>  <span class="fu">주제</span>(<span class="at">LEGEND.POSITION =</span> <span class="st">"없음"</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-testing-basemean-scp">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-testing-basemean-scp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-20" href="06-chap_files/figure-html/fig-testing-basemean-scp-1.png" title="Figure 6.19: Scatterplot of the rank of baseMean versus the negative logarithm of the p-value. For small values of baseMean, no small p-values occur. Only for genes whose read counts across all observations have a certain size, the test for differential expression has power to come out with a small p-value."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="06-chap_files/figure-html/fig-testing-basemean-scp-1.png" width="240"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-testing-basemean-scp-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 6.19 : 순위의 산점도<code>기지</code>p- 값의 음의 로그. 작은 값의 경우<code>기지</code>, 작은 p- 값은 발생하지 않습니다. 모든 관찰에 걸쳐 읽기 카운트가 특정 크기를 갖는 유전자의 경우에만, 차등 발현에 대한 시험은 작은 p- 값으로 나올 수있는 힘을 가지고있다.</figcaption>
+</figure>
+</div>
+</div></div></div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-testing-trsf">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">질문 6.21</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>우리는 왜 사용 했습니까?<span class="math inline">\ (\ text {asinh} \)</span>히스토그램의 변환? 변환, 로그, 이동 된 로그, 즉, 즉, 어떻게 생겼습니까?<span class="math inline">\ (\ log (x+\ text {const.}) \)</span>?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-testing-log10">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">질문 6.22</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>ScatterPlot에서 우리는 왜 우리가 사용 했습니까?<span class="math inline">\ (-\ log_ {10} \)</span>p- 값을 위해? 왜 순위 변환<code>기지</code>?</p>
+</div>
+</div>
+<p>편의를 위해 우리는 분리합니다<code>기지</code>요인 변수로<code>그룹</code>6 개의 동일한 크기 그룹에 해당합니다.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a aria-hidden="true" href="#cb39-1" tabindex="-1"></a>어서<span class="ot">=</span> <span class="fu">돌연변이</span>(소유하다,<span class="at">지층 =</span> <span class="fu">자르다</span>(베이스 맨,<span class="at">포함 .lowest =</span> <span class="cn">진실</span>,,,</span>
+<span id="cb39-2"><a aria-hidden="true" href="#cb39-2" tabindex="-1"></a>  <span class="at">breaks =</span> <span class="fu">의미가 있습니다</span>(<span class="fu">양자</span>(베이스 맨,<span class="at">프로브 =</span><span class="fu">서열</span>(<span class="dv">0</span>,,,<span class="dv">1</span>,,,<span class="at">length.out =</span><span class="dv">7</span>)),<span class="dv">2</span>))))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+</div>
+<p>그림에서<a class="quarto-xref" href="#fig-testing-awde-stratified-hist"><span>6.20</span></a>그리고<a class="quarto-xref" href="#fig-testing-awde-stratified-ecdf"><span>6.21</span></a>우리는 p- 값의 히스토그램과 ECDF가<code>지충</code>.</p>
+<!-- TODO: fig-caps overlap here -->
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a aria-hidden="true" href="#cb40-1" tabindex="-1"></a><span class="fu">ggplot</span>(소유하다,<span class="fu">AES</span>(<span class="at">x =</span>PValue))<span class="sc">+</span> <span class="fu">facet_wrap</span>( <span class="sc">~</span>지충,<span class="at">nrow =</span> <span class="dv">4</span>))<span class="sc">+</span></span>
+<span id="cb40-2"><a aria-hidden="true" href="#cb40-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.025</span>,,,<span class="at">경계 =</span> <span class="dv">0</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-testing-awde-stratified-hist">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-testing-awde-stratified-hist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-21" href="06-chap_files/figure-html/fig-testing-awde-stratified-hist-1.png" title="Figure 6.20: p-value histograms of the airway data, stratified into equally sized groups defined by increasing value of baseMean."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="06-chap_files/figure-html/fig-testing-awde-stratified-hist-1.png" width="240"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-testing-awde-stratified-hist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 6.20 :기도 데이터의 p- 값 히스토그램,<code>기지</code>.
+</figcaption>
+</figure>
+</div>
+</div></div></div>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a aria-hidden="true" href="#cb41-1" tabindex="-1"></a><span class="fu">ggplot</span>(소유하다,<span class="fu">AES</span>(<span class="at">x =</span>프 베일,<span class="at">col =</span>지충))<span class="sc">+</span></span>
+<span id="cb41-2"><a aria-hidden="true" href="#cb41-2" tabindex="-1"></a>  <span class="fu">STAT_ECDF</span>(<span class="at">geom =</span> <span class="st">"단계"</span>))<span class="sc">+</span> <span class="fu">주제</span>(<span class="at">LEGEND.POSITION =</span> <span class="st">"맨 아래"</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-testing-awde-stratified-ecdf">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-testing-awde-stratified-ecdf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-22" href="06-chap_files/figure-html/fig-testing-awde-stratified-ecdf-1.png" title="Figure 6.21: Same data as in Figure fig-testing-awde-stratified-hist, shown with ECDFs."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="06-chap_files/figure-html/fig-testing-awde-stratified-ecdf-1.png" width="320"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-testing-awde-stratified-ecdf-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 6.21 : IN과 동일한 데이터<a class="quarto-xref" href="#fig-testing-awde-stratified-hist">수치<span>6.20</span></a>ECDF로 표시됩니다.</figcaption>
+</figure>
+</div>
+</div></div></div>
+<p>우리가 두 그룹 모델을이 지층에 별도로 맞추려면 상당히 다른 추정치를 얻을 수 있습니다.<span class="math inline">\ (\ pi_0 \)</span>그리고<span class="math inline">\ (f _ {\ text {alt}} \)</span>. 가장 낮은 발현 유전자의 경우<strong><a href="https://bioconductor.org/packages/DESeq2/">deseq2</a></strong>-테스트는 낮고 p- 값은 본질적으로 모두 널 구성 요소에서 나옵니다. 우리가 평균 표현이 더 높아지면 히스토그램에서 작은 p- 값 피크의 높이가 증가하여 테스트의 전력이 증가합니다.</p>
+<!-- TODO: footnote here overlaps with figure caption -->
+<p>다중 테스트 처리를 개선하는 데 사용할 수 있습니까? 이것이 가능하다는 것이 밝혀졌습니다. 한 가지 접근법은입니다<strong>독립적 인 가설 가중치</strong>(IHW)<span class="citation" data-cites="Ignatiadis:2016 Ignatiadis:JRSSB:2021">(<a href="16-chap.html#ref-Ignatiadis:2016" role="doc-biblioref">Ignatiadis et al. 2016</a>; <a href="16-chap.html#ref-Ignatiadis:JRSSB:2021" role="doc-biblioref">Ignatiadis와 Huber 2021</a>))</span><a class="footnote-ref" href="#fn22" id="fnref22" role="doc-noteref"><sup>22</sup></a>.</p>
+<div class="no-row-height column-margin column-container"><div id="fn22"><p><sup>22</sup>다른 여러 접근법이 있습니다 (예 : 벤치 마크 연구 참조)<span class="citation" data-cites="Korthauer:GB:2019">Korthauer et al. (<a href="16-chap.html#ref-Korthauer:GB:2019" role="doc-biblioref">2019</a>))</span>또는 종이의 인용<span class="citation" data-cites="Ignatiadis:JRSSB:2021">이그나 티아 디스와 후버 (Huber) (<a href="16-chap.html#ref-Ignatiadis:JRSSB:2021" role="doc-biblioref">2021</a>))</span>.</p></div></div><div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a aria-hidden="true" href="#cb42-1" tabindex="-1"></a><span class="fu">도서관</span>(<span class="st">"IHW"</span>))</span>
+<span id="cb42-2"><a aria-hidden="true" href="#cb42-2" tabindex="-1"></a>IHW_RES<span class="ot">=</span> <span class="fu">ihw</span>(an<span class="sc">$</span>PValue, awde<span class="sc">$</span>기지,<span class="at">알파 =</span> <span class="fl">0.1</span>))</span>
+<span id="cb42-3"><a aria-hidden="true" href="#cb42-3" tabindex="-1"></a><span class="fu">거부</span>(ihw_res)</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4892</code></pre>
+</div>
+</div>
+<p>이것을 평범한 (비가 중) Benjamini-Hochberg 방법에서 얻는 것과 비교해 봅시다.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a aria-hidden="true" href="#cb44-1" tabindex="-1"></a>padj_v<span class="ot">=</span> <span class="fu">P.Adjust</span>(an<span class="sc">$</span>프 베일,<span class="at">방법 =</span> <span class="st">"BH"</span>))</span>
+<span id="cb44-2"><a aria-hidden="true" href="#cb44-2" tabindex="-1"></a><span class="fu">합집합</span>(padj_v<span class="sc">&lt;</span> <span class="fl">0.1</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4099</code></pre>
+</div>
+</div>
+<p>가설 가중치로 우리는 더 많은 거부를 얻습니다. 이 데이터의 경우 차이는 훌륭하지는 않지만 주목할 만하다. 신호 대 잡음비가 이미 상당히 높기 때문입니다. 시작할 힘이 적은 다른 상황에서 (예를 들어, 복제가 적거나, 데이터가 더 시끄럽거나 치료의 영향이 덜 과감한 경우) IHW 사용과의 차이는 더욱 두드러 질 수 있습니다.</p>
+<p>우리는<code>ihw</code>기능 (<a class="quarto-xref" href="#fig-testing-ihwplot">수치<span>6.22</span></a>).</p>
+<div class="cell page-columns page-full" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a aria-hidden="true" href="#cb46-1" tabindex="-1"></a><span class="fu">구성</span>(ihw_res)</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
+<div class="no-row-height column-margin column-container"><div class="cell-output-display">
+<div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-testing-ihwplot">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-testing-ihwplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a class="lightbox" data-gallery="quarto-lightbox-gallery-23" href="06-chap_files/figure-html/fig-testing-ihwplot-1.png" title="Figure 6.22: Hypothesis weights determined by the ihw function. Here the function’s default settings chose 22 strata, while in our manual exploration above (Figures fig-testing-awde-stratified-hist, fig-testing-awde-stratified-ecdf) we had used 6; in practice, this is a minor detail."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="06-chap_files/figure-html/fig-testing-ihwplot-1.png" width="280"/></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-testing-ihwplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 6.22 : 가설 가중치에 의해 결정됩니다<code>ihw</code>기능. 여기서 기능의 기본 설정은 22 지층을 선택하고 위의 수동 탐색에서는<a class="quarto-xref" href="#fig-testing-awde-stratified-hist"><span>6.20</span></a>,,,<a class="quarto-xref" href="#fig-testing-awde-stratified-ecdf"><span>6.21</span></a>) 우리는 6을 사용했다. 실제로 이것은 사소한 세부 사항입니다.</figcaption>
+</figure>
+</div>
+</div></div></div>
+<p>직관적으로 여기서 일어나는 일은 IHW가 가설 지층에 더 많은 무게를두기로 선택한다는 것입니다.<code>기지</code>카운트가 매우 낮은 사람의 무게가 낮습니다. Benjamini-Hochberg 방법은 특정 Type-I 오류 예산을 가지고 있으며, 모든 가설 중에 똑같이 퍼지는 대신, 우리는 어쨌든 작은 FDR의 변화가 거의없는 지층에서 빼앗아 많은 가설을 작은 FDR에서 거부 할 수있는 지층에“투자”합니다.</p>
+<div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-testing-kfolds">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">질문 6.23</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>왜<a class="quarto-xref" href="#fig-testing-ihwplot">수치<span>6.22</span></a>단지 5 개의 곡선이 아닌 5 개의 곡선을 표시합니까?</p>
+</div>
+</div>
+<p>P- 값 외에 추가 요약 통계로 계층화 할 가능성 (우리의 경우,<code>기지</code>- 많은 여러 테스트 상황에서 존재합니다. 비공식적으로, 우리는 그러한 소위가 필요합니다<em>공변량</em>장차 ~ 가 되는</p>
+<ul>
+<li><p>널 아래의 p- 값과 통계적으로 독립적이지만</p></li>
+<li><p>이전 확률에 대한 정보<span class="math inline">\ (\ pi_0 \)</span>및/또는 테스트의 힘 (대체 밀도의 모양,<span class="math inline">\ (f _ {\ text {alt}} \)</span>) 두 그룹 모델에서.</p></li>
+</ul>
+<p>이러한 요구 사항은 그림에서와 같이 진단 플롯을 통해 평가할 수 있습니다.<a class="quarto-xref" href="#fig-testing-basemean-hist"><span>6.18</span></a>-<a class="quarto-xref" href="#fig-testing-awde-stratified-ecdf"><span>6.21</span></a>.</p>
+</section>
+<section class="level2" data-number="6.12" id="summary-of-this-chapter">
+<h2 class="anchored" data-anchor-id="summary-of-this-chapter" data-number="6.12"><span class="header-section-number">6.12</span>이 장의 요약</h2>
+<p>우리는 뒤의 개념을 탐구했습니다<em>단일 가설 테스트</em>그런 다음 계속했습니다<em>다중 테스트</em>. 우리는 많은 테스트에서 결과의 전체 분포를 고려하면 단일 테스트에서 단일 p- 값을 해석하는 일부 한계를 극복 할 수있는 방법을 보았습니다. 또한 P- 값 외에도 데이터의 추가 요약 통계가 종종 있음을 알았습니다. 우리는 그들을 유익한 공변량이라고 불렀으며, p- 값을 평가하고 전반적으로 더 많은 (또는 더 나은) 발견을 얻는 방법을 보았습니다.</p>
+<p>가설 테스트의 사용<em>다중 테스트</em>시나리오는<em>단일 테스트</em>사례 : 후자의 경우, 가설 테스트는 문자 그대로 최종 결과 일 수 있으며, 길고 비싼 데이터 획득 캠페인의 정점 (이상적으로는 미리 지정된 가설 및 데이터 분석 계획). 다중 테스트 사례에서 결과는 종종 중간 단계 일뿐입니다. 큰 초기 세트를 선별하여 선택한 가장 가치있는 가설의 하위 집합. 이 서브 세트에는보다 신중한 분석이 이어집니다.</p>
+<p>우리는 개념을 보았습니다<em>허위 발견 률</em>(FDR). 선택된 가설의 하위 집합에 대해서는 평균 속성이라는 점을 명심해야합니다. 다른 평균과 마찬가지로, 그것은 개별 가설에 대해 아무 말도하지 않습니다. 그런 다음 개념이 있습니다<em>현지 허위 발견 률</em>(FDR), 실제로 개별 가설에 적용됩니다. 그러나 두 그룹 모델이 보여준 것처럼 국소 허위 발견 률은 P- 값과는 관련이 없습니다. p- 값에 대한 혼란과 좌절의 대부분은 사람들이 FDR을 위해 만들어지는 목적으로 그것들을 사용하고 싶다는 사실에서 비롯된 것 같습니다. 아마도 적용된 과학의 많은 부분이 지역 허위 발견 률이 아닌 p- 값에 초점을 맞추는 것은 역사적 수차 일 것입니다. 반면에 P- 값이 쉽게 계산되기 때문에 실질적인 이유가있는 반면, FDR은 강력한 모델링 가정을하지 않고 데이터를 추정하거나 제어하기가 어렵습니다.</p>
+<p>우리는 특히 다중 테스트 분석이 발생할 때 p- 값 히스토그램을 항상 보는 진단 음모의 중요성을 보았습니다.</p>
+</section>
+<section class="level2" data-number="6.13" id="further-reading">
+<h2 class="anchored" data-anchor-id="further-reading" data-number="6.13"><span class="header-section-number">6.13</span>추가 독서</h2>
+<ul>
+<li><p>다중 테스트의 포괄적 인 교과서 처리는<span class="citation" data-cites="Efron2010">efron (<a href="16-chap.html#ref-Efron2010" role="doc-biblioref">2010 년</a>))</span>.</p></li>
+<li><p>임상 시험에서 결과 전환 :<a class="uri" href="http://compare-trials.org">http://compare-trials.org</a></p></li>
+<li><p>가설 가중치를 위해<strong><a href="https://bioconductor.org/packages/IHW/">ihw</a></strong>비네팅, IHW 종이<span class="citation" data-cites="Ignatiadis:2016">(<a href="16-chap.html#ref-Ignatiadis:2016" role="doc-biblioref">Ignatiadis et al. 2016</a>))</span>그리고 그 안에있는 참고 문헌.</p></li>
+</ul>
+</section>
+<section class="level2" data-number="6.14" id="exercises">
+<h2 class="anchored" data-anchor-id="exercises" data-number="6.14"><span class="header-section-number">6.14</span>수업 과정</h2>
+<div class="callout callout-style-default callout-important no-icon callout-titled" id="imp-testing-yourmt">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">운동 6.1</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>여러 테스트에 의존하는 과학 전문 분야에서 응용 프로그램을 식별하십시오. 예시적인 데이터 세트를 찾고 p- 값의 히스토그램을 플로팅하십시오. 가설은 모두 교환 가능합니까, 아니면 하나 이상의 유익한 공변량이 있습니까? 계층화 된 히스토그램을 플로팅하십시오.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled" id="inp-testing-nullvsalt">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">운동</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>수학적 통계 학자들은 왜 대체 가설에 비해 시험의 귀무 가설에 너무 집중합니까?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled" id="imp-testing-proovenull">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">운동 6.2</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>귀무 가설이 사실임을 어떻게 증명할 수 있습니까? 아니면 대안이 사실입니까?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled" id="imp-testing-lessextremecorr">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">운동 6.3</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>끝의 데이터 복제보다 상관 된 테스트 통계의 덜 극단적 인 예를 작성하십시오.<a class="quarto-xref" href="#sec-testing-ttest"><span>섹션 6.5</span></a>. 실제 귀무 가설만으로 데이터를 시뮬레이션하고 데이터가 완전히 독립적 인 복제 (열)를 가질 수없는 일부 연속 값 제어 매개 변수의 함수로서 고도로 상관 관계가 없습니다. 이 제어 매개 변수의 함수로서 Type-I Error Control (예 : p- 값 히스토그램으로)을 확인하십시오.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled" id="imp-testing-pvaluehacking">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">운동 6.4</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>P- 값 해킹, 결과 전환, Harking이 역할을 한 것처럼 보이는 출판 된 문헌에서 예를 찾으십시오.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled" id="imp-testing-worstcase">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">운동 6.5</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>FDR은 기대 값입니다. 즉, 절차의 평균 동작을 제어하려면 사용됩니다. 최악의 경우 제어 방법이 있습니까?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-important no-icon callout-titled" id="imp-testing-complexity">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">운동 6.6</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Benjamini-Hochberg 알고리즘의 기억과 시간 복잡성은 무엇입니까? IHW 방법은 어떻습니까? 다항식 기능을 테스트 수의 함수로 맞출 수 있습니까?<span class="math inline">\(중\)</span>? 힌트 : 가설 테스트의 수가 증가함에 따라 데이터를 시뮬레이션하고 다음과 같은 기능으로 시간 및 메모리 소비를 측정합니다.<code>Pryr :: Object_size</code>또는<code>마이크로 벤치 마크</code>시조 패키지에서,이를 위해 플롯하십시오<span class="math inline">\(중\)</span>이중 관구 음모에서.</p>
+</div>
+</div>
+<div class="references csl-bib-body hanging-indent" data-entry-spacing="0" id="refs" role="list" style="display: none">
+<div class="csl-entry" id="ref-Altman:PoS:2017" role="listitem">Altman, Naomi 및 Martin Krzywinski. 2017.<span>"유의점 : P 값 해석."</span> <em>자연<span>중</span>이방</em>14 (3) : 213–14.<a href="https://doi.org/10.1038/nmeth.4210">https://doi.org/10.1038/nmeth.4210</a>.
+</div>
+<div class="csl-entry" id="ref-BH:1995" role="listitem">Benjamini, Yoav 및 Yosef Hochberg. 1995.<span>"허위 발견 률을 제어 : 다중 테스트에 대한 실용적이고 강력한 접근."</span> <em>왕실 통계 학회지 b</em>57 : 289–300.</div>
+<div class="csl-entry" id="ref-Efron2010" role="listitem">에프론, 브래들리. 2010 년.<em>대규모 추론 : 경험적<span>비</span>Ayes 추정, 테스트 및 예측 방법</em>. 케임브리지 대학교 출판부.</div>
+<div class="csl-entry" id="ref-Head:PLoSBiol:2015:pvaluehacking" role="listitem">머리, Megan L, Luke Holman, Rob Lanfear, Andrew T Kahn 및 Michael D Jennions. 2015.<span>"과학에서의 P- 하킹의 범위와 결과."</span> <em>PLOS 생물학</em>13 (3) : E1002106.</div>
+<div class="csl-entry" id="ref-Ignatiadis:JRSSB:2021" role="listitem">Ignatiadis, Nikolaos 및 Wolfgang Huber. 2021.<span>"공변량 전원 교차 가중 다중 테스트."</span> <em>왕실 통계 학회지 : 시리즈 b</em>83 : 720–51.<a href="https://doi.org/10.1111/rssb.12411">https://doi.org/10.1111/rssb.12411</a>.
+</div>
+<div class="csl-entry" id="ref-Ignatiadis:2016" role="listitem">Ignatiadis, Nikolaos, Bernd Klaus, Judith Zaugg 및 Wolfgang Huber. 2016.<span>"데이터 중심의 가설 가중치는 게놈 규모 다중 테스트에서 탐지 능력을 증가시킵니다."</span> <em>자연 방법</em>13 : 577–80.</div>
+<div class="csl-entry" id="ref-Korthauer:GB:2019" role="listitem">Korthauer, K., P. K. Kives, A. Reyes, A. Subraman, M. Ten, C. Shukla, Elm 및 S.C. Hicks. 2019<span>"<span class="nocase"><span>에이</span>계산 생물학에서 허위 발견을 제어하는 ​​방법에 대한 실용 가이드</span>.”</span> <em>게놈 생물학</em>20 (1) : 118.</div>
+<div class="csl-entry" id="ref-SchwederSpjotvoll1982" role="listitem">수영, T. 및 E. Spjøirt. 1982 년.<span>“음모<span class="nocase">p- 값</span>많은 테스트를 동시에 평가합니다.”</span> <em>생체 인식</em>69 : 493–502.<a href="https://doi.org/10.1093/biomet/69.3.493">https://doi.org/10.1093/biomet/69.3.493</a>.
+</div>
+<div class="csl-entry" id="ref-Storey:AnnStat:2003" role="listitem">Storey, John D. 2003.<span>"긍정적 인 허위 발견 률 : 베이지안 해석과 Q- 값."</span> <em>통계의 연대기</em>31 (6).<a href="https://doi.org/10.1214/aos/1074290335">https://doi.org/10.1214/aos/1074290335</a>.
+</div>
+<div class="csl-entry" id="ref-Wasserstein2016:ASA" role="listitem">Wasserstein, Ronald L 및 Nicole A Lazar. 2016.<span>"그만큼<span>ASA</span>P- 값에 대한 진술 : 문맥, 프로세스 및 목적.”</span> <em>미국 통계 학자</em>.
+</div>
+</div>
+</section>
+<p>R 버전 4.5.1 (2025-06-13)을 사용하여 2025-09-01에 01:33에 구축 된 페이지</p></main> <!-- /main --><p class="build-date">이 책의 온라인 버전을 유지 관리하는 지원은 다음과 같습니다.<a href="http://www.denbi.de">de.nbi</a>
+<img src="imgs/denbi.png" style="vertical-align: text-top;height: 16px"/><br/>웹 사이트 지원은 msmith@embl.de로 문의하십시오<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+  const anchorJS_eq = new window.AnchorJS();
+  anchorJS_eq.options = {
+    placement: 'left',
+    class: 'eq-link',
+    icon: icon
+  };
+  anchorJS_eq.add('.anchored-eq');
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/www\.huber\.embl\.de\/msmb");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</p></div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+</body></html>

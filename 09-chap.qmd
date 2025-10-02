@@ -1,0 +1,3033 @@
+[![](imgs/Brighton_West_Pier_20090214_sunset.jpg)](imgs/Brighton_West_Pier_20090214_sunset.jpg)
+
+Real situations often involve point clouds, gradients, graphs, attraction
+points, noise and different spatial milieux, a little like this picture where
+we have a rigid skeleton, waves, sun and starlings.
+
+In [Chapter 7](07-chap.html), we saw how to summarize rectangular matrices
+whose columns were continuous variables. The maps we made used unsupervised
+dimensionality reduction techniques such as principal component analysis aimed
+at isolating the most important _signal_ component in a matrix \\(X\\) when
+all the columns have meaningful variances.
+
+Here we extend these ideas to more complex heterogeneous data where continuous
+and categorical variables are combined. Indeed, sometimes our observations
+cannot be easily described by sets of individual variables or coordinates –
+but it is possible to determine distances or (dis)similarities between them,
+or to describe relationships between them using a graph or a tree. Examples
+include species in a species tree or biological sequences. Outside of biology,
+examples include text documents or movie files, where we may have a reasonable
+method to determine (dis)similarity between them, but no obvious variables or
+coordinates.
+
+This chapter contains more advanced techniques, for which we often omit
+technical details. Having come this far, we hope that by giving you some
+hands-on experience with examples, and extensive references, to enable you to
+understand and use some of the more `cutting edge’ techniques in nonlinear
+multivariate analysis.
+
+## 9.1 Goals for this chapter
+
+In this chapter, we will:
+
+  * Extend linear dimension reduction methods to cases when the distances between observations are available, known as **m** ulti**d** imensional **s** caling (MDS) or principal coordinates analysis.
+
+  * Find modifications of MDS that are nonlinear and robust to outliers.
+
+  * Encode combinations of categorical data and continuous data as well as so-called ‘supplementary’ information. We will see that this enables us to deal with _batch effects_.
+
+  * Use chi-square distances and **c** orrespondence **a** nalysis (CA) to see where categorical data (contingency tables) contain notable dependencies.
+
+  * Generalize clustering methods that can uncover latent variables that are not categorical. This will allow us to detect gradients, “pseudotime” and hidden nonlinear effects in our data.
+
+  * Generalize the notion of variance and covariance to the study of tables of data from multiple different data domains.
+
+## 9.2 Multidimensional scaling and ordination
+
+Sometimes, data are _not_ represented as points in a feature space. This can
+occur when we are provided with (dis)similarity matrices between objects such
+as drugs, images, trees or other complex objects, which have no obvious
+coordinates in \\({\mathbb R}^n\\).
+
+In [Chapter 5](05-chap.html) we saw how to produce _clusters_ from distances.
+Here our goal is to visualize the data in maps in low dimensional spaces
+(e.g., planes) reminiscent of the ones we make from the first few principal
+axes in PCA.
+
+We start with an intuitive example using geography data. In Figure 9.1, a
+heatmap and clustering of the distances between cities and places in Ukraine1
+are shown.
+
+1 The provenance of these data are described in the script ukraine-dists.R in
+the data folder.
+
+    
+    
+    library("pheatmap")
+    data("ukraine_dists", package = "MSMB")
+    as.matrix(ukraine_dists)[1:4, 1:4]__
+    
+    
+                   Kyiv    Odesa Sevastopol Chernihiv
+    Kyiv         0.0000 441.2548   687.7551  128.1287
+    Odesa      441.2548   0.0000   301.7482  558.6483
+    Sevastopol 687.7551 301.7482     0.0000  783.6561
+    Chernihiv  128.1287 558.6483   783.6561    0.0000
+    
+    
+    pheatmap(as.matrix(ukraine_dists), 
+      color = colorRampPalette(c("#0057b7", "#ffd700"))(50),
+      breaks = seq(0, max(ukraine_dists)^(1/2), length.out = 51)^2,
+      treeheight_row = 10, treeheight_col = 10)__
+
+[![](09-chap_files/figure-html/fig-HeatDists-1.png)](09-chap_files/figure-
+html/fig-HeatDists-1.png "Figure 9.1: A heatmap of the ukraine_dists distance
+matrix. Distances are measured in kilometres. The function has re-arranged the
+order of the cities, and grouped the closest ones.")
+
+Figure 9.1: A heatmap of the `ukraine_dists` distance matrix. Distances are
+measured in kilometres. The function has re-arranged the order of the cities,
+and grouped the closest ones.
+
+Besides `ukraine_dists`, which contains the pairwise distances, the RData file
+that we loaded above also contains the dataframe `ukraine_coords` with the
+longitudes and latitudes; we will use this later as a ground truth. Given the
+distances, multidimensional scaling (MDS) provides a “map” of their relative
+locations. It will not be possible to arrange the cities such that their
+Euclidean distances on a 2D plane exactly reproduce the given distance matrix:
+the cities lie on the curved surface of the Earth rather than in a plane.
+Nevertheless, we can expect to find a two dimensional embedding that
+represents the data well. With biological data, our 2D embeddings are likely
+to be much less clearcut. We call the function with:
+
+    
+    
+    ukraine_mds = cmdscale(ukraine_dists, eig = TRUE)__
+
+We make a function that we will reuse several times in this chapter to make a
+screeplot from the result of a call to the `cmdscale` function:
+
+    
+    
+    library("dplyr")
+    library("ggplot2")
+    plotscree = function(x, m = length(x$eig)) {
+      ggplot(tibble(eig = x$eig[seq_len(m)], k = seq(along = eig)),
+        aes(x = k, y = eig)) + theme_minimal() +
+        scale_x_discrete("k", limits = as.factor(seq_len(m))) + 
+        geom_bar(stat = "identity", width = 0.5, fill = "#ffd700", col = "#0057b7")
+    }__
+    
+    
+    plotscree(ukraine_mds, m = 4)__
+
+[![](09-chap_files/figure-html/fig-plotscreeeig-1.png)](09-chap_files/figure-
+html/fig-plotscreeeig-1.png "Figure 9.2: Screeplot of the first four
+eigenvalues. There is a pronounced drop after the first two eigenvalues, which
+indicates that the data are well described by a two-dimensional embedding.")
+
+Figure 9.2: Screeplot of the first four eigenvalues. There is a pronounced
+drop after the first two eigenvalues, which indicates that the data are well
+described by a two-dimensional embedding.
+
+__
+
+Question 9.1
+
+Look at all the eigenvalues output by the `cmdscale` function: what do you
+notice?
+
+__
+
+Solution
+
+__
+
+If you execute:
+
+    
+    
+    ukraine_mds$eig |> signif(3)__
+    
+    
+     [1]  3.91e+06  1.08e+06  3.42e+02  4.84e-01  2.13e-01  3.83e-05  5.90e-06
+     [8]  5.82e-07  8.79e-08  4.94e-08  6.52e-10  2.84e-10  1.84e-10  5.22e-11
+    [15]  4.89e-11  4.57e-11 -3.26e-12 -2.55e-11 -5.90e-11 -6.55e-11 -1.40e-10
+    [22] -1.51e-10 -3.46e-10 -3.76e-10 -4.69e-10 -2.24e-09 -1.51e-08 -9.60e-05
+    [29] -2.51e-04 -1.41e-02 -1.19e-01 -3.58e+02 -8.85e+02
+    
+    
+    plotscree(ukraine_mds)__
+
+[![](09-chap_files/figure-html/fig-
+plotscreeeigall-1.png)](09-chap_files/figure-html/fig-plotscreeeigall-1.png
+"Figure 9.3: Screeplot of all the eigenvalues.")
+
+Figure 9.3: Screeplot of all the eigenvalues.
+
+you will note that unlike in PCA, there are some negative eigenvalues. These
+are due to the way `cmdscale` works.
+
+The main output from the `cmdscale` function are the coordinates of the two-
+dimensional embedding, which we show in Figure 9.4 (we will discuss how the
+algorithm works in the next section).
+
+    
+    
+    ukraine_mds_df = tibble(
+      PCo1 = ukraine_mds$points[, 1],
+      PCo2 = ukraine_mds$points[, 2],
+      labs = rownames(ukraine_mds$points)
+    )
+    library("ggrepel")
+    g = ggplot(ukraine_mds_df, aes(x = PCo1, y = PCo2, label = labs)) +
+      geom_point() + geom_text_repel(col = "#0057b7") + coord_fixed() 
+    g __
+
+[![](09-chap_files/figure-html/fig-ukrainemds1-1.png)](09-chap_files/figure-
+html/fig-ukrainemds1-1.png "Figure 9.4: MDS map based on the distances.")
+
+Figure 9.4: MDS map based on the distances.
+
+Note that while relative positions are correct, the orientation of the map is
+unconventional: Crimea is at the top. This is a common phenomenon with methods
+that reconstruct planar embeddings from distances. Since the distances between
+the points are invariant under rotations and reflections (axis flips), any
+solution is as good as any other solution that relates to it via rotation or
+reflection. Functions like `cmdscale` will pick one of the equally optimal
+solutions, and the particular choice can depend on minute details of the data
+or the computing platform being used. Here, we can transform our result into a
+more conventional orientation by reversing the sign of the \\(y\\)-axis. We
+redraw the map in Figure 9.5 and compare this to the true longitudes and
+latitudes from the `ukraine_coords` dataframe (Figure 9.6).
+
+    
+    
+    g %+% mutate(ukraine_mds_df, PCo1 = PCo1, PCo2 = -PCo2)__
+
+[![](09-chap_files/figure-html/fig-ukrainemds2-1.png)](09-chap_files/figure-
+html/fig-ukrainemds2-1.png "Figure 9.5: Same as Figure fig-ukrainemds1, but
+with y-axis flipped.")
+
+Figure 9.5: Same as Figure 9.4, but with y-axis flipped.
+
+    
+    
+    data("ukraine_coords", package = "MSMB")
+    print.data.frame(ukraine_coords[1:4,  c("city", "lat", "lon")])__
+    
+    
+            city      lat      lon
+    1       Kyiv 50.45003 30.52414
+    2      Odesa 46.48430 30.73229
+    3 Sevastopol 44.60544 33.52208
+    4  Chernihiv 51.49410 31.29433
+    
+    
+    ggplot(ukraine_coords, aes(x = lon, y = lat, label = city)) +
+      geom_point() + geom_text_repel(col = "#0057b7")__
+
+[![](09-chap_files/figure-html/fig-ukrainecoord1-1.png)](09-chap_files/figure-
+html/fig-ukrainecoord1-1.png "Figure 9.6: True latitudes and longitudes, taken
+from the ukraine_coords dataframe.")
+
+Figure 9.6: True latitudes and longitudes, taken from the `ukraine_coords`
+dataframe.
+
+__
+
+Question 9.2
+
+We drew the longitudes and latitudes in the right panel of Figure 9.6 without
+attention to aspect ratio. What is the right aspect ratio for this plot?
+
+__
+
+Solution
+
+__
+
+There is no simple relationship between the distances that correspond to 1
+degree change in longitude and to 1 degree change in latitude, so the choice
+is difficult to make. Even under the simplifying assumption that our Earth is
+spherical and has a radius of 6371 km, it’s complicated: one degree in
+latitude always corresponds to a distance of 111 km
+(\\(6371\times2\pi/360\\)), as does one degree of longitude on the equator.
+However, when you move away from the equator, a degree of longitude
+corresponds to shorter and shorter distances (and to no distance at all at the
+poles). Pragmatically, for displays such as in Figure 9.6, we could choose a
+value for the aspect ratio that’s somewhere in the middle between the Northern
+and Southern most points, say, the cosine for 48 degrees.
+
+__
+
+Question 9.3
+
+Add international borders and geographic features such as rivers to Figure
+9.6.
+
+__
+
+Solution
+
+__
+
+A start point is provided by the code below, which adds the international
+borders as a polygon (Figure 9.7).
+
+    
+    
+    library("maps")
+    ua_borders = dplyr::filter(map_data("world"), region == "Ukraine")
+    ggplot(ukraine_coords, aes(x = lon, y = lat)) + 
+      geom_polygon(data = ua_borders, aes(x = long, y = lat, group = subregion), fill = "#ffd700", color = "#0057b7") +
+      geom_point() + 
+      geom_text_repel(aes(label = city)) +
+      coord_fixed(1/cos(48/180*pi))__
+
+There is a lot of [additional infrastructure available in R for geospatial
+data](https://cran.r-project.org/web/views/Spatial.html), including vector and
+raster data types.
+
+[![](09-chap_files/figure-html/fig-
+ukrainewithborders-1.png)](09-chap_files/figure-html/fig-
+ukrainewithborders-1.png "Figure 9.7: International borders added to
+Figure fig-ukrainecoord1.")
+
+Figure 9.7: International borders added to Figure 9.6.
+
+**Note:** MDS creates similar output as PCA, however there is only one
+‘dimension’ to the data (the sample points). There is no ‘dual’ dimension,
+there are no biplots and no loading vectors. This is a drawback when coming to
+interpreting the maps. Interpretation can be facilitated by examining
+carefully the extreme points and their differences.
+
+### 9.2.1 How does the method work?
+
+Let’s take a look at what would happen if we really started with points whose
+coordinates were known2. We put these coordinates into the two columns of a
+matrix with as many rows as there are points. Now we compute the distances
+between points based on these coordinates. To go from the coordinates \\(X\\)
+to distances, we write \\[d^2_{i,j} = (x_i^1 - x_j^1)^2 + \dots + (x_i^p -
+x_j^p)^2.\\] We will call the matrix of squared distances `DdotD` in R and
+\\(D\bullet D\\) in the text . We want to find points such that the square of
+their distances is as close as possible to the \\(D\bullet D\\) observed.3
+
+This is different from \\(DD\\) or \\(D^2\\), the matrix-multiplication of
+\\(D\\) with itself.
+
+3 Here we commit a slight ‘abuse’ by using the longitudes and latitudes of our
+cities as Cartesian coordinates and ignoring the fact that they are
+curvilinear coordinates on a sphere-like surface.
+
+2 Here we commit a slight ‘abuse’ by using the longitude and longitude of our
+cities as Cartesian coordinates and ignoring the curvature of the earth’s
+surface. Check out the internet for information on the Haversine formula.
+
+    
+    
+    X = with(ukraine_coords, cbind(lon, lat * cos(48)))
+    DdotD = as.matrix(dist(X)^2)__
+
+The relative distances do not depend on the point of origin of the data. We
+center the data by using the centering matrix \\(H\\) defined as
+\\(H=I-\frac{1}{n}{\mathbf{11}}^t\\). Let’s check the _centering_ property of
+\\(H\\) using:
+
+    
+    
+    n = nrow(X)
+    H = diag(rep(1,n))-(1/n) * matrix(1, nrow = n, ncol = n)
+    Xc = sweep(X,2,apply(X,2,mean))
+    Xc[1:2, ]__
+    
+    
+                lon          
+    [1,] -1.1722946 -1.184705
+    [2,] -0.9641429  1.353935
+    
+    
+    HX = H %*% X
+    HX[1:2, ]__
+    
+    
+                lon          
+    [1,] -1.1722946 -1.184705
+    [2,] -0.9641429  1.353935
+    
+    
+    apply(HX, 2, mean)__
+    
+    
+              lon               
+    -1.618057e-15  1.747077e-16 
+
+__
+
+Question 9.4
+
+Call `B0` the matrix obtained by applying the centering matrix both to the
+right and to the left of `DdotD` Consider the points centered at the origin
+given by the \\(HX\\) matrix and compute its cross product, we’ll call this
+`B2`. What do you have to do to `B0` to make it equal to `B2`?
+
+__
+
+Solution
+
+__
+
+    
+    
+    B0 = H  %*% DdotD %*% H
+    B2 = HX %*% t(HX)
+    B2[1:3, 1:3] / B0[1:3, 1:3]__
+    
+    
+         [,1] [,2] [,3]
+    [1,] -0.5 -0.5 -0.5
+    [2,] -0.5 -0.5 -0.5
+    [3,] -0.5 -0.5 -0.5
+    
+    
+    max(abs(-0.5 * B0 - B2))__
+    
+    
+    [1] 9.237056e-14
+
+Therefore, given the squared distances between rows (\\(D\bullet D\\)) and the
+cross product of the centered matrix \\(B=(HX)(HX)^t\\), we have shown:
+
+\\[ -\frac{1}{2} H(D\bullet D) H=B \tag{9.1}\\]
+
+This is always true, and we use it to reverse-engineer an \\(X\\) which
+satisfies Equation 9.1 when we are given \\(D\bullet D\\) to start with.
+
+#### From \\(D\bullet D\\) to \\(X\\) using singular vectors.
+
+We can go backwards from a matrix \\(D\bullet D\\) to \\(X\\) by taking the
+eigen-decomposition of \\(B\\) as defined in Equation 9.1. This also enables
+us to choose how many coordinates, or columns, we want for the \\(X\\) matrix.
+This is very similar to how PCA provides the best rank \\(r\\) approximation.  
+**Note** : As in PCA, we can write this using the singular value decomposition
+of \\(HX\\) (or the eigen decomposition of \\(HX(HX)^t\\)):
+
+\\[ HX^{(r)} = US^{(r)}V^t \mbox{ with } S^{(r)} \mbox{ the diagonal matrix of
+the first } r \mbox{ singular values}, \\]
+
+This provides the best approximate representation in an Euclidean space of
+dimension \\(r\\). The algorithm gives us the coordinates of points that have
+approximately the same distances as those provided by the \\(D\\) matrix.
+
+\\[S^{(r)} = \begin{pmatrix} s_1 & 0 & 0 & 0 & ...\\\ 0 & s_2 & 0 & 0 & ...\\\
+0 & 0 & ... & ... & ...\\\ 0 & 0 & ... & s_r & ...\\\ ...& ...& ...& 0 & 0 \\\
+\end{pmatrix}\\]The method is often called Principal Coordinates Analysis, or
+PCoA which stresses the connection to PCA.
+
+#### Classical MDS Algorithm.
+
+In summary, given an \\(n \times n\\) matrix of squared interpoint distances
+\\(D\bullet D\\), we can find points and their coordinates \\(\tilde{X}\\) by
+the following operations:
+
+  1. Double center the interpoint distance squared and multiply it by \\(-\frac{1}{2}\\):  
+\\(B = -\frac{1}{2}H D\bullet D H\\).
+
+  2. Diagonalize \\(B\\): \\(\quad B = U \Lambda U^t\\).
+
+  3. Extract \\(\tilde{X}\\): \\(\quad \tilde{X} = U \Lambda^{1/2}\\).
+
+#### Finding the right underlying dimensionality.
+
+As an example, let’s take objects for which we have similarities (surrogrates
+for distances) but for which there is no natural underlying Euclidean space.
+
+In a psychology experiment from the 1950s, Ekman ([1954](16-chap.html#ref-
+Ekman:1954)) asked 31 subjects to rank the similarities of 14 different
+colors. His goal was to understand the underlying dimensionality of color
+perception. The similarity or confusion matrix was scaled to have values
+between 0 and 1. The colors that were often confused had similarities close to
+1. We transform the data into a dissimilarity by subtracting the values from
+1:
+
+    
+    
+    ekm = read.table("../data/ekman.txt", header=TRUE)
+    rownames(ekm) = colnames(ekm)
+    disekm = 1 - ekm - diag(1, ncol(ekm))
+    disekm[1:5, 1:5]__
+    
+    
+         w434 w445 w465 w472 w490
+    w434 0.00 0.14 0.58 0.58 0.82
+    w445 0.14 0.00 0.50 0.56 0.78
+    w465 0.58 0.50 0.00 0.19 0.53
+    w472 0.58 0.56 0.19 0.00 0.46
+    w490 0.82 0.78 0.53 0.46 0.00
+    
+    
+    disekm = as.dist(disekm)__
+
+We compute the MDS coordinates and eigenvalues. We combine the eigenvalues in
+the screeplot shown in Figure 9.8:
+
+    
+    
+    mdsekm = cmdscale(disekm, eig = TRUE)
+    plotscree(mdsekm)__
+
+[![](09-chap_files/figure-html/fig-ekmanMDSeig-1.png)](09-chap_files/figure-
+html/fig-ekmanMDSeig-1.png "Figure 9.8: The screeplot shows us that the
+phenomenon is largely two dimensional.")
+
+Figure 9.8: The screeplot shows us that the phenomenon is largely two
+dimensional.
+
+We plot the different colors using the first two principal coordinates as
+follows:
+
+    
+    
+    dfekm = mdsekm$points[, 1:2] |>
+      `colnames<-`(paste0("MDS", 1:2)) |>
+      as_tibble() |>
+      mutate(
+        name = rownames(ekm),
+        rgb = photobiology::w_length2rgb(as.numeric(sub("w", "", name))))
+    ggplot(dfekm, aes(x = MDS1, y = MDS2)) +
+      geom_point(col = dfekm$rgb, size = 4) +
+      geom_text_repel(aes(label = name)) + coord_fixed()__
+
+[![](09-chap_files/figure-html/fig-ekmanMDS-1-1.png)](09-chap_files/figure-
+html/fig-ekmanMDS-1-1.png "Figure 9.9: The layout of the scatterpoints in the
+first two dimensions has a horseshoe shape. The labels and colors show that
+the arch corresponds to the wavelengths.")
+
+Figure 9.9: The layout of the scatterpoints in the first two dimensions has a
+horseshoe shape. The labels and colors show that the arch corresponds to the
+wavelengths.
+
+Figure 9.9 shows the Ekman data in the new coordinates. There is a striking
+pattern that calls for explanation. This horseshoe or arch structure in the
+points is often an indicator of a sequential latent ordering or gradient in
+the data ([Diaconis, Goel, and Holmes 2008](16-chap.html#ref-Goel:2007aa)). We
+will revisit this in Section 9.5.
+
+### 9.2.2 Robust versions of MDS
+
+Multidimensional scaling aims to minimize the difference between the squared
+distances as given by \\(D\bullet D\\) and the squared distances between the
+points with their new coordinates. Unfortunately, this objective tends to be
+sensitive to outliers: one single data point with large distances to everyone
+else can dominate, and thus skew, the whole analysis. Often, we like to use
+something that is more robust, and one way to achieve this is to disregard the
+actual values of the distances and only ask that the relative rankings of the
+original and the new distances are as similar as possible. Such a rank based
+approach is robust: its sensitivity to outliers is reduced.
+
+**Robustness:** A method is robust if it is not too influenced by a few
+outliers. For example, the median of a set of \\(n\\) numbers does not change
+by a lot even if we change 20 the numbers by arbitrarily large amounts; to
+drastically shift the median, we need to change more than half of the numbers.
+In contrast, we can change the mean by a large amount by just manipulating one
+of the numbers. We say that the _breakdown point_ of the median is 1/2, while
+that of the mean is only \\(1/n\\). Both mean and median are estimators of the
+_location_ of a distribution (i.e., what is a "typical" value of the numbers),
+but the median is more robust. The median is based on the ranks; more
+generally, methods based on ranks are often more robust than those based on
+the actual values. Many nonparametric tests are based on reductions of data to
+their ranks.
+
+We will use the Ekman data to show how useful robust methods are when we are
+not quite sure about the ‘scale’ of our measurements. Robust ordination,
+called non metric multidimensional scaling (NMDS for short) only attempts to
+embed the points in a new space such that the **order** of the reconstructed
+distances in the new map is the same as the ordering of the original distance
+matrix.
+
+Non metric MDS looks for a transformation \\(f\\) of the given dissimilarities
+in the matrix \\(d\\) and a set of coordinates in a low dimensional space
+(_the map_) such that the distance in this new map is \\(\tilde{d}\\) and
+\\(f(d)\thickapprox \tilde{d}\\). The quality of the approximation can be
+measured by the standardized residual sum of squares (stress) function:
+
+\\[ \text{stress}^2=\frac{\sum(f(d)-\tilde{d})^2}{\sum d^2}. \\]
+
+NMDS is not sequential in the sense that we have to specify the underlying
+dimensionality at the outset and the optimization is run to maximize the
+reconstruction of the distances according to that number. There is no notion
+of percentage of variation explained by individual axes as provided in PCA.
+However, we can make a simili-screeplot by running the program for all the
+successive values of \\(k\\) (\\(k=1, 2, 3, ...\\)) and looking at how well
+the stress drops. Here is an example of looking at these successive
+approximations and their goodness of fit. As in the case of diagnostics for
+clustering, we will take the number of axes **after** the stress has a steep
+drop.
+
+Because each calculation of a NMDS result requires a new optimization that is
+both random and dependent on the \\(k\\) value, we use a similar procedure to
+what we did for clustering in [Chapter 4](04-chap.html). We execute the
+`metaMDS` function, say, 100 times for each of the four possible values of
+\\(k\\) and record the stress values.
+
+    
+    
+    library("vegan")
+    nmds.stress = function(x, sim = 100, kmax = 4) {
+      sapply(seq_len(kmax), function(k)
+        replicate(sim, metaMDS(x, k = k, autotransform = FALSE)$stress))
+    }
+    stress = nmds.stress(disekm, sim = 100)
+    dim(stress)__
+
+Let’s look at the boxplots of the results. This can be a useful diagnostic
+plot for choosing \\(k\\) (Figure 9.10).
+
+    
+    
+    dfstr = reshape2::melt(stress, varnames = c("replicate","dimensions"))
+    ggplot(dfstr, aes(y = value, x = dimensions, group = dimensions)) +
+      geom_boxplot()__
+
+[![](09-chap_files/figure-html/fig-
+NMDSscreeplot-1-1.png)](09-chap_files/figure-html/fig-NMDSscreeplot-1-1.png
+"Figure 9.10: Several replicates at each dimension were run to evaluate the
+stability of the stress. We see that the stress drops dramatically with two or
+more dimensions, thus indicating that a two dimensional solution is
+appropriate here.")
+
+Figure 9.10: Several replicates at each dimension were run to evaluate the
+stability of the stress. We see that the stress drops dramatically with two or
+more dimensions, thus indicating that a two dimensional solution is
+appropriate here.
+
+We can also compare the distances and their approximations using what is known
+as a Shepard plot for \\(k=2\\) for instance, computed with:
+
+    
+    
+    nmdsk2 = metaMDS(disekm, k = 2, autotransform = FALSE)
+    stressplot(nmdsk2, pch = 20)__
+
+[![](09-chap_files/figure-html/fig-
+Shepardsplot-1-1.png)](09-chap_files/figure-html/fig-Shepardsplot-1-1.png
+"Figure 9.11: The Shepard’s plot compares the original distances or
+dissimilarities \(along the horizonal axis\) to the reconstructed distances,
+in this case for k=2 \(vertical axis\).")
+
+Figure 9.11: The Shepard’s plot compares the original distances or
+dissimilarities (along the horizonal axis) to the reconstructed distances, in
+this case for \\(k=2\\) (vertical axis).
+
+Both the Shepard’s plot in Figure 9.11 and the screeplot in Figure 9.10 point
+to a two-dimensional solution for Ekman’s color confusion study. Let us
+compare the output of the two different MDS programs, the classical metric
+least squares approximation and the nonmetric rank approximation method. The
+right panel of Figure 9.12 shows the result from the nonmetric rank
+approximation, the left panel is the same as Figure 9.9. The projections are
+almost identical in both cases. For these data, it makes little difference
+whether we use a Euclidean or nonmetric multidimensional scaling method.
+
+    
+    
+    nmdsk2$points[, 1:2] |> 
+      `colnames<-`(paste0("NmMDS", 1:2)) |>
+      as_tibble() |> 
+      bind_cols(dplyr::select(dfekm, rgb, name)) |>
+      ggplot(aes(x = NmMDS1, y = NmMDS2)) +
+        geom_point(col = dfekm$rgb, size = 4) +
+        geom_text_repel(aes(label = name))__
+
+[![](09-chap_files/figure-html/fig-ekmannonMDS-1-1.png)](09-chap_files/figure-
+html/fig-ekmannonMDS-1-1.png "Figure 9.12 \(a\): ")
+
+(a)
+
+[![](09-chap_files/figure-html/fig-ekmannonMDS-1-2.png)](09-chap_files/figure-
+html/fig-ekmannonMDS-1-2.png "Figure 9.12 \(b\): ")
+
+(b)
+
+Figure 9.12: Comparison of the output from (a) the classical multidimensional
+scaling (same as Figure 9.9) and (b) the nonmetric version.
+
+## 9.3 Contiguous or supplementary information
+
+[![Metadata: Many programs and workflows for biological sequence analysis or
+assays separate the environmental and contextual information, which they call
+metadata, from the assay data or sequence reads. We discourage such practice
+as the exact connections between the samples and covariates are important. A
+lost connection between the assays and covariates makes later analyses
+impossible. Covariates such as clinical history, time, batch or location are
+important and should be considered components of the
+data.](imgs/devil.png)](imgs/devil.png "Metadata: Many programs and workflows
+for biological sequence analysis or assays separate the environmental and
+contextual information, which they call metadata, from the assay data or
+sequence reads. We discourage such practice as the exact connections between
+the samples and covariates are important. A lost connection between the assays
+and covariates makes later analyses impossible. Covariates such as clinical
+history, time, batch or location are important and should be considered
+components of the data.")
+
+**Metadata:** Many programs and workflows for biological sequence analysis or
+assays separate the environmental and contextual information, which they call
+**metadata** , from the assay data or sequence reads. We discourage such
+practice as the exact connections between the samples and covariates are
+important. A lost connection between the assays and covariates makes later
+analyses impossible. Covariates such as clinical history, time, batch or
+location are important and should be considered components of the data.
+
+In [Chapter 3](03-chap.html) we introduced the R _data.frame_ class that
+enables us to combine heterogeneous data types: categorical factors, text and
+continuous values. Each row of a dataframe corresponds to an object, or a
+record, and the columns are the different variables, or features.
+
+Extra information about sample batches, dates of measurement, different
+protocols are often named _metadata_ ; this can be misnomer if it is implied
+that metadata are somehow less important. Such information is _real data_ that
+need to be integrated into the analyses. We typically store it in a
+_data.frame_ or a similar R class and tightly link it to the primary assay
+data.
+
+### 9.3.1 Known batches in data
+
+Here we show an example of an analysis that was done by Holmes et al.
+([2011](16-chap.html#ref-holmes2011psb)) on bacterial abundance data from
+_Phylochip_ ([Brodie et al. 2006](16-chap.html#ref-Brodie:2006)) microarrays.
+The experiment was designed to detect differences between a group of healthy
+rats and a group who had Irritable Bowel Disease ([Nelson et al.
+2010](16-chap.html#ref-Nelson:2011)). This example shows a case where the
+nuisance batch effects become apparent in the analysis of experimental data.
+It is an illustration of the fact that best practices in data analyses are
+sequential and that it is better to analyse data as they are collected to
+adjust for severe problems in the experimental design _as they occur_ ,
+instead of having to deal with them _post mortem_ 4.
+
+4 Fisher’s terminology, see [Chapter 13](13-chap.html).
+
+When data collection started on this project, days 1 and 2 were delivered and
+we made the plot that appears in Figure 9.14. This showed a definite _day_
+effect. When investigating the source of this effect, we found that both the
+protocol and the array were different in days 1 and 2. This leads to
+uncertainty in the source of variation, we call this **confounding** of
+effects.
+
+[![Bioconductor container: These data are an example of an awkward way of
+combining batch information with the actual data. The day information has been
+combined with the array data and encoded as a number and could be confused
+with a continuous variable. We will see in the next section a better practice
+for storing and manipulating heterogeneous data using a Bioconductor container
+called SummarizedExperiment.](imgs/devil.png)](imgs/devil.png "Bioconductor
+container: These data are an example of an awkward way of combining batch
+information with the actual data. The day information has been combined with
+the array data and encoded as a number and could be confused with a continuous
+variable. We will see in the next section a better practice for storing and
+manipulating heterogeneous data using a Bioconductor container called
+SummarizedExperiment.")
+
+**Bioconductor container:** These data are an example of an awkward way of
+combining batch information with the actual data. The `day` information has
+been combined with the array data and encoded as a number and could be
+confused with a continuous variable. We will see in the next section a better
+practice for storing and manipulating heterogeneous data using a Bioconductor
+container called _SummarizedExperiment_.
+
+We load the data and the packages we use for this section:
+
+    
+    
+    IBDchip = readRDS("../data/vsn28Exprd.rds")
+    library("ade4")
+    library("factoextra")
+    library("sva")__
+
+__
+
+Question 9.5
+
+What class is the `IBDchip` ? Look at the last row of the matrix, what do you
+notice?
+
+__
+
+Solution
+
+__
+
+    
+    
+    class(IBDchip)__
+    
+    
+    [1] "matrix" "array" 
+    
+    
+    dim(IBDchip)__
+    
+    
+    [1] 8635   28
+    
+    
+    tail(IBDchip[,1:3])__
+    
+    
+                                     20CF     20DF     20MF
+    bm-026.1.sig_st              7.299308 7.275802 7.383103
+    bm-125.1.sig_st              8.538857 8.998562 9.296096
+    bru.tab.d.HIII.Con32.sig_st  6.802736 6.777566 6.859950
+    bru.tab.d.HIII.Con323.sig_st 6.463604 6.501139 6.611851
+    bru.tab.d.HIII.Con5.sig_st   5.739235 5.666060 5.831079
+    day                          2.000000 2.000000 2.000000
+    
+    
+    table(IBDchip[nrow(IBDchip), ])__
+    
+    
+     1  2  3 
+     8 16  4 
+
+The data are normalized abundance measurements of 8634 taxa measured on 28
+samples. We use a rank-threshold transformation, giving the top 3000 most
+abundant taxa scores from 3000 to 1, and letting the remaining (low abundant)
+ones all have a score of 1. We also separate out the proper assay data from
+the (awkwardly placed) day variable, which should be considered a factor5:
+
+5 Below, we show how to arrange these data into a Bioconductor
+`SummarizedExperiment`, which is a much more sane way of storing such data.
+
+    
+    
+    assayIBD = IBDchip[-nrow(IBDchip), ]
+    day      = factor(IBDchip[nrow(IBDchip), ])__
+
+Instead of using the continuous, somehow normalized data, we use a robust
+analysis replacing the values by their ranks. The lower values are considered
+ties encoded as a threshold chosen to reflect the number of expected taxa
+thought to be present:
+
+    
+    
+    rankthreshPCA = function(x, threshold = 3000) {
+      ranksM = apply(x, 2, rank)
+      ranksM[ranksM < threshold] = threshold
+      ranksM = threshold - ranksM
+      dudi.pca(t(ranksM), scannf = FALSE, nf = 2)
+    }
+    pcaDay12 = rankthreshPCA(assayIBD[, day != 3])
+    fviz_eig(pcaDay12, bar_width = 0.6) + ggtitle("")__
+
+[![](09-chap_files/figure-html/fig-screepc12-1.png)](09-chap_files/figure-
+html/fig-screepc12-1.png "Figure 9.13: The screeplot shows us that the samples
+can be usefully represented in a two dimensional embedding.")
+
+Figure 9.13: The screeplot shows us that the samples can be usefully
+represented in a two dimensional embedding.
+
+    
+    
+    day12 = day[ day!=3 ]
+    rtPCA1 = fviz(pcaDay12, element = "ind", axes = c(1, 2), geom = c("point", "text"),
+      habillage = day12, repel = TRUE, palette = "Dark2",
+      addEllipses = TRUE, ellipse.type = "convex") + ggtitle("") +
+      coord_fixed()
+    rtPCA1 __
+
+[![](09-chap_files/figure-html/fig-rankthreshPCA-1.png)](09-chap_files/figure-
+html/fig-rankthreshPCA-1.png "Figure 9.14: We have used colors to identify the
+different days and have kept the sample labels as well. We have also added
+convex hulls for each day. The group mean is identified as the point with the
+larger symbol \(circle, triangle or square\).")
+
+Figure 9.14: We have used colors to identify the different days and have kept
+the sample labels as well. We have also added convex hulls for each day. The
+group mean is identified as the point with the larger symbol (circle, triangle
+or square).
+
+__
+
+Question 9.6
+
+Why do we use a threshold for the ranks?
+
+__
+
+Solution
+
+__
+
+Low abundances, at noise level occur for species that are not really present,
+of which there are more than half. A large jump in rank for these observations
+could easily occur without any meaningful reason. Thus we create a large
+number of ties for low abundance.
+
+Figure 9.14 shows that the sample arrange themselves naturally into two
+different groups according to the day of the samples. After discovering this
+effect, we delved into the differences that could explain these distinct
+clusters. There were two different protocols used (protocol 1 on day 1,
+protocol 2 on day 2) _and_ unfortunately two different provenances for the
+arrays used on those two days (array 1 on day 1, array 2 on day 2).
+
+A third set of data of four samples had to be collected to deconvolve the
+confounding effect. Array 2 was used with protocol 2 on Day 3, Figure 9.15
+shows the new PCA plot with all the samples created by the following:
+
+    
+    
+    pcaDay123 = rankthreshPCA(assayIBD)
+    fviz(pcaDay123, element = "ind", axes = c(1, 2), geom = c("point", "text"),
+      habillage = day, repel = TRUE, palette = "Dark2",
+      addEllipses = TRUE, ellipse.type = "convex") + 
+      ggtitle("") + coord_fixed()__
+
+[![](09-chap_files/figure-html/fig-
+Threesetspca123-1.png)](09-chap_files/figure-html/fig-Threesetspca123-1.png
+"Figure 9.15 \(a\): ")
+
+(a)
+
+[![](09-chap_files/figure-html/fig-
+Threesetspca123-2.png)](09-chap_files/figure-html/fig-Threesetspca123-2.png
+"Figure 9.15 \(b\): ")
+
+(b)
+
+Figure 9.15: When comparing the three day analysis to that of the first two
+days, we notice the inversion of signs in the coordinates on the second axis:
+this has no biological relevance. The important finding is that group 3
+overlaps heavily with group 1 indicating that it was the protocol change on
+Day 2 which created the variability.
+
+__
+
+Question 9.7
+
+In which situation would it be preferable to make confidence ellipses around
+the group means using the following code?
+
+    
+    
+    fviz_pca_ind(pcaDay123, habillage = day, labelsize = 3,
+      palette = "Dark2", addEllipses = TRUE, ellipse.level = 0.69)__
+
+[![](09-chap_files/figure-html/fig-screepc123-1.png)](09-chap_files/figure-
+html/fig-screepc123-1.png "Figure 9.16: The eigenvalue screeplot the case of 3
+groups is extremely similar to that with two groups shown in Figure fig-
+screepc12.")
+
+Figure 9.16: The eigenvalue screeplot the case of 3 groups is extremely
+similar to that with two groups shown in Figure 9.13.
+
+Through this visualization we were able to uncover a flaw in the original
+experimental design. The first two batches shown in green and brown were both
+balanced with regards to IBS and healthy rats. They do show very different
+levels of variability and overall multivariate coordinates. In fact, there are
+two **confounded** effects. Both the arrays and protocols were different on
+those two days. We had to run a third batch of experiments on day 3,
+represented in purple, this used protocol from day 1 and the arrays from day
+2. The third group faithfully overlaps with batch 1, telling us that the
+change in protocol was responsible for the variability.
+
+### 9.3.2 Removing batch effects
+
+Through the combination of the continuous measurements from `assayIBD` and the
+**supplementary** batch number as a factor, the PCA map has provided an
+invaluable investigation tool. This is a good example of the use of
+**supplementary points** 6. The mean-barycenter points are created by using
+the group-means of points in each of the three groups and serve as extra
+markers on the plot.
+
+6 This is called a supplementary point because the new observation-point is
+not used in the matrix decomposition.
+
+We can decide to re-align the three groups by subtracting the group means so
+that all the batches are centered on the origin. A slightly more effective way
+is to use the `ComBat` function available in the
+**[sva](https://bioconductor.org/packages/sva/)** package. This function uses
+a similar, but slightly more sophisticated method (Empirical Bayes mixture
+approach ([Leek et al. 2010](16-chap.html#ref-Leek:2010:batch))). We can see
+its effect on the data by redoing our robust PCA (see the result in Figure
+9.17):
+
+    
+    
+    model0 = model.matrix(~1, day)
+    combatIBD = ComBat(dat = assayIBD, batch = day, mod = model0)
+    pcaDayBatRM = rankthreshPCA(combatIBD)
+    fviz(pcaDayBatRM, element = "ind", geom = c("point", "text"),
+      habillage = day, repel=TRUE, palette = "Dark2", addEllipses = TRUE,
+      ellipse.type = "convex", axes =c(1,2)) + coord_fixed() + ggtitle("")__
+
+[![](09-chap_files/figure-html/fig-CombatIBD-1.png)](09-chap_files/figure-
+html/fig-CombatIBD-1.png "Figure 9.17: The modified data with the batch
+effects removed now show three batch-groups heavily overlapping and centered
+almost at the origin.")
+
+Figure 9.17: The modified data with the batch effects removed now show three
+batch-groups heavily overlapping and centered almost at the origin.
+
+### 9.3.3 Hybrid data and Bioconductor containers
+
+A more rational way of combining the batch and treatment information into
+compartments of a composite object is to use the _SummarizedExperiment_ class.
+It includes special _slots_ for the assay(s) where rows represent features of
+interest (e.g., genes, transcripts, exons, etc.) and columns represent
+samples. Supplementary information about the features can be stored in a
+_DataFrame_ object, accessible using the function `rowData`. Each row of the
+_DataFrame_ provides information on the feature in the corresponding row of
+the _SummarizedExperiment_ object.
+
+[![A confusing notational similarity occurs here, in the SummarizedExperiment
+framework a DataFrame is not the same as a
+data.frame.](imgs/devil.png)](imgs/devil.png "A confusing notational
+similarity occurs here, in the SummarizedExperiment framework a DataFrame is
+not the same as a data.frame.")
+
+A confusing notational similarity occurs here, in the SummarizedExperiment
+framework a `DataFrame` is not the same as a _data.frame._
+
+Here we insert the two covariates day and treatment in the `colData` object
+and combine it with assay data in a new _SummarizedExperiment_ object.
+
+    
+    
+    library("SummarizedExperiment")
+    treatment  = factor(ifelse(grepl("Cntr|^C", colnames(IBDchip)), "CTL", "IBS"))
+    sampledata = DataFrame(day = day, treatment = treatment)
+    chipse = SummarizedExperiment(assays  = list(abundance = assayIBD),
+                                  colData = sampledata)__
+
+This is the best way to keep all the relevant data together, it will also
+enable you to quickly filter the data while keeping all the information
+aligned properly.
+
+[![You can explore composite objects using the Environment pane in RStudio.
+You will see that in chipse, some of the slots are
+empty.](imgs/devil.png)](imgs/devil.png "You can explore composite objects
+using the Environment pane in RStudio. You will see that in chipse, some of
+the slots are empty.")
+
+You can explore composite objects using the Environment pane in RStudio. You
+will see that in `chipse`, some of the slots are empty.
+
+__
+
+Question 9.8
+
+Make a new _SummarizedExperiment_ object by choosing the subset of the samples
+that were created on day 2.
+
+__
+
+Solution
+
+__
+
+    
+    
+    chipse[, day == 2]__
+    
+    
+    class: SummarizedExperiment 
+    dim: 8634 16 
+    metadata(0):
+    assays(1): abundance
+    rownames(8634): 01010101000000.2104_gPM_GC 01010101000000.2141_gPM_GC
+      ... bru.tab.d.HIII.Con323.sig_st bru.tab.d.HIII.Con5.sig_st
+    rowData names(0):
+    colnames(16): 20CF 20DF ... IBSM IBSP
+    colData names(2): day treatment
+
+Columns of the _DataFrame_ represent different attributes of the features of
+interest, e.g., gene or transcript IDs, etc. Here is an example of hybrid data
+container from single cell experiments (see Bioconductor workflow in
+Perraudeau et al. ([2017](16-chap.html#ref-Perraudeau:2017)) for more
+details).
+
+    
+    
+    corese = readRDS("../data/normse.rds")
+    norm = assays(corese)$normalizedValues __
+
+After the pre-processing and normalization steps prescribed in the workflow,
+we retain the 1000 most variable genes measured on 747 cells.
+
+__
+
+Question 9.9
+
+How many different batches do the cells belong to ?
+
+__
+
+Solution
+
+__
+
+    
+    
+    length(unique(colData(corese)$Batch))__
+    
+    
+    [1] 18
+
+We can look at a PCA of the normalized values and check graphically that the
+batch effect has been removed:
+
+    
+    
+    respca = dudi.pca(t(norm), nf = 3, scannf = FALSE)
+    plotscree(respca, 15)
+    PCS = respca$li[, 1:3]__
+
+[![](09-chap_files/figure-html/fig-screeplotnorm-1.png)](09-chap_files/figure-
+html/fig-screeplotnorm-1.png "Figure 9.18: Screeplot of the PCA of the
+normalized data.")
+
+Figure 9.18: Screeplot of the PCA of the normalized data.
+
+[![We have set up colors for the clusters as in the workflow, \(the code is
+not shown here\).](imgs/devil.png)](imgs/devil.png "We have set up colors for
+the clusters as in the workflow, \(the code is not shown here\).")
+
+We have set up colors for the clusters as in the workflow, (the code is not
+shown here).
+
+Since the screeplot in Figure 9.18 shows us that we must not dissociate axes 2
+and 3, we will make a three dimensional plot with the
+**[rgl](https://cran.r-project.org/web/packages/rgl/)** package. We use the
+following interactive code:
+
+    
+    
+    library("rgl")
+    batch = colData(corese)$Batch
+    plot3d(PCS,aspect=sqrt(c(84,24,20)),col=col_clus[batch])
+    plot3d(PCS,aspect=sqrt(c(84,24,20)),
+    col = col_clus[as.character(publishedClusters)])__
+
+[![](imgs/plotnormpcabatch1.png)](imgs/plotnormpcabatch1.png
+"Figure 9.19 \(a\): ")
+
+(a)
+
+[![](imgs/plotnormpclust1.png)](imgs/plotnormpclust1.png "Figure 9.19 \(b\):
+")
+
+(b)
+
+Figure 9.19: Two-dimensional screenshots of three-dimensional
+**[rgl](https://cran.r-project.org/web/packages/rgl/)** plots. The points are
+colored according to batch numbers in (a), and according to the original
+clustering in (b). We can see that the batch effect has been effectively
+removed and that the cells show the original clustering.
+
+**Note:** Of course, the book medium is limiting here, as we are showing two
+static projections that do not do justice to the depth available when looking
+at the interactive dynamic plots as they appear using the `plot3d` function.
+We encourage the reader to experiment extensively with these and other
+interactive packages and they provide a much more intuitive experience of the
+data.
+
+## 9.4 Correspondence analysis for contingency tables
+
+### 9.4.1 Cross-tabulation and contingency tables
+
+Categorical data abound in biological settings: sequence status (CpG/non-CpG),
+phenotypes, taxa are often coded as factors as we saw in Chapter 2. Cross-
+tabulation of two such variables gives us a **contingency table** ; the result
+of counting the co-occurrence of two phenotypes (sex and colorblindness was
+such an example). We saw that the first step is to look at the independence of
+the two categorical variables; the standard statistical measure of
+independence uses the **chisquare distance**. This quantity will replace the
+variance we used for continuous measurements.
+
+The columns and rows of the table have the same `status’ and we are not in
+supervised/regression type setting. We won’t see a sample/variable divide; as
+a consequence the rows and columns will have the same status and we will
+‘center’ both the rows and the columns. This symmetry will also translate in
+our use of **biplots** where both dimensions appear on the same plot.
+
+Table 9.1: Sample by mutation matrix.
+
+Patient | Mut1 | Mut2 | Mut3 | ...  
+---|---|---|---|---  
+AHX112 | 0 | 0 | 0 |   
+AHX717 | 1 | 0 | 1 |   
+AHX543 | 1 | 0 | 0 |   
+  
+#### Transforming the data to tabular form.
+
+If the data are collected as long lists with each subject (or sample)
+associated to its levels of the categorical variables, we may want to
+transform them into a contingency table. Here is an example. In Table 9.1 HIV
+mutations are tabulated as indicator (0/1) binary variables. These data are
+then transformed into a **mutation co-occurrence matrix** shown in Table 9.2.
+
+Table 9.2: Cross-tabulation of the HIV mutations showing two-way co-
+occurrences.
+
+Patient | Mut1 | Mut2 | Mut3 | ...  
+---|---|---|---|---  
+Mut1 | 853 | 29 | 10 |   
+Mut2 | 29 | 853 | 52 |   
+Mut3 | 10 | 52 | 853 |   
+  
+__
+
+Question 9.10
+
+What information is lost in this cross-tabulation ?  
+When will this matter?
+
+Here are some co-occurrence data from the HIV database ([Rhee et al.
+2003](16-chap.html#ref-HIVdb)). Some of these mutations have a tendency to co-
+occur.
+
+__
+
+Question 9.11
+
+Test the hypothesis of independence of the mutations.
+
+Before explaining the details of how correspondence analysis works, let’s look
+at the output of one of many correspondence analysis functions. We use
+`dudi.coa` from the **[ade4](https://cran.r-project.org/web/packages/ade4/)**
+package to plot the mutations in a lower dimensional projection; the procedure
+follows what we did for PCA.
+
+    
+    
+    cooc = read.delim2("../data/coccurHIV.txt", header = TRUE, sep = ",")
+    cooc[1:4, 1:11]__
+    
+    
+        X4S X6D X6K X11R X20R X21I X35I X35L X35M X35T X39A
+    4S    0  28   8    0   99    0   22    5   15    3   45
+    6D   26   0   0   34  131    0  108    4   30   13   84
+    6K    7   0   0    6   45    0    5   13   38   35   12
+    11R   0  35   7    0  127   12   60   17   15    6   42
+    
+    
+    HIVca = dudi.coa(cooc, nf = 4, scannf = FALSE)
+    fviz_eig(HIVca, geom = "bar", bar_width = 0.6) + ggtitle("")__
+
+[![](09-chap_files/figure-html/fig-HIVnnrti-1.png)](09-chap_files/figure-
+html/fig-HIVnnrti-1.png "Figure 9.20: The dependencies between HIV mutations
+is clearly a three dimensional phenomenon, the three first eigenvalues show a
+clear signal in the data.")
+
+Figure 9.20: The dependencies between HIV mutations is clearly a three
+dimensional phenomenon, the three first eigenvalues show a clear signal in the
+data.
+
+[![](imgs/scatter3d-HIV.png)](imgs/scatter3d-HIV.png "Figure 9.21: A
+screenshot of the output from an interactive 3d plotting function
+\(plot3d\).")
+
+Figure 9.21: A screenshot of the output from an interactive 3d plotting
+function (`plot3d`).
+
+After looking at a screeplot, we see that dimensionality of the underlying
+variation is definitely three dimensional, we plot these three dimensions.
+Ideally this would be done with an interactive three-dimensional plotting
+function such as that provided through the package
+**[rgl](https://cran.r-project.org/web/packages/rgl/)** as shown in Figure
+9.21.
+
+__
+
+Question 9.12
+
+Using the **[car](https://cran.r-project.org/web/packages/car/)** and
+**[rgl](https://cran.r-project.org/web/packages/rgl/)** packages make 3d
+scatterplot similar to Figure 9.21.  
+Compare to the plot obtained using aspect=FALSE with the plot3d function from
+**[rgl](https://cran.r-project.org/web/packages/rgl/)**.  
+What structure do you notice by rotating the cloud of points?
+
+__
+
+Solution
+
+__
+
+    
+    
+    library("rgl")
+    CA1=HIVca$li[,1];CA2=HIVca$li[,2];CA3=HIVca$li[,3]
+    plot3d(CA1,CA2,CA3,aspect=FALSE,col="purple")__
+    
+    
+    fviz_ca_row(HIVca,axes = c(1, 2),geom="text", col.row="purple",
+      labelsize=3)+ggtitle("") + xlim(-0.55, 1.7) + ylim(-0.53,1.1) +
+      theme_bw() +  coord_fixed()
+    fviz_ca_row(HIVca,axes = c(1, 3), geom="text",col.row="purple",
+        labelsize=3)+ggtitle("")+ xlim(-0.55, 1.7)+ylim(-0.5,0.6) +
+        theme_bw() + coord_fixed()__
+
+[![](09-chap_files/figure-html/fig-HIVca-1.png)](09-chap_files/figure-
+html/fig-HIVca-1.png "Figure 9.22 \(a\): ")
+
+(a)
+
+[![](09-chap_files/figure-html/fig-HIVca-2.png)](09-chap_files/figure-
+html/fig-HIVca-2.png "Figure 9.22 \(b\): ")
+
+(b)
+
+Figure 9.22: Two planar maps of the mutations defined with the horizontal axis
+corresponding to the first eigenvector of the CA and the vertical axis being
+the second axis in (a), and the third in (b); notice the difference in
+heights.
+
+__
+
+Question 9.13
+
+Show the code for plotting the plane defined by axes 1 and 3 of the
+correspondence analysis respecting the scaling of the vertical axis as shown
+in the bottom figure of Figure 9.22.
+
+__
+
+Solution
+
+__
+
+    
+    
+    fviz_ca_row(HIVca, axes=c(1, 3), geom="text", col.row="purple", labelsize=3) +
+      ggtitle("") + theme_minimal() + coord_fixed()__
+
+This first example showed how to map all the different levels of one
+categorical variable (the mutations) in a similar way to how PCA projects
+continuous variables. We will now explore how this can be extended to two or
+more categorical variables.
+
+### 9.4.2 Hair color, eye color and phenotype co-occurrence
+
+We will consider a small table, so we can follow the analysis in detail. The
+data are a contingency table of hair-color and eye-color phenotypic co-
+occurrence from students as shown in Table 9.3. In [Chapter 2](02-chap.html),
+we used a \\(\chi^2\\) test to detect possible dependencies:
+
+    
+    
+    HairColor = HairEyeColor[,,2]
+    chisq.test(HairColor)__
+    
+    
+        Pearson's Chi-squared test
+    
+    data:  HairColor
+    X-squared = 106.66, df = 9, p-value < 2.2e-16
+
+Table 9.3: Cross tabulation of students hair and eye color.
+
+| Brown | Blue | Hazel | Green  
+---|---|---|---|---  
+Black | 36 | 9 | 5 | 2  
+Brown | 66 | 34 | 29 | 14  
+Red | 16 | 7 | 7 | 7  
+Blond | 4 | 64 | 5 | 8  
+  
+However, stating _non independence_ between hair and eye color is not enough.
+We need a more detailed explanation of where the dependencies occur: which
+hair color occurs more often with green eyes ? Are some of the variable levels
+independent? In fact we can study the departure from independence using a
+special weighted version of SVD. This method can be understood as a simple
+extension of PCA and MDS to contingency tables.
+
+#### Independence: computationally and visually.
+
+We start by computing the row and column sums; we use these to build the table
+that would be expected if the two phenotypes were independent. We call this
+expected table `HCexp`.
+
+    
+    
+    rowsums = as.matrix(apply(HairColor, 1, sum))
+    rowsums __
+    
+    
+          [,1]
+    Black   52
+    Brown  143
+    Red     37
+    Blond   81
+    
+    
+    colsums = as.matrix(apply(HairColor, 2, sum))
+    t(colsums)__
+    
+    
+         Brown Blue Hazel Green
+    [1,]   122  114    46    31
+    
+    
+    HCexp = rowsums %*%t (colsums) / sum(colsums)__
+
+Now we compute the \\(\chi^2\\) (chi-squared) statistic, which is the sum of
+the scaled residuals for each of the cells of the table:
+
+    
+    
+    sum((HairColor  - HCexp)^2/HCexp)__
+    
+    
+    [1] 106.6637
+
+We can study these residuals from the expected table, first numerically then
+in Figure 9.23.
+
+    
+    
+    round(t(HairColor-HCexp))__
+    
+    
+           Hair
+    Eye     Black Brown Red Blond
+      Brown    16    10   2   -28
+      Blue    -10   -18  -6    34
+      Hazel    -3     8   2    -7
+      Green    -3     0   3     0
+    
+    
+    library("vcd")
+    mosaicplot(HairColor, shade=TRUE, las=1, type="pearson", cex.axis=0.7, main="")__
+
+[![](09-chap_files/figure-html/fig-MosaicHair-1.png)](09-chap_files/figure-
+html/fig-MosaicHair-1.png "Figure 9.23: Visualization of the departure from
+independence. Now, the boxes are proportional in size to the actual observed
+counts and we no longer have a ‘rectangular’ property. The departure from
+independence is measured in Chisquared distance for each of the boxes and
+colored according to whether the residuals are large and positive. Dark blue
+indicates a positive association, for instance between blue eyes and blonde
+hair, red indicates a negative association such as in the case of blond hair
+and brown eyes.")
+
+Figure 9.23: Visualization of the departure from independence. Now, the boxes
+are proportional in size to the actual observed counts and we no longer have a
+‘rectangular’ property. The departure from independence is measured in
+Chisquared distance for each of the boxes and colored according to whether the
+residuals are large and positive. Dark blue indicates a positive association,
+for instance between blue eyes and blonde hair, red indicates a negative
+association such as in the case of blond hair and brown eyes.
+
+#### Mathematical Formulation.
+
+Here are the computations we just did in R in a more mathematical form. For a
+general contingency table \\({\mathbf N}\\) with \\(I\\) rows and \\(J\\)
+columns and a total sample size of \\(n=\sum_{i=1}^I \sum_{j=1}^J n_{ij}=
+n_{\cdot \cdot}\\). If the two categorical variables were independent, each
+cell frequency would be approximately equal to
+
+\\[ n_{ij} = \frac{n_{i \cdot}}{n} \frac{n_{\cdot j}}{n} \times n \\]
+
+can also be written:
+
+\\[ {\mathbf N} = {\mathbf c r'} \times n, \qquad \mbox{ where } c=
+\frac{1}{n} {{\mathbf N}} {\mathbb 1}_m \;\mbox{ and }\; r'=\frac{1}{n}
+{\mathbf N}' {\mathbb 1}_p \\]
+
+The departure from independence is measured by the \\(\chi^2\\) statistic
+
+\\[ {\cal X}^2=\sum_{i,j}
+\frac{\left(n_{ij}-\frac{n_{i\cdot}}{n}\frac{n_{\cdot j}}{n}n\right)^2}
+{\frac{n_{i\cdot}n_{\cdot j}}{n^2}n} \\]
+
+Once we have ascertained that the two variables are not independent, we use a
+weighted multidimensional scaling using \\(\chi^2\\) distances to visualize
+the associations.
+
+**Correspondece Analysis functions** `CCA` in
+**[vegan](https://cran.r-project.org/web/packages/vegan/)** , `CA` in
+**[FactoMineR](https://cran.r-project.org/web/packages/FactoMineR/)** ,
+`ordinate` in **[phyloseq](https://bioconductor.org/packages/phyloseq/)** ,
+`dudi.coa` in **[ade4](https://cran.r-project.org/web/packages/ade4/)**.
+
+The method is called **Correspondence Analysis (CA)** or **Dual Scaling** and
+there are multiple R packages that implement it.
+
+Here we make a simple biplot of the Hair and Eye colors.
+
+    
+    
+    HC = as.data.frame.matrix(HairColor)
+    coaHC = dudi.coa(HC,scannf=FALSE,nf=2)
+    round(coaHC$eig[1:3]/sum(coaHC$eig)*100)__
+    
+    
+    [1] 89 10  2
+    
+    
+    fviz_ca_biplot(coaHC, repel=TRUE, col.col="brown", col.row="purple") +
+      ggtitle("") + ylim(c(-0.5,0.5))__
+
+[![](09-chap_files/figure-html/fig-HCscatter-1.png)](09-chap_files/figure-
+html/fig-HCscatter-1.png "Figure 9.24: The CA plot gives a representation of a
+large proportion of the chisquare distance between the data and the values
+expected under independence. The first axis shows a contrast between black
+haired and blonde haired students, mirrored by the brown eye, blue eye
+opposition. In CA the two categories play symmetric roles and we can interpret
+the proximity of Blue eyes and Blond hair has meaning that there is strong co-
+occurence of these categories.")
+
+Figure 9.24: The CA plot gives a representation of a large proportion of the
+chisquare distance between the data and the values expected under
+independence. The first axis shows a contrast between black haired and blonde
+haired students, mirrored by the brown eye, blue eye opposition. In CA the two
+categories play symmetric roles and we can interpret the proximity of Blue
+eyes and Blond hair has meaning that there is strong co-occurence of these
+categories.
+
+__
+
+Question 9.14
+
+What percentage of the Chisquare statistic is explained by the first two axes
+of the Correspondence Analysis?
+
+__
+
+Question 9.15
+
+Compare the results with those obtained by using `CCA` in the
+**[vegan](https://cran.r-project.org/web/packages/vegan/)** package with the
+appropriate value for the `scaling` parameter.
+
+__
+
+Solution
+
+__
+
+    
+    
+    library("vegan")
+    res.ca = vegan::cca(HairColor)
+    plot(res.ca, scaling=3)__
+
+#### Interpreting the biplots
+
+CA has a special barycentric property: the biplot scaling is chosen so that
+the row points are placed at the center of gravity of the column levels with
+their respective weights. For instance, the Blue eyes column point is at the
+center gravity of the (Black, Brown, Red, Blond) with weights proportional to
+(9, 34, 7, 64). The Blond row point is very heavily weighted, this is why
+Figure 9.24 shows Blond and Blue quite close together.
+
+## 9.5 Finding time…and other important gradients.
+
+All the methods we have studied in the last sections are commonly known as
+**ordination** methods. In the same way **clustering** allowed us to detect
+and interpret a hidden factor/categorical variable, ordination enables us to
+detect and interpret a hidden ordering, gradient or latent variable in the
+data.
+
+[![](imgs/ProustProxy.png)](imgs/ProustProxy.png)
+
+Ecologists have a long history of interpreting the arches formed by
+observations points in correspondence analysis and principal components as
+ecological gradients ([Prentice 1977](16-chap.html#ref-Prentice:1977)). Let’s
+illustrate this first with a very simple data set on which we perform a
+correspondence analysis.
+
+The first examples of seriation or chronology detection was that of
+archaelogical artifacts by Kendall ([1969](16-chap.html#ref-Kendall:1969)),
+who used presence/absence of features on pottery to date them. These so-called
+seriation methods are still relevant today as we follow developmental
+trajectories in single cell data for instance.
+
+    
+    
+    load("../data/lakes.RData")
+    lakelike[1:3,1:8]__
+    
+    
+         plant1 plant2 plant3 plant4 plant5 plant6 plant7 plant8
+    loc1      6      4      0      3      0      0      0      0
+    loc2      4      5      5      3      4      2      0      0
+    loc3      3      4      7      4      5      2      1      1
+    
+    
+    reslake=dudi.coa(lakelike,scannf=FALSE,nf=2)
+    round(reslake$eig[1:8]/sum(reslake$eig),2)__
+    
+    
+    [1] 0.56 0.25 0.09 0.03 0.03 0.02 0.01 0.00
+
+We plot both the row-location points (Figure 9.25 (a)) and the biplot of both
+location and plant species in the lower part of Figure 9.25 (b); this plot was
+made with:
+
+    
+    
+    fviz_ca_row(reslake,repel=TRUE)+ggtitle("")+ylim(c(-0.55,1.7))
+    fviz_ca_biplot(reslake,repel=TRUE)+ggtitle("")+ylim(c(-0.55,1.7))__
+
+[![](09-chap_files/figure-html/fig-LakeCAr-1.png)](09-chap_files/figure-
+html/fig-LakeCAr-1.png "Figure 9.25 \(a\): ")
+
+(a)
+
+[![](09-chap_files/figure-html/fig-LakeCAr-2.png)](09-chap_files/figure-
+html/fig-LakeCAr-2.png "Figure 9.25 \(b\): ")
+
+(b)
+
+Figure 9.25: The locations near the lake are ordered along an arch as shown in
+(a). In the biplot (b), we can see which plants are most frequent at which
+locations by looking at the red triangles closest to the blue points.
+
+__
+
+Question 9.16
+
+Looking back at the raw matrix `lakes` as it appears, do you see a pattern in
+its entries?  
+What would happen if the plants had been ordered by actual taxa names for
+instance?
+
+### 9.5.1 Dynamics of cell development
+
+We will now analyse a more interesting data set that was published by Moignard
+et al. ([2015](16-chap.html#ref-Moignard:2015)). This paper describes the
+dynamics of blood cell development. The data are single cell gene expression
+measurements of 3,934 cells with blood and endothelial potential from five
+populations from between embryonic days E7.0 and E8.25.
+
+[![](imgs/CellTree.png)](imgs/CellTree.png "Figure 9.26: The four cell
+populations studied here are representative of three sequential states
+\(PS,NP,HF\) and two possible final branches \(4SG and 4SFG^{-}\).")
+
+Figure 9.26: The four cell populations studied here are representative of
+three sequential states (PS,NP,HF) and two possible final branches (4SG and
+4SFG\\(^{-}\\)).
+
+Remember from [Chapter 4](04-chap.html) that several different distances are
+available for comparing our cells. Here, we start by computing both an
+\\(L_2\\) distance and the \\(\ell_1\\) distance between the 3,934 cells.
+
+    
+    
+    Moignard = readRDS("../data/Moignard.rds")
+    cellt = rowData(Moignard)$celltypes
+    colsn = c("red", "purple", "orange", "green", "blue")
+    blom = assay(Moignard)
+    dist2n.euclid = dist(blom)
+    dist1n.l1     = dist(blom, "manhattan")__
+
+The classical multidimensional scaling on these two distances matrices can be
+carried out using:
+
+    
+    
+    ce1Mds = cmdscale(dist1n.l1,     k = 20, eig = TRUE)
+    ce2Mds = cmdscale(dist2n.euclid, k = 20, eig = TRUE)
+    perc1  = round(100*sum(ce1Mds$eig[1:2])/sum(ce1Mds$eig))
+    perc2  = round(100*sum(ce2Mds$eig[1:2])/sum(ce2Mds$eig))__
+
+We look at the underlying dimension and see in Figure 9.27 that two dimensions
+can provide a substantial fraction of the variance.
+
+    
+    
+    plotscree(ce1Mds, m = 4)
+    plotscree(ce2Mds, m = 4)__
+
+[![](09-chap_files/figure-html/fig-CMDSplotscree-1.png)](09-chap_files/figure-
+html/fig-CMDSplotscree-1.png "Figure 9.27 \(a\): ")
+
+(a)
+
+[![](09-chap_files/figure-html/fig-CMDSplotscree-2.png)](09-chap_files/figure-
+html/fig-CMDSplotscree-2.png "Figure 9.27 \(b\): ")
+
+(b)
+
+Figure 9.27: Screeplots from MDS on \\(\ell_1\\) (a) and \\(L_2\\) (b)
+distances. We see that the eigenvalues are extremely similar and both point to
+a \\(2\\) dimensional phenomenon.
+
+The first 2 coordinates account for 78 % of the variability when the
+\\(\ell_1\\) distance is used between cells, and 57% when the \\(L^2\\)
+distance is used. We see in Figure 9.28 (a) the first plane for the MDS on the
+\\(\ell_1\\) distances between cells:
+
+    
+    
+    c1mds = ce1Mds$points[, 1:2] |>
+            `colnames<-`(paste0("L1_PCo", 1:2)) |>
+            as_tibble()
+    ggplot(c1mds, aes(x = L1_PCo1, y = L1_PCo2, color = cellt)) +
+      geom_point(aes(color = cellt), alpha = 0.6) +
+      scale_colour_manual(values = colsn) + guides(color = "none")
+    c2mds = ce2Mds$points[, 1:2] |>
+            `colnames<-`(paste0("L2_PCo", 1:2)) |>
+            as_tibble()
+    ggplot(c2mds, aes(x = L2_PCo1, y = L2_PCo2, color = cellt)) +
+      geom_point(aes(color = cellt), alpha = 0.6) +
+       scale_colour_manual(values = colsn) + guides(color = "none")__
+
+[![](09-chap_files/figure-html/fig-CMDSplotL2-1.png)](09-chap_files/figure-
+html/fig-CMDSplotL2-1.png "Figure 9.28 \(a\): ")
+
+(a)
+
+[![](09-chap_files/figure-html/fig-CMDSplotL2-2.png)](09-chap_files/figure-
+html/fig-CMDSplotL2-2.png "Figure 9.28 \(b\): ")
+
+(b)
+
+Figure 9.28: Moignard cell data colored according to the cell types (blue: PS,
+green: NP, yellow: HF, red: 4SG, purple: 4SFG\\(^-\\)) in the two dimensional
+MDS plots created. In (a) using \\(\ell_1\\) distances and in (b) using the L2
+distances.
+
+Figure 9.28 (b) is created in the same way and shows the two-dimensional
+projection created by using MDS on the L2 distances.
+
+Figure 9.28 shows that both distances (L1 and L2) give the same first plane
+for the MDS with very similar representations of the underlying gradient
+followed by the cells.
+
+We can see from Figure 9.28 that the cells are not distributed uniformly in
+the lower dimensions we have been looking at, we see a definite organization
+of the points. All the cells of type 4SG represented in red form an elongated
+cluster who are much less mixed with the other cell types.
+
+### 9.5.2 Local, nonlinear methods
+
+Multidimensional scaling and non metric multidimensional scaling aims to
+represent **all** distances as precisely as possible and the large distances
+between far away points skew the representations. It can be beneficial when
+looking for gradients or low dimensional manifolds to restrict ourselves to
+approximations of points that are close together. This calls for methods that
+try to represent local (small) distances well and do not try to approximate
+distances between faraway points with too much accuracy.
+
+There has been substantial progress in such methods in recent years. The use
+of **kernels** computed using the calculated interpoint distances allows us to
+decrease the importance of points that are far apart. A radial basis kernel is
+of the form
+
+\\[ 1-\exp\left(-\frac{d(x,y)^2}{\sigma^2}\right), \quad\mbox{where } \sigma^2
+\mbox{ is fixed.} \\]
+
+It has the effect of heavily discounting large distances. This can be very
+useful as the precision of interpoint distances is often better at smaller
+ranges; several examples of such methods are covered in Exercise 9.6 at the
+end of this chapter.
+
+__
+
+Question 9.17
+
+Why do we take the difference between the 1 and the exponential?  
+What happens when the distance between \\(x\\) and \\(y\\) is very big?
+
+#### t-SNE.
+
+This widely used method adds flexibility to the kernel defined above and
+allows the \\(\sigma^2\\) parameter to vary locally (there is a normalization
+step so that it averages to one). The t-SNE method starts out from the
+positions of the points in the high dimensional space and derives a
+probability distribution on the set of pairs of points, such that the
+probabilities are proportional to the points’ proximities or similarities. It
+then uses this distribution to construct a representation of the dataset in
+low dimensions. The method is not robust and has the property of separating
+clusters of points artificially; however, this property can also help clarify
+a complex situation. One can think of it as a method akin to graph (or
+network) layout algorithms. They stretch the data to clarify relations between
+the very close (in the network: connected) points, but the distances between
+more distal (in the network: unconnected) points cannot be interpreted as
+being on the same scales in different regions of the plot. In particular,
+these distances will depend on the local point densities. Here is an example
+of the output of t-SNE on the cell data:
+
+    
+    
+    library("Rtsne")
+    restsne = Rtsne(blom, dims = 2, perplexity = 30, verbose = FALSE,
+                    max_iter = 900)
+    dftsne = restsne$Y[, 1:2] |>
+             `colnames<-`(paste0("axis", 1:2)) |>
+             as_tibble()
+    ggplot(dftsne,aes(x = axis1, y = axis2, color = cellt)) +
+      geom_point(aes(color = cellt), alpha = 0.6) +
+       scale_color_manual(values = colsn) + guides(color = "none")
+    restsne3 = Rtsne(blom, dims = 3, perplexity = 30, verbose = FALSE,
+                     max_iter = 900)
+    dftsne3 = restsne3$Y[, 1:3] |>
+              `colnames<-`(paste0("axis", 1:3)) |> 
+              as_tibble()
+    ggplot(dftsne3,aes(x = axis3, y = axis2, group = cellt)) +
+          geom_point(aes(color = cellt), alpha = 0.6) +
+          scale_colour_manual(values = colsn) + guides(color = "none")__
+
+[![](09-chap_files/figure-html/fig-tsnecells-1.jpeg)](09-chap_files/figure-
+html/fig-tsnecells-1.jpeg "Figure 9.29 \(a\): ")
+
+(a)
+
+[![](09-chap_files/figure-html/fig-tsnecells-2.jpeg)](09-chap_files/figure-
+html/fig-tsnecells-2.jpeg "Figure 9.29 \(b\): ")
+
+(b)
+
+Figure 9.29: The four cell populations studied here are representative of
+three sequential states (PS,NP,HF) and two possible final branches (4SG and
+4SFG\\(^{-}\\)). The plot on the left was obtained by choosing 2 dimensions
+for t-sne at a perplexity of 30. The lower plot has obtained by choosing 3
+dimensions, we can see that this third t-SNE axis represented here as the
+horizontal axis.
+
+In this case in order to see the subtle differences between MDS and t-SNE, it
+is really necessary to use 3d plotting.
+
+__
+
+Task
+
+Use the **[rgl](https://cran.r-project.org/web/packages/rgl/)** package to
+look at the three t-SNE dimensions and add the correct cell type colors to the
+display.
+
+Two of these 3d snapshots are shown in Figure 9.30, we see a much stronger
+grouping of the purple points than in the MDS plots.
+
+**Note:** A site worth visiting in order to appreciate more about the
+sensitivity of the t-SNE method to the complexity and \\(\sigma\\) parameters
+can be found at <http://distill.pub/2016/misread-tsne>.
+
+[![](imgs/tsnemoignard3scrop.png)](imgs/tsnemoignard3scrop.png
+"Figure 9.30 \(a\): ")
+
+(a)
+
+[![](imgs/tsnemoignard3crop.png)](imgs/tsnemoignard3crop.png
+"Figure 9.30 \(b\): ")
+
+(b)
+
+Figure 9.30: Moignard cell data colored according to the cell types (blue: PS,
+green: NP, yellow: HF, red: 4SG, purple: 4SFG\\(^-\\)) in the three-
+dimensional t-SNE layouts. We can see that the purple cells (4SFG\\(^-\\))
+segregate at the outer shell on the top of the point cloud.
+
+__
+
+Question 9.18
+
+Visualize a two-dimensional t-SNE embedding of the Ukraine distances from
+Section 9.2.
+
+__
+
+Solution
+
+__
+
+    
+    
+    ukraine_tsne = Rtsne(ukraine_dists, is_distance = TRUE, perplexity = 8)
+    ukraine_tsne_df = tibble(
+      PCo1 = ukraine_tsne$Y[, 1],
+      PCo2 = ukraine_tsne$Y[, 2],
+      labs = attr(ukraine_dists, "Labels")
+    )
+    ggplot(ukraine_tsne_df, aes(x = PCo1, y = PCo2, label = labs)) +
+      geom_point() + geom_text_repel(col = "#0057b7") + coord_fixed() __
+
+[![](09-chap_files/figure-html/fig-ukrainetsne-1.png)](09-chap_files/figure-
+html/fig-ukrainetsne-1.png "Figure 9.31: t-SNE map based of Ukraine.")
+
+Figure 9.31: t-SNE map based of Ukraine.
+
+There are several other nonlinear methods for estimating nonlinear
+trajectories followed by points in the relevant state spaces. Here are a few
+examples.
+
+**[RDRToolbox](https://cran.r-project.org/web/packages/RDRToolbox/)** Local
+linear embedding (**LLE**) and **isomap**
+
+**[diffusionMap](https://cran.r-project.org/web/packages/diffusionMap/)** This
+package models connections between points as a Markovian kernel.
+
+**[kernlab](https://cran.r-project.org/web/packages/kernlab/)** Kernel methods
+
+**[LPCM-package](https://cran.r-project.org/web/packages/LPCM-package/)**
+Local principal curves
+
+## 9.6 Multitable techniques
+
+Current studies often attempt to quantify variation in the microbial, genomic,
+and metabolic measurements across different experimental conditions. As a
+result, it is common to perform multiple assays on the same biological samples
+and ask what features – microbes, genes, or metabolites, for example – are
+associated with different sample conditions. There are many ways to approach
+these questions. Which to apply depends on the study’s focus.
+
+### 9.6.1 Co-variation, inertia, co-inertia and the RV coefficient
+
+As in physics, we define inertia as a sum of distances with ‘weighted’ points.
+This enables us to compute the inertia of counts in a contingency table as the
+weighted sum of the squares of distances between observed and expected
+frequencies (as in the chisquare statistic).
+
+Another generalization of variance-inertia is the useful Phylogenetic
+diversity index. (computing the sum of distances between a subset of taxa
+through the tree). Other useful generalizations include using variability of
+points on a graph taken from standard spatial statistics.
+
+If we want to study two standardized variables measured at the same 10
+locations together, we use their **covariance**. If \\(x\\) represents the
+standardized PH, and and \\(y\\) the standardized humidity, we measure their
+covariation using the mean
+
+\\[ \text{cov}(x,y) = \text{mean}(x1*y1 + x2*y2 + x3*y3 + \cdots + x10*y10).
+\tag{9.2}\\]
+
+If \\(x\\) and \\(y\\) co-vary in the same direction, this will be big. We saw
+how useful the correlation coefficient we defined in [Chapter 8](08-chap.html)
+was to our multivariate analyses. Multitable generalizations will be just as
+useful.
+
+### 9.6.2 Mantel coefficient and a test of distance correlation
+
+[![There are some precautions to be taken when using the Mantel coefficient,
+see a critical review in Guillot and Rousset
+\(2013\).](imgs/devil.png)](imgs/devil.png "There are some precautions to be
+taken when using the Mantel coefficient, see a critical review in
+@Guillot:2013.")
+
+There are some precautions to be taken when using the Mantel coefficient, see
+a critical review in Guillot and Rousset ([2013](16-chap.html#ref-
+Guillot:2013)).
+
+The Mantel coefficient, one of the earliest version of association measures,
+is probably also the most popular now, especially in ecology ([Josse and
+Holmes 2016](16-chap.html#ref-Josse:2016)). Given two dissimilarity matrices
+\\(D^X\\) and \\(D^Y\\) associated with \\(X\\) and \\(Y\\), make these
+matrices into vectors the way the R `dist` function does, and compute their
+linear correlation. A prototypical application is, for instance, to compute
+\\(D^X\\) from the soil chemistry at 17 different locations and to use
+\\(D^Y\\) to represent dissimilarities in plant occurences as measured by the
+Jaccard index between the same 17 locations. The Mantel coefficient is defined
+mathematically as:
+
+\\[ r_m(X, Y) = \frac{ \sum_{i\neq j} \left(d_{ij}^X − \bar{d}^X \right)
+\left(d_{ij}^Y − \bar{d}^Y \right) } { \sqrt{ \left( \sum_{i\neq j}
+\left(d_{ij}^X − \bar{d}^X \right)^2 \right) \left( \sum_{i\neq j}
+\left(d_{ij}^Y − \bar{d}^Y \right)^2 \right) } }, \\]
+
+with \\(\bar{d}^X\\) (resp. \\(\bar{d}^Y\\)) the mean of the upper diagonal
+elements of the dissimilarity matrix associated to \\(d^X\\) (resp. to
+\\(d^Y\\)). The main difference between the Mantel coefficient and the others
+such as the RV or the dCov is the absence of double centering. Due to the
+dependences within distances matrix, the Mantel correlation’s null
+distribution and its statistical significance cannot be assessed as simply for
+regular correlation ccoefficients. Instead, it is usually assessed via
+permutation testing. See Josse and Holmes ([2016](16-chap.html#ref-
+Josse:2016)) for a review with historical background and modern incarnations.
+The coefficient and associated tests are implemented in several R packages
+such as **[ade4](https://cran.r-project.org/web/packages/ade4/)** ([Chessel,
+Dufour, and Thioulouse 2004](16-chap.html#ref-ade4)),
+**[vegan](https://cran.r-project.org/web/packages/vegan/)** and
+**[ecodist](https://cran.r-project.org/web/packages/ecodist/)** ([Goslee,
+Urban, et al. 2007](16-chap.html#ref-Goslee:2007)).
+
+### 9.6.3 The RV coefficient
+
+The global measure of similarity of two data tables as opposed to two vectors
+can be done by a generalization of covariance provided by an inner product
+between tables that gives the RV coefficient, a number between 0 and 1, like a
+correlation coefficient, but for tables.
+
+\\[ RV(A,B)=\frac{Tr(A'BAB')}{\sqrt{Tr(A'A)}\sqrt{Tr(B'B)}} \\]
+
+There are several other measures of matrix correlation available in the
+package
+**[MatrixCorrelation](https://cran.r-project.org/web/packages/MatrixCorrelation/)**.
+
+If we do ascertain a link between two matrices, we then need to find a way to
+understand that link. One such method is explained in the next section.
+
+### 9.6.4 Canonical correlation analysis (CCA)
+
+CCA is a method similar to PCA as it was developed by Hotelling in the 1930s
+to search for associations between two sets of continuous variables \\(X\\)
+and \\(Y\\). Its goal is to find a linear projection of the first set of
+variables that maximally correlates with a linear projection of the second set
+of variables.
+
+Finding correlated functions (covariates) of the two views of the same
+phenomenon by discarding the representation-specific details (noise) is
+expected to reveal the underlying hidden yet influential factors responsible
+for the correlation.
+
+Let us consider two matrices:
+
+  * the \\(n\times p\\) matrix \\(X\\), and
+  * the \\(n\times p\\) matrix \\(Y\\).
+
+The \\(p\\) columns of \\(X\\) and the \\(q\\) columns of \\(Y\\) correspond
+to variables, and the rows correspond to the same \\(n\\) experimental units.
+We denote the \\(j\\)-th column of the matrix \\(X\\) by \\(X_j\\), likewise
+the \\(k\\)-th column of \\(Y\\) by \\(Y_k\\). Without loss of generality it
+will be assumed that the columns of \\(X\\) and \\(Y\\) are standardized (mean
+0 and variance 1).
+
+Classical CCA assumes that \\(p \leq n\\) and \\(q \leq n\\), and that the
+matrices \\(X\\) and \\(Y\\) are of full column rank \\(p\\) and \\(q\\)
+respectively. In the following, CCA is presented as a problem solved through
+an iterative algorithm. The first stage of CCA consists of finding two vectors
+\\(a =(a_1,...,a_p)^t\\) and \\(b =(b_1,...,b_q)^t\\) that maximize the
+correlation between the linear combinations \\(U\\) and \\(V\\) defined as
+
+\\[ \begin{aligned} U=Xa&=&a_1 X_1 +a_2 X_2 +\cdots a_p X_p\\\ V=Yb&=&b_1 Y_1
++b_2 Y_2 +\cdots a_q Y_q \end{aligned} \\]
+
+and assuming that the vectors \\(a\\) and \\(b\\) are normalized so that
+\\(\text{var}(U) = \text{var}(V) = 1\\). In other words, the problem consists
+of finding \\(a\\) and \\(b\\) such that
+
+\\[ \rho_1 = \text{cor}(U, V) = \max_{a,b} \text{cor} (Xa, Yb)\quad
+\text{subject to}\quad \text{var}(Xa)=\text{var}(Yb) = 1. \tag{9.3}\\]
+
+The resulting variables \\(U\\) and \\(V\\) are called the first canonical
+variates and \\(\rho_1\\) is referred to as the first canonical correlation.
+
+**Note:** Higher order canonical variates and canonical correlations can be
+found as a stepwise problem. For \\(s = 1,...,p\\), we can successively find
+positive correlations \\(\rho_1 \geq \rho_2 \geq ... \geq \rho_p\\) with
+corresponding vectors \\((a^1, b^1), ..., (a^p, b^p)\\), by maximizing
+
+\\[ \rho_s = \text{cor}(U^s,V^s) = \max_{a^s,b^s} \text{cor} (Xa^s,Yb^s)\quad
+\text{subject to}\quad \text{var}(Xa^s) = \text{var}(Yb^s)=1 \tag{9.4}\\]
+
+under the additional restrictions
+
+\\[ \text{cor}(U^s,U^t) = \text{cor}(V^s, V^t)=0 \quad\text{for}\quad 1 \leq t
+< s \leq p. \tag{9.5}\\]
+
+We can think of CCA as a generalization of PCA where the variance we maximize
+is the ‘covariance’ between the two matrices (see Holmes
+([2006](16-chap.html#ref-frenchway)) for more details).
+
+### 9.6.5 Sparse canonical correlation analysis (sCCA)
+
+When the number of variables in each table is very large finding two very
+correlated vectors can be too easy and unstable: we have too many degrees of
+freedom.
+
+[![We will see many examples of regularization and danger of overfitting in
+sec-supervised.](imgs/devil.png)](imgs/devil.png "We will see many examples of
+regularization and danger of overfitting in sec-supervised.")
+
+We will see many examples of regularization and danger of overfitting in
+[Chapter 12](12-chap.html).
+
+Then it is beneficial to add a penalty maintains the number of non-zero
+coefficients to a minimum. This approach is called sparse canonical
+correlation analysis (sparse CCA or sCCA), a method well-suited to both
+exploratory comparisons between samples and the identification of features
+with interesting **co** variation. We will use an implementation from the
+**[PMA](https://cran.r-project.org/web/packages/PMA/)** package.
+
+Here we study a dataset collected by Kashyap et al. ([2013](16-chap.html#ref-
+Kashyap:2013)) with two tables. One is a contingency table of bacterial
+abundances and another an abundance table of metabolites. There are 12
+samples, so \\(n = 12\\). The metabolite table has measurements on \\(p =
+637\\) feature and the bacterial abundances had a total of $ q = 20,609$ OTUs,
+which we will filter down to around 200. We start by loading the data.
+
+    
+    
+    library("genefilter")
+    load("../data/microbe.rda")
+    metab = read.csv("../data/metabolites.csv", row.names = 1) |> as.matrix()__
+
+We first filter down to bacteria and metabolites of interest, removing (“by
+hand”) those that are zero across many samples and giving an upper threshold
+of 50 to the large values. We transform the data to weaken the heavy tails.
+
+    
+    
+    library("phyloseq")
+    metab   = metab[rowSums(metab == 0) <= 3, ]
+    microbe = prune_taxa(taxa_sums(microbe) > 4, microbe)
+    microbe = filter_taxa(microbe, filterfun(kOverA(3, 2)), TRUE)
+    metab   = log(1 + metab, base = 10)
+    X       = log(1 + as.matrix(otu_table(microbe)), base = 10)__
+
+A second step in our preliminary analysis is to look if there is any
+association between the two matrices using the `RV.test` from the
+**[ade4](https://cran.r-project.org/web/packages/ade4/)** package:
+
+    
+    
+    colnames(metab) = colnames(X)
+    pca1 = dudi.pca(t(metab), scal = TRUE, scann = FALSE)
+    pca2 = dudi.pca(t(X), scal = TRUE, scann = FALSE)
+    rv1 = RV.rtest(pca1$tab, pca2$tab, 999)
+    rv1 __
+    
+    
+    Monte-Carlo test
+    Call: RV.rtest(df1 = pca1$tab, df2 = pca2$tab, nrepet = 999)
+    
+    Observation: 0.8400429 
+    
+    Based on 999 replicates
+    Simulated p-value: 0.002 
+    Alternative hypothesis: greater 
+    
+        Std.Obs Expectation    Variance 
+    6.231661953 0.314166070 0.007121318 
+
+We can now apply sparse CCA. This method compares sets of features across
+high-dimensional data tables, where there may be more measured features than
+samples. In the process, it chooses a subset of available features that
+capture the most covariance – these are the features that reflect signals
+present across multiple tables. We then apply PCA to this selected subset of
+features. In this sense, we use sparse CCA as a screening procedure, rather
+than as an ordination method.
+
+The implementation is below. The parameters `penaltyx` and `penaltyz` are
+sparsity penalties. Smaller values of `penaltyx` will result in fewer selected
+microbes, similarly `penaltyz` modulates the number of selected metabolites.
+We tune them manually to facilitate subsequent interpretation – we generally
+prefer more sparsity than the default parameters would provide.
+
+    
+    
+    library("PMA")
+    ccaRes = CCA(t(X), t(metab), penaltyx = 0.15, penaltyz = 0.15, 
+                 typex = "standard", typez = "standard")__
+    
+    
+    123456789
+    
+    
+    ccaRes __
+    
+    
+    Call: CCA(x = t(X), z = t(metab), typex = "standard", typez = "standard", 
+        penaltyx = 0.15, penaltyz = 0.15)
+    
+    
+    Num non-zeros u's:  5 
+    Num non-zeros v's:  16 
+    Type of x:  standard 
+    Type of z:  standard 
+    Penalty for x: L1 bound is  0.15 
+    Penalty for z: L1 bound is  0.15 
+    Cor(Xu,Zv):  0.9904707
+
+With these parameters, 5 bacteria and 16 metabolites were selected based on
+their ability to explain covariation between tables. Further, these features
+result in a correlation of 0.99 between the two tables. We interpret this to
+mean that the microbial and metabolomic data reflect similar underlying
+signals, and that these signals can be approximated well by the selected
+features. Be wary of the correlation value, however, since the scores are far
+from the usual bivariate normal cloud. Further, note that it is possible that
+other subsets of features could explain the data just as well – sparse CCA has
+minimized redundancy across features, but makes no guarantee that these are
+the “true” features in any sense.
+
+Nonetheless, we can still use these 21 features to compress information from
+the two tables without much loss. To relate the recovered metabolites and OTUs
+to characteristics of the samples on which they were measured, we use them as
+input to an ordinary PCA. We have omitted the code we used to generate Figure
+9.32, we refer the reader to the online material accompanying the book or the
+workflow published in Callahan et al. ([2016](16-chap.html#ref-
+Callahan2016Bioc)).
+
+Figure 9.32 displays the PCA _triplot_ , where we show different types of
+samples and the multidomain features (Metabolites and OTUs). This allows
+comparison across the measured samples – triangles for knockout and circles
+for wild type –and characterizes the influence the different features –
+diamonds with text labels. For example, we see that the main variation in the
+data is across PD and ST samples, which correspond to the different diets.
+Further, large values of 15 of the features are associated with ST status,
+while small values for 5 of them indicate PD status.
+
+[![](09-chap_files/figure-html/fig-
+multitableinterpretpca-1.png)](09-chap_files/figure-html/fig-
+multitableinterpretpca-1.png "Figure 9.32: A PCA triplot produced from the CCA
+selected features from muliple data types \(metabolites and OTUs\).")
+
+Figure 9.32: A PCA triplot produced from the CCA selected features from
+muliple data types (metabolites and OTUs).
+
+The advantage of the sparse CCA screening is now clear – we can display most
+of the variation across samples using a relatively simple plot, and can avoid
+plotting the hundreds of additional points that would be needed to display all
+of the features.
+
+### 9.6.6 Canonical (or constrained) correspondence analysis (CCpnA)
+
+[![Notational overload for CCA: Originally invented by Braak \(1985\) and
+called Canonical Correspondence analysis, we will call this method Constrained
+Correspondence Analysis and abbreviate it CCpnA to avoid confusion with
+Canonical Correlation Analysis \(CCA\). However several R packages, such as
+ade4 and vegan use the name cca for their correspondence analyses
+function.](imgs/devil.png)](imgs/devil.png "Notational overload for CCA:
+Originally invented by @terBraak:1985 and called Canonical Correspondence
+analysis, we will call this method Constrained Correspondence Analysis and
+abbreviate it CCpnA to avoid confusion with Canonical Correlation Analysis
+\(CCA\). However several R packages, such as ade4 and vegan use the name cca
+for their correspondence analyses function.")
+
+**Notational overload for CCA** : Originally invented by Braak
+([1985](16-chap.html#ref-terBraak:1985)) and called Canonical Correspondence
+analysis, we will call this method Constrained Correspondence Analysis and
+abbreviate it CCpnA to avoid confusion with Canonical Correlation Analysis
+(CCA). However several R packages, such as
+**[ade4](https://cran.r-project.org/web/packages/ade4/)** and
+**[vegan](https://cran.r-project.org/web/packages/vegan/)** use the name `cca`
+for their correspondence analyses function.
+
+The term constrained correspondence analysis translates the fact that this
+method is similar to a constrained regression. The method attempts to force
+the latent variables to be correlated with the environmental variables
+provided as `explanatory’.
+
+CCpnA creates biplots where the positions of samples are determined by
+similarity in both species signatures and environmental characteristics. In
+contrast, principal components analysis or correspondence analysis only look
+at species signatures. More formally, it ensures that the resulting CCpnA
+directions lie in the span of the environmental variables. For thorough
+explanations see Braak ([1985](16-chap.html#ref-terBraak:1985); [Greenacre
+2007](16-chap.html#ref-greenacre2007)).
+
+This method can be run using the function `ordinate` in
+**[phyloseq](https://bioconductor.org/packages/phyloseq/)**. In order to use
+the covariates from the sample data, we provide an extra argument, specifying
+which of the features to consider.
+
+Here, we take the data we denoised using
+**[dada2](https://bioconductor.org/packages/dada2/)** in [Chapter
+4](04-chap.html). We will see more details about creating the _phyloseq_
+object in [Chapter 10](10-chap.html). For the time being, we use the
+`otu_table` component containing a contingency table of counts for different
+taxa. We would like to compute the constrained correspondence analyses that
+explain the taxa abundances by the age and family relationship (both variables
+are contained in the `sample_data` slot of the `ps1` object).
+
+We would like to make two dimensional plots showing only using the four most
+abundant taxa (making the biplot easier to read):
+
+    
+    
+    ps1=readRDS("../data/ps1.rds")
+    ps1p=filter_taxa(ps1, function(x) sum(x) > 0, TRUE)
+    psCCpnA = ordinate(ps1p, "CCA",
+                     formula = ps1p ~ ageBin + family_relationship)__
+
+To access the positions for the biplot, we can use the `scores` function in
+the **[vegan](https://cran.r-project.org/web/packages/vegan/)**. Further, to
+facilitate figure annotation, we also join the site scores with the
+environmental data in the `sample_data` slot. Of the 23 total taxonomic
+orders, we only explicitly annotate the four most abundant – this makes the
+biplot easier to read.
+
+    
+    
+    evalProp = 100 * psCCpnA$CCA$eig[1:2] / sum(psCCpnA$CA$eig)
+    ggplot() +
+     geom_point(data = sites,aes(x =CCA2, y =CCA1),shape =2,alpha=0.5) +
+     geom_point(data = species,aes(x =CCA2,y =CCA1,col = Order),size=1)+
+     geom_text_repel(data = dplyr::filter(species, CCA2 < (-2)),
+                       aes(x = CCA2, y = CCA1, label = otu_id),
+                       size = 2, segment.size = 0.1) +
+     facet_grid(. ~ ageBin) +
+     guides(col = guide_legend(override.aes = list(size = 2))) +
+     labs(x = sprintf("Axis2 [%s%% variance]", round(evalProp[2])),
+          y = sprintf("Axis1 [%s%% variance]", round(evalProp[1]))) +
+     scale_color_brewer(palette = "Set1") + theme(legend.position="bottom")__
+
+[![](09-chap_files/figure-html/fig-ccpnaplotage-1.png)](09-chap_files/figure-
+html/fig-ccpnaplotage-1.png "Figure 9.33: The mouse and taxa scores generated
+by CCpnA. The sites \(mice samples\) are triangles; species are circles,
+respectively. The separate panels indicate different age groups.")
+
+Figure 9.33: The mouse and taxa scores generated by CCpnA. The sites (mice
+samples) are triangles; species are circles, respectively. The separate panels
+indicate different age groups.
+
+__
+
+Question 9.19
+
+Look up the extra code for creating the `tax` and `species` objects in the
+online resources accompanying the book. Then make the analogue of Figure 9.33
+but using litter as the faceting variable.
+
+__
+
+Solution
+
+__
+
+[![](09-chap_files/figure-html/fig-
+ccpnaplotlitter-1.png)](09-chap_files/figure-html/fig-ccpnaplotlitter-1.png
+"Figure 9.34: The analogue to Figure fig-ccpnaplotage, faceting by litter
+membership rather than age bin.")
+
+Figure 9.34: The analogue to Figure 9.33, faceting by litter membership rather
+than age bin.
+
+Figures 9.33 and 9.34 show the plots of these annotated scores, splitting
+sites by their age bin and litter membership, respectively. Note that to keep
+the appropriate aspect ratio in the presence of faceting, we have taken the
+vertical axis as our first canonical component. We have labeled individual
+bacteria that are outliers along the second CCpnA direction.
+
+Evidently, the first CCpnA direction distinguishes between mice in the two
+main age bins. Circles on the left and right of the biplot represent bacteria
+that are characteristic of younger and older mice, respectively. The second
+CCpnA direction splits off the few mice in the oldest age group; it also
+partially distinguishes between the two litters. These samples low in the
+second CCpnA direction have more of the outlier bacteria than the others.
+
+This CCpnA analysis supports the conclusion that the main difference between
+the microbiome communities of the different mice lies along the age axis.
+However, in situations where the influence of environmental variables is not
+so strong, CCA can have more power in detecting such associations. In general,
+it can be applied whenever it is desirable to incorporate supplemental data,
+but in a way that (1) is less aggressive than supervised methods, and (2) can
+use several environmental variables at once.
+
+## 9.7 Summary of this chapter
+
+**Heterogeneous data** A mixture of many continuous and a few categorical
+variables can be handled by adding the categorical variables as supplementary
+information to the PCA. This is done by projecting the mean of all points in a
+group onto the map.
+
+**Using distances** Relations between data objects can often be summarized as
+interpoint distances (whether distances between trees, images, graphs, or
+other complex objects).
+
+**Ordination** A useful representation of these distances is available through
+a method similar to PCA called multidimensional scaling (MDS), otherwise known
+as PCoA (principal coordinate analysis). It can be helpful to think of the
+outcome of these analyses as uncovering latent variable. In the case of
+clustering the latent variables are categorical, in ordination they are latent
+variables like time or environmental gradients like distance to the water.
+This is why these methods are often called ordination.
+
+**Robust versions** can be used when interpoint distances are wildly
+different. NMDS (nonmetric multidimensional scaling) aims to produce
+coordinates such that the order of the interpoint distances is respected as
+closely as possible.
+
+**Correspondence analysis** : a method for computing low dimensional
+projections that explain dependencies in categorical data. It decomposes
+chisquare distance in much the same way that PCA decomposes variance.
+Correspondence analysis is usually the best way to follow up on a significant
+chisquare test. Once we have ascertained there are significant dependencies
+between different levels of categories, we can map them and interpret
+proximities on this map using plots and biplots.
+
+**Permutation test for distances** Given two sets of distances between the
+same points, we can measure whether they are related using the Mantel
+permutation test.
+
+**Generalizations of variance and covariance** When dealing with more than one
+matrix of measurements on the same data, we can generalize the notion of
+covariance and correlations to vectorial measurements of co-inertia.
+
+**Canonical correlation** is a method for finding a few linear combinations of
+variables from each table that are as correlated as possible. When using this
+method on matrices with large numbers of variables, we use a regularized
+version with an L1 penalty that reduces the number of non-zero coefficients.
+
+## 9.8 Further reading
+
+Interpretation of PCoA maps and nonlinear embeddings can also be enhanced the
+way we did for PCA using generalizations of the supplementary point method,
+see Trosset and Priebe ([2008](16-chap.html#ref-Trosset2008)) or Bengio et al.
+([2004](16-chap.html#ref-Bengio2004)). We saw in [Chapter 7](07-chap.html) how
+we can project one categorical variable onto a PCA. The correspondence
+analysis framework actually allows us to mix several categorical variables in
+with any number of continuous variables. This is done through an extension
+called multiple correspondence analysis (MCA) whereby we can do the same
+analysis on a large number of binary categorical variables and obtain useful
+maps. The trick here will be to turn the continuous variables into categorical
+variables first. For extensive examples using R see for instance the book by
+Pagès ([2016](16-chap.html#ref-Pages:2016)).
+
+A simple extension to PCA that allows for **nonlinear** principal curve
+estimates instead of principal directions defined by eigenvectors was proposed
+in Hastie and Stuetzle ([1989](16-chap.html#ref-Hastie1989)) and is available
+in the package
+**[princurve](https://cran.r-project.org/web/packages/princurve/)**.
+
+Finding curved subspaces containing a high density data for dimensions higher
+than \\(1\\) is now called manifold embedding and can be done through
+Laplacian eigenmaps ([Belkin and Niyogi 2003](16-chap.html#ref-Belkin2003)),
+local linear embedding as in Roweis and Saul ([2000](16-chap.html#ref-
+Roweis2000)) or using the isomap method ([Tenenbaum, De Silva, and Langford
+2000](16-chap.html#ref-Tenenbaum2000)). For textbooks covering nonlinear
+unsupervised learning methods see Hastie, Tibshirani, and Friedman ([2008,
+chap. 14](16-chap.html#ref-HastieTibshiraniFriedman)) or Izenman
+([2008](16-chap.html#ref-Izenman2008)).
+
+A review of many multitable correlation coefficients, and analysis of
+applications can be found in Josse and Holmes ([2016](16-chap.html#ref-
+Josse:2016)).
+
+## 9.9 Exercises
+
+__
+
+Exercise 9.1
+
+We are going to take another look at the Phylochip data, replacing the
+original expression values by presence/absence. We threshold the data to
+retain only those that have a value of at least 8.633 in at least 8 samples7.
+
+    
+    
+    ibd.pres = ifelse(assayIBD[, 1:28] > 8.633, 1, 0)__
+
+Perform a correspondence analysis on these binary data and compare the plot
+you obtain to what we saw in Figure 9.15.
+
+7 These values were chosen to give about retain about 3,000 taxa, similar to
+our previous choice of threshold.
+
+__
+
+Solution
+
+__
+
+See Figure 9.35.
+
+    
+    
+    IBDca = dudi.coa(ibd.pres, scannf = FALSE, nf = 4)
+    fviz_eig(IBDca, geom = "bar", bar_width = 0.7) +
+        ylab("Percentage of chisquare") + ggtitle("")
+    fviz(IBDca, element = "col", axes = c(1, 2), geom = "point",
+         habillage = day, palette = "Dark2", addEllipses = TRUE, color = day,
+         ellipse.type = "convex", alpha = 1, col.row.sup =  "blue",
+         select = list(name = NULL, cos2 = NULL, contrib = NULL),
+         repel = TRUE)__
+
+[![](09-chap_files/figure-html/fig-Threesetscoa-1.png)](09-chap_files/figure-
+html/fig-Threesetscoa-1.png "Figure 9.35 \(a\): \\text{}")
+
+(a) \\(\text{}\\)
+
+[![](09-chap_files/figure-html/fig-Threesetscoa-2.png)](09-chap_files/figure-
+html/fig-Threesetscoa-2.png "Figure 9.35 \(b\): \\text{}")
+
+(b) \\(\text{}\\)
+
+Figure 9.35: Correspondence analysis on binary data.
+
+__
+
+Exercise 9.2
+
+Correspondence Analysis on color association tables:  
+Here is an example of data collected by looking at the number of Google hits
+resulting from queries of pairs of words. The numbers in Table 9.4 are to be
+multiplied by 1000. For instance, the combination of the words “quiet” and
+“blue” returned 2,150,000 hits.
+
+Table 9.4: Contingency table of co-occurring terms from search engine results.
+
+| black | blue | green | grey | orange | purple | white  
+---|---|---|---|---|---|---|---  
+quiet | 2770 | 2150 | 2140 | 875 | 1220 | 821 | 2510  
+angry | 2970 | 1530 | 1740 | 752 | 1040 | 710 | 1730  
+clever | 1650 | 1270 | 1320 | 495 | 693 | 416 | 1420  
+depressed | 1480 | 957 | 983 | 147 | 330 | 102 | 1270  
+happy | 19300 | 8310 | 8730 | 1920 | 4220 | 2610 | 9150  
+lively | 1840 | 1250 | 1350 | 659 | 621 | 488 | 1480  
+perplexed | 110 | 71 | 80 | 19 | 23 | 15 | 109  
+virtuous | 179 | 80 | 102 | 20 | 25 | 17 | 165  
+  
+Perform a correspondence analysis of these data. What do you notice when you
+look at the two-dimensional biplot?
+
+__
+
+Solution
+
+__
+
+See Figure 9.36. The code is not rendered here, but is shown in the document’s
+source file.
+
+[![](09-chap_files/figure-html/fig-ColorBiplot-1-1.png)](09-chap_files/figure-
+html/fig-ColorBiplot-1-1.png "Figure 9.36: Correspondence Analysis allows for
+a symmetrical graphical representation of two categorical variables, in this
+case colors and emotions for a contingency table of co-occurrences such as
+Table tbl-colors.")
+
+Figure 9.36: Correspondence Analysis allows for a symmetrical graphical
+representation of two categorical variables, in this case colors and emotions
+for a contingency table of co-occurrences such as Table 9.4.
+
+[![](imgs/PlatoTableImage.png)](imgs/PlatoTableImage.png)
+
+__
+
+Exercise 9.3
+
+The dates Plato wrote his various books are not known. We take the sentence
+endings and use those pattern frequencies as the data.
+
+    
+    
+    platof = read.table("../data/platof.txt", header = TRUE)
+    platof[1:4, ]__
+    
+    
+          Rep Laws Crit Phil Pol Soph Tim
+    uuuuu  42   91    5   24  13   26  18
+    -uuuu  60  144    3   27  19   33  30
+    u-uuu  64   72    3   20  24   31  46
+    uu-uu  72   98    2   25  20   24  14
+    
+    
+    resPlato = dudi.coa(platof, scannf = FALSE, nf = 2)
+    fviz_ca_biplot(resPlato, axes=c(2, 1)) + ggtitle("")
+    fviz_eig(resPlato, geom = "bar", width = 0.6) + ggtitle("")__
+
+Figure 9.37: Biplot of Plato’s sentence endings.
+
+  1. From the biplot in Figure 9.37 can you guess at the chronological order of Plato’s works?  
+Hint: the first (earliest) is known to be _Republica_. The last (latest) is
+known to be _Laws_.
+
+  2. Which sentence ending did Plato use more frequently early in his life?
+
+  3. What percentage of the inertia (\\(\chi^2\\)-distance) is explained by the map in Figure 9.37?
+
+[![](09-chap_files/figure-html/fig-platoca-1.png)](09-chap_files/figure-
+html/fig-platoca-1.png "Figure 9.37 \(a\): ")
+
+(a)
+
+[![](09-chap_files/figure-html/fig-platoca-2.png)](09-chap_files/figure-
+html/fig-platoca-2.png "Figure 9.37 \(b\): ")
+
+(b)
+
+__
+
+Solution
+
+__
+
+To compute the percentage of inertia explained by the first two axes we take
+the cumulative sum of the eigenvalues at the value 2:
+
+    
+    
+    names(resPlato)__
+    
+    
+     [1] "tab"  "cw"   "lw"   "eig"  "rank" "nf"   "c1"   "li"   "co"   "l1"  
+    [11] "call" "N"   
+    
+    
+    sum(resPlato$eig)__
+    
+    
+    [1] 0.132618
+    
+    
+    percentageInertia=round(100*cumsum(resPlato$eig)/sum(resPlato$eig))
+    percentageInertia __
+    
+    
+    [1]  69  85  92  96  98 100
+    
+    
+    percentageInertia[2]__
+    
+    
+    [1] 85
+
+__
+
+Exercise 9.4
+
+We are going to look at two datasets, one is a perturbed version of the other
+and they both present gradients as often seen in ecological data. Read in the
+two species count matrices `lakelike` and `lakelikeh`, which are stored as the
+object `lakes.RData`. Compare the output of correspondence analysis and
+principal component analysis on each of the two data sets; restrict yourself
+two dimensions. In the plots and the eigenvalues, what do you notice?
+
+__
+
+Solution
+
+__
+
+    
+    
+    load("../data/lakes.RData")
+    lakelike[ 1:3, 1:8]__
+    
+    
+         plant1 plant2 plant3 plant4 plant5 plant6 plant7 plant8
+    loc1      6      4      0      3      0      0      0      0
+    loc2      4      5      5      3      4      2      0      0
+    loc3      3      4      7      4      5      2      1      1
+    
+    
+    lakelikeh[1:3, 1:8]__
+    
+    
+         plant1 plant2 plant3 plant4 plant5 plant6 plant7 plant8
+    loc1      6      4      0      3      0      0      0      0
+    loc2      4      5      5      3      4      2      0      0
+    loc3      3      4      7      4      5      2      1      1
+    
+    
+    e_coa  = dudi.coa(lakelike,  scannf = FALSE, nf = 2)
+    e_pca  = dudi.pca(lakelike,  scannf = FALSE, nf = 2)
+    eh_coa = dudi.coa(lakelikeh, scannf = FALSE, nf = 2)
+    eh_pca = dudi.pca(lakelikeh, scannf = FALSE, nf = 2)__
+
+Comparison (output not shown):
+
+    
+    
+    scatter(e_pca)__
+    
+    
+     scatter(e_coa)__
+    
+    
+     s.label(e_pca$li)__
+    
+    
+     s.label(e_coa$li)__
+    
+    
+     s.label(eh_pca$co)__
+    
+    
+     s.label(eh_pca$li)__
+    
+    
+     s.label(eh_coa$li)__
+    
+    
+     s.label(eh_coa$co)__
+
+__
+
+Exercise 9.5
+
+We analyzed the normalized Moignard data in Section 9.5.1. Now redo the
+analysis with the _raw_ data (in file _nbt.3154-S3-raw.csv_) and compare the
+output with that obtained using the normalized values.
+
+__
+
+Solution
+
+__
+
+    
+    
+    moignard_raw = as.matrix(read.csv("../data/nbt.3154-S3-raw.csv", row.names = 1))
+    dist2r.euclid = dist(moignard_raw)
+    dist1r.l1     = dist(moignard_raw, "manhattan")
+    cells1.cmds = cmdscale(dist1r.l1,     k = 20, eig = TRUE)
+    cells2.cmds = cmdscale(dist2r.euclid, k = 20, eig = TRUE)
+    sum(cells1.cmds$eig[1:2]) / sum(cells1.cmds$eig)__
+    
+    
+    [1] 0.776075
+    
+    
+    sum(cells2.cmds$eig[1:2]) / sum(cells2.cmds$eig)__
+    
+    
+    [1] 0.6297133
+
+__
+
+Exercise 9.6
+
+We are going to explore the use of kernel methods.
+
+  1. Compute kernelized distances using the **[kernlab](https://cran.r-project.org/web/packages/kernlab/)** for the Moignard data using various values for the sigma tuning parameter in the definition of the kernels. Then perform MDS on these kernelized distances. What difference is there in variability explained by the first four components of kernel multidimensional scaling?
+
+  2. Make interactive three dimensional representations of the components: is there a projection where you see a branch for the purple points?
+
+__
+
+Solution
+
+__
+
+  1. kernelized distances
+
+    
+    
+    library("kernlab")
+    laplacedot1 = laplacedot(sigma = 1/3934)
+    rbfdot1     = rbfdot(sigma = (1/3934)^2 )
+    Klaplace_cellsn   = kernelMatrix(laplacedot1, blom)
+    KGauss_cellsn     = kernelMatrix(rbfdot1, blom)
+    Klaplace_rawcells = kernelMatrix(laplacedot1, moignard_raw)
+    KGauss_rawcells   = kernelMatrix(rbfdot1, moignard_raw)__
+
+Use kernelized distances to protect against outliers and allows discovery of
+non-linear components.
+
+    
+    
+    dist1kr = 1 - Klaplace_rawcells
+    dist2kr = 1 - KGauss_rawcells
+    dist1kn = 1 - Klaplace_cellsn
+    dist2kn = 1 - KGauss_cellsn
+    
+    cells1.kcmds = cmdscale(dist1kr, k = 20, eig = TRUE) 
+    cells2.kcmds = cmdscale(dist2kr, k = 20, eig = TRUE) 
+    
+    percentage = function(x, n = 4) round(100 * sum(x[seq_len(n)]) / sum(x[x>0]))
+    kperc1 = percentage(cells1.kcmds$eig)
+    kperc2 = percentage(cells2.kcmds$eig)
+    
+    cellsn1.kcmds = cmdscale(dist1kn, k = 20, eig = TRUE) 
+    cellsn2.kcmds = cmdscale(dist2kn, k = 20, eig = TRUE)__
+
+  2. using a 3d scatterplot interactively:
+
+    
+    
+    colc = rowData(Moignard)$cellcol
+    library("scatterplot3d")
+    scatterplot3d(cellsn2.kcmds$points[, 1:3], color=colc, pch = 20,
+       xlab = "Axis k1", ylab = "Axis k2", zlab = "Axis k3", angle=15)
+    scatterplot3d(cellsn2.kcmds$points[, 1:3], color=colc, pch = 20,
+       xlab = "Axis k1", ylab = "Axis k2", zlab = "Axis k3", angle = -70)__
+
+[![](09-chap_files/figure-html/fig-
+KernelMDSplots-1.png)](09-chap_files/figure-html/fig-KernelMDSplots-1.png
+"Figure 9.38 \(a\): \\text{}")
+
+(a) \\(\text{}\\)
+
+[![](09-chap_files/figure-html/fig-
+KernelMDSplots-2.png)](09-chap_files/figure-html/fig-KernelMDSplots-2.png
+"Figure 9.38 \(b\): \\text{}")
+
+(b) \\(\text{}\\)
+
+Figure 9.38: Kernel multidimensional scaling.
+
+__
+
+Exercise 9.7
+
+**Higher resolution study of cell data.**  
+Take the original expression data `blom` we generated in Section 9.5.1. Map
+the intensity of expression of each of the top 10 most variable genes onto the
+3d plot made with the diffusion mapping. Which dimension, or which one of the
+principal coordinates (1,2,3,4) can be seen as the one that clusters the
+**4SG** (red) points the most?
+
+__
+
+Solution
+
+__
+
+    
+    
+    library("rgl")
+    plot3d(cellsn2.kcmds$points[, 1:3], col = colc, size = 3,
+           xlab = "Axis1", ylab = "Axis2", zlab = "Axis3")
+    plot3d(cellsn2.kcmds$points[, c(1,2,4)], col = colc, size = 3,
+           xlab = "Axis1", ylab = "Axis2", zlab = "Axis4")
+    # Using an L1 distance instead.
+    plot3d(cellsn1.kcmds$points[, 1:3], col = colc, size = 3,
+           xlab = "Axis1", ylab = "Axis2", zlab = "Axis3")
+    plot3d(cellsn1.kcmds$points[, c(1,2,4)], col = colc, size = 3,
+           xlab = "Axis1", ylab = "Axis2", zlab = "Axis4")__
+
+An implementation in the package
+**[LPCM](https://cran.r-project.org/web/packages/LPCM/)** provides the
+function `lpc`, which estimates principal curves. Here we constrain ourselves
+to three dimensions chosen from the output of the diffusion map and create
+smoothed curves.
+
+    
+    
+    library("LPCM")
+    library("diffusionMap")
+    dmap1 = diffuse(dist1n.l1, neigen = 10)__
+    
+    
+    Performing eigendecomposition
+    Computing Diffusion Coordinates
+    Elapsed time: 5.014 seconds
+    
+    
+    combs = combn(4, 3)
+    lpcplots = apply(combs, 2, function(j) lpc(dmap1$X[, j], scale = FALSE))__
+
+To get a feel for what the smoothed data are showing us, we take a look at the
+interactive graphics using the function `plot3d` from them
+**[rgl](https://cran.r-project.org/web/packages/rgl/)** package.
+
+    
+    
+    library("rgl")
+    for (i in seq_along(lpcplots))
+      plot(lpcplots[[i]], type = "l", lwd = 3,
+      xlab = paste("Axis", combs[1, i]),
+      ylab = paste("Axis", combs[2, i]),
+      zlab = paste("Axis", combs[3, i]))__
+
+One way of plotting both the smoothed line and the data points is to add the
+line using the `plot3d` function.
+
+    
+    
+    outlpce134 = lpc(dmap1$X[,c(1,3,4)], scale=FALSE, h=0.5)
+    plot3d(dmap1$X[,c(1,3,4)], col=colc, pch=20, 
+           xlab="Axis1", ylab="Axis3", zlab="Axis4")
+    plot3d(outlpce134$LPC, type="l", lwd=7, add=TRUE)
+    
+    outlpce134 = lpc(dmap1$X[,c(1,3,4)], scale=FALSE, h=0.7)
+    plot3d(outlpce134$LPC, type="l", lwd=7,
+           xlab="Axis1", ylab="Axis3", zlab="Axis4")
+    plot3d(dmap1$X[,c(1,3,4)], col=colc, 
+           xlab="", ylab="", zlab="", add=TRUE)__
+
+[![](imgs/TripleArm.png)](imgs/TripleArm.png "Figure 9.39: Diffusion map
+projection for Axes 1, 3 and 4. The lower figure shows the smoothed path
+followed by the cells in their development.")
+
+Figure 9.39: Diffusion map projection for Axes 1, 3 and 4. The lower figure
+shows the smoothed path followed by the cells in their development.
+
+[![](imgs/SmoothLineP134h7.png)](imgs/SmoothLineP134h7.png "Figure 9.40:
+Diffusion map projection for Axes 1, 3 and 4. The lower figure shows the
+smoothed path followed by the cells in their development.")
+
+Figure 9.40: Diffusion map projection for Axes 1, 3 and 4. The lower figure
+shows the smoothed path followed by the cells in their development.
+
+__
+
+Exercise 9.8
+
+Here we explore more refined distances and diffusion maps that can show cell
+development trajectories as in Figure 9.41.
+
+The diffusion map method restricts the estimation of distances to local
+points, thus further pursuing the idea that often only local distances should
+be represented precisely and as points become further apart they are not being
+measured with the same ‘reference’. This method also uses the distances as
+input but then creates local probabilistic transitions as indicators of
+similarity, these are combined into an affinity matrix for which the
+eigenvalues and eigenvectors are also computed much like in standard MDS.
+
+Compare the output of the `diffuse` function from the
+**[diffusionMap](https://cran.r-project.org/web/packages/diffusionMap/)**
+package on both the l1 and l2 distances computed between the cells available
+in the `dist2n.euclid` and `dist1n.l1` objects from Section 9.5.1.
+
+[![](imgs/dmap134.png)](imgs/dmap134.png "Figure 9.41: Ouput from a three-
+dimensional diffusion map projection.")
+
+Figure 9.41: Ouput from a three-dimensional diffusion map projection.
+
+__
+
+Solution
+
+__
+
+    
+    
+    library("diffusionMap")
+    dmap2 = diffuse(dist2n.euclid, neigen = 11)__
+    
+    
+    Performing eigendecomposition
+    Computing Diffusion Coordinates
+    Elapsed time: 7.243 seconds
+    
+    
+    dmap1 = diffuse(dist1n.l1, neigen = 11)__
+    
+    
+    Performing eigendecomposition
+    Computing Diffusion Coordinates
+    Elapsed time: 4.849 seconds
+    
+    
+    plot(dmap2)__
+
+Notice that the vanilla plot for a _dmap_ object does not allow the use of
+colors. As this essential to our understanding of cell development, we add the
+colors by hand. Of course, here we use static 3d plots but these should
+supplemented by the plot3d examples we give in the code.
+
+We use a tailored wrapper function `scp3d`, so that we can easily insert
+relevant parameters:
+
+    
+    
+    library("scatterplot3d")
+    scp3d = function(axestop = 1:3, dmapRes = dmap1, color = colc,
+               anglea = 20, pch = 20)
+    scatterplot3d(dmapRes$X[, axestop], color = colc,
+        xlab = paste("Axis",axestop[1]), ylab = paste("Axis", axestop[2]),
+        zlab = paste("Axis",axestop[3]), pch = pch, angle = anglea)__
+    
+    
+    scp3d()
+    scp3d(anglea=310)
+    scp3d(anglea=210)
+    scp3d(anglea=150)__
+
+The best way of visualizing the data is to make a rotatable interactive plot
+using the **[rgl](https://cran.r-project.org/web/packages/rgl/)** package.
+
+    
+    
+    # interactive plot
+    library("rgl")
+    plot3d(dmap1$X[,1:3], col=colc, size=3)
+    plot3d(dmap1$X[,2:4], col=colc, size=3)__
+
+Belkin, Mikhail, and Partha Niyogi. 2003. “Laplacian Eigenmaps for
+Dimensionality Reduction and Data Representation.” _Neural Computation_ 15
+(6): 1373–96.
+
+Bengio, Yoshua, Jean-François Paiement, Pascal Vincent, Olivier Delalleau,
+Nicolas Le Roux, and Marie Ouimet. 2004. “Out-of-Sample Extensions for LLE,
+Isomap, MDS, Eigenmaps, and Spectral Clustering.” _Advances in Neural
+Information Processing Systems_ 16: 177–84.
+
+Braak, Cajo ter. 1985. “Correspondence Analysis of Incidence and Abundance
+Data: Properties in Terms of a Unimodal Respose.” _Biometrics_ 41 (January).
+
+Brodie, Eoin L, Todd Z DeSantis, Dominique C Joyner, Seung M Baek, Joern T
+Larsen, Gary L Andersen, Terry C Hazen, et al. 2006. “Application of a High-
+Density Oligonucleotide Microarray Approach to Study Bacterial Population
+Dynamics During Uranium Reduction and Reoxidation.” _Applied and Environmental
+Microbiology_ 72 (9): 6288–98.
+
+Callahan, Ben J, Kris Sankaran, Julia A Fukuyama, Paul J McMurdie, and Susan P
+Holmes. 2016. “Bioconductor Workflow for Microbiome Data Analysis: From Raw
+Reads to Community Analyses.” _F1000Research_ 5\.
+
+Chessel, Daniel, Anne Dufour, and Jean Thioulouse. 2004. “The ade4 Package -
+i: One-Table Methods.” _R News_ 4 (1): 5–10.
+<http://CRAN.R-project.org/doc/Rnews/>.
+
+Diaconis, Persi, Sharad Goel, and Susan Holmes. 2008. “Horseshoes in
+Multidimensional Scaling and Kernel Methods.” _Annals of Applied Statistics_
+2: 777. <https://doi.org/DOI:10.1214/08-AOAS165>.
+
+Ekman, Gosta. 1954. “Dimensions of Color Vision.” _The Journal of Psychology_
+38 (2): 467–74.
+
+Goslee, Sarah C, Dean L Urban, et al. 2007. “The Ecodist Package for
+Dissimilarity-Based Analysis of Ecological Data.” _Journal of Statistical
+Software_ 22 (7): 1–19.
+
+Greenacre, Michael J. 2007. _Correspondence Analysis in Practice_. Chapman &
+Hall.
+
+Guillot, Gilles, and François Rousset. 2013. “Dismantling the Mantel Tests.”
+_Methods in Ecology and Evolution_ 4 (4): 336–44.
+
+Hastie, Trevor, and Werner Stuetzle. 1989. “Principal Curves.” _Journal of the
+American Statistical Association_ 84 (406): 502–16.
+
+Hastie, Trevor, Robert Tibshirani, and Jerome Friedman. 2008. _The Elements of
+Statistical Learning_. 2^{\text{nd}} ed. Springer.
+
+Holmes, Susan. 2006. “Multivariate Analysis: The French way.” In _Probability
+and Statistics: Essays in Honor of David a. Freedman_ , edited by D. Nolan and
+T. P. Speed. Vol. 56. IMS Lecture Notes–Monograph Series. Beachwood, OH: IMS.
+<http://www.imstat.org/publications/lecnotes.htm>.
+
+Holmes, Susan, Alexander V Alekseyenko, Alden Timme, Tyrrell Nelson, Pankaj
+Jay Pasricha, and Alfred Spormann. 2011. “Visualization and Statistical
+Comparisons of Microbial Communities Using r Packages on Phylochip Data.” In
+_Pacific Symposium on Biocomputing_ , 142–53. World Scientific.
+
+Izenman, Alan Julian. 2008. “Nonlinear Dimensionality Reduction and Manifold
+Learning.” In _Modern Multivariate Statistical Techniques: Regression,
+Classification, and Manifold Learning_ , 597–632. New York, NY: Springer New
+York.
+
+Josse, Julie, and Susan Holmes. 2016. “Measuring Multivariate Association and
+Beyond.” _Statistics Surveys_ 10: 132–67.
+
+Kashyap, Purna C, Angela Marcobal, Luke K Ursell, Samuel A Smits, Erica D
+Sonnenburg, Elizabeth K Costello, Steven K Higginbottom, et al. 2013.
+“Genetically Dictated Change in Host Mucus Carbohydrate Landscape Exerts a
+Diet-Dependent Effect on the Gut Microbiota.” _PNAS_ 110 (42): 17059–64.
+
+Kendall, David. 1969. “Incidence Matrices, Interval Graphs and Seriation in
+Archeology.” _Pacific Journal of Mathematics_ 28 (3): 565–70.
+
+Leek, Jeffrey T, Robert B Scharpf, Héctor Corrada Bravo, David Simcha,
+Benjamin Langmead, W Evan Johnson, Donald Geman, Keith Baggerly, and Rafael A
+Irizarry. 2010. “Tackling the Widespread and Critical Impact of Batch Effects
+in High-Throughput Data.” _Nature Reviews Genetics_ 11 (10): 733–39.
+
+Moignard, Victoria, Steven Woodhouse, Laleh Haghverdi, Andrew J Lilly, Yosuke
+Tanaka, Adam C Wilkinson, Florian Buettner, et al. 2015. “Decoding the
+Regulatory Network of Early Blood Development from Single-Cell Gene Expression
+Measurements.” _Nature Biotechnology_.
+
+Nelson, Tyrell A, Susan Holmes, Alexander Alekseyenko, Masha Shenoy, Todd
+DeSantis, Cindy Wu, Gary Andersen, et al. 2010. “PhyloChip Microarray Analysis
+Reveals Altered Gastrointestinal Microbial Communities in a Rat Model of
+Colonic Hypersensitivity.” _Neurogastroenterology & Motility_.
+
+Pagès, Jérôme. 2016. _Multiple Factor Analysis by Example Using R_. CRC Press.
+
+Perraudeau, Fanny, Davide Risso, Kelly Street, Elizabeth Purdom, and Sandrine
+Dudoit. 2017. “Bioconductor Workflow for Single-Cell RNA Sequencing:
+Normalization, Dimensionality Reduction, Clustering, and Lineage Inference.”
+_F1000Research_ 6\.
+
+Prentice, IC. 1977. “Non-Metric Ordination Methods in Ecology.” _The Journal
+of Ecology_ , 85–94.
+
+Rhee, Soo-Yon, Matthew J Gonzales, Rami Kantor, Bradley J Betts, Jaideep
+Ravela, and Robert W Shafer. 2003. “Human Immunodeficiency Virus Reverse
+Transcriptase and Protease Sequence Database.” _Nucleic Acids Research_ 31
+(1): 298–303.
+
+Roweis, Sam T, and Lawrence K Saul. 2000. “Nonlinear Dimensionality Reduction
+by Locally Linear Embedding.” _Science_ 290 (5500): 2323–26.
+
+Tenenbaum, Joshua B, Vin De Silva, and John C Langford. 2000. “A Global
+Geometric Framework for Nonlinear Dimensionality Reduction.” _Science_ 290
+(5500): 2319–23.
+
+Trosset, Michael W, and Carey E Priebe. 2008. “The Out-of-Sample Problem for
+Classical Multidimensional Scaling.” _Computational Statistics & Data
+Analysis_ 52 (10): 4635–42.
+
+Page built at 01:33 on 2025-09-01 using R version 4.5.1 (2025-06-13)
+

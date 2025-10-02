@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta charset="utf-8"/>
+<meta content="quarto-1.7.31" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0, user-scalable=yes" name="viewport"/>
+<title>References – Modern Statistics for Modern Biology</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta content="./" name="quarto:offset"/>
+<link href="./imgs/msmb-favicon.png" rel="icon" type="image/png"/>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet"/>
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-af5ec82acda093b5ee751184164e9432.css" id="quarto-text-highlighting-styles" rel="stylesheet"/>
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet"/>
+<link append-hash="true" data-mode="light" href="site_libs/bootstrap/bootstrap-d63985d606c7f07261ad561a6cfde940.min.css" id="quarto-bootstrap" rel="stylesheet"/>
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="msmb.css" rel="stylesheet"/>
+<meta content="References – Modern Statistics for Modern Biology" property="og:title"/>
+<meta content="If you are a biologist and want to get the best out of the powerful methods of modern computational statistics, this is your book." property="og:description"/>
+<meta content="https://www.huber.embl.de/msmb/imgs/bibliothek.jpeg" property="og:image"/>
+<meta content="Modern Statistics for Modern Biology" property="og:site_name"/>
+<meta content="References – Modern Statistics for Modern Biology" name="twitter:title"/>
+<meta content="If you are a biologist and want to get the best out of the powerful methods of modern computational statistics, this is your book." name="twitter:description"/>
+<meta content="https://www.huber.embl.de/msmb/imgs/bibliothek.jpeg" name="twitter:image"/>
+<meta content="summary" name="twitter:card"/>
+<script type="text/javascript">
+  var _paq = _paq || [];
+  
+  // Call disableCookies before calling trackPageView 
+  _paq.push(['disableCookies']);
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u='//tr-denbi.embl.de/heimdall/';
+    _paq.push(['setTrackerUrl', u+'p.php']);
+    _paq.push(['setSiteId', '26']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'p.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+</head>
+<body class="floating nav-fixed quarto-light">
+<div id="quarto-search-results"></div>
+<header class="headroom fixed-top" id="quarto-header">
+<nav class="navbar navbar-expand-lg" data-bs-theme="dark">
+<div class="navbar-container container-fluid">
+<div class="navbar-brand-container mx-auto">
+<a class="navbar-brand" href="./index.html">
+<span class="navbar-title">현대 생물학에 대한 현대 통계</span>
+</a>
+</div>
+<div class="" id="quarto-search" title="Search"></div>
+<button aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbarCollapse" data-bs-toggle="collapse" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }" role="menu" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarCollapse">
+<ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item dropdown">
+<a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" id="nav-menu-chapters" role="link">
+<span class="menu-text">챕터</span>
+</a>
+<ul aria-labelledby="nav-menu-chapters" class="dropdown-menu dropdown-menu-end">
+<li>
+<a class="dropdown-item" href="./index.html">
+<span class="dropdown-text">집</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./00-chap.html">
+<span class="dropdown-text">소개</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./01-chap.html">
+<span class="dropdown-text">개별 데이터에 대한 생성 모델</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./02-chap.html">
+<span class="dropdown-text">통계 모델링</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./03-chap.html">
+<span class="dropdown-text">데이터 시각화</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./04-chap.html">
+<span class="dropdown-text">혼합 모델</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./05-chap.html">
+<span class="dropdown-text">클러스터링</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./06-chap.html">
+<span class="dropdown-text">테스트</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./07-chap.html">
+<span class="dropdown-text">다변량 분석</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./08-chap.html">
+<span class="dropdown-text">고 처리량 수 데이터 및 일반화 된 선형 모델</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./09-chap.html">
+<span class="dropdown-text">이종 데이터를위한 다변량 방법</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./10-chap.html">
+<span class="dropdown-text">네트워크와 나무</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./11-chap.html">
+<span class="dropdown-text">이미지 데이터</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./12-chap.html">
+<span class="dropdown-text">감독 학습</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./13-chap.html">
+<span class="dropdown-text">높은 처리량 실험 및 분석의 설계</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./14-chap.html">
+<span class="dropdown-text">통계적 일치</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./15-chap.html">
+<span class="dropdown-text">감사의 말</span></a>
+</li>
+<li>
+<a class="dropdown-item" href="./16-chap.html">
+<span class="dropdown-text">참조</span></a>
+</li>
+</ul>
+</li>
+</ul>
+</div> <!-- /navcollapse -->
+<div class="quarto-navbar-tools">
+</div>
+</div> <!-- /container-fluid -->
+</nav>
+</header>
+<!-- content -->
+<div class="quarto-container page-columns page-rows-contents page-layout-article page-navbar" id="quarto-content">
+<!-- sidebar -->
+<nav class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" id="quarto-sidebar">
+</nav>
+<div class="quarto-sidebar-collapse-item" data-bs-target=".quarto-sidebar-collapse-item" data-bs-toggle="collapse" id="quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+<div class="sidebar margin-sidebar zindex-bottom" id="quarto-margin-sidebar">
+</div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+<header class="quarto-title-block default" id="title-block-header">
+<div class="quarto-title">
+<h1 class="title">참조</h1>
+</div>
+<div class="quarto-title-meta">
+</div>
+</header>
+<div class="references csl-bib-body hanging-indent" data-entry-spacing="0" id="refs" role="list">
+<div class="csl-entry" id="ref-1000Genomes" role="listitem">1000 게놈 프로젝트 컨소시엄. 2012.<span>“통합지도
+1,092 인간 게놈의 유전 적 변화.”</span> <em>자연</em>491
+(7422) : 56–65.</div>
+<div class="csl-entry" id="ref-Abbott:1884" role="listitem">애보트, 에드윈 A. 1884.<em>플랫 랜드 : 많은 차원의 로맨스</em>.
+OUP 옥스포드.</div>
+<div class="csl-entry" id="ref-Agresti:2007" role="listitem">Agresti, Alan. 2007.<em>범주 형 데이터 소개
+분석</em>. 존 와일리.</div>
+<div class="csl-entry" id="ref-Altman:PoS:2017" role="listitem">Altman, Naomi 및 Martin Krzywinski. 2017.<span>“포인트
+중요성 : P 값 해석.”</span> <em>자연<span>중</span>이방</em>14 (3) : 213–14.<a href="https://doi.org/10.1038/nmeth.4210">https://doi.org/10.1038/nmeth.4210</a>.
+</div>
+<div class="csl-entry" id="ref-ambroise2002selection" role="listitem">Ambroise, Christophe 및 Geoffrey J. McLachlan. 2002.<span>"<span>에스</span>유전자 추출의 선거 편견
+마이크로 어레이 유전자 발현 데이터.”</span> <em>PNA</em>99 (10) : 6562–66.</div>
+<div class="csl-entry" id="ref-Anders:2010:GB" role="listitem">Anders, Simon 및 Wolfgang Huber. 2010 년.<span>"<span>디</span>시퀀스 수에 대한 IFFerential 표현 분석
+데이터."</span> <em>게놈 생물학</em>11 : R106.<a href="http://genomebiology.com/2010/11/10/R106">http://genomebiology.com/2010/11/10/r106</a>.
+</div>
+<div class="csl-entry" id="ref-Reyes:GnomeResearch:2012" role="listitem">Anders, Simon, Alejandro Reyes 및 Wolfgang Huber. 2012.<span>"<span class="nocase"><span>디</span>엑손의 차별적 사용을 취소합니다<span>RNA</span>-seq 데이터</span>.”</span> <em>게놈 연구</em>22
+(10) : 2008–17.</div>
+<div class="csl-entry" id="ref-Anscombe1948" role="listitem">Anscombe, Francis J. 1948.<span>“의 변화<span>피</span>Oisson, Binomial 및 부정적인 이분기 데이터.”</span>
+<em>생체 인식</em>, 246–54.</div>
+<div class="csl-entry" id="ref-Aure2017" role="listitem">Aure, Miriam Ragle, Valeria Vitelli, Sandra Jernström, Surendra Kumar,
+Marit Krohn, Eldri U Due, Tonje Husby Haukaas 등. 2017.<span>“통합 클러스터링은 내강에서 소설 분할을 보여줍니다<span>에이</span>결과에 영향을 미치는 유방암 하위 유형.”</span>
+<em>유방암 연구</em>19 (1) : 44.</div>
+<div class="csl-entry" id="ref-Bacher:GB:2016" role="listitem">Bacher, Rhonda 및 Christina Kendziorski. 2016.<span>“디자인과
+단일 세포의 계산 분석<span>RNA</span>-시합
+실험.”</span> <em>게놈 생물학</em>17 (1) : 1.</div>
+<div class="csl-entry" id="ref-Baddeley2000" role="listitem">Baddeley, Adrain, Jesper Moller 및 Rasmus Waagepetersen. 2000.<span>“상호 작용의 비 및 반 마리 메트릭 추정
+불균일 포인트 패턴.”</span> <em>Neerlandic 통계</em>54 : 329–50.</div>
+<div class="csl-entry" id="ref-Baddeley1998" role="listitem">Baddeley, Adrian J. 1998.<span>"공간 샘플링 및 검열."</span>~ 안에<em>확률 론적 형상 : 가능성과 계산</em>, 편집
+O. E. Barndorff-Nielsen, W. S. Kendall 및 M. N. M. Van Lieshout,
+37–78. 행상인; 홀.</div>
+<div class="csl-entry" id="ref-BioNet" role="listitem">Beisser, Daniela, Gunnar W Klau, Thomas Dandekar, Tobias Müller 및
+마커스 T 디트리히. 2010 년.<span>"<span>비오넷</span>: an<span>아르 자형</span>-생물학적 분석을위한 패키지
+네트워크.”</span> <em>생물 정보학</em>26 (8) : 1129–30.</div>
+<div class="csl-entry" id="ref-Belkin2003" role="listitem">Belkin, Mikhail 및 Partha Niyogi. 2003.<span>“라플라시안 고유 맵
+차원 감소 및 데이터 표현.”</span> <em>신경
+계산</em>15 (6) : 1373–96.</div>
+<div class="csl-entry" id="ref-Bellman:1961" role="listitem">벨만, 리차드 어니스트 1961.<em>적응 형 제어 프로세스 : 안내
+관광</em>. 프린스턴 대학 출판부.</div>
+<div class="csl-entry" id="ref-BendallCell" role="listitem">Bendall, Sean C, Garry P Nolan, Mario Roederer 및 Pratip K
+Chattopadhyay. 2012.<span>“깊은 프로파일 러 가이드
+세포 측정.”</span> <em>면역학 동향</em>33 (7) : 323–32.</div>
+<div class="csl-entry" id="ref-Bengio2004" role="listitem">Bengio, Yoshua, Jean-François 지불, Pascal Vincent, Olivier
+Delaleau, Nicolas Le Roux 및 Marie Ouimet. 2004.<span>“샘플 외부
+확장<span>lle</span>, ISOMAP,<span>MDS</span>, 고유 맵,
+스펙트럼 클러스터링.”</span> <em>신경 정보의 발전
+처리 시스템</em>16 : 177–84.</div>
+<div class="csl-entry" id="ref-benjamini2014selective" role="listitem">Benjamini, Yoav 및 Marina Bogomolov. 2014.<span>“선택적 추론
+가설의 여러 가족에.”</span> <em>왕실의 저널
+통계 학회 : 시리즈 b</em>76 (1) : 297–318.</div>
+<div class="csl-entry" id="ref-BH:1995" role="listitem">Benjamini, Yoav 및 Yosef Hochberg. 1995.<span>“거짓 제어
+발견 속도 : 여러 가지에 대한 실용적이고 강력한 접근
+테스트.”</span> <em>왕실 통계 학회지 b</em>57:
+289–300.</div>
+<div class="csl-entry" id="ref-benjamini2003hierarchical" role="listitem">Benjamin, Yovaav 및 Daniel Teli. 2003.<span>“계층 적<span>FDR</span>가설의 나무 테스트.”</span>인위적인
+통계부 보고서; 운영 연구, 텔 아비브
+대학교.</div>
+<div class="csl-entry" id="ref-ilastik:NatMeth:2019" role="listitem">Berg, Stuart, Dominik Kutra, Thorben Kroeger, Christoph N Strahle,
+Bernhard X Kausler, Carsten Haubold, Martin Schiegg 등. 2019.<span>“Ilastik : (BIO) 이미지를위한 대화식 머신 러닝
+분석."</span> <em>자연 방법</em>16 (12) : 1226–32.</div>
+<div class="csl-entry" id="ref-Bhattacharya:2015" role="listitem">Bhattacharya, Bhaswar B. 2015.<span>“그래프 기반 두 샘플의 힘
+테스트.”</span> <em>ARXIV PREPRINT ARXIV : 1508.07530</em>.
+</div>
+<div class="csl-entry" id="ref-Bishop:PRML" role="listitem">주교, Christopher M. 2006.<em>패턴 인식 및 기계
+학습</em>. 뛰는 것.</div>
+<div class="csl-entry" id="ref-BolandMurphy" role="listitem">Boland, Michael V. 및 Robert F. Murphy. 2001.<span>"<span class="nocase">인식 할 수있는 신경망 분류기
+형광 현미경에서 모든 주요 세포체 구조의 패턴
+이미지<span>헬라</span>세포</span>.”</span>
+<em>생물 정보학</em>17 (12) : 1213–23.</div>
+<div class="csl-entry" id="ref-beast" role="listitem">Bouckaert, Remco, Joseph Heled, Denise Kühnert, Tim Vaughan, Chieh-Hsi
+Wu, Dong Xie, Marc A Suchard, Andrew Rambaut 및 Alexei J Drummond.
+2014.<span>"<span>짐승 2</span>: 베이지안을위한 소프트웨어 플랫폼
+진화론 분석.”</span> <em>PLOS 계산 생물학</em>10
+(4) : E1003537.</div>
+<div class="csl-entry" id="ref-Box:1987" role="listitem">Box, George EP, Norman Richard Draper 등. 1987.<em>경험적
+모델 건설 및 응답 표면</em>. vol. 424. Wiley New York.</div>
+<div class="csl-entry" id="ref-box1978statistics" role="listitem">Box, George EP, William G Hunter 및 J Stuart Hunter. 1978.<em>실험자를위한 통계 : 설계 소개, 데이터
+분석 및 모델 구축</em>. John Wiley &amp; Sons.</div>
+<div class="csl-entry" id="ref-terBraak:1985" role="listitem">Braak, Cajo Ter. 1985.<span>“발생률의 통신 분석 및
+풍부한 데이터 : 단단한 부활의 관점에서 속성.”</span>
+<em>생체 인식</em>41 (1 월).</div>
+<div class="csl-entry" id="ref-Brodie:2006" role="listitem">Brodie, Eoin L, Todd Z Desantis, Dominique C Joyner, Seung M Baek, Joern
+T Larsen, Gary L Andersen, Terry C Hazen 등. 2006.<span>“고밀도 올리고 뉴클레오티드 마이크로 어레이 접근법의 적용
+우라늄 감소 중에 박테리아 집단 역학을 연구합니다
+재산 화.”</span> <em>적용 및 환경 미생물학</em>72
+(9) : 6288–98.</div>
+<div class="csl-entry" id="ref-BronsteinSemendjajew" role="listitem">Bronštein, Jja N. 및 Konstantin A Semendjaj. 1979.<em>페이퍼 백
+수학</em>. B.G. Teubner Verlagsgesellschaft, 라이프 치히; 발행자
+나우카, 모스크바.</div>
+<div class="csl-entry" id="ref-Brooks2010" role="listitem">Brooks, Angela N, Li Yang, Michael O Duff, Kasper D Hansen, Jung W Park,
+Sandrine Dudoit, Steven E Brenner 및 Brenton R Graveley. 2011.<span>“보존<span>RNA</span>사이의 규제지도<span>디</span>로오 필라와 포유류.”</span> <em>게놈 연구</em>,,,
+193–202.<a href="https://doi.org/10.1101/gr.108662.110">https://doi.org/10.1101/gr.108662.110</a>.
+</div>
+<div class="csl-entry" id="ref-bulmer2003" role="listitem">Bulmer, Michael George. 2003.<em>Francis Galton : 유전의 선구자
+및 생체 측정</em>, Jhu Press.</div>
+<div class="csl-entry" id="ref-Callahan2016Bioc" role="listitem">Callahan, Ben J, Kris Sankaran, Julia A Fukuyama, Paul J McMurdie 및
+수잔 P 홈즈. 2016.<span>“미생물 데이터를위한 생체 전도체 워크 플로우
+분석 : RAW 읽기부터 커뮤니티 분석에 이르기까지.”</span>
+<em>F1000Research</em>5.</div>
+<div class="csl-entry" id="ref-Callahan:2017" role="listitem">Callahan, Benjamin J, Paul J McMurdie 및 Susan P Holmes. 2017.<span>“정확한 시퀀스 변형은 운영 분류학을 대체해야합니다
+마커 유전자 데이터 분석의 단위.”</span> <em>ISM 저널</em>, 1–5.</div>
+<div class="csl-entry" id="ref-dada2" role="listitem">Callahan, Benjamin J, Paul J McMurdie, Michael J Rosen, Andrew W Han,
+Amy J Johnson과 Susan P Holmes. 2016.<span>"<span>dada2</span>:
+<span>시간</span>Amplicon의 IGH 해상도 샘플 추론
+데이터."</span> <em>자연 방법</em>, 1–4.</div>
+<div class="csl-entry" id="ref-Cannings1968" role="listitem">Cannings, Chris 및 Anthony WF Edwards. 1968.<span>“자연 선택
+그리고<span class="nocase">Deet</span>도표."</span>
+<em>인간 유전학의 연대기</em>31 (4) : 421–28.</div>
+<div class="csl-entry" id="ref-caporaso2010qiime" role="listitem">케이크, J. G ..
+Bushman, Er K. Costello, N. Fierrish 및 Al. 2010 년.<span>“Qiime은 허용합니다
+고 처리량 커뮤니티 시퀀싱 데이터 분석.”</span>
+<em>자연 방법</em>7 (5) : 335–36.</div>
+<div class="csl-entry" id="ref-carpenter2006cellprofiler" role="listitem">목수, Anne E, Thouis r Jones, Michael R Lampritt, Colin Clarke,
+한 칸드, 올라 프리 만, 데이비드 및 거절, 주 한 창, 로버트 및
+Lindquist와 Jason Moffat. 2006.<span>"<span>셀 프로파일</span>:
+셀을 식별하고 정량화하기위한 이미지 분석 소프트웨어
+표현형.”</span> <em>게놈 생물학</em>7 : R100.</div>
+<div class="csl-entry" id="ref-Carr1987hexbin" role="listitem">Carr, Daniel B, Richard J Littlefield, WL Nicholson 및 JS Littlefield.
+1987.<span>“크기를위한 ScatterPlot 매트릭스 기술<span>N</span>.”</span> <em>미국 통계 저널
+협회</em>82 (398) : 424–36.</div>
+<div class="csl-entry" id="ref-distory-paper" role="listitem">Chakerian, John 및 Susan Holmes. 2012.<span>“계산 도구
+계통 발생 학적 및 계층 적 클러스터링 트리 평가.”</span>
+<em>계산 및 그래픽 통계 저널</em>21 (3) :
+581–99.</div>
+<div class="csl-entry" id="ref-chaumont2012icy" role="listitem">Chaumont, Fabrice DE, Stéphane Dallongeville, Nicolas Chenotard, Nicolas
+Hervé, Sorin Pop, Thomas Provoost, Vannary Meas-Yedid 등. 2012.<span>"<span class="nocase"><span>나</span>Cy : 열린 바이오 이미지
+확장 된 재현 가능한 연구를위한 정보학 플랫폼</span>.”</span>
+<em>자연 방법</em>9 : 690–96.</div>
+<div class="csl-entry" id="ref-Chen2011" role="listitem">Chen, Min, Yang Xie 및 Michael Story. 2011.<span>“an
+배경 보정을위한 지수-감마 컨볼 루션 모델<span>나</span>빛<span>비니</span>데이터."</span>
+<em>통계 이론 및 방법의 커뮤니케이션</em>40 (17) :
+3055–69.</div>
+<div class="csl-entry" id="ref-ade4" role="listitem">Chessel, Daniel, Anne Dufour 및 Jean Thioulouse. 2004.<span>"그만큼<span class="nocase">적절한</span>패키지 -I : 하나의 테이블 방법.”</span>
+<em>R 뉴스</em>4 (1) : 5–10.<a href="http://CRAN.R-project.org/doc/Rnews/">http://cran.r-project.org/doc/rnews/</a>.
+</div>
+<div class="csl-entry" id="ref-MeckeSG2013" role="listitem">Chiu, Sung Nok, Dietrich Stoyan, Wilfrid S. Kendall 및 Joseph Mecke.
+2013.<em>확률 론적 형상 및 응용 분야</em>. 뛰는 것.</div>
+<div class="csl-entry" id="ref-clemmensen2012sparse" role="listitem">Clemmensen, Line, Trevor Hastie, Daniela Witten 및 Bjarne Ersbøll.
+2011.<span>"스파스 판별 분석."</span>
+<em>기술계</em>53 : 406–13.</div>
+<div class="csl-entry" id="ref-Tukey:1988" role="listitem">클리블랜드, 윌리엄 S. 1988.<em>John w.의 수집 된 작품. Tukey :
+그래픽 1965-1985</em>. vol. 5. CRC 프레스.</div>
+<div class="csl-entry" id="ref-Cleveland:1988:Banking" role="listitem">클리블랜드, William S., Marylyn E. McGill 및 Robert McGill. 1988.<span>"두 가지 변수 그래프의 모양 매개 변수."</span> <em>신문
+미국 통계 협회의</em>83 : 289–300.</div>
+<div class="csl-entry" id="ref-cole2009rdp" role="listitem">Cole, J. R., Q. Wang, E. Cardenas, J. Fish, B. Chai, R. J. Farris, A.S.
+Kulam-Syed-Mohideen, et al. 2009 년.<span>“리보솜 데이터베이스 프로젝트 :
+RRNA 분석을위한 개선 된 정렬 및 새로운 도구.”</span> <em>핵
+산 연구</em>37 (보충 1) : D141–45.</div>
+<div class="csl-entry" id="ref-Cook1977Detection" role="listitem">Cook, R. Dennis. 1977.<span>“영향력있는 관찰의 탐지
+선형 회귀.”</span> <em>기술계</em>.
+</div>
+<div class="csl-entry" id="ref-CressieSSD1991" role="listitem">Cressie, Noel A. 1991.<em>공간 데이터에 대한 통계</em>. 존 와일리;
+자제.</div>
+<div class="csl-entry" id="ref-diaconis1980finite" role="listitem">집사, 페르시, 데이비드 프리드먼. 1980.<span>“유한 교환 가능
+시퀀스.”</span> <em>확률의 연대기</em>, 745–64.</div>
+<div class="csl-entry" id="ref-Goel:2007aa" role="listitem">Diaconists, Persi, Sharad Goel 및 Susan Holmes. 2008.<span>“말굽
+다차원 스케일링 및 커널 방법에서.”</span> <em>Annals of
+응용 통계</em>2 : 777.<a href="https://doi.org/DOI:10.1214/08-AOAS165">https://doi.org/doi:10.1214/08-aoas165</a>.
+</div>
+<div class="csl-entry" id="ref-Diaconis1994" role="listitem">집사, 페르시, 수잔 홈즈. 1994.<span>“회색 코드
+무작위 배정 절차.”</span> <em>통계 및 컴퓨팅</em>4
+(4) : 287–302.</div>
+<div class="csl-entry" id="ref-Diaconis-Montgomery-Holmes-2007" role="listitem">Diaconis, Persi, Susan Holmes 및 Richard Montgomery. 2007.<span>"동전 던지기의 동적 편견."</span> <em>시암 리뷰</em>49
+(2) : 211–35.</div>
+<div class="csl-entry" id="ref-Diday1989" role="listitem">Diday, Edwin 및 M Paula Brito. 1989.<span>“상징적 인 클러스터
+분석."</span>~ 안에<em>데이터의 개념적 및 수치 분석</em>,,,
+45–84. 뛰는 것.</div>
+<div class="csl-entry" id="ref-DiggleSPP" role="listitem">Diggle, Peter J. 2013.<em>공간의 통계 분석 및
+시공간 지점 패턴</em>. 행상인; 홀/CRC.</div>
+<div class="csl-entry" id="ref-DigiulioCallahan:2015" role="listitem">Digiulio, Daniel B., Benjamin J. Callahan, Paul J. McMurdie, Elizabeth
+K. Costello, Deirdre J. Lyelle, Anna Robaczewska, Christine L. Sun, et
+알. 2015.<span>“인간 미생물 총의 시간적 및 공간적 변화
+임신 중.”</span> <em>PNA</em>.
+</div>
+<div class="csl-entry" id="ref-Dundar2014" role="listitem">Dundar, Murat, Ferit Akova, Khalid Z. Yerebakan 및 Bartek Rajwa. 2014.<span>“비모수 적<span>비</span>조인트 세포에 대한 아예 아 모델
+클러스터링 및 클러스터 매칭 : 변칙 샘플의 식별
+무작위 효과를 가진 표현형.”</span> <em>BMC 생물 정보학</em>15
+(1) : 1–15.<a href="https://doi.org/10.1186/1471-2105-15-314">https://doi.org/10.1186/1471-2105-15-314</a>.
+</div>
+<div class="csl-entry" id="ref-DEKM" role="listitem">Durbin, Richard, Sean Eddy, Anders Krogh 및 Graeme Mitchison. 1998.<em>생물학적 서열 분석</em>. 케임브리지 대학교 출판부.</div>
+<div class="csl-entry" id="ref-Efron2010" role="listitem">에프론, 브래들리. 2010 년.<em>대규모 추론 : 경험적<span>비</span>Ayes 추정, 테스트 및 예측 방법</em>.
+케임브리지 대학교 출판부.</div>
+<div class="csl-entry" id="ref-Efron:1994" role="listitem">Efron, Bradley 및 Robert J Tibshirani. 1994.<em>소개
+부트 스트랩</em>. CRC 프레스.</div>
+<div class="csl-entry" id="ref-efront" role="listitem">Efron, B. 및 R. Tibshirani. 1993.<em>소개
+부트 스트랩</em>. 채프먼 &amp; 홀/CRC.</div>
+<div class="csl-entry" id="ref-Ekman:1954" role="listitem">Ekman, Gosta. 1954.<span>"컬러 비전의 치수."</span> <em>그만큼
+심리학 저널</em>38 (2) : 467–74.</div>
+<div class="csl-entry" id="ref-Chargaff" role="listitem">엘슨, D 및 1952.<span>“Desoxyribonucleic acid
+Sea Uchin Gametes의 내용.”</span> <em>경험</em>8 (4) :
+143–45.</div>
+<div class="csl-entry" id="ref-fels:book" role="listitem">펠슨 슈타인, 조셉 2004.<em>계통 발생을 유추합니다</em>. 보스턴:
+Sinauer.</div>
+<div class="csl-entry" id="ref-definetti26" role="listitem">FINETTI, Bruno de. 1926.<span>“수학적 고려 사항
+Mendelian 직원에게. "</span> <em>지하철</em>6 : 3–41.</div>
+<div class="csl-entry" id="ref-fisher1935design" role="listitem">Fisher, Ronald Aylmer. 1935.<em>실험의 설계</em>. 올리버
+&amp; 보이드.</div>
+<div class="csl-entry" id="ref-Flury" role="listitem">플라이, 버나드 1997.<em>다변량의 첫 번째 코스
+통계</em>. 뛰는 것.</div>
+<div class="csl-entry" id="ref-freedman1991" role="listitem">Freedman, David A. 1991.<span>“통계 모델과 신발
+가죽."</span> <em>사회 학적 방법론</em>21 (2) : 291–313.</div>
+<div class="csl-entry" id="ref-Freedman:1997" role="listitem">Freedman, David, Robert Pisani 및 Roger Purves. 1997.<em>통계</em>. 뉴욕, 뉴욕 : WW Norton.</div>
+<div class="csl-entry" id="ref-friedmanbiasvariance01" role="listitem">Friedman, Jerome H. 1997.<span>“바이어스, 분산, 0/1 — Loss 및
+차원의 저주.”</span> <em>데이터 마이닝 및 지식
+발견</em>1 : 55–77.</div>
+<div class="csl-entry" id="ref-friedman1979multivariate" role="listitem">Friedman, Jerome H 및 Lawrence C Rafsky. 1979.<span>“다변량
+Wald-Wolfowitz 및 Smirnov 2- 표본의 일반화
+테스트.”</span> <em>통계의 연대기</em>, 697–717.</div>
+<div class="csl-entry" id="ref-Fukuyama:2012" role="listitem">후쿠야마, 줄리아, 폴 J McMurdie, Les Dethlefsen, David a Relman 및
+수잔 홈즈. 2012.<span>“결합을위한 거리 방법의 비교
+미생물 연구의 공변량과 풍부함.”</span>~ 안에<em>Pac Symp
+바이오 쿠션</em>. 세계 과학.</div>
+<div class="csl-entry" id="ref-Bioconductor" role="listitem">신사, Robert C, Vincent J Carey, Douglas M Bates, Ben Bolstad,
+Marcel Dettling, Sandrine Dudit, Byron Ellis 등. 2004.<span>“바이오 컨덕터 : 계산 생물학을위한 개방형 소프트웨어 개발
+생물 정보학.”</span> <em>게놈 생물학</em>5 (10) : R80.<a href="https://doi.org/10.1186/gb-2004-5-10-r80">https://doi.org/10.1186/GB-2004-5-10-R80</a>.
+</div>
+<div class="csl-entry" id="ref-glass2007experimental" role="listitem">Glass, David J. 2007.<em>생물 학자를위한 실험 설계</em>. 추운
+스프링 하버 실험실 언론.</div>
+<div class="csl-entry" id="ref-Goslee:2007" role="listitem">Goslee, Sarah C, Dean L Urban 등. 2007.<span>“Ecodist 패키지
+생태 데이터의 비 유사성 기반 분석.”</span> <em>신문
+통계 소프트웨어</em>22 (7) : 1–19.</div>
+<div class="csl-entry" id="ref-Grantham1981" role="listitem">Grantham, Richard, Christian Gautier, Manolo Gouy, M Jacobzone 및 R
+머시에. 1981.<span>“코돈 카탈로그 사용은 변조 된 게놈 전략입니다
+유전자 표현 성을 위해.”</span> <em>핵산 연구</em>9 (1) :
+213–13.</div>
+<div class="csl-entry" id="ref-greenacre2007" role="listitem">Greenacre, Michael J. 2007.<em>서신 분석
+관행</em>. 채프먼 &amp; 홀.</div>
+<div class="csl-entry" id="ref-Wickham:r4ds" role="listitem">Grolemund, Garrett 및 Hadley Wickham. 2017.<em><span>아르 자형</span>~을 위한
+데이터 과학</em>. 오라일리.</div>
+<div class="csl-entry" id="ref-Grun2012" role="listitem">Green, Bettina, Theresa Scharl 및 Friedrich Leisch. 2012.<span>“유한 혼합물을 사용한 시간 코스 유전자 발현 데이터 모델링
+선형 첨가제 모델의.”</span> <em>생물 정보학</em>28 (2) :
+222–28.<a href="https://doi.org/10.1093/bioinformatics/btr653">https://doi.org/10.1093/bioinformatics/btr653</a>.
+</div>
+<div class="csl-entry" id="ref-Guillot:2013" role="listitem">Guillot, Gilles 및 François Rousset. 2013.<span>“해체
+Mantel 테스트.”</span> <em>생태와 진화의 방법</em>4 (4) :
+336–44.</div>
+<div class="csl-entry" id="ref-Hallett2012" role="listitem">Hallett, Robin M, Anna Dvorkin-Gheva, Anita Bane 및 John A Hassell.
+2012.<span>“환자의 결과를 예측하기위한 유전자 서명
+기초 같은 유방암.”</span> <em>과학적 보고서</em>2.</div>
+<div class="csl-entry" id="ref-Hastie1989" role="listitem">Hastie, Trevor 및 Werner Stuetzle. 1989.<span>"주요한
+곡선.”</span> <em>미국 통계 협회 저널</em>84 (406) : 502–16.</div>
+<div class="csl-entry" id="ref-HastieTibshiraniFriedman" role="listitem">Hastie, Trevor, Robert Tibshirani 및 Jerome Friedman. 2008.<em>그만큼
+통계 학습의 요소</em>. 2^{\ text {nd}} ed. 뛰는 것.</div>
+<div class="csl-entry" id="ref-Head:PLoSBiol:2015:pvaluehacking" role="listitem">헤드, Megan L, Luke Holman, Rob Lanfear, Andrew T Kahn 및 Michael D
+제니니언. 2015.<span>“P-Hacking의 범위와 결과
+과학."</span> <em>PLOS 생물학</em>13 (3) : E1002106.</div>
+<div class="csl-entry" id="ref-held2010cellcognition" role="listitem">Held, M., M. H. A. Schmitz, B. Fischer, T. Walter, B. Neumann, M.H.
+Olma, M. Peter, J. Ellenberg 및 D. W. Gerlich. 2010 년.<span>"<span>세포인지</span>: 시간 분해 표현형 주석
+고 처리량 라이브 셀 이미징.”</span> <em>자연 방법</em>7 :
+747.</div>
+<div class="csl-entry" id="ref-Helmholtz:1867" role="listitem">Helmholtz, H. von. 1867.<em>생리적 외관의 핸드북</em>.
+라이프 치히 : 레오폴드 보스.</div>
+<div class="csl-entry" id="ref-Henderson:2017:SoftwareEngineeringGoogle" role="listitem">헨더슨, 퍼거스. 2017.<span>"<span class="nocase">소프트웨어
+Google의 엔지니어링</span>.”</span> <em>Arxiv e 프린트</em>. <a href="https://arxiv.org/abs/1702.01715">https://arxiv.org/abs/1702.01715</a>.
+</div>
+<div class="csl-entry" id="ref-hoeting1999" role="listitem">Hoeting, Jennifer A, David Madigan, Adrian E Raftery 및 Chris T
+볼린스키. 1999.<span>"베이지안 모델 평균 : 튜토리얼."</span>
+<em>통계 과학</em>, 382–401.</div>
+<div class="csl-entry" id="ref-Holmes1985" role="listitem">홈즈 - Junca, Susan. 1985.<span>“IT 도구
+엘'<span>그리고</span>r의 방출 평가<span>그리고</span>Sultat in
+데이터 분석<span>그리고</span>es.”</span>박사 학위 논문, 대학
+몽펠리에 2 세, 프랑스.</div>
+<div class="csl-entry" id="ref-holmesima" role="listitem">홈즈, 수잔 1999.<span>"계통 발생 나무 : 개요."</span>~ 안에<em>통계 및 유전학</em>, 81–118. 112. New York : Springer가 있습니다.</div>
+<div class="csl-entry" id="ref-Holmes-2003" role="listitem">———. 2003a.<span>“Phylogenetic Trees 부트 스트랩 : 이론 및
+행동 양식."</span> <em>통계 과학</em>18 (2) : 241–55.</div>
+<div class="csl-entry" id="ref-holmes2003b" role="listitem">———. 2003b.<span>"<span class="nocase">계통 발생 통계
+나무</span>.”</span> <em>이론적 인구 생물학</em>63 (1) :
+17–32.</div>
+<div class="csl-entry" id="ref-frenchway" role="listitem">———. 2006.<span>“다변량 분석 :<span class="nocase">프랑스어
+방법</span>.”</span>~ 안에<em>확률 및 통계 : 기호 에세이
+데이비드 A의. 자유민</em>, D. Nolan 및 T. P. Speed에 의해 편집. vol. 56.
+IMS 강의 노트 - 모노 그래프 시리즈. Beachwood, OH : IMS.<a href="http://www.imstat.org/publications/lecnotes.htm">http://www.imstat.org/publications/lecnotes.htm</a>.
+</div>
+<div class="csl-entry" id="ref-Holmes2017" role="listitem">———. 2018.<span>“통계적 증거? 문제
+부적절 할 수 없습니다.”</span> <em>AMS의 게시판</em>55 (1) : 31–55.</div>
+<div class="csl-entry" id="ref-holmes2011psb" role="listitem">Holmes, Susan, Alexander v Alekseyenko, Alden Timme, Tyrrell Nelson,
+Pankaj Jay Pasricha 및 Alfred Sportmann. 2011.<span>“시각화 및
+R 패키지를 사용한 미생물 군집의 통계적 비교
+Phylochip 데이터.”</span>~ 안에<em>바이오 컴퓨팅에 관한 태평양 심포지엄</em>,,,
+142–53. 세계 과학.</div>
+<div class="csl-entry" id="ref-holmes2005memory" role="listitem">Holmes, Susan, Michael He, Tong Xu 및 Peter P Lee. 2005.<span>"메모리
+T 세포는 순진한 것과 순진한 것 사이의 유전자 발현 패턴을 갖는다.
+이펙터.”</span> <em>PNA</em>102 (15) : 5519–23.</div>
+<div class="csl-entry" id="ref-Holmes2009" role="listitem">Holmes, Susan, Adam Kapelner 및 Peter P Lee. 2009 년.<span>“an
+대화식<span>자바</span>통계 이미지 분할 시스템 :<span>배</span>.”</span> <em>통계 소프트웨어 저널</em>30 (10).</div>
+<div class="csl-entry" id="ref-Hornik2005" role="listitem">Hornik, 커트. 2005.<span>"에이<span>단서</span>~을 위한<span>클루</span>스테르<span>이자형</span>nsemble. '</span> <em>통계 소프트웨어 저널</em>14 (12).</div>
+<div class="csl-entry" id="ref-Hotelling:1933ki" role="listitem">Hotelling, Harold. 1933.<span>“통계의 복잡한 분석
+주요 구성 요소로 변수.”</span> <em>교육 저널
+심리학</em>24 (6) : 417–41.</div>
+<div class="csl-entry" id="ref-Hotelling1944" role="listitem">———. 1944.<span>“계량 및 기타 실험의 일부 개선
+기법."</span> <em>수학적 통계의 연대기</em>15
+(3) : 297–306.</div>
+<div class="csl-entry" id="ref-Huber:AMS:1964" role="listitem">Huber, Peter J. 1964.<span>“위치의 강력한 추정
+매개 변수.”</span> <em>수학적 통계의 연대기</em>35 :
+73–101.</div>
+<div class="csl-entry" id="ref-Huber:2015" role="listitem">Huber, Wolfgang, Vincent J Carey, Robert Gentleman, Simon Anders, Marc
+Carlson, Benilton S Carvalho, Hector Corrada Bravo 등. 2015.<span>“고 처리량 게놈 분석을 조정합니다<span>생체 전도체</span>.”</span> <em>자연 방법</em>12 (2) :
+115–21.</div>
+<div class="csl-entry" id="ref-flowsort" role="listitem">Hulett, Henry R, ​​William A Bonner, Janet Barrett 및 Leonard A
+Herzenberg. 1969.<span>“셀 분류 : 포유 동물의 자동 분리
+세포 내 형광의 함수로서 세포.”</span>
+<em>과학</em>166 (3906) : 747–49.</div>
+<div class="csl-entry" id="ref-Ideker:2002" role="listitem">Ideaker, Trey, Owen Ozier, Benno Schwikowski 및 Andrew F Siegel. 2002.<span>“분자에서 조절 및 신호 회로 발견
+상호 작용 네트워크.”</span> <em>생물 정보학</em>18 공급 1
+(1 월) : S233–40.<a href="http://bioinformatics.oxfordjournals.org/cgi/reprint/18/suppl\_1/S233">http://bioinformatics.oxfordjournals.org/cgi/reprint/18/suppl\_1/s233</a>.
+</div>
+<div class="csl-entry" id="ref-Ignatiadis:JRSSB:2021" role="listitem">Ignatiadis, Nikolaos 및 Wolfgang Huber. 2021.<span>“공변량 전원
+교차 가중 다중 테스트.”</span> <em>왕실의 저널
+통계 학회 : 시리즈 b</em>83 : 720–51.<a href="https://doi.org/10.1111/rssb.12411">https://doi.org/10.1111/rssb.12411</a>.
+</div>
+<div class="csl-entry" id="ref-Ignatiadis:2016" role="listitem">Ignatiadis, Nikolaos, Bernd Klaus, Judith Zaugg 및 Wolfgang Huber.
+2016.<span>“데이터 중심의 가설 가중치는 감지력을 증가시킵니다
+게놈 규모의 다중 테스트에서.”</span> <em>자연 방법</em>13 :
+577–80.</div>
+<div class="csl-entry" id="ref-IhakaColorPres" role="listitem">이삭, 로스. 2003.<span>"프리젠 테이션 그래픽을위한 색상."</span>~ 안에<em>분산에 관한 제 3 차 국제 워크숍의 절차
+통계 컴퓨팅</em>, Kurt Hornik과 Friedrich Leisch가 편집했습니다.
+비엔나, 오스트리아 :
+http://www.r-project.org/conferences/dsc-2003/proceedings/; ISSN
+1609-395X.</div>
+<div class="csl-entry" id="ref-RlangB" role="listitem">Ihaka, Ross 및 Robert Gentleman. 1996.<span>“R : 데이터를위한 언어
+분석 및 그래픽.”</span> <em>전산 저널
+그래픽 통계</em>5 (3) : 299–314.</div>
+<div class="csl-entry" id="ref-Irizarry:Biostat:2003" role="listitem">Irizarry, R. A., B. Hobbs, F. Collin, Y. D. Beazer-Barclay, K. J.
+Antonellis, U. Scherf 및 T. P. Speed. 2003.<span>"탐구,
+정규화 및 고밀도 올리고 뉴클레오티드 어레이 프로브의 요약
+레벨 데이터.”</span> <em>생물 통계학</em>4 (2) : 249–64.</div>
+<div class="csl-entry" id="ref-Irizarry2009" role="listitem">Irizarry, Rafael A, Hao Wu 및 Andrew P Feinberg. 2009 년.<span>"에이
+CPG의 종-성과 확률 모델 기반 정의
+섬.”</span> <em>포유류 게놈</em>20 (9-10) : 674–80.</div>
+<div class="csl-entry" id="ref-Izenman2008" role="listitem">Izenman, Alan Julian. 2008.<span>“비선형 차원 감소
+그리고 매니 폴드 학습.”</span>~ 안에<em>현대의 다변량 통계
+기술 : 회귀, 분류 및 매니 폴드 학습</em>,,
+597–632. 뉴욕, 뉴욕 : Springer New York.</div>
+<div class="csl-entry" id="ref-Jacob:GroupLasso:2009" role="listitem">Jacob, Laurent, Guillaume Obozinski 및 Jean-Philippe Vert. 2009 년.<span>"오버랩 및 그래프 라소를 가진 그룹 라소."</span>~ 안에<em>제 26 차 연례 국제 기계 회의 절차
+학습</em>, 433–40. ACM.</div>
+<div class="csl-entry" id="ref-James:2013" role="listitem">James, Gareth, Daniela Witten, Trevor Hastie 및 Robert Tibshirani.
+2013.<em>통계 학습 소개</em>. 뛰는 것.</div>
+<div class="csl-entry" id="ref-Jolicoeur1960" role="listitem">Jolicoeur, Pierre 및 James E Mosimann. 1960.<span>“크기와 모양
+페인트 거북의 변화. 주요 구성 요소 분석.”</span>
+<em>성장</em>24 : 339–54.</div>
+<div class="csl-entry" id="ref-Jolliffe" role="listitem">Jolliffe, Ian. 2002.<em>주요 구성 요소 분석</em>. 와일리 온라인
+도서관.</div>
+<div class="csl-entry" id="ref-jones2005voronoi" role="listitem">Jones, T., A. Carpenter 및 P. Golland. 2005.<span>“Voronoi 기반
+이미지 매니 폴드에서 세포의 분할.”</span> <em>컴퓨터 비전
+생물 의학 이미지 응용 분야</em>, 535.</div>
+<div class="csl-entry" id="ref-Josse:2016" role="listitem">Josse, Julie 및 Susan Holmes. 2016.<span>“다변량 측정
+협회와 그 너머.”</span> <em>통계 조사</em>10 : 132–67.</div>
+<div class="csl-entry" id="ref-kahneman2011" role="listitem">KAHNEMAN, 다니엘. 2011.<em>생각, 빠르고 느리게</em>. 맥밀란.</div>
+<div class="csl-entry" id="ref-Kashyap:2013" role="listitem">Kashyap, Prince C, Marcobal, Luke K Urseell, Samuel Smith, Ericaro.
+D Sonnburg, Elizbeth K Costulllo, Steven Kostabtom 등. 2013.<span>“호스트 점액 탄수화물 환경의 유전자 적으로 지시 된 변화
+장내 미생물에식이 의존적 영향을 미칩니다.”</span>
+<em>PNA</em>110 (42) : 17059–64.</div>
+<div class="csl-entry" id="ref-Kaufman2009" role="listitem">Kaufman, Leonard 및 Peter J Rousseeuw. 2009 년.<em>그룹 찾기
+데이터 : 클러스터 분석 소개</em>. vol. 344. 존 와일리
+&amp; 아들.</div>
+<div class="csl-entry" id="ref-Kendall:1969" role="listitem">켄달, 데이비드. 1969.<span>“발병 행렬, 간격 그래프 및
+고고학의 세리나.”</span> <em>Pacific Journal of Mathematics</em>28 (3) : 565–70.</div>
+<div class="csl-entry" id="ref-Kery2015" role="listitem">Kéry, Marc 및 J Andrew Royle. 2015.<em>적용된 계층 모델링
+생태학 : 분포, 풍부 및 종 풍부함 분석
+R 및 버그 : 1 권 : 사전 및 정적 모델</em>. 학업 언론.</div>
+<div class="csl-entry" id="ref-Korthauer:GB:2019" role="listitem">Corthician, K., P. K. Kitchen C. Duval, A. Reyes, A. Subraman, M.
+Eng, C. Shukla, Er J. Alm 및 S.C. Hicks. 2019<span>"<span class="nocase"><span>에이</span>방법 제어 방법에 대한 실용 가이드
+계산 생물학에서의 허위 발견</span>.”</span> <em>게놈
+생물학</em>20 (1) : 118.</div>
+<div class="csl-entry" id="ref-Kozich2013" role="listitem">Kozich, James J, Sarah L Westcott, Nielson T Baxter, Sarah K Highlander,
+그리고 Patrick D Schloss. 2013.<span>“이중 인덱스 개발
+Amplicon 분석을위한 시퀀싱 전략 및 큐 레이션 파이프 라인
+Miseq Illumina 시퀀싱 플랫폼의 서열 데이터.”</span>
+<em>적용 및 환경 미생물학</em>79 (17) : 5112–20.</div>
+<div class="csl-entry" id="ref-Kristiansson2009" role="listitem">Kristiansson, Erik, Michael Thorsen, Markus J Tamás 및 Olle Nerman.
+2009 년.<span>“진화력은 프로모터 길이 : 식별에 작용합니다
+풍부한 시스 조절 요소의.”</span> <em>분자 생물학 및
+진화</em>26 (6) : 1299–1307.</div>
+<div class="csl-entry" id="ref-Kuan2011statistical" role="listitem">테인
+Starard, Senduz Kelérish. 2011.<span>“통계 프레임 워크
+분석<span>Chip-seq</span>데이터."</span> <em>저널
+미국 통계 협회</em>106 (495) : 891–903.</div>
+<div class="csl-entry" id="ref-Lai:2001" role="listitem">Lai, Tze Leung. 2001.<em>순차적 분석</em>. 와일리 온라인
+도서관.</div>
+<div class="csl-entry" id="ref-lange2016mm" role="listitem">LANGE, 케네스 2016.<em>MM 최적화 알고리즘</em>. 시암.</div>
+<div class="csl-entry" id="ref-Laufer:NatMeth:2013" role="listitem">Laufer, Christina, Bernd Fischer, Maximilian Billmann, Wolfgang Huber,
+그리고 Michael Boutros. 2013.<span>"<span class="nocase"><span>중</span>인간 암에서 유전자 상호 작용을 적용합니다
+세포<span>아르 자형</span><span>N</span><span>에이</span>나와
+다수의 표현형</span>.”</span> <em>자연 방법</em>10 :
+427–31.</div>
+<div class="csl-entry" id="ref-Lawrence:Nature:2013" role="listitem">Lawrence, Michael S., Petar Stojanov, Paz Polak, Gregory V. Kryukov,
+Kristian Cibulskis, Andrey Sivachenko, Scott L. Carter 등. 2013.<span>“암의 돌연변이 이질성과 새로운 검색
+암 관련 유전자.”</span> <em>자연</em>499 (7457) : 214–18.<a href="https://doi.org/10.1038/nature12213">https://doi.org/10.1038/nature12213</a>.
+</div>
+<div class="csl-entry" id="ref-Leek:2010:batch" role="listitem">Leek, Jeffrey T, Robert B Scharpf, Héctor Corrade Bravo, David Simcha,
+Benjamin Langmead, W Evan Johnson, Donald Geman, Keith Baggerly 및
+라파엘은 irizarry. 2010 년.<span>“광범위하고 비판적인 문제를 해결합니다
+고 처리량 데이터에서 배치 효과의 영향.”</span> <em>자연
+유전학을 검토합니다</em>11 (10) : 733–39.</div>
+<div class="csl-entry" id="ref-LeekStorey:2007" role="listitem">Leek, Jeffrey T. 및 John D. Storey. 2007.<span>"<span class="nocase"><span>기음</span>유전자 발현에서의 적절한 이질성
+대리 변수 분석에 의한 연구</span>.”</span> <em>plos
+유전학</em>3 (9) : 1724–35.</div>
+<div class="csl-entry" id="ref-WHLi" role="listitem">Li, Wen-Hsiung. 1997.<em>분자 진화.</em>Sinauer Associates
+통합.</div>
+<div class="csl-entry" id="ref-LiandGraur" role="listitem">Li, Wen-Hsiung 및 Dan Graur. 1991.<em>분자의 기초
+진화</em>. vol. 48. Sinauer Associates Sunderland, MA.</div>
+<div class="csl-entry" id="ref-MSigDB" role="listitem">Liberzon, Arthur, Aravind Subramanian, Reid Pinchback, Helga
+Thorvaldsdóttir, Pablo Tamayo 및 Jill P Mesirov. 2011.<span>“분자 서명 데이터베이스 (<span>MIGDB</span>) 3.0.”</span>
+<em>생물 정보학</em>27 (12) : 1739–40.</div>
+<div class="csl-entry" id="ref-BiocRNASeqWorkflow" role="listitem">사랑, Michael I., Simon Anders, Vladislav Kim 및 Wolfgang Huber. 2015.<span>"<span>RNA</span>-Seq 워크 플로 : 유전자 수준의 탐색 분석
+그리고 미분 표현.”</span> <em>F1000Research</em>4 (1070).<a href="https://doi.org/10.12688/f1000research.7035.1">https://doi.org/10.12688/f1000research.7035.1</a>.
+</div>
+<div class="csl-entry" id="ref-LoveDESeq2" role="listitem">사랑, Michael I, Wolfgang Huber 및 Simon Anders. 2014.<span>“접힘 변화와 분산의 중재 된 추정<span class="nocase">RNA-seq</span>데이터<span>deseq2</span>.”</span>
+<em>그놈 생물학</em>15 (12) : 1–21.</div>
+<div class="csl-entry" id="ref-mandal2009" role="listitem">Mandal, Rakesh, Sophie St-Hilaire, John G Kie 및 Dewayne Derryberry.
+2009 년.<span>“유나이티드에서 유방 및 전립선 암의 공간 경향
+2000 년에서 2005 년 사이의 주.”</span> <em>국제 저널
+건강 지리학</em>8 (1) : 53.</div>
+<div class="csl-entry" id="ref-Mardia" role="listitem">Mardia, Kanti, John T Kent 및 John M Bibby. 1979.<em>다중 해제
+분석</em>. 뉴욕 : Academic Press.</div>
+<div class="csl-entry" id="ref-Marin2007" role="listitem">마린, 장 미첼, 크리스티안 로버트. 2007.<em>베이지안 핵심 : a
+계산에 대한 실질적인 접근<span>비</span>Ayesian
+통계</em>. Springer Science &amp; Business Media.</div>
+<div class="csl-entry" id="ref-McCormick:1972:MatrixClustering" role="listitem">McCormick Jr, William T, Paul J Schweitzer 및 Thomas W White. 1972.<span>“클러스터링에 의한 문제 분해 및 데이터 재구성
+기술."</span> <em>운영 연구</em>20 (5) : 993–1009.</div>
+<div class="csl-entry" id="ref-McElreath2015" role="listitem">McElreath, Richard. 2015.<em>통계적 재고 : a<span>비</span>예제가있는 Ayesian 코스<span class="nocase">r과
+스탠</span></em>. 행상인; 홀/CRC.</div>
+<div class="csl-entry" id="ref-mclachlan2007algorithm" role="listitem">McLachlan, Geoffrey 및 Thriyambakam Krishnan. 2007.<em>그만큼<span>여자 이름</span>알고리즘 및 확장</em>. vol. 382. 존 와일리
+&amp; 아들.</div>
+<div class="csl-entry" id="ref-mclachlan2004" role="listitem">McLachlan, Geoffrey 및 David Peel. 2004.<em>유한 혼합물
+모델</em>. John Wiley &amp; Sons.</div>
+<div class="csl-entry" id="ref-mcmurdie2014" role="listitem">McMurdie, Paul J 및 Susan Holmes. 2014.<span>“폐기하지 말고, 원하지 않는다 :
+희귀 미생물 데이터가 허용되지 않는 이유.”</span> <em>plos
+계산 생물학</em>10 (4) : E1003531.</div>
+<div class="csl-entry" id="ref-mcmurdie2015" role="listitem">———. 2015.<span>“Shiny-Phyloseq : 대화식을위한 웹 응용 프로그램
+출처 추적을 통한 미생물 분석.”</span>
+<em>생물 정보학</em>31 (2) : 282–83.</div>
+<div class="csl-entry" id="ref-mead1990design" role="listitem">미드, 로저. 1990.<em>실험의 설계 : 통계 원리
+실제 응용 프로그램</em>. 케임브리지 대학교 출판부.</div>
+<div class="csl-entry" id="ref-Moignard:2015" role="listitem">Moignard, Victoria, Steven Woodhouse, Laleh Hadhverdi, Andrew J Lilly,
+Yusuke Tanaka, Adam C Wilkinson, Florian Buettner 등. 2015.<span>“조기 혈액 발달의 규제 네트워크를 디코딩합니다
+단일 세포 유전자 발현 측정.”</span> <em>자연
+생명 공학</em>.
+</div>
+<div class="csl-entry" id="ref-Mollon:1995" role="listitem">Mollon, John. 1995.<span>"색을 보는 것."</span>~ 안에<em>색상 : 예술과
+과학</em>, T. Lamb 및 J. Bourriat에 의해 편집 됨. 케임브리지 불의
+누르다.</div>
+<div class="csl-entry" id="ref-Mood1946" role="listitem">분위기, Alexander M. 1946.<span>"Hotelling의 계량 문제에."</span>
+<em>수학적 통계의 연대기</em>, 432–46.</div>
+<div class="csl-entry" id="ref-Mossel:2003" role="listitem">이끼, 엘 차난. 2003.<span>“재구성이 불가능합니다
+조상 데이터와 계통 발생.”</span> <em>전산 저널
+생물학</em>10 (5) : 669–76.</div>
+<div class="csl-entry" id="ref-Mourant1976" role="listitem">Mourant, AE, Ada Kopec 및 K Domaniewska-Sobczak. 1976.<span>"그만큼
+인간 혈액 그룹의 분포 2 판.”</span>옥스퍼드
+University Press London.</div>
+<div class="csl-entry" id="ref-Mullner:2013" role="listitem">ül너, 다니엘 2013.<span>“FastCluster : 빠른 계층 적,
+R 및 Python의 응집 클러스터링 루틴.”</span> <em>신문
+통계 소프트웨어</em>53 (9) : 1–18.</div>
+<div class="csl-entry" id="ref-GXNA" role="listitem">Nacu, Serban, Rebecca Critchley-Thorne, Peter Lee 및 Susan Holmes.
+2007.<span>“유전자 발현 네트워크 분석 및 응용 프로그램
+면역학."</span> <em>생물 정보학</em>23 (7, 7) : 850–58.<a href="https://doi.org/10.1093/bioinformatics/btm019">https://doi.org/10.1093/bioinformatics/btm019</a>.
+</div>
+<div class="csl-entry" id="ref-Nelson:2011" role="listitem">Nelson, Tyrell A, Susan Holmes, Alexander Alekseyenko, Masha Shenoy,
+Todd Desantis, Cindy Wu, Gary Andersen 등. 2010 년.<span>"<span>Phylochip</span>마이크로 어레이 분석은 변경된 것을 보여줍니다
+쥐의 쥐 모델에서 위장관 미생물 군집
+과민성.”</span> <em>신경 대변학 및 운동성</em>.
+</div>
+<div class="csl-entry" id="ref-Neumann:2010" role="listitem">Neumann, B., T. Walter, J. K. Heriche, J. Bulkescher, H. Erfle, C.
+Conrad, P. Rogers, et al. 2010 년.<span>"<span class="nocase"><span>피</span>인간 게놈의 Henotypic 프로파일 링
+시간 경과 현미경은 세포 분열 유전자를 나타냅니다</span>.”</span>
+<em>자연</em>464 (7289) : 721–27.</div>
+<div class="csl-entry" id="ref-Neyman1936" role="listitem">Neyman, Jerzy 및 Egon S Pearson. 1936.<em>충분한 통계 및
+통계 가설의 균일하게 가장 강력한 테스트</em>. 대학교
+캘리포니아 언론.</div>
+<div class="csl-entry" id="ref-Nolan:2013" role="listitem">Nolan, Daniel J, Michael Ginsberg, Ed Israel
+구스, 베이온 제임스, B- 감세 및 al. 2013.<span>“분자
+조직-특이 적 미세 혈관 내피 세포의 시그니처
+장기 유지 및 재생의 이질성.”</span>
+<em>발달 세포</em>26 (2) : 204–19.</div>
+<div class="csl-entry" id="ref-oneill2013flow" role="listitem">O'Neill, Kieran, Nima Aghaeepour, Josef Špidlen 및 Ryan Brinkman.
+2013.<span>"유세포 분석 생물 정보학."</span> <em>plos
+계산 생물학</em>9 (12) : E1003365.</div>
+<div class="csl-entry" id="ref-Ohnishi2014" role="listitem">Ohnishhi, Y., W. Huber, A. Tour, M. Kang, P. Xenopolos, K. Curioto,
+A. K. Oles, et al. 2014.<span>“세포 간 발현 변동성
+신호 강화가 점차 초기 마우스를 분리합니다
+계보.”</span> <em>자연 세포 생물학</em>16 (1) : 27–37.</div>
+<div class="csl-entry" id="ref-OzsolakMilos" role="listitem">Ozsolak, Fatih 및 Patrice M Milos. 2011.<span>"<span class="nocase"><span>아르 자형</span><span>N</span><span>에이</span>시퀀싱 :
+발전, 도전 및 기회</span>.”</span> <em>자연
+유전학을 검토합니다</em>12 : 87–98.</div>
+<div class="csl-entry" id="ref-Pages:2016" role="listitem">Pagès, Jérôme. 2016.<em>예제 사용에 의한 다중 요소 분석<span>아르 자형</span></em>. CRC 프레스.</div>
+<div class="csl-entry" id="ref-paradis:2011" role="listitem">Paradis, Emmanuel. 2011.<em>계통 발생학 및 진화의 분석
+r</em>. Springer Science &amp; Business Media.</div>
+<div class="csl-entry" id="ref-EBImage" role="listitem">Pau, Grégoire, Florian Fuchs, Oleg Sklyar, Michael Boutros 및 Wolfgang
+허버. 2010 년.<span>"<span>에비</span>마술사<span>아르 자형</span>패키지
+세포 표현형에 대한 응용 프로그램을 사용한 이미지 처리.”</span>
+<em>생물 정보학</em>26 (7) : 979–81.</div>
+<div class="csl-entry" id="ref-Pearson1901" role="listitem">피어슨, 칼. 1901.<span>"<span>. 영형</span>n 라인과 평면
+우주의 포인트 시스템에 가장 가깝습니다.”</span> <em>런던,
+에든버러, 더블린 철학 잡지 및 Journal of Science</em>2 (11) : 559–72.</div>
+<div class="csl-entry" id="ref-Perraudeau:2017" role="listitem">Perraudeau, Fanny, Davide Risso, Kelly Street, Elizabeth Pardom 및
+Sandrine Dudit. 2017.<span>“단일 셀의 생체 전도체 워크 플로우<span>RNA</span>시퀀싱 : 정규화, 치수 감소,
+클러스터링 및 계보 추론.”</span> <em>F1000Research</em>6.</div>
+<div class="csl-entry" id="ref-Perriere2002" role="listitem">Perrière, Guy 및 Jean Thioulouse. 2002.<span>“사용 및 오용
+코돈 사용 연구에서의 서신 분석.”</span> <em>핵
+산 연구</em>30 (20) : 4548–55.</div>
+<div class="csl-entry" id="ref-Pounds2003" role="listitem">파운드, 스탠, 스테판 W 모리스. 2003.<span>“추정
+마이크로 어레이 연구에서 잘못된 양성 및 잘못된 부정의 발생
+경험적 분포를 근사화하고 분할함으로써
+p- 값.”</span> <em>생물 정보학</em>19 (10) : 1236–42.</div>
+<div class="csl-entry" id="ref-Prentice:1977" role="listitem">프렌 티스, IC. 1977.<span>“비 금지 안수 방법
+생태학."</span> <em>생태학 저널</em>, 85–94.</div>
+<div class="csl-entry" id="ref-Purdom2010" role="listitem">Purdom, 엘리자베스. 2010 년.<span>“데이터 매트릭스 및 그래프 분석 :
+Metagenomic 데이터와 계통 발생 트리.”</span> <em>Annals of
+응용 통계</em>, 7 월.</div>
+<div class="csl-entry" id="ref-Purdom2005" role="listitem">Purdom, Elizabeth 및 Susan P Holmes. 2005.<span>“오류 분포
+유전자 발현 데이터의 경우.”</span> <em>통계 응용 프로그램
+유전학 및 분자 생물학</em>4 (1).</div>
+<div class="csl-entry" id="ref-PhenoRipper" role="listitem">Rajaram, S., B. Pavie, L. F. Wu 및 S. J. Altschuler. 2012.<span>"<span class="nocase"><span>피</span>숙녀<span>아르 자형</span>ipper :
+현미경 이미지를 빠르게 프로파일 링하는 소프트웨어</span>.”</span>
+<em>자연 방법</em>9 : 635–37.</div>
+<div class="csl-entry" id="ref-diabetes" role="listitem">Reaven, GM 및 RG Miller. 1979.<span>“자연을 정의하려는 시도
+다차원 분석을 사용한 화학 당뇨병.”</span>
+<em>당뇨병</em>16 (1) : 17–24.</div>
+<div class="csl-entry" id="ref-Reyes:PNAS:2013" role="listitem">Reyes, Alejandro, Simon Anders, Robert J. Weatheritt, Toby J. Gibson,
+Lars M. Steinmetz 및 Wolfgang Huber. 2013.<span>“드리프트와
+영장류의 조직 전체에 걸친 차등 엑손 사용의 보존
+종."</span> <em>국립 아카데미의 절차
+과학</em>110 (38) : 15377–82.<a href="https://doi.org/10.1073/pnas.1307202110">https://doi.org/10.1073/pnas.1307202110</a>.
+</div>
+<div class="csl-entry" id="ref-Reyes:NAR:2017" role="listitem">Reyes, Alejandro 및 Wolfgang Huber. 2017.<span>“대체 시작 및
+전사의 종결 부위는 대부분의 전사 이소 형을 구동합니다
+인간 조직의 차이점.”</span> <em>핵산
+연구</em>46 (2) : 582–92.<a href="https://doi.org/10.1093/nar/gkx1165">https://doi.org/10.1093/nar/gkx1165</a>.
+</div>
+<div class="csl-entry" id="ref-HIVdb" role="listitem">Rhee, Soo-Yon, Matthew J Gonzales, Rami Kantor, Bradley J Betts, Jaideep
+Ravela와 Robert W Shafer. 2003.<span>"인체 면역 결핍 바이러스
+역전사 제 및 프로테아제 서열 데이터베이스.”</span>
+<em>핵산 연구</em>31 (1) : 298–303.</div>
+<div class="csl-entry" id="ref-Rice:2007" role="listitem">라이스, 존. 2006.<em>수학적 통계 및 데이터 분석</em>.
+Cengage Learning.</div>
+<div class="csl-entry" id="ref-RipleySISS1988" role="listitem">Ripley, B. D. 1988.<em>공간에 대한 통계적 추론
+프로세스.</em>케임브리지 대학교 출판부.</div>
+<div class="csl-entry" id="ref-Casella2009" role="listitem">Robert, Christian 및 George Casella. 2009 년.<em>소개<span>중</span>어제<span>기음</span>Arlo 방법<span>아르 자형</span></em>.
+Springer Science &amp; Business Media.</div>
+<div class="csl-entry" id="ref-robins:2007" role="listitem">Robins, Garry, Tom Snijders, Peng Wang, Mark Handcock 및 Philippa
+패티슨. 2007.<span>“지수 랜덤 그래프의 최근 발전
+(P*) 소셜 네트워크 모델.”</span> <em>소셜 네트워크</em>29
+(2) : 192–215.</div>
+<div class="csl-entry" id="ref-edgeR:Robinson:2009" role="listitem">Robinson, M.D., D. J. McCarthy 및 G. K. Smyth. 2009 년.<span>"<span class="nocase">에더</span>: a<span>생체 전도체</span>패키지
+디지털 유전자 발현의 차등 발현 분석
+데이터."</span> <em>생물 정보학</em>26 (1) : 139–40.<a href="https://doi.org/10.1093/bioinformatics/btp616">https://doi.org/10.1093/bioinformatics/btp616</a>.
+</div>
+<div class="csl-entry" id="ref-RockeDurbin:2001" role="listitem">Rocke, David M 및 Blythe Durbin. 2001.<span>“측정 모델
+유전자 발현 어레이에 대한 오류.”</span> <em>전산 저널
+생물학</em>8 (6) : 557–69.</div>
+<div class="csl-entry" id="ref-mrbayes3" role="listitem">Ronquist, Fredrik, Maxim Teslenko, Paul van der Mark, Daniel L Ayres,
+Aaron Darling, Sebastian Höhna, Bret Larget, Liang Liu, Marc A Suchard,
+그리고 John P Huelsenbeck. 2012.<span>“Mrbayes 3.2 : 효율적인 베이지안
+큰 모델에서 계통 발생 학적 추론 및 모델 선택
+공간."</span> <em>체계적인 생물학</em>61 (3) : 539–42.</div>
+<div class="csl-entry" id="ref-Rosen:2012" role="listitem">Rosen, Michael J, Benjamin J Callahan, Daniel S Fisher 및 Susan P
+홈즈. 2012.<span>“Denoising<span>PCR</span>-메타 게놈 증폭
+데이터."</span> <em>BMC<span>비</span>ioinformatics</em>13 (1) : 283.</div>
+<div class="csl-entry" id="ref-Rousseeuw:1987" role="listitem">Rousseeuw, Peter J. 1987.<span>“실루엣 : 그래픽 보조 도구
+클러스터 분석의 해석 및 검증.”</span> <em>신문
+계산 및 응용 수학</em>20 : 53–65.</div>
+<div class="csl-entry" id="ref-Rousseeuw:RobustBook:1987" role="listitem">Rousseeuw, Peter J. 및 Annick M. Leroy. 1987 년.<em>강력한 회귀
+그리고 이상적인 탐지</em>. 와일리.<a href="https://doi.org/10.1002/0471725382">https://doi.org/10.1002/0471725382</a>.
+</div>
+<div class="csl-entry" id="ref-Roweis2000" role="listitem">Roweis, Sam T 및 Lawrence K Saul. 2000.<span>“비선형
+국부 선형 임베딩에 의한 치수 감소.”</span>
+<em>과학</em>290 (5500) : 2323–26.</div>
+<div class="csl-entry" id="ref-RussImageProcessingHandbook" role="listitem">Russ, John C. 및 F. Brent Neal. 2015.<em>이미지 처리
+안내서</em>. 7th ed. CRC 프레스;</div>
+<div class="csl-entry" id="ref-sankaran2014structssi" role="listitem">Sankaran, Kris 및 Susan Holmes. 2014.<span>"<span class="nocase">structssi : 동시 및 선택적 추론
+그룹화 또는 계층 적으로 구조화 된 데이터</span>.”</span> <em>저널
+통계 소프트웨어</em>59 (1) : 1–21.</div>
+<div class="csl-entry" id="ref-schilling1986multivariate" role="listitem">Schilling, Mark F. 1986.<span>“다변량 2- 표본 테스트를 기반으로합니다
+가장 가까운 이웃.”</span> <em>미국 통계 저널
+협회</em>81 (395) : 799–806.</div>
+<div class="csl-entry" id="ref-schindelin2012fiji" role="listitem">Schindelin, Johannes, Ignacio Arganda-Carras, Erwin Frize, Verena
+Kaynig, Mark Longair, Tobias Pietzsch, Stephan Preibisch 등. 2012.<span>"<span class="nocase"><span>에프</span>IJI : 오픈 소스 플랫폼
+생물학 이미지 분석 용</span>.”</span> <em>자연 방법</em>9 :
+676–82.</div>
+<div class="csl-entry" id="ref-mothur" role="listitem">Schloss, P D, S L Westcott, T Ryabin, J R Hall, M Hartmann, E B
+Hollister, R A Lesniewski 등. 2009 년.<span>"<span class="nocase">Mothur 소개 : 오픈 소스, 플랫폼 독립적,
+미생물을 설명하고 비교하기위한 커뮤니티 지원 소프트웨어
+커뮤니티</span>.”</span> <em>적용 및 환경
+미생물학</em>75 (23) : 7537–41.</div>
+<div class="csl-entry" id="ref-schloss2012stabilization" role="listitem">Schloss, P.D., A. M. Schuber, J. P. Zackular, K. D. Iverson, Young V.
+B. 및 Petrosino J. F. 2012.<span>“뮤린 내장의 안정화
+이유 후 미생물 군집.”</span> <em>장내 미생물</em>3 (4) :
+383–93.</div>
+<div class="csl-entry" id="ref-VertKernel" role="listitem">Schölkopf, Bernhard, Koji Tsuda 및 Jean-Philippe Vert. 2004.<em>계산 생물학의 커널 방법</em>. 프레스와 함께.</div>
+<div class="csl-entry" id="ref-SchwederSpjotvoll1982" role="listitem">수영, T. 및 E. Spjøirt. 1982 년.<span>“음모<span class="nocase">p- 값</span>많은 테스트를 평가합니다
+동시에."</span> <em>생체 인식</em>69 : 493–502.<a href="https://doi.org/10.1093/biomet/69.3.493">https://doi.org/10.1093/biomet/69.3.493</a>.
+</div>
+<div class="csl-entry" id="ref-senn2004randomization" role="listitem">Senn, Stephen. 2004.<span>“무작위 배정에 관한 논쟁
+임상 시험의 부가성.”</span> <em>의학 통계</em>23 : 3729–53.</div>
+<div class="csl-entry" id="ref-MathematicalMorphology" role="listitem">세라, 진. 1983.<em>이미지 분석 및 수학적 형태</em>.
+학업 언론.</div>
+<div class="csl-entry" id="ref-Setiadi2010" role="listitem">Settica, Francis, Nelson C Ray, Kohrt의 Holbrook, Adam Kapelner,
+Carcamo-Cavasos Valley, Edina B Levic, China, Yadegaryan 및 Al. 2010 년.<span>“면역 세포 서브 세트의 정량적, 건축 분석
+유방암 환자 및 건강한 림프의 종양 배수 림프절
+노드.”</span> <em>plos one</em>5 (8) : E12420.</div>
+<div class="csl-entry" id="ref-CosmaShalizi2017" role="listitem">Shalizi, Cosma. 2017.<em>초등학교의 고급 데이터 분석
+관점</em>. 케임브리지 대학교 출판부.<a href="https://www.stat.cmu.edu/~cshalizi/ADAfaEPoV/ADAfaEPoV.pdf">https://www.stat.cmu.edu/~cshalizi/adafaepov/adafaepov.pdf</a>.
+</div>
+<div class="csl-entry" id="ref-Slonim:2005" role="listitem">Slonim, Noam, Gurinder Singh Atwal, Gašper Tkačik 및 William Bialek.
+2005.<span>"정보 기반 클러스터링."</span> <em>PNA</em>102
+(51) : 18297–302.</div>
+<div class="csl-entry" id="ref-Stegle:2010" role="listitem">Stegle, O., L. Parts, R. Durbin 및 J. Winn. 2010 년.<span>"<span class="nocase"><span>에이</span> <span>비</span>Ayesian 프레임 워크를 설명합니다
+유전자 발현 수준의 복잡한 비 유전자 인자
+e<span>큐</span><span>티</span><span>엘</span>연구</span>.”</span> <em>PLOS 계산 생물학</em>6 (5) :
+E1000770.</div>
+<div class="csl-entry" id="ref-SteijgerBertone:2013" role="listitem">Steiijger, T., J.F. Abril, P. G. G. Engstrus, F. Kokocinski, T. J. Hubbard,
+R. Guigo, J. Harrow, et al. 2013.<span>"<span class="nocase"><span>에이</span>전 사체 재건의 SSESSMENT
+방법<span class="nocase">RNA-seq</span></span>.”</span>
+<em>자연 방법</em>10 (12) : 1177–84.</div>
+<div class="csl-entry" id="ref-Stigler:sevenpillars" role="listitem">Stigler, Stephen M. 2016.<em>통계의 일곱 기둥
+지혜</em>. 하버드 대학교 출판부.</div>
+<div class="csl-entry" id="ref-Storey:AnnStat:2003" role="listitem">Storey, John D. 2003.<span>“긍정적 인 허위 발견 률 : a
+베이지안 해석과 Q- 값.”</span> <em>연대기
+통계</em>31 (6).<a href="https://doi.org/10.1214/aos/1074290335">https://doi.org/10.1214/aos/1074290335</a>.
+</div>
+<div class="csl-entry" id="ref-Strang:09" role="listitem">길, 길버트. 2009 년.<em>소개<span>엘</span>inear<span>에이</span>lgebra</em>. 네번째. Wellesley-Cambridge Press.</div>
+<div class="csl-entry" id="ref-Tenenbaum2000" role="listitem">Tenenbaum, Joshua B, Vin de Silva 및 John C Lanford. 2000.<span>"에이
+비선형 차원에 대한 글로벌 기하학적 프레임 워크
+절감."</span> <em>과학</em>290 (5500) : 2319–23.</div>
+<div class="csl-entry" id="ref-Tibshirani1996" role="listitem">Tibshirani, Robert. 1996.<span>“회귀 수축 및 선택을 통한 선택
+레이소.”</span> <em>왕실 통계 학회지. 시리즈
+B (방법 론적)</em>, 267–88.</div>
+<div class="csl-entry" id="ref-gap2001" role="listitem">Tibshirani, Robert, Guenther Walther 및 Trevor Hastie. 2001.<span>“갭을 통해 데이터 세트의 클러스터 수를 추정
+통계량."</span> <em>JRSSB</em>63 (2) : 411–23.</div>
+<div class="csl-entry" id="ref-Trosset2008" role="listitem">Trosset, Michael W 및 Carey E Priebe. 2008.<span>“샘플 외부
+고전적인 다차원 스케일링의 문제.”</span>
+<em>계산 통계 및 데이터 분석</em>52 (10) : 4635–42.</div>
+<div class="csl-entry" id="ref-Tseng:2005" role="listitem">Tseng, George C 및 Wing H Wong. 2005.<span>“단단한 클러스터링 : a
+안정적이고 단단한 패턴을 식별하기위한 기반 접근 방식
+데이터."</span> <em>생체 인식</em>61 (1) : 10–16.</div>
+<div class="csl-entry" id="ref-Tukey77" role="listitem">Tukey, John W. 1977.<span>"탐색 적 데이터 분석."</span>
+<em>매사추세츠 : 애디슨 웨슬리</em>.
+</div>
+<div class="csl-entry" id="ref-tversky1974heuristics" role="listitem">Tversky, Amos 및 Daniel Kahneman. 1974.<span>“휴리스틱 및 편견 :
+불확실한 판단.”</span> <em>과학</em>185 : 1124–30.</div>
+<div class="csl-entry" id="ref-tversky1975judgment" role="listitem">———. 1975.<span>“불확실성 하의 판단 : 휴리스틱 및
+편견.”</span>~ 안에<em>유용성, 확률 및 인간 결정
+만들기</em>, 141–62. 뛰는 것.</div>
+<div class="csl-entry" id="ref-Verhulst:1845" role="listitem">Verhulst, Pierre-François. 1845.<span>"연구<span class="nocase">수학</span>증가의 법칙에
+인구."</span> <em>새로운<span>논문집</span>~의
+엘'<span>학원</span> <span>로얄</span>의<span>과학</span>et<span>종</span>-<span>lettres</span>~의<span>브루셀레스</span></em>18 : 1–42.</div>
+<div class="csl-entry" id="ref-FoundationSignalProcessing" role="listitem">Vetterli, Martin, Jelena Kovačević 및 Vivek Goyal. 2014.<em>신호 처리의 기초</em>. 케임브리지 대학교 출판부.</div>
+<div class="csl-entry" id="ref-wang2007naive" role="listitem">Wang, Q., G. M. Garrity, J. M. Tiedje 및 J. R. Cole. 2007.<span>“RRNA 서열의 신속한 할당을위한 순진한 베이지안 분류기
+새로운 박테리아 분류법으로.”</span> <em>적용 및 환경
+미생물학</em>73 (16) : 5261.</div>
+<div class="csl-entry" id="ref-Wasserstein2016:ASA" role="listitem">Wasserstein, Ronald L 및 Nicole A Lazar. 2016.<span>"그만큼<span>ASA</span>p- 값에 대한 진술 : 컨텍스트, 프로세스 및
+목적."</span> <em>미국 통계 학자</em>.
+</div>
+<div class="csl-entry" id="ref-Wertheim:2009" role="listitem">Wertheim, Joel O 및 Michael Worobey. 2009 년.<span>“나이 데이트
+그만큼<span>사용</span>발생한 혈통<span>HIV</span>-1 및<span>HIV</span>-2.”</span> <em>PLOS 계산 생물학</em>5 (5) :
+E1000377.</div>
+<div class="csl-entry" id="ref-Wickham:LayeredGrammar" role="listitem">위엄, 해들리. 2010 년.<span>"그래픽의 계층 문법."</span>
+<em>계산 및 그래픽 통계 저널</em>19 (1) : 3–28.</div>
+<div class="csl-entry" id="ref-Wickham:TidyData" role="listitem">———. 2014.<span>"깔끔한 데이터."</span> <em>통계 저널
+소프트웨어</em>59 (10).</div>
+<div class="csl-entry" id="ref-ggplot2" role="listitem">———. 2016.<em>GGPLOT2 : 데이터 분석을위한 우아한 그래픽</em>.
+스프링거 뉴욕.<a href="http://had.co.nz/ggplot2/book">http://had.co.nz/ggplot2/book</a>.
+</div>
+<div class="csl-entry" id="ref-Wiel:StatMed:2016" role="listitem">Wall, Mark A, Tonaje G Len, Wina Pass, West N Western 및 Saskia
+M Wilting. 2016.<span>“공동 데이터 사용에 의한 더 나은 예측 : 적응 형
+그룹 규제 릿지 회귀.”</span> <em>통계
+약</em>35 (3) : 368–81.</div>
+<div class="csl-entry" id="ref-Wilkinson:DotPlots:1999" role="listitem">Wilkinson, Leland. 1999.<span>"도트 플롯."</span> <em>미국
+통계 학자</em>53 (3) : 276.</div>
+<div class="csl-entry" id="ref-GrofGrbook" role="listitem">———. 2005.<em>그래픽의 문법</em>. 뛰는 것.</div>
+<div class="csl-entry" id="ref-Wills2013" role="listitem">Wills, Quin F, Kenneth J Livak, Alex J Tipping, Tariq Enver, Andrew J
+Goldson, Darren W Sexton 및 Chris Holmes. 2013.<span>“단일 세포
+유전자 발현 분석은 가면에 빠진 유전자 연관성을 보여준다
+전체 조직 실험.”</span> <em>자연 생명 공학</em>31 (8) :
+748–52.</div>
+<div class="csl-entry" id="ref-Wilson:Goodenough:2017" role="listitem">Wilson, Greg, Jennifer Bryan, Karen Cranston, Justin Kitzes, Lex
+Nederbragt 및 Tracy K. Teal. 2017.<span>“충분한 관행
+과학 컴퓨팅.”</span>Francis Ouellette에 의해 편집 됨.<em><span>plos</span> <span>기음</span>계약<span>비</span>iology</em>13 (6) : E1005510.<a href="https://doi.org/10.1371/journal.pcbi.1005510">https://doi.org/10.1371/journal.pcbi.1005510</a>.
+</div>
+<div class="csl-entry" id="ref-witten2011penalized" role="listitem">Witten, Daniela M 및 Robert Tibshirani. 2011.<span>“처벌
+분류 사용<span>에프</span>Isher의 선형 판별제.”</span>
+<em>JRSSB</em>73 (5) : 753–72.</div>
+<div class="csl-entry" id="ref-Witten2009" role="listitem">Witten, Daniela M, Robert Tibshirani 및 Trevor Hastie. 2009 년.<span>"에이
+희소 한 교장에 대한 응용 프로그램과 함께 처벌 된 매트릭스 분해
+구성 요소 및 표준 상관 관계 분석.”</span>
+<em>생물 통계학</em>, KXP008.</div>
+<div class="csl-entry" id="ref-wright2015decipher" role="listitem">Wright, Erik S. 2015.<span>"<span>풀다</span>: 현지 활용
+단백질 다중 서열 정렬을 개선하기위한 서열 컨텍스트.”</span>
+<em><span>BMC 생물 정보학</span></em>16 (1) : 1.</div>
+<div class="csl-entry" id="ref-wu2011experiments" role="listitem">Wu, CF Jeff 및 Michael S Hamada. 2011.<em>실험 : 계획,
+분석 및 최적화</em>. vol. 552. John Wiley &amp; Sons.</div>
+<div class="csl-entry" id="ref-YuGXNA" role="listitem">Yu, Hongxiang, Diana L Simons, Ilana Segall, Valeria Carcamo-Cavazos,
+Erich J Schwartz, Ning Yan, Neta S Zuckerman 등. 2012.<span>"<span>PRC2</span>/<span>EED-EZH2</span>복합체는 상향 조절됩니다
+유방암 림프절 전이에서 1 차 종양과 비교하여
+현장에서 종양 증식과 관련이 있습니다.”</span> <em>plos one</em>7
+(12) : E51239.</div>
+<div class="csl-entry" id="ref-Zeileis:2008" role="listitem">Zeileis, Achim, Christian Kleiber 및 Simon Jackman. 2008.<span>“카운트 데이터에 대한 회귀 모델<span>아르 자형</span>.”</span>
+<em>통계 소프트웨어 저널</em>27 (8).<a href="http://www.jstatsoft.org/v27/i08/">http://www.jstatsoft.org/v27/i08/</a>.
+</div>
+<div class="csl-entry" id="ref-Zeller:MSB:2014" role="listitem">Zeller, Georg, 탭 Julien, Anita Y Voice, Sunnagawa, Jens Roat
+Cultima, Paul I Coast, Amiot 's Wild 및 Al. 2014.<span>"<span>피</span>초기 단계에 대한 대변 미생물 총의 전위
+결장 직장암 검출.”</span> <em>분자 시스템
+생물학</em>10 (11) : 766.<a href="https://doi.org/10.15252/msb.20145645">https://doi.org/10.15252/msb.20145645</a>.
+</div>
+<div class="csl-entry" id="ref-Zou2006" role="listitem">Hui, Trevor Hastie 및 Robert Tibshirani. 2006.<span>"부족한
+주요 구성 요소 분석.”</span> <em>전산 저널
+그래픽 통계</em>15 (2) : 265–86.</div>
+</div>
+<p>R 버전 4.5.1 (2025-06-13)을 사용하여 2025-09-01에 01:33에 구축 된 페이지</p></main> <!-- /main --><p class="build-date">이 책의 온라인 버전을 유지 관리하는 지원은 다음과 같습니다.<a href="http://www.denbi.de">de.nbi</a>
+<img src="imgs/denbi.png" style="vertical-align: text-top;height: 16px"/><br/>웹 사이트 지원은 msmith@embl.de로 문의하십시오<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+  const anchorJS_eq = new window.AnchorJS();
+  anchorJS_eq.options = {
+    placement: 'left',
+    class: 'eq-link',
+    icon: icon
+  };
+  anchorJS_eq.add('.anchored-eq');
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/www\.huber\.embl\.de\/msmb");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</p></div> <!-- /content -->
+</body></html>

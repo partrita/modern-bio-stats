@@ -1,0 +1,111 @@
+# Home
+
+**Please navigate between and within the chapters of this book via the
+dropdown menu (“Chapters”) at the top.**
+
+How to cite this book: Modern Statistics for Modern Biology, by Susan Holmes
+and Wolfgang Huber, Cambridge University Press (2019). ISBN: 9781108705295.  
+License: [**CC BY-NC-SA**](https://creativecommons.org/licenses/by-nc-sa/2.0/)
+
+[ ![](./imgs/MSMB-Cover2-smallest.jpg) Introduction  ](./00-chap.html)
+
+[ ![](./imgs/Pile_ou_face.png) Generative Models for Discrete Data
+](./01-chap.html)
+
+[ ![](./imgs/StatDiagram.png) Statistical Modeling  ](./02-chap.html)
+
+[ ![](./03-chap_files/figure-html/fig-graphics-onedridge4-1.png) Data
+visualization  ](./03-chap.html)
+
+[ ![](imgs/t_distribution.png) Mixture Models  ](./04-chap.html)
+
+[ ![](imgs/starlings_copyrightfree.jpg) Clustering  ](./05-chap.html)
+
+[ ![](./imgs/active-substance-discovery-robot-screening-robot-sm.jpeg) Testing
+](./06-chap.html)
+
+[ ![](imgs/TheMatrix.jpg) Multivariate Analysis  ](./07-chap.html)
+
+[ ![](./08-chap_files/figure-html/fig-countdata-MA-1.png) High-Throughput
+Count Data & Generalized Linear Models  ](./08-chap.html)
+
+[ ![](./imgs/Brighton_West_Pier_20090214_sunset.jpg) Multivariate methods for
+heterogeneous data  ](./09-chap.html)
+
+[ ![](imgs/Darwin_Tree_1837_web.png) Networks and Trees  ](./10-chap.html)
+
+[ ![](./11-chap_files/figure-html/fig-voronoiPaint-1.png) Image data
+](./11-chap.html)
+
+[ ![](imgs/BuildWall.png) Supervised Learning  ](./12-chap.html)
+
+[ ![](./imgs/maizeDarwin.png) Design of High Throughput Experiments and their
+Analyses  ](./13-chap.html)
+
+[ ![](./imgs/the-library-of-alexandria-and-its-legacy.jpg) Statistical
+Concordance  ](./14-chap.html)
+
+[ ![](./imgs/Monetflowers.jpg) Acknowledgements  ](./15-chap.html)
+
+[ ![](./imgs/bibliothek.jpeg) References  ](./16-chap.html)
+
+No matching items
+
+## Note to readers
+
+The print version of the book (see below) was published in 2019, but we are
+continually updating the online version. So if you spot any inaccuracies,
+mistakes, typos, please let us know and we will do our best to improve the
+book accordingly.
+
+A particular issue is the code examples. R and its many packages on CRAN and
+Bioconductor are a highly dynamic environment. We finalized the print version
+in 2018 on R 3.5 and Bioconductor 3.7. We have been constantly updating the
+code to changes in R or the packages. What you see here has been built using R
+version 4.5.1 (2025-06-13) using the most recent release versions of all
+packages on 2025-09-01. It is possible that we have overlooked unintended
+changes whose detection is not easy to automate, e.g., in plot outputs or in
+results from certain computations. We think that this risk is a prize worth
+paying to enable readers to work in an up-to-date compute environment, but
+apologize to our readers for possible confusions.
+
+If you spot anything, please alert us via email to wolfgang.huber [at]
+embl.org.
+
+## Code and data
+
+### Package Installation
+
+You can install all the packages required to run every code example in the
+book via the following command:
+
+    
+    
+    source("https://www.huber.embl.de/msmb/install_packages.R")__
+
+### Data
+
+  * [Data files (zipped folder)](https://www.huber.embl.de/msmb/data.tar.gz)  
+last modified: 2022-12-15 16:05:03  
+md5 hash: `4aefffbcd826d9645b9e0e5b12274f07 -`
+
+### Code
+
+  * [R code (zipped folder)](https://www.huber.embl.de/msmb/code/)
+
+### Download an electronic copy of the whole book
+
+  * [HTML tree for the book (zipped)](https://www.huber.embl.de/msmb/msmb.tar.gz)
+
+## Physical Copy
+
+If you would like a hard copy of Modern Statistics for Modern Biology, the
+book can be purchased from [Cambridge University
+Press](https://www.cambridge.org/it/academic/subjects/statistics-
+probability/statistics-life-sciences-medicine-and-health/modern-statistics-
+modern-biology?format=HB)
+
+[![](imgs/book-cover-photo.jpg)](imgs/book-cover-photo.jpg)
+
+Page built at 01:33 on 2025-09-01 using R version 4.5.1 (2025-06-13)
+
