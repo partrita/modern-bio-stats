@@ -314,24 +314,24 @@ window.Quarto = {
 </figure>
 </div>
 </div></div></div>
-<p>분자 생물학에서, 많은 상황에는 계산 사건이 포함됩니다. 특정 철자법을 사용하는 코돈 수, 참조와의 DNA 읽기 수, DNA 서열에서 얼마나 많은 CG Digram이 관찰되는지 이 수는 우리에게 준다<em>이산</em>측정되는 질량 및 강도와 같은 수량과 달리 변수<em>마디 없는</em>저울.</p>
-<p>연구중인 메커니즘이 따르는 규칙을 알고 있다면 결과가 무작위이더라도 계산 및 표준 확률 법칙에 의해 관심있는 모든 사건의 확률을 생성 할 수 있습니다. 이것은 a입니다<em>하향식</em>공제 및 확률을 조작하는 방법에 대한 지식을 바탕으로 접근합니다. ~ 안에<a class="quarto-xref" href="02-chap.html"><span>2 장</span></a>, 당신은 이것을 데이터 중심과 결합하는 방법을 볼 수 있습니다 (<em>상향식</em>) 통계 모델링.</p>
+<p>분자생물학에서는 특정 철자를 사용하는 코돈의 수, 참조 서열과 일치하는 DNA 시퀀싱 리드(read)의 수, DNA 서열에서 관찰되는 CG 다이그램(digram)의 수 등 무언가를 세는 경우가 많습니다. 이러한 횟수는 질량이나 강도처럼 <em>연속적인</em> 척도로 측정되는 양과 달리 <em>이산</em> 변수가 됩니다.</p>
+<p>만약 연구 대상 메커니즘이 따르는 규칙을 알고 있다면, 그 결과가 무작위일지라도 계산과 표준 확률 법칙을 통해 관심 있는 모든 사건의 확률을 생성할 수 있습니다. 이는 연역과 확률 조작에 대한 지식에 기반한 <em>하향식</em> 접근법입니다. <a class="quarto-xref" href="02-chap.html"><span>2장</span></a>에서는 이 방법을 데이터 기반의 (<em>상향식</em>) 통계 모델링과 결합하는 방법을 배우게 됩니다.</p>
 <section class="level2" data-number="1.1" id="sec-generative-intro">
-<h2 class="anchored" data-anchor-id="sec-generative-intro" data-number="1.1"><span class="header-section-number">1.1</span>이 장의 목표</h2>
-<p>이 장에서는 다음과 같습니다.</p>
+<h2 class="anchored" data-anchor-id="sec-generative-intro" data-number="1.1"><span class="header-section-number">1.1</span> 이 장의 목표</h2>
+<p>이 장에서 우리는 다음을 배웁니다.</p>
 <ul>
-<li><p>주어진 모델에서 가능한 모든 결과의 확률을 얻는 방법을 배우고 이론적 빈도를 실제 데이터에서 관찰 된 주파수와 비교할 수있는 방법을 확인하십시오.</p></li>
-<li><p>포아송 분포를 사용하여 에피토프 탐지에 대한 데이터를 분석하는 방법에 대한 완전한 예를 살펴보십시오.</p></li>
-<li><p>이산 데이터에 대한 가장 유용한 생성 모델 (Poisson, Binomial, Multinomial)을 실험 할 수있는 방법을 확인하십시오.</p></li>
-<li><p>확률을 계산하고 드문 이벤트 계산에 R 기능을 사용하십시오.</p></li>
+<li><p>주어진 모델에서 가능한 모든 결과의 확률을 얻는 방법을 배우고, 이론적 빈도를 실제 데이터에서 관찰된 빈도와 비교하는 방법을 알아봅니다.</p></li>
+<li><p>푸아송 분포를 사용하여 에피토프(epitope) 검출 데이터를 분석하는 전체 예제를 살펴봅니다.</p></li>
+<li><p>이산 데이터에 가장 유용한 생성 모델(푸아송, 이항, 다항 분포)을 실험하는 방법을 알아봅니다.</p></li>
+<li><p>R 함수를 사용하여 확률을 계산하고 드문 사건을 세는 방법을 알아봅니다.</p></li>
 <li><p>지정된 분포에서 난수를 생성합니다.</p></li>
 </ul>
 </section>
 <section class="level2 page-columns page-full" data-number="1.2" id="a-real-example">
-<h2 class="anchored" data-anchor-id="a-real-example" data-number="1.2"><span class="header-section-number">1.2</span>진짜 예</h2>
-<p>데이터 생성 프로세스에 대한 확률 모델이있는 예를 들어 보겠습니다. 우리의 모델은 HIV의 게놈 (인간 면역 결핍 바이러스)을 따르는 돌연변이가 다음의 속도로 발생한다고 말합니다.<span class="math inline">\ (5 \ Times 10^{-4} \)</span>복제주기 당 뉴클레오티드 당. 속도는 각 뉴클레오티드 위치에서 동일하며, 한 위치에서의 돌연변이는 다른 위치에서 발생하는 일과 독립적으로 발생합니다.<a class="footnote-ref" href="#fn1" id="fnref1" role="doc-noteref"><sup>1</sup></a>. HIV의 게놈 크기는 거의 없습니다<span class="math inline">\ (10^4 = 10,000 \)</span>따라서 뉴클레오티드, 한주기 후에 총 돌연변이 수는<strong>포아송</strong>분포<a class="footnote-ref" href="#fn2" id="fnref2" role="doc-noteref"><sup>2</sup></a>속도로<span class="math inline">\ (5 \ times 10^{-4} \ times 10^4 = 5 \)</span>. 그것은 우리에게 무엇을 말합니까?</p>
-<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>실제로, 완전하고 완전한 독립성은 실제로 충분히 가까이 보이면 실제로는 거의 유지되지 않을 것입니다. 따라서, 모듈러가 일반적으로 그러한 주장에서 의미하는 바는 가능한 상관 관계 나 종속성이 너무 약하고 드문 일 정도로 근사치가 충분하다는 것입니다.</p></div><div id="fn2"><p><sup>2</sup>이러한 유형의 확률 분포에 대해 나중에 자세한 내용을 알 수 있습니다.</p></div></div><p>이 확률 모델은 하나의 복제주기에 대한 돌연변이의 수가 5에 가까워 지고이 추정치의 변동성이<span class="math inline">\ (\ sqrt {5} \)</span>(표준 오류). 우리는 이제 우리가 전형적인 HIV 균주에서 볼 것으로 예상되는 돌연변이의 수와 그 변동에 대한 기준 기준 값을 갖습니다.</p>
-<div class="page-columns page-full"><p>실제로, 우리는 더 자세한 정보를 추론 할 수 있습니다. Poisson (5) 모델에서 3 개의 돌연변이가 얼마나 자주 발생할 수 있는지 알고 싶다면 R 기능을 사용하여 볼 확률을 생성 할 수 있습니다.<span class="math inline">\ (x = 3 \)</span>이벤트, 가치를 취합니다<strong>속도 매개 변수</strong>람다 (Lambda)라고 불리는 포아송 분포의<span class="math inline">\ (\ lambda \)</span>), 장차 ~ 가 되는<span class="math inline">\ (5 \)</span><br/>
+<h2 class="anchored" data-anchor-id="a-real-example" data-number="1.2"><span class="header-section-number">1.2</span> 실제 예제</h2>
+<p>데이터 생성 과정에 대한 확률 모델이 있는 예제를 살펴보겠습니다. 우리 모델에 따르면 HIV(인간 면역 결핍 바이러스) 게놈의 돌연변이는 복제 주기당 뉴클레오티드당 <span class="math inline">\\(5 \\times 10^{-4}\\)</span>의 비율로 발생합니다. 이 비율은 모든 뉴클레오티드 위치에서 동일하며, 한 위치의 돌연변이는 다른 위치에서 일어나는 일과 독립적으로 발생합니다<a class="footnote-ref" href="#fn1" id="fnref1" role="doc-noteref"><sup>1</sup></a>. HIV의 게놈 크기는 약 <span class="math inline">\\(10^4=10,000\\)</span> 뉴클레오티드이므로, 한 번의 복제 주기가 지난 후의 총 돌연변이 수는 비율이 <span class="math inline">\\(5 \\times 10^{-4} \\times 10^4 = 5\\)</span>인 <strong>푸아송</strong> 분포<a class="footnote-ref" href="#fn2" id="fnref2" role="doc-noteref"><sup>2</sup></a>를 따릅니다. 이는 무엇을 의미할까요?</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>실제로, 완전하고 완전한 독립성은 실제로 충분히 가까이 보이면 실제로는 거의 유지되지 않을 것입니다. 따라서, 모듈러가 일반적으로 그러한 주장에서 의미하는 바는 가능한 상관 관계 나 종속성이 너무 약하고 드문 일 정도로 근사치가 충분하다는 것입니다.</p></div><div id="fn2"><p><sup>2</sup>이러한 유형의 확률 분포에 대해 나중에 자세한 내용을 알 수 있습니다.</p></div></div><p>이 확률 모델은 하나의 복제 주기 동안 돌연변이 수가 5에 가까울 것이며, 이 추정치의 변동성(표준 오차)은 <span class="math inline">\\(\sqrt{5}\\)</span>가 될 것이라고 예측합니다. 이제 우리는 일반적인 HIV 균주에서 예상되는 돌연변이 수와 그 변동성에 대한 기준값을 갖게 되었습니다.</p>
+<div class="page-columns page-full"><p>사실, 더 자세한 정보도 추론할 수 있습니다. Poisson (5) 모델에서 3 개의 돌연변이가 얼마나 자주 발생할 수 있는지 알고 싶다면 R 기능을 사용하여 볼 확률을 생성 할 수 있습니다.<span class="math inline">\ (x = 3 \)</span>이벤트, 가치를 취합니다<strong>속도 매개 변수</strong>람다 (Lambda)라고 불리는 포아송 분포의<span class="math inline">\ (\ lambda \)</span>), 장차 ~ 가 되는<span class="math inline">\ (5 \)</span><br/>
 </p><div class="no-row-height column-margin column-container"><span class="margin-aside">다음과 같은 그리스어 편지<span class="math inline">\ (\ lambda \)</span>그리고<span class="math inline">\ (\ 안에 \)</span>종종 우리가 사용하는 확률 분포를 특성화하는 중요한 매개 변수를 나타냅니다.</span></div></div>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="fu">DPOIS</span><span class="at">x =</span> <span class="dv">3</span>,,,<span class="at">람다 =</span> <span class="dv">5</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
@@ -339,8 +339,8 @@ window.Quarto = {
 <pre><code>[1] 0.1403739</code></pre>
 </div>
 </div>
-<p>이것은 정확히 세 가지 이벤트를 볼 가능성이 약 0.14, 또는 7 명 중 약 1 명이라고 말합니다.</p>
-<p>모든 값의 확률을 0에서 12까지 생성하려면 루프를 작성할 필요가 없습니다. 우리는 단순히 첫 번째 인수를<strong>벡터</strong>이 13 개의 값 중 R의 시퀀스 연산자 인 Colon "<code></code>”. 우리는 확률을 플로팅하여 확률을 볼 수 있습니다.<a class="quarto-xref" href="#fig-Poisson5">수치<span>1.1</span></a>). 이 그림과 마찬가지로이 책의 여백의 대부분의 수치는 텍스트에 표시된 코드에 의해 만들어집니다.</p>
+<p>이는 정확히 세 개의 사건을 볼 확률이 약 0.14, 즉 7번 중 1번 정도라는 것을 의미합니다.</p>
+<p>0부터 12까지 모든 값에 대한 확률을 생성하기 위해 루프를 작성할 필요는 없습니다. R의 시퀀스 연산자인 콜론("`:`")을 사용하여 이 13개 값의 **벡터**를 첫 번째 인수로 설정하기만 하면 됩니다. 이 확률은 <a class="quarto-xref" href="#fig-Poisson5">그림 <span>1.1</span></a>과 같이 그려볼 수 있습니다. 이 그림과 마찬가지로, 이 책의 여백에 있는 대부분의 그림은 본문에 표시된 코드로 생성됩니다.</p>
 <div class="cell page-columns page-full" data-layout-align="center">
 <div class="no-row-height column-margin column-container"><div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -371,12 +371,12 @@ window.Quarto = {
 <div aria-describedby="fig-Poisson5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a class="lightbox" data-gallery="quarto-lightbox-gallery-3" href="01-chap_files/figure-html/fig-Poisson5-1.png" title="Figure 1.1: Probabilities of seeing 0,1,2,…,12 mutations, as modeled by the Poisson(5) distribution. The plot shows that we will often see 4 or 5 mutations but rarely as many as 12. The distribution continues to higher numbers (13,...), but the probabilities will be successively smaller, and here we don’t visualize them."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="01-chap_files/figure-html/fig-Poisson5-1.png" width="320"/></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-Poisson5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 1.1 : Poisson (5) 분포에 의해 모델링 된 0,1,2,…, 12 개의 돌연변이를 보는 확률. 플롯은 우리가 종종 4 또는 5 개의 돌연변이를 볼 수 있지만 거의 12 개 정도는 거의 없다는 것을 보여줍니다. 분포는 더 높은 숫자로 계속됩니다 (<span class="math inline">\ (13, ... \)</span>), 그러나 확률은 연속적으로 작을 것이며, 여기서 우리는이를 시각화하지 않습니다.</figcaption>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-Poisson5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 1.1: 푸아송(5) 분포로 모델링한 0, 1, 2, ..., 12개 돌연변이를 볼 확률. 이 그림은 4개 또는 5개의 돌연변이는 자주 볼 수 있지만 12개만큼 많이 보는 경우는 드물다는 것을 보여줍니다. 분포는 더 높은 숫자(13, ...)로 계속되지만 확률은 점차 작아지므로 여기서는 시각화하지 않았습니다.</figcaption>
 </figure>
 </div>
 </div></div></div>
-<p>수학적 이론은 우리에게 값을 볼 확률이<span class="math inline">\(엑스\)</span>공식에 의해 제공됩니다<span class="math inline">\ (e^{-\ lambda} \ lambda^x / x! \)</span>. 이 책에서는 때때로 이론에 대해 논의하지만 구체적인 숫자 예제와 다음과 같은 시각화를 선호합니다.<a class="quarto-xref" href="#fig-Poisson5">수치<span>1.1</span></a></p>
-<p>포아송 분포는 돌연변이와 같은 희귀 한 사건에 대한 좋은 모델입니다. 다른 유용한 확률 모델<strong>불연속 이벤트</strong>Bernoulli, Binomial 및 Multinomial 분포입니다. 우리는이 장 에서이 모델을 탐색 할 것입니다.</p>
+<p>수학 이론에 따르면 값을 볼 푸아송 확률 <span class="math inline">\\(x\\)</span>는 <span class="math inline">\\(e^{-\\lambda} \\lambda^x / x!\\)</span> 공식으로 주어집니다. 이 책에서는 때때로 이론을 논의하지만, <a class="quarto-xref" href="#fig-Poisson5">그림 <span>1.1</span></a>과 같은 구체적인 숫자 예제와 시각화를 더 선호합니다.</p>
+<p>푸아송 분포는 돌연변이와 같은 드문 사건에 대한 좋은 모델입니다. <strong>이산 사건</strong>에 대한 다른 유용한 확률 모델로는 베르누이, 이항, 다항 분포가 있습니다. 이 장에서는 이러한 모델들을 탐색할 것입니다.</p>
 </section>
 <section class="level2 page-columns page-full" data-number="1.3" id="using-discrete-probability-models">
 <h2 class="anchored" data-anchor-id="using-discrete-probability-models" data-number="1.3"><span class="header-section-number">1.3</span>개별 확률 모델 사용</h2>
@@ -393,10 +393,10 @@ window.Quarto = {
 </figure>
 </div>
 </div></div></div>
-<p>포인트 돌연변이는 발생할 수 있는지 여부; 이진 이벤트입니다. 가능한 두 가지 결과 (예, 아니오)를<strong>레벨</strong>범주 형 변수의.</p>
-<p>모든 이벤트가 이진이 아닙니다. 예를 들어, 이배체 유기체의 유전자형은 3 단계 (AA, AA, AA)를 취할 수 있습니다.</p>
-<p>때로는 범주 형 변수의 레벨 수가 매우 큽니다. 예는 생물학적 샘플 (수백 또는 수천)에서 상이한 유형의 박테리아의 수와 3 개의 뉴클레오티드 (64 수준)로 형성된 코돈의 수를 포함한다.</p>
-<p>샘플에서 범주 형 변수를 측정하면 종종 벡터의 벡터에서 다른 레벨의 주파수를 집계하고 싶습니다. R은 범주 형 변수에 대한 특별 인코딩을 가지고 있으며<strong>요인</strong><a class="footnote-ref" href="#fn3" id="fnref3" role="doc-noteref"><sup>3</sup></a>. 여기서 우리는 우리가 표로 한 벡터의 19 명의 대상에 대한 다른 혈액 유전자형을 포착합니다.</p>
+<p>점돌연변이는 발생하거나 발생하지 않을 수 있는 이진 사건입니다. 가능한 두 가지 결과(예, 아니오)를 범주형 변수의 <strong>수준(level)</strong>이라고 합니다.</p>
+<p>모든 사건이 이진인 것은 아닙니다. 예를 들어, 이배체 생물의 유전자형은 세 가지 수준(AA, Aa, aa)을 가질 수 있습니다.</p>
+<p>때로는 범주형 변수의 수준 수가 매우 클 수 있습니다. 예를 들어, 생물학적 샘플에 있는 다양한 유형의 박테리아 수(수백 또는 수천)와 3개의 뉴클레오티드로 형성된 코돈의 수(64 수준)가 있습니다.</p>
+<p>표본에서 범주형 변수를 측정할 때, 종종 다른 수준의 빈도를 집계하여 카운트 벡터로 만들고 싶어합니다. R에는 범주형 변수를 위한 특별한 인코딩 방식이 있으며, 이를 **요인(factor)**<a class="footnote-ref" href="#fn3" id="fnref3" role="doc-noteref"><sup>3</sup></a>이라고 부릅니다. 여기서는 19명 대상의 다양한 혈액 유전자형을 벡터에 담아 표로 만듭니다.</p>
 <div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>R 요인 변수가 다른 "불법"값을 받아들이지 않도록하고 계산을 안전하게 유지하는 데 유용합니다.</p></div></div><div class="cell page-columns page-full" data-layout-align="center">
 <div class="no-row-height column-margin column-container"><div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -486,16 +486,16 @@ AA AB AO BB BO OO
 </figure>
 </div>
 </div></div></div>
-<p>동전을 던지면 두 가지 가능한 결과가 있습니다. Bernoulli 시험이라고하는이 간단한 실험은 소위 Bernoulli 랜덤 변수를 사용하여 모델링됩니다. 이 빌딩 블록을 이해하면 놀랍게도 멀어 질 것입니다. 더 복잡한 모델을 구축하는 데 사용할 수 있습니다.</p>
-<p>이러한 임의의 변수 중 일부가 어떻게 보이는지 몇 가지 실험을 시도해 봅시다. 우리는 각 유형의 분포에 대한 결과를 생성하기 위해 맞춤형 특수 R 기능을 사용합니다. 그들은 모두 편지로 시작합니다<code>아르 자형</code>, 여기에 모델의 사양이 이어집니다<code>rbinom</code>, 어디<code>일부 중 일부</code>이항에 사용되는 약어입니다.</p>
-<p>15 개의 공정한 동전 던지기 시퀀스를 시뮬레이션하고 싶다고 가정 해 봅시다. 0.5 (공정한 동전)와 같은 성공 가능성이있는 15 개의 Bernoulli 시험의 결과를 얻으려면 우리는</p>
+<p>동전 던지기는 두 가지 가능한 결과를 가집니다. 베르누이 시행이라고 불리는 이 간단한 실험은 소위 베르누이 무작위 변수를 사용하여 모델링됩니다. 이 구성 요소를 이해하면 놀라울 정도로 많은 것을 할 수 있습니다. 이를 사용하여 더 복잡한 모델을 만들 수 있습니다.</p>
+<p>이러한 무작위 변수 중 일부가 어떻게 생겼는지 몇 가지 실험을 해보겠습니다. 각 분포 유형에 대한 결과를 생성하기 위해 특별히 제작된 R 함수를 사용합니다. 이 함수들은 모두 모델 사양이 뒤따르는 `r` 문자로 시작합니다. 예를 들어, 여기서는 이항 분포의 약어인 `binom`을 사용하여 `rbinom`을 씁니다.</p>
+<p>15개의 공정한 동전 던지기 시퀀스를 시뮬레이션하고 싶다고 가정해 봅시다. 성공 확률이 0.5(공정한 동전)인 15개의 베르누이 시행 결과를 얻으려면 다음과 같이 작성합니다.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a aria-hidden="true" href="#cb14-1" tabindex="-1"></a><span class="fu">rbinom</span><span class="dv">15</span>,,,<span class="at">prob =</span> <span class="fl">0.5</span>,,,<span class="at">크기 =</span> <span class="dv">1</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0 1 1 0 1 1 1 1 1 1 0 1 0 0</code></pre>
 </div>
 </div>
-<p>우리는 사용합니다<code>rbinom</code>특정 세트로 기능합니다<strong>매개 변수</strong><a class="footnote-ref" href="#fn4" id="fnref4" role="doc-noteref"><sup>4</sup></a>: 첫 번째 매개 변수는 우리가 관찰하려는 시험의 수입니다. 여기서 우리는 15를 선택했습니다. 우리는 지정합니다<code>프로브</code>성공 가능성. 에 의해<code>크기 = 1</code>우리는 각 개별 시험이 단 하나의 동전 던지기로 구성되어 있다고 선언합니다.</p>
+<p>우리는 특정 **모수(parameter)**<a class="footnote-ref" href="#fn4" id="fnref4" role="doc-noteref"><sup>4</sup></a> 세트와 함께 `rbinom` 함수를 사용합니다. 첫 번째 모수는 관찰하려는 시행 횟수이며, 여기서는 15를 선택했습니다. `prob`는 성공 확률을 지정합니다. `size=1`은 각 개별 시행이 단 한 번의 동전 던지기로 구성됨을 선언합니다.</p>
 <div class="no-row-height column-margin column-container"><div id="fn4"><p><sup>4</sup>R 함수의 경우 매개 변수도 호출됩니다<strong>논쟁</strong>에스.</p></div></div><div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-generative-rbinom">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -507,25 +507,25 @@ AA AB AO BB BO OO
 <p>이 기능을 여러 번 반복하십시오. 왜 대답이 항상 같지 않습니까?</p>
 </div>
 </div>
-<p>성공과 실패는 확률이 하나로 합의하는 한 Bernoulli 시험에서 불평등 한 확률을 가질 수 있습니다.<a class="footnote-ref" href="#fn5" id="fnref5" role="doc-noteref"><sup>5</sup></a>. 다음과 같이 두 상자에 공을 던지는 12 개의 시험을 시뮬레이션합니다.<a class="quarto-xref" href="#fig-twoballs">수치<span>1.2</span></a>오른쪽 상자에 떨어질 확률이 있습니다<span class="math inline">\ (\ frac {2} {3} \)</span>그리고 왼쪽 상자에서<span class="math inline">\ (\ frac {1} {3} \)</span>, 우리는 글을 씁니다</p>
+<p>베르누이 시행에서 성공과 실패는 확률의 합이 1이 되는 한, 같지 않은 확률을 가질 수 있습니다<a class="footnote-ref" href="#fn5" id="fnref5" role="doc-noteref"><sup>5</sup></a>. <a class="quarto-xref" href="#fig-twoballs">그림 <span>1.2</span></a>와 같이 오른쪽 상자에 공이 들어갈 확률이 <span class="math inline">\\(\frac{2}{3}\\)</span>이고 왼쪽 상자에 들어갈 확률이 <span class="math inline">\\(\frac{1}{3}\\)</span>인 두 상자에 공을 던지는 12번의 시행을 시뮬레이션하려면 다음과 같이 작성합니다.</p>
 <div class="no-row-height column-margin column-container"><div id="fn5"><p><sup>5</sup>우리는 그러한 이벤트를 부릅니다<strong>보완 적</strong></p></div></div><div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a aria-hidden="true" href="#cb16-1" tabindex="-1"></a><span class="fu">rbinom</span><span class="dv">12</span>,,,<span class="at">prob =</span> <span class="dv">2</span><span class="sc"></span><span class="dv">3</span>,,,<span class="at">크기 =</span> <span class="dv">1</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1 1 1 0 0 1 0 1 0 1 0</code></pre>
 </div>
 </div>
-<p>1은 성공을 나타내며, 즉, 공이 오른쪽 상자에 떨어 졌다는 것을 의미합니다. 0은 볼이 왼쪽 상자에 떨어 졌다는 것을 의미합니다.</p>
+<p>1은 성공, 즉 공이 오른쪽 상자에 들어갔음을 의미하고, 0은 공이 왼쪽 상자에 들어갔음을 의미합니다.</p>
 </section>
 <section class="level3 page-columns page-full" data-number="1.3.2" id="sec-generative-binomial">
 <h3 class="anchored" data-anchor-id="sec-generative-binomial" data-number="1.3.2"><span class="header-section-number">1.3.2</span>이항 성공의 계수</h3>
-<div class="page-columns page-full"><p>우리가 오른쪽 상자에 얼마나 많은 공이 들어가는 지 신경 쓰면 던지기의 순서는 중요하지 않습니다.<a class="footnote-ref" href="#fn6" id="fnref6" role="doc-noteref"><sup>6</sup></a>그리고 출력 벡터에서 셀의 합을 가져 와서이 숫자를 얻을 수 있습니다. 따라서 위에서 본 이진 벡터 대신 단일 숫자 만보고하면됩니다. R에서는 한 번의 호출을 사용 하여이 작업을 수행 할 수 있습니다.<code>rbinom</code>매개 변수와 기능합니다<code>크기</code>12로 설정하십시오.</p><div class="no-row-height column-margin column-container"><span class="margin-aside">두 가지 결과와 1 개 이상의 크기는 이항 시험으로 만듭니다. 크기가 1이면 Bernoulli 시험의 특별한 경우입니다.</span></div></div>
+<div class="page-columns page-full"><p>오른쪽 상자에 공이 몇 개 들어가는지만 중요하다면 던지는 순서는 중요하지 않으며<a class="footnote-ref" href="#fn6" id="fnref6" role="doc-noteref"><sup>6</sup></a>, 출력 벡터의 셀 합계를 구하여 이 숫자를 얻을 수 있습니다. 따라서 위에서 본 이진 벡터 대신 단일 숫자만 보고하면 됩니다. R에서는 `size` 매개변수를 12로 설정하여 `rbinom` 함수를 한 번만 호출하여 이 작업을 수행할 수 있습니다.</p><div class="no-row-height column-margin column-container"><span class="margin-aside">두 가지 결과와 1 이상의 크기는 이항 시행이 됩니다. 크기가 1이면 베르누이 시행의 특별한 경우입니다.</span></div></div>
 <div class="no-row-height column-margin column-container"><div id="fn6"><p><sup>6</sup>교환 성 속성.</p></div></div><div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a aria-hidden="true" href="#cb18-1" tabindex="-1"></a><span class="fu">rbinom</span><span class="dv">1</span>,,,<span class="at">prob =</span> <span class="dv">2</span><span class="sc"></span><span class="dv">3</span>,,,<span class="at">크기 =</span> <span class="dv">12</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 9</code></pre>
 </div>
 </div>
-<p>이 출력은 12 개의 공 중 몇 개가 오른쪽 상자 (2/3 확률이있는 결과)에 얼마나 많은지를 알려줍니다. 헤드 또는 테일, 성공 또는 실패, CPG 또는 비 CPG, M 또는 F, Y = Pyrimidine 또는 R = Purine, 병에 걸리거나 건강하거나 참 또는 거짓과 같은 두 가지 가능한 결과 만있는 경우 임의의 2 상한 모델을 사용합니다. 우리는“성공”의 확률 만 있으면됩니다.<span class="math inline">\(피\)</span>,“실패”(the<em>보완 적</em>이벤트)는 확률로 발생합니다<span class="math inline">\ (1-p \)</span>. 교환 할 수있는 여러 시험의 결과를 볼 때<a class="footnote-ref" href="#fn7" id="fnref7" role="doc-noteref"><sup>7</sup></a>, 우리는 성공의 수만 기록합니다. 따라서 SSSSSSFSSSSSFFFSF는 ( #성공 = 10, #실패 = 5) 또는 AS로 요약됩니다<span class="math inline">\ (x = 10 \)</span>,,,<span class="math inline">\ (n = 15 \)</span></p>
+<p>이 출력은 12개의 공 중 몇 개가 오른쪽 상자(확률이 2/3인 결과)에 들어갔는지 알려줍니다. 앞면 또는 뒷면, 성공 또는 실패, CpG 또는 비-CpG, M 또는 F, Y=피리미딘 또는 R=퓨린, 질병 또는 건강, 참 또는 거짓과 같이 가능한 결과가 두 가지뿐인 경우 임의의 2-상자 모델을 사용합니다. "성공" 확률 <span class="math inline">\\(p\\)</span>만 필요합니다. 왜냐하면 "실패"(여사건)는 <span class="math inline">\\(1-p\\)</span>의 확률로 발생하기 때문입니다. 여러 시행 결과가 교환 가능할 때<a class="footnote-ref" href="#fn7" id="fnref7" role="doc-noteref"><sup>7</sup></a>, 우리는 성공 횟수만 기록합니다. 따라서 SSSSSSFSSSSSFFFSF는 (#성공=10, #실패=5) 또는 <span class="math inline">\\(x=10\\)</span>, <span class="math inline">\\(n=15\\)</span>로 요약됩니다.</p>
 <div class="no-row-height column-margin column-container"><div id="fn7"><p><sup>7</sup>시험이 교환 할 수있는 한 가지 상황은<strong>독립적인</strong>서로.</p></div></div><p>0.3의 성공 가능성이있는 15 번 Bernoulli 시험에서의 성공 횟수를<strong>이항식</strong>랜덤 변수 또는 다음을 따르는 랜덤 변수<span class="math inline">\ (B (15,0.3) \)</span>분포. 샘플을 생성하기 위해 우리는 전화를 사용합니다<code>rbinom</code>15로 설정된 시험 수와 기능 :</p>
 <div class="cell page-columns page-full" data-layout-align="center">
 <div class="no-row-height column-margin column-container"><div class="cell-output-display">

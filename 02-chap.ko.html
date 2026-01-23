@@ -320,7 +320,7 @@ window.Quarto = {
 </figure>
 </div>
 </div></div></div>
-<p>이전 장에서 생성 모델과 매개 변수의 값에 대한 지식은 의사 결정에 사용할 수있는 확률, 예를 들어 에피토프를 실제로 찾았는지 여부를 제공했습니다. 많은 실제 상황에서 생성 모델이나 매개 변수는 알려져 있지 않으며 수집 한 데이터를 사용하여이를 추정해야합니다. 통계 모델링은 데이터에서 작동합니다<em>위로 향하여</em>모델에<em>~할 것 같다</em>데이터를 그럴듯하게 설명하십시오<a class="footnote-ref" href="#fn1" id="fnref1" role="doc-noteref"><sup>1</sup></a>. 이 상향 계급 단계를 통계라고합니다<strong>추론</strong>. 이 장에서는 추론을위한 빌딩 블록 역할을하는 몇 가지 분포 및 추정 메커니즘을 보여줍니다. 이 장의 예제는 모두 파라 메트릭이지만 (즉, 통계 모델에는 소수의 알 수없는 매개 변수 만 있습니다), 우리가 논의하는 원리는 일반화됩니다.</p>
+<p>이전 장에서는 생성 모델과 모수 값에 대한 지식을 바탕으로 에피토프를 실제로 발견했는지 여부와 같은 의사결정에 사용할 수 있는 확률을 구했습니다. 하지만 많은 실제 상황에서는 생성 모델이나 모수가 알려져 있지 않으며, 수집한 데이터를 사용하여 이를 추정해야 합니다. 통계 모델링은 데이터로부터 시작하여 데이터를 그럴듯하게 설명할 수 있는 모델을 찾아가는 <em>상향식</em> 과정입니다<a class="footnote-ref" href="#fn1" id="fnref1" role="doc-noteref"><sup>1</sup></a>. 이러한 상향식 추론 단계를 통계적 <strong>추론</strong>이라고 합니다. 이 장에서는 추론의 구성 요소가 되는 몇 가지 분포와 추정 메커니즘을 보여줄 것입니다. 이 장의 예제는 모두 모수적이지만(즉, 통계 모델에 알려지지 않은 모수가 거의 없음), 우리가 논의하는 원칙은 일반화될 수 있습니다.</p>
 <div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>우리가 모든 현재 데이터를 완벽하게 설명하는 모델을 발견하더라도, 항상 현실이 더 복잡 할 수 있습니다. 새로운 데이터 세트를 사용하면 다른 모델이 필요하다고 결론을 내릴 수 있으며 현재 모델을 특별한 경우 또는 근사치로 포함시킬 수 있습니다.</p></div></div><div class="cell page-columns page-full" data-layout-align="center">
 <div class="no-row-height column-margin column-container"><div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -336,16 +336,16 @@ window.Quarto = {
 </div></div></div>
 <section class="level2 page-columns page-full" data-number="2.1" id="goals-for-this-chapter">
 <h2 class="anchored" data-anchor-id="goals-for-this-chapter" data-number="2.1"><span class="header-section-number">2.1</span>이 장의 목표</h2>
-<p>이 장에서는 다음과 같습니다.</p>
+<p>이 장에서는 다음을 배웁니다.</p>
 <ul>
-<li><p>종종 혼란스러워하는 두 과목 사이에는“확률”과“통계”가 있음을 확인하십시오.</p></li>
-<li><p>히스토그램 및 기타 시각화 트릭을 사용하여 데이터를 확률 분포에 맞추십시오.</p></li>
-<li><p>다음으로 알려진 추정 절차와 첫 만남이 있습니다.<strong>최대 가능성</strong>시뮬레이션 실험을 통해.</p></li>
-<li><p>이전 정보가있는 데이터로부터 추론을한다. 이를 위해 우리는 특별히 맞춤형 속성을 갖춘 새로운 분포를 포함하는 베이지안 패러다임을 사용합니다. 우리는 시뮬레이션을 사용하고 베이지안 추정이 최대 가능성의 간단한 적용과 어떻게 다른지 보게 될 것입니다.</p></li>
-<li><p>통계 모델과 추정을 사용하여 이항 및 다중 분포의 종속성을 평가하십시오.</p></li>
-<li><p>역사적으로 흥미로운 게놈 데이터를 테이블로 조립하십시오.</p></li>
-<li><p>Markov 체인 모델을 만듭니다<strong>매달린</strong>데이터.</p></li>
-<li><p>전체 게놈에서 모티프를 계산하는 몇 가지 구체적인 응용을 수행하고 게놈 데이터 전용 특수 생체 전환기 클래스를 조작하십시오.</p></li>
+<li><p>자주 혼동되는 두 주제인 "확률"과 "통계"의 차이점을 알아봅니다.</p></li>
+<li><p>히스토그램 및 기타 시각화 기법을 사용하여 데이터를 확률 분포에 적합시킵니다.</p></li>
+<li><p>시뮬레이션 실험을 통해 **최대가능도**라는 추정 절차를 처음 접합니다.</p></li>
+<li><p>사전 정보가 있는 데이터로부터 추론을 수행합니다. 이를 위해 특별히 맞춤화된 속성을 가진 새로운 분포를 포함하는 베이즈 패러다임을 사용합니다. 시뮬레이션을 사용하여 베이즈 추정이 최대가능도의 단순한 적용과 어떻게 다른지 알아봅니다.</p></li>
+<li><p>통계 모델과 추정을 사용하여 이항 및 다항 분포의 종속성을 평가합니다.</p></li>
+<li><p>역사적으로 흥미로운 게놈 데이터를 표로 정리하여 분석합니다.</p></li>
+<li><p>**종속** 데이터에 대한 마르코프 연쇄 모델을 만듭니다.</p></li>
+<li><p>전체 게놈에서 모티프를 세는 몇 가지 구체적인 응용 프로그램을 수행하고 게놈 데이터 전용 특수 Bioconductor 클래스를 조작합니다.</p></li>
 </ul>
 <!-- -->
 <div class="cell page-columns page-full" data-layout-align="center">
@@ -356,15 +356,15 @@ window.Quarto = {
 </figure>
 </div>
 </div></div></div>
-<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="margin-aside"><strong>매개 변수의 예</strong>: 단일 매개 변수<span class="math inline">\ (\ lambda \)</span>포아송 분포를 정의합니다. 편지<span class="math inline">\ (\ 안에 \)</span>종종 정상의 평균에 사용됩니다. 보다 일반적으로, 우리는 그리스어 편지를 사용합니다<span class="math inline">\ (\ theta \)</span>확률 모델을 지정하는 데 필요한 일반적인 매개 변수를 지정합니다. 예를 들어, 이항 분포의 경우<span class="math inline">\ (\ theta = (n, p) \)</span>양의 정수와 0과 1 사이의 실수 숫자의 두 숫자로 구성됩니다.</span></div></div>
+<div class="page-columns page-full"><p></p><div class="no-row-height column-margin column-container"><span class="margin-aside">**모수의 예**: 단일 모수 <span class="math inline">\\(\lambda\\)</span>는 푸아송 분포를 정의합니다. 문자 <span class="math inline">\\(\mu\\)</span>는 종종 정규분포의 평균에 사용됩니다. 더 일반적으로, 우리는 확률 모델을 지정하는 데 필요한 일반적인 모수 튜플을 지정하기 위해 그리스 문자 <span class="math inline">\\(\theta\\)</span>를 사용합니다. 예를 들어, 이항 분포의 경우 <span class="math inline">\\(\theta = (n, p)\\)</span>는 양의 정수와 0과 1 사이의 실수, 두 숫자로 구성됩니다.</span></div></div>
 <section class="level4 unnumbered" id="parameters-are-the-key.">
-<h4 class="unnumbered anchored" data-anchor-id="parameters-are-the-key.">매개 변수가 핵심입니다.</h4>
-<p>우리는 봤습니다<a class="quarto-xref" href="01-chap.html"><span>1 장</span></a>에피토프 예제의 모든 매개 변수 값에 대한 지식을 통해 확률 모델을 사용하고 당면한 데이터를 기반으로 귀무 가설을 테스트 할 수있었습니다. 실제 예제와 컴퓨터 시뮬레이션을 통해 통계 모델링에 대한 다양한 접근 방식을 볼 수 있지만 사용 가능한 정보의 양에 따라 두 상황을 구별하는 것으로 시작하겠습니다.</p>
+<h4 class="unnumbered anchored" data-anchor-id="parameters-are-the-key.">모수가 핵심입니다.</h4>
+<p>우리는 <a class="quarto-xref" href="01-chap.html"><span>1장</span></a>에서 에피토프 예제의 모든 모수 값에 대한 지식을 통해 확률 모델을 사용하고 주어진 데이터를 기반으로 귀무 가설을 테스트할 수 있음을 보았습니다. 실제 예제와 컴퓨터 시뮬레이션을 통해 통계 모델링에 대한 다양한 접근 방식을 살펴보겠지만, 사용 가능한 정보의 양에 따라 두 가지 상황을 구별하는 것으로 시작하겠습니다.</p>
 </section>
 </section>
 <section class="level2 page-columns page-full" data-number="2.2" id="the-difference-between-statistical-and-probabilistic-models">
 <h2 class="anchored" data-anchor-id="the-difference-between-statistical-and-probabilistic-models" data-number="2.2"><span class="header-section-number">2.2</span>통계적 모델과 확률 론적 모델의 차이</h2>
-<p>데이터의 무작위성에 대한 좋은 생성 모델을 알면 확률 론적 분석이 가능합니다.<em>그리고</em>우리는 매개 변수의 실제 값을 알고 있습니다.</p>
+<p>데이터의 무작위성에 대한 좋은 생성 모델을 알고 있고 그 모수의 실제 값을 알고 있을 때 확률론적 분석이 가능합니다.</p>
 <div class="cell page-columns page-full" data-layout-align="center">
 <div class="no-row-height column-margin column-container"><div class="cell-output-display">
 <div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-probabilitydiag">
@@ -376,16 +376,16 @@ window.Quarto = {
 </figure>
 </div>
 </div></div></div>
-<p>에피토프의 예에서, 거짓 양성이 위치 당 베르노 울리 (0.01)로 발생한다는 것을 아는 경우, 분석 된 환자 샘플의 수와 단백질의 길이는<em>알 수없는 매개 변수가 없습니다</em>.</p>
-<p>그러한 경우, 우리는 수학을 사용할 수 있습니다<strong>공제</strong>개략적으로 이벤트의 확률을 계산합니다.<a class="quarto-xref" href="#fig-probabilitydiag">수치<span>2.1</span></a>. 에피토프 예에서, 우리는 Poisson 확률을 우리로 사용했습니다.<strong>널 모델</strong>주어진 매개 변수로<span class="math inline">\ (\ lambda = 0.5 \)</span>. 우리는 수학적 추론을 통해 최대 7 개 이상을 볼 수있는 기회가 주변에 있다는 결론을 내릴 수있었습니다.<span class="math inline">\ (10^{-4} \)</span>따라서 실제로 관찰 된 데이터는 해당 모델 (또는 "널 가설")에서 거의 가능하지 않았다.</p>
-<p>이제 우리가 환자의 수와 단백질의 길이 (이들은 실험 설계에 의해 제공됨)를 알고 있지만 분포 자체와 허위 양성 속도는 아닙니다. 데이터를 관찰하면 가야합니다<em>위로</em>데이터에서 확률 모델을 모두 추정합니다<span class="math inline">\(에프\)</span>(Poisson, Normal, Binomial) 및 결국 해당 모델의 누락 된 매개 변수. 이것은 통계의 유형입니다<strong>추론</strong>이 장에서 설명하겠습니다.</p>
+<p>에피토프 예에서, 위양성이 위치당 베르누이(0.01)로 발생한다는 사실, 분석된 환자 샘플 수, 단백질 길이를 안다는 것은 알려지지 않은 모수가 없음을 의미했습니다.</p>
+<p>이러한 경우, <a class="quarto-xref" href="#fig-probabilitydiag">그림 <span>2.1</span></a>에 개략적으로 설명된 것처럼 수학적 **연역**을 사용하여 사건의 확률을 계산할 수 있습니다. 에피토프 예에서 우리는 주어진 모수 <span class="math inline">\\(\lambda=0.5\\)</span>를 사용하여 푸아송 확률을 **귀무 모델**로 사용했습니다. 우리는 수학적 추론을 통해 최댓값이 7 이상일 확률이 약 <span class="math inline">\\(10^{-4}\\)</span>이라는 결론을 내릴 수 있었고, 따라서 실제로 관찰된 데이터는 해당 모델(또는 "귀무 가설") 하에서 발생할 가능성이 매우 낮다는 것을 알 수 있었습니다.</p>
+<p>이제 환자 수와 단백질 길이는 알고 있지만(실험 설계에 의해 주어짐) 분포 자체와 위양성 비율은 모른다고 가정해 봅시다. 데이터를 관찰하면 데이터로부터 확률 모델 <span class="math inline">\\(F\\)</span>(푸아송, 정규, 이항)와 해당 모델의 누락된 모수를 모두 추정해야 합니다. 이것이 이 장에서 설명할 통계적 **추론**의 한 유형입니다.</p>
 </section>
 <section class="level2 page-columns page-full" data-number="2.3" id="sec:stat:simplex">
 <h2 class="anchored" data-anchor-id="sec:stat:simplex" data-number="2.3"><span class="header-section-number">2.3</span>통계 모델링의 간단한 예</h2>
 <section class="level4 unnumbered" id="start-with-the-data">
 <h4 class="unnumbered anchored" data-anchor-id="start-with-the-data">데이터로 시작하십시오</h4>
-<p>모델링 절차에는 두 부분이 있습니다. 먼저 합리적인 확률이 필요합니다<em>분포</em>데이터 생성 프로세스를 모델링합니다. 우리가 본 것처럼<a class="quarto-xref" href="01-chap.html"><span>1 장</span></a>, 이산 카운트 데이터는 이항, 다중 유리 또는 포아송 분포와 같은 간단한 확률 분포에 의해 모델링 될 수 있습니다. 정규 분포 또는 종 모양의 곡선은 종종 연속 측정을위한 좋은 모델입니다. 분포는 또한 이러한 기본 혼합물의 복잡한 혼합물 일 수 있습니다 (자세한 내용은<a class="quarto-xref" href="04-chap.html"><span>4 장</span></a>).</p>
-<p>까다로운 특징없이 시작하여 이전 장의 에피토프 예제를 다시 방문합시다.</p>
+<p>모델링 절차는 두 부분으로 나뉩니다. 먼저, 데이터 생성 과정을 모델링하기 위해 합리적인 확률 <em>분포</em>가 필요합니다. <a class="quarto-xref" href="01-chap.html"><span>1장</span></a>에서 보았듯이, 이산적인 카운트 데이터는 이항, 다항 또는 푸아송 분포와 같은 간단한 확률 분포로 모델링될 수 있습니다. 정규 분포 또는 종 모양 곡선은 종종 연속적인 측정에 좋은 모델입니다. 분포는 또한 이러한 기본 분포들의 복잡한 혼합일 수 있습니다 (자세한 내용은 <a class="quarto-xref" href="04-chap.html"><span>4장</span></a> 참조).</p>
+<p>까다로운 이상치 없이 시작하여 이전 장의 에피토프 예제를 다시 살펴보겠습니다.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a><span class="fu">짐</span>(<span class="st">"../data/e100.rdata"</span>))</span>
 <span id="cb1-2"><a aria-hidden="true" href="#cb1-2" tabindex="-1"></a>E99<span class="ot">=</span>E100 [<span class="sc">-</span><span class="fu">hall.max</span>(E100)]</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
@@ -393,7 +393,7 @@ window.Quarto = {
 </section>
 <section class="level4 unnumbered page-columns page-full" id="goodness-of-fit-visual-evaluation">
 <h4 class="unnumbered anchored" data-anchor-id="goodness-of-fit-visual-evaluation">적합성 : 시각적 평가</h4>
-<p>첫 번째 단계는 후보 분포에서 적합한 것을 찾는 것입니다. 이를 위해서는 그래픽 및 양적 적합도 음모 컨설팅이 필요합니다. 개별 데이터의 경우, 우리는 주파수의 바로를 플로팅 할 수 있습니다 (연속 데이터의 경우 히스토그램을 볼 것입니다).<a class="quarto-xref" href="#fig-twopoisson">수치<span>2.2</span></a>.</p>
+<p>첫 번째 단계는 후보 분포 중에서 적합한 것을 찾는 것입니다. 이를 위해서는 그래픽 및 정량적 적합도 그림을 참조해야 합니다. 이산 데이터의 경우, <a class="quarto-xref" href="#fig-twopoisson">그림 <span>2.2</span></a>와 같이 빈도의 막대 그래프를 그릴 수 있습니다(연속 데이터의 경우 히스토그램을 사용합니다).</p>
 <div class="cell page-columns page-full" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a aria-hidden="true" href="#cb2-1" tabindex="-1"></a><span class="fu">바 플로트</span>(<span class="fu">테이블</span>(e99),<span class="at">공간 =</span> <span class="fl">0.8</span>,,,<span class="at">col =</span> <span class="st">"chartreuse4"</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
 <div class="no-row-height column-margin column-container"><div class="cell-output-display">
@@ -406,7 +406,7 @@ window.Quarto = {
 </figure>
 </div>
 </div></div></div>
-<p>그러나 비교를 사용하지 않고 어떤 이론적 분포가 데이터에 가장 적합한 지 결정하기가 어렵습니다. 하나의 비주얼<strong>적합성</strong>다이어그램은 the로 알려져 있습니다<strong>루그 그램</strong> <span class="citation" data-cites="Tukey:1988">(<a href="16-chap.html#ref-Tukey:1988" role="doc-biblioref">클리블랜드 1988</a>))</span>; 그것은 이론적 인 빨간색 점에서 관찰 된 카운트와 막대를 걸어갑니다. 카운트가 이론적 값에 정확히 일치하면 상자의 바닥은 수평 축과 정확히 일치합니다.</p>
+<p>그러나 비교 없이는 어떤 이론적 분포가 데이터에 가장 잘 맞는지 결정하기 어렵습니다. 한 가지 시각적인 **적합도** 다이어그램은 **루토그램(rootogram)**으로 알려져 있습니다(<span class="citation" data-cites="Tukey:1988">(<a href="16-chap.html#ref-Tukey:1988" role="doc-biblioref">클리블랜드 1988</a>)</span>). 이 다이어그램은 관찰된 카운트를 나타내는 막대를 이론적인 빨간 점에서부터 아래로 매달아 놓은 형태입니다. 만약 카운트가 이론값과 정확히 일치한다면, 상자의 밑면은 수평축과 정확히 정렬됩니다.</p>
 <div class="cell page-columns page-full" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a><span class="fu">도서관</span>(<span class="st">"VCD"</span>))</span>
 <span id="cb3-2"><a aria-hidden="true" href="#cb3-2" tabindex="-1"></a>GF1<span class="ot">=</span> <span class="fu">좋은 편</span>(E99,<span class="st">"포아송"</span>))</span>
@@ -417,7 +417,7 @@ window.Quarto = {
 <div aria-describedby="fig-stat-rooto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a class="lightbox" data-gallery="quarto-lightbox-gallery-6" href="02-chap_files/figure-html/fig-stat-rooto-1.png" title="Figure 2.3: Rootogram showing the square root of the theoretical values as red dots and the square root of the observed frequencies as drop down rectangles. (We’ll see a bit below how the goodfit function decided which \lambda to use.)"><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="02-chap_files/figure-html/fig-stat-rooto-1.png" width="320"/></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-stat-rooto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 2.3 : 이론적 값의 제곱근을 적색 도트로, 관찰 된 주파수의 제곱근을 드롭 다운 사각형으로 보여주는 루트 그램. (우리는 어떻게 아래에서 볼 것입니다<code>좋은 편</code>기능은 어느 쪽을 결정했습니다<span class="math inline">\ (\ lambda \)</span>사용하려면.)</figcaption>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-stat-rooto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 2.3: 이론값의 제곱근을 빨간 점으로, 관찰된 빈도의 제곱근을 아래로 떨어지는 직사각형으로 보여주는 루토그램. (`goodfit` 함수가 어떤 \\(\lambda\\)를 사용할지 어떻게 결정했는지는 잠시 후에 살펴보겠습니다.)</figcaption>
 </figure>
 </div>
 </div></div></div>
@@ -450,7 +450,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>우리는 그 루트 그램을 봅니다<code>E99</code>포아송 모델에 합리적으로 잘 맞는 것 같습니다. 그러나 이런 일이 일어나기 위해 우리는 특이 치를 제거했습니다. Poisson은 하나의 매개 변수에 의해 완전히 결정되며 종종 Poisson Mean이라고합니다.<span class="math inline">\ (\ lambda \)</span>. 대부분의 경우 데이터가 Poisson 분포를 따르는 것을 추측 할 수있는 경우 데이터에서 Poisson 매개 변수를 추정해야합니다.</p>
+<p><code>e99</code>에 대한 루토그램은 푸아송 모델에 상당히 잘 맞는 것으로 보입니다. 하지만 기억해야 할 것은, 이를 위해 이상치를 제거했다는 점입니다. 푸아송 분포는 종종 푸아송 평균 \\(\lambda\\)라고 불리는 단일 모수에 의해 완전히 결정됩니다. 데이터가 푸아송 분포를 따른다고 추측할 수 있는 대부분의 경우, 데이터로부터 푸아송 모수를 추정해야 합니다.</p>
 <div class="cell page-columns page-full" data-layout-align="center">
 <div class="no-row-height column-margin column-container"><div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -460,16 +460,16 @@ window.Quarto = {
 <p><a class="lightbox" data-gallery="quarto-lightbox-gallery-7" href="imgs/devil.png" title="The parameter is called the Poisson mean because it is the mean of the theoretical distribution and, as it turns out, is estimated by the sample mean. This overloading of the word is confusing to everyone."><img alt="The parameter is called the Poisson mean because it is the mean of the theoretical distribution and, as it turns out, is estimated by the sample mean. This overloading of the word is confusing to everyone." class="img-fluid quarto-figure quarto-figure-center figure-img" src="imgs/devil.png" width="123"/></a></p>
 </figure>
 </div>
-<figcaption>매개 변수는 이론적 분포의 평균이기 때문에 포아송 평균이라고합니다.<em>그리고</em>결과적으로 샘플 평균에 의해 추정됩니다. 이 단어의 과부하는 모든 사람에게 혼란 스럽습니다.</figcaption>
+<figcaption>이 모수는 이론적 분포의 평균이기 때문에 푸아송 평균이라고 불리며, 결과적으로 표본 평균으로 추정됩니다. 이 단어의 중복된 의미는 모두에게 혼란을 줍니다.</figcaption>
 </figure>
 </div>
 </div></div></div>
-<p>가장 일반적인 추정 방법<span class="math inline">\ (\ lambda \)</span>값을 선택하는 것입니다<span class="math inline">\ (\ hat {\ lambda} \)</span>그것은 관찰 된 데이터를 가장 가능성이 높습니다. 이것을<strong>최대 가능성 추정기</strong> <span class="citation" data-cites="Rice:2007">(<a href="16-chap.html#ref-Rice:2007" role="doc-biblioref">Rice 2006, Chap. 8</a>, 섹션 5)</span>, 종종 약식<strong>mle</strong>. 우리는 다음 섹션 에서이 역설적 인 아이디어를 설명 할 것입니다.</p>
-<p>우리는 확률 분포를 추측하기 전에 극단적 인 관찰을 취했지만 나머지 분석을 위해 데이터로 돌아갈 것입니다. 실제로 우리는 이상치가 있는지, 그리고 어떤 데이터 포인트가 있는지 알 수 없습니다. 그것을 남겨 두는 효과는 평균의 추정치를 더 높이게하는 것입니다. 이로 인해 NULL 모델에서 7의 값을 관찰 할 가능성이 높아져 p- 값이 더 커집니다. 따라서, 특이점이 포함되어 있어도 결과 P- 값이 작 으면 분석이 실제에 달려 있음을 보장합니다. 우리는 그런 전술이라고 부릅니다<strong>보수적인</strong>: 우리는 무언가를 감지하지 못하는주의의 측면에 오류가 있습니다.</p>
+<p>\\(\\lambda\\)를 추정하는 가장 일반적인 방법은 관찰된 데이터를 가장 가능성 있게 만드는 \\(\\hat{\\lambda}\\) 값을 선택하는 것입니다. 이를 **최대가능도 추정량**(<span class="citation" data-cites="Rice:2007">(<a href="16-chap.html#ref-Rice:2007" role="doc-biblioref">Rice 2006, Chap. 8</a>, Section 5)</span>)이라고 하며, 종종 **MLE**로 축약됩니다. 다음 섹션에서 이 다소 역설적인 아이디어를 설명하겠습니다.</p>
+<p>비록 위에서는 확률 분포를 추측하기 전에 극단적인 관측치를 제거했지만, 나머지 분석을 위해 해당 데이터를 다시 포함할 것입니다. 실제로는 이상치가 있는지, 어떤 데이터 포인트가 이상치인지 알 수 없습니다. 이상치를 그대로 두면 평균 추정치가 높아지는 효과가 있습니다. 이는 다시 귀무 모델 하에서 7이라는 값을 관찰할 가능성을 높여 p-값을 더 크게 만듭니다. 따라서 이상치가 포함된 상태에서도 결과 p-값이 작다면, 우리 분석이 실제 의미 있는 무언가를 발견했음을 확신할 수 있습니다. 우리는 이러한 전략을 **보수적**이라고 부릅니다. 즉, 무언가를 탐지하지 못하는 쪽으로 신중을 기하는 것입니다.</p>
 </section>
 <section class="level4 unnumbered page-columns page-full" id="estimating-the-parameter-of-the-poisson-distribution">
-<h4 class="unnumbered anchored" data-anchor-id="estimating-the-parameter-of-the-poisson-distribution">포아송 분포의 매개 변수 추정</h4>
-<p>Poisson의 어떤 가치가 데이터를 가장 가능성이 높은가? 첫 번째 단계에서, 우리는 결과를 집계합니다.</p>
+<h4 class="unnumbered anchored" data-anchor-id="estimating-the-parameter-of-the-poisson-distribution">푸아송 분포의 모수 추정</h4>
+<p>푸아송 평균의 어떤 값이 데이터를 가장 가능성 있게 만들까요? 첫 번째 단계로, 결과를 집계합니다.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a aria-hidden="true" href="#cb5-1" tabindex="-1"></a><span class="fu">테이블</span>(E100)</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -478,7 +478,7 @@ window.Quarto = {
 58 34 7 1</code></pre>
 </div>
 </div>
-<p>그런 다음 Poisson Mean에 대해 다른 값을 시도하고 데이터가 데이터에 가장 잘 맞는지 확인합니다. 평균이라면<span class="math inline">\ (\ lambda \)</span>포아송 분포 중 3 개는 카운트가 다음과 같습니다.</p>
+<p>그런 다음 푸아송 평균에 대해 다른 값을 시도해보고 어떤 값이 우리 데이터에 가장 잘 맞는지 확인합니다. 만약 푸아송 분포의 평균 \\(\\lambda\\)가 3이라면, 카운트는 다음과 같을 것입니다:</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a aria-hidden="true" href="#cb7-1" tabindex="-1"></a><span class="fu">테이블</span>(<span class="fu">RPOIS</span>(<span class="dv">100</span>,,,<span class="dv">3</span>)))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -486,7 +486,7 @@ window.Quarto = {
  4 12 23 24 14 16 4 3</code></pre>
 </div>
 </div>
-<p>데이터에서 볼 수있는 것보다 2와 3이 더 많습니다. 그래서 우리는 그것을 봅니다<span class="math inline">\ (\ lambda = 3 \)</span>카운트가 잘 어울리지 않기 때문에 데이터를 생성하지는 않을 것입니다.</p>
+<p>이는 우리 데이터에서 보는 것보다 2와 3이 훨씬 많습니다. 따라서 카운트가 잘 맞지 않으므로 \\(\\lambda=3\\)이 우리 데이터를 생성했을 가능성은 낮습니다.</p>
 <div class="callout callout-style-default callout-warning no-icon callout-titled" id="wrn-models-simrpois">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -498,20 +498,20 @@ window.Quarto = {
 <p>다른 값 으로이 시뮬레이션을 반복하십시오<span class="math inline">\ (\ lambda \)</span>. 시행 착오에 의해 관찰 된 것과 가까운 수를 제공하는 것을 찾을 수 있습니까?</p>
 </div>
 </div>
-<p>그래서 우리는 가능한 많은 값을 시험하고 무차별 인 힘으로 진행할 수있었습니다. 그러나 우리는 더 우아한 일을하고 약간의 수학을 사용하여 데이터를 관찰 할 확률을 극대화하는 값을 확인합니다. 포아송 매개 변수의 값이있는 경우 데이터를 볼 확률을 계산해 봅시다.<span class="math inline">\(중\)</span>. 우리는 데이터가 독립적 인 추첨에서 파생된다고 가정하기 때문에이 확률은 단순히 개별 확률의 산물입니다.</p>
+<p>따라서 가능한 많은 값을 시도하고 무차별 대입 방식으로 진행할 수 있습니다. 하지만 더 우아하게 약간의 수학을 사용하여 데이터를 관찰할 확률을 최대화하는 값을 찾아보겠습니다. 푸아송 모수 값이 \\(m\\)일 때 데이터를 볼 확률을 계산해 봅시다. 데이터가 독립적인 추출에서 파생된다고 가정하므로, 이 확률은 단순히 개별 확률의 곱입니다.</p>
 <!-- TODO -->
-<p><span class="math display">\ [\ 시작 {방정식*}
-\ begin {aligned}
-p (58 \ times 0,
-  34 \ Times 1,
-  7 \ Times 2,
-  \ text {one} 7 \; | \; \ text {데이터는 Poisson} (m)) =입니다
-p (0)^{58} \ times
-p (1)^{34} \ 시간
-p (2)^{7} \ 시간
-p (7)^{1}. \ end {Aligned}
-\ end {방정식*} \]</span></p>
-<p>을 위한<span class="math inline">\ (M = 3 \)</span>우리는 이것을 계산할 수 있습니다<a class="footnote-ref" href="#fn2" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+<p><span class="math display">\\ [\\ 시작 {방정식*}
+\\ begin {aligned}
+p (58 \\ times 0,
+  34 \\ Times 1,
+  7 \\ Times 2,
+  \\ text {one} 7 \\; | \\; \\ text {데이터는 Poisson} (m)) =입니다
+p (0)^{58} \\ times
+p (1)^{34} \\ 시간
+p (2)^{7} \\ 시간
+p (7)^{1}. \\ end {Aligned}
+\\ end {방정식*} \\]</span></p>
+<p>\\(m=3\\)에 대해 이것을 계산할 수 있습니다<a class="footnote-ref" href="#fn2" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
 <div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>여기서 우리가 어떻게 r의 벡터화를 사용하는지 주목하십시오 :<code>DPOIS</code>네 가지 숫자에 해당하는 네 값을 반환합니다. 그런 다음이를 각각 58, 34, 7 및 1의 힘으로 가져 가면<code>^</code>연산자, 4 가지 값으로 다시 발생합니다. 마지막으로, 우리는 그것들을<code>찌르다</code>기능.</p></div></div><div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a aria-hidden="true" href="#cb9-1" tabindex="-1"></a><span class="fu">찌르다</span>(<span class="fu">DPOIS</span>(<span class="fu">기음</span>(<span class="dv">0</span>,,,<span class="dv">1</span>,,,<span class="dv">2</span>,,,<span class="dv">7</span>),)<span class="at">람다 =</span> <span class="dv">3</span>))<span class="sc">^</span> (<span class="fu">기음</span>(<span class="dv">58</span>,,,<span class="dv">34</span>,,,<span class="dv">7</span>,,,<span class="dv">1</span>))))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -694,11 +694,11 @@ l \ left (\ lambda, \, x = (k_1, k_2, k_3, ...) \ 오른쪽) = \ prod_ {i = 1}^{
 </section>
 </section>
 <section class="level2 page-columns page-full" data-number="2.4" id="FreqBayes:sec:BinDistML">
-<h2 class="anchored" data-anchor-id="FreqBayes:sec:BinDistML" data-number="2.4"><span class="header-section-number">2.4</span>이항 분포 및 최대 가능성</h2>
-<p>이항 분포에는 두 가지 매개 변수가 있습니다 : 시험 수<span class="math inline">\(N\)</span>일반적으로 알려져 있으며 확률<span class="math inline">\(피\)</span>시험에서 1을 보는 것. 이 확률은 종종 알려지지 않았습니다.</p>
+<h2 class="anchored" data-anchor-id="FreqBayes:sec:BinDistML" data-number="2.4"><span class="header-section-number">2.4</span> 이항 분포와 최대가능도</h2>
+<p>이항 분포에는 두 개의 모수가 있습니다: 일반적으로 알려진 시행 횟수 \(n\)과 시행에서 1을 볼 확률 \(p\)입니다. 이 확률은 종종 알려져 있지 않습니다.</p>
 <section class="level3 page-columns page-full" data-number="2.4.1" id="an-example">
-<h3 class="anchored" data-anchor-id="an-example" data-number="2.4.1"><span class="header-section-number">2.4.1</span>예</h3>
-<p>우리가 샘플을 취한다고 가정 해 봅시다<span class="math inline">\ (n = 120 \)</span>수컷을 사용하여 적색 녹색 색맹을 테스트하십시오. 피사체가 Colorblind가 아닌 경우 1과 1 인 경우 데이터를 0으로 코딩 할 수 있습니다. 테이블별로 데이터를 요약합니다.</p>
+<h3 class="anchored" data-anchor-id="an-example" data-number="2.4.1"><span class="header-section-number">2.4.1</span> 예제</h3>
+<p>\\(n=120\\)명의 남성을 표본으로 추출하여 적록 색맹 검사를 한다고 가정해 봅시다. 피험자가 색맹이 아니면 0, 색맹이면 1로 데이터를 코딩할 수 있습니다. 데이터를 표로 요약하면 다음과 같습니다.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a aria-hidden="true" href="#cb20-1" tabindex="-1"></a><span class="fu">테이블</span>(CB)</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -751,8 +751,8 @@ l \ left (\ lambda, \, x = (k_1, k_2, k_3, ...) \ 오른쪽) = \ prod_ {i = 1}^{
 </figure>
 </div>
 </div></div></div>
-<p>이 특별한 경우, 당신의 직관은 당신에게 견적을 줄 수 있습니다<span class="math inline">\ (\ hat {p} = \ frac {1} {12} \)</span>, 이는 최대 가능성 추정치로 밝혀졌습니다. 우리는 이것이 (필연적으로) 근본적인 진정한 값이 아니라 데이터에서 얻은 추정치라는 것을 상기시키기 위해 편지 위에 모자를 넣었습니다.</p>
-<p>Poisson의 경우와 같이 가능한 많은 가능성을 계산하면<span class="math inline">\(피\)</span>, 우리는 그것을 음모하고 최대치가 어디에서 떨어지는 지 볼 수 있습니다 (<a class="quarto-xref" href="#fig-likely1-1">수치<span>2.5</span></a>).</p>
+<p>이 특별한 경우, 여러분의 직관은 추정치 \\(\\hat{p}=\\frac{1}{12}\\)를 제시할 수 있으며, 이는 최대가능도 추정치로 밝혀졌습니다. 우리는 이것이 (반드시) 근본적인 실제 값이 아니라 데이터로부터 얻은 추정치임을 상기시키기 위해 문자 위에 모자(hat)를 씌웁니다.</p>
+<p>푸아송의 경우와 마찬가지로, 가능한 많은 \\(p\\)에 대한 가능도를 계산하면, 이를 그려보고 최댓값이 어디에 있는지 확인할 수 있습니다(<a class="quarto-xref" href="#fig-likely1-1">그림 <span>2.5</span></a>).</p>
 <div class="cell page-columns page-full" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a aria-hidden="true" href="#cb24-1" tabindex="-1"></a>프로브<span class="ot">=</span>  <span class="fu">서열</span>(<span class="dv">0</span>,,,<span class="fl">0.3</span>,,,<span class="at">by =</span> <span class="fl">0.005</span>))</span>
 <span id="cb24-2"><a aria-hidden="true" href="#cb24-2" tabindex="-1"></a>있을 수 있는 일<span class="ot">=</span> <span class="fu">dbinom</span>(<span class="fu">합집합</span>(CB),<span class="at">prob =</span>프로브,<span class="at">크기 =</span> <span class="fu">길이</span>(CB))</span>
@@ -773,7 +773,7 @@ l \ left (\ lambda, \, x = (k_1, k_2, k_3, ...) \ 오른쪽) = \ prod_ {i = 1}^{
 </figure>
 </div>
 </div></div></div>
-<p>참고 : 0.085는 우리가 예상 한 값이 아닙니다<span class="math inline">\ ((\ frac {1} {12}) \)</span>그리고 그것은 우리가 시도한 값 세트 때문입니다.<code>프로브</code>) 정확한 값은 포함되지 않았습니다<span class="math inline">\ (\ frac {1} {12} \ simeq 0.0833 \)</span>그래서 우리는 다음으로 가장 좋은 것을 얻었습니다. 숫자 최적화 방법을 사용하여 극복 할 수 있습니다.</p>
+<p>참고: 0.085는 우리가 예상했던 값(\\((\\frac{1}{12})\\))과 정확히 일치하지 않는데, 이는 우리가 시도한 값의 집합(`probs`)에 \\(\\frac{1}{12} \\simeq 0.0833\\)의 정확한 값이 포함되지 않았기 때문입니다. 그래서 우리는 그 다음으로 가장 좋은 값을 얻었습니다. 수치 최적화 방법을 사용하여 이를 극복할 수 있습니다.</p>
 </section>
 <section class="level3 page-columns page-full" data-number="2.4.2" id="FreqBayes:subsec:likelihoodbinomial">
 <h3 class="anchored" data-anchor-id="FreqBayes:subsec:likelihoodbinomial" data-number="2.4.2"><span class="header-section-number">2.4.2</span>이항 분포 가능성</h3>
@@ -823,14 +823,14 @@ f (p \, | | \, n, y) = f (y \, | \, n, p) = {n \ 선택 y} \, p^y \, (1-p)^{(n-y
 </section>
 </section>
 <section class="level2 page-columns page-full" data-number="2.5" id="more-boxesmultinomial-data">
-<h2 class="anchored" data-anchor-id="more-boxesmultinomial-data" data-number="2.5"><span class="header-section-number">2.5</span>더 많은 상자 : 다국적 데이터</h2>
+<h2 class="anchored" data-anchor-id="more-boxesmultinomial-data" data-number="2.5"><span class="header-section-number">2.5</span> 더 많은 상자: 다항 데이터</h2>
 <section class="level3" data-number="2.5.1" id="dna-count-modeling-base-pairs">
-<h3 class="anchored" data-anchor-id="dna-count-modeling-base-pairs" data-number="2.5.1"><span class="header-section-number">2.5.1</span>DNA 수 모델링 : 기본 쌍</h3>
-<p>DNA의 4 가지 기본 분자 : A- 아데닌, C- 시토신, G -Guanine, T -Thymine이 있습니다. 뉴클레오티드는 퓨린 (A 및 G) 및 피리 미딘 (C 및 T)의 2 개의 그룹으로 분류된다. 이항은 퓨린/피리 미딘 그룹의 모델로 작용하지만 A, C, G, T를 사용하려는 경우; 이를 위해서는 다국적 모델이 필요합니다<a class="quarto-xref" href="01-chap.html#sec-generative-multinomial"><span>섹션 1.4</span></a>. 이러한 주파수에서 발생하는 눈에 띄는 패턴을 살펴 보겠습니다.</p>
+<h3 class="anchored" data-anchor-id="dna-count-modeling-base-pairs" data-number="2.5.1"><span class="header-section-number">2.5.1</span> DNA 카운트 모델링: 염기쌍</h3>
+<p>DNA에는 4가지 기본 분자가 있습니다: A-아데닌, C-시토신, G-구아닌, T-티민. 뉴클레오티드는 퓨린(A와 G)과 피리미딘(C와 T)의 두 그룹으로 분류됩니다. 이항 분포는 퓨린/피리미딘 그룹의 모델로 작동할 수 있지만, A, C, G, T를 모두 사용하려면 <a class="quarto-xref" href="01-chap.html#sec-generative-multinomial"><span>1.4절</span></a>의 다항 모델이 필요합니다. 이러한 빈도에서 발생하는 눈에 띄는 패턴을 살펴보겠습니다.</p>
 </section>
 <section class="level3 page-columns page-full" data-number="2.5.2" id="Sec:nucleotideBias">
-<h3 class="anchored" data-anchor-id="Sec:nucleotideBias" data-number="2.5.2"><span class="header-section-number">2.5.2</span>뉴클레오티드 바이어스</h3>
-<p>이 섹션은 실제 예에서 시뮬레이션 별 추정 및 테스트를 결합합니다. 유전자에 대한 한 가닥의 DNA에서 나온 데이터<em>포도상 구균 아우 레 우스</em>박테리아는 a<em>빠른</em>파일<code>stapheadence.ffn.txt</code>생체 전도기 패키지의 함수로 읽을 수 있습니다.<strong><a href="https://bioconductor.org/packages/Biostrings/">바이오 스트링</a></strong>.</p>
+<h3 class="anchored" data-anchor-id="Sec:nucleotideBias" data-number="2.5.2"><span class="header-section-number">2.5.2</span> 뉴클레오티드 편향</h3>
+<p>이 섹션은 실제 예제에서 시뮬레이션을 통한 추정과 검정을 결합합니다. _Staphylococcus aureus_ 박테리아 유전자의 한 가닥 DNA 데이터는 _fasta_ 파일 `staphsequence.ffn.txt`에 있으며, Bioconductor 패키지 **[Biostrings](https://bioconductor.org/packages/Biostrings/)**의 함수로 읽을 수 있습니다.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a aria-hidden="true" href="#cb28-1" tabindex="-1"></a><span class="fu">도서관</span>(<span class="st">"바이오 스트링"</span>))</span>
 <span id="cb28-2"><a aria-hidden="true" href="#cb28-2" tabindex="-1"></a>포도당<span class="ot">=</span> <span class="fu">readdnastringset</span>(<span class="st">"../data/staphestidence.ffn.txt"</span>,,,<span class="st">"금식"</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
@@ -968,8 +968,8 @@ T 409 340 74 334 580 798 249 454 386 209</code></pre>
 </section>
 </section>
 <section class="level2 page-columns page-full" data-number="2.6" id="the-chi2-distribution">
-<h2 class="anchored" data-anchor-id="the-chi2-distribution" data-number="2.6"><span class="header-section-number">2.6</span>그만큼<span class="math inline">\ (\ chi^2 \)</span>분포</h2>
-<p>실제로, 우리는 이러한 시뮬레이션을 실행하지 않고도 통계 이론을 사용하여 동일한 결론을 내릴 수있었습니다. 이론적 분포<code>Simulstate</code>통계를<span class="math inline">\ (\ chi^2 \)</span>(카이 제곱) 분포<a class="footnote-ref" href="#fn6" id="fnref6" role="doc-noteref"><sup>6</sup></a>파라미터 30 (<span class="math inline">\ (= 10 \ times (4-1) \)</span>). 우리는 값이 큰 값을 가질 확률을 계산하는 데 사용할 수 있습니다.<code>S1</code> <span class="math inline">\ (= \)</span>70.1. 우리가 위에서 방금 보았 듯이, 몬테 카를로 (Monte Carlo)의 작은 확률은 계산하기 어렵다 : 계산의 세분성은<span class="math inline">\ (1/b \)</span>따라서 우리는 그보다 작은 확률을 추정 할 수 없으며 실제로 추정치의 불확실성이 더 큽니다. 따라서 어떤 이론이 적용되면, 그것은 유용한 경향이 있습니다. 우리는 다른 시각적 장점을 사용하여 이론과 시뮬레이션이 얼마나 잘 일치하는지 확인할 수 있습니다.<strong>양자 용량</strong> (<strong>QQ</strong>) 구성. 두 개의 다른 샘플 또는 하나의 샘플과 이론적 모델에서 두 가지 분포를 비교할 때 히스토그램을 보는 것만으로는 충분히 유익하지 않습니다. 우리는 각 분포의 양자를 기반으로하는 방법을 사용합니다.</p>
+<h2 class="anchored" data-anchor-id="the-chi2-distribution" data-number="2.6"><span class="header-section-number">2.6</span> \\(\\chi^2\\) 분포</h2>
+<p>사실, 우리는 이러한 시뮬레이션을 실행하지 않고도 통계 이론을 사용하여 동일한 결론에 도달할 수 있었습니다. `simulstat` 통계량의 이론적 분포는 모수가 30(\\(10 \\times (4-1)\\))인 \\(\\chi^2\\)(카이제곱) 분포<a class="footnote-ref" href="#fn6" id="fnref6" role="doc-noteref"><sup>6</sup></a>이라고 합니다. 이를 사용하여 `S1` = 70.1만큼 큰 값을 가질 확률을 계산할 수 있습니다. 위에서 보았듯이, 몬테카를로 방법으로는 작은 확률을 계산하기 어렵습니다. 계산의 세분성은 \\(1/B\\)이므로 그보다 작은 확률은 추정할 수 없으며, 실제로 추정치의 불확실성은 더 큽니다. 따라서 어떤 이론이 적용 가능하다면, 그것은 유용한 경향이 있습니다. 우리는 또 다른 시각적 적합도 도구인 **Q-Q 그림(quantile-quantile plot)**을 사용하여 이론과 시뮬레이션이 우리 경우에 얼마나 잘 일치하는지 확인할 수 있습니다. 두 개의 다른 표본 또는 하나의 표본과 이론적 모델의 두 분포를 비교할 때, 히스토그램을 보는 것만으로는 충분히 유익하지 않습니다. 우리는 각 분포의 분위수에 기반한 방법을 사용합니다.</p>
 <div class="no-row-height column-margin column-container"><div id="fn6"><p><sup>6</sup>엄격하게 말하면, 분포<code>Simulstate</code>대략 a<span class="math inline">\ (\ chi^2 \)</span>분포; 테이블의 수가 큰 경우 근사치가 특히 좋습니다.</p></div></div><section class="level3 page-columns page-full" data-number="2.6.1" id="intermezzo-quantiles-and-the-quantile-quantile-plot">
 <h3 class="anchored" data-anchor-id="intermezzo-quantiles-and-the-quantile-quantile-plot" data-number="2.6.1"><span class="header-section-number">2.6.1</span>Intermezzo : Quantiles와 Quantile-Quantile Plot</h3>
 <p>이전 장에서는 100 개의 샘플 값을 주문했습니다.<span class="math inline">\ (x _ {(1)}, x _ {(2)}, ..., x _ {(100)} \)</span>. 22 번째 백분위 수를 원한다고 가정 해 봅시다. 우리는 22 번째와 23 번째 가치, 즉 충족되는 값 사이의 값을 취할 수 있습니다.<span class="math inline">\ (x _ {(22)} \ leq c_ {0.22} &lt;x _ {(23)} \)</span>0.22로 허용됩니다<strong>양자</strong> (<span class="math inline">\ (C_ {0.22} \)</span>). 다시 말해서,<span class="math inline">\ (C_ {0.22} \)</span>에 의해 정의됩니다</p>
@@ -1085,8 +1085,8 @@ T 409 340 74 334 580 798 249 454 386 209</code></pre>
 </section>
 </section>
 <section class="level2 page-columns page-full" data-number="2.7" id="sec-models-Chargaff">
-<h2 class="anchored" data-anchor-id="sec-models-Chargaff" data-number="2.7"><span class="header-section-number">2.7</span>Chargaff의 규칙</h2>
-<p>뉴클레오티드 주파수에서 가장 중요한 패턴은 Chargaff에 의해 발견되었습니다.<span class="citation" data-cites="Chargaff">(<a href="16-chap.html#ref-Chargaff" role="doc-biblioref">Elson and Chargaff 1952</a>))</span>.</p>
+<h2 class="anchored" data-anchor-id="sec-models-Chargaff" data-number="2.7"><span class="header-section-number">2.7</span> 샤가프의 법칙</h2>
+<p>뉴클레오티드 빈도에서 가장 중요한 패턴은 샤가프(Chargaff)에 의해 발견되었습니다<span class="citation" data-cites="Chargaff">(<a href="16-chap.html#ref-Chargaff" role="doc-biblioref">Elson and Chargaff 1952</a>)</span>.</p>
 <div class="cell page-columns page-full" data-layout-align="center">
 <div class="no-row-height column-margin column-container"><div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -1095,8 +1095,8 @@ T 409 340 74 334 580 798 249 454 386 209</code></pre>
 </figure>
 </div>
 </div></div></div>
-<p>분자의 중량을 사용하여 DNA 시퀀싱을 이용할 수 있기 오래 전에, 그는 뉴클레오티드가 동일한 주파수에서 발생했는지 여부를 물었다. 그는 이것을 테트라 뉴클레오티드 가설이라고 불렀다. 우리는 그것을 묻는 것으로 번역 할 것입니다<span class="math inline">\ (p _ {\ text {a}} = p _ {\ text {c}} = p _ {\ text {g}} = p _ {\ text {t}} \)</span>.</p>
-<p>불행히도, Chargaff는<em>백분율</em>측정 자체가 아니라 각각의 뉴클레오티드에 대해 다른 유기체에 존재하는 질량의.</p>
+<p>분자량을 이용한 DNA 시퀀싱이 가능해지기 오래 전, 그는 뉴클레오티드가 동일한 빈도로 발생하는지 의문을 가졌습니다. 그는 이것을 테트라뉴클레오티드 가설이라고 불렀습니다. 우리는 이를 \\(p_{\\text{A}} = p_{\\text{C}} = p_{\\text{G}} = p_{\\text{T}}\\)인지 묻는 것으로 해석할 수 있습니다.</p>
+<p>불행히도 샤가프는 측정값 자체가 아니라, 각 뉴클레오티드에 대해 다른 유기체에 존재하는 질량의 <em>백분율</em>만을 발표했습니다.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a aria-hidden="true" href="#cb50-1" tabindex="-1"></a><span class="fu">짐</span>(<span class="st">"../data/chargafftable.rdata"</span>))</span>
 <span id="cb50-2"><a aria-hidden="true" href="#cb50-2" tabindex="-1"></a>충전식</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
@@ -1468,22 +1468,24 @@ t 0.22 0.25 0.1 0.25 0.15 0 1 0 0.00</code></pre>
 <p>여러 범주 형 변수가 있다면, 우리는 그것들이 거의 독립적이지 않다는 것을 알았습니다 (성별 및 색맹, 머리카락 및 눈 색깔…). 나중에 볼 것입니다<a class="quarto-xref" href="09-chap.html"><span>9 장</span></a>우발 테이블의 다변량 분해를 사용하여 이러한 종속성의 패턴을 탐색 할 수 있습니다. 여기서는 범주 형 변수 사이의 중요한 특수한 의존성, 즉 시간이 지남에 따라 또는 바이오 폴리머를 따라 범주 형 변수의 시퀀스 (또는 "체인")를 따라 발생하는 의존성 간의 중요한 사례를 살펴 봅니다.</p>
 </section>
 </section>
-<section class="level2 page-columns page-full" data-number="2.8" id="sec-models-modelingdependencies">
-<h2 class="anchored" data-anchor-id="sec-models-modelingdependencies" data-number="2.8"><span class="header-section-number">2.8</span>순차적 의존성 모델링 : Markov 체인</h2>
-<p>우리가 내일의 날씨를 예측하고 싶다면, 상당히 좋은 추측은 오늘 날씨와 동일 할 가능성이 높다는 것입니다. 또한 다양한 종류의 가능한 변화에 대한 확률을 진술 할 수 있습니다. 잠재적으로 사용은 이미 오늘 날씨에 포함되어 있습니다). 날씨 예는 또한 그러한 가정이 반드시 사실 일 필요는 없지만 충분한 가정이어야한다는 것을 강조합니다. 이 가정을 이전의 종속성으로 확장하는 것은 상당히 간단합니다.<span class="math inline">\(케이\)</span>날, 어디서<span class="math inline">\(케이\)</span>유한하고 희망적으로는 너무 많지 않습니다. Markov 가정의 본질은 프로세스에 유한 한 "메모리"가 있으므로 예측은 유한 한 시간 동안 만 되돌아 볼 필요가 있다는 것입니다.</p>
-<p>시간적 서열 대신, 우리는 이것을 생물학적 서열에도 적용 할 수있다. DNA에서, 우리는 Digrams라고하는 뉴클레오티드 쌍, 예를 들어 [CG, CA, CC] 및 [CT]가 똑같이 빈번하지 않도록 특정 패턴의 연속을 볼 수 있습니다. 예를 들어, 게놈의 일부에서 우리는 독립에서 기대하는 것보다 [CA]의 더 빈번한 인스턴스를 볼 수 있습니다.</p>
-<p><span class="math display">\ [
-p (\ mathtt {ca}) \ neq p (\ mathtt {c}) \, p (\ mathtt {a}).
+<h2 class="anchored" data-anchor-id="sec-models-modelingdependencies" data-number="2.8"><span class="header-section-number">2.8</span> 순차적 종속성 모델링: 마르코프 연쇄</h2>
+<p>유한한 상태 집합 S에 대한 마르코프 연쇄는 <strong>마르코프 속성</strong>을 갖는 일련의 확률 변수 X0, X1, X2, ... 입니다. 즉, 모든 n &gt;= 0에 대해 다음 상태 Xn+1의 확률은 현재 상태 Xn에만 의존하며, 그 이전의 어떤 상태에도 의존하지 않습니다. 이를 수식으로 표현하면 다음과 같습니다.</p>
+<p><span class="mathdisplay">\[
+p(X_{n+1}=s_{n+1} | X_n=s_n, X_{n-1}=s_{n-1}, \dots, X_0=s_0) = p(X_{n+1}=s_{n+1} | X_n=s_n)
+\tag{2.6}\]</span></p>
+<p>시간적 서열 대신 생물학적 서열에도 이를 적용할 수 있습니다. DNA에서는 다이뉴클레오티드(dinucleotide)라고 하는 특정 뉴클레오티드 쌍, 예를 들어 CG, CA, CC, CT가 동일한 빈도로 나타나지 않는 패턴을 볼 수 있습니다. 예를 들어, 게놈의 어떤 부분에서는 독립성을 가정할 때 기대하는 것보다 CA가 더 자주 나타날 수 있습니다.</p>
+<p><span class="mathdisplay">\[
+p(\mathtt{CA}) \neq p(\mathtt{C})\,p(\mathtt{A}).
 \]</span></p>
-<p>우리는 순서 대로이 의존성을 a로 모델링합니다<strong>마르코프 체인</strong>:</p>
-<p><span class="math display">\ [
-p (\ mathtt {ca})
-= p (\ mathtt {nca})
-= p (\ mathtt {nnca})
-= p (... \ mathtt {CA})
-= p (\ mathtt {c}) \, p (\ mathtt {a | c}),
+<p>우리는 이러한 서열 내 의존성을 <strong>마르코프 연쇄</strong>로 모델링합니다.</p>
+<p><span class="mathdisplay">\[
+p(\mathtt{CA})
+= p(\mathtt{NCA})
+= p(\mathtt{NNCA})
+= p(\dots\mathtt{CA})
+= p(\mathtt{C})\,p(\mathtt{A|C}),
 \]</span></p>
-<p>여기서 N은 모든 뉴클레오티드를 나타냅니다<span class="math inline">\ (p (\ mathtt {a | c}) \)</span>“의 확률<span class="math inline">\ (\ mathtt {a} \)</span>, 앞의 기지가 a<span class="math inline">\ (\ mathtt {c} \)</span>".".<a class="quarto-xref" href="#fig-statsfourstateMC">수치<span>2.14</span></a>그래프에서 이러한 전이의 개략도를 보여줍니다.</p>
+<p>여기서 N은 임의의 뉴클레오티드를 나타내고, <span class="math inline">\(p(\mathtt{A|C})\)</span>는 "이전 염기가 <span class="math inline">\(\mathtt{C}\)</span>였을 때 <span class="math inline">\(\mathtt{A}\)</span>가 나올 확률"을 의미합니다. <a href="#fig-statsfourstateMC" class="quarto-xref">그림 <span>2.14</span></a>는 이러한 전이를 그래프로 개략적으로 보여줍니다.</p>
 <div class="cell page-columns page-full" data-layout-align="center">
 <div class="no-row-height column-margin column-container"><div class="cell-output-display">
 <div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-statsfourstateMC">
@@ -1491,13 +1493,13 @@ p (\ mathtt {ca})
 <div aria-describedby="fig-statsfourstateMC-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a class="lightbox" data-gallery="quarto-lightbox-gallery-22" href="02-chap_files/figure-html/fig-statsfourstateMC-1.png" title="Figure 2.14: Visualisation of a 4-state Markov chain. The probability of each possible digram (e.,g., CA) is given by the weight of the edge between the corresponding nodes. So for instance, the probability of CA is given by the edge C$ o$ A. We’ll see in sec-images how to use R packages to draw these type of network graphs."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="02-chap_files/figure-html/fig-statsfourstateMC-1.png" width="320"/></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-statsfourstateMC-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 2.14 : 4 개 주 마르코프 체인의 시각화. 가능한 각각의 digram (예 : g., ca)의 확률은 해당 노드 사이의 모서리의 가중치에 의해 주어진다. 예를 들어, CA의 확률은 Edge C $ O $ A에 의해 제공됩니다.<a class="quarto-xref" href="11-chap.html"><span>11 장</span></a>R 패키지를 사용하여 이러한 유형의 네트워크 그래프를 그리는 방법.</figcaption>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-statsfourstateMC-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 2.14: 4상태 마르코프 연쇄의 시각화. 각 가능한 다이뉴클레오티드(예: CA)의 확률은 해당 노드 사이의 간선(edge) 가중치로 주어집니다. 예를 들어, CA의 확률은 C -&gt; A 간선에 의해 주어집니다. <a class="quarto-xref" href="11-chap.html"><span>11장</span></a>에서는 R 패키지를 사용하여 이러한 유형의 네트워크 그래프를 그리는 방법을 배웁니다.</figcaption>
 </figure>
 </div>
 </div></div></div>
 </section>
 <section class="level2 page-columns page-full" data-number="2.9" id="bayesian-thinking">
-<h2 class="anchored" data-anchor-id="bayesian-thinking" data-number="2.9"><span class="header-section-number">2.9</span>베이지안 사고</h2>
+<h2 class="anchored" data-anchor-id="bayesian-thinking" data-number="2.9"><span class="header-section-number">2.9</span> 베이즈식 사고</h2>
 <div class="cell page-columns page-full" data-layout-align="center">
 <div class="no-row-height column-margin column-container"><div class="cell-output-display">
 <div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-FreqBayes-turtles">
@@ -1505,18 +1507,18 @@ p (\ mathtt {ca})
 <div aria-describedby="fig-FreqBayes-turtles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a class="lightbox" data-gallery="quarto-lightbox-gallery-23" href="imgs/turtlesalltheway.png" title="Figure 2.15: Turtles all the way down. Bayesian modeling of the uncertainty of the parameter of a distribution is done by using a random variable whose distribution may depend on parameters whose uncertainty can be modeled as a random variable; these are called hierarchical models."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="imgs/turtlesalltheway.png"/></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-FreqBayes-turtles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 2.15 : 거북이 끝까지. 분포의 매개 변수의 불확실성에 대한 베이지안 모델링은 분포가 불확실성을 랜덤 변수로 모델링 할 수있는 매개 변수에 의존 할 수있는 랜덤 변수를 사용하여 수행됩니다. 이를 계층 적 모델이라고합니다.</figcaption>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-FreqBayes-turtles-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 2.15: 모든 것이 거북이 등 위에. 분포 모수의 불확실성에 대한 베이즈 모델링은 분포가 불확실성을 확률 변수로 모델링할 수 있는 모수에 따라 달라질 수 있는 확률 변수를 사용하여 수행됩니다. 이를 계층적 모델이라고 합니다.</figcaption>
 </figure>
 </div>
 </div></div></div>
-<p>지금까지 우리는 모델의 매개 변수와 그들이 사용하는 분포, 즉 가능한 다른 결과의 확률이 장기 빈도를 나타냅니다. 매개 변수는 (적어도 개념적으로 - 정의, 알고 있고 고정되어 있습니다. 우리는 그것들을 알지 못할 수도 있으므로 당면한 데이터에서 추정합니다. 그러나 이러한 접근 방식은 이미 가지고있는 정보를 고려하지 않으며 매개 변수에 대해 알려주거나 특정 매개 변수 값 또는 조합을 다른 사람보다 더 많이 만들 수 있습니다.<em>~ 전에</em>현재 데이터 세트가 있습니다. 이를 위해서는 다른 접근 방식이 필요합니다. 여기에는 확률 모델 (즉, 분포)을 사용하여 사전 지식을 표현합니다.<a class="footnote-ref" href="#fn8" id="fnref8" role="doc-noteref"><sup>8</sup></a>매개 변수에 대해, 현재 데이터를 사용하십시오<em>업데이트</em>그러한 지식은 예를 들어 해당 분포를 이동 시키거나 더 좁게 만드는 것과 같습니다. 이러한 접근법은 베이지안 패러다임에 의해 제공됩니다.<a class="quarto-xref" href="#fig-FreqBayes-turtles">수치<span>2.15</span></a>).</p>
-<div class="no-row-height column-margin column-container"><div id="fn8"><p><sup>8</sup>어떤 사람들은“우리의 믿음”이라고 말하는 것을 좋아합니다.</p></div></div><p>베이지안 패러다임은 실용적인 접근법입니다<em>이전의</em>그리고<em>후부</em>우리의 지식을 모델링하기위한 배포<em>~ 전에</em>그리고<em>~ 후에</em>일부 데이터를 수집하고 관찰합니다. 반복 된 Ad Infinitum : 한 라운드의 데이터 생성 후 후방은 다음 라운드의 사전으로 사용될 수 있습니다. 따라서 다른 소스의 정보를 통합하거나 결합하는 데 특히 유용합니다.</p>
-<p>동일한 아이디어는 가설 테스트에도 적용될 수 있으며, 데이터를 사용하여 특정 진술을 믿는지 여부를 결정하려고합니다.<span class="math inline">\(시간\)</span>- 사실입니다. 여기서 우리의 "매개 변수"는 그 확률입니다<span class="math inline">\(시간\)</span>사실이며, 우리는 사전 지식을 다음의 형태로 공식화 할 수 있습니다.<strong>이전의</strong>확률, 작성<span class="math inline">\ (P (H) \)</span><a class="footnote-ref" href="#fn9" id="fnref9" role="doc-noteref"><sup>9</sup></a>. 데이터를 본 후에는 있습니다<strong>후부</strong>개연성. 우리는 그것을로 씁니다<span class="math inline">\ (p (h \, | \, d) \)</span>, 확률<span class="math inline">\(시간\)</span>우리가 본다는 것을 감안할 때<span class="math inline">\(디\)</span>. 이것은보다 높거나 낮을 수 있습니다<span class="math inline">\ (P (H) \)</span>데이터에 따라<span class="math inline">\(디\)</span>이었다.</p>
+<p>지금까지 우리는 모델의 모수와 사용하는 분포, 즉 가능한 여러 결과의 확률이 장기적인 빈도를 나타낸다는 관점을 취했습니다. 모수는 (적어도 개념적으로는) 정의되어 있고, 알 수 있으며, 고정되어 있습니다. 우리가 그 값을 모를 수도 있기 때문에 주어진 데이터로부터 추정합니다. 그러나 이러한 접근 방식은 현재 데이터 세트를 얻기 <em>전</em>에 이미 가지고 있을 수 있는 정보, 즉 모수에 대해 무언가를 알려주거나 특정 모수 값 또는 조합을 다른 것보다 더 그럴듯하게 만드는 정보를 고려하지 않습니다. 이를 위해서는 다른 접근 방식이 필요합니다. 즉, 확률 모델(분포)을 사용하여 모수에 대한 사전 지식<a class="footnote-ref" href="#fn8" id="fnref8" role="doc-noteref"><sup>8</sup></a>을 표현하고, 현재 데이터를 사용하여 그 지식을 <em>업데이트</em>하는 것입니다. 예를 들어, 분포를 이동시키거나 더 좁게 만드는 방식입니다. 이러한 접근법은 베이즈 패러다임에 의해 제공됩니다(<a class="quarto-xref" href="#fig-FreqBayes-turtles">그림 <span>2.15</span></a>).</p>
+<div class="no-row-height column-margin column-container"><div id="fn8"><p><sup>8</sup>어떤 사람들은“우리의 믿음”이라고 말하는 것을 좋아합니다.</p></div></div><p>베이즈 패러다임은 데이터를 수집하고 관찰하기 <em>전</em>과 <em>후</em>의 지식을 모델링하기 위해 <em>사전</em> 분포와 <em>사후</em> 분포를 사용하는 실용적인 접근법입니다. 이는 무한히 반복될 수 있습니다. 한 번의 데이터 생성 라운드 후의 사후 분포는 다음 라운드의 사전 분포로 사용될 수 있습니다. 따라서 여러 다른 출처의 정보를 통합하거나 결합하는 데 특히 유용합니다.</p>
+<p>동일한 아이디어는 가설 테스트에도 적용될 수 있으며, 데이터를 사용하여 특정 진술을 믿는지 여부를 결정하려고합니다.<span class="math inline">\(시간\)</span>- 사실입니다. 여기서 우리의 "매개 변수"는 그 확률입니다<span class="math inline">\(시간\)</span>사실이며, 우리는 사전 지식을 다음의 형태로 공식화 할 수 있습니다.<strong>이전의</strong>확률, 작성<span class="math inline">\ (P (H) \)</span><a class="footnote-ref" href="#fn9" id="fnref9" role="doc-noteref"><sup>9</sup></a>. 데이터를 관찰한 후에는<strong>사후</strong> 확률을 갖게 됩니다. 이를 \(p(H | D)\)로 표기하며, 데이터 \(D\)를 관찰했을 때 \(H\)가 참일 확률을 의미합니다. 이것은보다 높거나 낮을 수 있습니다<span class="math inline">\ (P (H) \)</span>데이터에 따라<span class="math inline">\(디\)</span>입니다.</p>
 <div class="no-row-height column-margin column-container"><div id="fn9"><p><sup>9</sup>소위 빈곤 주의자에게는 그러한 확률이 존재하지 않습니다. 그들의 견해는 진실은 알 수 없지만 실제로 가설은 참 또는 거짓이라는 것입니다. “70% True”라고 부르는 것은 의미가 없습니다.</p></div></div><section class="level3 page-columns page-full" data-number="2.9.1" id="sec-models-haplotypefrequencies">
-<h3 class="anchored" data-anchor-id="sec-models-haplotypefrequencies" data-number="2.9.1"><span class="header-section-number">2.9.1</span>예 : 일배 체형 주파수</h3>
-<p>수학적 형식을 최소로 유지하기 위해, 우리는 Y 염색체의 결합 된 시그니처 (haplotypes)를 사용하여 법의학의 예로 시작합니다.</p>
-<p>에이<em>일배 체형</em>염색체에 공간적으로 인접한 대립 유전자 (DNA 서열 변이체)의 모음은 일반적으로 함께 유전되며 (재조합은이를 분리하지 않는 경향이 있음), 따라서 유전자로 연결되어있다. 이 경우 우리는 Y 염색체의 연결된 변형을보고 있습니다.</p>
-<p>먼저 일배 체형 주파수 분석의 동기를 살펴 보면 가능성에 대한 아이디어를 다시 방문 할 것입니다. 그 후, 우리는 알 수없는 매개 변수를 임의의 숫자 자체라고 생각할 수있는 방법을 설명하고, 사전 분포로 불확실성을 모델링합니다. 그런 다음 관찰 된 새로운 데이터를 확률 분포에 통합하고 매개 변수에 대한 사후 신뢰도를 계산하는 방법을 살펴 봅니다.</p>
+<h3 class="anchored" data-anchor-id="sec-models-haplotypefrequencies" data-number="2.9.1"><span class="header-section-number">2.9.1</span>예시: 단일배수체 빈도</h3>
+<p>수학적 형식주의는 최소화하기 위해, Y 염색체의 결합된 시그니처(단일배수체)를 사용하는 법의학 예시부터 시작하겠습니다.</p>
+<p><em>단일배수체</em>는 염색체 상에서 공간적으로 인접한 대립유전자(DNA 서열 변이)의 집합으로, 보통 함께 유전되고 (재조합으로 잘 분리되지 않음) 유전적으로 연결되어 있습니다. 이 경우, 우리는 Y 염색체에 연결된 변이들을 보고 있습니다.</p>
+<p>먼저 단일배수체 빈도 분석의 동기를 살펴본 다음, 가능도(likelihood) 개념을 다시 살펴보겠습니다. 그 후에, 미지의 모수를 확률 변수 자체로 간주하고 사전 분포(prior distribution)로 그 불확실성을 모델링하는 방법을 설명하겠습니다. 그리고 새로 관찰된 데이터를 확률 분포에 통합하여 모수에 대한 사후 신뢰도(posterior confidence)를 계산하는 방법을 알아보겠습니다.</p>
 <div class="cell page-columns page-full" data-layout-align="center">
 <div class="cell-output-display page-columns page-full">
 <div class="quarto-float quarto-figure quarto-figure-center anchored page-columns page-full" data-cap-location="margin" data-fig-align="center" id="fig-STRDefinition">
@@ -1524,7 +1526,7 @@ p (\ mathtt {ca})
 <div aria-describedby="fig-STRDefinition-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a class="lightbox" data-gallery="quarto-lightbox-gallery-24" href="imgs/STRDefinition.png" title="Figure 2.16: A short tandem repeat (STR) in DNA occurs when a pattern of two or more nucleotides is repeated, and the repeated sequences are directly adjacent to each other. An STR is also known as a microsatellite. The pattern can range in length from 2 to 13 nucleotides, and the number of repeats is highly variable across individuals. STR numbers can be used as genetic signatures."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="imgs/STRDefinition.png"/></a>
 </div>
-<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-STRDefinition-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 2.16 : DNA의 짧은 탠덤 반복 (STR)은 둘 이상의 뉴클레오티드의 패턴이 반복되고 반복 된 서열이 서로 직접 인접 해있을 때 발생합니다. STR은 미세 위성이라고도합니다. 패턴의 길이는 2 내지 13 뉴클레오티드의 길이가 될 수 있으며, 반복의 수는 개인마다 매우 가변적이다. 스트림 수는 유전자 서명으로 사용될 수 있습니다.</figcaption>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-STRDefinition-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 2.16: DNA의 짧은 직렬 반복(Short Tandem Repeat, STR)은 두 개 이상의 뉴클레오티드 패턴이 반복되고, 반복된 서열이 서로 바로 인접해 있을 때 발생합니다. STR은 마이크로새틀라이트(microsatellite)라고도 합니다. 패턴의 길이는 2에서 13개의 뉴클레오티드까지 다양하며, 반복 횟수는 개인마다 매우 가변적입니다. STR 수는 유전적 시그니처로 사용될 수 있습니다.</figcaption>
 </figure>
 </div>
 </div>
@@ -1536,7 +1538,7 @@ p (\ mathtt {ca})
 <div aria-describedby="fig-YSTRPositions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a class="lightbox" data-gallery="quarto-lightbox-gallery-25" href="imgs/YSTRPositions.jpg" title="Figure 2.17: Location of short tandem repeats (STR) on the human Y chromosome. Source: https://strbase.nist.gov/ystrpos1.htm"><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="imgs/YSTRPositions.jpg"/></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-YSTRPositions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 2.17 : 인간 Y 염색체의 짧은 탠덤 반복 (STR)의 위치. 원천:<a href="https://strbase.nist.gov/ystrpos1.htm">https://strbase.nist.gov/ystrpos1.htm</a>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-YSTRPositions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 2.17: 인간 Y 염색체에 있는 짧은 직렬 반복(STR)의 위치. 출처: <a href="https://strbase.nist.gov/ystrpos1.htm">https://strbase.nist.gov/ystrpos1.htm</a>
 </figcaption>
 </figure>
 </div>
@@ -1548,11 +1550,11 @@ p (\ mathtt {ca})
 <div aria-describedby="fig-USY-STR-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a class="lightbox" data-gallery="quarto-lightbox-gallery-26" href="imgs/USY-STR.png" title="Figure 2.18: Y STR haplotype lookup from a database used by the FBI."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="imgs/USY-STR.png"/></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-USY-STR-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 2.18 : FBI가 사용하는 데이터베이스의 Y Str Haplotype 조회.</figcaption>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-USY-STR-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 2.18: FBI가 사용하는 데이터베이스의 Y-STR 단일배수체 조회.</figcaption>
 </figure>
 </div>
 </div></div></div>
-<p>우리는 다른 짧은 탠덤 반복 (STR) 세트로 구성된 특정 y-haplotypes의 빈도에 관심이 있습니다. DNA 법의학에 사용되는 특정 위치에서의 스트림 수의 조합은 특정 위치에서의 반복 수로 라벨을 붙인다. 다음은 STR 일배 체형 테이블의 짧은 발췌문입니다.</p>
+<p>우리는 서로 다른 짧은 직렬 반복(STR) 세트로 구성된 특정 Y-단일배수체의 빈도에 관심이 있습니다. DNA 법의학에 사용되는 특정 위치의 STR 조합은 특정 위치의 반복 횟수로 표시됩니다. 다음은 그러한 STR 단일배수체 표의 일부입니다.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a aria-hidden="true" href="#cb78-1" tabindex="-1"></a>haplo6<span class="ot">=</span> <span class="fu">read.table</span>(<span class="st">"../data/haplotype6.txt"</span>,,,<span class="at">헤더 =</span> <span class="cn">진실</span>))</span>
 <span id="cb78-2"><a aria-hidden="true" href="#cb78-2" tabindex="-1"></a>haplo6</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
@@ -1566,16 +1568,16 @@ p (\ mathtt {ca})
 6 H8 16 11 5 12 3</code></pre>
 </div>
 </div>
-<div class="page-columns page-full"><p>테이블에 따르면 일배 체형 H1은 14 개의 반복이 있습니다.<code>dys19</code>, 12 회 반복<code>dxys156y</code>기본 비율을 찾고 싶다고 가정 해<span class="math inline">\(피\)</span>관심있는 집단의 특정 일배 체형, 일배 체형에 의한<span class="math inline">\ (n = 300 \)</span>남자; 그리고 우리가 H1을 발견했다고 가정 해 봅시다<span class="math inline">\ (y = 40 \)</span>그들 중. 우리는 이항 분포를 사용할 것입니다<span class="math inline">\ (b (n, p) \)</span>이것을 모델링하기 위해<span class="math inline">\(피\)</span>알려지지 않은.</p><div class="no-row-height column-margin column-container"><span class="margin-aside">이러한 Y-STR 프로파일을 사용하여 생성 된 일배 체형은 동일한 가부장적 계통에서 남성들 사이에서 공유됩니다. 따라서 두 사람이 동일한 프로파일을 공유 할 수 있습니다.</span></div></div>
+<div class="page-columns page-full"><p>표에 따르면 단일배수체 H1은 <code>DYS19</code> 위치에 14개의 반복, <code>DXYS156Y</code> 위치에 12개의 반복 등을 가집니다. 관심 집단에서 특정 단일배수체의 기본 비율 \(p\)를 찾기 위해 \(n=300\)명의 남성을 대상으로 단일배수체 분석을 수행했다고 가정해 봅시다. 그리고 그들 중 \(y=40\)명에게서 H1을 발견했다고 가정합니다. 우리는 이항 분포 \(B(n,p)\)를 사용하여 이를 모델링할 것이며, 여기서 \(p\)는 미지수입니다.</p><div class="no-row-height column-margin column-container"><span class="margin-aside">이러한 Y-STR 프로필을 사용하여 생성된 단일배수체는 동일한 부계 혈통의 남성들 사이에서 공유됩니다. 따라서 서로 다른 두 남성이 동일한 프로필을 공유할 수 있습니다.</span></div></div>
 </section>
 <section class="level3 page-columns page-full" data-number="2.9.2" id="subsection:simulationbinomial">
-<h3 class="anchored" data-anchor-id="subsection:simulationbinomial" data-number="2.9.2"><span class="header-section-number">2.9.2</span>이항 분포에 대한 베이지안 패러다임의 시뮬레이션 연구</h3>
-<p>우리의 매개 변수를 가정하는 대신<span class="math inline">\(피\)</span>하나의 단일 값 (예 : 최대 가능성 추정치 40/300)을 가지고 있으며, 베이지안 접근 방식은 통계 분포에서 추첨으로 볼 수 있습니다. 분포는 매개 변수의 가능한 값에 대한 우리의 믿음을 표현합니다.<span class="math inline">\(피\)</span>. 원칙적으로, 우리는 가능한 값이 허용되는 분포를 사용할 수 있습니다.<span class="math inline">\(피\)</span>. 여기에서 우리는 비율이나 확률을 표현하고 0과 1 사이의 값을 취하는 매개 변수를보고 있습니다.<em>베타 배포</em>. 밀도 공식이 작성되었습니다</p>
+<h3 class="anchored" data-anchor-id="subsection:simulationbinomial" data-number="2.9.2"><span class="header-section-number">2.9.2</span>시뮬레이션을 통한 이항분포의 베이즈 패러다임 연구</h3>
+<p>모수 \(p\)가 단일 값(예: 최대가능도 추정치 40/300)을 갖는다고 가정하는 대신, 베이즈 접근법에서는 이를 통계 분포로부터의 표본으로 간주합니다. 이 분포는 모수 \(p\)의 가능한 값에 대한 우리의 믿음을 표현합니다. 원칙적으로, \(p\)에 허용되는 값을 갖는 어떤 분포든 사용할 수 있습니다. 여기서는 비율 또는 확률을 나타내고 0과 1 사이의 값을 갖는 모수를 다루므로, <em>베타 분포</em>를 사용하는 것이 편리합니다. 밀도 공식은 다음과 같습니다.</p>
 <p><span class="anchored-eq" data-anchor-id="eq-stat" id="eq-stat-densitybeta"><span class="math display">\ [
 f _ {\ alpha, \ beta} (x) = \ frac {x^{\ alpha-1} \, (1-x)^{\ beta-1}} {\ text {b} (\ alpha, \ beta) \ quad \ text {where} \ quad
 \ text {b} (\ alpha, \ beta) = \ frac {\ gamma (\ alpha) \ gamma (\ beta)} {\ gamma (\ alpha+\ beta)}.
 \ tag {2.6} \]</span></span></p>
-<p>우리는 볼 수 있습니다<a class="quarto-xref" href="#fig-histobeta2">수치<span>2.19</span></a>이 함수는 두 매개 변수에 따라 다릅니다<span class="math inline">\ (\ alpha \)</span>그리고<span class="math inline">\(\베타\)</span>, 그것은 매우 유연한 분포 제품군이됩니다 (많은 다른 상황에 맞을 수 있음). 그리고 그것은 좋은 수학적 속성을 가지고 있습니다. 우리가 사전 믿음으로 시작한다면<span class="math inline">\(피\)</span>그것은 베타 모양이며 데이터 세트를 관찰하십시오<span class="math inline">\(N\)</span>이항 시험, 그런 다음 우리의 신념, 후방 분포를 업데이트하십시오.<span class="math inline">\(피\)</span>업데이트 된 매개 변수가 있지만 베타 배포도 있습니다. 이것은 수학적 사실입니다. 우리는 여기서 그것을 증명하지 않을 것이지만, 시뮬레이션으로 그것을 보여줍니다.</p>
+<p><a class="quarto-xref" href="#fig-histobeta2">그림 <span>2.19</span></a>에서 볼 수 있듯이 이 함수는 두 모수 \(\alpha\)와 \(\beta\)에 따라 달라지므로 매우 유연한 분포족(family of distributions)이 됩니다(다양한 상황에 '적합'할 수 있음). 그리고 이것은 좋은 수학적 속성을 가집니다. 만약 \(p\)에 대한 우리의 사전 믿음이 베타 분포 형태이고, \(n\)번의 이항 시행 데이터셋을 관찰한 후 우리의 믿음을 업데이트하면, \(p\)에 대한 사후 분포 또한 업데이트된 모수를 가진 베타 분포가 됩니다. 이것은 수학적 사실입니다. 여기서 증명하지는 않겠지만, 시뮬레이션을 통해 보여드리겠습니다.</p>
 <div class="cell page-columns page-full" data-layout-align="center">
 <div class="no-row-height column-margin column-container"><div class="cell-output-display">
 <div class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" id="fig-histobeta2">
@@ -1583,14 +1585,14 @@ f _ {\ alpha, \ beta} (x) = \ frac {x^{\ alpha-1} \, (1-x)^{\ beta-1}} {\ text {
 <div aria-describedby="fig-histobeta2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a class="lightbox" data-gallery="quarto-lightbox-gallery-27" href="02-chap_files/figure-html/fig-histobeta2-1.png" title="Figure 2.19: Beta distributions with \alpha=10,20,50 and \beta=30,60,150. We can use these as a prior for probability of success in a binomial experiment. These three distributions have the same mean (\frac{\alpha}{\alpha +\beta}), but different concentrations around the mean."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="02-chap_files/figure-html/fig-histobeta2-1.png" width="280"/></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-histobeta2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 2.19 : 베타 배포<span class="math inline">\ (\ alpha = 10,20,50 \)</span>그리고<span class="math inline">\ (\ 베타 = 30,60,150 \)</span>. 우리는 이것을 a로 사용할 수 있습니다<strong>이전의</strong>이항 실험에서 성공 확률을 위해. 이 세 가지 분포는 평균과 동일합니다 (<span class="math inline">\ (\ frac {\ alpha} {\ alpha +\ beta} \)</span>), 그러나 평균 주위의 다른 농도.</figcaption>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-histobeta2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 2.19: \(\alpha=10,20,50\)과 \(\beta=30,60,150\)일 때의 베타 분포. 이것을 이항 실험의 성공 확률에 대한 <strong>사전분포</strong>로 사용할 수 있습니다. 이 세 분포는 평균(\( \frac{\alpha}{\alpha +\beta} \))은 같지만, 평균 주변의 집중도가 다릅니다.</figcaption>
 </figure>
 </div>
 </div></div></div>
 </section>
 <section class="level3 page-columns page-full" data-number="2.9.3" id="the-distribution-of-y">
-<h3 class="anchored" data-anchor-id="the-distribution-of-y" data-number="2.9.3"><span class="header-section-number">2.9.3</span>분포<span class="math inline">\(와이\)</span></h3>
-<p>주어진 선택을 위해<span class="math inline" data-anchor-id="eq-stat">\(피\)</span>, 우리는 분포가 무엇인지 알고 있습니다<span class="math inline">\(와이\)</span>의 덕분에<a class="quarto-xref" href="#eq-stat-dbinom">방정식<span>2.3</span></a>. 그러나 분포는 무엇입니까?<span class="math inline">\(와이\)</span>만약에<span class="math inline">\(피\)</span>자체는 일부 분포에 따라 다릅니다. 우리는 이것을이라고 부릅니다<strong>한계 분포</strong>~의<span class="math inline">\(와이\)</span>. 그것을 시뮬레이션합시다. 먼저 무작위 샘플을 생성합니다<code>RP</code>100000<span class="math inline">\(피\)</span>에스. 그들 각각에 대해, 우리는 임의의 샘플을 생성합니다.<span class="math inline">\(와이\)</span>, 표시<a class="quarto-xref" href="#fig-histmarginal-1">수치<span>2.20</span></a>. 아래 코드에서 시연을 위해 우리는 이전의 매개 변수 50과 350을 사용합니다. 그러한 이전은 이미 유익한 정보 (“피크”)이며, 예를 들어, 이전 연구에 근거한 신념을 반영 할 수 있습니다. ~ 안에<a class="quarto-xref" href="#wrn-models-softerprior">질문<span>2.20</span></a>당신은 사전에“부드러운”(덜 유익한)를 시험해 볼 기회가 있습니다. 우리는 다시 사용합니다<code>vapply</code>함수를 적용하기 위해 이름이없는 (익명) 함수<code>엑스</code>, 모든 요소에서<code>RP</code>결과적으로 다른 벡터를 얻습니다<code>와이</code>같은 길이의.</p>
+<h3 class="anchored" data-anchor-id="the-distribution-of-y" data-number="2.9.3"><span class="header-section-number">2.9.3</span>\(Y\)의 분포</h3>
+<p>주어진 \(p\) 값에 대해, <a class="quarto-xref" href="#eq-stat-dbinom">식 <span>2.3</span></a>에 따라 \(Y\)의 분포를 알 수 있습니다. 하지만 \(p\) 자체가 어떤 분포에 따라 변한다면 \(Y\)의 분포는 어떻게 될까요? 이것을 \(Y\)의 <strong>주변분포(marginal distribution)</strong>라고 부릅니다. 시뮬레이션해 봅시다. 먼저 100,000개의 \(p\)로 이루어진 무작위 표본 `rp`를 생성합니다. 각각에 대해 \(Y\)의 무작위 표본을 생성하며, 이는 <a class="quarto-xref" href="#fig-histmarginal-1">그림 <span>2.20</span></a>에 나와 있습니다. 아래 코드에서는 시연을 위해 사전분포의 모수로 50과 350을 사용합니다. 이러한 사전분포는 이미 상당히 유익하며('뾰족한' 모양), 예를 들어 이전 연구에 기반한 믿음을 반영할 수 있습니다. <a class="quarto-xref" href="#wrn-models-softerprior">질문 <span>2.20</span></a>에서는 '더 부드러운'(덜 유익한) 사전분포를 시험해 볼 기회가 있습니다. 다시 `vapply`를 사용하여 이름 없는(익명) 함수를 `rp`의 모든 요소에 적용하여 결과적으로 동일한 길이의 다른 벡터 `y`를 얻습니다.</p>
 <div class="cell page-columns page-full" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a aria-hidden="true" href="#cb80-1" tabindex="-1"></a>RP<span class="ot">=</span> <span class="fu">rbeta</span>(<span class="dv">100000</span>,,,<span class="dv">50</span>,,,<span class="dv">350</span>))</span>
 <span id="cb80-2"><a aria-hidden="true" href="#cb80-2" tabindex="-1"></a>와이<span class="ot">=</span> <span class="fu">vapply</span>(RP,</span>
@@ -1603,7 +1605,7 @@ f _ {\ alpha, \ beta} (x) = \ frac {x^{\ alpha-1} \, (1-x)^{\ beta-1}} {\ text {
 <div aria-describedby="fig-histmarginal-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a class="lightbox" data-gallery="quarto-lightbox-gallery-28" href="02-chap_files/figure-html/fig-histmarginal-1-1.png" title="Figure 2.20: Marginal Distribution of Y."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="02-chap_files/figure-html/fig-histmarginal-1-1.png" width="280"/></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-histmarginal-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 2.20 : 한계 분포<span class="math inline">\(와이\)</span>.
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-histmarginal-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 2.20: Y의 주변분포.
 </figcaption>
 </figure>
 </div>
@@ -1643,8 +1645,8 @@ f _ {\ alpha, \ beta} (x) = \ frac {x^{\ alpha-1} \, (1-x)^{\ beta-1}} {\ text {
 </div>
 </section>
 <section class="level3 page-columns page-full" data-number="2.9.4" id="histogram-of-all-the-ps-such-that-y40-the-posterior-distribution">
-<h3 class="anchored" data-anchor-id="histogram-of-all-the-ps-such-that-y40-the-posterior-distribution" data-number="2.9.4"><span class="header-section-number">2.9.4</span>모든의 히스토그램<span class="math inline">\(피\)</span>그런 것<span class="math inline">\ (y = 40 \)</span>: 사후 분포</h3>
-<p>이제 후방 분포를 계산합시다<span class="math inline">\(피\)</span>그 결과를 조절함으로써<span class="math inline">\(와이\)</span>40 세였습니다. 우리는 그것을 이론적 후부와 비교했고,<code>덴스패 포스트 이론</code>아래에서 더. 결과가 표시됩니다<a class="quarto-xref" href="#fig-densityposterior-1">수치<span>2.21</span></a>.</p>
+<h3 class="anchored" data-anchor-id="histogram-of-all-the-ps-such-that-y40-the-posterior-distribution" data-number="2.9.4"><span class="header-section-number">2.9.4</span>\(Y=40\)을 만족하는 모든 \(p\)의 히스토그램: 사후 분포</h3>
+<p>이제 \(Y\)가 40이었던 결과에 대해 조건부로 \(p\)의 사후 분포를 계산해 봅시다. 이것을 이론적 사후 분포인 `densPostTheory`와 비교할 것이며, 이에 대해서는 아래에서 더 자세히 설명합니다. 결과는 <a class="quarto-xref" href="#fig-densityposterior-1">그림 <span>2.21</span></a>에 나와 있습니다.</p>
 <div class="cell page-columns page-full" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a aria-hidden="true" href="#cb82-1" tabindex="-1"></a>ppostemp<span class="ot">=</span>RP [y<span class="sc">==</span> <span class="dv">40</span>]]</span>
 <span id="cb82-2"><a aria-hidden="true" href="#cb82-2" tabindex="-1"></a><span class="fu">히스</span>(ppostemp,<span class="at">breaks =</span> <span class="dv">40</span>,,,<span class="at">col =</span> <span class="st">"chartreuse4"</span>,,,<span class="at">메인 =</span> <span class="st">"" "</span>,,,</span>
@@ -1659,11 +1661,11 @@ f _ {\ alpha, \ beta} (x) = \ frac {x^{\ alpha-1} \, (1-x)^{\ beta-1}} {\ text {
 <div aria-describedby="fig-densityposterior-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a class="lightbox" data-gallery="quarto-lightbox-gallery-29" href="02-chap_files/figure-html/fig-densityposterior-1-1.png" title="Figure 2.21: Only choosing the values of the distribution with Y=40 gives the posterior distribution of p. The histogram (green) shows the simulated values for the posterior distribution, the line the density of a Beta distribution with the theoretical parameters."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="02-chap_files/figure-html/fig-densityposterior-1-1.png" width="280"/></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-densityposterior-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 2.21 : 분포 값 만 선택하십시오<span class="math inline">\ (y = 40 \)</span>후방 분포를 제공합니다<span class="math inline">\(피\)</span>. 히스토그램 (녹색)은 사후 분포에 대한 시뮬레이션 된 값, 이론적 매개 변수와 베타 분포의 밀도를 보여줍니다.</figcaption>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-densityposterior-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 2.21: \(Y=40\)인 분포의 값만 선택하면 \(p\)의 사후 분포를 얻을 수 있습니다. 히스토그램(녹색)은 사후 분포에 대한 시뮬레이션 값을 보여주고, 선은 이론적 모수를 가진 베타 분포의 밀도를 보여줍니다.</figcaption>
 </figure>
 </div>
 </div></div></div>
-<p>또한 위에서 계산 된 두 분포의 수단을 확인하고 4 자리에 가까운 것을 확인할 수 있습니다.</p>
+<p>또한 위에서 계산된 두 분포의 평균을 확인하여 유효숫자 4자리까지 근사한 것을 볼 수 있습니다.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a aria-hidden="true" href="#cb83-1" tabindex="-1"></a><span class="fu">평균</span>(ppostemp)</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1675,11 +1677,11 @@ f _ {\ alpha, \ beta} (x) = \ frac {x^{\ alpha-1} \, (1-x)^{\ beta-1}} {\ text {
 <pre><code>[1] 0.1285714</code></pre>
 </div>
 </div>
-<p>이론적 밀도의 평균을 근사화합니다<code>덴스패 포스트 이론</code>, 우리는 위의 문자 그대로 적분을 계산했습니다</p>
+<p>이론적 밀도 <code>densPostTheory</code>의 평균을 근사하기 위해, 위에서는 말 그대로 다음 적분을 계산했습니다.</p>
 <p><span class="math display">\ [
 \ int_0^1 p \, f (p) \, dp
 \]</span></p>
-<p>수치 적 통합 사용, 즉<code>합집합</code>적분에 대해. 특히 단일 스칼라 매개 변수가 아닌 경우 항상 편리하거나 실행 가능한 것은 아닙니다.<span class="math inline">\(피\)</span>, 그러나 많은 매개 변수가 있으므로 고차원 매개 변수 벡터와 고차원 적분을 다루고 있습니다. 적분을 분석적으로 계산할 수없는 경우 사용할 수 있습니다.<strong>몬테 카를로 통합</strong>. 위의 코드에서 몬테 카를로 통합의 매우 간단한 인스턴스를 이미 보았습니다.<code>ppostemp</code>R을 호출하여 후방 평균을 계산하기 위해 통합을 수행했습니다.<code>평균</code>기능. 이 경우 대체 Monte Carlo 알고리즘은<code>rbeta</code>올바른 매개 변수와 직접 작동합니다.</p>
+<p>즉, 수치 적분(numerical integration)을 사용했습니다. 이 방법은 항상 편리하거나 실행 가능한 것은 아니며, 특히 모델이 단일 스칼라 모수 \(p\)가 아니라 다차원 모수 벡터와 다차원 적분을 다루는 많은 모수를 포함하는 경우 더욱 그렇습니다. 적분을 해석적으로 계산할 수 없는 경우, <strong>몬테카를로 적분(Monte Carlo integration)</strong>을 사용할 수 있습니다. 위 코드에서 `pPostEmp`로 사후분포를 표본추출하고 R의 `mean` 함수를 호출하여 사후 평균을 계산함으로써 몬테카를로 적분의 매우 간단한 예를 이미 보았습니다. 이 경우, 대안적인 몬테카를로 알고리즘은 올바른 모수를 사용하여 `rbeta` 함수로 직접 사후 표본을 생성하는 것입니다.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a aria-hidden="true" href="#cb87-1" tabindex="-1"></a>PPOSTMC<span class="ot">=</span> <span class="fu">rbeta</span>(<span class="at">n =</span> <span class="dv">100000</span>,,,<span class="dv">90</span>,,,<span class="dv">610</span>))</span>
 <span id="cb87-2"><a aria-hidden="true" href="#cb87-2" tabindex="-1"></a><span class="fu">평균</span>(PPOSTMC)</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
@@ -1687,7 +1689,7 @@ f _ {\ alpha, \ beta} (x) = \ frac {x^{\ alpha-1} \, (1-x)^{\ beta-1}} {\ text {
 <pre><code>[1] 0.1285718</code></pre>
 </div>
 </div>
-<p>우리는 Monte Carlo 샘플 사이의 일치를 확인할 수 있습니다.<code>PPOSTMC</code>그리고<code>ppostemp</code>, a를 사용하여 약간 다른 방식으로 생성됩니다<strong>양자 용량 플롯</strong> (<strong>QQ- 플롯</strong>,,,<a class="quarto-xref" href="#fig-qqplotbeta-1">수치<span>2.22</span></a>).</p>
+<p>약간 다른 방식으로 생성된 몬테카를로 표본 `pPostMC`와 `pPostEmp` 사이의 일치 여부를 <strong>분위수-분위수 그림(quantile-quantile plot, QQ-plot)</strong>(<a class="quarto-xref" href="#fig-qqplotbeta-1">그림 <span>2.22</span></a>)을 사용하여 확인할 수 있습니다.</p>
 <div class="cell page-columns page-full" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a aria-hidden="true" href="#cb89-1" tabindex="-1"></a><span class="fu">qqplot</span>(ppostmc, ppostemp,<span class="at">유형 =</span> <span class="st">"엘"</span>,,,<span class="at">ASP =</span> <span class="dv">1</span>))</span>
 <span id="cb89-2"><a aria-hidden="true" href="#cb89-2" tabindex="-1"></a><span class="fu">Abline</span>(<span class="at">a =</span> <span class="dv">0</span>,,,<span class="at">b =</span> <span class="dv">1</span>,,,<span class="at">col =</span> <span class="st">"파란색"</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
@@ -1697,7 +1699,7 @@ f _ {\ alpha, \ beta} (x) = \ frac {x^{\ alpha-1} \, (1-x)^{\ beta-1}} {\ text {
 <div aria-describedby="fig-qqplotbeta-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a class="lightbox" data-gallery="quarto-lightbox-gallery-30" href="02-chap_files/figure-html/fig-qqplotbeta-1-1.png" title="Figure 2.22: Quantile-quantile (QQ) plot of our Monte Carlo sample pPostMC from the theoretical distribution and our simulation sample pPostEmp. We could also similarly compare either of these two distributions to the theoretical distribution function pbeta(., 90, 610). If the curve lies on the line y=x, this indicates a good agreement. There are some random differences at the tails."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="02-chap_files/figure-html/fig-qqplotbeta-1-1.png" width="280"/></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-qqplotbeta-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 2.22 : Monte Carlo 샘플의 Quantile-Quantile (QQ) 플롯<code>PPOSTMC</code>이론적 분포 및 시뮬레이션 샘플에서<code>ppostemp</code>. 또한이 두 분포 중 하나를 이론적 분포 함수와 비교할 수도 있습니다.<code>pbeata (. ,, 90, 610)</code>. 곡선이 줄에있는 경우<span class="math inline">\ (y = x \)</span>, 이것은 좋은 합의를 나타냅니다. 꼬리에는 임의의 차이가 있습니다.</figcaption>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-qqplotbeta-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 2.22: 이론 분포로부터의 몬테카를로 표본 `pPostMC`와 시뮬레이션 표본 `pPostEmp`의 분위수-분위수(QQ) 그림. 마찬가지로 이 두 분포 중 하나를 이론적 분포 함수 `pbeta(., 90, 610)`와 비교할 수도 있습니다. 곡선이 \(y=x\) 선상에 놓이면 좋은 일치를 나타냅니다. 꼬리 부분에는 약간의 무작위적 차이가 있습니다.</figcaption>
 </figure>
 </div>
 </div></div></div>
@@ -1714,17 +1716,17 @@ f _ {\ alpha, \ beta} (x) = \ frac {x^{\ alpha-1} \, (1-x)^{\ beta-1}} {\ text {
 </div>
 </section>
 <section class="level3 page-columns page-full" data-number="2.9.5" id="the-posterior-distribution-is-also-a-beta">
-<h3 class="anchored" data-anchor-id="the-posterior-distribution-is-also-a-beta" data-number="2.9.5"><span class="header-section-number">2.9.5</span>사후 분포도 베타입니다</h3>
-<p>이제 우리는 사후 분포도 베타라는 것을 알았습니다. 우리의 경우 매개 변수<span class="math inline">\ (\ alpha = 90 \)</span>그리고<span class="math inline">\ (\ beta = 610 \)</span>이전 매개 변수를 합산하여 얻어졌습니다<span class="math inline">\ (\ alpha = 50 \)</span>,,,<span class="math inline">\ (\ beta = 350 \)</span>관찰 된 성공으로<span class="math inline">\ (y = 40 \)</span>관찰 된 실패<span class="math inline">\ (n-y = 260 \)</span>따라서 후방을 얻습니다</p>
+<h3 class="anchored" data-anchor-id="the-posterior-distribution-is-also-a-beta" data-number="2.9.5"><span class="header-section-number">2.9.5</span>사후 분포 또한 베타 분포이다</h3>
+<p>이제 사후 분포 또한 베타 분포임을 확인했습니다. 우리의 경우, 모수 \(\alpha=90\)과 \(\beta=610\)은 사전 모수 \(\alpha=50\), \(\beta=350\)에 관찰된 성공 \(y=40\)과 실패 \(n-y=260\)을 더하여 얻었으며, 따라서 다음과 같은 사후 분포를 얻습니다.</p>
 <p><span class="math display">\ [
 \ text {beta} (90, \, 610) = \ text {beta} (\ alpha+y, \ text {beta}+(n-y)).
 \]</span></p>
-<p>우리는 그것을 사용하여 최선을 다할 수 있습니다<a class="footnote-ref" href="#fn10" id="fnref10" role="doc-noteref"><sup>10</sup></a>우리가 할 수있는 추정<span class="math inline">\(피\)</span>사후 분포로 인해 불확실성이 있습니다.</p>
-<div class="no-row-height column-margin column-container"><div id="fn10"><p><sup>10</sup>우리는 사후 분포를 최상의 추정치로 최대화하는 가치를 취할 수 있습니다.<strong>지도</strong>추정치,이 경우에<span class="math inline">\ (\ frac {\ alpha-1} {\ alpha+\ beta-2} = \ frac {89} {698} \ doteq 0.1275 \)</span>.</p></div></div></section>
+<p>이를 사용하여 사후 분포에 의해 주어진 불확실성을 감안할 때 \(p\)에 대한 최상의 추정치<a class="footnote-ref" href="#fn10" id="fnref10" role="doc-noteref"><sup>10</sup></a>를 제공할 수 있습니다.</p>
+<div class="no-row-height column-margin column-container"><div id="fn10"><p><sup>10</sup>사후 분포를 최대화하는 값을 최상의 추정치로 삼을 수 있는데, 이를 <strong>최대 사후 확률(Maximum a posteriori, MAP)</strong> 추정치라고 하며, 이 경우 \(\frac{\alpha-1}{\alpha+\beta-2}=\frac{89}{698}\doteq 0.1275\)가 됩니다.</p></div></div></section>
 <section class="level3" data-number="2.9.6" id="suppose-we-had-a-second-series-of-data">
-<h3 class="anchored" data-anchor-id="suppose-we-had-a-second-series-of-data" data-number="2.9.6"><span class="header-section-number">2.9.6</span>두 번째 일련의 데이터가 있다고 가정 해 봅시다</h3>
-<p>이전 데이터를 본 후에는 이제 새로운 사전이 있습니다.<span class="math inline">\ (\ text {베타} (90, 610) \)</span>. 우리가 새로운 데이터 세트를 수집한다고 가정 해 봅시다<span class="math inline">\ (n = 150 \)</span>관찰 및<span class="math inline">\ (y = 25 \)</span>성공, 따라서 125 실패. 이제 우리는 최선의 추측을 위해 무엇을 취할 것인가<span class="math inline">\(피\)</span>?</p>
-<p>이전과 같은 추론을 사용하면 새로운 후방은<span class="math inline">\ (\ text {beta} (90+25 = 115, \, 610+125 = 735) \)</span>. 이 분포의 평균은 다음과 같습니다<span class="math inline">\ (\ frac {115} {115+735} = \ frac {115} {850} \ simeq 0.135 \)</span>따라서 하나의 추정치<span class="math inline">\(피\)</span>0.135입니다. 그만큼<strong>후방의 최대 값</strong>(지도) 추정치는의 모드입니다<span class="math inline">\ (\ text {beta} (115, 735) \)</span>, 즉<span class="math inline">\ (\ frac {114} {848} \ simeq 0.134 \)</span>. 이것을 수치 적으로 확인해 봅시다.</p>
+<h3 class="anchored" data-anchor-id="suppose-we-had-a-second-series-of-data" data-number="2.9.6"><span class="header-section-number">2.9.6</span>두 번째 데이터 계열이 있다고 가정해 보자</h3>
+<p>이전 데이터를 본 후, 이제 우리에게는 새로운 사전분포 \(\text{Beta}(90, 610)\)가 있습니다. \(n=150\)개의 관측치와 \(y=25\)개의 성공(따라서 125개의 실패)을 가진 새로운 데이터 세트를 수집한다고 가정해 봅시다. 이제 \(p\)에 대한 최선의 추측은 무엇일까요?</p>
+<p>이전과 동일한 추론을 사용하면 새로운 사후 분포는 \(\text{Beta}(90+25=115,\, 610+125=735)\)가 됩니다. 이 분포의 평균은 \(\frac{115}{115+735}=\frac{115}{850}\simeq 0.135\)이므로, \(p\)의 한 추정치는 0.135가 될 것입니다. <strong>최대 사후 확률(Maximum a posteriori, MAP)</strong> 추정치는 \(\text{Beta}(115, 735)\)의 최빈값(mode), 즉 \(\frac{114}{848}\simeq 0.134\)가 될 것입니다. 이것을 수치적으로 확인해 봅시다.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a aria-hidden="true" href="#cb90-1" tabindex="-1"></a>DENSPOST2<span class="ot">=</span> <span class="fu">dbeta</span>(p_seq,<span class="dv">115</span>,,,<span class="dv">735</span>))</span>
 <span id="cb90-2"><a aria-hidden="true" href="#cb90-2" tabindex="-1"></a>MCPOST2<span class="ot">=</span> <span class="fu">rbeta</span>(<span class="fl">1e6</span>,,,<span class="dv">115</span>,,,<span class="dv">735</span>))</span>
@@ -1752,12 +1754,12 @@ f _ {\ alpha, \ beta} (x) = \ frac {x^{\ alpha-1} \, (1-x)^{\ beta-1}} {\ text {
 <p>이전의 원본을 이전에 이전 (피크가 적음)으로 대체하는 모든 계산을 다시 사용하여 이전 정보를 덜 사용합니다. 예를 들어, 균일 한 분포 인 베타 (1,1)를 시도하십시오. 이것이 최종 결과를 얼마나 변경합니까?</p>
 </div>
 </div>
-<p>일반적으로, 이전은 매우 정점에 도달 한 경우를 제외하고 사전 분포를 실질적으로 거의 변경하지 않습니다. 처음에 우리가 이미 무엇을 기대 해야하는지 확신했다면 그렇습니다. 이전에 영향을 미치는 또 다른 사례는 데이터가 거의없는 경우입니다.</p>
-<p>가장 좋은 상황은 이전 결과에 큰 영향을 미치지 않도록 이전을 늪에 빠뜨릴 수있는 충분한 데이터를 갖추는 것입니다.</p>
+<p>일반적으로, 사전분포가 매우 뾰족한 경우를 제외하고는 사후 분포를 크게 변경하지 않습니다. 이는 처음에 우리가 기대하는 바를 이미 상당히 확신하고 있는 경우에 해당합니다. 사전분포가 영향을 미치는 또 다른 경우는 데이터가 매우 적을 때입니다.</p>
+<p>가장 좋은 상황은 사전분포의 선택이 최종 결과에 큰 영향을 미치지 않도록 사전분포를 압도할 만큼 충분한 데이터를 갖는 것입니다.</p>
 </section>
 <section class="level3 page-columns page-full" data-number="2.9.7" id="confidence-statements-for-the-proportion-parameter">
-<h3 class="anchored" data-anchor-id="confidence-statements-for-the-proportion-parameter" data-number="2.9.7"><span class="header-section-number">2.9.7</span>비율 매개 변수에 대한 신뢰 진술</h3>
-<p>이제 비율에 대해 결론을 내릴 때입니다.<span class="math inline">\(피\)</span>실제로 데이터가 주어집니다. 한 가지 요약은 후방 신뢰성 간격으로, 신뢰 구간의 베이지안 유사체입니다. 우리는 후방 분포의 2.5 및 97.5-th 백분위 수를 취할 수 있습니다.<span class="math inline">\ (p (q_ {2.5 \%} \ leq p \ leq q_ {97.5 \%}) = 0.95 \)</span>.</p>
+<h3 class="anchored" data-anchor-id="confidence-statements-for-the-proportion-parameter" data-number="2.9.7"><span class="header-section-number">2.9.7</span>비율 모수에 대한 신뢰도 기술</h3>
+<p>이제 주어진 데이터를 바탕으로 비율 \(p\)가 실제로 무엇인지에 대해 결론을 내릴 시간입니다. 한 가지 요약은 신뢰구간의 베이즈 버전인 사후 신용구간(posterior credibility interval)입니다. 사후 분포의 2.5번째 백분위수와 97.5번째 백분위수를 취할 수 있습니다: \(P(q_{2.5\%} \leq p \leq q_{97.5\%})=0.95\).</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a aria-hidden="true" href="#cb96-1" tabindex="-1"></a><span class="fu">양자</span>(MCPOST2,<span class="fu">기음</span>(<span class="fl">0.025</span>,,,<span class="fl">0.975</span>)))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1772,16 +1774,16 @@ f _ {\ alpha, \ beta} (x) = \ frac {x^{\ alpha-1} \, (1-x)^{\ beta-1}} {\ text {
 <div aria-describedby="fig-DESeq2-Prediction-Interval-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a class="lightbox" data-gallery="quarto-lightbox-gallery-31" href="imgs/DESeq2-Prediction-Interval.png" title="Figure 2.23: An example from @LoveDESeq2 shows plots of the likelihoods (solid lines, scaled to integrate to 1) and the posteriors (dashed lines) for the green and purple genes and of the prior (solid black line): due to the higher dispersion of the purple gene, its likelihood is wider and less peaked (indicating less information), and the prior has more influence on its posterior than for the green gene. The stronger curvature of the green posterior at its maximum translates to a smaller reported standard error for the MAP logarithmic fold change (LFC) estimate (horizontal error bar)."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="imgs/DESeq2-Prediction-Interval.png"/></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-DESeq2-Prediction-Interval-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 2.23 : 예제<span class="citation" data-cites="LoveDESeq2">사랑, 허버, 앤더스 (<a href="16-chap.html#ref-LoveDESeq2" role="doc-biblioref">2014</a>))</span>녹색과 자주색 유전자와 이전 (고체 검은 선)의 우도 (1로 조정 된 실선) 및 후구 (점선)를 보여줍니다. 자주색 유전자의 더 높은 분산으로 인해 가능성은 더 넓고 정점이 적으며 (정보가 적음을 나타냅니다), 그 이전은 녹색 유전자보다 더 많은 영향을 미칩니다. 최대 녹색 후부의 더 강한 곡률은 LFC (Logarithmic Fold Change) 추정치 (수평 오류 막대)에 대한보고 된 표준 오차가 더 작습니다.</figcaption>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-DESeq2-Prediction-Interval-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 2.23: <span class="citation" data-cites="LoveDESeq2">Love, Huber, and Anders (<a href="16-chap.html#ref-LoveDESeq2" role="doc-biblioref">2014</a>)</span>의 예시는 녹색과 보라색 유전자에 대한 가능도(실선, 적분하면 1이 되도록 크기 조정됨)와 사후분포(점선), 그리고 사전분포(검은 실선)의 그림을 보여줍니다. 보라색 유전자의 분산이 더 높기 때문에 가능도가 더 넓고 덜 뾰족하며(정보가 적음을 나타냄), 사전분포가 녹색 유전자보다 사후분포에 더 많은 영향을 미칩니다. 최댓값에서 녹색 사후분포의 더 강한 곡률은 MAP 로그 배수 변화(logarithmic fold change, LFC) 추정치(가로 오차 막대)에 대해 보고된 표준 오차가 더 작다는 것을 의미합니다.</figcaption>
 </figure>
 </div>
 </div></div></div>
 </section>
 </section>
 <section class="level2 page-columns page-full" data-number="2.10" id="example-occurrence-of-a-nucleotide-pattern-in-a-genome">
-<h2 class="anchored" data-anchor-id="example-occurrence-of-a-nucleotide-pattern-in-a-genome" data-number="2.10"><span class="header-section-number">2.10</span>예 : 게놈에서 뉴클레오티드 패턴의 발생</h2>
-<p>우리가 지금 보았던 예는 이산 카운트의 분포와 범주 형 데이터에 집중했습니다. 준 연속적인 거리의 분포의 예를 살펴 보겠습니다. 게놈 서열에서 특정 모티프의 사례 사이의 거리 분포에 대한이 사례 연구는 또한 우리가 생체 전성기의 특정 게놈 서열 조작을 탐색 할 수있게한다.</p>
-<div class="page-columns page-full"><p>그만큼<strong><a href="https://bioconductor.org/packages/Biostrings/">바이오 스트링</a></strong>패키지는 시퀀스 데이터로 작업하기위한 도구를 제공합니다. 필수 데이터 구조 또는<em>수업</em>그들이 R에서 알려진대로<em>dnastring</em>그리고<em>dnastrings</em>. 이를 통해 하나 또는 다중 DNA 서열과 효율적으로 작업 할 수 있습니다.</p><div class="no-row-height column-margin column-container"><span class="margin-aside">그만큼<strong><a href="https://bioconductor.org/packages/Biostrings/">바이오 스트링</a></strong>패키지에는 또한 아미노산 서열을 나타내는 추가 클래스와보다 일반적인 생물학에서 영감을 얻은 서열이 포함되어 있습니다.</span></div></div>
+<h2 class="anchored" data-anchor-id="example-occurrence-of-a-nucleotide-pattern-in-a-genome" data-number="2.10"><span class="header-section-number">2.10</span>예시: 게놈에서의 뉴클레오티드 패턴 발생</h2>
+<p>지금까지 살펴본 예제들은 이산적인 개수와 범주형 데이터의 분포에 초점을 맞추었습니다. 이제 준-연속적인(quasi-continuous) 거리 분포의 예를 살펴보겠습니다. 게놈 서열에서 특정 모티프의 출현 사이의 거리 분포에 대한 이 사례 연구는 Bioconductor에서 특정 게놈 서열 조작을 탐색하는 기회도 될 것입니다.</p>
+<div class="page-columns page-full"><p><strong><a href="https://bioconductor.org/packages/Biostrings/">Biostrings</a></strong> 패키지는 서열 데이터 작업을 위한 도구를 제공합니다. R에서 알려진 필수 데이터 구조 또는 <em>클래스</em>는 <em>DNAString</em>과 <em>DNAStringSet</em>입니다. 이를 통해 단일 또는 다중 DNA 서열을 효율적으로 작업할 수 있습니다.</p><div class="no-row-height column-margin column-container"><span class="margin-aside"><strong><a href="https://bioconductor.org/packages/Biostrings/">Biostrings</a></strong> 패키지에는 아미노산 서열을 나타내는 추가 클래스와 더 일반적인 생물학 기반 서열도 포함되어 있습니다.</span></div></div>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a aria-hidden="true" href="#cb98-1" tabindex="-1"></a><span class="fu">도서관</span>(<span class="st">"바이오 스트링"</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
 </div>
@@ -1816,8 +1818,8 @@ f _ {\ alpha, \ beta} (x) = \ frac {x^{\ alpha-1} \, (1-x)^{\ beta-1}} {\ text {
 </div>
 </div>
 </div>
-<p>이 마지막 명령은 문서에 액세스 할 수있는 브라우저 창에서 목록을 열게됩니다.<a class="footnote-ref" href="#fn11" id="fnref11" role="doc-noteref"><sup>11</sup></a>. 그만큼<strong><a href="https://bioconductor.org/packages/BSgenome/">BSGENOME</a></strong>패키지는 많은 게놈에 대한 액세스를 제공하며 타이핑하여 전체 게놈 서열을 포함하는 데이터 패키지의 이름에 액세스 할 수 있습니다.</p>
-<div class="no-row-height column-margin column-container"><div id="fn11"><p><sup>11</sup>비네팅은 예제 및 사례 연구가 포함 된 패키지의 매뉴얼입니다.</p></div></div><div class="cell" data-layout-align="center">
+<p>이 마지막 명령은 문서에 접근할 수 있는 목록을 브라우저 창에 엽니다<a class="footnote-ref" href="#fn11" id="fnref11" role="doc-noteref"><sup>11</sup></a>. <strong><a href="https://bioconductor.org/packages/BSgenome/">BSgenome</a></strong> 패키지는 많은 게놈에 대한 접근을 제공하며, 전체 게놈 서열을 포함하는 데이터 패키지의 이름은 다음을 입력하여 접근할 수 있습니다.</p>
+<div class="no-row-height column-margin column-container"><div id="fn11"><p><sup>11</sup>비네트(Vignette)는 예제와 사례 연구가 포함된 패키지 설명서입니다.</p></div></div><div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a aria-hidden="true" href="#cb100-1" tabindex="-1"></a><span class="fu">도서관</span>(<span class="st">"Bsgenome"</span>))</span>
 <span id="cb100-2"><a aria-hidden="true" href="#cb100-2" tabindex="-1"></a>Ag<span class="ot">=</span> <span class="fu">사용 가능 .genomes</span>()</span>
 <span id="cb100-3"><a aria-hidden="true" href="#cb100-3" tabindex="-1"></a><span class="fu">길이</span>(AG)</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
@@ -1830,14 +1832,14 @@ f _ {\ alpha, \ beta} (x) = \ frac {x^{\ alpha-1} \, (1-x)^{\ beta-1}} {\ text {
 [2] "bbsgenome.amellifera. 그들은 잠 들어 있습니다.</code></pre>
 </div>
 </div>
-<p>우리는 그 사건의 발생을 탐구 할 것입니다<code>aggaggt</code>주제<a class="footnote-ref" href="#fn12" id="fnref12" role="doc-noteref"><sup>12</sup></a>e.coli의 게놈에서. 우리는 하나의 특정 균주의 게놈 서열을 사용합니다.<strong>그들은 차갑게 나타났습니다</strong>str. K12 substr.dh10b<a class="footnote-ref" href="#fn13" id="fnref13" role="doc-noteref"><sup>13</sup></a>NCBI 수탁 번호는 NC_010473입니다.</p>
-<div class="no-row-height column-margin column-container"><div id="fn12"><p><sup>12</sup>이것은입니다<a href="https://en.wikipedia.org/wiki/Shine-Dalgarno_sequence">IS-Dalgenno</a>박테리아에서 단백질 합성을 시작하는 데 도움이되는 모티프.</p></div><div id="fn13"><p><sup>13</sup>실험실의 작업장으로 알려져 있으며 종종 실험에 사용됩니다.</p></div></div><div class="cell" data-layout-align="center">
+<p>대장균(E. coli) 게놈에서 <code>AGGAGGT</code> 모티프<a class="footnote-ref" href="#fn12" id="fnref12" role="doc-noteref"><sup>12</sup></a>의 출현을 탐색해 보겠습니다. 특정 균주인 <strong>Escherichia coli</strong> str. K12 substr. DH10B<a class="footnote-ref" href="#fn13" id="fnref13" role="doc-noteref"><sup>13</sup></a>의 게놈 서열을 사용하며, NCBI 접근 번호는 NC_010473입니다.</p>
+<div class="no-row-height column-margin column-container"><div id="fn12"><p><sup>12</sup>이것은 박테리아에서 단백질 합성을 시작하는 데 도움이 되는 <a href="https://en.wikipedia.org/wiki/Shine-Dalgarno_sequence">샤인-달가노(Shine-Dalgarno)</a> 모티프입니다.</p></div><div id="fn13"><p><sup>13</sup>실험실의 일꾼으로 알려져 있으며, 실험에 자주 사용됩니다.</p></div></div><div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a aria-hidden="true" href="#cb104-1" tabindex="-1"></a><span class="fu">도서관</span>(<span class="st">"bsgenome.ecoli.ncbi.20080805"</span>))</span>
 <span id="cb104-2"><a aria-hidden="true" href="#cb104-2" tabindex="-1"></a>ECOL</span>
 <span id="cb104-3"><a aria-hidden="true" href="#cb104-3" tabindex="-1"></a>Shinedalgarno<span class="ot">=</span> <span class="st">"Aggaggt"</span></span>
 <span id="cb104-4"><a aria-hidden="true" href="#cb104-4" tabindex="-1"></a>ECOL<span class="ot">=</span>ECOL<span class="sc">$</span>NC_010473</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
 </div>
-<p>폭 50000의 창에서 패턴 발생을<code>카운트 패턴</code>기능.</p>
+<p><code>countPattern</code> 함수를 사용하여 너비 50,000의 창에서 패턴 발생을 셀 수 있습니다.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb105"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a aria-hidden="true" href="#cb105-1" tabindex="-1"></a>창문<span class="ot">=</span> <span class="dv">50000</span></span>
 <span id="cb105-2"><a aria-hidden="true" href="#cb105-2" tabindex="-1"></a>시작<span class="ot">=</span> <span class="fu">서열</span>(<span class="dv">1</span>,,,<span class="fu">길이</span>(ecoli)<span class="sc">-</span>창문,<span class="at">by =</span>창문)</span>
@@ -1892,7 +1894,7 @@ f _ {\ alpha, \ beta} (x) = \ frac {x^{\ alpha-1} \, (1-x)^{\ beta-1}} {\ text {
 <div aria-describedby="fig-poissonness-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a class="lightbox" data-gallery="quarto-lightbox-gallery-32" href="02-chap_files/figure-html/fig-poissonness-1.png" title="Figure 2.24: Evaluation of a Poisson model for motif counts along the sequence Ecoli$NC_010473."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="02-chap_files/figure-html/fig-poissonness-1.png" style="width:50.0%"/></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-poissonness-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 2.24 : 시퀀스를 따라 모티프 계산에 대한 포아송 모델 평가<code>ecoli $ nc_010473</code>.
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-poissonness-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 2.24: 서열 <code>Ecoli$NC_010473</code>을 따른 모티프 개수에 대한 푸아송 모델 평가.
 </figcaption>
 </figure>
 </div>
@@ -1901,16 +1903,16 @@ f _ {\ alpha, \ beta} (x) = \ frac {x^{\ alpha-1} \, (1-x)^{\ beta-1}} {\ text {
 </div>
 </div>
 </div>
-<p>우리는 그것을 사용하여 일치를 검사 할 수 있습니다<code>매치 패턴</code>기능.</p>
+<p><code>matchPattern</code> 함수를 사용하여 일치 항목을 검사할 수 있습니다.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a aria-hidden="true" href="#cb110-1" tabindex="-1"></a>sdmatches<span class="ot">=</span> <span class="fu">매치 패턴</span>(Shinedalgarno, Ecoli,<span class="at">max.mistatch =</span> <span class="dv">0</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
 </div>
-<p>당신은 입력 할 수 있습니다<code>sdmatches</code>이 개체의 요약을 얻기 위해 R 명령 줄에서. 여기에는 65 개의 패턴 일치의 위치가 포함되어 있으며 소위 세트로 표시됩니다.<em>보기</em>원래 순서에. 이제 그들 사이의 거리는 무엇입니까?</p>
+<p>R 명령 줄에 <code>sdmatches</code>를 입력하여 이 객체의 요약을 얻을 수 있습니다. 여기에는 65개 패턴 일치의 위치가 포함되어 있으며, 원본 서열에 대한 소위 <em>뷰(Views)</em> 집합으로 표시됩니다. 이제 그들 사이의 거리는 얼마일까요?</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb111"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a aria-hidden="true" href="#cb111-1" tabindex="-1"></a>MOTIFS 간<span class="ot">=</span> <span class="fu">갭</span>(sdmatches)</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
 </div>
-<p>그래서 이것들은 실제로 66 개의 보완 지역입니다. 이제 모티프 사이의 갭 크기 분포에 대한 모델을 찾아 봅시다. 무작위 위치에서 주제가 발생하면 갭 길이가 지수 분포를 따를 것으로 예상됩니다.<a class="footnote-ref" href="#fn14" id="fnref14" role="doc-noteref"><sup>14</sup></a>. 아래 코드 (출력이 표시됩니다<a class="quarto-xref" href="#fig-expplotdata-1">수치<span>2.25</span></a>)이 가정을 평가합니다. 지수 분포가 적합하다면 포인트는 대략 직선에 있어야합니다. 지수 분포에는 하나의 매개 변수, 속도 및 데이터의 추정치에 해당하는 경사가있는 선도 표시됩니다.</p>
-<div class="no-row-height column-margin column-container"><div id="fn14"><p><sup>14</sup>지수가 여기에 올바른 것으로 추측 할 수있는 방법은 무엇입니까? 시퀀스를 따라 독립적이고 무작위 베르노 울리가 발생할 때마다 갭 길이는 지수입니다. 방사성 붕괴에 익숙 할 수 있습니다. 방사선 간의 대기 시간도 기하 급수적으로 분포됩니다. 이 배포에 익숙하지 않으면 더 자세한 내용은<a href="http://en.wikipedia.org/wiki/Exponential_distribution">위키 백과</a>.</p></div></div><div class="cell page-columns page-full" data-layout-align="center">
+<p>따라서 실제로는 66개의 상보적인 영역이 있습니다. 이제 모티프 사이의 간격 크기 분포에 대한 모델을 찾아봅시다. 모티프가 무작위 위치에서 발생한다면, 간격 길이는 지수 분포를 따를 것으로 예상됩니다<a class="footnote-ref" href="#fn14" id="fnref14" role="doc-noteref"><sup>14</sup></a>. 아래 코드(출력은 <a class="quarto-xref" href="#fig-expplotdata-1">그림 <span>2.25</span></a>에 표시됨)는 이 가정을 평가합니다. 지수 분포가 잘 맞는다면, 점들은 대략 직선 위에 놓여야 합니다. 또한 데이터로부터 추정된 지수 분포의 단일 모수인 비율(rate)에 해당하는 기울기를 가진 선도 표시합니다.</p>
+<div class="no-row-height column-margin column-container"><div id="fn14"><p><sup>14</sup>여기서 지수 분포가 올바른 분포라고 어떻게 추측할 수 있을까요? 서열을 따라 독립적이고 무작위적인 베르누이 발생이 일어날 때, 간격 길이는 지수 분포를 따릅니다. 방사성 붕괴에 익숙할 수 있습니다. 방사선 방출 사이의 대기 시간도 지수적으로 분포합니다. 이 분포에 익숙하지 않다면, <a href="http://en.wikipedia.org/wiki/Exponential_distribution">위키백과</a>에서 더 자세한 내용을 확인할 수 있습니다.</p></div></div><div class="cell page-columns page-full" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a aria-hidden="true" href="#cb112-1" tabindex="-1"></a><span class="fu">도서관</span>(<span class="st">"Renext"</span>))</span>
 <span id="cb112-2"><a aria-hidden="true" href="#cb112-2" tabindex="-1"></a><span class="fu">expplot</span>(<span class="fu">너비</span>(MOTOFS 간),<span class="at">속도 =</span> <span class="dv">1</span><span class="sc">/</span><span class="fu">평균</span>(<span class="fu">너비</span>(Mintmotifs))),</span>
 <span id="cb112-3"><a aria-hidden="true" href="#cb112-3" tabindex="-1"></a>        <span class="at">라벨 =</span> <span class="st">"맞다"</span>))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
@@ -1920,7 +1922,7 @@ f _ {\ alpha, \ beta} (x) = \ frac {x^{\ alpha-1} \, (1-x)^{\ beta-1}} {\ text {
 <div aria-describedby="fig-expplotdata-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a class="lightbox" data-gallery="quarto-lightbox-gallery-33" href="02-chap_files/figure-html/fig-expplotdata-1-1.png" title="Figure 2.25: Evaluation of fit to the exponential distribution (black line) of the gaps between the motifs."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="02-chap_files/figure-html/fig-expplotdata-1-1.png" width="280"/></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-expplotdata-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 2.25 : 모티프 사이의 간격의 지수 분포 (검은 색선)에 대한 적합성 평가.</figcaption>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-expplotdata-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 2.25: 모티프 사이 간격의 지수 분포(검은색 선)에 대한 적합도 평가.</figcaption>
 </figure>
 </div>
 </div></div></div>
@@ -1936,9 +1938,9 @@ f _ {\ alpha, \ beta} (x) = \ frac {x^{\ alpha-1} \, (1-x)^{\ beta-1}} {\ text {
 </div>
 </div>
 <section class="level3 page-columns page-full" data-number="2.10.1" id="modeling-in-the-case-of-dependencies">
-<h3 class="anchored" data-anchor-id="modeling-in-the-case-of-dependencies" data-number="2.10.1"><span class="header-section-number">2.10.1</span>의존성의 경우 모델링</h3>
-<p>우리가 본 것처럼<a class="quarto-xref" href="#sec-models-modelingdependencies"><span>섹션 2.8</span></a>, 뉴클레오티드 서열은 종종 의존적이다 : 주어진 위치에서 특정 뉴클레오티드를 se 할 확률은 주변 서열에 의존하는 경향이있다. 여기서 우리는<strong>마르코프 체인</strong>. 우리는 인간 게놈의 염색체 8의 영역을보고 CPG라는 영역 간의 차이를 발견하려고 노력할 것입니다.<a class="footnote-ref" href="#fn15" id="fnref15" role="doc-noteref"><sup>15</sup></a>섬과 나머지.</p>
-<div class="no-row-height column-margin column-container"><div id="fn15"><p><sup>15</sup>CPG는 5'-C- 포스페이트 -G-3 '을 나타냅니다. 이것은 가닥을 따라 포스페이트를 통해 C가 G에 연결되어 있음을 의미합니다 (이것은 C-G베이스 페어링과 관련이 없습니다.<a class="quarto-xref" href="#sec-models-Chargaff"><span>섹션 2.7</span></a>). CPG 디 뉴클레오티드의 시토신은 메틸화되어 유전자 발현의 수준을 변화시킬 수있다. 이러한 유형의 유전자 조절은 일부입니다<strong>후성 유전학</strong>. 더 많은 정보는 Wikipedia에 있습니다.<a href="https://en.wikipedia.org/wiki/CpG_site">CPG 사이트</a>그리고<a href="https://en.wikipedia.org/wiki/Epigenetics">후성 유전학</a>.</p></div></div><p>우리는 데이터를 사용합니다 (생성<span class="citation" data-cites="Irizarry2009">Irizarry, Wu 및 Feinberg (<a href="16-chap.html#ref-Irizarry2009" role="doc-biblioref">2009 년</a>))</span>)) 섬의 시작점과 종말점이 게놈에있는 곳을 알려주고 뉴클레오티드와 Digrams‘CG’,‘CT’,‘CA’,‘CC’의 주파수를 살펴 봅니다. 따라서 뉴클레오티드 발생 사이에 의존성이 있는지 여부와 모델을 모델링하는 방법을 물어볼 수 있습니다.</p>
+<h3 class="anchored" data-anchor-id="modeling-in-the-case-of-dependencies" data-number="2.10.1"><span class="header-section-number">2.10.1</span>의존성이 있는 경우의 모델링</h3>
+<p><a class="quarto-xref" href="#sec-models-modelingdependencies"><span>2.8절</span></a>에서 보았듯이, 뉴클레오티드 서열은 종종 종속적입니다. 즉, 특정 위치에서 특정 뉴클레오티드를 볼 확률은 주변 서열에 의존하는 경향이 있습니다. 여기서는 <strong>마르코프 연쇄(Markov chain)</strong>를 사용할 것입니다. 인간 게놈의 8번 염색체 영역을 살펴보고 CpG<a class="footnote-ref" href="#fn15" id="fnref15" role="doc-noteref"><sup>15</sup></a> 섬(island)이라고 불리는 영역과 나머지 영역 간의 차이점을 찾으려고 노력할 것입니다.</p>
+<div class="no-row-height column-margin column-container"><div id="fn15"><p><sup>15</sup>CpG는 5'-C-인산-G-3'을 의미합니다. 이는 C가 가닥을 따라 인산을 통해 G에 연결되어 있음을 의미합니다(<a class="quarto-xref" href="#sec-models-Chargaff"><span>2.7절</span></a>에서 본 C-G 염기쌍 형성과는 관련이 없습니다). CpG 이중뉴클레오티드의 시토신은 메틸화되어 유전자 발현 수준을 변경할 수 있습니다. 이러한 유형의 유전자 조절은 <strong>후성유전학(epigenetics)</strong>의 일부입니다. 자세한 내용은 위키백과의 <a href="https://en.wikipedia.org/wiki/CpG_site">CpG 사이트</a> 및 <a href="https://en.wikipedia.org/wiki/Epigenetics">후성유전학</a> 항목에 있습니다.</p></div></div><p>게놈에서 섬의 시작점과 끝점이 어디에 있는지 알려주는 데이터(<span class="citation" data-cites="Irizarry2009">Irizarry, Wu, and Feinberg (<a href="16-chap.html#ref-Irizarry2009" role="doc-biblioref">2009</a>)</span>에서 생성)를 사용하여 뉴클레오티드와 이중염기서열 'CG', 'CT', 'CA', 'CC'의 빈도를 살펴봅니다. 따라서 뉴클레오티드 출현 사이에 종속성이 있는지, 그리고 이를 어떻게 모델링할 수 있는지 질문할 수 있습니다.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb113"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a aria-hidden="true" href="#cb113-1" tabindex="-1"></a><span class="fu">도서관</span>(<span class="st">"bsgenome.hsapiens.ucsc.hg19"</span>))</span>
 <span id="cb113-2"><a aria-hidden="true" href="#cb113-2" tabindex="-1"></a>chr8<span class="ot">=</span>hsapiens<span class="sc">$</span>chr8</span>
@@ -1970,16 +1972,16 @@ f _ {\ alpha, \ beta} (x) = \ frac {x^{\ alpha-1} \, (1-x)^{\ beta-1}} {\ text {
 <p><a class="lightbox" data-gallery="quarto-lightbox-gallery-34" href="imgs/devil.png" title="We use the :: operator to call the filter function specifically from the dplyr package—and not from any other packages that may happen to be loaded and defining functions of the same name. This precaution is particularly advisable in the case of the filter function, since this name is used by quite a few other packages. You can think of the normal (without ::) way of calling R functions like calling people by their first (given) names; whereas the fully qualified version with :: corresponds to calling someone by their full name. At least within the reach of the CRAN and Bioconductor repositories, such fully qualified names are guaranteed to be unique."><img alt="We use the :: operator to call the filter function specifically from the dplyr package—and not from any other packages that may happen to be loaded and defining functions of the same name. This precaution is particularly advisable in the case of the filter function, since this name is used by quite a few other packages. You can think of the normal (without ::) way of calling R functions like calling people by their first (given) names; whereas the fully qualified version with :: corresponds to calling someone by their full name. At least within the reach of the CRAN and Bioconductor repositories, such fully qualified names are guaranteed to be unique." class="img-fluid quarto-figure quarto-figure-center figure-img" src="imgs/devil.png" width="123"/></a></p>
 </figure>
 </div>
-<figcaption>우리는 사용합니다<code>::</code>연산자에게 전화하십시오<code>필터</code>특별히 기능<code>dplyr</code>패키지 -로드 될 수있는 다른 패키지가 아닌 동일한 이름의 기능을 정의하지 않습니다. 이 예방 조치는 특히<code>필터</code>기능,이 이름은 상당히 다른 패키지에서 사용되므로 기능. 당신은 정상을 생각할 수 있습니다 (없이<code>::</code>) 첫 번째 (주어진) 이름으로 사람들을 부르는 것과 같은 R 기능을 호출하는 방법; 반면에 완전한 자격을 갖춘 버전<code>::</code>자신의 이름으로 누군가를 부르는 것에 해당합니다. 적어도 CRAN 및 Bioconductor 리포지토리의 범위 내에서 완전한 자격을 갖춘 이름은 고유 한 것으로 보장됩니다.</figcaption>
+<figcaption>우리는 <code>::</code> 연산자를 사용하여 <code>dplyr</code> 패키지에서 <code>filter</code> 함수를 특별히 호출합니다. 로드되었을 수 있고 동일한 이름의 함수를 정의하는 다른 패키지가 아닌 <code>dplyr</code>에서 호출하는 것입니다. 이 예방 조치는 <code>filter</code> 함수의 경우 특히 권장됩니다. 이 이름은 다른 많은 패키지에서 사용되기 때문입니다. 일반적인 R 함수 호출 방식(<code>::</code> 없음)은 사람을 이름으로 부르는 것과 같다고 생각할 수 있습니다. 반면 <code>::</code>를 사용한 완전 정규화 버전은 사람을 성과 이름으로 부르는 것에 해당합니다. 적어도 CRAN 및 Bioconductor 저장소 내에서는 이러한 완전 정규화된 이름이 고유함이 보장됩니다.</figcaption>
 </figure>
 </div>
 </div></div></div>
-<p>위의 줄에서, 우리는 서브 세트 (<code>필터</code>) 데이터 프레임<code>CPGTAB</code>염색체 8만으로, 그리고 우리는 an을 만듭니다<em>iranges</em>시작 및 종료 위치가 데이터 프레임의 동일하게 명명 된 열에 의해 정의되는 개체. 에서<code>iranges</code>기능 호출 (인수에서 객체를 구성하는), 첫 번째<code>시작</code>함수의 인수 이름, 두 번째는입니다<code>시작</code>얻은 데이터 프레임의 열을 통해 출력으로 표시됩니다.<code>필터</code>; 그리고 마찬가지로<code>끝</code>. <em>iranges</em>수학 간격을위한 일반적인 컨테이너입니다. 우리는 생물학적 맥락을 만듭니다<a class="footnote-ref" href="#fn16" id="fnref16" role="doc-noteref"><sup>16</sup></a>다음 줄로.</p>
-<div class="no-row-height column-margin column-container"><div id="fn16"><p><sup>16</sup>"나"<em>iranges</em>"간격"을 나타냅니다. "g"<em>전원</em>"게놈"을 위해.</p></div></div><div class="cell" data-layout-align="center">
+<p>위 줄에서, 우리는 데이터 프레임 `cpgTab`을 8번 염색체만으로 부분집합화(`filter`)하고, 시작 및 끝 위치가 데이터 프레임의 동일한 이름의 열에 의해 정의되는 <em>IRanges</em> 객체를 만듭니다. `IRanges` 함수 호출(인수로부터 객체를 구성)에서, 첫 번째 `start`는 함수의 인수 이름이고, 두 번째 `start`는 `filter`의 출력으로 얻는 데이터 프레임의 열입니다. `end`도 마찬가지입니다. <em>IRanges</em>는 수학적 구간을 위한 일반적인 컨테이너입니다. 다음 줄에서 생물학적 맥락을 만듭니다<a class="footnote-ref" href="#fn16" id="fnref16" role="doc-noteref"><sup>16</sup></a>.</p>
+<div class="no-row-height column-margin column-container"><div id="fn16"><p><sup>16</sup><em>IRanges</em>의 'i'는 'integer'를 의미합니다. <em>GRanges</em>의 'g'는 'genomic'을 의미합니다.</p></div></div><div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb118"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a aria-hidden="true" href="#cb118-1" tabindex="-1"></a>grcpg<span class="ot">=</span> <span class="fu">전원</span>(<span class="at">범위 =</span>IRCPG,<span class="at">seqnames =</span> <span class="st">"chr8"</span>,,,<span class="at">가닥 =</span> <span class="st">"+"</span>))</span>
 <span id="cb118-2"><a aria-hidden="true" href="#cb118-2" tabindex="-1"></a><span class="fu">게놈</span>(GRCPG)<span class="ot">=</span> <span class="st">"HG19"</span></span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
 </div>
-<p>이제 시각화합시다. 출력을 참조하십시오<a class="quarto-xref" href="#fig-freqandbayes-ideo">수치<span>2.26</span></a>.</p>
+<p>이제 시각화해 봅시다. <a class="quarto-xref" href="#fig-freqandbayes-ideo">그림 <span>2.26</span></a>의 출력을 참조하십시오.</p>
 <div class="cell page-columns page-full" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb119"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a aria-hidden="true" href="#cb119-1" tabindex="-1"></a><span class="fu">도서관</span>(<span class="st">"gviz"</span>))</span>
 <span id="cb119-2"><a aria-hidden="true" href="#cb119-2" tabindex="-1"></a>아이다<span class="ot">=</span> <span class="fu">IDEOGRAMTRACK</span>(<span class="at">게놈 =</span> <span class="st">"HG19"</span>,,,<span class="at">염색체 =</span> <span class="st">"chr8"</span>))</span>
@@ -1994,16 +1996,16 @@ f _ {\ alpha, \ beta} (x) = \ frac {x^{\ alpha-1} \, (1-x)^{\ beta-1}} {\ text {
 <div aria-describedby="fig-freqandbayes-ideo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a class="lightbox" data-gallery="quarto-lightbox-gallery-35" href="02-chap_files/figure-html/fig-freqandbayes-ideo-1.png" title="Figure 2.26: Gviz plot of CpG locations in a selected region of chromosome 8."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="02-chap_files/figure-html/fig-freqandbayes-ideo-1.png" width="320"/></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-freqandbayes-ideo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 2.26 :<strong><a href="https://bioconductor.org/packages/Gviz/">GVIZ</a></strong>염색체 8의 선택된 영역에서 CPG 위치의 플롯.</figcaption>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-freqandbayes-ideo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 2.26: <strong><a href="https://bioconductor.org/packages/Gviz/">Gviz</a></strong>를 이용한 8번 염색체의 선택된 영역 내 CpG 위치 그림.</figcaption>
 </figure>
 </div>
 </div></div></div>
-<p>우리는 이제 CPG 섬에 해당하는 염색체 서열에 대한 소위 뷰를 정의합니다.<code>IRCPG</code>, 그리고 그 사이의 지역에 (<code>갭 (IRCPG)</code>). 결과 객체<code>cgiview</code>그리고<code>비 cgiview</code>시퀀스 자체가 아니라 좌표 만 포함합니다 (이것은 큰 물체에 머물러 있습니다.<code>hsapiens $ chr8</code>), 그래서 그들은 저장면에서 상당히 가볍습니다.</p>
+<p>이제 CpG 섬(<code>IRCPG</code>)에 해당하는 염색체 서열에 대한 소위 뷰(view)와 그 사이의 영역(<code>갭 (IRCPG)</code>)에 대한 뷰를 정의합니다. 결과 객체 <code>cgiview</code>와 <code>비 cgiview</code>는 서열 데이터 자체가 아니라 좌표만 포함하므로(서열 데이터는 <code>hsapiens$chr8</code>이라는 하나의 큰 객체에 남아있어 메모리 효율적임) 저장 공간 측면에서 매우 가볍습니다.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb120"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a aria-hidden="true" href="#cb120-1" tabindex="-1"></a>cgiview<span class="ot">=</span> <span class="fu">보기</span>(<span class="fu">마스크를 마시지</span>(hsapiens<span class="sc">$</span>chr8), ircpg)</span>
 <span id="cb120-2"><a aria-hidden="true" href="#cb120-2" tabindex="-1"></a>비 cgiview<span class="ot">=</span> <span class="fu">보기</span>(<span class="fu">마스크를 마시지</span>(hsapiens<span class="sc">$</span>chr8),<span class="fu">갭</span>(IRCPG))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
 </div>
-<p>우리는 데이터를 사용하여 CPG 섬과 비 일대일의 전환 카운트를 계산합니다.</p>
+<p>우리는 데이터를 사용하여 CpG 섬과 비섬(non-island)의 전이 횟수를 계산합니다.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a aria-hidden="true" href="#cb121-1" tabindex="-1"></a>Seqcgi<span class="ot">=</span> <span class="fu">~처럼</span>(cgiview,<span class="st">"dnastringset"</span>))</span>
 <span id="cb121-2"><a aria-hidden="true" href="#cb121-2" tabindex="-1"></a>Seqnoncgi<span class="ot">=</span> <span class="fu">~처럼</span>(비 Cgiview,<span class="st">"dnastringset"</span>))</span>
@@ -2017,14 +2019,14 @@ f _ {\ alpha, \ beta} (x) = \ frac {x^{\ alpha-1} \, (1-x)^{\ beta-1}} {\ text {
 <div class="sourceCode cell-code" id="cb123"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a aria-hidden="true" href="#cb123-1" tabindex="-1"></a>비정치<span class="ot">=</span> <span class="fu">로우 섬</span>(dinucnoncpg)</span>
 <span id="cb123-2"><a aria-hidden="true" href="#cb123-2" tabindex="-1"></a>islcounts<span class="ot">=</span> <span class="fu">로우 섬</span>(DINUCCPG)</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
 </div>
-<p>우리가 가진 4 개의 State Markov 체인의 경우, 우리는 행이 행하는 행렬로 전이 행렬을 정의합니다.<code>~에서</code>상태와 열은 다음과 같습니다<code>에게</code>상태.</p>
+<p>우리가 가진 4-상태 마르코프 연쇄의 경우, 행이 ‘from’ 상태이고 열이 ‘to’ 상태인 행렬로 전이 행렬을 정의합니다.</p>
 <div class="cell" data-layout-align="center">
 <div class="sourceCode cell-code" id="cb124"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a aria-hidden="true" href="#cb124-1" tabindex="-1"></a>의<span class="ot">=</span> <span class="fu">행렬</span>(islcounts,<span class="at">NCOL =</span> <span class="dv">4</span>,,,<span class="at">Byrow =</span> <span class="cn">진실</span>))</span>
 <span id="cb124-2"><a aria-hidden="true" href="#cb124-2" tabindex="-1"></a>TNI<span class="ot">=</span> <span class="fu">행렬</span>(Nonicounts,<span class="at">NCOL =</span> <span class="dv">4</span>,,,<span class="at">Byrow =</span> <span class="cn">진실</span>))</span>
 <span id="cb124-3"><a aria-hidden="true" href="#cb124-3" tabindex="-1"></a><span class="fu">Dimnames</span>(의)<span class="ot">=</span> <span class="fu">Dimnames</span>(TNI)<span class="ot">=</span></span>
 <span id="cb124-4"><a aria-hidden="true" href="#cb124-4" tabindex="-1"></a>  <span class="fu">목록</span>(<span class="fu">기음</span>(<span class="st">"에이"</span>,,,<span class="st">"기음"</span>,,,<span class="st">"G"</span>,,,<span class="st">"티"</span>),)<span class="fu">기음</span>(<span class="st">"에이"</span>,,,<span class="st">"기음"</span>,,,<span class="st">"G"</span>,,,<span class="st">"티"</span>)))</span></code><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></pre></div>
 </div>
-<p>우리는 각 유형의 전환 수를 사용하여 주파수를 계산하고 두 행렬에 넣습니다.</p>
+<p>우리는 각 유형의 전이 횟수를 사용하여 빈도를 계산하고 두 행렬에 넣습니다.</p>
 <div class="cell page-columns page-full" data-layout-align="center">
 <div class="no-row-height column-margin column-container"><div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -2034,7 +2036,7 @@ f _ {\ alpha, \ beta} (x) = \ frac {x^{\ alpha-1} \, (1-x)^{\ beta-1}} {\ text {
 <p><a class="lightbox" data-gallery="quarto-lightbox-gallery-36" href="imgs/devil.png" title="The transition probabilities are probabilities so the rows need to sum to 1."><img alt="The transition probabilities are probabilities so the rows need to sum to 1." class="img-fluid quarto-figure quarto-figure-center figure-img" src="imgs/devil.png" width="123"/></a></p>
 </figure>
 </div>
-<figcaption>전환 확률은 확률이므로 행을 1로 합산해야합니다.</figcaption>
+<figcaption>전이 확률은 확률이므로 행의 합은 1이 되어야 합니다.</figcaption>
 </figure>
 </div>
 </div></div></div>
@@ -2241,23 +2243,23 @@ p _ {\ text {i}} (\ mathtt {c} \ rightarrow \ mathtt {g})}
 <div aria-describedby="fig-ScoreMixture-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a class="lightbox" data-gallery="quarto-lightbox-gallery-38" href="02-chap_files/figure-html/fig-ScoreMixture-1-1.png" title="Figure 2.27: Island and non-island scores as generated by the function generateRandomScores. This is the first instance of a mixture we encounter. We will revisit them in sec-mixtures."><img class="img-fluid quarto-figure quarto-figure-center figure-img" src="02-chap_files/figure-html/fig-ScoreMixture-1-1.png" width="320"/></a>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ScoreMixture-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 2.27 : 함수에 의해 생성 된 섬 및 비 일드 랜드 점수<code>속도가 높습니다</code>. 이것은 a의 첫 번째 사례입니다<strong>혼합물</strong>우리는 만난다. 우리는 그들을 다시 방문 할 것입니다<a class="quarto-xref" href="04-chap.html"><span>4 장</span></a>.
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ScoreMixture-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">그림 2.27: `generateRandomScores` 함수에 의해 생성된 섬(island) 및 비섬(non-island) 점수. 이것은 우리가 마주치는 <strong>혼합물(mixture)</strong>의 첫 번째 사례입니다. 우리는 <a class="quarto-xref" href="04-chap.html"><span>4장</span></a>에서 다시 다룰 것입니다.
 </figcaption>
 </figure>
 </div>
 </div></div></div>
-<p>우리는 이것을 고려할 수 있습니다<em>교육 데이터</em>: 유형을 알고있는 데이터에서 점수가 차별에 유용한 지 확인할 수 있습니다.<a class="quarto-xref" href="#fig-ScoreMixture-1">수치<span>2.27</span></a>.</p>
+<p>이것을 <em>훈련 데이터(training data)</em>로 간주할 수 있습니다. 즉, 유형을 알고 있는 데이터로부터 점수가 구별에 유용한지 <a class="quarto-xref" href="#fig-ScoreMixture-1">그림 <span>2.27</span></a>에서 볼 수 있습니다.</p>
 </section>
 </section>
 <section class="level2" data-number="2.11" id="summary-of-this-chapter">
 <h2 class="anchored" data-anchor-id="summary-of-this-chapter" data-number="2.11"><span class="header-section-number">2.11</span>이 장의 요약</h2>
-<p>이 장에서는 통계의 기본 요가를 경험했습니다. 데이터에서 가능한 생성 분포로 이동하는 방법 및 이러한 분포를 정의하는 매개 변수를 추정하는 방법.</p>
-<p><strong>통계 모델</strong>우리는 범주 적 결과 (이항 및 다종)를 갖는 실험에 대한 특정 통계 모델을 보여 주었다.</p>
-<p><strong>착용감</strong>우리는 다른 시각화를 사용했으며 시뮬레이션 실험을 실행하는 방법을 보여주기 위해 Fair Four Box Multinomial 모델로 데이터가 적합 할 수 있는지 테스트했습니다. 우리는 카이 제곱 통계량을 발견하고 QQ 플롯을 사용하여 시뮬레이션과 이론을 비교하는 방법을 보았습니다.</p>
-<p><strong>견적</strong>우리는 최대 가능성과 베이지안 추정 절차를 설명했습니다. 이러한 접근법은 뉴클레오티드 패턴 발견 및 일배 체형 추정과 관련된 예에서 설명되었다.</p>
-<p><strong>사전 및 후방 분포</strong>일배 체형과 같이 이전에 연구 된 유형의 데이터를 평가할 때 데이터의 사후 분포를 계산하는 것이 좋습니다. 이를 통해 간단한 계산을 통해 의사 결정에 불확실성을 통합 할 수 있습니다. 이전의 선택은 충분한 데이터가있는 한 결과에 거의 영향을 미치지 않습니다.</p>
-<p><strong>CPG 제도 및 마르코프 체인</strong>우리는 DNA 서열에 따른 의존성을 Markov 체인 전이에 의해 어떻게 모델링 할 수 있는지 보았다. 우리는 이것을 사용하여 긴 DNA 서열이 CPG 섬에서 나오는지 여부를 확인할 수있는 우도 비율을 기반으로 점수를 구축하는 데 사용했습니다. 우리가 점수의 히스토그램을 만들었을 때, 우리는<a class="quarto-xref" href="#fig-ScoreMixture-1">수치<span>2.27</span></a>눈에 띄는 특징 : 두 조각으로 만들어진 것 같습니다. 이것<strong>이분권</strong>혼합물과의 첫 만남이었고, 그들은 주제입니다.<a class="quarto-xref" href="04-chap.html"><span>4 장</span></a>.</p>
-<p>이것은 일부 교육 데이터에 대한 모델을 구축 한 첫 번째 사례입니다. 우리가 알고있는 서열은 CPG 섬에서 나중에 새로운 데이터를 분류하는 데 사용할 수 있습니다. 우리는이 작업을 수행하는 훨씬 더 완전한 방법을 개발할 것입니다.<a class="quarto-xref" href="12-chap.html"><span>12 장</span></a>.</p>
+<p>이 장에서는 통계의 기본 원리를 경험했습니다. 즉, 데이터로부터 가능한 생성 분포로 나아가는 방법과 이러한 분포를 정의하는 모수를 추정하는 방법입니다.</p>
+<p><strong>통계 모델</strong> 우리는 범주형 결과(이항 및 다항)를 갖는 실험에 대한 특정 통계 모델을 보여주었습니다.</p>
+<p><strong>적합도</strong> 우리는 다양한 시각화를 사용했으며, 데이터가 공정한 4상자 다항 모델에 적합한지 테스트하기 위해 시뮬레이션 실험을 실행하는 방법을 보여주었습니다. 우리는 카이제곱 통계량을 발견하고 QQ 그림을 사용하여 시뮬레이션과 이론을 비교하는 방법을 보았습니다.</p>
+<p><strong>추정</strong> 우리는 최대가능도 및 베이즈 추정 절차를 설명했습니다. 이러한 접근 방식은 뉴클레오티드 패턴 발견 및 단일배수체 추정과 관련된 예에서 설명되었습니다.</p>
+<p><strong>사전 및 사후 분포</strong> 단일배수체와 같이 이전에 연구된 유형의 데이터를 평가할 때 데이터의 사후 분포를 계산하는 것이 좋습니다. 이를 통해 간단한 계산으로 의사결정에 불확실성을 통합할 수 있습니다. 사전분포의 선택은 충분한 데이터가 있는 한 결과에 거의 영향을 미치지 않습니다.</p>
+<p><strong>CpG 섬과 마르코프 연쇄</strong> 우리는 DNA 서열을 따르는 종속성이 마르코프 연쇄 전이로 어떻게 모델링될 수 있는지 보았습니다. 우리는 이것을 사용하여 긴 DNA 서열이 CpG 섬에서 왔는지 여부를 알려줄 수 있는 가능도비에 기반한 점수를 구축했습니다. 점수의 히스토그램을 만들었을 때, <a class="quarto-xref" href="#fig-ScoreMixture-1">그림 <span>2.27</span></a>에서 눈에 띄는 특징을 보았습니다. 그것은 두 부분으로 만들어진 것처럼 보였습니다. 이 <strong>이봉성(bimodality)</strong>은 혼합물과의 첫 만남이었으며, 이는 <a class="quarto-xref" href="04-chap.html"><span>4장</span></a>의 주제입니다.</p>
+<p>이것은 일부 훈련 데이터에 대한 모델을 구축한 첫 번째 사례였습니다. 즉, CpG 섬에서 왔는지 여부를 아는 서열을 사용하여 나중에 새로운 데이터를 분류하는 데 사용할 수 있습니다. 우리는 <a class="quarto-xref" href="12-chap.html"><span>12장</span></a>에서 이 작업을 수행하는 훨씬 더 완전한 방법을 개발할 것입니다.</p>
 </section>
 <section class="level2" data-number="2.12" id="further-reading">
 <h2 class="anchored" data-anchor-id="further-reading" data-number="2.12"><span class="header-section-number">2.12</span>추가 독서</h2>
