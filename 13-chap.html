@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>15&nbsp; 13.1 Goals for this chapter – Modern Statistics for Modern Biology</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./14-chap.html" rel="next">
+<link href="./12-chap.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-22854ec117201859c8a7ba6f538122c9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="msmb.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./13-chap.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">13.1 Goals for this chapter</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Modern Statistics for Modern Biology</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Home</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The challenge: heterogeneity</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">1.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">2.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">3.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">4.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">5.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">6.1 Goals for this Chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">7.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">8.1 Goals of this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">9.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">10.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">11.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">12.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-chap.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">13.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">14-chap.html</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">15-chap.html</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">16-chap.html</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#types-of-experiments" id="toc-types-of-experiments" class="nav-link active" data-scroll-target="#types-of-experiments"><span class="header-section-number">15.1</span> 13.2 Types of experiments</a></li>
+  <li><a href="#partitioning-error-bias-and-noise" id="toc-partitioning-error-bias-and-noise" class="nav-link" data-scroll-target="#partitioning-error-bias-and-noise"><span class="header-section-number">15.2</span> 13.3 Partitioning error: bias and noise</a>
+  <ul class="collapse">
+  <li><a href="#error-models-noise-is-in-the-eye-of-the-beholder" id="toc-error-models-noise-is-in-the-eye-of-the-beholder" class="nav-link" data-scroll-target="#error-models-noise-is-in-the-eye-of-the-beholder"><span class="header-section-number">15.2.1</span> 13.3.1 Error models: noise is in the eye of the beholder</a></li>
+  <li><a href="#biological-versus-technical-replicates" id="toc-biological-versus-technical-replicates" class="nav-link" data-scroll-target="#biological-versus-technical-replicates"><span class="header-section-number">15.2.2</span> 13.3.2 Biological versus technical replicates</a></li>
+  <li><a href="#units-vs.-fold-changes" id="toc-units-vs.-fold-changes" class="nav-link" data-scroll-target="#units-vs.-fold-changes"><span class="header-section-number">15.2.3</span> 13.3.3 Units vs.&nbsp;fold-changes</a></li>
+  <li><a href="#regular-and-catastrophic-noise" id="toc-regular-and-catastrophic-noise" class="nav-link" data-scroll-target="#regular-and-catastrophic-noise"><span class="header-section-number">15.2.4</span> 13.3.4 Regular and catastrophic noise</a></li>
+  </ul></li>
+  <li><a href="#basic-principles-in-the-design-of-experiments" id="toc-basic-principles-in-the-design-of-experiments" class="nav-link" data-scroll-target="#basic-principles-in-the-design-of-experiments"><span class="header-section-number">15.3</span> 13.4 Basic principles in the design of experiments</a>
+  <ul class="collapse">
+  <li><a href="#confounding" id="toc-confounding" class="nav-link" data-scroll-target="#confounding"><span class="header-section-number">15.3.1</span> 13.4.1 Confounding</a></li>
+  <li><a href="#effect-size-and-replicates" id="toc-effect-size-and-replicates" class="nav-link" data-scroll-target="#effect-size-and-replicates"><span class="header-section-number">15.3.2</span> 13.4.2 Effect size and replicates</a></li>
+  <li><a href="#clever-combinations-hotellings-weighting-example" id="toc-clever-combinations-hotellings-weighting-example" class="nav-link" data-scroll-target="#clever-combinations-hotellings-weighting-example"><span class="header-section-number">15.3.3</span> 13.4.3 Clever combinations: Hotelling’s weighting example</a></li>
+  <li><a href="#blocking-and-pairing" id="toc-blocking-and-pairing" class="nav-link" data-scroll-target="#blocking-and-pairing"><span class="header-section-number">15.3.4</span> 13.4.4 Blocking and pairing</a></li>
+  <li><a href="#how-many-replicates-do-i-need" id="toc-how-many-replicates-do-i-need" class="nav-link" data-scroll-target="#how-many-replicates-do-i-need"><span class="header-section-number">15.3.5</span> 13.4.5 How many replicates do I need?</a></li>
+  </ul></li>
+  <li><a href="#mean-variance-relationships-and-variance-stabilizing-transformations" id="toc-mean-variance-relationships-and-variance-stabilizing-transformations" class="nav-link" data-scroll-target="#mean-variance-relationships-and-variance-stabilizing-transformations"><span class="header-section-number">15.4</span> 13.5 Mean-variance relationships and variance-stabilizing transformations</a></li>
+  <li><a href="#data-quality-assessment-and-quality-control" id="toc-data-quality-assessment-and-quality-control" class="nav-link" data-scroll-target="#data-quality-assessment-and-quality-control"><span class="header-section-number">15.5</span> 13.6 Data quality assessment and quality control</a></li>
+  <li><a href="#longitudinal-data" id="toc-longitudinal-data" class="nav-link" data-scroll-target="#longitudinal-data"><span class="header-section-number">15.6</span> 13.7 Longitudinal data</a></li>
+  <li><a href="#data-integration-use-everything-you-could-know" id="toc-data-integration-use-everything-you-could-know" class="nav-link" data-scroll-target="#data-integration-use-everything-you-could-know"><span class="header-section-number">15.7</span> 13.8 Data integration: use everything you (could) know</a></li>
+  <li><a href="#sharpen-your-tools-reproducible-research" id="toc-sharpen-your-tools-reproducible-research" class="nav-link" data-scroll-target="#sharpen-your-tools-reproducible-research"><span class="header-section-number">15.8</span> 13.9 Sharpen your tools: reproducible research</a></li>
+  <li><a href="#data-representation" id="toc-data-representation" class="nav-link" data-scroll-target="#data-representation"><span class="header-section-number">15.9</span> 13.10 Data representation</a>
+  <ul class="collapse">
+  <li><a href="#wide-vs-long-table-format" id="toc-wide-vs-long-table-format" class="nav-link" data-scroll-target="#wide-vs-long-table-format"><span class="header-section-number">15.9.1</span> 13.10.1 Wide vs long table format</a></li>
+  </ul></li>
+  <li><a href="#tidy-data-using-it-wisely" id="toc-tidy-data-using-it-wisely" class="nav-link" data-scroll-target="#tidy-data-using-it-wisely"><span class="header-section-number">15.10</span> 13.11 Tidy data – using it wisely</a></li>
+  <li><a href="#leaky-pipelines-and-statistical-sufficiency" id="toc-leaky-pipelines-and-statistical-sufficiency" class="nav-link" data-scroll-target="#leaky-pipelines-and-statistical-sufficiency"><span class="header-section-number">15.11</span> 13.12 Leaky pipelines and statistical sufficiency</a></li>
+  <li><a href="#efficient-computing" id="toc-efficient-computing" class="nav-link" data-scroll-target="#efficient-computing"><span class="header-section-number">15.12</span> 13.13 Efficient computing</a></li>
+  <li><a href="#summary-of-this-chapter" id="toc-summary-of-this-chapter" class="nav-link" data-scroll-target="#summary-of-this-chapter"><span class="header-section-number">15.13</span> 13.14 Summary of this chapter</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">15.14</span> 13.15 Further reading</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">15.15</span> 13.16 Exercises</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">13.1 Goals for this chapter</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><a href="imgs/RAFisherSmoking.png"><img src="imgs/RAFisherSmoking.png" class="img-fluid"></a></p>
+<p><a href="imgs/dailies_icon.png"><img src="imgs/dailies_icon.png" class="img-fluid"></a></p>
+<p>In the same way a film director will view daily takes to correct potential lighting or shooting issues before they affect too much footage, it is a good idea not to wait until all the runs of an experiment have been finished before looking at the data. Intermediate data analyses and visualizations will track unexpected sources of variation and enable you to adjust the protocol. Much is known about sequential design of experiments (<a href="16-chap.html#ref- mead1990design">Mead 1990</a>), but even in a more pragmatic setting it is important to be aware of sources of variation as they occur and adjust for them.</p>
+<p>We have now seen many different biological datasets and data types, and methods for analyzing them. To conclude this book, we recapitulate some of the general lessons we learned. Three great pieces of good advice are:</p>
+<ul>
+<li><p><strong>How to analyze?</strong> R.A. Fisher, one of the fathers of experimental design (<a href="16-chap.html#ref-fisher1935design">Fisher 1935</a>) is quoted as saying: <em>To consult the statistician after an experiment is finished is often merely to ask him to conduct a post mortem examination. He can perhaps say what the experiment died of</em> 1. So it is important to design an experiment already with the analysis in mind. Do not wait with thinking about how to analyze the data only once they have been acquired.</p></li>
+<li><p><strong>When?</strong> Dailies: start with the analysis as soon as you have acquired the first data. Don’t wait until everything is collected and it’s too late to troubleshoot.</p></li>
+<li><p><strong>What?</strong> Start writing the paper while you’re analyzing the data. Only once you’re writing and trying to present your results and conclusions, you realize what you should have done to properly support them.</p></li>
+</ul>
+<p>1 Presidential Address to the First Indian Statistical Congress, 1938. Sankhya 4, 14-17.</p>
+<p>In this chapter we will:</p>
+<ul>
+<li><p>Develop a simple categorization of what types of experiments there are and the varying amounts of control we have with each of them.</p></li>
+<li><p>Recap how to distinguish the different types of variability: error, noise and bias.</p></li>
+<li><p>Discuss the things that we need to worry about: confounding, dependencies, batch effects. We’ll ask the famous question: <em>how many replicates?</em>.</p></li>
+<li><p>Recap the essential ideas behind mean-variance relationships and how they inform us on whether and how to transform our data.</p></li>
+<li><p>Computational techniques and tools are essential for getting the job done. We will discuss efficient workflow design, data representation and computation.</p></li>
+<li><p>Try to be aware of data summarization steps and questions of sufficiency in our analytical workflows - so that we don’t throw away important information in some step “upstream”, which is then missing and making us trouble downstream.</p></li>
+</ul>
+<section id="types-of-experiments" class="level2" data-number="15.1">
+<h2 data-number="15.1" class="anchored" data-anchor-id="types-of-experiments"><span class="header-section-number">15.1</span> 13.2 Types of experiments</h2>
+<section id="the-art-of-good-enough." class="level4" data-number="15.1.0.1">
+<h4 data-number="15.1.0.1" class="anchored" data-anchor-id="the-art-of-good-enough."><span class="header-section-number">15.1.0.1</span> The art of “good enough”.</h4>
+<p>We need experimental design in order to deal with the fact that our resources are finite, our instruments not perfect, and that the real world is complicated. We want to get the the best possible outcome nonetheless. This invariably results in hard decisions and tradeoffs. <strong>Experimental design</strong> aims to rationalize such decisions. Our experimental interventions and our measurement instruments have limited precision and accuracy; often we don’t know these limitations at the outset and have to collect <strong>preliminary data</strong> to estimate them. We may only be able to observe the phenomenon of interest indirectly rather than directly. Our treatment conditions may have undesired but hard to avoid side effects, our measurements may be overlaid with interfering signals or “background noise”. Sample sizes are limited for practical and economic reasons. There is little point in prescribing unrealistic ideals – we need to make choices that are pragmatic and feasible. A quote from (<a href="16-chap.html#ref-Bacher:GB:2016">Bacher and Kendziorski 2016</a>) explains this clearly: “Generally speaking, a well-designed experiment is one that is sufficiently powered and one in which technical artifacts and biological features that may systematically affect measurements are balanced, randomized or controlled in some other way in order to minimize opportunities for multiple explanations for the effect(s) under study.”</p>
+<p>To start with, let us discuss the major different types of experiments, since each of them requires different approaches.</p>
+<p>In a <strong>controlled experiment</strong> , we have control over all relevant variables: the (model) system under study, the environmental conditions, the experimental readout. For instance, we could have a well-characterized cell line growing in laboratory conditions on defined media, temperature and atmosphere, we’ll administer a precise amount of a drug, and after 72h we measure the activity of a specific pathway reporter.</p>
+<p>In a <strong>study</strong> , we have less control: important conditions that may affect the measured outcome are not under control of the researcher, usually because of ethical concerns or logistical constraints. For instance, in an ecological field study, this could be the weather, the availability of nutrition resources or the activity of predators. In an <strong>observational study</strong> , even the variable of interest is not controlled by the researcher. For instance, in a clinical trial, this might be the assignment of the individual subjects to groups. Since there are many possibilities for confounding (Section 13.4.1), interpretation of an observational study can be difficult. Here’s where the old adage “correlation is not causation” appertains.</p>
+<p>In a <strong>randomized controlled trial</strong> , we still have to deal with lack of control over many of the factors that impact the outcome, but we control assignment of the variable of interest (say, the type of treatment in a clinical trial), therefore we can expect that –with high enough sample size– all the nuisance effects average out and the observed effect can really be causally assigned to the intervention. Such trials are usually <strong>prospective</strong> 2, i.e., the outcome is not known at the time of the assignment of the patients to the groups.</p>
+<p>2 The antonym is retrospective; observational studies can be prospective or retrospective.</p>
+<p>A <strong>meta-analysis</strong> is an observational study on several previous experiments or studies. One motivation of a meta-analysis is to increase power by increasing effective sample size. Another is to overcome the limitations of individual experiments or studies, which might suffer from researcher bias or other biases, be underpowered, or can otherwise be flawed or random. The hope is that by pooling results from many studies, such “study-level” problems average out.</p>
+</section>
+</section>
+<section id="partitioning-error-bias-and-noise" class="level2" data-number="15.2">
+<h2 data-number="15.2" class="anchored" data-anchor-id="partitioning-error-bias-and-noise"><span class="header-section-number">15.2</span> 13.3 Partitioning error: bias and noise</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="imgs/devil.png" title="Statisticians use the term error for any deviations of a measured value from the true value. This is different from the everyday use of the word. In statistics, error is an unavoidable aspect of life. It is not “bad”, it is something to be cherished, reckoned with, tamed and controlled."><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
+<figcaption>Statisticians use the term error for any deviations of a measured value from the true value. This is different from the everyday use of the word. In statistics, error is an unavoidable aspect of life. It is not “bad”, it is something to be cherished, reckoned with, tamed and controlled.</figcaption>
+</figure>
+</div>
+<p>Statisticians use the term <strong>error</strong> for any deviations of a measured value from the true value. This is different from the everyday use of the word. In statistics, error is an unavoidable aspect of life. It is not “bad”, it is something to be cherished, reckoned with, tamed and controlled.</p>
+<p>We broadly distinguish between two types of error. The first, which we call <strong>noise</strong> , “averages out” if we just perform enough replicates. The second, which we call <strong>bias</strong> , remains; it even becomes more apparent with more replication. Recall the bull’s eye in <a href="12-chap.html#fig- supervised-bullseye">Figure 12.18</a>: in the lower panel, there is a lot of noise, but no bias, and the center of the cloud of points is in the right place. In the upper panel, there is much less noise, but bias. No amount of replication will remedy the fact that the center of the points is in the wrong place.</p>
+<p>Bias is more difficult to deal with than noise: noise is easily recognized just from looking at replicates, and it averages out as we analyze more and more replicates. With bias, it can be hard to even recognize that it is there, and then we need to find ways to measure it and adjust for it, usually with some quantitative model.</p>
+<p>__</p>
+<p>Question 13.1</p>
+<p>Give two examples in previous chapters where we have modeled bias in high throughput data.</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>For instance, in <a href="08-chap.html">Chapter 8</a>, we modeled the sampling noise with the gamma-Poisson distribution, we estimated sequencing depth bias with the library size factors and took it into account when testing for differential expression. We also modeled sampling biases caused by the two different protocols used (single-end, paired-end) by introducing a blocking factor into our generalized linear model.</p>
+<section id="error-models-noise-is-in-the-eye-of-the-beholder" class="level3" data-number="15.2.1">
+<h3 data-number="15.2.1" class="anchored" data-anchor-id="error-models-noise-is-in-the-eye-of-the-beholder"><span class="header-section-number">15.2.1</span> 13.3.1 Error models: noise is in the eye of the beholder</h3>
+<p>The efficiency of most biochemical or physical processes involving DNA- polymers depends on their sequence content. For instance, occurrences of long homopolymer stretches, palindromes, overall or local GC content can modify the efficiency of PCR, or the dynamics of how the polymer is being pulled through a nanopore. The size and nature of such effects is challenging to model. They depend in subtle ways on factors like concentration, temperature, enzyme used, etc. So: when looking at RNA-Seq data, should we treat GC content as noise or as bias?</p>
+<p>__</p>
+<p>Question 13.2</p>
+<p>How does the <strong><a href="https://bioconductor.org/packages/DESeq2/">DESeq2</a></strong> method address this issue?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p><strong><a href="https://bioconductor.org/packages/DESeq2/">DESeq2</a></strong> offers both options. If size factors are used to model per-sample sampling bias, then such effects are not explicitly modeled.</p>
+<p><em>Note:</em> The assumption is then that, for each gene, any such bias would effect the counts in the same way across all samples, so that for the purpose of differential expression analysis, it cancels out. To the extent that such effects are sample-specific, they are treated as noise. However, as described in its vignette, <strong><a href="https://bioconductor.org/packages/DESeq2/">DESeq2</a></strong> also allows specifying sample- <em>and</em> gene-dependent normalization factors for a matrix, and these are intended to contain explicit estimates of such biases.</p>
+<p>Remember that the noun <em>sample</em> here, by convention, refers to one column of the count matrix, e.g., one sequencing library corresponding to one replicate of one biological condition. The same term (here as the verb form <em>sampling</em>) is also used in its more general, statistical sense, as in “a sample of data from a distribution”. There is no easy way around this ambiguity, so we just need to be aware of it.</p>
+<p>Formal error models can help us decompose the variability into noise and bias. A standard decomposition you may have encountered is called ANOVA (ANalysis Of VAriance). In these types of models, variability is measured by sums of squares and aportioned according to its origin. For instance, when doing supervised classification in a linear discriminant analysis (LDA) in <a href="12-chap.html">Chapter 12</a>, we computed the total sum of squares \(C\) as</p>
+<p>\[ C_{} = C_{} + C_{}. \]</p>
+<p>However, there are usually multiple ways of doing such a decomposition: an effect that at one stage is considered within-group variation (noise) might be considered a between-groups effect once the right (sub)groups are assigned.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="imgs/devil.png" title="Maybe this is akin to the vision of “personalized medicine”: better patient stratification that converts within group variation (incl. unsuccessful or unnecessary treatments) into between groups variation (where every group gets exactly what they need)."><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
+<figcaption>Maybe this is akin to the vision of “personalized medicine”: better patient stratification that converts within group variation (incl.&nbsp;unsuccessful or unnecessary treatments) into between groups variation (where every group gets exactly what they need).</figcaption>
+</figure>
+</div>
+<p>Maybe this is akin to the vision of “personalized medicine”: better patient stratification that converts within group variation (incl.&nbsp;unsuccessful or unnecessary treatments) into between groups variation (where every group gets exactly what they need).</p>
+<section id="determinism-versus-chance." class="level4" data-number="15.2.1.1">
+<h4 data-number="15.2.1.1" class="anchored" data-anchor-id="determinism-versus-chance."><span class="header-section-number">15.2.1.1</span> Determinism versus chance.</h4>
+<p><a href="imgs/cointosser3_web.jpg" title="Figure 13.1: A carefully constructed coin tossing machine can be made to provide deterministic coin flips."><img src="imgs/cointosser3_web.jpg" class="img-fluid"></a></p>
+<p>Figure 13.1: A carefully constructed coin tossing machine can be made to provide deterministic coin flips.</p>
+<p>Everyone thinks of the outcome of a coin toss as random, thus a perfect example of noise. But if we meticulously registered the initial conditions of the coin flip and solved the mechanical equations, we could predict which side has a higher probability of coming up (<a href="16-chap.html#ref-Diaconis-Montgomery-Holmes-2007">Diaconis, Holmes, and Montgomery 2007</a>).</p>
+<p>So, rather than asking whether a certain effect or process <em>is</em> random or deterministic, it is more fruitful to say whether <em>we care</em> to model it deterministically (as bias), or whether we ignore the details, treat it as stochastic, and use probabilistic modeling (noise). In this sense, probabilistic models are a way of quantifying our ignorance, taming our uncertainty.</p>
+</section>
+<section id="latent-factors." class="level4" data-number="15.2.1.2">
+<h4 data-number="15.2.1.2" class="anchored" data-anchor-id="latent-factors."><span class="header-section-number">15.2.1.2</span> Latent factors.</h4>
+<p>Sometimes we explicitly know about factors that cause bias, for instance, when a different reagent batch was used in different phases of the experiments. We call this <strong>batch effects</strong> (<a href="16-chap.html#ref- Leek:2010:batch">Jeffrey T. Leek et al.&nbsp;2010</a>). At other times, we may expect that such factors are at work but have no explicit record of them. We call these <strong>latent factors</strong>. We can treat them as adding to the noise, and in <a href="04-chap.html">Chapter 4</a> we saw how to use mixture models to do so. But this may not be enough: with high- dimensional data, noise caused by latent factors tends to be correlated, and this can lead to faulty inference (<a href="16-chap.html#ref-Leek:2010:batch">Jeffrey T. Leek et al. 2010</a>). The good news is that these same correlations can be exploited to estimate latent factors from the data, model them as bias and thus reduce the noise (<a href="16-chap.html#ref-LeekStorey:2007">Jeffrey T. Leek and Storey 2007</a>; <a href="16-chap.html#ref-Stegle:2010">Stegle et al. 2010</a>).</p>
+</section>
+</section>
+<section id="biological-versus-technical-replicates" class="level3" data-number="15.2.2">
+<h3 data-number="15.2.2" class="anchored" data-anchor-id="biological-versus-technical-replicates"><span class="header-section-number">15.2.2</span> 13.3.2 Biological versus technical replicates</h3>
+<p>__</p>
+<p>Question 13.3</p>
+<p>Imagine you want to test whether a weight loss drug works. Which of the following study designs would you use:</p>
+<ul>
+<li><p>A person is weighed on milligram precision scales, with 20 replicates. He follows the diet, and four weeks later, he is weighed again, with 20 replicates.</p></li>
+<li><p>Ten people weigh themselves once on their bathroom scales and report the number. Four weeks later, they weigh themselves and report again.</p></li>
+</ul>
+<p>Surely the first option must be better since it has 20 replicates on a very precise instrument rather than only ten on an older piece of equipment?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>What we have here is a (placative) instance of the difference between <strong>technical</strong> versus <strong>biological replicates</strong>. The number of replicates is less important than what types of variation are allowed to affect them. The 20 replicates in the first design are wasted on re-measuring something that we already know with more than enough precision. Whereas the far more important question –how does the effect generalize to different people– starts to be addressed with the second design, although in practice more people would be needed.</p>
+<p><em>Note:</em> Inference or generalizations can only be made to a wider population if we have a representative, randomized sample of that population in our study. In the first case if a weight loss occurs, one could only infer about that person at that time.</p>
+<p>Analogous questions arise in biological experimentation, e.g., do you rather do five replicates on the same cell line, or one replicate each on three different cell lines?</p>
+<p>__</p>
+<p>Question 13.4</p>
+<p>For reliable variant calling with the sequencing technology used by the 1000 Genomes project, one needs about \(30\) coverage per genome. However, the average depth of the data produced was 5.1 for 1,092 individuals (<a href="16-chap.html#ref-1000Genomes">1000 Genomes Project Consortium 2012</a>). Why was that study design chosen?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>The project’s aim was finding common genetic variants, i.e., finding variants that have a prevalence of more than, say, 1% in the population. It was not to call high-confidence genotypes of individual people. Therefore, it was more cost-efficient to sample more individuals each with low coverage (say, 1092 individuals at 5x) than fewer individuals with high coverage (say, 182 at 30x). In this way, common variants would still be found with \(&gt;=30\) coverage (\(1092 % = 55\)), since they would be present in several of the 1000 people, but more of them would be found, and there would be more precise estimates of their population frequency.</p>
+<p>The technical versus biological replicates terminology has some value, but is often too coarse. The observed effect may or may not be generalizable at many different levels: different labs, different operators within one lab, different technologies, different machines from the same technology, different variants of the protocol, different strains, litters, sexes, individual animals, and so forth. It’s better to name the levels of replication more explicitly.</p>
+</section>
+<section id="units-vs.-fold-changes" class="level3" data-number="15.2.3">
+<h3 data-number="15.2.3" class="anchored" data-anchor-id="units-vs.-fold-changes"><span class="header-section-number">15.2.3</span> 13.3.3 Units vs.&nbsp;fold-changes</h3>
+<p>Measurements in physics are usually reported as multiples of SI3 units, such as meters, kilograms, seconds. A length measured in meters by a lab in Australia using one instrument is directly comparable to one measured a year later by a lab in Canada using a different instrument, or by alien scientists in a far-away galaxy. In biology, it is rarely possible or practical to make measurements that are as standardized. The situation here is more like that where human body parts (feets, inches, etc.) are used for length measurements, and where the size of these body parts is even different in different towns and countries, let alone galaxies.</p>
+<p>3 International System of Units (French: Système International d’Unités)</p>
+<p>Biologists often report measurements as multipes of (i.e., fold changes with regard to) some local, more or less ad hoc reference. The challenge with this is that fold changes and proportions are ratios. The denominator is a random variable (as it changes from lab to lab and probably from experiment to experiment), which can create high instability and very unequal variances between experiments; see the sections on transformations and sufficiency a little later in this chapter. Even when seemingly absolute values exist (e.g., TPKM values in an RNA-Seq experiment), due to experiment-specific sampling biases they do not translate into universal units, and they often lack an indication of their precision.</p>
+</section>
+<section id="regular-and-catastrophic-noise" class="level3" data-number="15.2.4">
+<h3 data-number="15.2.4" class="anchored" data-anchor-id="regular-and-catastrophic-noise"><span class="header-section-number">15.2.4</span> 13.3.4 Regular and catastrophic noise</h3>
+<p>Regular noise can be modelled by simple probability models such as independent normal distributions, Poissons, or mixtures such as gamma–Poisson or Laplace. We can use relatively straightforward methods to take such noise into account in our data analyses and to compute the probability of extraordinarily large or small values. In the real world, this is only part of the story: measurements can be completely off scale (a sample swap, a contamination or a software bug), and they can go awry all at the same time (a whole microtiter plate went bad, affecting all data measured from it). Such events are hard to model or even correct for – our best chance to deal with them is data quality assessment, outlier detection and documented removal.</p>
+</section>
+</section>
+<section id="basic-principles-in-the-design-of-experiments" class="level2" data-number="15.3">
+<h2 data-number="15.3" class="anchored" data-anchor-id="basic-principles-in-the-design-of-experiments"><span class="header-section-number">15.3</span> 13.4 Basic principles in the design of experiments</h2>
+<section id="confounding" class="level3" data-number="15.3.1">
+<h3 data-number="15.3.1" class="anchored" data-anchor-id="confounding"><span class="header-section-number">15.3.1</span> 13.4.1 Confounding</h3>
+<p><a href="13-chap_files/figure- html/fig-confounding-1-1.png" title="Figure 13.2: Comparison of a (hypothetical) biomarker between samples from disease and healthy states. If we are only given the information shown in the left panel, we might conclude that this biomarker performs well in detecting the disease. If, in addition, we are told that the data were acquired in two separate batches (e.g., different labs, different machines, different time points) as indicated in the panel on the right hand side, the conclusion will be different."><img src="13-chap_files/figure-html/fig-confounding-1-1.png" class="img-fluid"></a></p>
+<p>Figure 13.2: Comparison of a (hypothetical) biomarker between samples from disease and healthy states. If we are only given the information shown in the left panel, we might conclude that this biomarker performs well in detecting the disease. If, in addition, we are told that the data were acquired in two separate batches (e.g., different labs, different machines, different time points) as indicated in the panel on the right hand side, the conclusion will be different.</p>
+<p>__</p>
+<p>Question 13.5</p>
+<p>Consider the data shown in Figure 13.2. How can we decide whether the observed differences in the biomarker level are due to disease vs.&nbsp;healthy, or due to the batch?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>It is impossible to know from these data: the two variables are confounded.</p>
+<p><strong>Confounding</strong> need not only be between a biological and a technical variable, it can also be more subtle. For instance, the biomarker might have nothing to do with the disease directly – it might just be a marker of a life style that causes the disease (as well as other things), or of an inflammation that is caused by the disease (as well as by many other things), etc.</p>
+</section>
+<section id="effect-size-and-replicates" class="level3" data-number="15.3.2">
+<h3 data-number="15.3.2" class="anchored" data-anchor-id="effect-size-and-replicates"><span class="header-section-number">15.3.2</span> 13.4.2 Effect size and replicates</h3>
+<p><a href="imgs/Avicenna.png" title="Figure 13.3: Confounding is the reason that one of the seven rules of experimental design listed by the Persian physician-scientist Abu ’Ali al-Husayn ibn Sina (Avicenna) around AD 1020 was “to study one possible cause of a disease at a time” [@Stigler:sevenpillars]."><img src="imgs/Avicenna.png" class="img-fluid"></a></p>
+<p>Figure 13.3: Confounding is the reason that one of the seven rules of experimental design listed by the Persian physician-scientist <a href="https://en.wikipedia.org/wiki/Avicenna">Abu ’Ali al- Husayn ibn Sina (Avicenna)</a> around AD 1020 was “to study one possible cause of a disease at a time” (<a href="16-chap.html#ref-Stigler:sevenpillars">Stigler 2016</a>).</p>
+<p>The effect size is the difference between the group centers, as shown by the red arrow in Figure 13.4. A larger sample size in each group increases the precision with which the locations of each group and the effect size are known, thus increasing our power to detect a difference (Figure 13.5). On the other hand, the performance of the biomarker as a diagnostic for distinguishing individual samples between healthy and disease states depends on the within-group distributions (and the relative prevalences of both states), and is not improved by replication.</p>
+<p><a href="13-chap_files/figure- html/fig-effectsize-1.png" title="Figure 13.4: The red arrow shows the effect size, as measured by the difference between the centers of the two groups. Here we locate the centers by the medians; sometimes the mean is used."><img src="13-chap_files/figure-html/fig-effectsize-1.png" class="img-fluid"></a></p>
+<p>Figure 13.4: The red arrow shows the effect size, as measured by the difference between the centers of the two groups. Here we locate the centers by the medians; sometimes the mean is used.</p>
+<p><a href="13-chap_files/figure-html/fig- comparesamplesize-1.png" title="Figure 13.5: On the left, the boxplot was created with samples of size 6. On the right the sample sizes are 60. The measurements have the same underlying error distribution in both cases."><img src="13-chap_files/figure-html/fig- comparesamplesize-1.png" class="img-fluid"></a></p>
+<p>Figure 13.5: On the left, the boxplot was created with samples of size 6. On the right the sample sizes are 60. The measurements have the same underlying error distribution in both cases.</p>
+</section>
+<section id="clever-combinations-hotellings-weighting-example" class="level3" data-number="15.3.3">
+<h3 data-number="15.3.3" class="anchored" data-anchor-id="clever-combinations-hotellings-weighting-example"><span class="header-section-number">15.3.3</span> 13.4.3 Clever combinations: Hotelling’s weighting example</h3>
+<p>To get the best data out of available resources, capitalizing on cancellations and symmetries is an important aspect. Here is a famous illustration of how Hotelling devised an improved weighing scheme. Suppose we are given a set of eight unknown weights \(= (_1, …,_8)\). In the following code, we simulate such a set of true weights using R’s random number generator.</p>
+<p><a href="imgs/balancechem.png" title="Figure 13.6: The example in this section uses the pharmacist’s balance weighing analogy introduced by Yates and developed by @Hotelling1944 and @Mood1946."><img src="imgs/balancechem.png" class="img-fluid"></a></p>
+<p>Figure 13.6: The example in this section uses the pharmacist’s balance weighing analogy introduced by Yates and developed by Hotelling (<a href="16-chap.html#ref-Hotelling1944">1944</a>) and Mood (<a href="16-chap.html#ref- Mood1946">1946</a>).</p>
+<pre><code>theta = round((2 * sample(8, 8) + rnorm(8)), 1)
+theta __
+
+
+[1] 10.7 13.4 16.4  3.9  8.5 16.0  1.2  4.4</code></pre>
+<p><strong>Method 1</strong> : Naïve method, using eight weighings. Suppose we use a pharmacist’s balance (Figure 13.6) that weighs each weight \(_i\) individually, with errors distributed normally with a standard deviation of 0.1. We compute the vector of errors <code>errors1</code> and their sum of squares as follows:</p>
+<pre><code>X = theta + rnorm(length(theta), 0, 0.1)
+X __
+
+
+[1] 10.513279 13.268145 16.507673  3.881881  8.395974 16.073952  1.131341
+[8]  4.289040
+
+
+errors1 = X - theta
+errors1 __
+
+
+[1] -0.18672051 -0.13185519  0.10767279 -0.01811869 -0.10402607  0.07395242
+[7] -0.06865871 -0.11095993
+
+
+sum(errors1^2)__
+
+
+[1] 0.09748857</code></pre>
+<p><strong>Method 2</strong> : Hotelling’s method, also using eight weighings. The method is based on a Hadamard matrix, which we compute here.</p>
+<pre><code>library("survey")
+h8 = hadamard(6)
+coef8 = 2*h8 - 1
+coef8 __
+
+
+     [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8]
+[1,]    1    1    1    1    1    1    1    1
+[2,]    1   -1    1   -1    1   -1    1   -1
+[3,]    1    1   -1   -1    1    1   -1   -1
+[4,]    1   -1   -1    1    1   -1   -1    1
+[5,]    1    1    1    1   -1   -1   -1   -1
+[6,]    1   -1    1   -1   -1    1   -1    1
+[7,]    1    1   -1   -1   -1   -1    1    1
+[8,]    1   -1   -1    1   -1    1    1   -1</code></pre>
+<p>We use <code>coef8</code> as the coefficients in a new weighing scheme, as follows: the first column of the matrix tells us to put all the weights on one side of the balance and to weigh that. Call the result <code>Y[1]</code>. The second column tell us to place weights 1, 3, 5, 7 on one side of the balance and weights 2, 4, 6, 8 on the other. We then measure the difference and call the result <code>Y[2]</code>. And so forth, for all eight columns of <code>coef8</code>. We can express the necessary computations in matrix multiplication form as below.</p>
+<pre><code>Y = theta  %*% coef8 + rnorm(length(theta), 0, 0.1)__</code></pre>
+<p>As in the first method, each of the eight weight measurements has a normal error with standard deviation of 0.1.</p>
+<p>__</p>
+<p>Question 13.6</p>
+<ol type="1">
+<li><p>Check that <code>coef8</code> is -up to an overall factor- an orthogonal matrix (\(C^t C = \) for some \(\)).</p></li>
+<li><p>Check that if we multiply <code>theta</code> with <code>coef8</code> times <code>coef8</code> transposed and divide by 8, we obtain <code>theta</code> again.</p></li>
+</ol>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<pre><code>coef8 %*% t(coef8)__
+
+
+     [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8]
+[1,]    8    0    0    0    0    0    0    0
+[2,]    0    8    0    0    0    0    0    0
+[3,]    0    0    8    0    0    0    0    0
+[4,]    0    0    0    8    0    0    0    0
+[5,]    0    0    0    0    8    0    0    0
+[6,]    0    0    0    0    0    8    0    0
+[7,]    0    0    0    0    0    0    8    0
+[8,]    0    0    0    0    0    0    0    8
+
+
+theta %*% coef8 %*% t(coef8) / ncol(coef8)__
+
+
+     [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8]
+[1,] 10.7 13.4 16.4  3.9  8.5   16  1.2  4.4</code></pre>
+<p>We combine these results to estimate <code>theta</code> using the orthogonality of <code>coef8</code>.</p>
+<pre><code>thetahat = Y %*% t(coef8) / ncol(coef8)__</code></pre>
+<p>Since we know the true \(\), we can compute the errors and their sum of squares.</p>
+<pre><code>errors2 = as.vector(thetahat) - theta
+errors2 __
+
+
+[1] -0.005213746  0.025216488  0.003201562  0.033880188 -0.029459127
+[6] -0.043173774  0.083202870 -0.025818188
+
+
+sum(errors2^2)__
+
+
+[1] 0.01214228</code></pre>
+<p>We see that the sum of squares here is substantially smaller than that of the first procedure. Were we just lucky?</p>
+<p>__</p>
+<p>Question 13.7</p>
+<ol type="1">
+<li><p>Repeat the above experiment B = 10000 times, each time using a different <code>theta</code>, and look at the sampling distributions of sum of squared errors in both schemes.</p></li>
+<li><p>What do you think the relationship between the two variances is?</p></li>
+</ol>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<pre><code>B  = 10000
+tc = t(coef8) / ncol(coef8)
+sse = replicate(B, {
+  theta = round((2 * sample(8, 8)) + rnorm(8), 1)
+  X = theta + rnorm(length(theta), 0, 0.1)
+  err1 = sum((X - theta)^2)
+  Y = coef8 %*% theta + rnorm(length(theta), 0, 0.1)
+  thetahat = tc %*% Y
+  err2 = sum((thetahat - theta)^2)
+  c(err1, err2)
+})
+rowMeans(sse)__
+
+
+[1] 0.079591221 0.009954419
+
+
+ggplot(tibble(lr = log2(sse[1, ] / sse[2, ])), aes(x = lr)) +
+  geom_histogram(bins = 50) +
+  geom_vline(xintercept = log2(8), col = "orange") +
+  xlab("log2 ratio of SSE, Method 1 vs 2")__</code></pre>
+<p><a href="13-chap_files/figure- html/fig-logsseratios-1.png" title="Figure 13.7: Logarithm (base 2) of the ratios of sum of squared error for the two methods. The vertical orange line corresponds to 8."><img src="13-chap_files/figure-html/fig-logsseratios-1.png" class="img-fluid"></a></p>
+<p>Figure 13.7: Logarithm (base 2) of the ratios of sum of squared error for the two methods. The vertical orange line corresponds to 8.</p>
+<p>The second scheme is more <strong>efficient</strong> than the first by a factor of 8 because the errors generated by the measurement have a sum of squares that is 8 times lower (Figure 13.7).</p>
+<p>This example shows us that when several quantities are to be ascertained there is an opportunity to increase the accuracy and reduce the cost by combining measurements in one experiment and making comparisons between similar groups.</p>
+<p>Ibn Sina’s rule that an optimal design can only vary one factor at a time was superseded in the 20th century by RA Fisher. He realized that one could modify the factors in combinations and still come to a conclusion—sometimes, an even better conclusion, as in the weighing example—as long as the contrasts were carefully designed.</p>
+<p><a href="13-chap_files/figure- html/fig-blockbox-1.png" title="Figure 13.8: On the left, two samples each of size 6 are being compared. On the right, the same data are shown, but colored by the time of data collection. We note a tendency of the data to fall into blocks according to these times. Because of this, comparison between the groups is diluted. This effect can be mitigated by comparing within times, i.,e., by blocking into three groups. Paired analysis, such as demonstrated in Questions wrn-design-paired—wrn-design-powerPairedUnpaired, is a special case of blocking."><img src="13-chap_files/figure-html/fig-blockbox-1.png" class="img-fluid"></a></p>
+<p>Figure 13.8: On the left, two samples each of size 6 are being compared. On the right, the same data are shown, but colored by the time of data collection. We note a tendency of the data to fall into blocks according to these times. Because of this, comparison between the groups is diluted. This effect can be mitigated by comparing within times, i.,e., by blocking into three groups. Paired analysis, such as demonstrated in Questions 13.8—13.10, is a special case of blocking.</p>
+</section>
+<section id="blocking-and-pairing" class="level3" data-number="15.3.4">
+<h3 data-number="15.3.4" class="anchored" data-anchor-id="blocking-and-pairing"><span class="header-section-number">15.3.4</span> 13.4.4 Blocking and pairing</h3>
+<p>Darwin suspected that corn growth is affected by the composition of the soil and the humidity in the pots. For this reason, when he wanted to compare plants grown from cross-pollinated seeds to plants grown from self-pollinated seeds, he planted one seedling of each type in each of 15 pots. Each pot in Darwin’s <em>Zea Mays</em> experiment is a block, only the factor of interest (pollination method), called the <strong>treatment</strong> , is different within each block (Figure 13.9).</p>
+<p><a href="imgs/maizeDarwin.png" title="Figure 13.9: A paired experiment is the simplest case of blocking."><img src="imgs/maizeDarwin.png" class="img-fluid"></a></p>
+<p>Figure 13.9: A paired experiment is the simplest case of blocking.</p>
+<p>In fact, RA Fisher criticized Darwin’s experiment because he systematically put the cross-pollinated plants on the same side of the pot. This could have induced confounding of a “side” effect with the cross effect, if one side of the pot received more sunlight for instance. It would have been preferable to randomize the side of the pot, e.,g., by flipping a coin.</p>
+<p><em>Block what you can, randomize what you cannot.</em><br>
+(George Box, 1978)</p>
+<section id="comparing-a-paired-versus-an-unpaired-design" class="level4" data-number="15.3.4.1">
+<h4 data-number="15.3.4.1" class="anchored" data-anchor-id="comparing-a-paired-versus-an-unpaired-design"><span class="header-section-number">15.3.4.1</span> Comparing a paired versus an unpaired design</h4>
+<p>When comparing various possible designs, we do <strong>power simulations</strong> similar to what we saw in <a href="01-chap.html">Chapter 1</a>. Let’s suppose the sample size is 15 in each group and the <strong>effect size</strong> is 0.2. We also need to make assumptions about the standard deviations of the measurements, here we suppose both groups have the same sd=0.25 and simulate data:</p>
+<pre><code>n = 15
+effect = 0.2
+pots   = rnorm(n, 0, 1)
+noiseh = rnorm(n, 0, 0.25)
+noisea = rnorm(n, 0, 0.25)
+hybrid = pots + effect + noiseh
+autoz  = pots + noisea __</code></pre>
+<p>__</p>
+<p>Question 13.8</p>
+<p>Perform both a simple \(t\)-test and a paired \(t\)-test. Which is more powerful in this case?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<pre><code>t.test(hybrid, autoz, paired = FALSE)__
+
+
+    Welch Two Sample t-test
+
+data:  hybrid and autoz
+t = 0.77183, df = 26.012, p-value = 0.4472
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.3145706  0.6928591
+sample estimates:
+mean of x mean of y 
+0.5073519 0.3182076 
+
+
+t.test(hybrid, autoz, paired = TRUE)__
+
+
+    Paired t-test
+
+data:  hybrid and autoz
+t = 1.8783, df = 14, p-value = 0.08133
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.02683705  0.40512561
+sample estimates:
+mean difference 
+      0.1891443 </code></pre>
+<p>Maybe we were just lucky with our simulated data here?</p>
+<p>__</p>
+<p>Question 13.9</p>
+<p>Check which method is generally more powerful. Repeat the above computations \(1000\) times and compute the average probability of rejection for these 1000 trials, using a false positive rate \(\).</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<pre><code>B     = 1000
+alpha = 0.05
+what  = c(FALSE, TRUE)
+pvs = replicate(B, {
+  pots   = rnorm(n, 0, 1)
+  noiseh = rnorm(n, 0, 0.25)
+  noisea = rnorm(n, 0, 0.25)
+  hybrid = pots + effect + noiseh
+  autoz  = pots + noisea
+  vapply(what,
+    function(paired)
+      t.test(hybrid, autoz, paired = paired)$p.value,
+    double(1)) |&gt; setNames(paste(what))
+})
+rowMeans(pvs &lt;= alpha)__
+
+
+FALSE  TRUE 
+0.000 0.532 </code></pre>
+<p>We can compare the p-values obtained using both methods (Figure 13.10).</p>
+<pre><code>tidyr::pivot_longer(as.data.frame(t(pvs)), cols = everything(), names_to = "paired") |&gt;
+  ggplot(aes(x = value, fill = paired)) +
+  geom_histogram(binwidth = 0.01, boundary = 0, alpha = 1/3)__</code></pre>
+<p><a href="13-chap_files/figure-html/fig-pvaluescompare-1-1.png &quot;Figure 13.10: Results from the power calculation, comparing the p-value distributions from the ordinary unpaired and the paired t-test.&quot;"><img src="13-chap_files/figure-html/fig- pvaluescompare-1-1.png" class="img-fluid"></a></p>
+<p>Figure 13.10: Results from the power calculation, comparing the p-value distributions from the ordinary unpaired and the paired \(t\)-test.</p>
+<p>__</p>
+<p>Question 13.10</p>
+<ul>
+<li><p>Write a function that compares the power of the two types of tests for different values of the effect size, sample size, size of the pot effects (as measured by their standard deviation), noise standard deviation and sample size.</p></li>
+<li><p>Use your function to find out which of the standard deviations (pots or noise) has the largest effect on the improvement produced by pairing for \(n=15\).</p></li>
+<li><p>How big should \(n\) be to attain a power of 80% if the two standard deviations are both 0.5?</p></li>
+</ul>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<pre><code>powercomparison = function(effect = 0.2, n = 15, alpha = 0.05,
+                sdnoise, sdpots, B = 1000) {
+  what = c(FALSE, TRUE)
+  pvs = replicate(B, {
+    pots   = rnorm(n, 0, sdpots)
+    noiseh = rnorm(n, 0, sdnoise)
+    noisea = rnorm(n, 0, sdnoise)
+    hybrid = pots + effect + noiseh
+    autoz  = pots + noisea
+    vapply(what,
+      function(paired)
+        t.test(hybrid, autoz, paired = paired)$p.value,
+      double(1)) |&gt; setNames(paste(what))
+  })
+  rowMeans(pvs &lt;= alpha)
+}__</code></pre>
+<p>Here are a few simulations showing that when the pot effects are small compared to the noise standard deviation, pairing hardly makes a difference. If the pot effects are large, then pairing does make a big difference.</p>
+<pre><code>powercomparison(sdpots = 0.5,  sdnoise = 0.25)__
+
+
+FALSE  TRUE 
+0.034 0.533 
+
+
+powercomparison(sdpots = 0.25, sdnoise = 0.25)__
+
+
+FALSE  TRUE 
+0.242 0.524 
+
+
+powercomparison(sdpots = 0.1,  sdnoise = 0.25)__
+
+
+FALSE  TRUE 
+0.510 0.534 </code></pre>
+<p>For 100 plants of each type and both standard deviation at 0.5, the power of the paired test is about 80%.</p>
+<pre><code>powercomparison(sdpots = 0.5, sdnoise = 0.5, n = 100)__
+
+
+FALSE  TRUE 
+0.513 0.796 </code></pre>
+<p>__</p>
+<p>Question 13.11</p>
+<p><strong>Paired designs</strong> take into account a natural pairing of the observations — for instance, twin studies, or studies of patients before and after a treatment. What can be done when pairing is not available?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p><strong>Matched designs</strong> try to create pairs of subjects that have as much similarity as possible through matching age, sex, background health etc. One is treated, the other serves as a control.</p>
+<p>A <strong>balanced design</strong> is an experimental design where all the different factor combinations have the same number of observation replicates. The effect of each factor is identifiable. If there are nuisance factors, it is good to make sure they are balanced with the factors of interest. Sometimes this is inconvenient or impractical for logistic or economic reasons – but in such cases analysts are on thin ice and need to proceed with caution.</p>
+</section>
+<section id="randomization" class="level4" data-number="15.3.4.2">
+<h4 data-number="15.3.4.2" class="anchored" data-anchor-id="randomization"><span class="header-section-number">15.3.4.2</span> Randomization</h4>
+<p>Often we don’t know which nuisance factors will be important, or we cannot plan for them ahead of time. In such cases, randomization is a practical strategy: at least in the limit of large enough sample size, the effect of any nuisance factor should average out.</p>
+<p>Randomization can also help reduce unconscious bias. For instance, if the samples from one of the groups are extremely hard to come by, we might be tempted to be extra careful when handling them, compared to samples from the other groups. Unfortunately this might bias the measurement outcomes and thus invalidate the comparison. See Senn (<a href="16-chap.html#ref- senn2004randomization">2004</a>) for an extensive discussion of some of the pitfalls that occur when trying to improve on simple randomization.</p>
+</section>
+</section>
+<section id="how-many-replicates-do-i-need" class="level3" data-number="15.3.5">
+<h3 data-number="15.3.5" class="anchored" data-anchor-id="how-many-replicates-do-i-need"><span class="header-section-number">15.3.5</span> 13.4.5 How many replicates do I need?</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="imgs/devil.png &quot;Beware of underpowered me-too studies.&quot;"><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
+<figcaption>Beware of underpowered me-too studies.</figcaption>
+</figure>
+</div>
+<p>Beware of underpowered me-too studies.</p>
+<p>In <a href="01-chap.html#sec-generative-SimulatingForPower">Section 1.4.1</a> we showed a simulation experiment calculating how many nucleotides were necessary to achieve a 80% true positive rate, given that we knew the alternative. Now, recall the discussion of experiments versus studies from Section 13.2. For the cell line experiment, we might get the correct result already from one replicate; usually we’ll do two or three to be sure. On the other hand, for a study comparing the effect of two alternative drugs on patients, our intuition tells us that there is so much uncontrolled variability that we’ll likely need dozens (if not more) patients until we can be sure about the result. The number of replicates needed is highly context specific. It depends on the amount of uncontrolled variability and the <strong>effect size</strong>. A pragmatic approach is to check out previous successful (or unsuccessful) experiments or studies that did something comparable and use simulations, subsampling or bootstrapping to get an estimate of the planned study’s power.</p>
+<section id="power-depends-on-sample-sizes-effect-sizes-and-variability." class="level4" data-number="15.3.5.1">
+<h4 data-number="15.3.5.1" class="anchored" data-anchor-id="power-depends-on-sample-sizes-effect-sizes-and-variability."><span class="header-section-number">15.3.5.1</span> Power depends on sample sizes, effect sizes and variability.</h4>
+<p><a href="imgs/African_Bush_Elephant.jpg &quot;Figure 13.11: The elephant in the room with power calculations is the effect size. Especially in ’omics studies, when we are screening thousands of genes (or other features) for differences, we rarely have a precise idea of what effect size to expect. However, even so, power calculations are useful for order-of-magnitude calculations, or for qualitative comparisons such as shown in this section for paired versus unpaired tests. Source: Wikimedia CH.&quot;"><img src="imgs/African_Bush_Elephant.jpg" class="img-fluid"></a></p>
+<p>Figure 13.11: The elephant in the room with power calculations is the effect size. Especially in ’omics studies, when we are screening thousands of genes (or other features) for differences, we rarely have a precise idea of what effect size to expect. However, even so, power calculations are useful for order-of-magnitude calculations, or for qualitative comparisons such as shown in this section for paired versus unpaired tests. Source: <a href="https://en.wikipedia.org/wiki/Elephant">Wikimedia CH</a>.</p>
+<p>The package <strong><a href="https://cran.r-project.org/web/packages/pwr/">pwr</a></strong> provides functions for doing the standard <strong>power calculations</strong>. There are always four quantities involved in these computations: sample size, effect size, significance level (false positive rate) and the power itself which is the probability of rejecting a hypothesis when you should (true positive rate). The functions <code>pwr.2p.test</code>, <code>pwr.chisq.test</code>, <code>pwr.f2.test</code> provide the calculations for tests of two proportions, the chisquared test and general linear tests respectively.</p>
+<p>Here is an example of the power calculcation for a two sample \(t\)-test with \(n=15\). The function requires several arguments:</p>
+<pre><code>library("pwr")
+str(pwr.t.test)__
+
+
+function (n = NULL, d = NULL, sig.level = 0.05, power = NULL, type = c("two.sample", 
+    "one.sample", "paired"), alternative = c("two.sided", "less", "greater"))  </code></pre>
+<p>If you call the function with a value for power and effect size, it will return the sample size needed, or if you specify the sample size and effect size, it returns the power.</p>
+<pre><code>pwr.t.test(n = 15, d = 0.4, sig.level = 0.05, type = "two.sample")__
+
+
+     Two-sample t test power calculation 
+
+              n = 15
+              d = 0.4
+      sig.level = 0.05
+          power = 0.1848496
+    alternative = two.sided
+
+NOTE: n is number in *each* group
+
+
+pwr.t.test(n = 15, d = 0.4, sig.level = 0.05, type = "paired")__
+
+
+     Paired t test power calculation 
+
+              n = 15
+              d = 0.4
+      sig.level = 0.05
+          power = 0.3031649
+    alternative = two.sided
+
+NOTE: n is number of *pairs*</code></pre>
+<p>If we want to know what sample size would be required to detect a given effect size:</p>
+<pre><code>pwr.t.test(d = 0.4, sig.level = 0.05, type = "two.sample", power=0.8)__
+
+
+     Two-sample t test power calculation 
+
+              n = 99.08032
+              d = 0.4
+      sig.level = 0.05
+          power = 0.8
+    alternative = two.sided
+
+NOTE: n is number in *each* group
+
+
+pwr.t.test(d = 0.4, sig.level = 0.05, type = "paired", power=0.8)__
+
+
+     Paired t test power calculation 
+
+              n = 51.00945
+              d = 0.4
+      sig.level = 0.05
+          power = 0.8
+    alternative = two.sided
+
+NOTE: n is number of *pairs*</code></pre>
+<p>We see that we would need about twice as many observations for the same power when not using a paired test.</p>
+</section>
+<section id="effective-sample-size" class="level4" data-number="15.3.5.2">
+<h4 data-number="15.3.5.2" class="anchored" data-anchor-id="effective-sample-size"><span class="header-section-number">15.3.5.2</span> Effective sample size</h4>
+<p>A sample of independent observations is more informative than the same number of dependent observations. Suppose you want to do an opinion poll by knocking at people’s doors and asking them a question. In the first scenario, you pick \(n\) people at \(n\) random places throughout the country. In the second scenario, to save travel time, you pick \(n/3\) random places and then at each of these interview three people who live next door to each other. In both cases, the number of people polled is \(n\), but if we assume that people living in the same neighborhood are more likely to have the same opinion, the data from the second scenario are (positively) correlated. To explore this, let’s do a simulation.</p>
+<pre><code>doPoll = function(n = 100, numPeoplePolled = 12) {
+  opinion = sort(rnorm(n))
+  i1 = sample(n, numPeoplePolled)
+  i2 = sample(seq(3, n, by = 3), numPeoplePolled / 3)
+  i2 = c(i2, i2 - 1, i2 - 2)
+  c(independent = mean(opinion[i1]), correlated = mean(opinion[i2]))
+}
+responses = replicate(5000, doPoll())
+
+tidyr::pivot_longer(as.data.frame(t(responses)), 
+        cols = everything(), names_to = "design") |&gt;
+ggplot(aes(x = value, col = design)) + geom_density() +
+  geom_vline(xintercept = 0) + xlab("Opinion poll result")__</code></pre>
+<p><a href="13-chap_files/figure-html/fig-effective-sample-size-sim-1-1.png &quot;Figure 13.12: Density estimates for the polling result using the two sampling methods. The correlated method has higher spread. The truth is indicated by the vertical line.&quot;"><img src="13-chap_files/figure-html/fig-effective-sample-size- sim-1-1.png" class="img-fluid"></a></p>
+<p>Figure 13.12: Density estimates for the polling result using the two sampling methods. The correlated method has higher spread. The truth is indicated by the vertical line.</p>
+<p>There are 100 people in the country, of which in the first approach (<code>i1</code>) we randomly sample 12. In the second approach, we sample 4 people as well as two neighbors for each (<code>i2</code>). The “opinion” in our case is a real number, normally distributed in the population with mean 0 and standard deviation 1. We model the spatio-sociological structure of our country by sorting the houses from most negative to most positive opinion in the first line of the <code>doPoll</code> function. The output is shown in Figure 13.12.</p>
+</section>
+</section>
+</section>
+<section id="mean-variance-relationships-and-variance-stabilizing-transformations" class="level2" data-number="15.4">
+<h2 data-number="15.4" class="anchored" data-anchor-id="mean-variance-relationships-and-variance-stabilizing-transformations"><span class="header-section-number">15.4</span> 13.5 Mean-variance relationships and variance-stabilizing transformations</h2>
+<p>In Chapters <a href="04-chap.html">4</a> and <a href="08-chap.html">8</a> we saw examples for data transformations that compress or stretch the space of quantitative measurements in such a way that the measurements’ variance is more similar throughout. Thus the variance between replicate measurements is no longer highly dependent on the mean value.</p>
+<p>The mean-variance relationship of our data <em>before</em> transformation can in principle be any function, but in many cases, the following prototypic relationships are found, at least approximately:</p>
+<ol type="1">
+<li><p>constant: the variance is independent of the mean, \(v(m)=c\).</p></li>
+<li><p>Poisson: the variance is proportional to to the mean, \(v(m)=am\).</p></li>
+<li><p>quadratic: the standard deviation is proportional to the mean, therefore the variance grows quadratically, \(v(m)=bm^2\).</p></li>
+</ol>
+<p>Here \(v(m)\) is the function that describes the trend of the variance \(v\) as a function of the mean \(m\). The real numbers \(a, b, c\) parameterize factors affecting the variance besides the mean.</p>
+<p>__</p>
+<p>Question 13.12</p>
+<p>Give examples for biological assays or measurement technologies whose data show these types of mean-variance relationships.</p>
+<p>Real data can also be affected by a combination of these. For instance, with DNA microarrays, the fluorescence intensities are subject to a combination of background noise that is largely independent of the signal, and multiplicative noise whose standard deviation is proportional to the signal (<a href="16-chap.html#ref-RockeDurbin:2001">Rocke and Durbin 2001</a>). Therefore, the mean-variance relationship is \(v(m)=bm^2+c\). For bright spots (large \(m\)), the multiplicative noise dominates (\(bm^2\)), whereas for faint ones, the background \(c\).</p>
+<p>__</p>
+<p>Question 13.13</p>
+<p>What is the point of applying a variance-stabilizing transformation?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>Analyzing the data on the transformed scale tends to:</p>
+<ul>
+<li><p>Improve visualization, since the physical space on the plot is used more “fairly” throughout the range of the data. A similar argument applies to the color space in the case of a heatmap.</p></li>
+<li><p>Improve the outcome of ordination methods such as PCA or clustering based on correlation, as the results are not so much dominated by the signal from a few very highly expressed genes, but more uniformly from many genes throughout the dynamic range.</p></li>
+<li><p>Improve the estimates and inference from statistical models that are based on assuming identically distributed (and hence, homoskedastic) noise.</p></li>
+</ul>
+</section>
+<section id="data-quality-assessment-and-quality-control" class="level2" data-number="15.5">
+<h2 data-number="15.5" class="anchored" data-anchor-id="data-quality-assessment-and-quality-control"><span class="header-section-number">15.5</span> 13.6 Data quality assessment and quality control</h2>
+<p>We distinguish between data quality assessment (QA) –steps taken to measure and monitor data quality– and quality control (QC) –removing bad data. These activities pervade all phases of an analysis, from assembling the raw data over transformation, summarization, model fitting, hypothesis testing or screening for “hits” to interpretation. QA-related questions include:</p>
+<ul>
+<li><p>How do the marginal distributions of the variables look (histograms, ECDF plots)?</p></li>
+<li><p>How do their joint distributions look (scatter plots, pairs plot)?</p></li>
+<li><p>How well do replicates agree (as compared to different biological conditions)? Are the magnitudes of the differences between several conditions plausible?</p></li>
+<li><p>Is there evidence of batch effects? These could be of a categorical (stepwise) or continuous (gradual) nature, e.g.. due to changes in experimental reagents, protocols or environmental factors. Factors associated with such effects may be explicitly known, or unkown and latent , and often they are somewhere in between (e.g., when a measurement apparatus slowly degrades over time, and we have recorded the times, but don’t really know exactly at what time the degradation is how bad).</p></li>
+</ul>
+<p>For the last two sets of questions, heatmaps, principal component plots and other ordination plots (as we have seen in Chapters <a href="07-chap.html">7</a> and <a href="09-chap.html">9</a>) are useful.</p>
+<p><a href="imgs/1896_Ford_Quadricycle.jpeg &quot;Figure 13.13: Henry Ford’s (possibly apocryphal) quote: “If I had asked people what they wanted, they would have said faster horses.” expresses the view of quality as fitness for purpose, versus adherence to specifications. (Source: Ford)&quot;"><img src="imgs/1896_Ford_Quadricycle.jpeg" class="img-fluid"></a></p>
+<p>Figure 13.13: Henry Ford’s (possibly apocryphal) quote: “If I had asked people what they wanted, they would have said faster horses.” expresses the view of quality as <strong>fitness for purpose</strong> , versus adherence to specifications. (<a href="https://corporate.ford.com/history.html">Source: Ford</a>)</p>
+<p>It’s not easy to define <strong>quality</strong> , and the word is used with many meanings. The most pertinent for us is <strong>fitness for purpose</strong> 4, and this contrasts to other definitions of quality that are based on normative specifications. For instance, in differential expression analysis with RNA-Seq data, our purpose may be the detection of differentially expressed genes between two biological conditions. We can check specifications such as the number of reads, read length, base calling quality, fraction of aligned reads, but ultimately these measures in isolation have little bearing on our purpose. More to the point will be the identification of samples that are not behaving as expected, e.g., because of a sample swap or degradation; or genes that were not measured properly. We saw an example for this in <a href="08-chap.html#sec- countdata-dealingCooks">Section 8.10.3</a>. Useful plots include ordination plots, such as <a href="08-chap.html#fig-countdata-PCA">Figure 8.6</a>, and heatmaps, such as <a href="08-chap.html#fig-figHeatmap-1">Figure 8.7</a>. A <strong>quality metric</strong> is any value that we use to measure quality, and having explicit quality metrics helps automating QA/QC.</p>
+<p>4 <a href="http://en.wikipedia.org/wiki/Quality_%28business%29" class="uri">http://en.wikipedia.org/wiki/Quality_%28business%29</a></p>
+</section>
+<section id="longitudinal-data" class="level2" data-number="15.6">
+<h2 data-number="15.6" class="anchored" data-anchor-id="longitudinal-data"><span class="header-section-number">15.6</span> 13.7 Longitudinal data</h2>
+<p><strong>Longitudinal data</strong> 5 have time as a covariate. The first question is whether we are looking at a handful of time points –say, the response of a cell line measured 48h, 72h and 96h after exposure to a drug– or a long and densely sampled time series –say, patch clamp data in electrophysiology or a movie from life cell microscopy.</p>
+<p>5 A related but different concept is <em>survival data</em> , where time is the outcome variable.</p>
+<p>In the first case, time is usually best thought of as just another discrete experimental factor. Perhaps the multiple time points were chosen because the experimenter was not sure which one would give the most useful results. One can then try to identify the best time point and focus on that. Depending on the data, the other time points could serve for validation, as “more-or-less” replicates. When designing the experiment, we’ll try to cover those time periods more densely when we expect most to happen, e.g., directly after a perturbation.</p>
+<p>In a screening context, we can ask whether there is any effect at all, regardless of which time point and which shape, using something like an \(F\)-test. We then just need to make sure that we account for the dependencies between the measurements at the different time points and determine the null distribution accordingly.</p>
+<p>In the second case, with time series, we may want to fit dynamical models to the data. We can write \(X(t)\) for the <em>state</em> of our system at time \(t\), and we have many choices, depending on whether</p>
+<ul>
+<li><p>\(X\) is continuous or discrete,</p></li>
+<li><p>the <em>dynamics</em> of \(X\)6 are deterministic or stochastic,</p></li>
+<li><p>the dynamics are smooth and/or jumpy,</p></li>
+<li><p>we observe \(X\) directly or only some noisy and/or reduced version \(Y = g(X)+\)7 of it.</p></li>
+</ul>
+<p>6 The value of \(X(t+t)\), given \(X(t)\), in other words, the temporal evolution</p>
+<p>7 Here \(g\) denotes a function that looses information, e.g., by dropping some of the variables of a vector-valued \(X\), and \(\) is a noise term.</p>
+<p>We have many modeling tools at hand, including</p>
+<ul>
+<li><p>Markov Models: discrete state space; the dynamics are stochastic and occur by jumping between states.</p></li>
+<li><p>Ordinary or partial differential equations: continuous state space; the dynamics are deterministic and smooth and are described by a differential equation, possibly derived from first principles rooted in physics or chemistry.</p></li>
+<li><p>Master equation, Fokker-Planck equation: the dynamics are stochastic and are described by (partial) differential equations for the probability distribution of \(X\) in space and time.</p></li>
+<li><p>Piece-wise deterministic stochastic processes: a combination of the above, samples from the process involve deterministic, smooth movements as well as occasional jumps.</p></li>
+</ul>
+<p>If we don’t observe \(X\) directly, but only a noisy and/or summarized version \(Y\), then in the case of Markov models, the formalism of <strong>Hidden Markov Models</strong> (<a href="16-chap.html#ref-DEKM">Durbin et al.&nbsp;1998</a>) makes it relatively straightforward to fit such models. For the other types of processes, analogous approaches are possible, but these are technically more demanding, and we refer to specialized literature.</p>
+<p>Taking a more data-driven (rather than model-driven) view, methods for analyzing time series data include:</p>
+<ul>
+<li><p>Non-parametric smoothing followed by clustering or classification into prototypic shapes</p></li>
+<li><p>Change point detection</p></li>
+<li><p>Autoregressive models</p></li>
+<li><p>Fourier and wavelet decomposition</p></li>
+</ul>
+<p>It’s outside the scope of this book to go into details, and there is a huge number of choices8. Many methods originated in physics, econometrics or signal processing, so it’s worthwhile to scan the literature in these fields.</p>
+<p>8 One start point is the CRAN taskview <a href="https://cran.r-project.org/web/views/TimeSeries.html" class="uri">https://cran.r-project.org/web/views/TimeSeries.html</a>.</p>
+</section>
+<section id="data-integration-use-everything-you-could-know" class="level2" data-number="15.7">
+<h2 data-number="15.7" class="anchored" data-anchor-id="data-integration-use-everything-you-could-know"><span class="header-section-number">15.7</span> 13.8 Data integration: use everything you (could) know</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="imgs/devil.png" title="Don’t pretend you are dumb."><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
+<figcaption>Don’t pretend you are dumb.</figcaption>
+</figure>
+</div>
+<p>Don’t pretend you are dumb.</p>
+<p>There is an attraction to seemingly “unbiased” approaches that analyse the data at hand without reference to what is already known. Such tendencies are reinforced by the fact that statistical methods have often been developed to be generic and self-contained, for instance, to work of a general matrix without specific reference to what the rows and column mean in an application, or what other, more or less relevant data might be around.</p>
+<p>Generic approaches are a good way to get started, and for analyses that are straightforward and highly powered, such an approach might work out. But often, it is wasteful. Recall the example of an RNA-Seq experiment for differential expression. As we saw in Chapters <a href="06-chap.html">6</a> and <a href="08-chap.html">8</a>, we could perform a hypothesis test for each recorded gene, regardless of its signal strength9 or anything else, and then run a multiple testing method that treats all tests the same (i.e., as exchangeable). But this is inefficient: we can improve our detection power by filtering out or downweighting hypotheses with lower power or with higher prior probability \(_0\) of being true.</p>
+<p>9 i.e., average read counts</p>
+<p>Similarly, in the interpretation of single p-values, we don’t need to ignore everything else we know, and for instance, blindly stick to an arbitrary 5% cutoff no matter what, but rather, we can let prior knowledge on the test’s power and on \(_0\) guide our interpretation (<a href="16-chap.html#ref-Altman:PoS:2017">Altman and Krzywinski 2017</a>).</p>
+<p>Other potential examples of misplaced objectivity include:</p>
+<ul>
+<li><p>Penalization or feature selection in high-dimensional regression or classification. It is easy to use schemes that treat all features the same, for instance, standardize all of them to zero mean and unit variance. But sometime we know that some classes of features are likely to be more or less informative than others (<a href="16-chap.html#ref-Wiel:StatMed:2016">Wiel et al.&nbsp;2016</a>). We can also use graphs or networks to represent “other” data and use approaches like the group or graph lasso (<a href="16-chap.html#ref-Jacob:GroupLasso:2009">Jacob, Obozinski, and Vert 2009</a>) to structure your penalties in high-dimensional modeling.</p></li>
+<li><p>Unsupervised clustering of our objects of interest (samples, genes or sequences) and subsequent search for over-represented annotations. We can be better off by incorporating the different uncertainties with which these were measured as well as their different frequencies into the clustering algorithm. We can use probabilities and similarities to check whether the members of clusters are more similar than two randomly picked objects (<a href="16-chap.html#ref-dada2">Callahan et al.&nbsp;2016</a>).</p></li>
+</ul>
+<p>When embarking on an analysis, it’s important to anticipate that rarely we’ll be done by applying a single method and getting a straightforward result. We need to dig out other, related datasets, look for confirmations (or else) of our results, get further interpretation. An example is gene set enrichment analysis: after we’ve analyzed our data and found a list of genes that appear to be related to our comparison of interest, we’ll overlap them with other gene lists, such as those from the <a href="http://software.broadinstitute.org/gsea/msigdb">Molecular Signatures Database</a> (<a href="16-chap.html#ref-MSigDB">Liberzon et al. 2011</a>) in order to explore the broader biological processes involved; or we might load up datasets looking at levels of regulation10 up-stream or down-stream of ours in search for context.</p>
+<p>10 Genome, chromatin state, transcription, mRNA life cycle, translation, protein life cycle, localization and interactions; metabolites, \(…\)</p>
+</section>
+<section id="sharpen-your-tools-reproducible-research" class="level2" data-number="15.8">
+<h2 data-number="15.8" class="anchored" data-anchor-id="sharpen-your-tools-reproducible-research"><span class="header-section-number">15.8</span> 13.9 Sharpen your tools: reproducible research</h2>
+<p>Analysis projects often begin with a simple script, perhaps to try out a few initial ideas and explore the quality of the pilot data. Then more ideas are added, more data come in, other datasets are integrated, more people become involved. Eventually the paper needs to be written, figures be done ‘properly’, and the analysis be saved for the scientific record and to document its integrity. Here are a few principles that can help with such a process11.</p>
+<p>11 An excellent and very readable outline of good computing practices for researchers, including data management, programming, collaborating with colleagues, organizing projects, tracking work and writing manuscripts, is given by Wilson et al.&nbsp;(<a href="16-chap.html#ref-Wilson:Goodenough:2017">2017</a>).</p>
+<p><strong>Use an integrated development environment.</strong> <strong>RStudio</strong> is a great choice; there are also other platforms such as Emacs or Eclipse.</p>
+<p><strong>Use literate programming</strong> tools such as <strong>Rmarkdown</strong> or Jupyter. This is more readable (for yourself and for others) than burying explanations and usage instructions in comments in the source code or in separate README files, in addition you can directly embed figures and tables in these documents. Such documents are good starting points for the supplementary material of your paper. Moreover, they’re great for reporting analyses to your collaborators. <strong>Anticipate re-engineering of the data formats and the software.</strong> The first version of how you represent the data and structure the analysis workflow will rarely be capable of supporting the project as it evolves. Don’t be afraid12 to make a clean cut and redesign as soon as you notice that you are doing a lot of awkward data manipulations or repetitive steps. This is time well- invested. Almost always it also helps to unearth bugs.</p>
+<p>12 The professionals do it, too: “Most software at Google gets rewritten every few years.” (<a href="16-chap.html#ref- Henderson:2017:SoftwareEngineeringGoogle">Henderson 2017</a>)</p>
+<p><strong>Reuse existing tools.</strong> Don’t reinvent the wheel; your time is better spent on things that are actually new. Before using a self-made “heuristic” or a temporary “short-cut”, spend a couple of minutes researching to see if something like this hasn’t been done before. More often than not, it has, and sometimes there is a clean, scalable and already tested solution.</p>
+<p><strong>Use version control</strong> , such as . This takes time to learn, but this time is well-invested. In the long run it will be infinitely better than all your self-grown attempts at managing evolving code with version numbers, switches and the like. Moreover, this is the sanest option for collaborative work on code, and it provides an extra backup of your codebase, especially if the server is distinct from your personal computer.</p>
+<p><strong>Use functions</strong> rather than copy-pasting (or repeatedly <code>source</code>-ing) stretches of code.</p>
+<p><strong>Use the R package system.</strong> Soon you’ll note recurring function or variable definitions that you want to share between your different scripts. It is fine to use the R function <code>source</code> to manage them initially, but it is never too early to move them into your own package – at the latest when you find yourself starting to write emails or code comments explaining others (or yourself) how to use some functionality. Assembling existing code into an R package is not hard, and it offers you many goodies including standardized ways of documentation, showing code usage examples, code testing, versioning and provision to others. And quite likely you’ll soon appreciate the benefits of using namespaces.</p>
+<p><strong>Centralize the location of the raw data files and automate the derivation of intermediate data.</strong> Store the input data at a centralized file server that is professionally backed up. Mark the files as read-only. Have a clear and linear workflow for computing the derived data (e.g., normalized, summarized, transformed etc.) from the raw files, and store these in a separate directory. Anticipate that this workflow will need to be run several times13, and version it. Use the <strong><a href="https://bioconductor.org/packages/BiocFileCache/">BiocFileCache</a></strong> package to mirror these files on your personal computer14.</p>
+<p>13 Always once more than the final, final time before the final data freeze…</p>
+<p>14 A more basic alternative is the utility. A popular solution offered by some organizations is based on <a href="https://owncloud.org">ownCloud</a>. Commercial options include Dropbox, Google Drive, and the like.</p>
+<p>15 In computer science, the term <em>data warehouse</em> is sometimes used for such a concept.</p>
+<p><strong>Think in terms of cooking recipes and try to automate them.</strong> When developing downstream analysis ideas that bring together several different data types, you don’t want to do the conversion from data type specific formats into a representation suitable for machine learning or generic statistical method each time anew, on an ad hoc basis. Have a <em>recipe</em> script that assembles the different ingredients and cooks them up as an easily consumable15 matrix, data frame or Bioconductor <em>SummarizedExperiment</em>.</p>
+<p><strong>Keep a hyperlinked webpage with an index of all analyses.</strong> This is helpful for collaborators (especially if the page and the analysis can be accessed via a web browser) and also a good starting point for the methods part of your paper. Structure it in chronological or logical order, or a combination of both.</p>
+</section>
+<section id="data-representation" class="level2" data-number="15.9">
+<h2 data-number="15.9" class="anchored" data-anchor-id="data-representation"><span class="header-section-number">15.9</span> 13.10 Data representation</h2>
+<p>Getting data ready for analysis or visualization often involves a lot of shuffling until they are in the right shape and format for an analytical algorithm or a graphics routine. As we saw in <a href="03-chap.html">Chapter 3</a>, <strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong> likes its data in dataframe objects, with one row per measurement record. The reasons behind this choice are well explained in Hadley Wickham’s paper on <strong>tidy data</strong> (<a href="16-chap.html#ref-Wickham:TidyData">Wickham 2014</a>).</p>
+<section id="wide-vs-long-table-format" class="level3" data-number="15.9.1">
+<h3 data-number="15.9.1" class="anchored" data-anchor-id="wide-vs-long-table-format"><span class="header-section-number">15.9.1</span> 13.10.1 Wide vs long table format</h3>
+<p>Recall the Hiiragi data (for space reasons we select only four genes, and print only the first five columns of <code>xwdf</code>):</p>
+<pre><code>library("magrittr")
+data("x", package = "Hiiragi2013")
+xwdf = tibble(
+  probe  = c("1420085_at", "1418863_at", "1425463_at", "1416967_at"),
+  symbol = c(      "Fgf4",      "Gata4",      "Gata6",       "Sox2"))
+xwdf %&lt;&gt;% bind_cols(as_tibble(Biobase::exprs(x)[xwdf$probe, ]))
+dim(xwdf)__
+
+
+[1]   4 103
+
+
+xwdf[, 1:5]__
+
+
+# A tibble: 4 × 5
+  probe      symbol `1 E3.25` `2 E3.25` `3 E3.25`
+  &lt;chr&gt;      &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 1420085_at Fgf4        3.03      9.29      2.94
+2 1418863_at Gata4       4.84      5.53      4.42
+3 1425463_at Gata6       5.50      6.16      4.58
+4 1416967_at Sox2        1.73      9.70      4.16</code></pre>
+<p>Each row of this dataframe corresponds to one of the selected genes. The first two column contain the Affymetrix probe identifier and the gene symbol. The remaining 101 columns report the measured expression values, one for each sample. The sample identifiers, together with information on the time point when the sample was taken, are recorded in the column names as a concatenated string. This is an example for a data table in <strong>wide format</strong>. Now let us call the <code>pivot_longer</code> function from the <strong><a href="https://cran.r-project.org/web/packages/tidyr/">tidyr</a></strong> package and have a look at its output.</p>
+<pre><code>library("tidyr")
+xldf = pivot_longer(xwdf, cols = !all_of(c("probe", "symbol")),
+                          names_to = "sample")
+dim(xldf)__
+
+
+[1] 404   4
+
+
+head(xldf)__
+
+
+# A tibble: 6 × 4
+  probe      symbol sample  value
+  &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt;   &lt;dbl&gt;
+1 1420085_at Fgf4   1 E3.25  3.03
+2 1420085_at Fgf4   2 E3.25  9.29
+3 1420085_at Fgf4   3 E3.25  2.94
+4 1420085_at Fgf4   4 E3.25  9.72
+5 1420085_at Fgf4   5 E3.25  8.92
+6 1420085_at Fgf4   6 E3.25 11.3 </code></pre>
+<p>In <code>xldf</code>, each row corresponds to exactly one of the 404 measured values, stored in the column <code>value</code>. Then there are additional columns <code>probe</code>, <code>symbol</code> and <code>sample</code>, which store the associated covariates. This is an instance of <strong>long format</strong>.</p>
+<p>In <code>xwdf</code>, some columns refer to data from all the samples (namely, <code>probe</code> and <code>symbol</code>), whereas other columns (those with the expression measurements) contain information that is sample-specific. We somehow have to “know” this when interpreting the dataframe. This is what Hadley Wickham calls <strong>untidy data</strong> 16. In contrast, in the tidy dataframe <code>xldf</code> each row forms exactly one observation, its value is in the column named <code>value</code>, and all other information associated with that observation is in the other colums of the same row. If we want to add additional columns, say, Ensembl gene identifiers or chromosome locations, we can simply add them. Similarly, if we want to add data from further genes or additional samples, we can simply add the corresponding rows to <code>xldf</code>. In either, we can assume that we will not break existing code. This is in contrast to <code>xwdf</code>, adding columns might invalidate existing code, as we cannot be sure how it differentiates between data columns (with measured values) and covariate columns.</p>
+<p>16 <a href="http://en.wikipedia.org/wiki/Anna_Karenina_principle">Recall the Anna Karenina principle: there are many different ways for data to be untidy.</a></p>
+<p>Also, subsetting by probe identifier, by gene symbol, or by samples, or indeed by any other covariate, is straightforward and can always use the same <code>dplyr::filter</code> syntax. In contrast, for <code>xwdf</code>, we need to remember that subsetting samples amounts to column subsetting, whereas subsetting genes to row subsetting.</p>
+<p>The Hiiragi data have another natural wide format representation besides <code>xwdf</code>: instead of one row per gene and columns for the different samples, we could also have the data in a dataframe with one row per sample and columns for the different genes. Both of these wide representations can be useful. For instance, if we want to produce scatterplots using <code>ggplot2</code> of the expression values of all genes between two samples, or all samples between two genes, we need to use one or the other of the two wide formats.</p>
+<p>To transform from the long format into the wide format (either of them), you can use the <code>pivot_wider</code> function from the <strong><a href="https://cran.r-project.org/web/packages/tidyr/">tidyr</a></strong> package—the complement of the <code>pivot_longer</code> function that we already used above.</p>
+</section>
+</section>
+<section id="tidy-data-using-it-wisely" class="level2" data-number="15.10">
+<h2 data-number="15.10" class="anchored" data-anchor-id="tidy-data-using-it-wisely"><span class="header-section-number">15.10</span> 13.11 Tidy data – using it wisely</h2>
+<p>In tidy data (<a href="16-chap.html#ref-Wickham:TidyData">Wickham 2014</a>),</p>
+<ol type="1">
+<li><p>each variable forms a column,</p></li>
+<li><p>each observation forms a row,</p></li>
+<li><p>each type of observational unit forms a table.</p></li>
+</ol>
+<p>The success of the <a href="https://www.tidyverse.org">tidyverse</a> attests to the power of its underlying ideas and the quality of its implementation. Much of the code for this book has adopted these ideas and uses the tidyverse.</p>
+<p>Nevertheless, dataframes in the long format are not a panacea. Here are some things to keep in mind:</p>
+<p><strong>Efficiency and integrity.</strong> Even though there are only 4 probe-gene symbol relationships, we are repeatedly storing them 404 times in the rows of <code>xldf</code>. In this instance, the extra storage cost is negligible. In other cases it could be more considerable. More important is the diffusion of information: when we are given an object like <code>xldf</code> and want to know all the probe-gene symbol relationships it uses, we have to gather this information back from the many copies of it in the dataframe; we cannot be sure, without further checking, that the redundant copies of the information are consistent with each other; if we want to update the information, we have to change it in many places. This speaks for workflow designs in which an object like <code>xldf</code> is not used for long term data storage, but is assembled at a relatively late stage of analysis from more normalized17 data containers that contain the primary data objects.</p>
+<p>17 Data normalization is the process of organizing a database to reduce redundancy and improve integrity; see e.g. <a href="https://en.wikipedia.org/wiki/Database_normalization" class="uri">https://en.wikipedia.org/wiki/Database_normalization</a>.</p>
+<p><strong>Lack of contracts and standardization.</strong> When we write a function that expects to work on an object like <code>xldf</code>, we have no guarantee that the column <code>probe</code> does indeed contain valid probe identifiers; nor that such a column even exists. There is not even a direct way to express programmatically what “an object like <code>xldf</code>” means in the tidyverse. Object oriented (OO) programming, and its incarnation S4 in R, solves such questions. For instance, the above-mentioned checks could be performed by a <code>validObject</code> method for a suitably defined class, and the class definition would formalize the notion of “an object like <code>xldf</code>”. Addressing such issues is behind the object-oriented design of the data structures in Bioconductor, such as the <em>SummarizedExperiment</em> class. Other potentially useful features of OO data representations include</p>
+<ul>
+<li><p>Abstraction of interface from implementation and encapsulation: the user accesses the data only through defined channels and does not need to see how the data are stored “inside” – which means the inside can be changed and optimized without breaking user-level code.</p></li>
+<li><p>Polymorphism: you can have different functions with the same name, such as <code>plot</code> or <code>filter</code>, for different classes of objects, and R figures out for you which one to call.</p></li>
+<li><p>Inheritance: you can build up more complex data representations from simpler ones.</p></li>
+<li><p>Reflection and self-documentation: you can send programmatic queries to an object to ask for information about itself.</p></li>
+</ul>
+<p>All of these make it easier to write high-level code that focuses on the big picture functionality rather than on implementation details of the building blocks – albeit at the cost of more initial investment in infrastructure and “bureaucracy”.</p>
+<p><strong>Data provenance and metadata.</strong> There is no obvious place in an object like <code>xldf</code> to add information about data provenance, e.g., who performed the experiment, where it was published, where the data were downloaded from or which version of the data we’re looking at (data bugs exist \(…\)). Neither are there any explanations of the columns, such as units and assay type. Again, the data classes in Bioconductor try to address this need.</p>
+<p><a href="imgs/leakypipeline.png" title="Figure 13.14: Sequential data analyses workflows can be leaky. If insufficient information is passed from one stage to the next, the procedure can end up being suboptimal and losing power."><img src="imgs/leakypipeline.png" class="img-fluid"></a></p>
+<p>Figure 13.14: Sequential data analyses workflows can be leaky. If insufficient information is passed from one stage to the next, the procedure can end up being suboptimal and losing power.</p>
+<p><strong>Matrix-like data.</strong> Many datasets in biology have a natural matrix-like structure, since a number of features (e.g., genes; conventionally the rows of the matrix) were assayed on several samples (conventionally, columns of the matrix). Unrolling the matrix into a long form like <code>xldf</code> makes some operations (say, PCA, SVD, clustering of features or samples) more awkward.</p>
+</section>
+<section id="leaky-pipelines-and-statistical-sufficiency" class="level2" data-number="15.11">
+<h2 data-number="15.11" class="anchored" data-anchor-id="leaky-pipelines-and-statistical-sufficiency"><span class="header-section-number">15.11</span> 13.12 Leaky pipelines and statistical sufficiency</h2>
+<p>Data analysis pipelines in high-throughput biology often work as ‘funnels’ that successively summarise and compress the data. In high-throughput sequencing, we may start with microscopy images of a flow cell, perform base calling to derive sequencing reads, then align them to a reference, then only count the aligned reads for each position, summarise positions to genes (or other kinds of regions), then “normalize” these numbers by library size to make them comparable across libraries, etc. At each step, we loose information, yet it is important to make sure we still have enough information for the task at hand18. The problem is particularly acute if we build our data pipeline from a series of components from separate developers.</p>
+<p>18 For instance, for the RNA-Seq differential expression analysis that we saw in <a href="08-chap.html">Chapter 8</a>, we needed the actual read counts, not “normalized” versions; for some analyses, gene-level summaries might suffice, for others, we’ll want to look at the exon or isoform level.</p>
+<p>Statisticians have a concept for whether certain summaries enable the reconstruction of all the relevant information in the data: <strong>sufficiency</strong>. In a Bernoulli random experiment with a known number of trials, \(n\), the number of successes is a sufficient statistic for estimating the probability of success \(p\).</p>
+<p>__</p>
+<p>Question 13.14</p>
+<p>In a 4 state Markov chain (A, C, G, T) such as the one we saw in Chapter 13, what are the sufficient statistics for the estimation of the transition probabilities?</p>
+<p>Iterative approaches akin to what we saw when we used the EM algorithm can sometimes help avoid information loss. For instance, when analyzing mass spectroscopy data, a first run guesses at peaks individually for every sample. After this preliminary spectra-spotting, another iteration allows us to borrow strength from the other samples to spot spectra that may have been overlooked (looked like noise) before.</p>
+</section>
+<section id="efficient-computing" class="level2" data-number="15.12">
+<h2 data-number="15.12" class="anchored" data-anchor-id="efficient-computing"><span class="header-section-number">15.12</span> 13.13 Efficient computing</h2>
+<p>The rapid progress in data acquisition technologies leads to ever large datasets, and dealing with these is a challenge. It is tempting to jump right into software technologies that are designed for big data and scalability. But usually it is more helpful to first take a step back. Software engineers know the risks of <strong>premature optimization</strong> , or to paraphrase John Tukey19: “A slow and clumsy solution to the right problem is worth a good deal more than a fast and scalable solution to the wrong problem.” Sometimes, a good strategy is to figure out what is the right solution on a subset of the data before embarking on the quest for scalability and performance.</p>
+<p>19 <a href="http://stats.stackexchange.com/a/744" class="uri">http://stats.stackexchange.com/a/744</a></p>
+<p>It’s also good to keep in mind the value of your own time, versus CPU time. If you can save some of your time developing code, even at the cost of longer computations, that can be a worthwhile trade-off.</p>
+<p>Having considered all that, let’s talk about performance. R has a reputation for being slow and wasteful of memory, and that perception is sometimes invoked to motivate choosing other platforms. In some cases, this is justified: nobody would advocate writing a short read aligner, or the steering logic of a self-driving car in R. For statistical analyses, however, it is possible to write very efficient code using one or more of these concepts:</p>
+<p><strong>Vectorization</strong>. Consider the following alternative choices of computing the same result.</p>
+<pre><code>a = runif(1e6)
+b = runif(length(a))
+system.time({
+  z1 = numeric(length(a))
+  for (i in seq(along = a))
+    z1[i] = a[i]^2 * b[i]
+})__
+
+
+   user  system elapsed 
+  0.076   0.001   0.076 
+
+
+system.time({
+  z2 = a^2 * b
+})__
+
+
+   user  system elapsed 
+  0.003   0.000   0.003 
+
+
+identical(z1, z2)__
+
+
+[1] TRUE</code></pre>
+<p>The vectorized version (<code>z2</code>) is many times faster than the explicitly indexed one (<code>z1</code>) and even easier to read. Sometimes, translating an algorithm that is formulated with indices is a little harder — say, if there are <code>if</code>-conditions, or if the computation for index <code>i</code> involves results from index <code>i-1</code>. Language constructs such as vectorized conditionals with <code>ifelse</code>, shifting of vectors with functions such as <code>lead</code> and <code>lag</code> in the <strong><a href="https://cran.r-project.org/web/packages/dplyr/">dplyr</a></strong> package, and generally the infrastructure of <strong><a href="https://cran.r-project.org/web/packages/dplyr/">dplyr</a></strong> , which is designed to express computations on whole dataframes (rather than row by row), can help.</p>
+<p><strong>Parallelization</strong>. Parallelizing computations with R is easy, not least because it is a functional language in which it is natural to express computations as functions with explicit input, output, and no side effects. The landscape of R packages and functionality to support parallized computing is fast-moving; the <a href="https://cran.r-project.org/web/views/HighPerformanceComputing.html">CRAN task view “High-Performance and Parallel Computing”</a> and the package <strong><a href="https://bioconductor.org/packages/BiocParallel/">BiocParallel</a></strong> are good starting points.</p>
+<p><strong>Out-of-memory-data and chunking</strong>. Some datasets are too big to load into random access memory (RAM) and manipulate all at once. Chunking means splitting the data into manageable portions (“chunks”) and then sequentially loading each portion from mass storage, computing on it, storing the result and removing the portion from RAM before loading the next one. R also offers infrastructure for working with large datasets that are stored on disk in a relational database management systems (the <strong><a href="https://cran.r-project.org/web/packages/DBI/">DBI</a></strong> package) or in <a href="https://support.hdfgroup.org/HDF5">HDF5</a> (the <strong><a href="https://bioconductor.org/packages/rhdf5/">rhdf5</a></strong> package). The Bioconductor project provides the class <em>SummarizedExperiment</em> , which can store big data matrices either in RAM or in an HDF5 backend in a manner that is transparent to the user of objects of this class.</p>
+<p><strong>Judicious use of lower level languages</strong>. The <strong><a href="https://cran.r-project.org/web/packages/Rcpp/">Rcpp</a></strong> package makes it easy to write portions of your code in C++ and include them seamlessly within your R code. Many convenient wrappers are provided, such as below the C++ class <code>NumericVector</code> that wraps the R class <em>numeric</em> vector.</p>
+<pre><code>library("Rcpp")
+cppFunction("
+  NumericVector myfun(NumericVector x, NumericVector y) {
+    int n = x.size();
+    NumericVector out(n);
+    for(int i = 0; i &lt; n; ++i) {
+      out[i] = pow(x[i], 2) * y[i];
+    }
+    return out;
+  }")
+z3 = myfun(a, b)
+identical(z1, z3)__
+
+
+[1] TRUE</code></pre>
+<p>In practice, the above code should also contain a check on the length of <code>y</code>. Here, we provided the C++ code to <strong><a href="https://cran.r-project.org/web/packages/Rcpp/">Rcpp</a></strong> as an R character vector, and this is convenient for short injections. For larger functions, you can store the C++ code in an extra file. The idea is, of course, not to write a lot of code in C++, but only the most time critical parts.</p>
+</section>
+<section id="summary-of-this-chapter" class="level2" data-number="15.13">
+<h2 data-number="15.13" class="anchored" data-anchor-id="summary-of-this-chapter"><span class="header-section-number">15.13</span> 13.14 Summary of this chapter</h2>
+<p>In this last chapter, we have tried to collect, generalize and sort some of the concepts and ideas that popped up throughout the book, and that can help you design informative experiments or studies and analyze them effectively. Some of these ideas are intuitive and natural. Others are perhaps less intuitive, such as Hotelling’s weighting example in Section 13.4.3. It requires formal mathematical reasoning. Even when you cannot do an analytical computation, you might be able to do simulations or compute on existing, similar data to benchmark different, non-obvious design choices.</p>
+<p>Yet again other ideas require discipline and foresight: for instance, the “dailies” might be easily forgotten or rationalized away in the heat of an experimental campaign, with so many other concerns competing for our time and attention. You might get away with skipping on keeping your kitchen tidy or eating healthily on individual occasions – as a general approach, it is not recommended.</p>
+<p>We emphasized the importance of computing practices. Throughout the book, with its quantity of interweaved code and almost all “live” data visualizations, we have seen many examples of how to set up computational analyses. Nevertheless, running your own analysis on your own data is something very different from following the computations in a book – just like reading a cookbook is very different from preparing a banquet, or even just one dish. To equip you further, we highly recommend the resources mentioned in Section 13.15. And we wish you good cooking!</p>
+</section>
+<section id="further-reading" class="level2" data-number="15.14">
+<h2 data-number="15.14" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">15.14</span> 13.15 Further reading</h2>
+<ul>
+<li><p>This chapter presented merely a pragmatic and brief introduction to <em>experimental design</em>. There are many book-long treatments that offer detailed advice on setting up experiments to <em>avoid confounding</em> and <em>optimize power</em> (<a href="16-chap.html#ref-wu2011experiments">Wu and Hamada 2011</a>; <a href="16-chap.html#ref-box1978statistics">Box, Hunter, and Hunter 1978</a>; <a href="16-chap.html#ref-glass2007experimental">Glass 2007</a>).</p></li>
+<li><p>We have not scratched the surface of more sophisticated procedures. For instance if you have the possibility of setting up a sequence of experiments that you might stop once you can make a decision, you will need to study <strong>sequential design</strong> (<a href="16-chap.html#ref-Lai:2001">Lai 2001</a>). Exploring <em>complex response surfaces</em> by choosing “good” starting points and then using successive results to choose further points can be very effective; Box, Draper, et al.&nbsp;(<a href="16-chap.html#ref-Box:1987">1987</a>) is an invaluable resource.</p></li>
+<li><p>Gentleman et al.&nbsp;(<a href="16-chap.html#ref-Bioconductor">2004</a>) explain the ideas behind <em>Bioconductor</em> data structures and software design, and Huber et al.&nbsp;(<a href="16-chap.html#ref-Huber:2015">2015</a>) give an update on how Bioconductor supports collaborative software development for users and developers.</p></li>
+<li><p><strong>Git and GitHub</strong>. Jenny Bryan’s website <a href="http://happygitwithr.com">Happy Git and GitHub for the useR</a> is a great introduction to using version control with R.</p></li>
+<li><p>Wickham (<a href="16-chap.html#ref-Wickham:TidyData">2014</a>) explains the principles of <em>tidy data</em>.</p></li>
+<li><p><em>Good enough practices</em>. Wilson et al.&nbsp;(<a href="16-chap.html#ref-Wilson:Goodenough:2017">2017</a>) give a pragmatic and wise set of recommendations for how to be successful in scientific computing.</p></li>
+<li><p>The manual <a href="https://cran.r-project.org/doc/manuals/r-release/R-exts.html">Writing R Extensions</a> is the ultimate reference for <em>R package authoring</em>. It can be consumed in conjunction with the Bioconductor <a href="https://www.bioconductor.org/developers/package-guidelines">package guidelines</a>.</p></li>
+</ul>
+</section>
+<section id="exercises" class="level2" data-number="15.15">
+<h2 data-number="15.15" class="anchored" data-anchor-id="exercises"><span class="header-section-number">15.15</span> 13.16 Exercises</h2>
+<p>__</p>
+<p>Exercise 13.1</p>
+<p>Set up a simulation experiment to decide how many subjects you need, given that you know your measurements will be affected by noise that follows a symmetric Laplace distribution (infinite mixture of normal distributions as defined in <a href="04-chap.html">Chapter 4</a>). You will need to set up a table with different possible noise levels and effect sizes.</p>
+<p>__</p>
+<p>Exercise 13.2</p>
+<p>Use the Bioconductor package <strong><a href="https://bioconductor.org/packages/PROPER/">PROPER</a></strong> to decide the number of samples for an RNA-Seq experiment, and compare the results to those from the <strong><a href="https://bioconductor.org/packages/RNASeqPower/">RNASeqPower</a></strong> Bioconductor package.</p>
+<p>__</p>
+<p>Exercise 13.3</p>
+<p>Check out R’s <code>model.matrix</code> function. Read its manual page and explore the examples given there.</p>
+<p>__</p>
+<p>Exercise 13.4</p>
+<p>Go back to one of your recent data analyses and assemble it into an R package.</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<ul>
+<li><p>Collect one or more recurrent operations (e.g., plots) into functions and document them with manual pages (you may use <strong><a href="https://cran.r-project.org/web/packages/roxygen2/">roxygen2</a></strong>).</p></li>
+<li><p>Add the dataset under the <code>data</code> or <code>inst/extdata</code> directories.</p></li>
+<li><p>If it is not already in that format, convert your analysis script to Rmarkdown.</p></li>
+<li><p>Run <code>R CMD build</code> and <code>R CMD check</code> until all errors and warnings disappear.</p></li>
+</ul>
+<p>A simple intro is given here: &lt;https://hilaryparker.com/2014/04/29/writing-an- r-package-from-scratch&gt;, futher details are in the manual <a href="https://cran.r-project.org/doc/manuals/r-release/R-exts.html">Writing R Extensions</a> that comes with every installation of R.</p>
+<p>__</p>
+<p>Exercise 13.5</p>
+<p>Open an account at GitHub and upload your package. Hint: follow the instructions at Jenny Bryan’s <a href="http://happygitwithr.com">Happy Git and GitHub for the useR</a> site.</p>
+<p>__</p>
+<p>Exercise 13.6</p>
+<p>Check out the <em>renjin</em> project and the <strong>renjin</strong> package. Compare code compiled with <code>renjin</code> with native R code, and with code translated into C/C++ with <strong><a href="https://cran.r-project.org/web/packages/Rcpp/">Rcpp</a></strong> as above.</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>See the Gist at <a href="https://gist.github.com/wolfganghuber/909e14e45af6888eec384b82682b3766" class="uri">https://gist.github.com/wolfganghuber/909e14e45af6888eec384b82682b3766</a>.</p>
+<p>1000 Genomes Project Consortium. 2012. “An Integrated Map of Genetic Variation from 1,092 Human Genomes.” <em>Nature</em> 491 (7422): 56–65.</p>
+<p>Altman, Naomi, and Martin Krzywinski. 2017. “Points of Significance: Interpreting p Values.” <em>Nature Methods</em> 14 (3): 213–14. <a href="https://doi.org/10.1038/nmeth.4210" class="uri">https://doi.org/10.1038/nmeth.4210</a>.</p>
+<p>Bacher, Rhonda, and Christina Kendziorski. 2016. “Design and Computational Analysis of Single-Cell RNA-Sequencing Experiments.” <em>Genome Biology</em> 17 (1): 1.</p>
+<p>Box, George EP, Norman Richard Draper, et al.&nbsp;1987. <em>Empirical Model-Building and Response Surfaces</em>. Vol. 424. Wiley New York.</p>
+<p>Box, George EP, William G Hunter, and J Stuart Hunter. 1978. <em>Statistics for Experimenters: An Introduction to Design, Data Analysis, and Model Building</em>. John Wiley &amp; Sons.</p>
+<p>Callahan, Benjamin J, Paul J McMurdie, Michael J Rosen, Andrew W Han, Amy J Johnson, and Susan P Holmes. 2016. “DADA2: High Resolution Sample Inference from Amplicon Data.” <em>Nature Methods</em> , 1–4.</p>
+<p>Diaconis, Persi, Susan Holmes, and Richard Montgomery. 2007. “Dynamical Bias in the Coin Toss.” <em>SIAM Review</em> 49 (2): 211–35.</p>
+<p>Durbin, Richard, Sean Eddy, Anders Krogh, and Graeme Mitchison. 1998. <em>Biological Sequence Analysis</em>. Cambridge University Press.</p>
+<p>Fisher, Ronald Aylmer. 1935. <em>The Design of Experiments</em>. Oliver &amp; Boyd.</p>
+<p>Gentleman, Robert C, Vincent J Carey, Douglas M Bates, Ben Bolstad, Marcel Dettling, Sandrine Dudoit, Byron Ellis, et al.&nbsp;2004. “Bioconductor: Open Software Development for Computational Biology and Bioinformatics.” <em>Genome Biology</em> 5 (10): R80. <a href="https://doi.org/10.1186/gb-2004-5-10-r80" class="uri">https://doi.org/10.1186/gb-2004-5-10-r80</a>.</p>
+<p>Glass, David J. 2007. <em>Experimental Design for Biologists</em>. Cold Spring Harbor Laboratory Press.</p>
+<p>Henderson, Fergus. 2017. “Software Engineering at Google.” <em>ArXiv e-Prints</em>. <a href="https://arxiv.org/abs/1702.01715" class="uri">https://arxiv.org/abs/1702.01715</a>.</p>
+<p>Hotelling, Harold. 1944. “Some Improvements in Weighing and Other Experimental Techniques.” <em>The Annals of Mathematical Statistics</em> 15 (3): 297–306.</p>
+<p>Huber, Wolfgang, Vincent J Carey, Robert Gentleman, Simon Anders, Marc Carlson, Benilton S Carvalho, Hector Corrada Bravo, et al.&nbsp;2015. “Orchestrating High-Throughput Genomic Analysis with Bioconductor.” <em>Nature Methods</em> 12 (2): 115–21.</p>
+<p>Jacob, Laurent, Guillaume Obozinski, and Jean-Philippe Vert. 2009. “Group Lasso with Overlap and Graph Lasso.” In <em>Proceedings of the 26th Annual International Conference on Machine Learning</em> , 433–40. ACM.</p>
+<p>Lai, Tze Leung. 2001. <em>Sequential Analysis</em>. Wiley Online Library.</p>
+<p>Leek, Jeffrey T, Robert B Scharpf, Héctor Corrada Bravo, David Simcha, Benjamin Langmead, W Evan Johnson, Donald Geman, Keith Baggerly, and Rafael A Irizarry. 2010. “Tackling the Widespread and Critical Impact of Batch Effects in High-Throughput Data.” <em>Nature Reviews Genetics</em> 11 (10): 733–39.</p>
+<p>Leek, Jeffrey T., and John D. Storey. 2007. “Capturing heterogeneity in gene expression studies by surrogate variable analysis.” <em>PLoS Genetics</em> 3 (9): 1724–35.</p>
+<p>Liberzon, Arthur, Aravind Subramanian, Reid Pinchback, Helga Thorvaldsdóttir, Pablo Tamayo, and Jill P Mesirov. 2011. “Molecular Signatures Database (MSigDB) 3.0.” <em>Bioinformatics</em> 27 (12): 1739–40.</p>
+<p>Mead, Roger. 1990. <em>The Design of Experiments: Statistical Principles for Practical Applications</em>. Cambridge University Press.</p>
+<p>Mood, Alexander M. 1946. “On Hotelling’s Weighing Problem.” <em>The Annals of Mathematical Statistics</em> , 432–46.</p>
+<p>Rocke, David M, and Blythe Durbin. 2001. “A Model for Measurement Error for Gene Expression Arrays.” <em>Journal of Computational Biology</em> 8 (6): 557–69.</p>
+<p>Senn, Stephen. 2004. “Controversies Concerning Randomization and Additivity in Clinical Trials.” <em>Statistics in Medicine</em> 23: 3729–53.</p>
+<p>Stegle, O., L. Parts, R. Durbin, and J. Winn. 2010. “A Bayesian framework to account for complex non-genetic factors in gene expression levels greatly increases power in eQTL studies.” <em>PLoS Computational Biology</em> 6 (5): e1000770.</p>
+<p>Stigler, Stephen M. 2016. <em>The Seven Pillars of Statistical Wisdom</em>. Harvard University Press.</p>
+<p>Wickham, Hadley. 2014. “Tidy Data.” <em>Journal of Statistical Software</em> 59 (10).</p>
+<p>Wiel, Mark A, Tonje G Lien, Wina Verlaat, Wessel N Wieringen, and Saskia M Wilting. 2016. “Better Prediction by Use of Co-Data: Adaptive Group- Regularized Ridge Regression.” <em>Statistics in Medicine</em> 35 (3): 368–81.</p>
+<p>Wilson, Greg, Jennifer Bryan, Karen Cranston, Justin Kitzes, Lex Nederbragt, and Tracy K. Teal. 2017. “Good Enough Practices in Scientific Computing.” Edited by Francis Ouellette. <em>PLOS Computational Biology</em> 13 (6): e1005510. <a href="https://doi.org/10.1371/journal.pcbi.1005510" class="uri">https://doi.org/10.1371/journal.pcbi.1005510</a>.</p>
+<p>Wu, CF Jeff, and Michael S Hamada. 2011. <em>Experiments: Planning, Analysis, and Optimization</em>. Vol. 552. John Wiley &amp; Sons.</p>
+<p>Page built at 01:33 on 2025-09-01 using R version 4.5.1 (2025-06-13)</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./12-chap.html" class="pagination-link" aria-label="12.1 Goals for this chapter">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">12.1 Goals for this chapter</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./14-chap.html" class="pagination-link" aria-label="14-chap.html">
+        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">14-chap.html</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

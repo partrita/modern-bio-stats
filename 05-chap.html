@@ -1,0 +1,1803 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>7&nbsp; 5.1 Goals for this chapter – Modern Statistics for Modern Biology</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./06-chap.html" rel="next">
+<link href="./04-chap.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-22854ec117201859c8a7ba6f538122c9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="msmb.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05-chap.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">5.1 Goals for this chapter</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Modern Statistics for Modern Biology</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Home</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The challenge: heterogeneity</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">1.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">2.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">3.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">4.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-chap.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">5.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">6.1 Goals for this Chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">7.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">8.1 Goals of this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">9.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">10.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">11.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">12.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">13.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">14-chap.html</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">15-chap.html</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">16-chap.html</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#what-are-the-data-and-why-do-we-cluster-them" id="toc-what-are-the-data-and-why-do-we-cluster-them" class="nav-link active" data-scroll-target="#what-are-the-data-and-why-do-we-cluster-them"><span class="header-section-number">7.1</span> 5.2 What are the data and why do we cluster them?</a>
+  <ul class="collapse">
+  <li><a href="#clustering-can-sometimes-lead-to-discoveries." id="toc-clustering-can-sometimes-lead-to-discoveries." class="nav-link" data-scroll-target="#clustering-can-sometimes-lead-to-discoveries."><span class="header-section-number">7.1.1</span> 5.2.1 Clustering can sometimes lead to discoveries.</a></li>
+  </ul></li>
+  <li><a href="#how-do-we-measure-similarity" id="toc-how-do-we-measure-similarity" class="nav-link" data-scroll-target="#how-do-we-measure-similarity"><span class="header-section-number">7.2</span> 5.3 How do we measure similarity?</a>
+  <ul class="collapse">
+  <li><a href="#computations-related-to-distances-in-r" id="toc-computations-related-to-distances-in-r" class="nav-link" data-scroll-target="#computations-related-to-distances-in-r"><span class="header-section-number">7.2.1</span> 5.3.1 Computations related to distances in R</a></li>
+  </ul></li>
+  <li><a href="#nonparametric-mixture-detection" id="toc-nonparametric-mixture-detection" class="nav-link" data-scroll-target="#nonparametric-mixture-detection"><span class="header-section-number">7.3</span> 5.4 Nonparametric mixture detection</a>
+  <ul class="collapse">
+  <li><a href="#k-methods-k-means-k-medoids-and-pam" id="toc-k-methods-k-means-k-medoids-and-pam" class="nav-link" data-scroll-target="#k-methods-k-means-k-medoids-and-pam"><span class="header-section-number">7.3.1</span> 5.4.1 \(k\)-methods: \(k\)-means, \(k\)-medoids and PAM</a></li>
+  <li><a href="#tight-clusters-with-resampling" id="toc-tight-clusters-with-resampling" class="nav-link" data-scroll-target="#tight-clusters-with-resampling"><span class="header-section-number">7.3.2</span> 5.4.2 Tight clusters with resampling</a></li>
+  </ul></li>
+  <li><a href="#clustering-examples-flow-cytometry-and-mass-cytometry" id="toc-clustering-examples-flow-cytometry-and-mass-cytometry" class="nav-link" data-scroll-target="#clustering-examples-flow-cytometry-and-mass-cytometry"><span class="header-section-number">7.4</span> 5.5 Clustering examples: flow cytometry and mass cytometry</a>
+  <ul class="collapse">
+  <li><a href="#flow-cytometry-and-mass-cytometry" id="toc-flow-cytometry-and-mass-cytometry" class="nav-link" data-scroll-target="#flow-cytometry-and-mass-cytometry"><span class="header-section-number">7.4.1</span> 5.5.1 Flow cytometry and mass cytometry</a></li>
+  <li><a href="#data-preprocessing" id="toc-data-preprocessing" class="nav-link" data-scroll-target="#data-preprocessing"><span class="header-section-number">7.4.2</span> 5.5.2 Data preprocessing</a></li>
+  <li><a href="#density-based-clustering" id="toc-density-based-clustering" class="nav-link" data-scroll-target="#density-based-clustering"><span class="header-section-number">7.4.3</span> 5.5.3 Density-based clustering</a></li>
+  </ul></li>
+  <li><a href="#hierarchical-clustering" id="toc-hierarchical-clustering" class="nav-link" data-scroll-target="#hierarchical-clustering"><span class="header-section-number">7.5</span> 5.6 Hierarchical clustering</a>
+  <ul class="collapse">
+  <li><a href="#how-to-compute-dissimilarities-between-aggregated-clusters" id="toc-how-to-compute-dissimilarities-between-aggregated-clusters" class="nav-link" data-scroll-target="#how-to-compute-dissimilarities-between-aggregated-clusters"><span class="header-section-number">7.5.1</span> 5.6.1 How to compute (dis)similarities between aggregated clusters?</a></li>
+  </ul></li>
+  <li><a href="#validating-and-choosing-the-number-of-clusters" id="toc-validating-and-choosing-the-number-of-clusters" class="nav-link" data-scroll-target="#validating-and-choosing-the-number-of-clusters"><span class="header-section-number">7.6</span> 5.7 Validating and choosing the number of clusters</a>
+  <ul class="collapse">
+  <li><a href="#using-the-gap-statistic" id="toc-using-the-gap-statistic" class="nav-link" data-scroll-target="#using-the-gap-statistic"><span class="header-section-number">7.6.1</span> 5.7.1 Using the gap statistic</a></li>
+  <li><a href="#cluster-validation-using-the-bootstrap" id="toc-cluster-validation-using-the-bootstrap" class="nav-link" data-scroll-target="#cluster-validation-using-the-bootstrap"><span class="header-section-number">7.6.2</span> 5.7.2 Cluster validation using the bootstrap</a></li>
+  </ul></li>
+  <li><a href="#clustering-as-a-means-for-denoising" id="toc-clustering-as-a-means-for-denoising" class="nav-link" data-scroll-target="#clustering-as-a-means-for-denoising"><span class="header-section-number">7.7</span> 5.8 Clustering as a means for denoising</a>
+  <ul class="collapse">
+  <li><a href="#noisy-observations-with-different-baseline-frequencies" id="toc-noisy-observations-with-different-baseline-frequencies" class="nav-link" data-scroll-target="#noisy-observations-with-different-baseline-frequencies"><span class="header-section-number">7.7.1</span> 5.8.1 Noisy observations with different baseline frequencies</a></li>
+  <li><a href="#denoising-16s-rrna-sequences" id="toc-denoising-16s-rrna-sequences" class="nav-link" data-scroll-target="#denoising-16s-rrna-sequences"><span class="header-section-number">7.7.2</span> 5.8.2 Denoising 16S rRNA sequences</a></li>
+  <li><a href="#infer-sequence-variants" id="toc-infer-sequence-variants" class="nav-link" data-scroll-target="#infer-sequence-variants"><span class="header-section-number">7.7.3</span> 5.8.3 Infer sequence variants</a></li>
+  </ul></li>
+  <li><a href="#summary-of-this-chapter" id="toc-summary-of-this-chapter" class="nav-link" data-scroll-target="#summary-of-this-chapter"><span class="header-section-number">7.8</span> 5.9 Summary of this chapter</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">7.9</span> 5.10 Further reading</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">7.10</span> 5.11 Exercises</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">5.1 Goals for this chapter</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><a href="imgs/starlings_copyrightfree.jpg"><img src="imgs/starlings_copyrightfree.jpg" class="img-fluid"></a></p>
+<p>Finding categories of cells, illnesses, organisms and then naming them is a core activity in the natural sciences. In <a href="04-chap.html">Chapter 4</a> we’ve seen that some data can be modeled as mixtures from different groups or populations with a clear parametric generative model. We saw how in those examples we could use the EM algorithm to disentangle the components. We are going to extend the idea of unraveling of different groups to cases where the <strong>clusters</strong> do not necessarily have nice elliptic1 shapes.</p>
+<p>1 Mixture modeling with multivariate normal distributions implies elliptic cluster boundaries.</p>
+<p>Clustering takes data (continuous or quasi-continuous) and adds to them a new categorical <em>group</em> variable that can often simplify decision making; even if this sometimes comes at a cost of ignoring <em>intermediate</em> states. For instance, medical decisions are simplified by replacing possibly complex, high-dimensional diagnostic measurements by simple groupings: a full report of numbers associated with fasting glucose, glycated hemoglobin and plasma glucose two hours after intake is replaced by assigning the patient to a diabetes mellitus “group”.</p>
+<p>In this chapter, we will study how to find meaningful clusters or groups in both low-dimensional and high-dimensional <strong>nonparametric</strong> settings. However, there is a caveat: clustering algorithms are designed to find clusters, so they will find clusters, even where there are none2. So, cluster <em>validation</em> is an essential component of our process, especially if there is no prior domain knowledge that supports the existence of clusters.</p>
+<p>2 This is reminescent of humans: we like to see patterns—even in randomness.</p>
+<p>In this chapter we will</p>
+<ul>
+<li><p>Study the different types of data that can be beneficially clustered.</p></li>
+<li><p>See measures of (dis)similarity and <strong>distances</strong> that help us define clusters.</p></li>
+<li><p>Uncover hidden or latent clustering by partitioning the data into <em>tighter</em> sets.</p></li>
+<li><p>Use clustering when given biomarkers on each of hundreds of thousands cells. We’ll see that for instance immune cells can be naturally grouped into tight subpopulations.</p></li>
+<li><p>Run nonparametric algorithms such as <strong>\(k\) -means</strong>, <strong>\(k\) -medoids</strong> on real single cell data.</p></li>
+<li><p>Experiment with recursive approaches to clustering that combine observations and groups into a hierarchy of sets; these methods are known as <strong>hierarchical clustering</strong>.</p></li>
+<li><p>Study how to validate clusters through resampling-based bootstrap approaches, which we will demonstrate on a single-cell dataset.</p></li>
+</ul>
+<p><a href="imgs/SnowMapSmallest_web.png" title="Figure 5.1: John Snow’s map of cholera cases: small barcharts at each house indicate a clustering of diagnosed cases."><img src="imgs/SnowMapSmallest_web.png" class="img-fluid"></a></p>
+<p>Figure 5.1: John Snow’s map of cholera cases: small barcharts at each house indicate a clustering of diagnosed cases.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="imgs/book_icon.png &quot;David Freedman has a wonderful detailed account of all the steps that led to this discovery [@freedman1991].&quot;"><img src="imgs/book_icon.png" class="img-fluid figure-img"></a></p>
+<figcaption>David Freedman has a wonderful detailed account of all the steps that led to this discovery (Freedman 1991).</figcaption>
+</figure>
+</div>
+<p>David Freedman has a wonderful detailed account of all the steps that led to this discovery (<a href="16-chap.html#ref-freedman1991">Freedman 1991</a>).</p>
+<section id="what-are-the-data-and-why-do-we-cluster-them" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="what-are-the-data-and-why-do-we-cluster-them"><span class="header-section-number">7.1</span> 5.2 What are the data and why do we cluster them?</h2>
+<section id="clustering-can-sometimes-lead-to-discoveries." class="level3" data-number="7.1.1">
+<h3 data-number="7.1.1" class="anchored" data-anchor-id="clustering-can-sometimes-lead-to-discoveries."><span class="header-section-number">7.1.1</span> 5.2.1 Clustering can sometimes lead to discoveries.</h3>
+<p>John Snow made a map of cholera cases and identified <em>clusters</em> of cases. He then collected additional information about the situation of the pumps. The proximity of dense clusters of cases to the Broadstreet pump pointed to the water as a possible culprit. He collected separate sources of information that enabled him to infer the source of the cholera outbreak.</p>
+<p>Now, let’s look at another map of London, shown in Figure 5.2. The red dots designate locations that were bombed during World War II. Many theories were put forward during the war by the analytical teams. They attempted to find a rational explanation for the bombing patterns (proximity to utility plants, arsenals, \(…\)). In fact, after the war it was revealed that the bombings were randomly distributed without any attempt at hitting particular targets.</p>
+<p><a href="imgs/RedBombsLondon_web.png" title="Figure 5.2: Here is a map of the location of the bombs that were dropped on London on September, 7th, 1940 as depicted by the website of the British National Archives http://bombsight.org."><img src="imgs/RedBombsLondon_web.png" class="img-fluid"></a></p>
+<p>Figure 5.2: Here is a map of the location of the bombs that were dropped on London on September, 7th, 1940 as depicted by the website of the British National Archives <a href="http://bombsight.org" class="uri">http://bombsight.org</a>.</p>
+<p>Clustering is a useful technique for understanding complex multivariate data; it is an <strong>unsupervised</strong> 3. Exploratory techniques show groupings that can be important in interpreting the data.</p>
+<p>3 Thus named because all variables have the same status, we are not trying to predict or learn the value of one variable (the supervisory response) based on the information from explanatory variables.</p>
+<p>For instance, clustering has enabled researchers to enhance their understanding of cancer biology. Tumors that appeared to be the same based on their anatomical location and histopathology fell into multiple clusters based on their molecular signatures, such as gene expression data (<a href="16-chap.html#ref-Hallett2012">Hallett et al. 2012</a>). Eventually, such clusterings might lead to the definition of new, more relevant disease types. Relevance is evidenced, e.g., by the fact that they are associated with different patient outcomes. What we aim to do in this chapter is understand how pictures like Figure 5.3 are constructed and how to interpret them.</p>
+<p><a href="imgs/BreastCancerSubType_Biomed.png%20%22Figure%205.3:%20The%20breast%20cancer%20samples%20(shown%20from%20The%20Cancer%20Genome%20Atlas%20(TCGA)%20and%20the%20Molecular%20Taxonomy%20of%20Breast%20Cancer%20International%20Consortium%20(METABRIC))%20can%20be%20split%20into%20groups%20using%20their%20miRNA%20expression%20%5B@Aure2017%5D.%20The%20authors%20show%20in%20the%20lower%20plots%20that%20the%20survival%20times%20in%20different%20%%20groups%20were%20different.%20Thus%20these%20clusters%20were%20biologically%20and%20clinically%20relevant.%20The%20promise%20of%20such%20analyses%20is%20that%20the%20groups%20can%20be%20used%20to%20provide%20more%20specific,%20optimized%20treatments.%22"><img src="imgs/BreastCancerSubType_Biomed.png" class="img-fluid"></a></p>
+<p>Figure 5.3: The breast cancer samples (shown from The Cancer Genome Atlas (TCGA) and the Molecular Taxonomy of Breast Cancer International Consortium (METABRIC)) can be split into groups using their miRNA expression (<a href="16-chap.html#ref-Aure2017">Aure et al.&nbsp;2017</a>). The authors show in the lower plots that the survival times in different % groups were different. Thus these clusters were biologically and clinically relevant. The promise of such analyses is that the groups can be used to provide more specific, optimized treatments.</p>
+<p>In <a href="04-chap.html">Chapter 4</a>, we have already studied one technique, the EM algorithm, for uncovering groups. The techniques we explore in this chapter are more general and can be applied to more complex data. Many of them are based on distances between pairs of observations (this can be all versus all, or sometimes only all versus some), and they make no explicit assumptions about the generative mechanism of the data involving particular families of distributions, such as normal, gamma-Poisson, etc. There is a proliferation of clustering algorithms in the literature and in the scientific software landscape; this can be intimidating. In fact it is linked to the diversity of the types of data and the objectives pursued in different domains.</p>
+<p>__</p>
+<p>Task</p>
+<p>Look up the <a href="http://www.bioconductor.org/packages/release/BiocViews.html">BiocViews Clustering</a> or the <a href="https://cran.r-project.org/web/views/Cluster.html">Cluster view on CRAN</a> and count the number of packages providing clustering tools.</p>
+<p><a href="imgs/ClusteringA.png" title="Figure 5.4: We decompose the choices made in a clustering algorithm according to the steps taken: starting from an observations-by-features rectangular table X, we choose an observations-to-observations distance measure and compute the distance matrix, here schematized by the triangle. The distances are used to construct the clusters. On the left, we schematize agglomerative methods, that build a hierarchical clustering tree; on the right, partitioning methods that separate the data into subsets. Both types of methods require a choice to be made: the number k of clusters. For partitionning approaches such as k-means this choice has to be made at the outset; for hierarchical clustering this can be deferred to the end of the analysis."><img src="imgs/ClusteringA.png" class="img-fluid"></a></p>
+<p>Figure 5.4: We decompose the choices made in a clustering algorithm according to the steps taken: starting from an observations-by-features rectangular table \(X\), we choose an observations-to-observations distance measure and compute the distance matrix, here schematized by the triangle. The distances are used to construct the clusters. On the left, we schematize agglomerative methods, that build a hierarchical clustering tree; on the right, partitioning methods that separate the data into subsets. Both types of methods require a choice to be made: the number \(k\) of clusters. For partitionning approaches such as \(k\)-means this choice has to be made at the outset; for hierarchical clustering this can be deferred to the end of the analysis.</p>
+</section>
+</section>
+<section id="how-do-we-measure-similarity" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="how-do-we-measure-similarity"><span class="header-section-number">7.2</span> 5.3 How do we measure similarity?</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="imgs/devil.png" title="Of a feather: how the distances are measured and similarities between observations defined has a strong impact on the clustering result."><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
+<figcaption>Of a feather: how the distances are measured and similarities between observations defined has a strong impact on the clustering result.</figcaption>
+</figure>
+</div>
+<p><strong>Of a feather</strong> : how the distances are measured and similarities between observations defined has a strong impact on the clustering result.</p>
+<p>Our first step is to decide what we mean by <em>similar</em>. There are multiple ways of comparing birds: for instance, a distance using size and weight will give a different clustering than one using diet or habitat. Once we have chosen the relevant features, we have to decide how we combine differences between the multiple features into a single number. Here is a selection of choices, some of them are illustrated in Figure 5.5.</p>
+<p><a href="imgs/FourDistances_a.png" title="Figure 5.5 (a):"><img src="imgs/FourDistances_a.png" class="img-fluid"></a></p>
+<ol type="a">
+<li></li>
+</ol>
+<p><a href="imgs/FourDistances_b.png" title="Figure 5.5 (b):"><img src="imgs/FourDistances_b.png" class="img-fluid"></a></p>
+<ol start="2" type="a">
+<li></li>
+</ol>
+<p><a href="imgs/FourDistances_c.png" title="Figure 5.5 (c):"><img src="imgs/FourDistances_c.png" class="img-fluid"></a></p>
+<ol start="3" type="a">
+<li></li>
+</ol>
+<p><a href="imgs/FourDistances_d.png" title="Figure 5.5 (d):"><img src="imgs/FourDistances_d.png" class="img-fluid"></a></p>
+<ol start="4" type="a">
+<li></li>
+</ol>
+<p>Figure 5.5: Equal-distance contour plots according to four different distances: points on any one curve are all the same distance from the center point.</p>
+<p><strong>Euclidean</strong> The Euclidean distance between two points \(A=(a_1,…,a_p)\) and \(B= (b_1,…,b_p)\) in a \(p\)-dimensional space (for the \(p\) features) is the square root of the sum of squares of the differences in all \(p\) coordinate directions:</p>
+<p>\[ d(A,B)=. \]</p>
+<p><strong>Manhattan</strong> The Manhattan, City Block, Taxicab or \(L_1\) distance takes the sum of the absolute differences in all coordinates.</p>
+<p>\[ d(A,B)=|a_1-b_1|+|a_2-b_2|+… +|a_p-b_p|. \]</p>
+<p><strong>Maximum</strong> The maximum of the absolute differences between coordinates is also called the \(L_\) distance:</p>
+<p>\[ d_(A,B)= _{i}|a_i-b_i|. \]</p>
+<p><strong>Weighted Euclidean distance</strong> is a generalization of the ordinary Euclidean distance, by giving different directions in feature space different weights. We have already encountered one example of a weighted Euclidean distance in <a href="02-chap.html">Chapter 2</a>, the \(^2\) distance. It is used to compare rows in contingency tables, and the weight of each feature is the inverse of the expected value. The <em>Mahalanobis</em> distance is another weighted Euclidean distance that takes into account the fact that different features may have a different dynamic range, and that some features may be positively or negatively correlated with each other. The weights in this case are derived from the covariance matrix of the features. See also Question 5.1.</p>
+<p><strong>Minkowski</strong> Allowing the exponent to be \(m\) instead of \(2\), as in the Euclidean distance, gives the Minkowski distance</p>
+<p>\[ d(A,B) = ( (a_1-b_1)<sup>m+(a_2-b_2)</sup>m+… +(a_p-b_p)^m )^. \]</p>
+<p><strong>Edit, Hamming</strong> This distance is the simplest way to compare character sequences. It simply counts the number of differences between two character strings. This could be applied to nucleotide or amino acid sequences – although in that case, the different character substitutions are usually associated with different contributions to the distance (to account for physical or evolutionary similarity), and deletions and insertions may also be allowed.</p>
+<p><strong>Binary</strong> When the two vectors have binary bits as coordinates, we can think of the non-zero elements as ‘on’ and the zero elements as ‘off’. The binary distance is the proportion of features having only one bit on amongst those features that have at least one bit on.</p>
+<p><strong>Jaccard Distance</strong> Occurrence of traits or features in ecological or mutation data can be translated into presence and absence and encoded as 1’s and 0’s. In such situations, co-occurence is often more informative than co- absence. For instance, when comparing mutation patterns in HIV, the co- existence in two different strains of a mutation tends to be a more important observation than its co-absence. For this reason, biologists use the <strong>Jaccard index</strong>. Let’s call our two observation vectors \(S\) and \(T\), \(f_{11}\) the number of times a feature co-occurs in \(S\) and \(T\), \(f_{10}\) (and \(f_{01}\)) the number of times a feature occurs in \(S\) but not in \(T\) (and vice versa), and \(f_{00}\) the number of times a feature is co-absent. The Jaccard index is</p>
+<p>\[ J(S,T) = , \]</p>
+<p>(i.e., it ignores \(f_{00}\)), and the <strong>Jaccard dissimilarity</strong> is</p>
+<p>\[ d_J(S,T) = 1-J(S,T) = . \]</p>
+<p><strong>Correlation based distance</strong></p>
+<p>\[ d(A,B)=. \]</p>
+<p><a href="05-chap_files/figure- html/fig-Mahalanobis-1.png" title="Figure 5.6: An example for the use of Mahalanobis distances to measure the distance of a new data point (red) from two cluster centers."><img src="05-chap_files/figure-html/fig-Mahalanobis-1.png" class="img-fluid"></a></p>
+<p>Figure 5.6: An example for the use of Mahalanobis distances to measure the distance of a new data point (red) from two cluster centers.</p>
+<p>__</p>
+<p>Question 5.1</p>
+<p>Which of the two cluster centers in Figure 5.6 is the red point closest to?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>A naïve answer would use the Euclidean metric and decide that the point is closer to the left cluster. However, as we see that the features have different ranges and correlations, and that these even differ between the two clusters, it makes sense to use cluster-specific Mahalanobis distances. The figure shows contour lines for both clusters. These were obtained from a density estimate; the Mahalanobis distance approximates these contours with ellipses. The distance between the red point and each of the cluster centers corresponds to the number of contour lines crossed. We see that as the group on the right is more spread out, the red point is in fact closer to it.</p>
+<p><a href="imgs/DistanceTriangle.png" title="Figure 5.7: The lower triangle of distances can be computed by any of a hundred different functions in various R packages (vegdist in vegan, daisy in cluster, genetic_distance in gstudio, dist.dna in ape, Dist in amap, distance in ecodist, dist.multiPhylo in distory, shortestPath in gdistance, % dudi.dist and dist.genet in ade4)."><img src="imgs/DistanceTriangle.png" class="img-fluid"></a></p>
+<p>Figure 5.7: The lower triangle of distances can be computed by any of a hundred different functions in various R packages (<code>vegdist</code> in <strong><a href="https://cran.r-project.org/web/packages/vegan/">vegan</a></strong> , <code>daisy</code> in <strong><a href="https://cran.r-project.org/web/packages/cluster/">cluster</a></strong> , <code>genetic_distance</code> in <strong><a href="https://cran.r-project.org/web/packages/gstudio/">gstudio</a></strong> , <code>dist.dna</code> in <strong><a href="https://cran.r-project.org/web/packages/ape/">ape</a></strong> , <code>Dist</code> in <strong><a href="https://cran.r-project.org/web/packages/amap/">amap</a></strong> , <code>distance</code> in <strong><a href="https://cran.r-project.org/web/packages/ecodist/">ecodist</a></strong> , <code>dist.multiPhylo</code> in <strong><a href="https://cran.r-project.org/web/packages/distory/">distory</a></strong> , <code>shortestPath</code> in <strong><a href="https://cran.r-project.org/web/packages/gdistance/">gdistance</a></strong> , % <code>dudi.dist</code> and <code>dist.genet</code> in <strong><a href="https://cran.r-project.org/web/packages/ade4/">ade4</a></strong>).</p>
+<section id="computations-related-to-distances-in-r" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="computations-related-to-distances-in-r"><span class="header-section-number">7.2.1</span> 5.3.1 Computations related to distances in R</h3>
+<p>The <code>dist</code> function in R is designed to use less space than the full \(n^2\) positions a complete \(n n\) distance matrix between \(n\) objects would require. The function computes one of six choices of distance (<code>euclidean</code>, <code>maximum</code>, <code>manhattan</code>, <code>canberra</code>, <code>binary</code>, <code>minkowski</code>) and outputs a vector of values sufficient to reconstruct the complete distance matrix. The function returns a special object of class <code>dist</code> that encodes the relevant vector of size \(n(n-1)/2\). Here is the output for a \(3\) by \(3\) matrix:</p>
+<pre><code>mx  = c(0, 0, 0, 1, 1, 1)
+my  = c(1, 0, 1, 1, 0, 1)
+mz  = c(1, 1, 1, 0, 1, 1)
+mat = rbind(mx, my, mz)
+dist(mat)__
+
+
+         mx       my
+my 1.732051         
+mz 2.000000 1.732051
+
+
+dist(mat, method = "binary")__
+
+
+          mx        my
+my 0.6000000          
+mz 0.6666667 0.5000000</code></pre>
+<p>In order to access a particular distance (for example the distance between observations 1 and 2), one has to turn the <code>dist</code> class object back into a matrix.</p>
+<pre><code>load("../data/Morder.RData")
+sqrt(sum((Morder[1, ] - Morder[2, ])^2))__
+
+
+[1] 5.593667
+
+
+as.matrix(dist(Morder))[2, 1]__
+
+
+[1] 5.593667</code></pre>
+<p>Let’s look at how we would compute the Jaccard distance we defined above between HIV strains.</p>
+<pre><code>mut = read.csv("../data/HIVmutations.csv")
+mut[1:3, 10:16]__
+
+
+  p32I p33F p34Q p35G p43T p46I p46L
+1    0    1    0    0    0    0    0
+2    0    1    0    0    0    1    0
+3    0    1    0    0    0    0    0</code></pre>
+<p>__</p>
+<p>Question 5.2</p>
+<p>Compare the Jaccard distance (available as the function <code>vegdist</code> in the R package <strong><a href="https://cran.r-project.org/web/packages/vegan/">vegan</a></strong>) between mutations in the HIV data <code>mut</code> to the correlation based distance.</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<pre><code>library("vegan")
+mutJ = vegdist(mut, "jaccard")
+mutC = sqrt(2 * (1 - cor(t(mut))))
+mutJ __
+
+
+      1     2     3     4
+2 0.800                  
+3 0.750 0.889            
+4 0.900 0.778 0.846      
+5 1.000 0.800 0.889 0.900
+
+
+as.dist(mutC)__
+
+
+     1    2    3    4
+2 1.19               
+3 1.10 1.30          
+4 1.32 1.13 1.30     
+5 1.45 1.19 1.30 1.32</code></pre>
+<p><a href="imgs/birds_and_dinosaurs.png" title="Figure 5.8: An example of computing the cophenetic distance (xkcd)."><img src="imgs/birds_and_dinosaurs.png" class="img-fluid"></a></p>
+<p>Figure 5.8: An example of computing the cophenetic distance (xkcd).</p>
+<p>It can also be interesting to compare complex objects that are not traditional vectors or real numbers using dissimilarities or distances. Gower’s distance for data of mixed modalities (both categorical factors and continuous variables) can be computed with the <code>daisy</code> function. In fact, distances can be defined between any pairs of objects, not just points in \({ R}^p\) or character sequences. For instance, the <code>shortest.paths</code> function from the <strong><a href="https://cran.r-project.org/web/packages/igraph/">igraph</a></strong> package that we will see in <a href="10-chap.html">Chapter 10</a> computes the distance between vertices on a graph and the function <code>cophenetic</code> computes the distance between leaves of a tree as illustrated in Figure 5.8. We can compute the distance between trees using <code>dist.multiPhylo</code> in the <strong><a href="https://cran.r-project.org/web/packages/distory/">distory</a></strong> package.</p>
+<p>The Jaccard index between graphs can be computed by looking at two graphs built on the same nodes and counting the number of co-occurring edges. This is implemented in the function <code>similarity</code> in the <strong><a href="https://cran.r-project.org/web/packages/igraph/">igraph</a></strong> package. Distances and dissimilarities are also used to compare images, sounds, maps and documents. A distance can usefully encompass domain knowledge and, if carefully chosen, can lead to the solution of many hard problems involving heterogeneous data. Asking yourself what is the <em>relevant</em> notion of “closeness” or similarity for your data can provide useful ways of representing them, as we will explore in <a href="09-chap.html">Chapter 9</a>.</p>
+</section>
+</section>
+<section id="nonparametric-mixture-detection" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="nonparametric-mixture-detection"><span class="header-section-number">7.3</span> 5.4 Nonparametric mixture detection</h2>
+<section id="k-methods-k-means-k-medoids-and-pam" class="level3" data-number="7.3.1">
+<h3 data-number="7.3.1" class="anchored" data-anchor-id="k-methods-k-means-k-medoids-and-pam"><span class="header-section-number">7.3.1</span> 5.4.1 \(k\)-methods: \(k\)-means, \(k\)-medoids and PAM</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="imgs/devil.png" title="The centers of the groups are sometimes called medoids, thus the name PAM (partitioning around medoids)."><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
+<figcaption>The centers of the groups are sometimes called medoids, thus the name PAM (partitioning around medoids).</figcaption>
+</figure>
+</div>
+<p>The centers of the groups are sometimes called medoids, thus the name PAM (partitioning around medoids).</p>
+<p>Partitioning or iterative relocation methods work well in high-dimensional settings, where we cannot4 easily use probability densities, the EM algorithm and parametric mixture modeling in the way we did in <a href="04-chap.html">Chapter 4</a>. Besides the distance measure, the main choice to be made is the number of clusters \(k\). The PAM (partitioning around medoids, Kaufman and Rousseeuw (<a href="16-chap.html#ref-Kaufman2009">2009</a>)) method is as follows:</p>
+<p>4 This is due to the so-called curse of dimensionality. We will discuss this in more detail in <a href="12-chap.html">Chapter 12</a>.</p>
+<ol type="1">
+<li><p>Starts from a matrix of \(p\) features measured on a set of \(n\) observations.</p></li>
+<li><p>Randomly pick \(k\) distinct <em>cluster centers</em> out of the \(n\) observations (“seeds”).</p></li>
+<li><p>Assign each of the remaining observation to the group to whose center it is the closest.</p></li>
+<li><p>For each group, choose a new center from the observations in the group, such that the sum of the distances of group members to the center is minimal; this is called the <em>medoid</em>.</p></li>
+<li><p>Repeat Steps 3 and 4 until the groups stabilize.</p></li>
+</ol>
+<p>Each time the algorithm is run, different initial seeds will be picked in Step 2, and in general, this can lead to different final results. A popular implementation is the <code>pam</code> function in the package <strong><a href="https://cran.r-project.org/web/packages/cluster/">cluster</a></strong>.</p>
+<p>A slight variation of the method replaces the medoids by the arithmetic means (centers of gravity) of the clusters and is called \(k\)-means. While in PAM, the centers are observations, this is not, in general, the case with \(k\)-means. The function <code>kmeans</code> comes with every installation of R in the <strong><a href="https://cran.r-project.org/web/packages/stats/">stats</a></strong> package; an example run is shown in Figure 5.9.</p>
+<p>[<img src="05-chap_files/figure-html/fig-clust- kmeansastep1-1.png" class="img-fluid">](05-chap_files/figure-html/fig-clust-kmeansastep1-1.png “Figure&nbsp;5.9&nbsp;(a):”)</p>
+<ol type="a">
+<li></li>
+</ol>
+<p>[<img src="05-chap_files/figure-html/fig-clust- kmeansastep1-2.png" class="img-fluid">](05-chap_files/figure-html/fig-clust-kmeansastep1-2.png “Figure&nbsp;5.9&nbsp;(b):”)</p>
+<ol start="2" type="a">
+<li></li>
+</ol>
+<p>[<img src="05-chap_files/figure-html/fig-clust- kmeansastep1-3.png" class="img-fluid">](05-chap_files/figure-html/fig-clust-kmeansastep1-3.png “Figure&nbsp;5.9&nbsp;(c):”)</p>
+<ol start="3" type="a">
+<li></li>
+</ol>
+<p>Figure 5.9: An example run of the \(k\)-means algorithm. The initial, randomly chosen centers (black circles) and groups (colors) are shown in (a). The group memberships are assigned based on their distance to centers. At each iteration (b) and (c), the group centers are redefined, and the points reassigned to the cluster centers.</p>
+<p>These so-called \(k\)-methods are the most common off-the-shelf methods for clustering; they work particularly well when the clusters are of comparable size and convex (blob-shaped). On the other hand, if the true clusters are very different in size, the larger ones will tend to be broken up; the same is true for groups that have pronounced non-spherical or non-elliptic shapes.</p>
+<p>__</p>
+<p>Question 5.3</p>
+<p>The \(k\)-means algorithm alternates between computing the average point and assigning the points to clusters. How does this alternating, iterative method differ from an EM-algorithm?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>In the EM algorithm, each point participates in the computation of the mean of all the groups through a probabilistic weight assigned to it. In the \(k\)-means method, the points are either attributed to a cluster or not, so each point participates only, and entirely, in the computation of the center of one cluster.</p>
+</section>
+<section id="tight-clusters-with-resampling" class="level3" data-number="7.3.2">
+<h3 data-number="7.3.2" class="anchored" data-anchor-id="tight-clusters-with-resampling"><span class="header-section-number">7.3.2</span> 5.4.2 Tight clusters with resampling</h3>
+<p>There are clever schemes that repeat the process many times using different initial centers or resampled datasets. Repeating a clustering procedure multiple times on the same data, but with different starting points creates <em>strong forms</em> according to Diday and Brito (<a href="16-chap.html#ref- Diday1989">1989</a>). Repeated subsampling of the dataset and applying a clustering method will result in groups of observations that are “almost always” grouped together; these are called <em>tight clusters</em> (<a href="16-chap.html#ref-Tseng:2005">Tseng and Wong 2005</a>). The study of strong forms or tight clusters facilitates the choice of the number of clusters. A recent package developed to combine and compare the output from many different clusterings is <strong><a href="https://bioconductor.org/packages/clusterExperiment/">clusterExperiment</a></strong>. Here we give an example from its vignette. Single-cell RNA-Seq experiments provide counts of reads, representing gene transcripts, from individual cells. The single cell resolution enables scientists, among other things, to follow cell lineage dynamics. Clustering has proved very useful for analysing such data.</p>
+<p>__</p>
+<p>Question 5.4</p>
+<p>Follow the vignette of the package <strong><a href="https://bioconductor.org/packages/clusterExperiment/">clusterExperiment</a></strong>. Call the ensemble clustering function <code>clusterMany</code>, using <code>pam</code> for the individual clustering efforts. Set the choice of genes to include at either the 60, 100 or 150 most variable genes. Plot the clustering results for \(k\) varying between 4 and 9. What do you notice?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>The following code produces Figure 5.10.</p>
+<pre><code>library("clusterExperiment")
+fluidigm = scRNAseq::ReprocessedFluidigmData()
+se = fluidigm[, fluidigm$Coverage_Type == "High"]
+assays(se) = list(normalized_counts = as.matrix(limma::normalizeQuantiles(assay(se))))
+ce = clusterMany(se, clusterFunction = "pam", ks = c(5, 7, 9), run = TRUE,
+                 isCount = TRUE, reduceMethod = "var", nFilterDims = c(60, 100, 150))__
+
+
+9 parameter combinations, 0 use sequential method, 0 use subsampling method
+Running Clustering on Parameter Combinations...
+done.
+
+
+clusterLabels(ce) = sub("FilterDims", "", clusterLabels(ce))
+plotClusters(ce, whichClusters = "workflow", axisLine = -1)__</code></pre>
+<p><a href="05-chap_files/figure- html/fig-quiltclust-1-1.png" title="Figure 5.10: Comparison of clustering results (rows), for different numbers of included genes and for varying numbers of clusters, k. Each column of the heatmap corresponds to a cell, and the colors represent the cluster assignments."><img src="05-chap_files/figure-html/fig-quiltclust-1-1.png" class="img-fluid"></a></p>
+<p>Figure 5.10: Comparison of clustering results (rows), for different numbers of included genes and for varying numbers of clusters, \(k\). Each column of the heatmap corresponds to a cell, and the colors represent the cluster assignments.</p>
+</section>
+</section>
+<section id="clustering-examples-flow-cytometry-and-mass-cytometry" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="clustering-examples-flow-cytometry-and-mass-cytometry"><span class="header-section-number">7.4</span> 5.5 Clustering examples: flow cytometry and mass cytometry</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="imgs/book_icon.png" title="You can find reviews of bioinformatics methods for flow cytometry in [@oneill2013flow] and a well- kept wikipedia article."><img src="imgs/book_icon.png" class="img-fluid figure-img"></a></p>
+<figcaption>You can find reviews of bioinformatics methods for flow cytometry in (O’Neill et al.&nbsp;2013) and a well-kept wikipedia article.</figcaption>
+</figure>
+</div>
+<p>You can find reviews of bioinformatics methods for flow cytometry in (<a href="16-chap.html#ref-oneill2013flow">O’Neill et al.&nbsp;2013</a>) and <a href="https://en.wikipedia.org/wiki/Flow_cytometry_bioinformatics">a well-kept wikipedia article</a>.</p>
+<p>Studying measurements on single cells improves both the focus and resolution with which we can analyze cell types and dynamics. Flow cytometry enables the simultaneous measurement of about 10 different cell markers. Mass cytometry expands the collection of measurements to as many as 80 proteins per cell. A particularly promising application of this technology is the study of immune cell dynamics.</p>
+<section id="flow-cytometry-and-mass-cytometry" class="level3" data-number="7.4.1">
+<h3 data-number="7.4.1" class="anchored" data-anchor-id="flow-cytometry-and-mass-cytometry"><span class="header-section-number">7.4.1</span> 5.5.1 Flow cytometry and mass cytometry</h3>
+<p>At different stages of their development, immune cells express unique combinations of proteins on their surfaces. These protein-markers are called <strong>CD</strong> s (<strong>clusters of differentiation</strong>) and are collected by flow cytometry (using fluorescence, see Hulett et al.&nbsp;(<a href="16-chap.html#ref-flowsort">1969</a>)) or mass cytometry (using single-cell atomic mass spectrometry of heavy element reporters, see Bendall et al.&nbsp;(<a href="16-chap.html#ref-BendallCell">2012</a>)). An example of a commonly used CD is CD4, this protein is expressed by helper T cells that are referred to as being “CD4+”. Note however that some cells express CD4 (thus are CD4+), but are not actually helper T cells. We start by loading some useful Bioconductor packages for cytometry data, <strong><a href="https://bioconductor.org/packages/flowCore/">flowCore</a></strong> and <strong><a href="https://bioconductor.org/packages/flowViz/">flowViz</a></strong> , and read in an examplary data object <code>fcsB</code> as follows:</p>
+<pre><code>library("flowCore")
+library("flowViz")
+fcsB = read.FCS("../data/Bendall_2011.fcs", truncate_max_range = FALSE)
+slotNames(fcsB)__
+
+
+[1] "exprs"       "parameters"  "description"</code></pre>
+<p>Figure 5.11 shows a scatterplot of two of the variables available in the <code>fcsB</code> data. (We will see how to make such plots below.) We can see clear bimodality and clustering in these two dimensions.</p>
+<p>__</p>
+<p>Question 5.5</p>
+<ol type="1">
+<li><p>Look at the structure of the <code>fcsB</code> object (hint: the <code>colnames</code> function). How many variables were measured?</p></li>
+<li><p>Subset the data to look at the first few rows (hint: use <code>Biobase::exprs(fcsB)</code>). How many cells were measured?</p></li>
+</ol>
+</section>
+<section id="data-preprocessing" class="level3" data-number="7.4.2">
+<h3 data-number="7.4.2" class="anchored" data-anchor-id="data-preprocessing"><span class="header-section-number">7.4.2</span> 5.5.2 Data preprocessing</h3>
+<p>First we load the table data that reports the mapping between isotopes and markers (antibodies), and then we replace the isotope names in the column names of <code>fcsB</code> with the marker names. This makes the subsequent analysis and plotting code more readable:</p>
+<pre><code>markersB = readr::read_csv("../data/Bendall_2011_markers.csv")
+mt = match(markersB$isotope, colnames(fcsB))
+stopifnot(!any(is.na(mt)))
+colnames(fcsB)[mt] = markersB$marker __</code></pre>
+<p>Now we are ready to generate Figure 5.11</p>
+<pre><code>flowPlot(fcsB, plotParameters = colnames(fcsB)[2:3], logy = TRUE)__</code></pre>
+<p><a href="05-chap_files/figure-html/fig-ObviousClusters-1.png &quot;Figure 5.11: Cell measurements that show clear clustering in two dimensions.&quot;"><img src="05-chap_files/figure-html/fig- ObviousClusters-1.png" class="img-fluid"></a></p>
+<p>Figure 5.11: Cell measurements that show clear clustering in two dimensions.</p>
+<p>Plotting the data in two dimensions as in Figure 5.11 already shows that the cells can be grouped into subpopulations. Sometimes just one of the markers can be used to define populations on their own; in that case simple <strong>rectangular gating</strong> is used to separate the populations; for instance, CD4+ cells can be gated by taking the subpopulation with high values for the CD4 marker. Cell clustering can be improved by carefully choosing transformations of the data. The left part of Figure 5.12 shows a simple one dimensional histogram before transformation; on the right of Figure 5.12 we see the distribution after transformation. It reveals a bimodality and the existence of two cell populations.</p>
+<p><strong>Data Transformation: hyperbolic arcsin (asinh)</strong>. It is standard to transform both flow and mass cytometry data using one of several special functions. We take the example of the inverse hyperbolic sine (asinh):</p>
+<p>\[ (x) = . \]</p>
+<p>From this we can see that for large values of \(x\), \((x)\) behaves like the logarithm and is practically equal to \((x)+(2)\); for small \(x\) the function is close to linear in \(x\).</p>
+<p>__</p>
+<p>Task</p>
+<p>Try running the following code to see the two main regimes of the transformation: small values and large values.</p>
+<pre><code>v1 = seq(0, 1, length.out = 100)
+plot(log(v1), asinh(v1), type = 'l')__
+
+
+ plot(v1, asinh(v1), type = 'l')__
+
+
+v3 = seq(30, 3000, length = 100)
+plot(log(v3), asinh(v3), type= 'l')__</code></pre>
+<p>This is another example of a variance stabilizing transformation, also mentioned in Chapters <a href="04-chap.html">4</a> and <a href="08-chap.html">8</a>. Figure 5.12 is produced by the following code, which uses the <code>arcsinhTransform</code> function in the <strong><a href="https://bioconductor.org/packages/flowCore/">flowCore</a></strong> package.</p>
+<pre><code>asinhtrsf = arcsinhTransform(a = 0.1, b = 1)
+fcsBT = transform(fcsB, transformList(colnames(fcsB)[-c(1, 2, 41)], asinhtrsf))
+densityplot(~`CD3all`, fcsB)
+densityplot(~`CD3all`, fcsBT)__</code></pre>
+<p><a href="05-chap_files/figure-html/fig- plotTransformations-1.png" title="Figure 5.12 (a):"><img src="05-chap_files/figure-html/fig- plotTransformations-1.png" class="img-fluid"></a></p>
+<ol type="a">
+<li></li>
+</ol>
+<p><a href="05-chap_files/figure-html/fig- plotTransformations-2.png" title="Figure 5.12 (b):"><img src="05-chap_files/figure-html/fig- plotTransformations-2.png" class="img-fluid"></a></p>
+<ol start="2" type="a">
+<li></li>
+</ol>
+<p>Figure 5.12: Panel (a) shows the histogram of the CD3all variable: the cells are clustered around 0 with a few large values. In (b), we see that after an asinh transformation, the cells cluster and fall into two groups or types.</p>
+<p>__</p>
+<p>Question 5.6</p>
+<p>How many dimensions does the following code use to split the data into 2 groups using \(k\)-means ?</p>
+<pre><code>kf = kmeansFilter("CD3all" = c("Pop1","Pop2"), filterId="myKmFilter")
+fres = flowCore::filter(fcsBT, kf)
+summary(fres)__
+
+
+Pop1: 33434 of 91392 events (36.58%)
+Pop2: 57958 of 91392 events (63.42%)
+
+
+fcsBT1 = flowCore::split(fcsBT, fres, population = "Pop1")
+fcsBT2 = flowCore::split(fcsBT, fres, population = "Pop2")__</code></pre>
+<p>Figure 5.13, generated by the following code, shows a naïve projection of the data into the two dimensions spanned by the CD3 and CD56 markers:</p>
+<pre><code>library("flowPeaks")
+fp = flowPeaks(Biobase::exprs(fcsBT)[, c("CD3all", "CD56")])
+plot(fp)__</code></pre>
+<p><a href="05-chap_files/figure- html/fig-flowCD3CD56-1-1.png" title="Figure 5.13: After transformation these cells were clustered using kmeans."><img src="05-chap_files/figure-html/fig-flowCD3CD56-1-1.png" class="img-fluid"></a></p>
+<p>Figure 5.13: After transformation these cells were clustered using <code>kmeans</code>.</p>
+<p>When plotting points that densely populate an area we should try to avoid overplotting. We saw some of the preferred techniques in <a href="03-chap.html">Chapter 3</a>; here we use contours and shading. This is done as follows:</p>
+<pre><code>flowPlot(fcsBT, plotParameters = c("CD3all", "CD56"), logy = FALSE)
+contour(fcsBT[, c(40, 19)], add = TRUE)__</code></pre>
+<p><a href="05-chap_files/figure-html/fig- groupcontourCD3CD56-1.png" title="Figure 5.14: Like Figure fig-flowCD3CD56-1, using contours."><img src="05-chap_files/figure-html/fig- groupcontourCD3CD56-1.png" class="img-fluid"></a></p>
+<p>Figure 5.14: Like Figure 5.13, using contours.</p>
+<p>This produces Figure 5.14—a more informative version of Figure 5.13.</p>
+<p>__</p>
+<p>Task</p>
+<p>The Bioconductor package <strong><a href="https://bioconductor.org/packages/ggcyto/">ggcyto</a></strong> enables the plotting of each patient’s data in a different facet using <code>ggplot</code>. Try comparing the output using this approach to what we did above, along the following lines:</p>
+<pre><code>library("ggcyto")
+library("labeling")
+
+p1 = ggcyto(fcsB, aes(x = CD4)) + geom_histogram(bins = 60)
+p2 = ggcyto(fcsB, aes(x = CD8)) + geom_histogram(bins = 60)
+p3 = ggcyto(fcsB, aes(x = CD4, y = CD8)) + geom_density2d(colour = "black")
+
+fcsBT = transform(fcsB, transformList(colnames(fcsB)[-c(1, 2, 41)], 
+                                      arcsinhTransform(a = 0, b = 1)))
+                                      
+p1t = ggcyto(fcsBT, aes(x = CD4))            + geom_histogram(bins = 90)
+p2t = ggcyto(fcsBT, aes(x = CD4,y = CD8))    + geom_density2d(colour = "black")
+p3t = ggcyto(fcsBT, aes(x = CD45RA,y = CD20))+ geom_density2d(colour = "black")__</code></pre>
+</section>
+<section id="density-based-clustering" class="level3" data-number="7.4.3">
+<h3 data-number="7.4.3" class="anchored" data-anchor-id="density-based-clustering"><span class="header-section-number">7.4.3</span> 5.5.3 Density-based clustering</h3>
+<p>Data sets such as flow cytometry, that contain only a few markers and a large number of cells, are amenable to density-based clustering. This method looks for regions of high density separated by sparser regions. It has the advantage of being able to cope with clusters that are not necessarily convex. One implementation of such a method is called dbscan. Let’s look at an example by running the following code.</p>
+<pre><code>library("dbscan")
+mc5 = Biobase::exprs(fcsBT)[, c(15,16,19,40,33)]
+res5 = dbscan::dbscan(mc5, eps = 0.65, minPts = 30)
+mc5df = data.frame(mc5, cluster = as.factor(res5$cluster))
+table(mc5df$cluster)__
+
+
+    0     1     2     3     4     5     6     7     8 
+76053  4031  5450  5310   257   160    63    25    43 
+
+
+ggplot(mc5df, aes(x=CD4,    y=CD8,  col=cluster))+geom_density2d()
+ggplot(mc5df, aes(x=CD3all, y=CD20, col=cluster))+geom_density2d()__</code></pre>
+<p><a href="05-chap_files/figure- html/fig-dbscanfcs5-1.png" title="Figure 5.15 (a):"><img src="05-chap_files/figure-html/fig-dbscanfcs5-1.png" class="img-fluid"></a></p>
+<ol type="a">
+<li></li>
+</ol>
+<p><a href="05-chap_files/figure- html/fig-dbscanfcs5-2.png" title="Figure 5.15 (b):"><img src="05-chap_files/figure-html/fig-dbscanfcs5-2.png" class="img-fluid"></a></p>
+<ol start="2" type="a">
+<li></li>
+</ol>
+<p>Figure 5.15: These two plots show the results of clustering with <code>dbscan</code> using five markers. Here we only show the projections of the data into the CD4-CD8 and C3all-CD20 planes.</p>
+<p>The output is shown in Figure 5.15. The overlaps of the clusters in the 2D projections enable us to appreciate the multidimensional nature of the clustering.</p>
+<p>__</p>
+<p>Question 5.7</p>
+<p>Try increasing the dimension to 6 by adding one CD marker-variables from the input data.<br>
+Then vary <code>eps</code>, and try to find four clusters such that at least two of them have more than 100 points.<br>
+Repeat this will 7 CD marker-variables, what do you notice?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>An example with the following 6 markers</p>
+<pre><code>mc6 = Biobase::exprs(fcsBT)[, c(15, 16, 19, 33, 25, 40)]
+res = dbscan::dbscan(mc6, eps = 0.65, minPts = 20)
+mc6df = data.frame(mc6, cluster = as.factor(res$cluster))
+table(mc6df$cluster)__
+
+
+    0     1     2     3     4     5     6 
+91068    34    61    20    67   121    21 </code></pre>
+<p>We see that with eps= 0.75 it is easier to find large enough clusters than if we take eps=0.65, with eps=0.55 it is impossible. As we increase the dimensionality to 7, we have to make eps even larger.</p>
+<pre><code>mc7 = Biobase::exprs(fcsBT)[, c(11, 15, 16, 19, 25, 33, 40)]
+res = dbscan::dbscan(mc7, eps = 0.95, minPts = 20)
+mc7df = data.frame(mc7, cluster = as.factor(res$cluster))
+table(mc7df$cluster)__
+
+
+    0     1     2     3     4     5     6     7     8     9    10 
+90249    21   102   445   158   119    19   224    17    20    18 </code></pre>
+<p>This shows us the so-called <strong>curse of dimensionality</strong> in action, of which more in <a href="12-chap.html">Chapter 12</a>.</p>
+<section id="how-does-density-based-clustering-dbscan-work" class="level4" data-number="7.4.3.1">
+<h4 data-number="7.4.3.1" class="anchored" data-anchor-id="how-does-density-based-clustering-dbscan-work"><span class="header-section-number">7.4.3.1</span> How does density-based clustering (dbscan) work ?</h4>
+<p>The dbscan method clusters points in dense regions according to the <em>density- connectedness</em> criterion. It looks at small neighborhood spheres of radius \(\) to see if points are connected.</p>
+<p>The building block of dbscan is the concept of density-reachability: a point \(q\) is directly <strong>density-reachable</strong> from a point \(p\) if it is not further away than a given threshold \(\), and if \(p\) is surrounded by sufficiently many points such that one may consider \(p\) (and \(q\)) be part of a dense region. We say that \(q\) is <em>density-reachable</em> from \(p\) if there is a sequence of points \(p_1,…,p_n\) with \(p_1 = p\) and \(p_n = q\), so that each \(p_{i + 1}\) is directly density- reachable from \(p_i\).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="imgs/devil.png" title="It is important that the method looks for high density of points in a neighborhood. Other methods exist that try to define clusters by a void, or “missing points” between clusters. But these are vulnerable to the curse of dimensionality; these can create spurious “voids”."><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
+<figcaption>It is important that the method looks for high density of points in a neighborhood. Other methods exist that try to define clusters by a void, or “missing points” between clusters. But these are vulnerable to the curse of dimensionality; these can create spurious “voids”.</figcaption>
+</figure>
+</div>
+<p>It is important that the method looks for high density of points in a neighborhood. Other methods exist that try to define clusters by a void, or “missing points” between clusters. But these are vulnerable to the curse of dimensionality; these can create spurious “voids”.</p>
+<p>A <em>cluster</em> is then a subset of points that satisfy the following properties:</p>
+<ol type="1">
+<li><p>All points within the cluster are mutually density-connected.</p></li>
+<li><p>If a point is density-connected to any point of the cluster, it is part of the cluster as well.</p></li>
+<li><p>Groups of points must have at least <code>MinPts</code> points to count as a cluster.</p></li>
+</ol>
+</section>
+</section>
+</section>
+<section id="hierarchical-clustering" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="hierarchical-clustering"><span class="header-section-number">7.5</span> 5.6 Hierarchical clustering</h2>
+<p><a href="imgs/LinnaeusClass-01.png" title="Figure 5.16: A snippet of Linnus’ taxonomy that clusters organisms according to feature similarities."><img src="imgs/LinnaeusClass-01.png" class="img-fluid"></a></p>
+<p>Figure 5.16: A snippet of Linnus’ taxonomy that clusters organisms according to feature similarities.</p>
+<p>Hierarchical clustering is a bottom-up approach, where similar observations and subclasses are assembled iteratively. Figure 5.16 shows how Linnæus made nested clusters of organisms according to specific characteristics. Such hierarchical organization has been useful in many fields and goes back to Aristotle who postulated a <em>ladder of nature</em>.</p>
+<p><strong>Dendrogram ordering</strong>. As you can see in the example of Figure 5.17, the order of the labels does not matter within sibling pairs. Horizontal distances are usually meaningless, while the vertical distances do encode some information. These properties are important to remember when making interpretations about neighbors that are not monophyletic (i.e., not in the same subtree or clade), but appear as neighbors in the plot (for instance B and D in the right hand tree are non-monophyletic neighbors).</p>
+<p><a href="imgs/SameTree-01.png" title="Figure 5.17: Three representations of the same hierarchical clustering tree."><img src="imgs/SameTree-01.png" class="img-fluid"></a></p>
+<p>Figure 5.17: Three representations of the <strong>same</strong> hierarchical clustering tree.</p>
+<p><strong>Top-down hierarchies</strong>. An alternative, top-down, approach takes all the objects and splits them sequentially according to a chosen criterion. Such so- called <strong>recursive partitioning</strong> methods are often used to make decision trees. They can be useful for prediction (say, survival time, given a medical diagnosis): we are hoping in those instances to split heterogeneous populations into more homogeneous subgroups by partitioning. In this chapter, we concentrate on the bottom-up approaches. We will return to partitioning when we talk about supervised learning and classification in <a href="12-chap.html">Chapter 12</a>.</p>
+<section id="how-to-compute-dissimilarities-between-aggregated-clusters" class="level3" data-number="7.5.1">
+<h3 data-number="7.5.1" class="anchored" data-anchor-id="how-to-compute-dissimilarities-between-aggregated-clusters"><span class="header-section-number">7.5.1</span> 5.6.1 How to compute (dis)similarities between aggregated clusters?</h3>
+<p><a href="imgs/ClusterStepChoiceSingle1b.png &quot;Figure 5.18: In the single linkage method, the distance between groups C_1 and C_2 is defined as the distance between the closest two points from the groups.&quot;"><img src="imgs/ClusterStepChoiceSingle1b.png" class="img-fluid"></a></p>
+<p>Figure 5.18: In the single linkage method, the distance between groups \(C_1\) and \(C_2\) is defined as the distance between the closest two points from the groups.</p>
+<p>A hierarchical clustering algorithm, which works by aggregation, is easy enough to get started, by grouping the most similar observations together. But we will need more than just the distances between all pairs of individual objects. Once an aggregation is made, one is required to say how the distance between the newly formed cluster and all other points (or existing clusters) is computed. There are different choices, all based on the object-object distances, and each choice results in a different type of hierarchical clustering.</p>
+<p>The <strong>minimal jump</strong> method, also called <strong>single linkage</strong> or nearest neighbor method computes the distance between clusters as the smallest distance between any two points in the two clusters (as shown in Figure 5.18):</p>
+<p>\[ d_{12} = <em>{i C_1, j C_2 } d</em>{ij}. \]</p>
+<p>This method tends to create clusters that look like contiguous strings of points. The cluster tree often looks like a comb.</p>
+<p><a href="imgs/ClusterStepChoiceComplete1b.png &quot;Figure 5.19: In the complete linkage method, the distance between groups C_1 and C_2 is defined as the maximum distance between pairs of points from the two groups.&quot;"><img src="imgs/ClusterStepChoiceComplete1b.png" class="img-fluid"></a></p>
+<p>Figure 5.19: In the complete linkage method, the distance between groups \(C_1\) and \(C_2\) is defined as the maximum distance between pairs of points from the two groups.</p>
+<p>The <strong>maximum jump</strong> (or <strong>complete linkage</strong>) method defines the distance between clusters as the largest distance between any two objects in the two clusters, as represented in Figure 5.19:</p>
+<p>\[ d_{12} = <em>{i C_1, j C_2 } d</em>{ij}. \]</p>
+<p>The <strong>average linkage</strong> method is half way between the two above (here, \(|C_k|\) denotes the number of elements of cluster \(k\)):</p>
+<p>\[ d_{12} = <em>{i C_1, j C_2 } d</em>{ij} \]</p>
+<p><a href="imgs/BetweenWithinb.png" title="Figure 5.20: The Ward method maximizes the between group sum of squares (red edges), while minimizing the sums of squares within groups (black edges)."><img src="imgs/BetweenWithinb.png" class="img-fluid"></a></p>
+<p>Figure 5.20: The Ward method maximizes the between group sum of squares (red edges), while minimizing the sums of squares within groups (black edges).</p>
+<p><strong>Ward’s method</strong> takes an analysis of variance approach, where the goal is to minimize the variance within clusters. This method is very efficient, however, it tends to create clusters of smaller sizes.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Advantages and disadvantages of various choices of defining distances between aggregates (<a href="16-chap.html#ref-distory-paper">Chakerian and Holmes 2012</a>). Method</th>
+<th>Pros</th>
+<th>Cons</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Single linkage</td>
+<td>number of clusters</td>
+<td>comblike trees</td>
+</tr>
+<tr class="even">
+<td>Complete linkage</td>
+<td>compact classes</td>
+<td>one observation can alter groups</td>
+</tr>
+<tr class="odd">
+<td>Average linkage</td>
+<td>similar size and variance</td>
+<td>not robust</td>
+</tr>
+<tr class="even">
+<td>Centroid</td>
+<td>robust to outliers</td>
+<td>smaller number of clusters</td>
+</tr>
+<tr class="odd">
+<td>Ward</td>
+<td>minimising an inertia</td>
+<td>classes small if high variability</td>
+</tr>
+</tbody>
+</table>
+<p><a href="imgs/CalderHand.png" title="Figure 5.21: Hierarchical clustering output has similar properties to a mobile: the branches can rotate freely from their suspension points."><img src="imgs/CalderHand.png" class="img-fluid"></a></p>
+<p>Figure 5.21: Hierarchical clustering output has similar properties to a mobile: the branches can rotate freely from their suspension points.</p>
+<p>These are the choices we have to make building hierarchical clustering trees. An advantage of hierarchical clustering compared to the partitioning methods is that it offers a graphical diagnostic of the strength of groupings: the length of the inner edges in the tree.</p>
+<p>When we have prior knowledge that the clusters are about the same size, using average linkage or Ward’s method of minimizing the within class variance is the best tactic.</p>
+<p>__</p>
+<p>Question 5.8</p>
+<p><strong>Hierarchical clustering for cell populations</strong> The <code>Morder</code> data are gene expression measurements for 156 genes on T cells of 3 types (naïve, effector, memory) from 10 patients (<a href="16-chap.html#ref- holmes2005memory">Holmes et al.&nbsp;2005</a>). Using the <strong><a href="https://cran.r-project.org/web/packages/pheatmap/">pheatmap</a></strong> package, make two simple heatmaps, without dendogram or reordering, for Euclidean and Manhattan distances of these data.</p>
+<p>__</p>
+<p>Question 5.9</p>
+<p>Now, look at the differences in orderings in the hierarchical clustering trees with these two distances. What differences are noticeable?</p>
+<p><a href="imgs/single14heatmap.png" title="Figure 5.22 (a):"><img src="imgs/single14heatmap.png" class="img-fluid"></a></p>
+<ol type="a">
+<li></li>
+</ol>
+<p><a href="imgs/average14heatmap.png" title="Figure 5.22 (b):"><img src="imgs/average14heatmap.png" class="img-fluid"></a></p>
+<ol start="2" type="a">
+<li></li>
+</ol>
+<p>[<img src="imgs/complete14heatmap.png" class="img-fluid">](imgs/complete14heatmap.png “Figure&nbsp;5.22&nbsp;(c):”)</p>
+<ol start="3" type="a">
+<li></li>
+</ol>
+<p>Figure 5.22: Three hierarchical clustering plots made with different agglomeration choices. Note the comb-like structure for single linkage in (a). The average (b) and complete linkage (c) trees only differ by the lengths of their inner branches.</p>
+<p><a href="imgs/apeclust14.png" title="Figure 5.23: This tree can be drawn in many different ways. The ordering of the leaves as it is appears here is (8,11,9,10,7,5,6,1,4,2,3)."><img src="imgs/apeclust14.png" class="img-fluid"></a></p>
+<p>Figure 5.23: This tree can be drawn in many different ways. The ordering of the leaves as it is appears here is \((8,11,9,10,7,5,6,1,4,2,3)\).</p>
+<p>__</p>
+<p>Question 5.10</p>
+<p>A hierarchical clustering tree is like the Calder mobile in Figure 5.21 that can swing around many internal pivot points, giving many orderings of the tips consistent with a given tree. Look at the tree in Figure 5.23. How many ways are there of ordering the tip labels and still maintain consistence with that tree?</p>
+<p>It is common to see heatmaps whose rows and/or columns are ordered based on a hierarchical clustering tree. Sometimes this makes some clusters look very strong – stronger than what the tree really implies. There are alternative ways of ordering the rows and columns in heatmaps, for instance, in the package <strong><a href="https://cran.r-project.org/web/packages/NeatMap/">NeatMap</a></strong> , that uses ordination methods5 to find orderings.</p>
+<p>5 These will be explained in <a href="09-chap.html">Chapter 9</a>.</p>
+</section>
+</section>
+<section id="validating-and-choosing-the-number-of-clusters" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="validating-and-choosing-the-number-of-clusters"><span class="header-section-number">7.6</span> 5.7 Validating and choosing the number of clusters</h2>
+<p>The clustering methods we have described are tailored to deliver good groupings of the data under various constraints. However, keep in mind that clustering methods will always deliver groups, even if there are none. If, in fact, there are no real clusters in the data, a hierarchical clustering tree may show relatively short inner branches; but it is difficult to quantify this. In general it is important to validate your choice of clusters with more objective criteria.</p>
+<p>One criterion to assess the quality of a clustering result is to ask to what extent it maximizes the between group differences while keeping the within- group distances small (maximizing the lengths of red lines and minimizing those of the black lines in Figure 5.20). We formalize this with the within- groups sum of squared distances (WSS):</p>
+<p>\[ <em>k=</em>{}^k <em>{x_i C</em>} d^2(x_i, {x}_{}) \]</p>
+<p>Here, \(k\) is the number of clusters, \(C_\) is the set of objects in the \(\)-th cluster, and \({x}_\) is the center of mass (the average point) in the \(\)-th cluster. We state the dependence on \(k\) of the WSS in Equation 5.4 as we are interested in comparing this quantity across different values of \(k\), for the same cluster algorithm. Stated as it is, the WSS is however not a sufficient criterion: the smallest value of WSS would simply be obtained by making each point its own cluster. The WSS is a useful building block, but we need more sophisticated ideas than just looking at this number alone.</p>
+<p>One idea is to look at \(_k\) as a function of \(k\). This will always be a decreasing function, but if there is a pronounced region where it decreases sharply and then flattens out, we call this an <em>elbow</em> and might take this as a potential sweet spot for the number of clusters.</p>
+<p>__</p>
+<p>Question 5.11</p>
+<p>**An alternative expression for \(_k\)**. Use R to compute the sum of distances between all pairs of points in a cluster and compare it to \(_k\). Can you see how \(_k\) can also be written:</p>
+<p>\[ <em>k=</em>{}^k <em>{x_i C</em>} <em>{x_j C</em>} d^2(x_i,x_j), \]</p>
+<p>where \(n_\) is the size of the \(\)-th cluster.</p>
+<p>Question 5.11 shows us that the within-cluster sums of squares \(_k\) measures both the distances of all points in a cluster to its center, and the average distance between all pairs of points in the cluster.</p>
+<p>When looking at the behavior of various indices and statistics that help us decide how many clusters are appropriate for the data, it can be useful to look at cases where we actually know the right answer.</p>
+<p>To start, we simulate data coming from four groups. We use the pipe (<code>%&gt;%</code>) operator and the <code>bind_rows</code> function from <strong><a href="https://cran.r-project.org/web/packages/dplyr/">dplyr</a></strong> to concatenate the four <em>tibble</em> s corresponding to each cluster into one big <em>tibble</em>.6</p>
+<p>6 The pipe operator passes the value to its left into the function to its right. This can make the flow of data easier to follow in code: <code>f(x) %&gt;% g(y)</code> is equivalent to <code>g(f(x), y)</code>.</p>
+<pre><code>library("dplyr")
+simdat = lapply(c(0, 8), function(mx) {
+  lapply(c(0,8), function(my) {
+    tibble(x = rnorm(100, mean = mx, sd = 2),
+           y = rnorm(100, mean = my, sd = 2),
+           class = paste(mx, my, sep = ":"))
+   }) %&gt;% bind_rows
+}) %&gt;% bind_rows
+simdat __
+
+
+# A tibble: 400 × 3
+        x      y class
+    &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+ 1 -2.42  -4.59  0:0  
+ 2  1.89  -1.56  0:0  
+ 3  0.558  2.17  0:0  
+ 4  2.51  -0.873 0:0  
+ 5 -2.52  -0.766 0:0  
+ 6  3.62   0.953 0:0  
+ 7  0.774  2.43  0:0  
+ 8 -1.71  -2.63  0:0  
+ 9  2.01   1.28  0:0  
+10  2.03  -1.25  0:0  
+# ℹ 390 more rows
+
+
+simdatxy = simdat[, c("x", "y")] # without class label __
+
+
+ggplot(simdat, aes(x = x, y = y, col = class)) + geom_point() +
+  coord_fixed()__</code></pre>
+<p><a href="05-chap_files/figure- html/fig-simdat-1-1.png" title="Figure 5.24: The simdat data colored by the class labels. Here, we know the labels since we generated the data – usually we do not know them."><img src="05-chap_files/figure-html/fig-simdat-1-1.png" class="img-fluid"></a></p>
+<p>Figure 5.24: The <code>simdat</code> data colored by the class labels. Here, we know the labels since we generated the data – usually we do not know them.</p>
+<p>We compute the within-groups sum of squares for the clusters obtained from the \(k\)-means method:</p>
+<pre><code>wss = tibble(k = 1:8, value = NA_real_)
+wss$value[1] = sum(scale(simdatxy, scale = FALSE)^2)
+for (i in 2:nrow(wss)) {
+  km  = kmeans(simdatxy, centers = wss$k[i])
+  wss$value[i] = sum(km$withinss)
+}
+ggplot(wss, aes(x = k, y = value)) + geom_col()__</code></pre>
+<p><a href="05-chap_files/figure-html/fig- WSS-1.png" title="Figure 5.25: The barchart of the WSS statistic as a function of k shows that the last substantial jump is just before k=4. This indicates that the best choice for these data is k=4."><img src="05-chap_files/figure-html/fig-WSS-1.png" class="img-fluid"></a></p>
+<p>Figure 5.25: The barchart of the WSS statistic as a function of \(k\) shows that the last substantial jump is just before \(k=4\). This indicates that the best choice for these data is \(k=4\).</p>
+<p>__</p>
+<p>Question 5.12</p>
+<ol type="1">
+<li><p>Run the code above several times and compare the <code>wss</code> values for different runs. Why are they different?</p></li>
+<li><p>Create a set of data with uniform instead of normal distributions with the same range and dimensions as <code>simdat</code>. Compute the WSS values for for thess data. What do you conclude?</p></li>
+</ol>
+<p>__</p>
+<p>Question 5.13</p>
+<p>The so-called <strong>Calinski-Harabasz</strong> index uses the WSS and BSS (between group sums of squares). It is inspired by the \(F\) statistic — the ratio of the mean sum of squares explained by a factor to the mean residual sum of squares — used in analysis of variance:</p>
+<p>\[ (k)= <em>k = </em>{}^k n_({x}_{}-{x})^2, \]</p>
+<p>where \({x}\) is the overall center of mass (average point). Plot the Calinski-Harabasz index for the <code>simdat</code> data.</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>Here is the code to generate Figure 5.26.</p>
+<pre><code>library("fpc")
+library("cluster")
+CH = tibble(
+  k = 2:8,
+  value = sapply(k, function(i) {
+    p = pam(simdatxy, i)
+    calinhara(simdatxy, p$cluster)
+  })
+)
+ggplot(CH, aes(x = k, y = value)) + geom_line() + geom_point() +
+  ylab("CH index")__</code></pre>
+<p><a href="05-chap_files/figure- html/fig-CHIndex-1-1.png" title="Figure 5.26: The Calinski-Harabasz index, i.,e., the ratio of the between and within group variances for different choices of k, computed on the simdat data."><img src="05-chap_files/figure-html/fig-CHIndex-1-1.png" class="img-fluid"></a></p>
+<p>Figure 5.26: The Calinski-Harabasz index, i.,e., the ratio of the between and within group variances for different choices of \(k\), computed on the <code>simdat</code> data.</p>
+<section id="using-the-gap-statistic" class="level3" data-number="7.6.1">
+<h3 data-number="7.6.1" class="anchored" data-anchor-id="using-the-gap-statistic"><span class="header-section-number">7.6.1</span> 5.7.1 Using the gap statistic</h3>
+<p>Taking the logarithm of the within-sum-of-squares (\((_k)\)) and comparing it to averages from simulated data with less structure can be a good way of choosing \(k\). This is the basic idea of the <strong>gap statistic</strong> introduced by Tibshirani, Walther, and Hastie (<a href="16-chap.html#ref- gap2001">2001</a>). We compute \((_k)\) for a range of values of \(k\), the number of clusters, and compare it to that obtained on reference data of similar dimensions with various possible ‘non-clustered’ distributions. We can use uniformly distributed data as we did above or data simulated with the same covariance structure as our original data.</p>
+<p><a href="imgs/roulette.png"><img src="imgs/roulette.png" class="img-fluid"></a></p>
+<p>This algorithm is a Monte Carlo method that compares the gap statistic for the observed data to an average over simulations of data with similar structure.</p>
+<p><strong>Algorithm for computing the gap statistic(<a href="16-chap.html#ref-gap2001">Tibshirani, Walther, and Hastie 2001</a>):</strong></p>
+<ol type="1">
+<li><p>Cluster the data with \(k\) clusters and compute \(_k\) for the various choices of \(k\).</p></li>
+<li><p>Generate \(B\) plausible reference data sets, using Monte Carlo sampling from a homogeneous distribution and redo Step 1 above for these new simulated data. This results in \(B\) new within-sum-of-squares for simulated data \(W_{kb}^*\), for \(b=1,…,B\).</p></li>
+<li><p>Compute the \((k)\)-statistic:</p></li>
+</ol>
+<p>\[ (k) = _k - _k <em>k =</em>{b=1}^B W^*_{kb} \]</p>
+<p>Note that the first term is expected to be bigger than the second one if the clustering is good (i.e., the WSS is smaller); thus the gap statistic will be mostly positive and we are looking for its highest value.</p>
+<ol start="4" type="1">
+<li>We can use the standard deviation</li>
+</ol>
+<p>\[ <em>k^2 = </em>{b=1}<sup>B((W</sup>*_{kb})-_k)^2 \]</p>
+<p>to help choose the best \(k\). Several choices are available, for instance, to choose the smallest \(k\) such that</p>
+<p>\[ (k) (k+1) - s’<em>{k+1} s’</em>{k+1}=_{k+1}. \]</p>
+<p>The packages <strong><a href="https://cran.r-project.org/web/packages/cluster/">cluster</a></strong> and <strong><a href="https://cran.r-project.org/web/packages/clusterCrit/">clusterCrit</a></strong> provide implementations.</p>
+<p>__</p>
+<p>Question 5.14</p>
+<p>Make a function that plots the gap statistic as in Figure 5.27. Show the output for the <code>simdat</code> example dataset clustered with the <code>pam</code> function.</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<pre><code>library("cluster")
+library("ggplot2")
+pamfun = function(x, k)
+  list(cluster = pam(x, k, cluster.only = TRUE))
+
+gss = clusGap(simdatxy, FUN = pamfun, K.max = 8, B = 50,
+              verbose = FALSE)
+plot_gap = function(x) {
+  gstab = data.frame(x$Tab, k = seq_len(nrow(x$Tab)))
+  ggplot(gstab, aes(k, gap)) + geom_line() +
+    geom_errorbar(aes(ymax = gap + SE.sim,
+                      ymin = gap - SE.sim), width=0.1) +
+    geom_point(size = 3, col=  "red")
+}
+plot_gap(gss)__</code></pre>
+<p><a href="05-chap_files/figure- html/fig-GapStat-1-1.png" title="Figure 5.27: The gap statistic, see Question wrn- clustering-gapstat."><img src="05-chap_files/figure-html/fig-GapStat-1-1.png" class="img-fluid"></a></p>
+<p>Figure 5.27: The gap statistic, see Question 5.14.</p>
+<p>Let’s now use the method on a real example. We load the <strong><a href="https://bioconductor.org/packages/Hiiragi/">Hiiragi</a></strong> data that we already explored in <a href="03-chap.html">Chapter 3</a> and will see how the cells cluster.</p>
+<pre><code>library("Hiiragi2013")__
+
+
+In chunk 'Hiiragi': Warning: replacing previous import 'boot::logit' by 'gtools::logit' whenloading 'Hiiragi2013'
+
+
+In chunk 'Hiiragi': Warning: replacing previous import 'boot::inv.logit' by 'gtools::inv.logit'when loading 'Hiiragi2013'
+
+
+data("x")__</code></pre>
+<p>We start by choosing the 50 most variable genes (features)7.</p>
+<p>7 The intention behind this step is to reduce the influence of technical (or batch) effects. Although individually small, when accumulated over all the 45101 features in <code>x</code>, many of which match genes that are weakly or not expressed, without this feature selection step, such effects are prone to suppress the biological signal.</p>
+<pre><code>selFeats = order(rowVars(Biobase::exprs(x)), decreasing = TRUE)[1:50]
+embmat = t(Biobase::exprs(x)[selFeats, ])
+embgap = clusGap(embmat, FUN = pamfun, K.max = 24, verbose = FALSE)
+k1 = maxSE(embgap$Tab[, "gap"], embgap$Tab[, "SE.sim"])
+k2 = maxSE(embgap$Tab[, "gap"], embgap$Tab[, "SE.sim"],
+           method = "Tibs2001SEmax")
+c(k1, k2)__
+
+
+[1] 9 7</code></pre>
+<p>The default choice for the number of clusters, <code>k1</code>, is the first value of \(k\) for which the gap is not larger than the first local maximum minus a standard error \(s\) (see the manual page of the <code>clusGap</code> function). This gives a number of clusters \(k = 9\), whereas the choice recommended by Tibshirani, Walther, and Hastie (<a href="16-chap.html#ref-gap2001">2001</a>) is the smallest \(k\) such that \((k) (k+1) - s_{k+1}’\), this gives \(k = 7\). Let’s plot the gap statistic (Figure 5.28).</p>
+<pre><code>plot(embgap, main = "")
+cl = pamfun(embmat, k = k1)$cluster
+table(pData(x)[names(cl), "sampleGroup"], cl)__
+
+
+                 cl
+                   1  2  3  4  5  6  7  8  9
+  E3.25           23 11  1  1  0  0  0  0  0
+  E3.25 (FGF4-KO)  0  0  1 16  0  0  0  0  0
+  E3.5 (EPI)       2  1  0  0  0  8  0  0  0
+  E3.5 (FGF4-KO)   0  0  8  0  0  0  0  0  0
+  E3.5 (PE)        0  0  0  0  9  2  0  0  0
+  E4.5 (EPI)       0  0  0  0  0  0  0  4  0
+  E4.5 (FGF4-KO)   0  0  0  0  0  0  0  0 10
+  E4.5 (PE)        0  0  0  0  0  0  4  0  0</code></pre>
+<p><a href="05-chap_files/figure- html/fig-gapHiiragi-1-1.png" title="Figure 5.28: The gap statistic for the Hiiragi2013 data."><img src="05-chap_files/figure-html/fig-gapHiiragi-1-1.png" class="img-fluid"></a></p>
+<p>Figure 5.28: The gap statistic for the <strong><a href="https://bioconductor.org/packages/Hiiragi2013/">Hiiragi2013</a></strong> data.</p>
+<p>Above we see the comparison between the clustering that we got from <code>pamfun</code> with the sample labels in the annotation of the data.</p>
+<p>__</p>
+<p>Question 5.15</p>
+<p>How do the results change if you use all the features in <code>x</code>, rather than subsetting the top 50 most variable genes?</p>
+</section>
+<section id="cluster-validation-using-the-bootstrap" class="level3" data-number="7.6.2">
+<h3 data-number="7.6.2" class="anchored" data-anchor-id="cluster-validation-using-the-bootstrap"><span class="header-section-number">7.6.2</span> 5.7.2 Cluster validation using the bootstrap</h3>
+<p>[<img src="imgs/BootstrapClusterNew.png" class="img-fluid">](imgs/BootstrapClusterNew.png “Figure&nbsp;5.29&nbsp;(a):”)</p>
+<ol type="a">
+<li></li>
+</ol>
+<p>[<img src="imgs/BootstrapCluster2New.png" class="img-fluid">](imgs/BootstrapCluster2New.png “Figure&nbsp;5.29&nbsp;(b):”)</p>
+<ol start="2" type="a">
+<li></li>
+</ol>
+<p>Figure 5.29: Different samples from the same distribution \(F\) lead to different clusterings. In (a), we see the true sampling variability. The bootstrap simulates this sampling variability by drawing subsamples using the empirical distribution function \(_n\) as shown in (b).</p>
+<p>We saw the bootstrap principle in <a href="04-chap.html">Chapter 4</a>: ideally, we would like to use many new samples (sets of data) from the underlying data generating process, for each of them apply our clustering method, and then see how stable the clusterings are, or how much they change, using an index such as those we used above to compare clusterings. Of course, we don’t have these additional samples. So we are, in fact, going to create new datasets simply by taking different random subsamples of the data, look at the different clusterings we get each time, and compare them. Tibshirani, Walther, and Hastie (<a href="16-chap.html#ref-gap2001">2001</a>) recommend using bootstrap resampling to infer the number of clusters using the gap statistic.</p>
+<p>We will continue using the <strong><a href="https://bioconductor.org/packages/Hiiragi2013/">Hiiragi2013</a></strong> data. Here we follow the investigation of the hypothesis that the inner cell mass (ICM) of the mouse blastocyst in embyronic day 3.5 (E3.5) falls “naturally” into two clusters corresponding to pluripotent epiblast (EPI) versus primitive endoderm (PE), while the data for embryonic day 3.25 (E3.25) do not yet show this symmetry breaking.</p>
+<p>We will not use the true group labels in our clustering and only use them in the final interpretation of the results. We will apply the bootstrap to the two different data sets (E3.5) and (E3.25) separately. Each step of the bootstrap will generate a clustering of a random subset of the data and we will need to compare these through a consensus of an ensemble of clusters. There is a useful framework for this in the <strong><a href="https://cran.r-project.org/web/packages/clue/">clue</a></strong> package (<a href="16-chap.html#ref-Hornik2005">Hornik 2005</a>). The function <code>clusterResampling</code>, taken from the supplement of Ohnishi et al.&nbsp;(<a href="16-chap.html#ref-Ohnishi2014">2014</a>), implements this approach:</p>
+<pre><code>clusterResampling = function(x, ngenes = 50, k = 2, B = 250,
+                             prob = 0.67) {
+  mat = Biobase::exprs(x)
+  ce = cl_ensemble(list = lapply(seq_len(B), function(b) {
+    selSamps = sample(ncol(mat), size = round(prob * ncol(mat)),
+                      replace = FALSE)
+    submat = mat[, selSamps, drop = FALSE]
+    sel = order(rowVars(submat), decreasing = TRUE)[seq_len(ngenes)]
+    submat = submat[sel,, drop = FALSE]
+    pamres = pam(t(submat), k = k)
+    pred = cl_predict(pamres, t(mat[sel, ]), "memberships")
+    as.cl_partition(pred)
+  }))
+  cons = cl_consensus(ce)
+  ag = sapply(ce, cl_agreement, y = cons)
+  list(agreements = ag, consensus = cons)
+}__</code></pre>
+<p>The function <code>clusterResampling</code> performs the following steps:</p>
+<ol type="1">
+<li><p>Draw a random subset of the data (the data are either all E3.25 or all E3.5 samples) by selecting 67% of the samples without replacement.</p></li>
+<li><p>Select the top <code>ngenes</code> features by overall variance (in the subset).</p></li>
+<li><p>Apply \(k\)-means clustering and predict the cluster memberships of the samples that were not in the subset with the <code>cl_predict</code> method from the <strong><a href="https://cran.r-project.org/web/packages/clue/">clue</a></strong> package, through their proximity to the cluster centres.</p></li>
+<li><p>Repeat steps 1-3 <code>B</code> times.</p></li>
+<li><p>Apply consensus clustering (<code>cl_consensus</code>).</p></li>
+<li><p>For each of the <code>B</code> clusterings, measure the agreement with the consensus through the function(<code>cl_agreement</code>). Here a good agreement is indicated by a value of 1, and less agreement by smaller values. If the agreement is generally high, then the clustering into \(k\) classes can be considered stable and reproducible; inversely, if it is low, then no stable partition of the samples into \(k\) clusters is evident.</p></li>
+</ol>
+<p>As a measure of between-cluster distance for the consensus clustering, the <em>Euclidean</em> dissimilarity of the memberships is used, i.e., the square root of the minimal sum of the squared differences of \(\) and all column permutations of \(\), where \(\) and \(\) are the cluster membership matrices. As agreement measure for Step [clueagree], the quantity \(1 - d/m\) is used, where \(d\) is the Euclidean dissimilarity, and \(m\) is an upper bound for the maximal Euclidean dissimilarity.</p>
+<pre><code>iswt = (x$genotype == "WT")
+cr1 = clusterResampling(x[, x$Embryonic.day == "E3.25" &amp; iswt])
+cr2 = clusterResampling(x[, x$Embryonic.day == "E3.5"  &amp; iswt])__</code></pre>
+<p>The results are shown in Figure 5.30. They confirm the hypothesis that the E.35 data fall into two clusters.</p>
+<pre><code>ag1 = tibble(agreements = cr1$agreements, day = "E3.25")
+ag2 = tibble(agreements = cr2$agreements, day = "E3.5")
+p1 &lt;- ggplot(bind_rows(ag1, ag2), aes(x = day, y = agreements)) +
+  geom_boxplot() +
+  ggbeeswarm::geom_beeswarm(cex = 1.5, col = "#0000ff40")
+mem1 = tibble(y = sort(cl_membership(cr1$consensus)[, 1]),
+              x = seq(along = y), day = "E3.25")
+mem2 = tibble(y = sort(cl_membership(cr2$consensus)[, 1]),
+              x = seq(along = y), day = "E3.5")
+p2 &lt;- ggplot(bind_rows(mem1, mem2), aes(x = x, y = y, col = day)) +
+  geom_point() + facet_grid(~ day, scales = "free_x")
+gridExtra::grid.arrange(p1, p2, widths = c(2.4,4.0))__</code></pre>
+<p><a href="05-chap_files/figure- html/fig-figClue1-1.png" title="Figure 5.30: Cluster stability analysis with E3.25 and E3.5 samples. Left: beeswarm plots of the cluster agreements with the consensus, for the B clusterings; 1 indicates perfect agreement, lower values indicate lower degrees of agreement. Right: membership probabilities of the consensus clustering. For E3.25, the probabilities are diffuse, indicating that the individual clusterings often disagree, whereas for E3.5, the distribution is bimodal, with only one ambiguous sample."><img src="05-chap_files/figure-html/fig-figClue1-1.png" class="img-fluid"></a></p>
+<p>Figure 5.30: Cluster stability analysis with E3.25 and E3.5 samples. Left: beeswarm plots of the cluster agreements with the consensus, for the <code>B</code> clusterings; \(1\) indicates perfect agreement, lower values indicate lower degrees of agreement. Right: membership probabilities of the consensus clustering. For E3.25, the probabilities are diffuse, indicating that the individual clusterings often disagree, whereas for E3.5, the distribution is bimodal, with only one ambiguous sample.</p>
+<section id="computational-and-memory-issues" class="level4" data-number="7.6.2.1">
+<h4 data-number="7.6.2.1" class="anchored" data-anchor-id="computational-and-memory-issues"><span class="header-section-number">7.6.2.1</span> Computational and memory Issues</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="imgs/devil.png" title="Computational complexity. An algorithm is said to be O(n^k), if, as n gets larger, the resource consumption (CPU time or memory) grows proportionally to n^k. There may be other (sometimes considerable) baseline costs, or costs that grow proportionally to lower powers of n, but these always become negligible compared to the leading term as n\to\infty."><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
+<figcaption>Computational complexity. An algorithm is said to be O(n^k), if, as n gets larger, the resource consumption (CPU time or memory) grows proportionally to n^k. There may be other (sometimes considerable) baseline costs, or costs that grow proportionally to lower powers of n, but these always become negligible compared to the leading term as n\to\infty.</figcaption>
+</figure>
+</div>
+<p><strong>Computational complexity</strong>. An algorithm is said to be \(O(n^k)\), if, as \(n\) gets larger, the resource consumption (CPU time or memory) grows proportionally to \(n^k\). There may be other (sometimes considerable) baseline costs, or costs that grow proportionally to lower powers of \(n\), but these always become negligible compared to the leading term as \(n\).</p>
+<p>It is important to remember that the computation of all versus all distances of \(n\) objects is an \(O(n^2)\) operation (in time and memory). Classic hierarchical clustering approaches (such as <code>hclust</code> in the <strong><a href="https://cran.r-project.org/web/packages/stats/">stats</a></strong> package) are even \(O(n^3)\) in time. For large \(n\), this may become impractical8. We can avoid the complete computation of the all-vs-all distance matrix. For instance, \(k\)-means has the advantage of only requiring \(O(n)\) computations, since it only keeps track of the distances between each object and the cluster centers, whose number remains the same even if \(n\) increases.</p>
+<p>8 E.g., the distance matrix for one million objects, stored as 8-byte floating point numbers, would take up about 4 Terabytes, and an <code>hclust</code>-like algorithm would run 30 years even under the optimistic assumption that each of the iterations only takes a nanosecond.</p>
+<p>Fast implementations such as <strong><a href="https://cran.r-project.org/web/packages/fastclust/">fastclust</a></strong> (<a href="16-chap.html#ref-Mullner:2013">Müllner 2013</a>) and <strong><a href="https://cran.r-project.org/web/packages/dbscan/">dbscan</a></strong> have been carefully optimized to deal with a large number of observations.</p>
+</section>
+</section>
+</section>
+<section id="clustering-as-a-means-for-denoising" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="clustering-as-a-means-for-denoising"><span class="header-section-number">7.7</span> 5.8 Clustering as a means for denoising</h2>
+<p>Consider a set of measurements that reflect some underlying true values (say, species represented by DNA sequences from their genomes), but have been degraded by technical noise. Clustering can be used to remove such noise.</p>
+<section id="noisy-observations-with-different-baseline-frequencies" class="level3" data-number="7.7.1">
+<h3 data-number="7.7.1" class="anchored" data-anchor-id="noisy-observations-with-different-baseline-frequencies"><span class="header-section-number">7.7.1</span> 5.8.1 Noisy observations with different baseline frequencies</h3>
+<p>Suppose that we have a bivariate distribution of observations made with the same error variances. However, the sampling is from two groups that have very different baseline frequencies. Suppose, further, that the errors are continuous independent bivariate normally distributed. We have \(10^{3}\) of <code>seq1</code> and \(10^{5}\) of <code>seq2</code>, as generated for instance by the code:</p>
+<pre><code>library("mixtools")
+seq1 = rmvnorm(n = 1e3, mu = -c(1, 1), sigma = 0.5 * diag(c(1, 1)))
+seq2 = rmvnorm(n = 1e5, mu =  c(1, 1), sigma = 0.5 * diag(c(1, 1)))
+twogr = data.frame(
+  rbind(seq1, seq2),
+  seq = factor(c(rep(1, nrow(seq1)),
+                 rep(2, nrow(seq2))))
+)
+colnames(twogr)[1:2] = c("x", "y")
+library("ggplot2")
+ggplot(twogr, aes(x = x, y = y, colour = seq,fill = seq)) +
+  geom_hex(alpha = 0.5, bins = 50) + coord_fixed()__</code></pre>
+<p><a href="05-chap_files/figure- html/fig-seqradius-1.png" title="Figure 5.31: Although both groups have noise distributions with the same variances, the apparent radii of the groups are very different. The 10^{5} instances in seq2 have many more opportunities for errors than what we see in seq1, of which there are only 10^{3}. Thus we see that frequencies are important in clustering the data."><img src="05-chap_files/figure-html/fig-seqradius-1.png" class="img-fluid"></a></p>
+<p>Figure 5.31: Although both groups have noise distributions with the same variances, the apparent radii of the groups are very different. The \(10^{5}\) instances in <code>seq2</code> have many more opportunities for errors than what we see in <code>seq1</code>, of which there are only \(10^{3}\). Thus we see that frequencies are important in clustering the data.</p>
+<p>The observed values would look as in Figure 5.31.</p>
+<p>__</p>
+<p>Question 5.16</p>
+<p>Take the data <code>seq1</code> and <code>seq2</code> and cluster them into two groups according to distance from group center. Do you think the results should depend on the frequencies of each of the two sequence types?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>Such an approach, often used in taxonomic clustering, also called OTU -operational taxonomic unit clustering (<a href="16-chap.html#ref-caporaso2010qiime">Caporaso et al. 2010</a>; <a href="16-chap.html#ref-mothur">P. D. Schloss et al. 2009</a>)) methods is sub-optimal.</p>
+<p>The methods based solely on similarities suffer from the biases inherent in the <em>representativeness</em> heuristic. Let’s make a brief digression into the world of cognitive psychology that helps explain how our natural inclination to use only representativeness and a distance-based heuristic in clustering and taxonomic assignment can lead to biased results.</p>
+<p>In the 1970s, Tversky and Kahneman (<a href="16-chap.html#ref- tversky1975judgment">1975</a>) pointed out that we generally assign groups by looking at the most similar <em>representatives</em>. In clustering and group assignments that would mean assigning a new sequence to the group according to the distance to its center. In fact this is equivalent to taking balls with the same radius regardless of the differences in prevalence of the different groups. This psychological error was first discussed in an important Science paper that covers many different heuristics and biases(<a href="16-chap.html#ref-tversky1974heuristics">Tversky and Kahneman 1974</a>).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="imgs/book_icon.png" title="See @kahneman2011 for a book- length treatment of our natural heuristics and the ways in which they can mislead us when we make probability calculations (we recommend especially Chapters 14 and 15)."><img src="imgs/book_icon.png" class="img-fluid figure-img"></a></p>
+<figcaption>See Kahneman (2011) for a book-length treatment of our natural heuristics and the ways in which they can mislead us when we make probability calculations (we recommend especially Chapters 14 and 15).</figcaption>
+</figure>
+</div>
+<p>See Kahneman (<a href="16-chap.html#ref-kahneman2011">2011</a>) for a book-length treatment of our natural heuristics and the ways in which they can mislead us when we make probability calculations (we recommend especially Chapters 14 and 15).</p>
+<p>__</p>
+<p>Task</p>
+<p>Simulate <code>n=2000</code> binary variables of length <code>len=200</code> that indicate the quality of <code>n</code> sequencing reads of length <code>len</code>. For simplicity, let us assume that sequencing errors occur independently and uniformly with probability <code>perr=0.001</code>. That is, we only care whether a base was called correctly (<code>TRUE</code>) or not (<code>FALSE</code>).</p>
+<pre><code>n    = 2000
+len  = 200
+perr = 0.001
+seqs = matrix(runif(n * len) &gt;= perr, nrow = n, ncol = len)__</code></pre>
+<p>Now, compute all pairwise distances between reads.</p>
+<pre><code>dists = as.matrix(dist(seqs, method = "manhattan"))__</code></pre>
+<p>For various values of number of reads <code>k</code> (from 2 to <code>n</code>), the maximum distance within this set of reads is computed by the code below and shown in Figure 5.32.</p>
+<pre><code>library("tibble")
+dfseqs = tibble(
+  k = 10 ^ seq(log10(2), log10(n), length.out = 20),
+  diameter = vapply(k, function(i) {
+    s = sample(n, i)
+    max(dists[s, s])
+    }, numeric(1)))
+ggplot(dfseqs, aes(x = k, y = diameter)) + geom_point()+geom_smooth()__</code></pre>
+<p><a href="05-chap_files/figure- html/fig-diameter-1.png" title="Figure 5.32: The diameter of a set of sequences as a function of the number of sequences."><img src="05-chap_files/figure-html/fig-diameter-1.png" class="img-fluid"></a></p>
+<p>Figure 5.32: The diameter of a set of sequences as a function of the number of sequences.</p>
+<p>We will now improve the 16SrRNA-read clustering using a denoising mechanism that incorporates error probabilities.</p>
+</section>
+<section id="denoising-16s-rrna-sequences" class="level3" data-number="7.7.2">
+<h3 data-number="7.7.2" class="anchored" data-anchor-id="denoising-16s-rrna-sequences"><span class="header-section-number">7.7.2</span> 5.8.2 Denoising 16S rRNA sequences</h3>
+<p><strong>What are the data?</strong> In the bacterial 16SrRNA gene there are so-called <strong>variable regions</strong> that are taxa-specific. These provide fingerprints that enables <em>taxon</em> 9 identification. The raw data are FASTQ-files with quality scored sequences of PCR-amplified DNA regions10. We use an iterative alternating approach11 to build a probabilistic noise model from the data. We call this a <em>de novo</em> method, because we use clustering, and we use the cluster centers as our denoised sequence variants (a.k.a. Amplicon Sequence Variants, ASVs, see (<a href="16-chap.html#ref-Callahan:2017">Benjamin J. Callahan, McMurdie, and Holmes 2017</a>)). After finding all the denoised variants, we create contingency tables of their counts across the different samples. We will show in <a href="10-chap.html">Chapter 10</a> how these tables can be used to infer properties of the underlying bacterial communities using networks and graphs.</p>
+<p>9 Calling different groups of bacteria <em>taxa</em> rather than <em>species</em> highlights the approximate nature of the concept, as the notion of species is more fluid in bacteria than, say, in animals.</p>
+<p>10 The <a href="https://en.wikipedia.org/wiki/FASTQ_format">FASTQ format is described here</a>.</p>
+<p>11 Similar to the EM algorithm we saw in <a href="04-chap.html">Chapter 4</a>.</p>
+<p>In order to improve data quality, one often has to start with the raw data and model all the sources of variation carefully. One can think of this as an example of <em>cooking from scratch</em> (see the gruesome details in Ben J. Callahan et al.&nbsp;(<a href="16-chap.html#ref-Callahan2016Bioc">2016</a>) and Exercise 5.5).</p>
+<p>__</p>
+<p>Question 5.17</p>
+<p>Suppose that we have two sequences of length 200 (<code>seq1</code> and <code>seq2</code>) present in our sample at very different abundances. We are told that the technological sequencing errors occur as independent Bernoulli(0.0005) random events for each nucleotide.<br>
+What is the distribution of the number of errors per sequence?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>Probability theory tells us that the sum of 200 independent Poisson(0.0005) will be Poisson(0.1).</p>
+<p>We can also verify this by Monte Carlo simulation:</p>
+<pre><code>simseq10K = replicate(1e5, sum(rpois(200, 0.0005)))
+mean(simseq10K)__
+
+
+[1] 0.10143
+
+
+vcd::distplot(simseq10K, "poisson")__</code></pre>
+<p><a href="05-chap_files/figure- html/fig-seqradiusex-1.png" title="Figure 5.33: distplot for the simseq10K data."><img src="05-chap_files/figure-html/fig-seqradiusex-1.png" class="img-fluid"></a></p>
+<p>Figure 5.33: <code>distplot</code> for the <code>simseq10K</code> data.</p>
+<p>Figure 5.33 shows us how close the distribution is to being Poisson distributed.</p>
+</section>
+<section id="infer-sequence-variants" class="level3" data-number="7.7.3">
+<h3 data-number="7.7.3" class="anchored" data-anchor-id="infer-sequence-variants"><span class="header-section-number">7.7.3</span> 5.8.3 Infer sequence variants</h3>
+<p>The DADA method (Divisive Amplicon Denoising Algorithm, Rosen et al. (<a href="16-chap.html#ref-Rosen:2012">2012</a>)) uses a parameterized model of substitution errors that distinguishes sequencing errors from real biological variation. The model computes the probabilities of base substitutions, such as seeing an \({}\) instead of a \({}\). It assumes that these probabilities are independent of the position along the sequence. Because error rates vary substantially between sequencing runs and PCR protocols, the model parameters are estimated from the data themselves using an EM-type approach. A read is classified as noisy or exact given the current parameters, and the noise model parameters are updated accordingly12.</p>
+<p>12 In the case of a large data set, the noise model estimation step does not have to be done on the complete set. See <a href="https://benjjneb.github.io/dada2/bigdata.html" class="uri">https://benjjneb.github.io/dada2/bigdata.html</a> for tricks and tools when dealing with large data sets.</p>
+<p>13 F stands for forward strand and R for reverse strand.</p>
+<p>The dereplicated sequences13 are read in and then divisive denoising and estimation is run with the <code>dada</code> function as in the following code:</p>
+<pre><code>derepFs = readRDS(file="../data/derepFs.rds")
+derepRs = readRDS(file="../data/derepRs.rds")
+library("dada2")
+ddF = dada(derepFs, err = NULL, selfConsist = TRUE)
+ddR = dada(derepRs, err = NULL, selfConsist = TRUE)__</code></pre>
+<p>In order to verify that the error transition rates have been reasonably well estimated, we inspect the fit between the observed error rates (black points) and the fitted error rates (black lines) (Figure 5.34).</p>
+<pre><code>plotErrors(ddF)__
+
+
+In chunk 'fig-rerrorprofile1': Warning: Removed 82 rows containing missing values or values outside the scale range(`geom_line()`).</code></pre>
+<p><a href="05-chap_files/figure-html/fig-rerrorprofile1-1.png &quot;Figure 5.34: Forward transition error rates as provided by plotErrors(ddF). This shows the frequencies of each type of nucleotide transition as a function of quality.&quot;"><img src="05-chap_files/figure-html/fig- rerrorprofile1-1.png" class="img-fluid"></a></p>
+<p>Figure 5.34: Forward transition error rates as provided by <code>plotErrors(ddF)</code>. This shows the frequencies of each type of nucleotide transition as a function of quality.</p>
+<p>Once the errors have been estimated, the algorithm is rerun on the data to find the sequence variants:</p>
+<pre><code>dadaFs = dada(derepFs, err=ddF[[1]]$err_out, pool = TRUE)
+dadaRs = dada(derepRs, err=ddR[[1]]$err_out, pool = TRUE)__</code></pre>
+<p><strong>Note:</strong> The sequence inference function can run in two different modes: Independent inference by sample (<code>pool = FALSE</code>), and pooled inference from the sequencing reads combined from all samples. Independent inference has two advantages: as a functions of the number of samples, computation time is linear and memory requirements are constant. Pooled inference is more computationally taxing, however it can improve the detection of rare variants that occur just once or twice in an individual sample but more often across all samples. As this dataset is not particularly large, we performed pooled inference.</p>
+<p>Sequence inference removes nearly all substitution and <strong>indel</strong> 14 errors from the data. We merge the inferred forward and reverse sequences, while removing paired sequences that do not perfectly overlap as a final control against residual errors.</p>
+<p>14 The term <em>indel</em> stands for insertion-deletion; when comparing two sequences that differ by a small stretch of characters, it is a matter of viewpoint whether this is an insertion or a deletion, thus the name.</p>
+<pre><code>mergers = mergePairs(dadaFs, derepFs, dadaRs, derepRs)__</code></pre>
+<p>We produce a contingency table of counts of ASVs. This is a higher-resolution analogue of the “OTU15 table”, i.e., a samples by features table whose cells contain the number of times each sequence variant was observed in each sample.</p>
+<p>15 operational taxonomic units</p>
+<pre><code>seqtab.all = makeSequenceTable(mergers[!grepl("Mock",names(mergers))])__</code></pre>
+<p>__</p>
+<p>Question 5.18</p>
+<p>Explore the components of the objects <code>dadaRs</code> and <code>mergers</code>.</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p><code>dadaRs</code> is a list of length 20. Its elements are objects class <em>dada</em> that contain the denoised reads. We will see in <a href="10-chap.html">Chapter 10</a> how to align the sequences, assign their taxonomies and combine them with the sample information for downstream analyses.</p>
+<pre><code>[1] 20
+
+
+[1] 20
+
+
+[1] "list"
+
+
+ [1] "F3D0"   "F3D1"   "F3D141" "F3D142" "F3D143" "F3D144" "F3D145" "F3D146"
+ [9] "F3D147" "F3D148" "F3D149" "F3D150" "F3D2"   "F3D3"   "F3D5"   "F3D6"  
+[17] "F3D7"   "F3D8"   "F3D9"   "Mock"  
+
+
+[1] "list"
+
+
+[1] 20</code></pre>
+<p>Chimera are sequences that are artificially created during PCR amplification by the melding of two (in rare cases, more) of the original sequences. To complete our denoising workflow, we remove them with a call to the function <code>removeBimeraDenovo</code>, leaving us with a clean contingency table we will use later on.</p>
+<pre><code>seqtab = removeBimeraDenovo(seqtab.all)__</code></pre>
+<p>__</p>
+<p>Question 5.19</p>
+<p>Why do you think the chimera are quite easy to recognize?<br>
+What proportion of the reads were chimeric in the <code>seqtab.all</code> data?<br>
+What proportion of unique sequence variants are chimeric?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>Here we observed some sequence variants as chimeric, but these only represent 7% of all reads.</p>
+</section>
+</section>
+<section id="summary-of-this-chapter" class="level2" data-number="7.8">
+<h2 data-number="7.8" class="anchored" data-anchor-id="summary-of-this-chapter"><span class="header-section-number">7.8</span> 5.9 Summary of this chapter</h2>
+<p><strong>Of a feather: how to compare observations</strong> We saw at the start of the chapter how finding the <strong>right distance</strong> is an essential first step in a clustering analysis; this is a case where the <em>garbage in, garbage out</em> motto is in full force. Always choose a distance that is scientifically meaningful and compare output from as many distances as possible; sometimes the same data require different distances when different scientific objectives are pursued.</p>
+<p><strong>Two ways of clustering</strong> We saw there are two approaches to clustering:</p>
+<ul>
+<li><p>iterative partitioning approaches such as \(k\)-means and \(k\)-medoids (PAM) that alternated between estimating the cluster centers and assigning points to them;</p></li>
+<li><p>hierarchical clustering approaches that first agglomerate points, and subsequently the growing clusters, into nested sequences of sets that can be represented by hierarchical clustering <em>trees</em>.</p></li>
+</ul>
+<p><strong>Biological examples</strong> Clustering is important tool for finding latent classes in single cell measurements, especially in immunology and single cell data analyses. We saw how density-based clustering is useful for lower dimensional data where sparsity is not an issue.</p>
+<p><strong>Validating</strong> Clustering algorithms <em>always</em> deliver clusters, so we need to assess their quality and the number of clusters to choose carefully. Such validation steps are performed using visualization tools and repeating the clustering on many resamples of the data. We saw how statistics such as WSS/BSS or \(()\) can be calibrated using simulations on data where we understand the group structure and can provide useful benchmarks for choosing the number of clusters on new data. Of course, the use of biologically relevant information to inform and confirm the meaning of clusters is always the best validation approach.</p>
+<p>There is arguably no ground truth to compare a clustering result against, in general. The old adage of “all models are wrong, some are useful” also applies here. A good clustering is one that turns out to be useful.</p>
+<p><strong>Distances and probabilities</strong> Finally: distances are not everything. We showed how important it was to take into account baseline frequencies and local densities when clustering. This is essential in a cases such as clustering to denoise 16S rRNA sequence reads where the true class or taxa group occur at very different frequencies.</p>
+</section>
+<section id="further-reading" class="level2" data-number="7.9">
+<h2 data-number="7.9" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">7.9</span> 5.10 Further reading</h2>
+<p>For a complete book on <em>Finding groups in data</em> , see Kaufman and Rousseeuw (<a href="16-chap.html#ref-Kaufman2009">2009</a>). The vignette of the <strong><a href="https://bioconductor.org/packages/clusterExperiment/">clusterExperiment</a></strong> package contains a complete workflow for generating clusters using many different techniques, including preliminary dimension reduction (PCA) that we will cover in <a href="07-chap.html">Chapter 7</a>. There is no consensus on methods for deciding how many clusters are needed to describe data in the absence of contiguous biological information. However, making hierarchical clusters of the <em>strong forms</em> is a method that has the advantage of allowing the user to decide how far down to cut the hierarchical tree and be careful not to cut in places where these inner branches are short. See the vignette of <strong><a href="https://bioconductor.org/packages/clusterExperiment/">clusterExperiment</a></strong> for an application to single cell RNA experimental data.</p>
+<p>In analyzing the Hiiragi data, we used cluster probabilities, a concept already mentioned in <a href="04-chap.html">Chapter 4</a>, where the EM algorithm used them as weights to compute expected value statistics. The notion of probabilistic clustering is well-developed in the Bayesian nonparametric mixture framework, which enriches the mixture models we covered in <a href="04-chap.html">Chapter 4</a> to more general settings. See Dundar et al. (<a href="16-chap.html#ref-Dundar2014">2014</a>) for a real example using this framework for flow cytometry. In the denoising and assignment of high-throughput sequencing reads to specific strains of bacteria or viruses, clustering is essential. In the presence of noise, clustering into groups of <em>true</em> strains of very unequal sizes can be challenging. Using the data to create a noise model enables both denoising and cluster assignment concurrently. Denoising algorithms such as those by Rosen et al.&nbsp;(<a href="16-chap.html#ref-Rosen:2012">2012</a>) or Benjamin J. Callahan et al.&nbsp;(<a href="16-chap.html#ref-dada2">2016</a>) use an iterative workflow inspired by the EM method (<a href="16-chap.html#ref-mclachlan2007algorithm">McLachlan and Krishnan 2007</a>).</p>
+</section>
+<section id="exercises" class="level2" data-number="7.10">
+<h2 data-number="7.10" class="anchored" data-anchor-id="exercises"><span class="header-section-number">7.10</span> 5.11 Exercises</h2>
+<p>__</p>
+<p>Exercise 5.1</p>
+<p>We can define the average dissimilarity of a point \(x_i\) to a cluster \(C_k\) as the average of the distances from \(x_i\) to all points in \(C_k\). Let \(A(i)\) be the average dissimilarity of all points in the cluster that \(x_i\) belongs to. Let \(B(i)\) be the lowest average dissimilarity of \(x_i\) to any other cluster of which \(x_i\) is not a member. The cluster with this lowest average dissimilarity is said to be the <strong>neighboring cluster</strong> of \(x_i\), because it is the next best fit cluster for point \(x_i\). The <strong>silhouette index</strong> is</p>
+<p>\[ S(i)=. \]</p>
+<p>Compute the silhouette index for the <code>simdat</code> data we simulated in Section 5.7.</p>
+<pre><code>library("cluster")
+pam4 = pam(simdatxy, 4)
+sil = silhouette(pam4, 4)
+plot(sil, col=c("red","green","blue","purple"), main="Silhouette")__</code></pre>
+<p>Change the number of clusters \(k\) and assess which \(k\) gives the best silhouette index.</p>
+<p>Now, repeat this for groups that have uniform (unclustered) data distributions over a whole range of values.</p>
+<p>__</p>
+<p>Exercise 5.2</p>
+<p>Make a “character” representation of the distance between the 20 locations in the <code>dune</code> data from the <strong><a href="https://cran.r-project.org/web/packages/vegan/">vegan</a></strong> package using the function <code>symnum</code>.</p>
+<p>Make a heatmap plot of these distances.</p>
+<p>__</p>
+<p>Exercise 5.3</p>
+<p>Load the <code>spirals</code> data from the <strong><a href="https://cran.r-project.org/web/packages/kernlab/">kernlab</a></strong> package. Plot the results of using \(k\)-means on the data. This should give you something similar to Figure 5.35.</p>
+<p><a href="05-chap_files/figure- html/fig-kmeanspital1-1.png" title="Figure 5.35 (a):"><img src="05-chap_files/figure-html/fig-kmeanspital1-1.png" class="img-fluid"></a></p>
+<ol type="a">
+<li></li>
+</ol>
+<p><a href="05-chap_files/figure- html/fig-kmeanspital1-2.png" title="Figure 5.35 (b):"><img src="05-chap_files/figure-html/fig-kmeanspital1-2.png" class="img-fluid"></a></p>
+<ol start="2" type="a">
+<li></li>
+</ol>
+<p>Figure 5.35: An example of non-convex clusters. In (a), we show the result of \(k\)-means clustering with \(k=2\). In (b), we have the output from <code>dbscan</code>. The colors represent the three clusters found by the algorithm for the settings .</p>
+<p>You’ll notice that the clustering in Figure 5.35 seems unsatisfactory. Show how a different method, such as <code>specc</code> or <code>dbscan</code>, could cluster <code>spirals</code> data in a more useful manner.</p>
+<p>Repeat the <code>dbscan</code> clustering with different parameters. How robust is the number of groups?</p>
+<p>__</p>
+<p>Exercise 5.4</p>
+<p>Looking at graphical representations in simple two-dimensional maps can often reveal important clumping patterns. We saw an example for this with the map that enabled Snow to discover the source of the London cholera outbreak. Such clusterings can often indicate important information about hidden variables acting on the observations. Look at a map for breast cancer incidence in the US at:<br>
+<a href="http://www.huffingtonpost.com/bill-davenhall/post_1663_b_817254.html" class="uri">http://www.huffingtonpost.com/bill-davenhall/post_1663_b_817254.html</a> (<a href="16-chap.html#ref-mandal2009">Mandal et al.&nbsp;2009</a>); the areas of high incidence seem spatially clustered. Can you guess the reason(s) for this clustering and high incidence rates on the West and East coasts and around Chicago?</p>
+<p>__</p>
+<p>Exercise 5.5</p>
+<p><strong>Amplicon bioinformatics: from raw reads to dereplicated sequences</strong>. As a supplementary exercise, we provide the intermediate steps necessary to a full data preprocessing workflow for denoising 16S rRNA sequences. We start by setting the directories and loading the downloaded data:</p>
+<pre><code>base_dir = "../data"
+miseq_path = file.path(base_dir, "MiSeq_SOP")
+filt_path = file.path(miseq_path, "filtered")
+fnFs = sort(list.files(miseq_path, pattern="_R1_001.fastq"))
+fnRs = sort(list.files(miseq_path, pattern="_R2_001.fastq"))
+sampleNames = sapply(strsplit(fnFs, "_"), `[`, 1)
+if (!file_test("-d", filt_path)) dir.create(filt_path)
+filtFs = file.path(filt_path, paste0(sampleNames, "_F_filt.fastq.gz"))
+filtRs = file.path(filt_path, paste0(sampleNames, "_R_filt.fastq.gz"))
+fnFs = file.path(miseq_path, fnFs)
+fnRs = file.path(miseq_path, fnRs)
+print(length(fnFs))__
+
+
+[1] 20</code></pre>
+<p>The data are highly-overlapping Illumina Miseq \(2\) amplicon sequences from the V4 region of the 16S rRNA gene (<a href="16-chap.html#ref-Kozich2013">Kozich et al. 2013</a>). There were originally 360 fecal samples collected longitudinally from 12 mice over the first year of life. These were collected by P. D. Schloss et al.&nbsp;(<a href="16-chap.html#ref- schloss2012stabilization">2012</a>) to investigate the development and stabilization of the murine microbiome. We have selected 20 samples to illustrate how to preprocess the data.</p>
+<p>We will need to filter out low-quality reads and trim them to a consistent length. While generally recommended filtering and trimming parameters serve as a starting point, no two datasets are identical and therefore it is always worth inspecting the quality of the data before proceeding. We show the sequence quality plots for the two first samples in Figure 5.36. They are generated by:</p>
+<pre><code>plotQualityProfile(fnFs[1:2]) + ggtitle("Forward")
+plotQualityProfile(fnRs[1:2]) + ggtitle("Reverse")__</code></pre>
+<p><a href="05-chap_files/figure- html/fig-profile-1-1.png" title="Figure 5.36 (a):"><img src="05-chap_files/figure-html/fig-profile-1-1.png" class="img-fluid"></a></p>
+<ol type="a">
+<li></li>
+</ol>
+<p><a href="05-chap_files/figure- html/fig-profile-1-2.png" title="Figure 5.36 (b):"><img src="05-chap_files/figure-html/fig-profile-1-2.png" class="img-fluid"></a></p>
+<ol start="2" type="a">
+<li></li>
+</ol>
+<p>Figure 5.36: Quality scores. The lines show positional summary statistics: green is the mean, orange is the median, and the dashed orange lines are the 25th and 75th quantiles.</p>
+<p>Note that we also see the background distribution of quality scores at each position in Figure 5.36 as a grey-scale heat map. The dark colors correspond to higher frequency.</p>
+<p>__</p>
+<p>Exercise 5.6</p>
+<p>Generate similar plots for four randomly selected sets of forward and reverse reads. Compare forward and reverse read qualities; what do you notice?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<pre><code>ii = sample(length(fnFs), 4)
+plotQualityProfile(fnFs[ii]) + ggtitle("Forward")__
+
+
+ plotQualityProfile(fnRs[ii]) + ggtitle("Reverse")__</code></pre>
+<p>__</p>
+<p>Exercise 5.7</p>
+<p>Here, the forward reads maintain high quality throughout, while the quality of the reverse reads drops significantly at about position 160. Therefore, we truncate the forward reads at position 240, and trimm the first 10 nucleotides as these positions are of lower quality. The reverse reads are trimmed at position 160. Combine these trimming parameters with standard filtering parameters remember to enforce a maximum of 2 expected errors per-read. (Hint: Trim and filter on paired reads jointly, i.e., both reads must pass the filter for the pair to pass. The input arguments should be chosen following the <strong><a href="https://bioconductor.org/packages/dada2/">dada2</a></strong> vignette carefully. We recommend filtering out all reads with any ambiguous nucleotides.)</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>Most Illumina sequencing data show a trend of decreasing quality towards the end of the reads.</p>
+<pre><code>out = filterAndTrim(fnFs, filtFs, fnRs, filtRs, truncLen=c(240,160),
+        maxN=0, maxEE=2, truncQ=2, rm.phix=TRUE,  trimLeft=10,
+        compress=TRUE, multithread=TRUE) # On Windows set multithread=FALSE
+head(out)__
+
+
+                              reads.in reads.out
+F3D0_S188_L001_R1_001.fastq       7793      7139
+F3D1_S189_L001_R1_001.fastq       5869      5314
+F3D141_S207_L001_R1_001.fastq     5958      5478
+F3D142_S208_L001_R1_001.fastq     3183      2926
+F3D143_S209_L001_R1_001.fastq     3178      2955
+F3D144_S210_L001_R1_001.fastq     4827      4323</code></pre>
+<p>The <code>maxN</code> parameter omits all reads with more than <code>maxN = 0</code> ambiguous nucleotides and <code>maxEE</code> at 2 excludes reads with more than 2 expected errors.</p>
+<p>The sequence data was imported into R from demultiplexed <em>fastq</em> files (i.e. one <em>fastq</em> for each sample) and simultaneously dereplicated to remove redundancy. Name the resulting objects by their sample provenance; they will have <em>derep</em> as their class.</p>
+<pre><code>derepFs = derepFastq(filtFs, verbose = FALSE)
+derepRs = derepFastq(filtRs, verbose = FALSE)
+names(derepFs) = sampleNames
+names(derepRs) = sampleNames __</code></pre>
+<p>__</p>
+<p>Exercise 5.8</p>
+<p>Use R to create a map like the one shown in Figure 5.2. Hint: go to the <a href="http://bombsight.org">website of the British National Archives</a> and download street addresses of hits, use an address resolution service to convert these into geographic coordinates, and display these as points on a map of London.</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>See the Gist <a href="https://gist.github.com/wolfganghuber/523622aff6a156d26e77a87ccbe7bd0d" class="uri">https://gist.github.com/wolfganghuber/523622aff6a156d26e77a87ccbe7bd0d</a> by Andrzej Oles.</p>
+<p>Aure, Miriam Ragle, Valeria Vitelli, Sandra Jernström, Surendra Kumar, Marit Krohn, Eldri U Due, Tonje Husby Haukaas, et al.&nbsp;2017. “Integrative Clustering Reveals a Novel Split in the Luminal A Subtype of Breast Cancer with Impact on Outcome.” <em>Breast Cancer Research</em> 19 (1): 44.</p>
+<p>Bendall, Sean C, Garry P Nolan, Mario Roederer, and Pratip K Chattopadhyay. 2012. “A Deep Profiler’s Guide to Cytometry.” <em>Trends in Immunology</em> 33 (7): 323–32.</p>
+<p>Callahan, Ben J, Kris Sankaran, Julia A Fukuyama, Paul J McMurdie, and Susan P Holmes. 2016. “Bioconductor Workflow for Microbiome Data Analysis: From Raw Reads to Community Analyses.” <em>F1000Research</em> 5.</p>
+<p>Callahan, Benjamin J, Paul J McMurdie, and Susan P Holmes. 2017. “Exact Sequence Variants Should Replace Operational Taxonomic Units in Marker Gene Data Analysis.” <em>ISME Journal</em> , 1–5.</p>
+<p>Callahan, Benjamin J, Paul J McMurdie, Michael J Rosen, Andrew W Han, Amy J Johnson, and Susan P Holmes. 2016. “DADA2: High Resolution Sample Inference from Amplicon Data.” <em>Nature Methods</em> , 1–4.</p>
+<p>Caporaso, J. G., J. Kuczynski, J. Stombaugh, K. Bittinger, F. D. Bushman, E. K. Costello, N. Fierer, et al.&nbsp;2010. “QIIME Allows Analysis of High-Throughput Community Sequencing Data.” <em>Nature Methods</em> 7 (5): 335–36.</p>
+<p>Chakerian, John, and Susan Holmes. 2012. “Computational Tools for Evaluating Phylogenetic and Hierarchical Clustering Trees.” <em>Journal of Computational and Graphical Statistics</em> 21 (3): 581–99.</p>
+<p>Diday, Edwin, and M Paula Brito. 1989. “Symbolic Cluster Analysis.” In <em>Conceptual and Numerical Analysis of Data</em> , 45–84. Springer.</p>
+<p>Dundar, Murat, Ferit Akova, Halid Z. Yerebakan, and Bartek Rajwa. 2014. “A Non-Parametric Bayesian Model for Joint Cell Clustering and Cluster Matching: Identification of Anomalous Sample Phenotypes with Random Effects.” <em>BMC Bioinformatics</em> 15 (1): 1–15. <a href="https://doi.org/10.1186/1471-2105-15-314" class="uri">https://doi.org/10.1186/1471-2105-15-314</a>.</p>
+<p>Freedman, David A. 1991. “Statistical Models and Shoe Leather.” <em>Sociological Methodology</em> 21 (2): 291–313.</p>
+<p>Hallett, Robin M, Anna Dvorkin-Gheva, Anita Bane, and John A Hassell. 2012. “A Gene Signature for Predicting Outcome in Patients with Basal-Like Breast Cancer.” <em>Scientific Reports</em> 2.</p>
+<p>Holmes, Susan, Michael He, Tong Xu, and Peter P Lee. 2005. “Memory t Cells Have Gene Expression Patterns Intermediate Between Naive and Effector.” <em>PNAS</em> 102 (15): 5519–23.</p>
+<p>Hornik, Kurt. 2005. “A CLUE for CLUster Ensembles.” <em>Journal of Statistical Software</em> 14 (12).</p>
+<p>Hulett, Henry R, William A Bonner, Janet Barrett, and Leonard A Herzenberg. 1969. “Cell Sorting: Automated Separation of Mammalian Cells as a Function of Intracellular Fluorescence.” <em>Science</em> 166 (3906): 747–49.</p>
+<p>Kahneman, Daniel. 2011. <em>Thinking, Fast and Slow</em>. Macmillan.</p>
+<p>Kaufman, Leonard, and Peter J Rousseeuw. 2009. <em>Finding Groups in Data: An Introduction to Cluster Analysis</em>. Vol. 344. John Wiley &amp; Sons.</p>
+<p>Kozich, James J, Sarah L Westcott, Nielson T Baxter, Sarah K Highlander, and Patrick D Schloss. 2013. “Development of a Dual-Index Sequencing Strategy and Curation Pipeline for Analyzing Amplicon Sequence Data on the MiSeq Illumina Sequencing Platform.” <em>Applied and Environmental Microbiology</em> 79 (17): 5112–20.</p>
+<p>Mandal, Rakesh, Sophie St-Hilaire, John G Kie, and DeWayne Derryberry. 2009. “Spatial Trends of Breast and Prostate Cancers in the United States Between 2000 and 2005.” <em>International Journal of Health Geographics</em> 8 (1): 53.</p>
+<p>McLachlan, Geoffrey, and Thriyambakam Krishnan. 2007. <em>The EM Algorithm and Extensions</em>. Vol. 382. John Wiley &amp; Sons.</p>
+<p>Müllner, Daniel. 2013. “Fastcluster: Fast Hierarchical, Agglomerative Clustering Routines for r and Python.” <em>Journal of Statistical Software</em> 53 (9): 1–18.</p>
+<p>O’Neill, Kieran, Nima Aghaeepour, Josef Špidlen, and Ryan Brinkman. 2013. “Flow Cytometry Bioinformatics.” <em>PLoS Computational Biology</em> 9 (12): e1003365.</p>
+<p>Ohnishi, Y., W. Huber, A. Tsumura, M. Kang, P. Xenopoulos, K. Kurimoto, A. K. Oles, et al.&nbsp;2014. “Cell-to-Cell Expression Variability Followed by Signal Reinforcement Progressively Segregates Early Mouse Lineages.” <em>Nature Cell Biology</em> 16 (1): 27–37.</p>
+<p>Rosen, Michael J, Benjamin J Callahan, Daniel S Fisher, and Susan P Holmes. 2012. “Denoising PCR-Amplified Metagenome Data.” <em>BMC Bioinformatics</em> 13 (1): 283.</p>
+<p>Schloss, P D, S L Westcott, T Ryabin, J R Hall, M Hartmann, E B Hollister, R A Lesniewski, et al.&nbsp;2009. “Introducing mothur: Open-Source, Platform- Independent, Community-Supported Software for Describing and Comparing Microbial Communities.” <em>Applied and Environmental Microbiology</em> 75 (23): 7537–41.</p>
+<p>Schloss, P. D., A. M. Schuber, J. P. Zackular, K. D. Iverson, Young V. B., and Petrosino J. F. 2012. “Stabilization of the Murine Gut Microbiome Following Weaning.” <em>Gut Microbes</em> 3 (4): 383–93.</p>
+<p>Tibshirani, Robert, Guenther Walther, and Trevor Hastie. 2001. “Estimating the Number of Clusters in a Data Set via the Gap Statistic.” <em>JRSSB</em> 63 (2): 411–23.</p>
+<p>Tseng, George C, and Wing H Wong. 2005. “Tight Clustering: A Resampling-Based Approach for Identifying Stable and Tight Patterns in Data.” <em>Biometrics</em> 61 (1): 10–16.</p>
+<p>Tversky, Amos, and Daniel Kahneman. 1974. “Heuristics and Biases: Judgement Under Uncertainty.” <em>Science</em> 185: 1124–30.</p>
+<p>———. 1975. “Judgment Under Uncertainty: Heuristics and Biases.” In <em>Utility, Probability, and Human Decision Making</em> , 141–62. Springer.</p>
+<p>Page built at 01:33 on 2025-09-01 using R version 4.5.1 (2025-06-13)</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./04-chap.html" class="pagination-link" aria-label="4.1 Goals for this chapter">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">4.1 Goals for this chapter</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./06-chap.html" class="pagination-link" aria-label="6.1 Goals for this Chapter">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">6.1 Goals for this Chapter</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

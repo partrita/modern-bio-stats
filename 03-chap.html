@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>5&nbsp; 3.1 Goals for this chapter – Modern Statistics for Modern Biology</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./04-chap.html" rel="next">
+<link href="./02-chap.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-22854ec117201859c8a7ba6f538122c9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="msmb.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-chap.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">3.1 Goals for this chapter</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Modern Statistics for Modern Biology</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Home</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The challenge: heterogeneity</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">1.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">2.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-chap.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">3.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">4.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">5.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">6.1 Goals for this Chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">7.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">8.1 Goals of this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">9.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">10.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">11.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">12.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">13.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">14-chap.html</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">15-chap.html</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">16-chap.html</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#base-r-plotting" id="toc-base-r-plotting" class="nav-link active" data-scroll-target="#base-r-plotting"><span class="header-section-number">5.1</span> 3.2 Base R plotting</a></li>
+  <li><a href="#an-example-dataset" id="toc-an-example-dataset" class="nav-link" data-scroll-target="#an-example-dataset"><span class="header-section-number">5.2</span> 3.3 An example dataset</a></li>
+  <li><a href="#ggplot2" id="toc-ggplot2" class="nav-link" data-scroll-target="#ggplot2"><span class="header-section-number">5.3</span> 3.4 ggplot2</a>
+  <ul class="collapse">
+  <li><a href="#data-flow" id="toc-data-flow" class="nav-link" data-scroll-target="#data-flow"><span class="header-section-number">5.3.1</span> 3.4.1 Data flow</a></li>
+  <li><a href="#saving-figures" id="toc-saving-figures" class="nav-link" data-scroll-target="#saving-figures"><span class="header-section-number">5.3.2</span> 3.4.2 Saving figures</a></li>
+  </ul></li>
+  <li><a href="#the-grammar-of-graphics" id="toc-the-grammar-of-graphics" class="nav-link" data-scroll-target="#the-grammar-of-graphics"><span class="header-section-number">5.4</span> 3.5 The grammar of graphics</a></li>
+  <li><a href="#visualizing-data-in-1d" id="toc-visualizing-data-in-1d" class="nav-link" data-scroll-target="#visualizing-data-in-1d"><span class="header-section-number">5.5</span> 3.6 Visualizing data in 1D</a>
+  <ul class="collapse">
+  <li><a href="#barplots" id="toc-barplots" class="nav-link" data-scroll-target="#barplots"><span class="header-section-number">5.5.1</span> 3.6.1 Barplots</a></li>
+  <li><a href="#boxplots" id="toc-boxplots" class="nav-link" data-scroll-target="#boxplots"><span class="header-section-number">5.5.2</span> 3.6.2 Boxplots</a></li>
+  <li><a href="#dot-plots-and-beeswarm-plots" id="toc-dot-plots-and-beeswarm-plots" class="nav-link" data-scroll-target="#dot-plots-and-beeswarm-plots"><span class="header-section-number">5.5.3</span> 3.6.3 Dot plots and beeswarm plots</a></li>
+  <li><a href="#density-plots" id="toc-density-plots" class="nav-link" data-scroll-target="#density-plots"><span class="header-section-number">5.5.4</span> 3.6.4 Density plots</a></li>
+  <li><a href="#violin-plots" id="toc-violin-plots" class="nav-link" data-scroll-target="#violin-plots"><span class="header-section-number">5.5.5</span> 3.6.5 Violin plots</a></li>
+  <li><a href="#ridgeline-plots" id="toc-ridgeline-plots" class="nav-link" data-scroll-target="#ridgeline-plots"><span class="header-section-number">5.5.6</span> 3.6.6 Ridgeline plots</a></li>
+  <li><a href="#ecdf-plots" id="toc-ecdf-plots" class="nav-link" data-scroll-target="#ecdf-plots"><span class="header-section-number">5.5.7</span> 3.6.7 ECDF plots</a></li>
+  <li><a href="#the-effect-of-transformations-on-densities" id="toc-the-effect-of-transformations-on-densities" class="nav-link" data-scroll-target="#the-effect-of-transformations-on-densities"><span class="header-section-number">5.5.8</span> 3.6.8 The effect of transformations on densities</a></li>
+  </ul></li>
+  <li><a href="#visualizing-data-in-2d-scatterplots" id="toc-visualizing-data-in-2d-scatterplots" class="nav-link" data-scroll-target="#visualizing-data-in-2d-scatterplots"><span class="header-section-number">5.6</span> 3.7 Visualizing data in 2D: scatterplots</a>
+  <ul class="collapse">
+  <li><a href="#plot-shapes" id="toc-plot-shapes" class="nav-link" data-scroll-target="#plot-shapes"><span class="header-section-number">5.6.1</span> 3.7.1 Plot shapes</a></li>
+  </ul></li>
+  <li><a href="#visualizing-more-than-two-dimensions" id="toc-visualizing-more-than-two-dimensions" class="nav-link" data-scroll-target="#visualizing-more-than-two-dimensions"><span class="header-section-number">5.7</span> 3.8 Visualizing more than two dimensions</a>
+  <ul class="collapse">
+  <li><a href="#faceting" id="toc-faceting" class="nav-link" data-scroll-target="#faceting"><span class="header-section-number">5.7.1</span> 3.8.1 Faceting</a></li>
+  <li><a href="#interactive-graphics" id="toc-interactive-graphics" class="nav-link" data-scroll-target="#interactive-graphics"><span class="header-section-number">5.7.2</span> 3.8.2 Interactive graphics</a></li>
+  </ul></li>
+  <li><a href="#color" id="toc-color" class="nav-link" data-scroll-target="#color"><span class="header-section-number">5.8</span> 3.9 Color</a></li>
+  <li><a href="#heatmaps" id="toc-heatmaps" class="nav-link" data-scroll-target="#heatmaps"><span class="header-section-number">5.9</span> 3.10 Heatmaps</a>
+  <ul class="collapse">
+  <li><a href="#dendrogram-ordering" id="toc-dendrogram-ordering" class="nav-link" data-scroll-target="#dendrogram-ordering"><span class="header-section-number">5.9.1</span> 3.10.1 Dendrogram ordering</a></li>
+  <li><a href="#color-spaces" id="toc-color-spaces" class="nav-link" data-scroll-target="#color-spaces"><span class="header-section-number">5.9.2</span> 3.10.2 Color spaces</a></li>
+  </ul></li>
+  <li><a href="#data-transformations" id="toc-data-transformations" class="nav-link" data-scroll-target="#data-transformations"><span class="header-section-number">5.10</span> 3.11 Data transformations</a></li>
+  <li><a href="#mathematical-symbols-and-other-fonts" id="toc-mathematical-symbols-and-other-fonts" class="nav-link" data-scroll-target="#mathematical-symbols-and-other-fonts"><span class="header-section-number">5.11</span> 3.12 Mathematical symbols and other fonts</a></li>
+  <li><a href="#genomic-data" id="toc-genomic-data" class="nav-link" data-scroll-target="#genomic-data"><span class="header-section-number">5.12</span> 3.13 Genomic data</a></li>
+  <li><a href="#summary-of-this-chapter" id="toc-summary-of-this-chapter" class="nav-link" data-scroll-target="#summary-of-this-chapter"><span class="header-section-number">5.13</span> 3.14 Summary of this chapter</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">5.14</span> 3.15 Further reading</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">5.15</span> 3.16 Exercises</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">3.1 Goals for this chapter</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><a href="imgs/xkcd-plotting.png"><img src="imgs/xkcd-plotting.png" class="img-fluid"></a></p>
+<p>There are (at least) two types of data visualization. The first enables a scientist to explore data and make discoveries about the complex processes at work. The other type of visualization provides informative, clear and visually attractive illustrations of her results that she can show to others and eventually include in a publication.</p>
+<p>Both of these types of visualizations can be made with R. In fact, R offers multiple graphics systems. This is because R is extensible, and because progress in R graphics over the years has proceeded largely not by replacing the old functions, but by adding packages. Each of the different graphics systems has its advantages and limitations. In this chapter we will get to know two of them. First, we have a cursory look at the base R plotting functions1. Subsequently we will switch to <strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong>.</p>
+<p>1 They live in the <strong><a href="https://cran.r-project.org/web/packages/graphics/">graphics</a></strong> package, which ships with every basic R installation.</p>
+<p><a href="imgs/Automatisches_Zeichengeraet_ZUSE_Z64_ubt_web.jpg &quot;Figure 3.1: The ZUSE Plotter Z64 (presented in 1961). Source: https://en.wikipedia.org/wiki/Plotter.&quot;"><img src="imgs/Automatisches_Zeichengeraet_ZUSE_Z64_ubt_web.jpg" class="img-fluid"></a></p>
+<p>Figure 3.1: The ZUSE Plotter Z64 (presented in 1961). Source: <a href="https://en.wikipedia.org/wiki/Plotter" class="uri">https://en.wikipedia.org/wiki/Plotter</a>.</p>
+<p>Base R graphics came historically first: simple, procedural, conceptually motivated by drawing on a canvas. There are specialized functions for different types of plots. These are easy to call – but when you want to combine them to build up more complex plots, or exchange one for another, this quickly gets messy, or even impossible. The user plots (the word harks back to some of the first graphics devices – see Figure 3.1) directly onto a (conceptual) canvas. She explicitly needs to deal with decisions such as how much space to allocate to margins, axes labels, titles, legends, subpanels; once something is “plotted” it cannot be moved or erased.</p>
+<p>There is a more high-level approach: in the <em>grammar of graphics</em> , graphics are built up from modular logical pieces, so that we can easily try different visualization types for our data in an intuitive and easily deciphered way, like we can switch in and out parts of a sentence in human language. There is no concept of a canvas or a plotter, rather, the user gives <strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong> a high-level description of the plot she wants, in the form of an R object, and the rendering engine takes a wholistic view on the scene to lay out the graphics and render them on the output device.</p>
+<p>In this chapter, we will:</p>
+<ul>
+<li><p>Learn how to rapidly and flexibly explore datasets by visualization.</p></li>
+<li><p>Create beautiful and intuitive plots for scientific presentations and publications.</p></li>
+<li><p>Review the basics of base R plotting.</p></li>
+<li><p>Understand the logic behind the <em>grammar of graphics</em> concept.</p></li>
+<li><p>Introduce <strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong> ’s <code>ggplot</code> function.</p></li>
+<li><p>See how to plot data in one, two, or even three to five dimensions, and explore faceting.</p></li>
+<li><p>Create “along-genome” plots for molecular biology data (or along other sequences, e.g., peptides).</p></li>
+<li><p>Discuss some of our options of interactive graphics.</p></li>
+</ul>
+<section id="base-r-plotting" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="base-r-plotting"><span class="header-section-number">5.1</span> 3.2 Base R plotting</h2>
+<p>The most basic function is <code>plot</code>. In the code below, the output of which is shown in Figure 3.2, it is used to plot data from an enzyme-linked immunosorbent assay (ELISA) assay. The assay was used to quantify the activity of the enzyme deoxyribonuclease (DNase), which degrades DNA. The data are assembled in the R object <code>DNase</code>, which conveniently comes with base R. The object <code>DNase</code> is a dataframe whose columns are <code>Run</code>, the assay run; <code>conc</code>, the protein concentration that was used; and <code>density</code>, the measured optical density.</p>
+<pre><code>head(DNase)__
+
+
+  Run       conc density
+1   1 0.04882812   0.017
+2   1 0.04882812   0.018
+3   1 0.19531250   0.121
+4   1 0.19531250   0.124
+5   1 0.39062500   0.206
+6   1 0.39062500   0.215
+
+
+plot(DNase$conc, DNase$density)__</code></pre>
+<p><a href="03-chap_files/figure-html/fig-graphics- basicplotting1-1.png" title="Figure 3.2: Plot of concentration vs. density for an ELISA assay of DNase."><img src="03-chap_files/figure-html/fig-graphics- basicplotting1-1.png" class="img-fluid"></a></p>
+<p>Figure 3.2: Plot of concentration vs.&nbsp;density for an ELISA assay of DNase.</p>
+<p>This basic plot can be customized, for example by changing the plot symbol and axis labels using the parameters <code>xlab</code>, <code>ylab</code> and <code>pch</code> (plot character), as shown in Figure 3.3. Information about the variables is stored in the object <code>DNase</code>, and we can access it with the <code>attr</code> function.</p>
+<pre><code>plot(DNase$conc, DNase$density,
+  ylab = attr(DNase, "labels")$y,
+  xlab = paste(attr(DNase, "labels")$x, attr(DNase, "units")$x),
+  pch = 3,
+  col = "blue")__</code></pre>
+<p><a href="03-chap_files/figure-html/fig-graphics- basicplotting2-1.png" title="Figure 3.3: Same data as in Figure fig-graphics- basicplotting1 but with better axis labels and a different plot symbol."><img src="03-chap_files/figure-html/fig-graphics- basicplotting2-1.png" class="img-fluid"></a></p>
+<p>Figure 3.3: Same data as in Figure 3.2 but with better axis labels and a different plot symbol.</p>
+<p>__</p>
+<p>Question 3.1</p>
+<p>Annotating dataframe columns with “metadata” such as longer descriptions, physical units, provenance information, etc., seems like a useful feature. Is this way of storing such information, as in the <code>DNase</code> object, standardized or common across the R ecosystem? Are there other standardized or common ways for doing this?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>There is no good or widely used infrastructure in regular R <em>data.frame</em> s for this, nor in the tidyverse (<em>data_frame</em> , <em>tibble</em>). But have a look at the <em>DataFrame</em> class in the Bioconductor package <strong><a href="https://bioconductor.org/packages/S4Vectors/">S4Vectors</a></strong>. Among other things it is used to annotate the rows and columns of a <em>SummarizedExperiment</em>.</p>
+<p>Besides scatterplots, we can also use built-in functions to create histograms and boxplots (Figure 3.4).</p>
+<pre><code>hist(DNase$density, breaks=25, main = "")
+boxplot(density ~ Run, data = DNase)__</code></pre>
+<p><a href="03-chap_files/figure-html/fig-graphics- basicplotting3-1.png" title="Figure 3.4 (a):"><img src="03-chap_files/figure-html/fig-graphics- basicplotting3-1.png" class="img-fluid"></a></p>
+<ol type="a">
+<li></li>
+</ol>
+<p><a href="03-chap_files/figure-html/fig-graphics- basicplotting3-2.png" title="Figure 3.4 (b):"><img src="03-chap_files/figure-html/fig-graphics- basicplotting3-2.png" class="img-fluid"></a></p>
+<ol start="2" type="a">
+<li></li>
+</ol>
+<p>Figure 3.4: (a) Histogram of the density from the ELISA assay, and (b) boxplots of these values stratified by the assay run. The boxes are ordered along the axis in lexicographical order because the runs were stored as text strings. We could use R’s type conversion functions to achieve numerical ordering.</p>
+<p>Boxplots are convenient for showing multiple distributions next to each other in a compact space. We will see more about plotting multiple univariate distributions in Section 3.6.</p>
+<p>The base R plotting functions are great for quick interactive exploration of data; but we run soon into their limitations if we want to create more sophisticated displays. We are going to use a visualization framework called the grammar of graphics, implemented in the package <strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong> , that enables step by step construction of high quality graphics in a logical and elegant manner. First let us introduce and load an example dataset.</p>
+</section>
+<section id="an-example-dataset" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="an-example-dataset"><span class="header-section-number">5.2</span> 3.3 An example dataset</h2>
+<p><a href="imgs/Yusukecells-2_web.jpg" title="Figure 3.5: Single-section immunofluorescence image of the E3.5 mouse blastocyst stained for Serpinh1, a marker of primitive endoderm (blue), Gata6 (red) and Nanog (green)."><img src="imgs/Yusukecells-2_web.jpg" class="img-fluid"></a></p>
+<p>Figure 3.5: Single-section immunofluorescence image of the E3.5 mouse blastocyst stained for Serpinh1, a marker of primitive endoderm (blue), Gata6 (red) and Nanog (green).</p>
+<p>To properly testdrive the <strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong> functionality, we are going to need a dataset that is big enough and has some complexity so that it can be sliced and viewed from many different angles. We’ll use a gene expression microarray dataset that reports the transcriptomes of around 100 individual cells from mouse embryos at different time points in early development. The mammalian embryo starts out as a single cell, the fertilized egg. Through synchronized waves of cell divisions, the egg multiplies into a clump of cells that at first show no discernible differences between them. At some point, though, cells choose different lineages. By further and further specification, the different cell types and tissues arise that are needed for a full organism. The aim of the experiment, explained by Ohnishi et al. (<a href="16-chap.html#ref-Ohnishi2014">2014</a>), was to investigate the gene expression changes associated with the first symmetry breaking event in the embryo. We’ll further explain the data as we go. More details can be found in the paper and in the documentation of the Bioconductor data package <strong><a href="https://bioconductor.org/packages/Hiiragi2013/">Hiiragi2013</a></strong>. We first load the data:</p>
+<p><a href="imgs/devil.png"><img src="imgs/devil.png" class="img-fluid"></a></p>
+<p>It is unfortunate that the data object has the rather generic name <code>x</code>, rather than a more descriptive name. To avoid name collisions, perhaps the most pragmatic solution would be to run code such as following: <code>esHiiragi = x; rm(list="x")</code>.</p>
+<pre><code>library("Hiiragi2013")__
+
+
+In chunk 'loadHiiragi': Warning: replacing previous import 'boot::logit' by 'gtools::logit' whenloading 'Hiiragi2013'
+
+
+In chunk 'loadHiiragi': Warning: replacing previous import 'boot::inv.logit' by 'gtools::inv.logit'when loading 'Hiiragi2013'
+
+
+data("x")
+dim(Biobase::exprs(x))__
+
+
+[1] 45101   101</code></pre>
+<p>You can print out a more detailed summary of the <em>ExpressionSet</em> object <code>x</code> by just typing <code>x</code> at the R prompt. The 101 columns of the data matrix (accessed above through the <code>exprs</code> function from the <strong><a href="https://bioconductor.org/packages/Biobase/">Biobase</a></strong> package) correspond to the samples (each of these is a single cell), the 45101 rows correspond to the genes probed by the array, an Affymetrix mouse4302 array. The data were normalized using the RMA method (<a href="16-chap.html#ref- Irizarry:Biostat:2003">Irizarry et al.&nbsp;2003</a>). The raw data are also available in the package (in the data object <code>a</code>) and at EMBL-EBI’s ArrayExpress database under the accession code E-MTAB-1681.</p>
+<p>Let’s have a look at what information is available about the samples2.</p>
+<p>2 The notation #CAB2D6 is a hexadecimal representation of the RGB coordinates of a color; more on this in Section 3.10.2.</p>
+<pre><code>head(pData(x), n = 2)__
+
+
+        File.name Embryonic.day Total.number.of.cells lineage genotype
+1 E3.25  1_C32_IN         E3.25                    32               WT
+2 E3.25  2_C32_IN         E3.25                    32               WT
+          ScanDate sampleGroup sampleColour
+1 E3.25 2011-03-16       E3.25      #CAB2D6
+2 E3.25 2011-03-16       E3.25      #CAB2D6</code></pre>
+<p>The information provided is a mix of information about the cells (i.e., age, size and genotype of the embryo from which they were obtained) and technical information (scan date, raw data file name). By convention, time in the development of the mouse embryo is measured in days, and reported as, for instance, <code>E3.5</code>. Moreover, in the paper the authors divided the cells into 8 biological groups (<code>sampleGroup</code>), based on age, genotype and lineage, and they defined a color scheme to represent these groups (<code>sampleColour</code>3). Using the following code (see below for explanations), we define a small dataframe <code>groups</code> that contains summary information for each group: the number of cells and the preferred color.</p>
+<p>3 This identifier in the dataset uses the British spelling. Everywhere else in this book, we use the US spelling (color). The <strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong> package generally accepts both spellings.</p>
+<pre><code>library("dplyr")
+groups = group_by(pData(x), sampleGroup) |&gt;
+  summarise(n = n(), color = unique(sampleColour))
+groups __
+
+
+# A tibble: 8 × 3
+  sampleGroup         n color  
+  &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;  
+1 E3.25              36 #CAB2D6
+2 E3.25 (FGF4-KO)    17 #FDBF6F
+3 E3.5 (EPI)         11 #A6CEE3
+4 E3.5 (FGF4-KO)      8 #FF7F00
+5 E3.5 (PE)          11 #B2DF8A
+6 E4.5 (EPI)          4 #1F78B4
+7 E4.5 (FGF4-KO)     10 #E31A1C
+8 E4.5 (PE)           4 #33A02C</code></pre>
+<p>The cells in the groups whose name contains <code>FGF4-KO</code> are from embryos in which the FGF4 gene, an important regulator of cell differentiation, was knocked out. Starting from E3.5, the wildtype cells (without the FGF4 knock- out) undergo the first symmetry breaking event and differentiate into different cell lineages, called pluripotent epiblast (EPI) and primitive endoderm (PE).</p>
+<p>Since the code chunk above is the first instance that we encounter the pipe operator <code>|&gt;</code> and the functions <code>group_by</code> and <code>summarise</code> from the <strong><a href="https://cran.r-project.org/web/packages/dplyr/">dplyr</a></strong> package, let’s unpack the code. First, the pipe <code>|&gt;</code>4. Generally, the pipe is useful for making nested function calls easier to read for humans. The following two lines of code are equivalent to R.</p>
+<p>4 <code>|&gt;</code> is the pipe operator that has been coming with base R since version 4.1, released in 2021. The package <strong><a href="https://cran.r-project.org/web/packages/magrittr/">magrittr</a></strong> has provided the <code>%&gt;%</code> operator, which has similar although not identical semantics, already since a long time before, as well as several other piping related operators, such as <code>%&lt;&gt;%</code> and <code>%T&gt;%</code>. As much of the book was written before 2021, <strong><a href="https://cran.r-project.org/web/packages/magrittr/">magrittr</a></strong> ’s <code>%&gt;%</code> operator is used in many places. We are occasionally updating from <code>%&gt;%</code> to <code>|&gt;</code> during book maintenance, as in the code shown here.</p>
+<pre><code>f(x) |&gt; g(y) |&gt; h()
+h(g(f(x), y))__</code></pre>
+<p>It says: “Evaluate <code>f(x)</code>, then pass the result to function <code>g</code> as the first argument, while <code>y</code> is passed to <code>g</code> as the second argument. Then pass the output of <code>g</code> to the function <code>h</code>.” You could repeat this ad infinitum. Especially if the arguments <code>x</code> and <code>y</code> are complex expressions themselves, or if there is quite a chain of functions involved, the first version tends to be easier to read.</p>
+<p>The <code>group_by</code> function simply “marks” the dataframe with a note that all subsequent operations should not be applied to the whole dataframe at once, but to blocks defined by the <code>sampleGroup</code> factor. Finally, <code>summarise</code> computes summary statistics; this could be, e.g., the <code>mean</code>, <code>sum</code>; in this case, we just compute the number of rows in each block, <code>n()</code>, and the prevalent color.</p>
+</section>
+<section id="ggplot2" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="ggplot2"><span class="header-section-number">5.3</span> 3.4 ggplot2</h2>
+<p><strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong> is a package by Hadley Wickham (<a href="16-chap.html#ref-ggplot2">Wickham 2016</a>) that implements the idea of <strong>grammar of graphics</strong> – a concept created by Leland Wilkinson in his eponymous book (<a href="16-chap.html#ref-GrofGrbook">Wilkinson 2005</a>). We will explore some of its functionality in this chapter, and you will see many examples of how it can be used in the rest of this book. Comprehensive documentation for the package can be found <a href="https://ggplot2.tidyverse.org">on its website</a>. The online documentation includes example use cases for each of the graphic types that are introduced in this chapter (and many more) and is an invaluable resource when creating figures.</p>
+<p>Let’s start by loading the package and redoing the simple plot of Figure 3.2.</p>
+<pre><code>library("ggplot2")
+ggplot(DNase, aes(x = conc, y = density)) + geom_point()__</code></pre>
+<p><a href="03-chap_files/figure-html/fig-graphics- figredobasicplottingwithggplot-1.png" title="Figure 3.6: Our first ggplot2 figure, similar to the base graphics Figure fig-graphics-basicplotting1."><img src="03-chap_files/figure-html/fig-graphics- figredobasicplottingwithggplot-1.png" class="img-fluid"></a></p>
+<p>Figure 3.6: Our first <strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong> figure, similar to the base graphics Figure 3.2.</p>
+<p>We just wrote our first “sentence” using the grammar of graphics. Let’s deconstruct this sentence. First, we specified the dataframe that contains the data, <code>DNase</code>. The <code>aes</code> (this stands for <strong>aesthetic</strong>) argument states which variables we want to see mapped to the \(x\)- and \(y\)-axes, respectively. Finally, we stated that we want the plot to use points (as opposed to, say, lines or bars), by adding the result of calling the function <code>geom_point</code>.</p>
+<p>Now let’s turn to the mouse single cell data and plot the number of samples for each of the 8 groups using the <code>ggplot</code> function. The result is shown in Figure 3.7.</p>
+<pre><code>ggplot(groups, aes(x = sampleGroup, y = n)) +
+  geom_bar(stat = "identity")__</code></pre>
+<p><a href="03-chap_files/figure-html/fig-graphics-qplot1-1.png &quot;Figure 3.7: A barplot, produced with the ggplot function from the table of group sizes in the mouse single cell data.&quot;"><img src="03-chap_files/figure-html/fig-graphics- qplot1-1.png" class="img-fluid"></a></p>
+<p>Figure 3.7: A barplot, produced with the <code>ggplot</code> function from the table of group sizes in the mouse single cell data.</p>
+<p>With <code>geom_bar</code> we now told <code>ggplot</code> that we want each data item (each row of <code>groups</code>) to be represented by a bar. Bars are one example of geometric object (<strong>geom</strong> in the <strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong> package’s parlance) that <code>ggplot</code> knows about. We have already seen another such object in Figure 3.6: points, indicated by the <code>geom_point</code> function. We will encounter many other geoms later. We used the <code>aes</code> to indicate that we want the groups shown along the \(x\)-axis and the sizes along the \(y\)-axis. Finally, we provided the argument <code>stat = "identity"</code> (in other words, do nothing) to the <code>geom_bar</code> function, since otherwise it would try to compute a histogram of the data (the default value of <code>stat</code> is <code>"count"</code>). <code>stat</code> is short for <em>statistic</em> , which is what we call any function of data. Besides the identity and count statistic, there are others, such as smoothing, averaging, binning, or other operations that reduce the data in some way.</p>
+<p>These concepts –data, geometrical objects, statistics– are some of the ingredients of the grammar of graphics, just as nouns, verbs and adverbs are ingredients of an English sentence.</p>
+<p>__</p>
+<p>Task</p>
+<p>Flip the \(x\)- and \(y\)-aesthetics to produce a horizontal barplot.</p>
+<p>The plot in Figure 3.7 is not bad, but there are several potential improvements. We can use color for the bars to help us quickly see which bar corresponds to which group. This is particularly useful if we use the same color scheme in several plots. To this end, let’s define a named vector <code>groupColor</code> that contains our desired colors for each possible value of <code>sampleGroup</code>.5</p>
+<p>5 The information is completely equivalent to that in the <code>sampleGroup</code> and <code>color</code> columns of the dataframe <code>groups</code>; we are just adapting to the fact that <strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong> expects this information in the form of a named vector.</p>
+<pre><code>groupColor = setNames(groups$color, groups$sampleGroup)__</code></pre>
+<p>Another thing that we need to fix in Figure 3.7 is the readability of the bar labels. Right now they are running into each other — a common problem when you have descriptive names.</p>
+<pre><code>ggplot(groups, aes(x = sampleGroup, y = n, fill = sampleGroup)) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values = groupColor, name = "Groups") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))__</code></pre>
+<p><a href="03-chap_files/figure-html/fig-graphics-qplot2-1.png &quot;Figure 3.8: Similar to Figure fig-graphics-qplot1, but with colored bars and better bar labels.&quot;"><img src="03-chap_files/figure-html/fig-graphics- qplot2-1.png" class="img-fluid"></a></p>
+<p>Figure 3.8: Similar to Figure 3.7, but with colored bars and better bar labels.</p>
+<p>This is now already a longer and more complex sentence. Let’s dissect it. We added an argument, <code>fill</code> to the <code>aes</code> function that states that we want the bars to be colored (filled) based on <code>sampleGroup</code> (which in this case co- incidentally is also the value of the <code>x</code> argument, but that need not always be so). Furthermore we added a call to the <code>scale_fill_manual</code> function, which takes as its input a color map – i.e., the mapping from the possible values of a variable to the associated colors – as a named vector. We also gave this color map a title (note that in more complex plots, there can be several different color maps involved). Had we omitted the call to <code>scale_fill_manual</code>, <strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong> would have used its choice of default colors. We also added a call to <code>theme</code> stating that we want the \(x\)-axis labels rotated by 90 degrees and right-aligned (<code>hjust</code>; the default would be to center).</p>
+<section id="data-flow" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="data-flow"><span class="header-section-number">5.3.1</span> 3.4.1 Data flow</h3>
+<p><a href="imgs/devil.png"><img src="imgs/devil.png" class="img-fluid"></a></p>
+<p>The function <code>ggplot</code> expects your data in a dataframe. If they are in a matrix, in separate vectors, or other types of objects, you will have to convert them. The packages <strong><a href="https://cran.r-project.org/web/packages/dplyr/">dplyr</a></strong> and <strong><a href="https://cran.r-project.org/web/packages/broom/">broom</a></strong> , among others, offer facilities to this end. We will discuss this more in <a href="13-chap.html#sec-design-datarep">Section 13.10</a>, and you will see examples of such conversions throughout the book.</p>
+<p>This includes the base R <em>data.frame</em> as well as the <em>tibble</em> (and synonymous <em>data_frame</em>) classes from the <strong><a href="https://cran.r-project.org/web/packages/tibble/">tibble</a></strong> package in the tidyverse.</p>
+<p>The result of a call to the <code>ggplot</code> is a <em>ggplot</em> object. Let’s recall a piece of code from above:</p>
+<pre><code>gg = ggplot(DNase, aes(x = conc, y = density)) + geom_point()__</code></pre>
+<p>We have now assigned the output of <code>ggplot</code> to the object <code>gg</code>, instead of sending it directly to the console, where it was “printed” and produced Figure 3.6. The situation is completely analogous to what you’re used to from working with the R console: when you enter an expression such as <code>1+1</code> and hit “Enter”, the result is printed. When the expression is an assignment, such as <code>s = 1+1</code>, the side effect takes place (the name <code>"s"</code> is bound to an object in memory that represents the value of <code>1+1</code>), but nothing is printed. Similarly, when an expression is evaluated as part of a script called with <code>source</code>, it is not printed. Thus, the above code also does not create any graphic output, since no <code>print</code> method is invoked. To print <code>gg</code>, type its name (in an interactive session) or call <code>print</code> on it:</p>
+<pre><code>gg
+print(gg)__</code></pre>
+</section>
+<section id="saving-figures" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="saving-figures"><span class="header-section-number">5.3.2</span> 3.4.2 Saving figures</h3>
+<p><strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong> has a built-in plot saving function called <code>ggsave</code>:</p>
+<pre><code>ggplot2::ggsave("DNAse-histogram-demo.pdf", plot = gg)__</code></pre>
+<p>There are two major ways of storing plots: vector graphics and raster (pixel) graphics. In vector graphics, the plot is stored as a series of geometrical primitives such as points, lines, curves, shapes and typographic characters. The preferred format in R for saving plots into a vector graphics format is PDF. In raster graphics, the plot is stored in a dot matrix data structure. The main limitation of raster formats is their limited resolution, which depends on the number of pixels available. In R, the most commonly used device for raster graphics output is <code>png</code>. Generally, it’s preferable to save your plots in a vector graphics format, since it is always possible later to convert a vector graphics file into a raster format of any desired resolution, while the reverse is quite difficult. And you don’t want the figures in your talks or papers look poor because of pixelization artefacts!</p>
+</section>
+</section>
+<section id="the-grammar-of-graphics" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="the-grammar-of-graphics"><span class="header-section-number">5.4</span> 3.5 The grammar of graphics</h2>
+<p>The components of <strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong> ’s grammar of graphics are</p>
+<ol type="1">
+<li><p>one or more datasets,</p></li>
+<li><p>one or more geometric objects that serve as the visual representations of the data, – for instance, points, lines, rectangles, contours,</p></li>
+<li><p>descriptions of how the variables in the data are mapped to visual properties (aesthetics) of the geometric objects, and an associated scale (e. g., linear, logarithmic, rank),</p></li>
+<li><p>one or more coordinate systems,</p></li>
+<li><p>statistical summarization rules,</p></li>
+<li><p>a facet specification, i.e.&nbsp;the use of multiple similar subplots to look at subsets of the same data,</p></li>
+<li><p>optional parameters that affect the layout and rendering, such text size, font and alignment, legend positions.</p></li>
+</ol>
+<p>In the examples above, Figures 3.7 and 3.8, the dataset was <code>groupsize</code>, the variables were the numeric values as well as the names of <code>groupsize</code>, which we mapped to the aesthetics \(y\)-axis and \(x\)-axis respectively, the scale was linear on the \(y\) and rank-based on the \(x\)-axis (the bars are ordered alphanumerically and each has the same width), and the geometric object was the rectangular bar.</p>
+<p>Items 4–7 in the above list are optional. If you don’t specify them, then the Cartesian is used as the coordinate system, the statistical summary is the trivial one (i.e., the identity), and no facets or subplots are made (we’ll see examples later on, in Section 3.8). The first three items are required: a valid <strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong> “sentence” needs to contain at least one of each of them.</p>
+<p>In fact, <strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong> ’s implementation of the grammar of graphics allows you to use the same type of component multiple times, in what are called <strong>layers</strong> (<a href="16-chap.html#ref-Wickham:LayeredGrammar">Wickham 2010</a>). For example, the code below uses three types of geometric objects in the same plot, for the same data: points, a line and a confidence band.</p>
+<pre><code>dftx = data.frame(t(Biobase::exprs(x)), pData(x))
+ggplot( dftx, aes( x = X1426642_at, y = X1418765_at )) +
+  geom_point( shape = 1 ) +
+  geom_smooth( method = "loess" )__</code></pre>
+<p><a href="03-chap_files/figure-html/fig-graphics-scp2layers1-1.png &quot;Figure 3.9: A scatterplot with three layers that show different statistics of the same data: points (geom_point), a smooth regression line and a confidence band (the latter two from geom_smooth).&quot;"><img src="03-chap_files/figure-html/fig-graphics- scp2layers1-1.png" class="img-fluid"></a></p>
+<p>Figure 3.9: A scatterplot with three layers that show different statistics of the same data: points (<code>geom_point</code>), a smooth regression line and a confidence band (the latter two from <code>geom_smooth</code>).</p>
+<p>Here we had to assemble a copy of the expression data (<code>Biobase::exprs(x)</code>) and the sample annotation data (<code>pData(x)</code>) all together into the dataframe <code>dftx</code> – since this is the data format that <strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong> functions most easily take as input (more on this in <a href="13-chap.html#sec-design- datarep">Section 13.10</a>).</p>
+<p>We can further enhance the plot by using colors – since each of the points in Figure 3.9 corresponds to one sample, it makes sense to use the <code>sampleColour</code> information in the object <code>x</code>.</p>
+<pre><code>ggplot(dftx, aes(x = X1426642_at, y = X1418765_at))  +
+  geom_point(aes(color = sampleGroup), shape = 19) +
+  scale_color_manual(values = groupColor, guide = "none") +
+  geom_smooth(method = "loess")__</code></pre>
+<p><a href="03-chap_files/figure-html/fig-graphics-scp2layers2-1.png &quot;Figure 3.10: As Figure fig-graphics-scp2layers1, but in addition with points colored by the time point and cell lineage (as defined in Figure fig- graphics-qplot2). We can now see that the expression values of the gene Timd2 (targeted by the probe 1418765_at, along the y-axis) are consistently high in the early time points, whereas its expression goes down in the EPI samples at days 3.5 and 4.5. In the FGF4-KO, this decrease is delayed - at E3.5, its expression is still high. Conversely, the gene Fn1 (1426642_at, x-axis) is off in the early timepoints and then goes up at days 3.5 and 4.5. The PE samples (green) show a high degree of cell-to-cell variability.&quot;"><img src="03-chap_files/figure-html/fig-graphics- scp2layers2-1.png" class="img-fluid"></a></p>
+<p>Figure 3.10: As Figure 3.9, but in addition with points colored by the time point and cell lineage (as defined in Figure 3.8). We can now see that the expression values of the gene Timd2 (targeted by the probe 1418765_at, along the y-axis) are consistently high in the early time points, whereas its expression goes down in the EPI samples at days 3.5 and 4.5. In the FGF4-KO, this decrease is delayed - at E3.5, its expression is still high. Conversely, the gene Fn1 (1426642_at, x-axis) is off in the early timepoints and then goes up at days 3.5 and 4.5. The PE samples (green) show a high degree of cell-to- cell variability.</p>
+<p>__</p>
+<p>Question 3.2</p>
+<p>In the code above we defined the <code>color</code> aesthetics (<code>aes</code>) only for the <code>geom_point</code> layer, while we defined the <code>x</code> and <code>y</code> aesthetics for all layers. What happens if we set the <code>color</code> aesthetics for all layers, i.e., move it into the argument list of <code>ggplot</code>?</p>
+<p>__</p>
+<p>Question 3.3</p>
+<p>Is it always meaningful to visualize scatterplot data together with a regression line as in Figures 3.9 and 3.10?</p>
+<p>As an aside, if we want to find out which genes are targeted by these probe identifiers, and what they might do, we can call:</p>
+<p><a href="imgs/devil.png"><img src="imgs/devil.png" class="img-fluid"></a></p>
+<p>Note that here were need to use the original feature identifiers (e.,g., “1426642_at”, without the leading “X”). This is the notation used by the microarray manufacturer, by the Bioconductor annotation packages, and also inside the object <code>x</code>. The leading “X” that we used above when working with <code>dftx</code> was inserted during the creation of <code>dftx</code> by the constructor function <code>data.frame</code>, since its argument <code>check.names</code> is set to <code>TRUE</code> by default. Alternatively, we could have kept the original identifier notation by setting <code>check.names = FALSE</code>, but then our code (e.g., the calls to <code>aes()</code>) would need to use backticks around the identifiers to make sure R interprets them correctly.</p>
+<p>Note the use of the <code>::</code> operator to call the <code>select</code> function by its fully qualified name, including the package. We already encountered this in <a href="02-chap.html">Chapter 2</a>.</p>
+<pre><code>library("mouse4302.db")__
+
+
+AnnotationDbi::select(mouse4302.db,
+   keys = c("1426642_at", "1418765_at"), keytype = "PROBEID",
+   columns = c("SYMBOL", "GENENAME"))__
+
+
+     PROBEID SYMBOL                                            GENENAME
+1 1426642_at    Fn1                                       fibronectin 1
+2 1418765_at  Timd2 T cell immunoglobulin and mucin domain containing 2</code></pre>
+<p>Often when using <code>ggplot</code> you will only need to specify the data, aesthetics and a geometric object. Most geometric objects implicitly call a suitable default statistical summary of the data. For example, if you are using <code>geom_smooth</code>, then <strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong> uses <code>stat = "smooth"</code> by default and displays a line; if you use <code>geom_histogram</code>, the data are binned and the result is displayed in barplot format. Here’s an example:</p>
+<pre><code>dfx = as.data.frame(Biobase::exprs(x))
+ggplot(dfx, aes(x = `20 E3.25`)) + geom_histogram(binwidth = 0.2)__</code></pre>
+<p><a href="03-chap_files/figure-html/fig-graphics-hists-1.png" title="Figure 3.11: Histogram of probe intensities for one particular sample, cell number 20, which was from day E3.25."><img src="03-chap_files/figure-html/fig-graphics- hists-1.png" class="img-fluid"></a></p>
+<p>Figure 3.11: Histogram of probe intensities for one particular sample, cell number 20, which was from day E3.25.</p>
+<p>__</p>
+<p>Question 3.4</p>
+<p>What is the difference between the objects <code>dfx</code> and <code>dftx</code>? Why did we need to create them both?</p>
+<p>Let’s come back to the barplot example from above.</p>
+<pre><code>pb = ggplot(groups, aes(x = sampleGroup, y = n))__</code></pre>
+<p>This creates a plot object <code>pb</code>. If we try to display it, it creates an empty plot, because we haven’t specified what geometric object we want to use. All that we have in our <code>pb</code> object so far are the data and the aesthetics (Figure 3.12).</p>
+<pre><code>class(pb)__
+
+
+[1] "gg"     "ggplot"
+
+
+pb __</code></pre>
+<p><a href="03-chap_files/figure-html/fig-graphics-figbpempty-1.png &quot;Figure 3.12: pb: without a geometric object (a geom), the plot area remains empty. With the default style parameters, the tick labels on the x-axis are not legible.&quot;"><img src="03-chap_files/figure-html/fig-graphics- figbpempty-1.png" class="img-fluid"></a></p>
+<p>Figure 3.12: <code>pb</code>: without a geometric object (a <code>geom</code>), the plot area remains empty. With the default style parameters, the tick labels on the \(x\)-axis are not legible.</p>
+<p>Now we can simply add on the other components of our plot through using the <code>+</code> operator (Figure 3.13):</p>
+<pre><code>pb = pb + geom_bar(stat = "identity")
+pb = pb + aes(fill = sampleGroup)
+pb = pb + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+pb = pb + scale_fill_manual(values = groupColor, name = "Groups")
+pb __</code></pre>
+<p><a href="03-chap_files/figure-html/fig-graphics-bpgg3-1.png" title="Figure 3.13: The graphics object bp in its full glory."><img src="03-chap_files/figure-html/fig-graphics- bpgg3-1.png" class="img-fluid"></a></p>
+<p>Figure 3.13: The graphics object <code>bp</code> in its full glory.</p>
+<p>This step-wise buildup –taking a graphics object already produced in some way and then further refining it– can be more convenient and easy to manage than, say, providing all the instructions upfront to the single function call that creates the graphic.</p>
+<p>We can quickly try out different visualization ideas without having to rebuild our plots each time from scratch, but rather store the partially finished object and then modify it in different ways. For example we can switch our plot to polar coordinates to create an alternative visualization of the barplot.</p>
+<pre><code>pb.polar = pb + coord_polar() +
+  theme(axis.text.x = element_text(angle = 0, hjust = 1),
+        axis.text.y = element_blank(),
+        axis.ticks = element_blank()) +
+  xlab("") + ylab("")
+pb.polar __</code></pre>
+<p><a href="03-chap_files/figure-html/fig-graphics-bpgg7-1.png" title="Figure 3.14: A barplot in a polar coordinate system."><img src="03-chap_files/figure-html/fig-graphics- bpgg7-1.png" class="img-fluid"></a></p>
+<p>Figure 3.14: A barplot in a polar coordinate system.</p>
+<p>Note above that we can override previously set <code>theme</code> parameters by simply setting them to a new value – no need to go back to recreating <code>pb</code>, where we originally set them.</p>
+</section>
+<section id="visualizing-data-in-1d" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="visualizing-data-in-1d"><span class="header-section-number">5.5</span> 3.6 Visualizing data in 1D</h2>
+<p>A common task in biological data analysis is the comparison between several samples of univariate measurements. In this section we’ll explore some possibilities for visualizing and comparing such samples. As an example, we’ll use the intensities of a set of four genes: Fgf4, Gata4, Gata6 and Sox26. On the microarray, they are represented by</p>
+<p>6 You can read more about these genes in (<a href="16-chap.html#ref-Ohnishi2014">Ohnishi et al. 2014</a>).</p>
+<pre><code>selectedProbes = c( Fgf4 = "1420085_at", Gata4 = "1418863_at",
+                   Gata6 = "1425463_at",  Sox2 = "1416967_at")__</code></pre>
+<p>To extract data from this representation and convert them into a dataframe, we use the function <code>melt</code> from the <strong><a href="https://cran.r-project.org/web/packages/reshape2/">reshape2</a></strong> package7.</p>
+<p>7 We’ll talk more about the concepts and mechanics of different data representations in <a href="13-chap.html#sec-design-datarep">Section 13.10</a>.</p>
+<pre><code>library("reshape2")
+genes = melt(Biobase::exprs(x)[selectedProbes, ],
+             varnames = c("probe", "sample"))__</code></pre>
+<p>For good measure, we also add a column that provides the gene symbol along with the probe identifiers.</p>
+<pre><code>genes$gene =
+  names(selectedProbes)[match(genes$probe, selectedProbes)]
+head(genes)__
+
+
+       probe  sample    value  gene
+1 1420085_at 1 E3.25 3.027715  Fgf4
+2 1418863_at 1 E3.25 4.843137 Gata4
+3 1425463_at 1 E3.25 5.500618 Gata6
+4 1416967_at 1 E3.25 1.731217  Sox2
+5 1420085_at 2 E3.25 9.293016  Fgf4
+6 1418863_at 2 E3.25 5.530016 Gata4</code></pre>
+<section id="barplots" class="level3" data-number="5.5.1">
+<h3 data-number="5.5.1" class="anchored" data-anchor-id="barplots"><span class="header-section-number">5.5.1</span> 3.6.1 Barplots</h3>
+<p>A popular way to display data such as in our dataframe <code>genes</code> is through barplots (Figure 3.15).</p>
+<pre><code>ggplot(genes, aes(x = gene, y = value)) +
+  stat_summary(fun = mean, geom = "bar")__</code></pre>
+<p><a href="03-chap_files/figure-html/fig-graphics-onedbp1-1.png &quot;Figure 3.15: Barplots showing the means of the distributions of expression measurements from four probes.&quot;"><img src="03-chap_files/figure-html/fig-graphics- onedbp1-1.png" class="img-fluid"></a></p>
+<p>Figure 3.15: Barplots showing the means of the distributions of expression measurements from four probes.</p>
+<p>In Figure 3.15, each bar represents the mean of the values for that gene. Such plots are commonly used in the biological sciences, as well as in the popular media. However, summarizing the data into only a single number, the mean, loses much of the information, and given the amount of space they take, barplot are a poor way to visualize data8.</p>
+<p>8 In fact, if the mean is not an appropriate summary, such as for highly skewed or multimodal distributions, or for datasets with large outliers, this kind of visualization can be outright misleading.</p>
+<p>Sometimes we want to add error bars, and one way to achieve this in <strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong> is as follows.</p>
+<pre><code>library("Hmisc")
+ggplot(genes, aes( x = gene, y = value, fill = gene)) +
+  stat_summary(fun = mean, geom = "bar") +
+  stat_summary(fun.data = mean_cl_normal, geom = "errorbar",
+               width = 0.25)__</code></pre>
+<p><a href="03-chap_files/figure-html/fig-graphics-onedbp2-1.png &quot;Figure 3.16: Barplots with error bars indicating standard error of the mean.&quot;"><img src="03-chap_files/figure-html/fig-graphics- onedbp2-1.png" class="img-fluid"></a></p>
+<p>Figure 3.16: Barplots with error bars indicating standard error of the mean.</p>
+<p>Here, we see again the principle of layered graphics: we use two summary functions, <code>mean</code> and <code>mean_cl_normal</code>, and two associated geometric objects, <code>bar</code> and <code>errorbar</code>. The function <code>mean_cl_normal</code> is from the <strong><a href="https://cran.r-project.org/web/packages/Hmisc/">Hmisc</a></strong> package and computes the standard error (or <strong>c</strong> onfidence <strong>l</strong> imits) of the mean; it’s a simple function, and we could also compute it ourselves using base R expressions if we wished to do so. We have also colored the bars to make the plot more visually pleasing.</p>
+</section>
+<section id="boxplots" class="level3" data-number="5.5.2">
+<h3 data-number="5.5.2" class="anchored" data-anchor-id="boxplots"><span class="header-section-number">5.5.2</span> 3.6.2 Boxplots</h3>
+<p>Boxplots take up a similar amount of space as barplots, but are much more informative.</p>
+<pre><code>p = ggplot(genes, aes( x = gene, y = value, fill = gene))
+p + geom_boxplot()__</code></pre>
+<p><a href="03-chap_files/figure-html/fig-graphics-onedboxpl-1.png &quot;Figure 3.17: Boxplots.&quot;"><img src="03-chap_files/figure-html/fig-graphics- onedboxpl-1.png" class="img-fluid"></a></p>
+<p>Figure 3.17: Boxplots.</p>
+<p>In Figure 3.17 we see that two of the genes (Gata4, Gata6) have relatively concentrated distributions, with only a few data points venturing out in the direction of higher values. For Fgf4, we see that the distribution is right- skewed: the median, indicated by the horizontal black bar within the box is closer to the lower (or left) side of the box. Conversely, for Sox2 the distribution is left-skewed.</p>
+</section>
+<section id="dot-plots-and-beeswarm-plots" class="level3" data-number="5.5.3">
+<h3 data-number="5.5.3" class="anchored" data-anchor-id="dot-plots-and-beeswarm-plots"><span class="header-section-number">5.5.3</span> 3.6.3 Dot plots and beeswarm plots</h3>
+<p>If the number of data points is not too large, it is possible to show the data points directly, and it is good practice to do so, compared to the summaries we saw above. However, plotting the data directly will often lead to overlapping points, which can be visually unpleasant, or even obscure the data. We can try to lay out the points so that they are as near possible to their proper locations without overlap (<a href="16-chap.html#ref- Wilkinson:DotPlots:1999">Wilkinson 1999</a>).</p>
+<pre><code>p + geom_dotplot(binaxis = "y", binwidth = 1/6,
+       stackdir = "center", stackratio = 0.75,
+       aes(color = gene))
+library("ggbeeswarm")
+p + geom_beeswarm(aes(color = gene))__</code></pre>
+<p>[<img src="03-chap_files/figure-html/fig-graphics- oneddot-1.png" class="img-fluid">](03-chap_files/figure-html/fig-graphics-oneddot-1.png “Figure&nbsp;3.18&nbsp;(a):”)</p>
+<ol type="a">
+<li></li>
+</ol>
+<p>[<img src="03-chap_files/figure-html/fig-graphics- oneddot-2.png" class="img-fluid">](03-chap_files/figure-html/fig-graphics-oneddot-2.png “Figure&nbsp;3.18&nbsp;(b):”)</p>
+<ol start="2" type="a">
+<li></li>
+</ol>
+<p>Figure 3.18: (a) Dot plots, made using <code>geom_dotplot</code> from <strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong>. (b) Beeswarm plots, made using <code>geom_beeswarm</code> from <strong><a href="https://cran.r-project.org/web/packages/ggbeeswarm/">ggbeeswarm</a></strong>.</p>
+<p>The plot in panel (a) of Figure 3.18. The \(y\)-coordinates of the points are discretized into bins (above we chose a bin size of 1/6), and then they are stacked next to each other.</p>
+<p>An alternative is provided by the package <strong><a href="https://cran.r-project.org/web/packages/ggbeeswarm/">ggbeeswarm</a></strong> , which provides <code>geom_beeswarm</code>. The plot is shown in panel (b) of Figure 3.18. The layout algorithm aims to avoid overlaps between the points. If a point were to overlap an existing point, it is shifted along the \(x\)-axis by a small amount sufficient to avoid overlap. Some tweaking of the layout parameters is usually needed for each new dataset to make a dot plot or a beeswarm plot look good.</p>
+</section>
+<section id="density-plots" class="level3" data-number="5.5.4">
+<h3 data-number="5.5.4" class="anchored" data-anchor-id="density-plots"><span class="header-section-number">5.5.4</span> 3.6.4 Density plots</h3>
+<p>Yet another way to represent the same data is by density plots. Here, we try to estimate the underlying data-generating density by smoothing out the data points (Figure 3.19).</p>
+<pre><code>ggplot(genes, aes( x = value, color = gene)) + geom_density()__</code></pre>
+<p><a href="03-chap_files/figure-html/fig-graphics-oneddens-1.png &quot;Figure 3.19: Density plots.&quot;"><img src="03-chap_files/figure-html/fig-graphics- oneddens-1.png" class="img-fluid"></a></p>
+<p>Figure 3.19: Density plots.</p>
+<p>As you can see from Figures 3.17—3.19, boxplots work fairly well for unimodal data, but they can be misleading if the data distribution is multimodal, and they also do not always give a fair impression of long-tailed distributions. By showing the data points, or their densities, directly, Figures 3.18—3.19) give a better impression of such features. For instance, we can see that the data for Fgf4 and Sox2 are bimodal, while Gata4 and Gata6 have most of their values concentrated around a baseline, but a certain fraction of cells have elevated expression levels, across a wide range of values.</p>
+<p>Density estimation has, however, a number of complications, in particular, the need for choosing a smoothing window. A window size that is small enough to capture peaks in the dense regions of the data may lead to instable (“wiggly”) estimates elsewhere. On the other hand, if the window is made bigger, pronounced features of the density, such as sharp peaks, may be smoothed out. Moreover, the density lines do not convey the information on how much data was used to estimate them, and plots like Figure 3.19 can be especially problematic if the sample sizes for the curves differ.</p>
+</section>
+<section id="violin-plots" class="level3" data-number="5.5.5">
+<h3 data-number="5.5.5" class="anchored" data-anchor-id="violin-plots"><span class="header-section-number">5.5.5</span> 3.6.5 Violin plots</h3>
+<p>Density plots such as Figure 3.19 can look crowded if there are several densities, and one idea is to arrange the densities in a layout inspired by boxplots: the violin plot (Figure 3.20). Here, the density estimate is used to draw a symmetric shape, which sometimes visually reminds of a violin.</p>
+<pre><code>p + geom_violin()__</code></pre>
+<p><a href="03-chap_files/figure-html/fig-graphics-onedviolin-1.png &quot;Figure 3.20: Violin plots.&quot;"><img src="03-chap_files/figure-html/fig-graphics- onedviolin-1.png" class="img-fluid"></a></p>
+<p>Figure 3.20: Violin plots.</p>
+</section>
+<section id="ridgeline-plots" class="level3" data-number="5.5.6">
+<h3 data-number="5.5.6" class="anchored" data-anchor-id="ridgeline-plots"><span class="header-section-number">5.5.6</span> 3.6.6 Ridgeline plots</h3>
+<p>Another play on density plots are ridgeline plots (Figure 3.21):</p>
+<pre><code>library("ggridges")
+ggplot(genes, aes(x = value, y = gene, fill = gene)) + 
+  geom_density_ridges()__</code></pre>
+<p><a href="03-chap_files/figure-html/fig-graphics-onedridge4-1.png &quot;Figure 3.21: Ridgeline plots.&quot;"><img src="03-chap_files/figure-html/fig-graphics- onedridge4-1.png" class="img-fluid"></a></p>
+<p>Figure 3.21: Ridgeline plots.</p>
+<p>This type of display is perhaps most appropriate if the number of densities shown goes into the dozens.</p>
+<pre><code>top42 = order(rowMeans(Biobase::exprs(x)), decreasing = TRUE)[1:42]
+g42 = melt(Biobase::exprs(x)[rev(top42), ], varnames = c("probe", "sample"))
+ggplot(g42, aes(x = value, y = probe)) __</code></pre>
+<p><a href="03-chap_files/figure-html/fig-graphics-onedridge42-1.png &quot;Figure 3.22: Like Figure fig-graphics-onedridge4, with more genes.&quot;"><img src="03-chap_files/figure-html/fig-graphics- onedridge42-1.png" class="img-fluid"></a></p>
+<p>Figure 3.22: Like Figure 3.21, with more genes.</p>
+</section>
+<section id="ecdf-plots" class="level3" data-number="5.5.7">
+<h3 data-number="5.5.7" class="anchored" data-anchor-id="ecdf-plots"><span class="header-section-number">5.5.7</span> 3.6.7 ECDF plots</h3>
+<p>The mathematically most convenient way to describe the distribution of a one- dimensional random variable \(X\) is its <strong>cumulative distribution function</strong> (<strong>CDF</strong>), i.e., the function defined by</p>
+<p>\[ F(x) = P(Xx), \]</p>
+<p>where \(x\) takes all values along the real axis. The density of \(X\) is then the derivative of \(F\), if it exists9. The finite sample version of the probability 3.1 is called the <strong>empirical cumulative distribution function</strong> (<strong>ECDF</strong>),</p>
+<p>9 By its definition, \(F\) tends to 0 for small \(x\) (\(x-\)) and to 1 for large \(x\) (\(x+\)).</p>
+<p>\[ F_{n}(x) = = _{i=1}^n 𝟙({xx_i}), \]</p>
+<p>where \(x_1,…,x_n\) denote a sample of \(n\) draws from \(X\) and \(𝟙\) is the indicator function, i.e., the function that takes the value 1 if the expression in its argument is true and 0 otherwise. If this sounds abstract, we can get a perhaps more intuitive understanding from the following example (Figure 3.23):</p>
+<pre><code>simdata = rnorm(70)
+tibble(index = seq(along = simdata),
+          sx = sort(simdata)) %&gt;%
+ggplot(aes(x = sx, y = index)) + geom_step()__</code></pre>
+<p><a href="03-chap_files/figure-html/fig-graphics-ecdfexample-1.png &quot;Figure 3.23: Sorted values of simdata versus their index. This is the empirical cumulative distribution function of simdata.&quot;"><img src="03-chap_files/figure-html/fig-graphics- ecdfexample-1.png" class="img-fluid"></a></p>
+<p>Figure 3.23: Sorted values of <code>simdata</code> versus their index. This is the empirical cumulative distribution function of <code>simdata</code>.</p>
+<p>Plotting the sorted values against their ranks gives the essential features of the ECDF (Figure 3.23). In practice, we do not need to do the sorting and the other steps in the above code manually and will rather use the <code>stat_ecdf()</code> geometric object. The ECDFs of our data are shown in Figure 3.24.</p>
+<pre><code>ggplot(genes, aes( x = value, color = gene)) + stat_ecdf()__</code></pre>
+<p><a href="03-chap_files/figure-html/fig-graphics-onedecdf-1.png &quot;Figure 3.24: Empirical cumulative distribution functions (ECDF).&quot;"><img src="03-chap_files/figure-html/fig-graphics- onedecdf-1.png" class="img-fluid"></a></p>
+<p>Figure 3.24: Empirical cumulative distribution functions (ECDF).</p>
+<p>The ECDF has several nice properties:</p>
+<ul>
+<li><p>It is lossless: the ECDF \(F_{n}(x)\) contains all the information contained in the original sample \(x_1,…,x_n\), except for the order of the values, which is assumed to be unimportant.</p></li>
+<li><p>As \(n\) grows, the ECDF \(F_{n}(x)\) converges to the true CDF \(F(x)\). Even for limited sample sizes \(n\), the difference between the two functions tends to be small. Note that this is not the case for the empirical density! Without smoothing, the empirical density of a finite sample is a sum of Dirac delta functions, which is difficult to visualize and quite different from any underlying smooth, true density. With smoothing, the difference can be less pronounced, but is difficult to control, as we discussed above.</p></li>
+</ul>
+<p><a href="imgs/Lawrence-TCGA- Nature-2013-Fig1.png" title="Figure 3.25: Part of Figure 1 from @Lawrence:Nature:2013. Each dot corresponds to a tumour-normal pair, with vertical position indicating the total frequency of somatic mutations in the exome. The resulting curves are, in essence, ECDF plots, and conceptually this plot is similar to Figure fig-graphics-onedecdf, just that the graphs are rotated by 90 degrees (i.e., the roles of x- and y-axis are exchanged) and the curves for the individual tumor types are horizontally displaced to keep them better apart."><img src="imgs/Lawrence-TCGA-Nature-2013-Fig1.png" class="img-fluid"></a></p>
+<p>Figure 3.25: Part of Figure 1 from Lawrence et al.&nbsp;(<a href="16-chap.html#ref- Lawrence:Nature:2013">2013</a>). Each dot corresponds to a tumour-normal pair, with vertical position indicating the total frequency of somatic mutations in the exome. The resulting curves are, in essence, ECDF plots, and conceptually this plot is similar to Figure 3.24, just that the graphs are rotated by 90 degrees (i.e., the roles of \(x\)- and \(y\)-axis are exchanged) and the curves for the individual tumor types are horizontally displaced to keep them better apart.</p>
+<p>__</p>
+<p>Task</p>
+<p><strong>tibbles.</strong> In the above code we saw the <code>tibble</code> for the first time. Have a look at the vignette of the <strong><a href="https://cran.r-project.org/web/packages/tibble/">tibble</a></strong> package for what it does.</p>
+</section>
+<section id="the-effect-of-transformations-on-densities" class="level3" data-number="5.5.8">
+<h3 data-number="5.5.8" class="anchored" data-anchor-id="the-effect-of-transformations-on-densities"><span class="header-section-number">5.5.8</span> 3.6.8 The effect of transformations on densities</h3>
+<p>It is tempting to look at histograms or density plots and inspect them for evidence of <strong>bimodality</strong> (or multimodality) as an indication of some underlying biological phenomenon. Before doing so, it is important to remember that the number of modes of a density depends on scale transformations of the data, via the <strong>chain rule</strong>. For instance, let’s look at the data from one of the arrays in the Hiiragi dataset (Figure 3.26):</p>
+<pre><code>ggplot(dfx, aes(x = `64 E4.5 (EPI)`)) + geom_histogram(bins = 100)
+ggplot(dfx, aes(x = 2 ^ `64 E4.5 (EPI)`)) + 
+  geom_histogram(binwidth = 20) + xlim(0, 1500)__</code></pre>
+<p>[<img src="03-chap_files/figure-html/fig-graphics- onedtrsf-1.png" class="img-fluid">](03-chap_files/figure-html/fig-graphics-onedtrsf-1.png “Figure&nbsp;3.26&nbsp;(a):”)</p>
+<ol type="a">
+<li></li>
+</ol>
+<p>[<img src="03-chap_files/figure-html/fig-graphics- onedtrsf-2.png" class="img-fluid">](03-chap_files/figure-html/fig-graphics-onedtrsf-2.png “Figure&nbsp;3.26&nbsp;(b):”)</p>
+<ol start="2" type="a">
+<li></li>
+</ol>
+<p>Figure 3.26: Histograms of the same data, with and without logarithm transform. (a) The data are shown on the scale on which they are stored in the data object <code>x</code>, which resulted from logarithm (base 2) transformation of the microarray fluorescence intensities (<a href="16-chap.html#ref- Irizarry:Biostat:2003">Irizarry et al.&nbsp;2003</a>); (b) after re-exponentiating them back to the fluorescence scale. For better use of space, we capped the \(x\)-axis range at 1500.</p>
+<p>__</p>
+<p>Question 3.5</p>
+<p>(Advanced:) Consider a random variable \(X\) and a non-linear 1:1 transformation \(f: x y\) that defines the transformed random variable \(Y = f(X)\). Suppose the density function of \(Y\) is \(p(y)\). What is the density of \(X\)? How is the mode (or: the modes) of \(X\) related to the mode(s) of \(Y\)?<br>
+Hint: note that a mode of a function \(p\) is a root of its derivative \(p’=dp/dx\). Is it generally true that if \(x_0\) is a mode of \(X\), then \(y_0=f(x_0)\) is a mode of \(Y\)?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>According to the chain rule, \(p(y), dy = p(f(x)),f’(x),dx\), so the density of \(X\) is \((x) = p(f(x)),f’(x)\). The modes of \(\) are roots of its derivative \(d/dx\), i.e., they obey \(p’(f(x)),f’^2(x) + p(f(x))f”(x) = 0\). The second term in the sum vanishes if \(f\) is affine linear (\(f”\)), but in general there is no simple relationship between the roots of the two densities, and therefore between the modes of \(X\) and \(Y\).</p>
+</section>
+</section>
+<section id="visualizing-data-in-2d-scatterplots" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="visualizing-data-in-2d-scatterplots"><span class="header-section-number">5.6</span> 3.7 Visualizing data in 2D: scatterplots</h2>
+<p>Scatterplots are useful for visualizing treatment–response comparisons (as in Figure 3.3), associations between variables (as in Figure 3.10), or paired data (e.g., a disease biomarker in several patients before and after treatment). We use the two dimensions of our plotting paper, or screen, to represent the two variables. Let’s take a look at differential expression between a wildtype and an FGF4-KO sample.</p>
+<pre><code>scp = ggplot(dfx, aes(x = `59 E4.5 (PE)` ,
+                      y = `92 E4.5 (FGF4-KO)`))
+scp + geom_point()__</code></pre>
+<p><a href="03-chap_files/figure-html/fig-graphics-twodsp1-1.png &quot;Figure 3.27: Scatterplot of 45101 expression measurements for two of the samples.&quot;"><img src="03-chap_files/figure-html/fig-graphics- twodsp1-1.png" class="img-fluid"></a></p>
+<p>Figure 3.27: Scatterplot of 45101 expression measurements for two of the samples.</p>
+<p>The labels 59 E4.5 (PE) and 92 E4.5 (FGF4-KO) refer to column names (sample names) in the dataframe <code>dfx</code>, which we created above. Since they contain special characters (spaces, parentheses, hyphen) and start with numerals, we need to enclose them with the downward sloping quotes to make them syntactically digestible for R. The plot is shown in Figure 3.27. We get a dense point cloud that we can try and interpret on the outskirts of the cloud, but we really have no idea visually how the data are distributed within the denser regions of the plot.</p>
+<p>One easy way to ameliorate the overplotting is to adjust the transparency (alpha value) of the points by modifying the <code>alpha</code> parameter of <code>geom_point</code> (Figure 3.28).</p>
+<pre><code>scp  + geom_point(alpha = 0.1)__</code></pre>
+<p><a href="03-chap_files/figure-html/fig-graphics-twodsp2-1.png &quot;Figure 3.28: As Figure fig-graphics-twodsp1, but with semi-transparent points to resolve some of the overplotting.&quot;"><img src="03-chap_files/figure-html/fig-graphics- twodsp2-1.png" class="img-fluid"></a></p>
+<p>Figure 3.28: As Figure 3.27, but with semi-transparent points to resolve some of the overplotting.</p>
+<p>This is already better than Figure 3.27, but in the more dense regions even the semi-transparent points quickly overplot to a featureless black mass, while the more isolated, outlying points are getting faint. An alternative is a contour plot of the 2D density, which has the added benefit of not rendering all of the points on the plot, as in Figure 3.29.</p>
+<p>However, we see in Figure 3.29 that the point cloud at the bottom right (which contains a relatively small number of points) is no longer represented. We can somewhat overcome this by tweaking the bandwidth and binning parameters of <code>geom_density2d</code> (Figure 3.30, left panel).</p>
+<pre><code>scp + geom_density2d()__</code></pre>
+<p><a href="03-chap_files/figure-html/fig-graphics-twodsp3-1.png &quot;Figure 3.29: As Figure fig-graphics-twodsp1, but rendered as a contour plot of the 2D density estimate.&quot;"><img src="03-chap_files/figure-html/fig-graphics- twodsp3-1.png" class="img-fluid"></a></p>
+<p>Figure 3.29: As Figure 3.27, but rendered as a contour plot of the 2D density estimate.</p>
+<pre><code>scp + geom_density2d(h = 0.5, bins = 60)
+library("RColorBrewer")
+colorscale = scale_fill_gradientn(
+    colors = rev(brewer.pal(9, "YlGnBu")),
+    values = c(0, exp(seq(-5, 0, length.out = 100))))
+
+scp + stat_density2d(h = 0.5, bins = 60,
+          aes( fill = after_stat(level)), geom = "polygon") +
+  colorscale + coord_fixed()__</code></pre>
+<p>[<img src="03-chap_files/figure-html/fig-graphics- twodsp4-1.png" class="img-fluid">](03-chap_files/figure-html/fig-graphics-twodsp4-1.png “Figure&nbsp;3.30&nbsp;(a):”)</p>
+<ol type="a">
+<li></li>
+</ol>
+<p>[<img src="03-chap_files/figure-html/fig-graphics- twodsp4-2.png" class="img-fluid">](03-chap_files/figure-html/fig-graphics-twodsp4-2.png “Figure&nbsp;3.30&nbsp;(b):”)</p>
+<ol start="2" type="a">
+<li></li>
+</ol>
+<p>Figure 3.30: 2D density plots. (a) As Figure 3.29, but with smaller smoothing bandwidth and tighter binning for the contour lines. (b) With color filling.</p>
+<p>We can fill in each space between the contour lines with the relative density of points by explicitly calling the function <code>stat_density2d</code> (for which <code>geom_density2d</code> is a wrapper) and using the geometric object <em>polygon</em> , as in the right panel of Figure 3.30.</p>
+<p>We used the function <code>brewer.pal</code> from the package <strong><a href="https://cran.r-project.org/web/packages/RColorBrewer/">RColorBrewer</a></strong> to define the color scale, and we added a call to <code>coord_fixed</code> to fix the aspect ratio of the plot, to make sure that the mapping of data range to \(x\)- and \(y\)-coordinates is the same for the two variables. Both of these issues merit a deeper look, and we’ll talk more about plot shapes in Section 3.7.1 and about colors in Section 3.9.</p>
+<p>The density based plotting methods in Figure 3.30 are more visually appealing and interpretable than the overplotted point clouds of Figures 3.27 and 3.28, though we have to be careful in using them as we lose much of the information on the outlier points in the sparser regions of the plot. One possibility is using <code>geom_point</code> to add such points back in.</p>
+<p>But arguably the best alternative, which avoids the limitations of smoothing, is hexagonal binning (<a href="16-chap.html#ref-Carr1987hexbin">Carr et al.&nbsp;1987</a>).</p>
+<pre><code>scp + geom_hex() + coord_fixed()
+scp + geom_hex(binwidth = c(0.2, 0.2)) + colorscale +
+  coord_fixed()__</code></pre>
+<p>[<img src="03-chap_files/figure-html/fig-graphics- twodsp6-1.png" class="img-fluid">](03-chap_files/figure-html/fig-graphics-twodsp6-1.png “Figure&nbsp;3.31&nbsp;(a):”)</p>
+<ol type="a">
+<li></li>
+</ol>
+<p>[<img src="03-chap_files/figure-html/fig-graphics- twodsp6-2.png" class="img-fluid">](03-chap_files/figure-html/fig-graphics-twodsp6-2.png “Figure&nbsp;3.31&nbsp;(b):”)</p>
+<ol start="2" type="a">
+<li></li>
+</ol>
+<p>Figure 3.31: Hexagonal binning. (a) Default parameters. (b) Finer bin sizes and customized color scale.</p>
+<section id="plot-shapes" class="level3" data-number="5.6.1">
+<h3 data-number="5.6.1" class="anchored" data-anchor-id="plot-shapes"><span class="header-section-number">5.6.1</span> 3.7.1 Plot shapes</h3>
+<p>Choosing the proper shape for your plot is important to make sure the information is conveyed well. By default, the shape parameter, that is, the ratio between the height of the graph and its width, is chosen by <strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong> based on the available space in the current plotting device. The width and height of the device are specified when it is opened in R, either explicitly by you or through default parameters10. Moreover, the graph dimensions also depend on the presence or absence of additional decorations, like the color scale bars in Figure 3.31.</p>
+<p>10 See for example the manual pages of the <code>pdf</code> and <code>png</code> functions.</p>
+<p>There are two simple rules that you can apply for scatterplots:</p>
+<ul>
+<li><p>If the variables on the two axes are measured in the same units, then make sure that the same mapping of data space to physical space is used – i.e., use <code>coord_fixed</code>. In the scatterplots above, both axes are the logarithm to base 2 of expression level measurements; that is, a change by one unit has the same meaning on both axes (a doubling of the expression level). Another case is principal component analysis (PCA), where the \(x\)-axis typically represents component 1, and the \(y\)-axis component 2. Since the axes arise from an orthonormal rotation of input data space, we want to make sure their scales match. Since the variance of the data is (by definition) smaller along the second component than along the first component (or at most, equal), well-made PCA plots usually have a width that’s larger than the height.</p></li>
+<li><p>If the variables on the two axes are measured in different units, then we can still relate them to each other by comparing their dimensions. The default in many plotting routines in R, including <strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong> , is to look at the range of the data and map it to the available plotting region. However, in particular when the data more or less follow a line, looking at the typical slope of the line can be useful. This is called <strong>banking</strong> (<a href="16-chap.html#ref-Cleveland:1988:Banking">William S. Cleveland, McGill, and McGill 1988</a>).</p></li>
+</ul>
+<p>To illustrate banking, let’s use the classic sunspot data from Cleveland’s paper.</p>
+<pre><code>library("ggthemes")
+sunsp = tibble(year   = time(sunspot.year),
+               number = as.numeric(sunspot.year))
+sp = ggplot(sunsp, aes(x = year, y = number)) + geom_line()
+sp
+ratio = with(sunsp, bank_slopes(year, number))
+sp + coord_fixed(ratio = ratio)__</code></pre>
+<p>[<img src="03-chap_files/figure-html/fig-graphics- banking-1.png" class="img-fluid">](03-chap_files/figure-html/fig-graphics-banking-1.png “Figure&nbsp;3.32&nbsp;(a):”)</p>
+<ol type="a">
+<li></li>
+</ol>
+<p>[<img src="03-chap_files/figure-html/fig-graphics- banking-2.png" class="img-fluid">](03-chap_files/figure-html/fig-graphics-banking-2.png “Figure&nbsp;3.32&nbsp;(b):”)</p>
+<ol start="2" type="a">
+<li></li>
+</ol>
+<p>Figure 3.32: The sunspot data. In (a), the plot shape is roughly quadratic, a frequent default choice. In (b), a technique called <strong>banking</strong> was used to choose the plot shape. (Note: the placement of the tick labels is not great in this plot and would benefit from customization.)</p>
+<p>The resulting plot is shown in the upper panel of Figure 3.32. We can clearly see long-term fluctuations in the amplitude of sunspot activity cycles, with particularly low maximum activities in the early 1700s, early 1800s, and around the turn of the 20\(^\) century. But now lets try out banking.</p>
+<p>How does the algorithm work? It aims to make the slopes in the curve be around one. In particular, <code>bank_slopes</code> computes the median absolute slope, and then with the call to <code>coord_fixed</code> we set the aspect ratio of the plot such that this quantity becomes 1. The result is shown in the lower panel of Figure 3.32. Quite counter-intuitively, even though the plot takes much smaller space, we see more on it! In particular, we can see the saw-tooth shape of the sunspot cycles, with sharp rises and more slow declines.</p>
+</section>
+</section>
+<section id="visualizing-more-than-two-dimensions" class="level2" data-number="5.7">
+<h2 data-number="5.7" class="anchored" data-anchor-id="visualizing-more-than-two-dimensions"><span class="header-section-number">5.7</span> 3.8 Visualizing more than two dimensions</h2>
+<p>Sometimes we want to show the relationships between more than two variables. Obvious choices for including additional dimensions are the plot symbol shapes and colors. The <code>geom_point</code> geometric object offers the following aesthetics (beyond <code>x</code> and <code>y</code>):</p>
+<ul>
+<li><p><code>fill</code></p></li>
+<li><p><code>color</code></p></li>
+<li><p><code>shape</code></p></li>
+<li><p><code>size</code></p></li>
+<li><p><code>alpha</code></p></li>
+</ul>
+<p>They are explored in the manual page of the <code>geom_point</code> function. <code>fill</code> and <code>color</code> refer to the fill and outline color of an object, and <code>alpha</code> to its transparency level. Above, in Figures 3.28 and following, we have used color or transparency to reflect point density and avoid the obscuring effects of overplotting. We can also use these properties to show other dimensions of the data. In principle, we could use all five aesthetics listed above simultaneously to show up to seven-dimensional data; however, such a plot would be hard to decipher. Usually we are better off to limit ourselves to choosing only one or two of these aesthetics and varying them to show one or two additional dimensions in the data.</p>
+<section id="faceting" class="level3" data-number="5.7.1">
+<h3 data-number="5.7.1" class="anchored" data-anchor-id="faceting"><span class="header-section-number">5.7.1</span> 3.8.1 Faceting</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="imgs/devil.png" title="Sometimes this is also called trellis or lattice graphics, in an allusion to how these arrays of plots look like. The first major R package to implement faceting was lattice. In this book, we’ll use the faceting functionalities provided through ggplot2."><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
+<figcaption>Sometimes this is also called trellis or lattice graphics, in an allusion to how these arrays of plots look like. The first major R package to implement faceting was lattice. In this book, we’ll use the faceting functionalities provided through ggplot2.</figcaption>
+</figure>
+</div>
+<p>Sometimes this is also called <em>trellis</em> or <em>lattice</em> graphics, in an allusion to how these arrays of plots look like. The first major R package to implement faceting was <strong><a href="https://cran.r-project.org/web/packages/lattice/">lattice</a></strong>. In this book, we’ll use the faceting functionalities provided through <strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong>.</p>
+<p>Another way to show additional dimensions of the data is to show multiple plots that result from repeatedly subsetting (or “slicing”) our data based on one (or more) of the variables, so that we can visualize each part separately. This is called <strong>faceting</strong> and it enables us to visualize data in up to four or five dimensions. So we can, for instance, investigate whether the observed patterns among the other variables are the same or different across the range of the faceting variable. Let’s look at an example:</p>
+<pre><code>library("magrittr")
+dftx$lineage %&lt;&gt;% sub("^$", "no", .)
+dftx$lineage %&lt;&gt;% factor(levels = c("no", "EPI", "PE", "FGF4-KO"))
+
+ggplot(dftx, aes(x = X1426642_at, y = X1418765_at)) +
+  geom_point() + facet_grid( . ~ lineage )__</code></pre>
+<p><a href="03-chap_files/figure-html/fig-graphics-facet1-1.png &quot;Figure 3.33: An example of faceting: the same data as in Figure fig-graphics- scp2layers1, but now split by the categorical variable lineage.&quot;"><img src="03-chap_files/figure-html/fig-graphics- facet1-1.png" class="img-fluid"></a></p>
+<p>Figure 3.33: An example of <strong>faceting</strong> : the same data as in Figure 3.9, but now split by the categorical variable <code>lineage</code>.</p>
+<p>The result is shown in Figure 3.33. We have used R’s formula language to specify the variable by which we want to split the data, and that the separate panels should be in different columns: <code>facet_grid( . ~ lineage )</code>. In fact, we can specify two faceting variables, as follows; the result is shown in Figure 3.34.</p>
+<pre><code>ggplot(dftx,
+  aes(x = X1426642_at, y = X1418765_at)) + geom_point() +
+   facet_grid( Embryonic.day ~ lineage )__</code></pre>
+<p><a href="03-chap_files/figure-html/fig-graphics-facet2-1.png &quot;Figure 3.34: Faceting: the same data as in Figure fig-graphics-scp2layers1, split by the categorical variables Embryonic.day (rows) and lineage (columns).&quot;"><img src="03-chap_files/figure-html/fig-graphics- facet2-1.png" class="img-fluid"></a></p>
+<p>Figure 3.34: <strong>Faceting</strong> : the same data as in Figure 3.9, split by the categorical variables <code>Embryonic.day</code> (rows) and <code>lineage</code> (columns).</p>
+<p>Another useful function is <code>facet_wrap</code>: if the faceting variable has too many levels for all the plots to fit in one row or one column, then this function can be used to wrap them into a specified number of columns or rows. So far we have seen faceting by categorical variables, but we can also use it with continuous variables by discretizing them into levels. The function <code>cut</code> is useful for this purpose.</p>
+<pre><code>ggplot(mutate(dftx, Tdgf1 = cut(X1450989_at, breaks = 4)),
+   aes(x = X1426642_at, y = X1418765_at)) + geom_point() +
+   facet_wrap( ~ Tdgf1, ncol = 2 )__</code></pre>
+<p><a href="03-chap_files/figure-html/fig-graphics-facet3-1.png &quot;Figure 3.35: Faceting: the same data as in Figure fig-graphics-scp2layers1, split by the continuous variable X1450989_at and arranged by facet_wrap.&quot;"><img src="03-chap_files/figure-html/fig-graphics- facet3-1.png" class="img-fluid"></a></p>
+<p>Figure 3.35: <strong>Faceting</strong> : the same data as in Figure 3.9, split by the continuous variable <code>X1450989_at</code> and arranged by <code>facet_wrap</code>.</p>
+<p>We see in Figure 3.35 that the number of points in the four panels is different. This is because <code>cut</code> splits into bins of equal length, not equal number of points. If we want the latter, then we can use <code>quantile</code> in conjunction with <code>cut</code>, or cut on the ranks of the variable’s values.</p>
+<section id="axes-scales" class="level4" data-number="5.7.1.1">
+<h4 data-number="5.7.1.1" class="anchored" data-anchor-id="axes-scales"><span class="header-section-number">5.7.1.1</span> Axes scales</h4>
+<p>In Figures 3.33—3.35, the axes scales are the same for all panels. Alternatively, we could let them vary by setting the <code>scales</code> argument of the <code>facet_grid</code> and <code>facet_wrap</code> functions. This argument lets you control whether \(x\)-axis and \(y\)-axis in each panel have the same scale, or whether either of them or both adapt to each panel’s data range. There is a trade-off: adaptive axes scales might let us see more detail, on the other hand, the panels are then less comparable across the groupings.</p>
+</section>
+<section id="implicit-faceting" class="level4" data-number="5.7.1.2">
+<h4 data-number="5.7.1.2" class="anchored" data-anchor-id="implicit-faceting"><span class="header-section-number">5.7.1.2</span> Implicit faceting</h4>
+<p>You can also facet your plots (without explicit calls to <code>facet_grid</code> and <code>facet_wrap</code>) by specifying the aesthetics. A very simple version of implicit faceting is using a factor as your \(x\)-axis, such as in Figures 3.15—3.18.</p>
+</section>
+</section>
+<section id="interactive-graphics" class="level3" data-number="5.7.2">
+<h3 data-number="5.7.2" class="anchored" data-anchor-id="interactive-graphics"><span class="header-section-number">5.7.2</span> 3.8.2 Interactive graphics</h3>
+<p>The plots generated thus far have been static images. You can add an enormous amount of information and expressivity by making your plots interactive. We do not try here to to convey interactive visualizations in any depth, but we provide pointers to a few important resources. This is a dynamic space, so readers should explore the R ecosystem for recent developments.</p>
+<section id="shiny" class="level4" data-number="5.7.2.1">
+<h4 data-number="5.7.2.1" class="anchored" data-anchor-id="shiny"><span class="header-section-number">5.7.2.1</span> shiny</h4>
+<p>Rstudio’s <strong><a href="https://cran.r-project.org/web/packages/shiny/">shiny</a></strong> is a web application framework for R. It makes it easy to create interactive displays with sliders, selectors and other control elements that allow changing all aspects of the plot(s) shown – since the interactive elements call back directly into the R code that produces the plot(s). See the <a href="https://shiny.posit.co/r/gallery">shiny gallery</a> for some great examples.</p>
+<p>As a graphics engine for <strong><a href="https://cran.r-project.org/web/packages/shiny/">shiny</a></strong> -based interactive visualizations you can use <strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong> , and indeed, base R graphics or any other graphics package. What may be a little awkward here is that the language used for describing the interactive options is separated from the production of the graphics via <strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong> and the grammar of graphics. The <strong><a href="https://cran.r-project.org/web/packages/ggvis/">ggvis</a></strong> package aims to overcome this limitation:</p>
+</section>
+<section id="ggvis" class="level4" data-number="5.7.2.2">
+<h4 data-number="5.7.2.2" class="anchored" data-anchor-id="ggvis"><span class="header-section-number">5.7.2.2</span> ggvis</h4>
+<p><strong><a href="https://cran.r-project.org/web/packages/ggvis/">ggvis</a></strong> 11 is an attempt at extending the good features of <strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong> into the realm of interactive graphics. In contrast to <strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong> , which produces graphics into R’s traditional graphics devices (PDF, PNG, etc.), <strong><a href="https://cran.r-project.org/web/packages/ggvis/">ggvis</a></strong> builds upon a JavaScript infrastructure called <a href="https://github.com/trifacta/vega">Vega</a>, and its plots are intended to be viewed in an HTML browser. Like <strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong> , the <strong><a href="https://cran.r-project.org/web/packages/ggvis/">ggvis</a></strong> package is inspired by grammar of graphics concepts, but uses distinct syntax. It leverages <strong><a href="https://cran.r-project.org/web/packages/shiny/">shiny</a></strong> ’s infrastructure to connect to R to perform the computations needed for the interactivity. As its author put it12, “The goal is to combine the best of R (e.g., every modeling function you can imagine) and the best of the web (everyone has a web browser). Data manipulation and transformation are done in R, and the graphics are rendered in a web browser, using Vega.”</p>
+<p>11 At the time of writing (summer 2017), it is not clear whether the initial momentum of <strong><a href="https://cran.r-project.org/web/packages/ggvis/">ggvis</a></strong> development will be maintained, and its current functionality and maturity do no yet match <strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong>.</p>
+<p>12 https://ggvis.rstudio.com</p>
+<p>As a consequence of the interactivity in <strong><a href="https://cran.r-project.org/web/packages/shiny/">shiny</a></strong> and <strong><a href="https://cran.r-project.org/web/packages/ggvis/">ggvis</a></strong> , there needs to be an R interpreter running with the underlying data and code to respond to the user’s actions while she views the graphic. This R interpreter can be on the local machine or on a server; in both cases, the viewing application is a web browser, and the interaction with R goes through web protocols (http or https). That is, of course, different from a graphic stored in a self- contained file, which is produced once by R and can then be viewed in a PDF or HTML viewer without any connection to a running instance of R.</p>
+</section>
+<section id="plotly" class="level4" data-number="5.7.2.3">
+<h4 data-number="5.7.2.3" class="anchored" data-anchor-id="plotly"><span class="header-section-number">5.7.2.3</span> plotly</h4>
+<p>A great web-based tool for interactive graphic generation is <strong>plotly</strong>. You can view some examples of interactive graphics online at <a href="https://plot.ly/r" class="uri">https://plot.ly/r</a>. To create your own interactive plots in R, you can use code such as</p>
+<pre><code>library("plotly")
+plot_ly(economics, x = ~ date, y = ~ unemploy / pop)__</code></pre>
+<p>As with <strong><a href="https://cran.r-project.org/web/packages/shiny/">shiny</a></strong> and <strong><a href="https://cran.r-project.org/web/packages/ggvis/">ggvis</a></strong> , the graphics are viewed in an HTML browser; however, no running R session is required. The graphics are self-contained HTML documents whose “logic” is coded in JavaScript, or more precisely, in the D3.js system.</p>
+<p><a href="imgs/chap3-rglvolcano.png" title="Figure 3.36: rgl rendering of the volcano data, the topographic information for Maunga Whau (Mt Eden), one of about 50 volcanos in the Auckland volcanic field."><img src="imgs/chap3-rglvolcano.png" class="img-fluid"></a></p>
+<p>Figure 3.36: <strong><a href="https://cran.r-project.org/web/packages/rgl/">rgl</a></strong> rendering of the <code>volcano</code> data, the topographic information for Maunga Whau (Mt Eden), one of about 50 volcanos in the Auckland volcanic field.</p>
+</section>
+<section id="rgl-webgl" class="level4" data-number="5.7.2.4">
+<h4 data-number="5.7.2.4" class="anchored" data-anchor-id="rgl-webgl"><span class="header-section-number">5.7.2.4</span> rgl, webgl</h4>
+<p>For visualizing 3D objects (say, a geometrical structure), there is the package <strong><a href="https://cran.r-project.org/web/packages/rgl/">rgl</a></strong>. It produces interactive viewer windows (either in specialized graphics device on your screen or through a web browser) in which you can rotate the scene, zoom and in out, etc. A screenshot of the scene produced by the code below is shown in Figure 3.36; such screenshots can be produced using the function <code>snapshot3d</code>.</p>
+<pre><code>data("volcano")
+volcanoData = list(
+  x = 10 * seq_len(nrow(volcano)),
+  y = 10 * seq_len(ncol(volcano)),
+  z = volcano,
+  col = terrain.colors(500)[cut(volcano, breaks = 500)]
+)
+library("rgl")
+with(volcanoData, persp3d(x, y, z, color = col))__</code></pre>
+<p>In the code above, the base R function <code>cut</code> computes a mapping from the value range of the <code>volcano</code> data to the integers between 1 and 50013, which we use to index the color scale, <code>terrain.colors(500)</code>. For more information, consult the package’s excellent vignette.</p>
+<p>13 More precisely, it returns a factor with as many levels, which we let R autoconvert to integers.</p>
+</section>
+</section>
+</section>
+<section id="color" class="level2" data-number="5.8">
+<h2 data-number="5.8" class="anchored" data-anchor-id="color"><span class="header-section-number">5.8</span> 3.9 Color</h2>
+<p>An important consideration when making plots is the coloring that we use in them. Most R users are likely familiar with the built-in R color scheme, used by base R graphics, as shown in Figure 3.37.</p>
+<pre><code>pie(rep(1, 8), col=1:8)__</code></pre>
+<p><a href="03-chap_files/figure-html/fig-graphics- simplecolorpie-1.png" title="Figure 3.37: The first eight colors in the base R color palette."><img src="03-chap_files/figure-html/fig-graphics- simplecolorpie-1.png" class="img-fluid"></a></p>
+<p>Figure 3.37: The first eight colors in the base R color palette.</p>
+<p>The origins of this color palette date back to 1980s hardware, where graphics cards handled colors by letting each pixel either use or not use each of the three basic color channels of a cathode-ray tube: red, green and blue (RGB). This led to \(2^3=8\) combinations at the eight corners of an RGB color cube14.</p>
+<p>14 Thus, the \(8^\) color in Figure 3.37 should be white, instead it is grey.</p>
+<p>The first eight colors for a categorical variable in <strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong> are shown in Figure 3.38:</p>
+<pre><code>ggplot(tibble(u = factor(1:8), v = 1), 
+       aes(x = "",  y = v, fill = u)) +
+  geom_bar(stat = "identity", width = 1) + 
+  coord_polar("y", start = 0) + theme_void()__</code></pre>
+<p><a href="03-chap_files/figure-html/fig-graphics- ggplot2colorpie-1.png" title="Figure 3.38: The first eight colors in the ggplot2 color palette."><img src="03-chap_files/figure-html/fig-graphics- ggplot2colorpie-1.png" class="img-fluid"></a></p>
+<p>Figure 3.38: The first eight colors in the <strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong> color palette.</p>
+<p>These defaults are appropriate for simple use cases, but often we will want to make our own choices. In Section 3.7 we already saw the function <code>scale_fill_gradientn</code>, with which we created the smooth-looking color gradient used in Figures 3.30 and 3.31 by interpolating a set of color steps provided by the function <code>brewer.pal</code> in the <strong><a href="https://cran.r-project.org/web/packages/RColorBrewer/">RColorBrewer</a></strong> package. This package defines a set of purpose-designed color palettes. We can see all of them at a glance with the function <code>display.brewer.all</code> (Figure 3.39).</p>
+<pre><code>display.brewer.all()__</code></pre>
+<p><a href="03-chap_files/figure-html/fig-graphics-RColorBrewer-1.png &quot;Figure 3.39: RColorBrewer palettes.&quot;"><img src="03-chap_files/figure-html/fig-graphics- RColorBrewer-1.png" class="img-fluid"></a></p>
+<p>Figure 3.39: RColorBrewer palettes.</p>
+<p>We can get information about the available color palettes from <code>brewer.pal.info</code>.</p>
+<pre><code>head(brewer.pal.info)__
+
+
+     maxcolors category colorblind
+BrBG        11      div       TRUE
+PiYG        11      div       TRUE
+PRGn        11      div       TRUE
+PuOr        11      div       TRUE
+RdBu        11      div       TRUE
+RdGy        11      div      FALSE
+
+
+table(brewer.pal.info$category)__
+
+
+ div qual  seq 
+   9    8   18 </code></pre>
+<p>The palettes are divided into three categories:</p>
+<ul>
+<li><p>qualitative: for categorical properties that have no intrinsic ordering. The <code>Paired</code> palette supports up to 6 categories that each fall into two subcategories - such as <em>before</em> and <em>after</em> , <em>with</em> and <em>without</em> treatment, etc.</p></li>
+<li><p>sequential: for quantitative properties that go from <em>low</em> to <em>high</em></p></li>
+<li><p>diverging: for quantitative properties for which there is a natural midpoint or neutral value, and whose value can deviate both up- and down; we’ll see an example in Figure 3.41.</p></li>
+</ul>
+<p>To obtain the colors from a particular palette we use the function <code>brewer.pal</code>. Its first argument is the number of colors we want (which can be less than the available maximum number in <code>brewer.pal.info</code>).</p>
+<pre><code>brewer.pal(4, "RdYlGn")__
+
+
+[1] "#D7191C" "#FDAE61" "#A6D96A" "#1A9641"</code></pre>
+<p>If we want more than the available number of preset colors (for example so we can plot a heatmap with continuous colors) we can interpolate using the <code>colorRampPalette</code> function15.</p>
+<p>15 <code>colorRampPalette</code> returns a function of one parameter, an integer. In the code shown, we call that function with the argument <code>100</code>.</p>
+<pre><code>mypalette  = colorRampPalette(
+    c("darkorange3", "white","darkblue")
+  )(100)
+head(mypalette)__
+
+
+[1] "#CD6600" "#CE6905" "#CF6C0A" "#D06F0F" "#D17214" "#D27519"
+
+
+image(matrix(1:100, nrow = 100, ncol = 10), col = mypalette,
+        xaxt = "n", yaxt = "n", useRaster = TRUE)__</code></pre>
+<p><a href="03-chap_files/figure-html/fig-graphics- colorRampPalette-1.png" title="Figure 3.40: A quasi-continuous color palette derived by interpolating between the colors darkorange3, white and darkblue."><img src="03-chap_files/figure-html/fig-graphics- colorRampPalette-1.png" class="img-fluid"></a></p>
+<p>Figure 3.40: A quasi-continuous color palette derived by interpolating between the colors <code>darkorange3</code>, <code>white</code> and <code>darkblue</code>.</p>
+</section>
+<section id="heatmaps" class="level2" data-number="5.9">
+<h2 data-number="5.9" class="anchored" data-anchor-id="heatmaps"><span class="header-section-number">5.9</span> 3.10 Heatmaps</h2>
+<p>Heatmaps are a powerful way of visualizing large, matrix-like datasets and providing a quick overview of the patterns that might be in the data. There are a number of heatmap drawing functions in R; one that is convenient and produces a good-looking output is the function <code>pheatmap</code> from the eponymous package16. In the code below, we first select the top 500 most variable genes in the dataset <code>x</code> and define a function <code>rowCenter</code> that centers each gene (row) by subtracting the mean across columns. By default, <code>pheatmap</code> uses the <em>RdYlBu</em> color palette from <strong><a href="https://cran.r-project.org/web/packages/RcolorBrewer/">RcolorBrewer</a></strong> in conjuction with the <code>colorRampPalette</code> function to interpolate the 11 colors into a smooth-looking palette (Figure 3.41).</p>
+<p>16 A very versatile and modular alternative is the <strong><a href="https://bioconductor.org/packages/ComplexHeatmap/">ComplexHeatmap</a></strong> package.</p>
+<pre><code>library("pheatmap")
+topGenes = order(rowVars(Biobase::exprs(x)), decreasing = TRUE)[1:500]
+rowCenter = function(x) { x - rowMeans(x) }
+pheatmap(rowCenter(dfx[topGenes, ]), 
+  show_rownames = FALSE, 
+  show_colnames = FALSE, 
+  breaks = seq(-5, +5, length = 101),
+  annotation_col = pData(x)[, c("sampleGroup", "Embryonic.day", "ScanDate", "genotype") ],
+  annotation_colors = list(
+    sampleGroup = groupColor,
+    genotype = c(`FGF4-KO` = "chocolate1", `WT` = "azure2"),
+    Embryonic.day = setNames(brewer.pal(9, "Blues")[c(3, 6, 9)], c("E3.25", "E3.5", "E4.5")),
+    ScanDate = setNames(brewer.pal(nlevels(x$ScanDate), "YlGn"), levels(x$ScanDate))
+  )
+)__</code></pre>
+<p><a href="03-chap_files/figure-html/fig-graphics-heatmap-1.png &quot;Figure 3.41: A heatmap of relative expression values, i.e., logarithmic fold change compared to the average expression of that gene (row) across all samples (columns). The color scale uses a diverging palette whose midpoint is at 0.&quot;"><img src="03-chap_files/figure-html/fig-graphics- heatmap-1.png" class="img-fluid"></a></p>
+<p>Figure 3.41: A heatmap of relative expression values, i.e., logarithmic fold change compared to the average expression of that gene (row) across all samples (columns). The color scale uses a diverging palette whose midpoint is at 0.</p>
+<p>Let’s take a minute to deconstruct this rather massive-looking call to <code>pheatmap</code>. The options <code>show_rownames</code> and <code>show_colnames</code> control whether the row and column names are printed at the sides of the matrix. Because our matrix is large in relation to the available plotting space, the labels would not be readable, so we might as well suppress them. The <code>annotation_col</code> argument takes a data frame that carries additional information about the samples. The information is shown in the colored bars on top of the heatmap. There is also a similar <code>annotation_row</code> argument, which we haven’t used here, to annotate the rows (genes) with colored bars at the side. The argument <code>annotation_colors</code> is a list of named vectors by which we can override the default choice of colors for the annotation bars. The <code>pheatmap</code> function has many further options, and if you want to use it for your own data visualizations, it’s worth studying them.</p>
+<section id="dendrogram-ordering" class="level3" data-number="5.9.1">
+<h3 data-number="5.9.1" class="anchored" data-anchor-id="dendrogram-ordering"><span class="header-section-number">5.9.1</span> 3.10.1 Dendrogram ordering</h3>
+<p>In Figure 3.41, the trees at the left and the top represent the result of a hierarchical clustering algorithm and are also called <strong>dendrograms</strong>. The ordering of the rows and columns is based on the dendrograms. It has an enormous effect on the visual impact of the heatmap. However, it can be difficult to decide which of the apparent patterns are real and which are consequences of arbitrary tree layout decisions17. Let’s keep in mind that:</p>
+<p>17 We will learn about clustering and methods for evaluating cluster significance in <a href="05-chap.html">Chapter 5</a>.</p>
+<ul>
+<li><p>Ordering the rows and columns by cluster dendrogram (as in Figure 3.41) is an arbitrary choice, and you could just as well make others.</p></li>
+<li><p>Even if you settle on dendrogram ordering, there is an essentially arbitrary choice at each internal branch, as each branch could be flipped without changing the topology of the tree (see also <a href="05-chap.html#fig-mobile">Figure 5.21</a>).</p></li>
+</ul>
+<p>__</p>
+<p>Question 3.6</p>
+<p>How does the <code>pheatmap</code> function deal with the decision of how to pick which branches of the subtree go left and right?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>This is described in the manual page of the <code>hclust</code> function in the <strong><a href="https://cran.r-project.org/web/packages/stats/">stats</a></strong> package, which, by default, is used by <code>pheatmap</code>.</p>
+<p>__</p>
+<p>Question 3.7</p>
+<p>What other ordering methods can you think of?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>Among the methods proposed is the travelling salesman problem (<a href="16-chap.html#ref-McCormick:1972:MatrixClustering">McCormick Jr, Schweitzer, and White 1972</a>) or projection on the first principal component (for instance, see the examples in the manual page of <code>pheatmap</code>).</p>
+<p>__</p>
+<p>Question 3.8</p>
+<p>Check the argument <code>clustering_callback</code> of the <code>pheatmap</code> function.</p>
+</section>
+<section id="color-spaces" class="level3" data-number="5.9.2">
+<h3 data-number="5.9.2" class="anchored" data-anchor-id="color-spaces"><span class="header-section-number">5.9.2</span> 3.10.2 Color spaces</h3>
+<p>Color perception in humans (<a href="16-chap.html#ref-Helmholtz:1867">Helmholtz 1867</a>) is three-dimensional18. There are different ways of parameterizing this space. Above we already encountered the RGB color model, which uses three values in [0,1], for instance at the beginning of Section 3.4, where we printed out the contents of <code>groupColor</code>:</p>
+<p>18 Physically, there is an infinite number of wave-lengths of light and an infinite number of ways of mixing them, so for other species, or robots, color space can have fewer or more dimensions.</p>
+<pre><code>groupColor[1]__
+
+
+    E3.25 
+"#CAB2D6" </code></pre>
+<p>Here, CA is the hexadecimal representation for the strength of the red color channel, B2 of the green and D6 of the blue color channel. In decimal, these numbers are 202, 178 and 214. The range of these values goes from to 0 to 255, so by dividing by this maximum value, an RGB triplet can also be thought of as a point in the three-dimensional unit cube.</p>
+<p><a href="03-chap_files/figure- html/fig-graphics-hcl-1.png" title="Figure 3.42 (a):"><img src="03-chap_files/figure-html/fig-graphics-hcl-1.png" class="img-fluid"></a></p>
+<ol type="a">
+<li></li>
+</ol>
+<p><a href="03-chap_files/figure- html/fig-graphics-hcl-2.png" title="Figure 3.42 (b):"><img src="03-chap_files/figure-html/fig-graphics-hcl-2.png" class="img-fluid"></a></p>
+<ol start="2" type="a">
+<li></li>
+</ol>
+<p>Figure 3.42: Circles in HCL colorspace. (a) Luminance \(L\) fixed at \(75\), while the angular coordinate \(H\) (hue) varies from 0 to 360 and the radial coordinate \(C\) takes the values \(0, 10, …, 60\). (b) Constant chroma \(C\) at \(50\), \(H\) as above, and the radial coordinate is luminance \(L\) at values \(10, 20, …, 90\).</p>
+<p>The function <code>hcl</code> uses a different coordinate system. Again this consists of three coordinates: hue \(H\), an angle in the range \([0, 360]\), chroma \(C\), a positive number, and luminance \(L\), a value in \([0, 100]\). The upper bound for \(C\) depends on on hue and luminance.</p>
+<p>The <code>hcl</code> function corresponds to polar coordinates in the CIE-LUV19 and is designed for area fills. By keeping chroma and luminance coordinates constant and only varying hue, it is easy to produce color palettes that are harmonious and avoid irradiation illusions that make light colored areas look bigger than dark ones. Our attention also tends to get drawn to loud colors, and fixing the value of chroma makes the colors equally attractive to our eyes.</p>
+<p>19 CIE: Commission Internationale de l’Éclairage – see e.g.&nbsp;Wikipedia for more on this.</p>
+<p>There are many ways of choosing colors from a color wheel. <em>Triads</em> are three colors chosen equally spaced around the color wheel; for example, \(H=0,120,240\) gives red, green, and blue. <em>Tetrads</em> are four equally spaced colors around the color wheel, and some graphic artists describe the effect as “dynamic”. <em>Warm colors</em> are a set of equally spaced colors close to yellow, <em>cool colors</em> a set of equally spaced colors close to blue. <em>Analogous color</em> sets contain colors from a small segment of the color wheel, for example, yellow, orange and red, or green, cyan and blue. <em>Complementary colors</em> are colors diametrically opposite each other on the color wheel. A tetrad is two pairs of complementaries. <em>Split complementaries</em> are three colors consisting of a pair of complementaries, with one partner split equally to each side, for example, \(H=60,,240-30,,240+30\). This is useful to emphasize the difference between a pair of similar categories and a third different one. A more thorough discussion is provided in the references (<a href="16-chap.html#ref-Mollon:1995">Mollon 1995</a>; <a href="16-chap.html#ref- IhakaColorPres">Ihaka 2003</a>).</p>
+<section id="lines-versus-areas" class="level4" data-number="5.9.2.1">
+<h4 data-number="5.9.2.1" class="anchored" data-anchor-id="lines-versus-areas"><span class="header-section-number">5.9.2.1</span> Lines versus areas</h4>
+<p>For lines and points, we want a strong contrast to the background, so on a white background, we want them to be relatively dark (low luminance \(L\)). For area fills, lighter, more pastel-type colors with low to moderate chromatic content are usually more pleasant.</p>
+</section>
+</section>
+</section>
+<section id="data-transformations" class="level2" data-number="5.10">
+<h2 data-number="5.10" class="anchored" data-anchor-id="data-transformations"><span class="header-section-number">5.10</span> 3.11 Data transformations</h2>
+<p>Plots in which most points are huddled up in one area, with much of the available space sparsely populated, are difficult to read. If the histogram of the marginal distribution of a variable has a sharp peak and then long tails to one or both sides, transforming the data can be helpful. These considerations apply both to <code>x</code> and <code>y</code> aesthetics, and to color scales. In the plots of this chapter that involved the microarray data, we used the logarithmic transformation20 – not only in scatterplots like Figure 3.27 for the \(x\) and \(y\)-coordinates, but also in Figure 3.41 for the color scale that represents the expression fold changes. The logarithm transformation is attractive because it has a definitive meaning - a move up or down by the same amount on a log-transformed scale corresponds to the same multiplicative change on the original scale: \((ax)=a+x\).</p>
+<p>20 We used it implicitly since the data in the <em>ExpressionSet</em> object <code>x</code> already come log-transformed.</p>
+<p>Sometimes the logarithm however is not good enough, for instance when the data include zero or negative values, or when even on the logarithmic scale the data distribution is highly uneven. From the upper panel of Figure 3.43, it is easy to take away the impression that the distribution of <code>M</code> depends on <code>A</code>, with higher variances for lower <code>A</code>. However, this is entirely a visual artefact, as the lower panel confirms: the distribution of <code>M</code> is independent of <code>A</code>, and the apparent trend we saw in the upper panel was caused by the higher point density at smaller <code>A</code>.</p>
+<pre><code>gg = ggplot(tibble(A = Biobase::exprs(x)[, 1], M = rnorm(length(A))),
+            aes(y = M))
+gg + geom_point(aes(x = A), size = 0.2)
+gg + geom_point(aes(x = rank(A)), size = 0.2)__</code></pre>
+<p><a href="03-chap_files/figure- html/fig-graphics-MA-1.png" title="Figure 3.43 (a):"><img src="03-chap_files/figure-html/fig-graphics-MA-1.png" class="img-fluid"></a></p>
+<ol type="a">
+<li></li>
+</ol>
+<p><a href="03-chap_files/figure- html/fig-graphics-MA-2.png" title="Figure 3.43 (b):"><img src="03-chap_files/figure-html/fig-graphics-MA-2.png" class="img-fluid"></a></p>
+<ol start="2" type="a">
+<li></li>
+</ol>
+<p>Figure 3.43: The effect of rank transformation on the visual perception of dependency.</p>
+<p>__</p>
+<p>Question 3.9</p>
+<p>Can the visual artefact be avoided by using a density- or binning-based plotting method, as in Figure 3.31?</p>
+<p>__</p>
+<p>Question 3.10</p>
+<p>Can the rank transformation also be applied when choosing color scales e.g. for heatmaps? What does <em>histogram equalization</em> in image processing do?</p>
+</section>
+<section id="mathematical-symbols-and-other-fonts" class="level2" data-number="5.11">
+<h2 data-number="5.11" class="anchored" data-anchor-id="mathematical-symbols-and-other-fonts"><span class="header-section-number">5.11</span> 3.12 Mathematical symbols and other fonts</h2>
+<p>We can use mathematical notation in plot labels, using a notation that is a mix of R syntax and LaTeX-like notation (see <code>help("plotmath")</code> for details):</p>
+<p><a href="imgs/chap3-ecdfs-bauhaus93font.png &quot;Figure 3.44: As Figure fig-graphics-onedecdf, with font “Bauhaus 93”.&quot;"><img src="imgs/chap3-ecdfs-bauhaus93font.png" class="img-fluid"></a></p>
+<p>Figure 3.44: As Figure 3.24, with font “Bauhaus 93”.</p>
+<pre><code>volume = function(rho, nu)
+            pi^(nu/2) * rho^nu / gamma(nu/2+1)
+
+ggplot(tibble(nu    = 1:15,
+  Omega = volume(1, nu)), aes(x = nu, y = Omega)) +
+geom_line() +
+xlab(expression(nu)) + ylab(expression(Omega)) +
+geom_text(label =
+"Omega(rho,nu)==frac(pi^frac(nu,2)~rho^nu, Gamma(frac(nu,2)+1))",
+  parse = TRUE, x = 6, y = 1.5)__</code></pre>
+<p><a href="03-chap_files/figure-html/fig-graphics-mathnot-1.png &quot;Figure 3.45: Volume \Omega of the \nu-dimensional sphere with radius \rho=1, for \nu=1,...,15.&quot;"><img src="03-chap_files/figure-html/fig-graphics- mathnot-1.png" class="img-fluid"></a></p>
+<p>Figure 3.45: Volume \(\) of the \(\)-dimensional sphere with radius \(\), for \(,…,15\).</p>
+<p>The result is shown in Figure 3.45. It’s also easy to switch to other fonts, for instance the serif font Times (Figure 3.46).</p>
+<pre><code>ggplot(genes, aes( x = value, color = gene)) + stat_ecdf() +
+  theme(text = element_text(family = "Times"))__</code></pre>
+<p><a href="03-chap_files/figure-html/fig-graphics-timesfont-1.png &quot;Figure 3.46: As Figure fig-graphics-onedecdf, with a different font.&quot;"><img src="03-chap_files/figure-html/fig-graphics- timesfont-1.png" class="img-fluid"></a></p>
+<p>Figure 3.46: As Figure 3.24, with a different font.</p>
+<p>In fact, the set of fonts that can be used with a standard R installation are limited, but luckily there is the package <strong><a href="https://cran.r-project.org/web/packages/extrafont/">extrafont</a></strong> , which facilitates using fonts other than R’s standard set of PostScript fonts. There’s some extra work needed before we can use it, since fonts external to R first need to be made known to it. They could come shipped with your operating system, with a word processor or with another graphics application. The set of fonts available and their physical location is therefore not standardized, but will depend on your operating system and further configurations. In the first session after attaching the <strong><a href="https://cran.r-project.org/web/packages/extrafont/">extrafont</a></strong> package, you will need to run the function <code>font_import</code> to import fonts and make them known to the package. Then in each session in which you want to use them, you need to call the <code>loadfonts</code> function to register them with one or more of R’s graphics devices. Finally you can use the <code>fonttable</code> function to list the available fonts. You will need to refer to the documentation of the <strong><a href="https://cran.r-project.org/web/packages/extrafonts/">extrafonts</a></strong> package to see how to make this work on your machine.</p>
+<p>__</p>
+<p>Task</p>
+<p>Use the package <strong><a href="https://cran.r-project.org/web/packages/extrafont/">extrafont</a></strong> to produce a version of Figure 3.46 with the font “Bauhaus 93” (or another one available on your system).</p>
+</section>
+<section id="genomic-data" class="level2" data-number="5.12">
+<h2 data-number="5.12" class="anchored" data-anchor-id="genomic-data"><span class="header-section-number">5.12</span> 3.13 Genomic data</h2>
+<p><a href="imgs/EBI-genomebrowser-rnaseq.png &quot;Figure 3.47: Screenshot from Ensembl genome browser, showing gene annotation of a genomic region as well as a read pile-up visualization of an RNA-Seq experiment.&quot;"><img src="imgs/EBI-genomebrowser-rnaseq.png" class="img-fluid"></a></p>
+<p>Figure 3.47: Screenshot from Ensembl genome browser, showing gene annotation of a genomic region as well as a read pile-up visualization of an RNA-Seq experiment.</p>
+<p>To visualize genomic data, in addition to the general principles we have discussed in this chapter, there are some specific considerations. The data are usually associated with genomic coordinates. In fact genomic coordinates offer a great organizing principle for the integration of genomic data. You will probably have seen genome browser displays such as in Figure 3.47. Here we will briefly show how to produce such plots programmatically, using your data as well as public annotation. It will be a short glimpse, and we refer to resources such as <a href="https://www.bioconductor.org">Bioconductor</a> for a fuller picture.</p>
+<p>The main challenge of genomic data visualization is the size of genomes. We need visualizations at multiple scales, from whole genome down to the nucleotide level. It should be easy to zoom in and and out, and we may need different visualization strategies for the different size scales. It can be convenient to visualize biological molecules (genomes, genes, transcripts, proteins) in a linear manner, although their embedding in the 3D physical world can matter (a great deal).</p>
+<p>Let’s start with some fun examples, an ideogram plot of human chromosome 1 (Figure 3.48) and a plot of the genome-wide distribution of RNA editing sites (Figure 3.49).</p>
+<pre><code>library("ggbio")
+data("hg19IdeogramCyto", package = "biovizBase")
+plotIdeogram(hg19IdeogramCyto, subchr = "chr1")__</code></pre>
+<p><a href="03-chap_files/figure-html/fig-graphics-ideogram-1-1.png &quot;Figure 3.48: Chromosome 1 of the human genome: ideogram plot.&quot;"><img src="03-chap_files/figure-html/fig-graphics- ideogram-1-1.png" class="img-fluid"></a></p>
+<p>Figure 3.48: Chromosome 1 of the human genome: ideogram plot.</p>
+<p>The <code>darned_hg19_subset500</code> lists a selection of 500 RNA editing sites in the human genome. It was obtained from the <em>Database of RNA editing in Flies, Mice and Humans</em> (DARNED, <a href="https://darned.ucc.ie/" class="uri">https://darned.ucc.ie/</a>). The result is shown in Figure 3.49.</p>
+<pre><code>library("GenomicRanges")
+data("darned_hg19_subset500", package = "biovizBase")
+autoplot(darned_hg19_subset500, layout = "karyogram",
+         aes(color = exReg, fill = exReg))__</code></pre>
+<p><a href="03-chap_files/figure-html/fig-graphics-darned1-1.png &quot;Figure 3.49: Karyogram with RNA editing sites. exReg indicates whether a site is in the coding region (C), 3’- or 5’-UTR.&quot;"><img src="03-chap_files/figure-html/fig-graphics- darned1-1.png" class="img-fluid"></a></p>
+<p>Figure 3.49: Karyogram with RNA editing sites. <code>exReg</code> indicates whether a site is in the coding region (C), 3’- or 5’-UTR.</p>
+<p>__</p>
+<p>Question 3.11</p>
+<p>How do you fix the ordering of the chromosomes in Figure 3.49 and get rid of the warning about chromosome lengths?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>The information on chromosome lengths in the hg19 assembly of the human genome is (for instance) stored in the <code>ideoCyto</code> dataset. We use the function <code>keepSeqlevels</code> to reorder the chromosomes. See Figure 3.50.</p>
+<pre><code>data("ideoCyto", package = "biovizBase")
+dn = darned_hg19_subset500
+seqlengths(dn) = seqlengths(ideoCyto$hg19)[names(seqlengths(dn))]
+dn = keepSeqlevels(dn, paste0("chr", c(1:22, "X")))
+autoplot(dn, layout = "karyogram", aes(color = exReg, fill = exReg))__</code></pre>
+<p><a href="03-chap_files/figure-html/fig-graphics-darned2-1.png &quot;Figure 3.50: Improved version of Figure fig-graphics-darned1.&quot;"><img src="03-chap_files/figure-html/fig-graphics- darned2-1.png" class="img-fluid"></a></p>
+<p>Figure 3.50: Improved version of Figure 3.49.</p>
+<p>__</p>
+<p>Question 3.12</p>
+<p>What type of object is <code>darned_hg19_subset500</code>?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<pre><code>darned_hg19_subset500[1:2,]__
+
+
+GRanges object with 2 ranges and 10 metadata columns:
+      seqnames    ranges strand |       inchr       inrna         snp
+         &lt;Rle&gt; &lt;IRanges&gt;  &lt;Rle&gt; | &lt;character&gt; &lt;character&gt; &lt;character&gt;
+  [1]     chr5  86618225      - |           A           I        &lt;NA&gt;
+  [2]     chr7  99792382      - |           A           I        &lt;NA&gt;
+             gene      seqReg       exReg      source      ests      esta
+      &lt;character&gt; &lt;character&gt; &lt;character&gt; &lt;character&gt; &lt;integer&gt; &lt;integer&gt;
+  [1]        &lt;NA&gt;           O        &lt;NA&gt;    amygdala         0         0
+  [2]        &lt;NA&gt;           O        &lt;NA&gt;        &lt;NA&gt;         0         0
+           author
+      &lt;character&gt;
+  [1]    15342557
+  [2]    15342557
+  -------
+  seqinfo: 23 sequences from an unspecified genome; no seqlengths</code></pre>
+<p>It is a <em>GRanges</em> object, that is, a specialized class from the Bioconductor project for storing data that are associated with genomic coordinates. The first three columns are obligatory: <code>seqnames</code>, the name of the containing biopolymer (in our case, these are names of human chromosomes), <code>ranges</code>, the genomic coordinates of the intervals (in this case, the intervals all have length 1, as they each refer to a single nucleotide), and the DNA <code>strand</code> from which the RNA is transcribed. You can find out more on how to use this class and its associated infrastructure in the documentation, e.g., the vignette of the <strong><a href="https://bioconductor.org/packages/GenomicRanges/">GenomicRanges</a></strong> package. Learning it is worth the effort if you want to work with genome-associated datasets, as it allows for convenient, efficient and safe manipulation of these data and provides many powerful utilities.</p>
+</section>
+<section id="summary-of-this-chapter" class="level2" data-number="5.13">
+<h2 data-number="5.13" class="anchored" data-anchor-id="summary-of-this-chapter"><span class="header-section-number">5.13</span> 3.14 Summary of this chapter</h2>
+<p>Visualizing data, either “raw” or along the various steps of processing, summarization and inference, is one of the most important activities in applied statistics, and indeed, in science. It sometimes gets short shrift in textbooks since there is not much deductive theory. However, there is a large number of good (and bad) practices, and once you pay attention to it, you will quickly see whether a certain graphic is effective in conveying its message, or what choices you could make to create powerful and aesthetically attrative data visualizations. Among the important options are the plot type (what is called a <code>geom</code> in <strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong>), proportions (incl.&nbsp;aspect ratios) and colors. The <em>grammar of graphics</em> is a powerful set of concepts to reason about graphics and to communicate our intentions for a data visualization to a computer.</p>
+<p>Avoid <em>laziness</em> —just using the software’s defaults without thinking about the options—, and avoid <em>getting carried away</em> —adding lots of visual candy that just clutters up the plot but has no real message. Creating your own visualizations is in many ways like good writing. It is extremely important to get your message across (in talks, in papers), but there is no simple recipe for it. Look carefully at lots of visualizations made by others, experiment with making your own visualizations to learn the ropes, and then decide what is your style.</p>
+</section>
+<section id="further-reading" class="level2" data-number="5.14">
+<h2 data-number="5.14" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">5.14</span> 3.15 Further reading</h2>
+<p>The most useful resources about <strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong> are the second edition of Wickham (<a href="16-chap.html#ref-ggplot2">2016</a>) and the <a href="https://ggplot2.tidyverse.org">ggplot2</a> website. There are many <strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong> code snippets online, which you will find through search engines after some practice. But be critical and check your sources: sometimes, code examples you find online refer to outdated versions of the package, and sometimes they are of poor quality.</p>
+<p>The foundation of the system is based on Wilkinson (<a href="16-chap.html#ref- GrofGrbook">2005</a>) and the ideas by Tukey (<a href="16-chap.html#ref-Tukey77">1977</a>; <a href="16-chap.html#ref-Tukey:1988">William S. Cleveland 1988</a>).</p>
+</section>
+<section id="exercises" class="level2" data-number="5.15">
+<h2 data-number="5.15" class="anchored" data-anchor-id="exercises"><span class="header-section-number">5.15</span> 3.16 Exercises</h2>
+<p>__</p>
+<p>Exercise 3.1</p>
+<p>Use <em>themes</em> to change the visual appearance of your plots. Start by running the following example:</p>
+<pre><code>ggcars = ggplot(mtcars, aes(x = hp, y = mpg)) + geom_point()
+ggcars
+ggcars + theme_bw()
+ggcars + theme_minimal()__</code></pre>
+<p>What other themes are there? (Hint: have a look at the section for themes in the <a href="https://ggplot2.tidyverse.org/reference">online documentation of ggplot2</a>.) Are these all the themes? (Hint: have a look at the <strong><a href="https://cran.r-project.org/web/packages/ggthemes/">ggthemes</a></strong> package.) Make a version of the above plot in the style of the <em>Economist</em> magazine. Add a smoothing line</p>
+<p>__</p>
+<p>Exercise 3.2</p>
+<p>What are admissible <em>color names</em> in base R? Have a look at the manual page of the <code>colors</code> function. Ryun the examples and the demo.</p>
+<p>Use an internet search engine to search for “R color names” and explore some of the resources that come up, e.g., cheat sheets with all the colors diplayed.</p>
+<p>Produce a version of the heatmap in Figure 3.41 that uses a color palette from the <a href="https://github.com/dill/beyonce">R package <strong>beyonce</strong></a>.</p>
+<p>__</p>
+<p>Exercise 3.3</p>
+<p>Create plots in the style of the <a href="https://xkcd.com">xkcd</a> webcomic. Have a look at</p>
+<ul>
+<li><p>a thread on Stackoverflow titled <a href="https://stackoverflow.com/questions/12675147/how-can-we-make-xkcd-style-graphs">How can we make xkcd style graphs?</a></p></li>
+<li><p>the R source code of this book for the code that produces the chapter’s opening figure,</p></li>
+<li><p>the vignette of the <strong><a href="https://cran.r-project.org/web/packages/xkcd/">xkcd</a></strong> package.</p></li>
+</ul>
+<p><a href="imgs/xkcdgraph.png"><img src="imgs/xkcdgraph.png" class="img-fluid"></a></p>
+<p>__</p>
+<p>Exercise 3.4</p>
+<p>Check out the <strong><a href="https://cran.r-project.org/web/packages/shiny/">shiny</a></strong> tutorials on the RStudio website. Write a <em>shiny app</em> that displays one of the plots from this chapter, but with interactive elements to control, e.g., which genes are displayed (Figures 3.33—3.35).</p>
+<p>__</p>
+<p>Exercise 3.5</p>
+<p>What options are there for <em>serializing</em> a graphic, i.e., for storing a graphic in a file that you can save for later use, or load up in another software? How can you serialize interactive graphics?</p>
+<p>__</p>
+<p>Exercise 3.6</p>
+<p>Important and well done graphics do not have to be complex. For instance, check out Figure 9 (page 82) of the <a href="extras/comirnaty-epar-public-assessment- report_en.pdf">public assessment report by the European Medicines Agency on Comirnaty</a>21 and <a href="https://xkcd.com/2400/">XKCD 2400</a>.</p>
+<p>21 You can also get this from <a href="https://www.ema.europa.eu/en/medicines/human/EPAR/comirnaty" class="uri">https://www.ema.europa.eu/en/medicines/human/EPAR/comirnaty</a>.</p>
+<p>Carr, Daniel B, Richard J Littlefield, WL Nicholson, and JS Littlefield. 1987. “Scatterplot Matrix Techniques for Large N.” <em>Journal of the American Statistical Association</em> 82 (398): 424–36.</p>
+<p>Cleveland, William S. 1988. <em>The Collected Works of John w. Tukey: Graphics 1965-1985</em>. Vol. 5. CRC Press.</p>
+<p>Cleveland, William S., Marylyn E. McGill, and Robert McGill. 1988. “The Shape Parameter of a Two-Variable Graph.” <em>Journal of the American Statistical Association</em> 83: 289–300.</p>
+<p>Helmholtz, H. von. 1867. <em>Handbuch Der Physiologischen Optik</em>. Leipzig: Leopold Voss.</p>
+<p>Ihaka, Ross. 2003. “Color for Presentation Graphics.” In <em>Proceedings of the 3rd International Workshop on Distributed Statistical Computing</em> , edited by Kurt Hornik and Friedrich Leisch. Vienna, Austria: http://www.r-project.org/conferences/DSC-2003/Proceedings/; ISSN 1609-395X.</p>
+<p>Irizarry, R. A., B. Hobbs, F. Collin, Y. D. Beazer-Barclay, K. J. Antonellis, U. Scherf, and T. P. Speed. 2003. “Exploration, Normalization, and Summaries of High Density Oligonucleotide Array Probe Level Data.” <em>Biostatistics</em> 4 (2): 249–64.</p>
+<p>Lawrence, Michael S., Petar Stojanov, Paz Polak, Gregory V. Kryukov, Kristian Cibulskis, Andrey Sivachenko, Scott L. Carter, et al.&nbsp;2013. “Mutational Heterogeneity in Cancer and the Search for New Cancer-Associated Genes.” <em>Nature</em> 499 (7457): 214–18. <a href="https://doi.org/10.1038/nature12213" class="uri">https://doi.org/10.1038/nature12213</a>.</p>
+<p>McCormick Jr, William T, Paul J Schweitzer, and Thomas W White. 1972. “Problem Decomposition and Data Reorganization by a Clustering Technique.” <em>Operations Research</em> 20 (5): 993–1009.</p>
+<p>Mollon, John. 1995. “Seeing Colour.” In <em>Colour: Art and Science</em> , edited by T. Lamb and J. Bourriau. Cambridge Unversity Press.</p>
+<p>Ohnishi, Y., W. Huber, A. Tsumura, M. Kang, P. Xenopoulos, K. Kurimoto, A. K. Oles, et al.&nbsp;2014. “Cell-to-Cell Expression Variability Followed by Signal Reinforcement Progressively Segregates Early Mouse Lineages.” <em>Nature Cell Biology</em> 16 (1): 27–37.</p>
+<p>Tukey, John W. 1977. “Exploratory Data Analysis.” <em>Massachusetts: Addison- Wesley</em>.</p>
+<p>Wickham, Hadley. 2010. “A Layered Grammar of Graphics.” <em>Journal of Computational and Graphical Statistics</em> 19 (1): 3–28.</p>
+<p>———. 2016. <em>Ggplot2: Elegant Graphics for Data Analysis</em>. Springer New York. <a href="http://had.co.nz/ggplot2/book" class="uri">http://had.co.nz/ggplot2/book</a>.</p>
+<p>Wilkinson, Leland. 1999. “Dot Plots.” <em>The American Statistician</em> 53 (3): 276.</p>
+<p>———. 2005. <em>The Grammar of Graphics</em>. Springer.</p>
+<p>Page built at 01:33 on 2025-09-01 using R version 4.5.1 (2025-06-13)</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./02-chap.html" class="pagination-link" aria-label="2.1 Goals for this chapter">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">2.1 Goals for this chapter</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./04-chap.html" class="pagination-link" aria-label="4.1 Goals for this chapter">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">4.1 Goals for this chapter</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

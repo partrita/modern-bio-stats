@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>3&nbsp; 1.1 Goals for this chapter – Modern Statistics for Modern Biology</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./02-chap.html" rel="next">
+<link href="./00-chap.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-22854ec117201859c8a7ba6f538122c9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="msmb.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-chap.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">1.1 Goals for this chapter</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Modern Statistics for Modern Biology</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Home</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The challenge: heterogeneity</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-chap.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">1.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">2.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">3.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">4.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">5.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">6.1 Goals for this Chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">7.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">8.1 Goals of this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">9.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">10.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">11.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">12.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">13.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">14-chap.html</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">15-chap.html</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">16-chap.html</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#a-real-example" id="toc-a-real-example" class="nav-link active" data-scroll-target="#a-real-example"><span class="header-section-number">3.1</span> 1.2 A real example</a></li>
+  <li><a href="#using-discrete-probability-models" id="toc-using-discrete-probability-models" class="nav-link" data-scroll-target="#using-discrete-probability-models"><span class="header-section-number">3.2</span> 1.3 Using discrete probability models</a>
+  <ul class="collapse">
+  <li><a href="#bernoulli-trials" id="toc-bernoulli-trials" class="nav-link" data-scroll-target="#bernoulli-trials"><span class="header-section-number">3.2.1</span> 1.3.1 Bernoulli trials</a></li>
+  <li><a href="#binomial-success-counts" id="toc-binomial-success-counts" class="nav-link" data-scroll-target="#binomial-success-counts"><span class="header-section-number">3.2.2</span> 1.3.2 Binomial success counts</a></li>
+  <li><a href="#poisson-distributions" id="toc-poisson-distributions" class="nav-link" data-scroll-target="#poisson-distributions"><span class="header-section-number">3.2.3</span> 1.3.3 Poisson distributions</a></li>
+  <li><a href="#a-generative-model-for-epitope-detection" id="toc-a-generative-model-for-epitope-detection" class="nav-link" data-scroll-target="#a-generative-model-for-epitope-detection"><span class="header-section-number">3.2.4</span> 1.3.4 A generative model for epitope detection</a></li>
+  </ul></li>
+  <li><a href="#multinomial-distributions-the-case-of-dna" id="toc-multinomial-distributions-the-case-of-dna" class="nav-link" data-scroll-target="#multinomial-distributions-the-case-of-dna"><span class="header-section-number">3.3</span> 1.4 Multinomial distributions: the case of DNA</a>
+  <ul class="collapse">
+  <li><a href="#simulating-for-power" id="toc-simulating-for-power" class="nav-link" data-scroll-target="#simulating-for-power"><span class="header-section-number">3.3.1</span> 1.4.1 Simulating for power</a></li>
+  </ul></li>
+  <li><a href="#summary-of-this-chapter" id="toc-summary-of-this-chapter" class="nav-link" data-scroll-target="#summary-of-this-chapter"><span class="header-section-number">3.4</span> 1.5 Summary of this chapter</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">3.5</span> 1.6 Further reading</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">3.6</span> 1.7 Exercises</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">1.1 Goals for this chapter</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><a href="imgs/Pile_ou_face.png"><img src="imgs/Pile_ou_face.png" class="img-fluid"></a></p>
+<p>In molecular biology, many situations involve counting events: how many codons use a certain spelling, how many reads of DNA match a reference, how many CG digrams are observed in a DNA sequence. These counts give us <em>discrete</em> variables, as opposed to quantities such as mass and intensity that are measured on <em>continuous</em> scales.</p>
+<p>If we know the rules that the mechanisms under study follow, even if the outcomes are random, we can generate the probabilities of any events we are interested in by computations and standard probability laws. This is a <em>top- down</em> approach based on deduction and our knowledge of how to manipulate probabilities. In <a href="02-chap.html">Chapter 2</a>, you will see how to combine this with data-driven (<em>bottom-up</em>) statistical modeling.</p>
+<p>In this chapter we will:</p>
+<ul>
+<li><p>Learn how to obtain the probabilities of all possible outcomes from a given model and see how we can compare the theoretical frequencies with those observed in real data.</p></li>
+<li><p>Explore a complete example of how to use the Poisson distribution to analyse data on epitope detection.</p></li>
+<li><p>See how we can experiment with the most useful generative models for discrete data: Poisson, binomial, multinomial.</p></li>
+<li><p>Use the R functions for computing probabilities and counting rare events.</p></li>
+<li><p>Generate random numbers from specified distributions.</p></li>
+</ul>
+<section id="a-real-example" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="a-real-example"><span class="header-section-number">3.1</span> 1.2 A real example</h2>
+<p>Let’s dive into an example where we have a probability model for the data generating process. Our model says that mutations along the genome of HIV (Human Immunodeficiency Virus) occur with a rate of \(5 ^{-4}\) per nucleotide per replication cycle. The rate is the same at each nucleotide position, and mutations at one position happen independently of what happens at other positions1. The genome size of HIV is about \(10^4=10,000\) nucleotides, thus, after one cycle, the total number of mutations will follow a <strong>Poisson</strong> distribution2 with rate \(5 ^{-4} ^4 = 5\). What does that tell us?</p>
+<p>1 In practice, and strictly speaking, complete and utter independence will rarely hold in reality, if you look close enough. Thus, what modellers usually mean with such assertions is that any possible correlations or dependencies are so weak and rare that ignoring them is a good enough approximation.</p>
+<p>2 We will give more details later about this type of probability distribution</p>
+<p>This probability model predicts that the number of mutations over one replication cycle will be close to 5, and that the variability of this estimate is \(\) (the standard error). We now have baseline reference values for both the number of mutations we expect to see in a typical HIV strain and its variability.</p>
+<p>In fact, we can deduce even more detailed information. If we want to know how often 3 mutations could occur under the Poisson(5) model, we can use an R function to generate the probability of seeing \(x=3\) events, taking the value of the <strong>rate parameter</strong> of the Poisson distribution, called lambda (\(\)), to be \(5\).</p>
+<p>Greek letters such as \(\) and \(\) often denote important parameters that characterize the probability distributions we use.</p>
+<pre><code>dpois(x = 3, lambda = 5)__
+
+
+[1] 0.1403739</code></pre>
+<p>This says the chance of seeing exactly three events is around 0.14, or about 1 in 7.</p>
+<p>If we want to generate the probabilities of all values from 0 to 12, we do not need to write a loop. We can simply set the first argument to be the <strong>vector</strong> of these 13 values, using R’s sequence operator, the colon “<code>:</code>”. We can see the probabilities by plotting them (Figure 1.1). As with this figure, most figures in the margins of this book are created by the code shown in the text.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="imgs/devil.png" title="Note how the output from R is formatted: the first line begins with the first item in the vector, hence the [1], and the second line begins with the 9th item, hence the [9]. This helps you keep track of elements in long vectors. The term vector is R parlance for an ordered list of elements of the same type (in this case, numbers)."><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
+<figcaption>Note how the output from R is formatted: the first line begins with the first item in the vector, hence the [1], and the second line begins with the 9th item, hence the [9]. This helps you keep track of elements in long vectors. The term vector is R parlance for an ordered list of elements of the same type (in this case, numbers).</figcaption>
+</figure>
+</div>
+<p>Note how the output from R is formatted: the first line begins with the first item in the vector, hence the [1], and the second line begins with the 9th item, hence the [9]. This helps you keep track of elements in long vectors. The term <em>vector</em> is R parlance for an ordered list of elements of the same type (in this case, numbers).</p>
+<pre><code>0:12 __
+
+
+ [1]  0  1  2  3  4  5  6  7  8  9 10 11 12
+
+
+dpois(x = 0:12, lambda = 5)__
+
+
+ [1] 0.0067 0.0337 0.0842 0.1404 0.1755 0.1755 0.1462 0.1044 0.0653 0.0363
+[11] 0.0181 0.0082 0.0034
+
+
+barplot(dpois(0:12, 5), names.arg = 0:12, col = "red")__</code></pre>
+<p><a href="01-chap_files/figure- html/fig-Poisson5-1.png" title="Figure 1.1: Probabilities of seeing 0,1,2,…,12 mutations, as modeled by the Poisson(5) distribution. The plot shows that we will often see 4 or 5 mutations but rarely as many as 12. The distribution continues to higher numbers (13,...), but the probabilities will be successively smaller, and here we don’t visualize them."><img src="01-chap_files/figure-html/fig-Poisson5-1.png" class="img-fluid"></a></p>
+<p>Figure 1.1: Probabilities of seeing 0,1,2,…,12 mutations, as modeled by the Poisson(5) distribution. The plot shows that we will often see 4 or 5 mutations but rarely as many as 12. The distribution continues to higher numbers (\(13,…\)), but the probabilities will be successively smaller, and here we don’t visualize them.</p>
+<p>Mathematical theory tells us that the Poisson probability of seeing the value \(x\) is given by the formula \(e^{-} ^x / x!\). In this book, we’ll discuss theory from time to time, but give preference to displaying concrete numeric examples and visualizations like Figure 1.1.</p>
+<p>The Poisson distribution is a good model for rare events such as mutations. Other useful probability models for <strong>discrete events</strong> are the Bernoulli, binomial and multinomial distributions. We will explore these models in this chapter.</p>
+</section>
+<section id="using-discrete-probability-models" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="using-discrete-probability-models"><span class="header-section-number">3.2</span> 1.3 Using discrete probability models</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="imgs/devil.png" title="Think of a categorical variable as having different alternative values. These are the levels, similar to the different alternatives at a gene locus: alleles."><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
+<figcaption>Think of a categorical variable as having different alternative values. These are the levels, similar to the different alternatives at a gene locus: alleles.</figcaption>
+</figure>
+</div>
+<p>Think of a categorical variable as having different alternative values. These are the levels, similar to the different alternatives at a gene locus: <em>alleles</em>.</p>
+<p>A point mutation can either occur or not; it is a binary event. The two possible outcomes (yes, no) are called the <strong>levels</strong> of the categorical variable.</p>
+<p>Not all events are binary. For example, the genotypes in a diploid organism can take three levels (AA, Aa, aa).</p>
+<p>Sometimes the number of levels in a categorical variable is very large; examples include the number of different types of bacteria in a biological sample (hundreds or thousands) and the number of codons formed of 3 nucleotides (64 levels).</p>
+<p>When we measure a categorical variable on a sample, we often want to tally the frequencies of the different levels in a vector of counts. R has a special encoding for categorical variables and calls them <strong>factors</strong> 3. Here we capture the different blood genotypes for 19 subjects in a vector which we tabulate.</p>
+<p>3 R makes sure that the factor variable will accept no other, “illegal” values, and this is useful for keeping your calculations safe.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="imgs/devil.png" title="c() is one of the most basic functions. It collates elements of the same type into a vector. In the code shown here, the elements of genotype are character strings."><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
+<figcaption>c() is one of the most basic functions. It collates elements of the same type into a vector. In the code shown here, the elements of genotype are character strings.</figcaption>
+</figure>
+</div>
+<p><code>c()</code> is one of the most basic functions. It collates elements of the same type into a vector. In the code shown here, the elements of <code>genotype</code> are character strings.</p>
+<pre><code>genotype = c("AA","AO","BB","AO","OO","AO","AA","BO","BO",
+             "AO","BB","AO","BO","AB","OO","AB","BB","AO","AO")
+table(genotype)__
+
+
+genotype
+AA AB AO BB BO OO 
+ 2  2  7  3  3  2 </code></pre>
+<p>On creating a <em>factor</em> , R automatically detects the levels. You can access the levels with the <code>levels</code> function.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="imgs/devil.png" title="It is not obvious from the output of the table function that the input was a factor; however if there had been another level with no instances, the table would also have contained that level, with a zero count."><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
+<figcaption>It is not obvious from the output of the table function that the input was a factor; however if there had been another level with no instances, the table would also have contained that level, with a zero count.</figcaption>
+</figure>
+</div>
+<p>It is not obvious from the output of the <code>table</code> function that the input was a factor; however if there had been another level with no instances, the table would also have contained that level, with a zero count.</p>
+<pre><code>genotypeF = factor(genotype)
+levels(genotypeF)__
+
+
+[1] "AA" "AB" "AO" "BB" "BO" "OO"
+
+
+table(genotypeF)__
+
+
+genotypeF
+AA AB AO BB BO OO 
+ 2  2  7  3  3  2 </code></pre>
+<p>__</p>
+<p>Question 1.1</p>
+<p>What if you want to create a <em>factor</em> that has some levels not yet in your data?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>Look at the manual page of the <code>factor</code> function.</p>
+<p>If the order in which the data are observed doesn’t matter, we call the random variable <strong>exchangeable</strong>. In that case, all the information available in the factor is summarized by the counts of the factor levels. We then say that the vector of frequencies is <strong>sufficient</strong> to capture all the relevant information in the data, thus providing an effective way of compressing the data.</p>
+<section id="bernoulli-trials" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="bernoulli-trials"><span class="header-section-number">3.2.1</span> 1.3.1 Bernoulli trials</h3>
+<p><a href="imgs/BallsinBoxes2.png" title="Figure 1.2: Two possible events with unequal probabilities. We model this by a Bernoulli distribution with probability parameter p=2/3."><img src="imgs/BallsinBoxes2.png" class="img-fluid"></a></p>
+<p>Figure 1.2: Two possible events with unequal probabilities. We model this by a Bernoulli distribution with probability parameter \(p=2/3\).</p>
+<p>Tossing a coin has two possible outcomes. This simple experiment, called a Bernoulli trial, is modeled using a so-called Bernoulli random variable. Understanding this building block will take you surprisingly far. We can use it to build more complex models.</p>
+<p>Let’s try a few experiments to see what some of these random variables look like. We use special R functions tailored to generate outcomes for each type of distribution. They all start with the letter <code>r</code>, followed by a specification of the model, here <code>rbinom</code>, where <code>binom</code> is the abbreviation used for binomial.</p>
+<p>Suppose we want to simulate a sequence of 15 fair coin tosses. To get the outcome of 15 Bernoulli trials with a probability of success equal to 0.5 (a fair coin), we write</p>
+<pre><code>rbinom(15, prob = 0.5, size = 1)__
+
+
+ [1] 0 0 1 1 0 0 1 1 1 1 1 0 1 0 0</code></pre>
+<p>We use the <code>rbinom</code> function with a specific set of <strong>parameters</strong> 4: the first parameter is the number of trials we want to observe; here we chose 15. We designate by <code>prob</code> the probability of success. By <code>size=1</code> we declare that each individual trial consists of just one single coin toss.</p>
+<p>4 For R functions, parameters are also called <strong>argument</strong> s.</p>
+<p>__</p>
+<p>Question 1.2</p>
+<p>Repeat this function call a number of times. Why isn’t the answer always the same?</p>
+<p>Success and failure can have unequal probabilities in a Bernoulli trial, as long as the probabilities sum to one5. To simulate twelve trials of throwing a ball into the two boxes as shown in Figure 1.2, with probability of falling in the right-hand box \(\) and in the left-hand box \(\), we write</p>
+<p>5 We call such events <strong>complementary</strong>.</p>
+<pre><code>rbinom(12, prob = 2/3, size = 1)__
+
+
+ [1] 1 1 1 0 0 0 1 0 1 0 1 0</code></pre>
+<p>The 1 indicates success, meaning that the ball fell in the right-hand box, 0 means the ball fell in the left-hand box.</p>
+</section>
+<section id="binomial-success-counts" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="binomial-success-counts"><span class="header-section-number">3.2.2</span> 1.3.2 Binomial success counts</h3>
+<p>If we only care how many balls go in the right-hand box, then the order of the throws doesn’t matter6, and we can get this number by just taking the sum of the cells in the output vector. Therefore, instead of the binary vector we saw above, we only need to report a single number. In R, we can do this using one call to the <code>rbinom</code> function with the parameter <code>size</code> set to 12.</p>
+<p>Two outcomes and a size of 1 or more makes it a binomial trial. If the size is 1, then this is the special case of the Bernoulli trial.</p>
+<p>6 The exchangeability property.</p>
+<pre><code>rbinom(1, prob = 2/3, size = 12)__
+
+
+[1] 9</code></pre>
+<p>This output tells us how many of the twelve balls fell into the right-hand box (the outcome that has probability 2/3). We use a random two-box model when we have only two possible outcomes such as heads or tails, success or failure, CpG or non-CpG, M or F, Y = pyrimidine or R = purine, diseased or healthy, true or false. We only need the probability of “success” \(p\), because “failure” (the <em>complementary</em> event) will occur with probability \(1-p\). When looking at the result of several such trials, if they are exchangeable7, we record only the number of successes. Therefore, SSSSSFSSSSFFFSF is summarized as (#Successes=10, #Failures=5), or as \(x=10\), \(n=15\).</p>
+<p>7 One situation in which trials are exchangeable is if they are <strong>independent</strong> of each other.</p>
+<p>The number of successes in 15 Bernoulli trials with a probability of success of 0.3 is called a <strong>binomial</strong> random variable or a random variable that follows the \(B(15,0.3)\) distribution. To generate samples, we use a call to the <code>rbinom</code> function with the number of trials set to 15:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="imgs/devil.png" title="What does set.seed do here?"><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
+<figcaption>What does set.seed do here?</figcaption>
+</figure>
+</div>
+<p>What does <code>set.seed</code> do here?</p>
+<pre><code>set.seed(235569515)
+rbinom(1, prob = 0.3, size = 15)__
+
+
+[1] 5</code></pre>
+<p>__</p>
+<p>Question 1.3</p>
+<p>Repeat this function call ten times. What seems to be the most common outcome?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>The most frequent value is 4. In fact, the theoretical proportion of times that we expect 4 to appear is the value of the probability that \(X=4\) if \(X\) follows \(B(15, 0.3)\).</p>
+<p>The complete <strong>probability mass distribution</strong> is available by typing:</p>
+<p>We use the function <code>round</code> to keep the number of printed decimal digits down to 2.</p>
+<pre><code>probabilities = dbinom(0:15, prob = 0.3, size = 15)
+round(probabilities, 2)__
+
+
+ [1] 0.00 0.03 0.09 0.17 0.22 0.21 0.15 0.08 0.03 0.01 0.00 0.00 0.00 0.00 0.00
+[16] 0.00</code></pre>
+<p>We can produce a bar plot of this distribution, shown in Figure 1.3.</p>
+<pre><code>barplot(probabilities, names.arg = 0:15, col = "red")__</code></pre>
+<p><a href="01-chap_files/figure- html/fig-binombarplot-1.png" title="Figure 1.3: Theoretical distribution of B(15,0.3) . The highest bar is at x=4. We have chosen to represent theoretical values in red throughout."><img src="01-chap_files/figure-html/fig-binombarplot-1.png" class="img-fluid"></a></p>
+<p>Figure 1.3: Theoretical distribution of \(B(15,0.3)\) . The highest bar is at \(x=4\). We have chosen to represent theoretical values in red throughout.</p>
+<p>The number of trials is the number we input in R as the <code>size</code> parameter and is often written \(n\), while the probability of success is \(p\). Mathematical theory tells us that for \(X\) distributed as a binomial distribution with parameters \((n,p)\) written \(X B(n,p)\), the probability of seeing \(X=k\) successes is</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="imgs/devil.png" title="Instead of \frac{n!}{(n-k)!k!} we can use the special notation {n \choose k} as a shortcut."><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
+<figcaption>Instead of \frac{n!}{(n-k)!k!} we can use the special notation {n \choose k} as a shortcut.</figcaption>
+</figure>
+</div>
+<p>Instead of \(\) we can use the special notation \({n k}\) as a shortcut.</p>
+<p>\[ ]</p>
+<p>__</p>
+<p>Question 1.4</p>
+<p>What is the output of the formula for \(k=3\), \(p=2/3\), \(n=4\)?</p>
+</section>
+<section id="poisson-distributions" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="poisson-distributions"><span class="header-section-number">3.2.3</span> 1.3.3 Poisson distributions</h3>
+<p><a href="imgs/Simeon_Poisson.jpg" title="Figure 1.4: Simeon Poisson, after whom the Poisson distribution is named (this is why it always has a capital letter, except in our R code)."><img src="imgs/Simeon_Poisson.jpg" class="img-fluid"></a></p>
+<p>Figure 1.4: Simeon Poisson, after whom the Poisson distribution is named (this is why it always has a capital letter, except in our R code).</p>
+<p>When the probability of success \(p\) is small and the number of trials \(n\) large, the binomial distribution \(B(n, p)\) can be faithfully approximated by a simpler distribution, the <strong>Poisson distribution</strong> with rate parameter \(=np\). We already used this fact, and this distribution, in the HIV example (Figure 1.1).</p>
+<p>__</p>
+<p>Question 1.5</p>
+<p>What is the probability mass distribution of observing <code>0:12</code> mutations in a genome of \(n = 10^4\) nucleotides, when the probability is \(p = 5 ^{-4}\) per nucleotide? Is it similar when modeled by the binomial \(B(n,p)\) distribution and by the Poisson\((=np)\) distribution?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>Note that, unlike the binomial distribution, the Poisson no longer depends on two separate parameters \(n\) and \(p\), but only on their product \(np\). As in the case of the binomial distribution, we also have a mathematical formula for computing Poisson probabilities:</p>
+<p>\[ P(X=k)= . \]</p>
+<p>For instance, let’s take \(\) and compute \(P(X=3)\):</p>
+<pre><code>5^3 * exp(-5) / factorial(3)__
+
+
+[1] 0.1403739</code></pre>
+<p>which we can compare with what we computed above using <code>dpois</code>.</p>
+<p>__</p>
+<p>Task</p>
+<p>Simulate a mutation process along 10,000 positions with a mutation rate of \(5^{-4}\) and count the number of mutations. Repeat this many times and plot the distribution with the <code>barplot</code> function (see Figure 1.5).</p>
+<pre><code>rbinom(1, prob = 5e-4, size = 10000)__
+
+
+[1] 6
+
+
+simulations = rbinom(n = 300000, prob = 5e-4, size = 10000)
+barplot(table(simulations), col = "lavender")__</code></pre>
+<p><a href="01-chap_files/figure-html/fig-gen-simpoisson-1.png &quot;Figure 1.5: Simulated distribution of B(10000, 10^{-4}) for 300000 simulations.&quot;"><img src="01-chap_files/figure-html/fig-gen- simpoisson-1.png" class="img-fluid"></a></p>
+<p>Figure 1.5: Simulated distribution of B(10000, \(10^{-4}\)) for 300000 simulations.</p>
+<p>Now we are ready to use probability calculations in a case study.</p>
+</section>
+<section id="a-generative-model-for-epitope-detection" class="level3" data-number="3.2.4">
+<h3 data-number="3.2.4" class="anchored" data-anchor-id="a-generative-model-for-epitope-detection"><span class="header-section-number">3.2.4</span> 1.3.4 A generative model for epitope detection</h3>
+<p>When testing certain pharmaceutical compounds, it is important to detect proteins that provoke an allergic reaction. The molecular sites that are responsible for such reactions are called <strong>epitopes</strong>. The technical definition of an epitope is:</p>
+<blockquote class="blockquote">
+<p>A specific portion of a macromolecular antigen to which an antibody binds. In the case of a protein antigen recognized by a T-cell, the epitope or determinant is the peptide portion or site that binds to a Major Histocompatibility Complex (MHC) molecule for recognition by the T cell receptor (TCR).</p>
+</blockquote>
+<p>And in case you’re not so familiar with immunology: an <strong>antibody</strong> (as schematized in Figure 1.6) is a type of protein made by certain white blood cells in response to a foreign substance in the body, which is called the <strong>antigen</strong>.</p>
+<p><a href="imgs/Antibody_IgG2.png" title="Figure 1.6: A diagram of an antibody showing several immunoglobulin domains in color."><img src="imgs/Antibody_IgG2.png" class="img-fluid"></a></p>
+<p>Figure 1.6: A diagram of an antibody showing several immunoglobulin domains in color.</p>
+<p>An antibody binds (with more or less specificity) to its antigen. The purpose of the binding is to help destroy the antigen. Antibodies can work in several ways, depending on the nature of the antigen. Some antibodies destroy antigens directly. Others help recruit white blood cells to destroy the antigen. An epitope, also known as antigenic determinant, is the part of an antigen that is recognized by the immune system, specifically by antibodies, B cells or T cells.</p>
+<section id="elisa-error-model-with-known-parameters" class="level4" data-number="3.2.4.1">
+<h4 data-number="3.2.4.1" class="anchored" data-anchor-id="elisa-error-model-with-known-parameters"><span class="header-section-number">3.2.4.1</span> ELISA error model with known parameters</h4>
+<p>ELISA8 assays are used to detect specific epitopes at different positions along a protein. Suppose the following facts hold for an ELISA array we are using:</p>
+<p>8 <strong>E</strong> nzyme-<strong>L</strong> inked <strong>I</strong> mmuno<strong>S</strong> orbent <strong>A</strong> ssay (<a href="http://en.wikipedia.org/wiki/ELISA">Wikipedia link ELISA</a>).</p>
+<ul>
+<li><p>The baseline noise level per position, or more precisely the false positive rate, is 1%. This is the probability of declaring a hit – we think we have an epitope – when there is none. We write this \(P(|)\)9.</p></li>
+<li><p>The protein is tested at 100 different positions, supposed to be independent.</p></li>
+<li><p>We are going to examine a collection of 50 patient samples.</p></li>
+</ul>
+<p>9 The vertical bar in expressions such as \(X|Y\) means “\(X\) happens <em>conditional on</em> \(Y\) being the case”.</p>
+</section>
+<section id="one-patients-data" class="level4" data-number="3.2.4.2">
+<h4 data-number="3.2.4.2" class="anchored" data-anchor-id="one-patients-data"><span class="header-section-number">3.2.4.2</span> One patient’s data</h4>
+<p>The data for one patient’s assay look like this:</p>
+<pre><code>  [1] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ [38] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ [75] 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0</code></pre>
+<p>where the 1 signifies a hit (and thus the potential for an allergic reaction), and the zeros signify no reaction at that position.</p>
+<p>__</p>
+<p>Task</p>
+<p>Verify by simulation that the sum of 50 independent Bernoulli variables with \(p=0.01\) is –to good enough approximation– the same as a Poisson(\(0.5\)) random variable.</p>
+</section>
+<section id="results-from-the-50-assays" class="level4" data-number="3.2.4.3">
+<h4 data-number="3.2.4.3" class="anchored" data-anchor-id="results-from-the-50-assays"><span class="header-section-number">3.2.4.3</span> Results from the 50 assays</h4>
+<p>We’re going to study the data for all 50 patients tallied at each of the 100 positions. If there are no allergic reactions, the false positive rate means that for one patient, each individual position has a probability of 1 in 100 of being a 1. So, after tallying 50 patients, we expect at any given position the sum of the 50 observed \((0,1)\) variables to have a Poisson distribution with parameter 0.5. A typical result may look like Figure 1.7. Now suppose we see actual data as shown in Figure 1.8, loaded as R object <code>e100</code> from the data file <code>e100.RData</code>.</p>
+<p><a href="01-chap_files/figure- html/fig-typicalP-1.png" title="Figure 1.7: Plot of typical data from our generative model for the background, i.,e., for the false positive hits: 100 positions along the protein, at each position the count is drawn from a Poisson(0.5) random variable."><img src="01-chap_files/figure-html/fig-typicalP-1.png" class="img-fluid"></a></p>
+<p>Figure 1.7: Plot of typical data from our generative model for the background, i.,e., for the false positive hits: 100 positions along the protein, at each position the count is drawn from a Poisson(0.5) random variable.</p>
+<pre><code>load("../data/e100.RData")
+barplot(e100, ylim = c(0, 7), width = 0.7, xlim = c(-0.5, 100.5),
+  names.arg = seq(along = e100), col = "darkolivegreen")__</code></pre>
+<p><a href="01-chap_files/figure- html/fig-epitopedata-1.png" title="Figure 1.8: Output of the ELISA array results for 50 patients in the 100 positions."><img src="01-chap_files/figure-html/fig-epitopedata-1.png" class="img-fluid"></a></p>
+<p>Figure 1.8: Output of the ELISA array results for 50 patients in the 100 positions.</p>
+<p>The spike in Figure 1.8 is striking. <em>What are the chances of seeing a value as large as 7, if no epitope is present?</em><br>
+If we look for the probability of seeing a number as big as 7 (or larger) when considering one Poisson(\(0.5\)) random variable, the answer can be calculated in closed form as</p>
+<p>\[ P(X)= _{k=7}^P(X=k). \]</p>
+<p>This is, of course, the same as \(1-P(X)\). The probability \(P(X)\) is the so-called <strong>cumulative distribution</strong> function at 6, and R has the function <code>ppois</code> for computing it, which we can use in either of the following two ways:10</p>
+<p>10 Besides the convenience of not having to do the subtraction from one, the second of these computations also tends to be more accurate when the probability is small. This has to do with limitations of floating point arithmetic.</p>
+<pre><code>1 - ppois(6, 0.5)__
+
+
+[1] 1.00238e-06
+
+
+ppois(6, 0.5, lower.tail = FALSE)__
+
+
+[1] 1.00238e-06</code></pre>
+<p>__</p>
+<p>Task</p>
+<p>Check the manual page of <code>ppois</code> for the meaning of the <code>lower.tail</code> argument.</p>
+<p>We denote this number by \(\), the Greek letter epsilon11. We have shown that the probability of seeing a count as large as \(7\), assuming no epitope reactions, is:</p>
+<p>11 Mathematicians often call small numbers (and children) \(\)s.</p>
+<p>\[ =P(X)=1-P(X)^{-6}. \]</p>
+</section>
+<section id="extreme-value-analysis-for-the-poisson-distribution" class="level4" data-number="3.2.4.4">
+<h4 data-number="3.2.4.4" class="anchored" data-anchor-id="extreme-value-analysis-for-the-poisson-distribution"><span class="header-section-number">3.2.4.4</span> Extreme value analysis for the Poisson distribution</h4>
+<p>Stop! The above calculation is <em>not</em> the correct computation in this case.</p>
+<p>__</p>
+<p>Question 1.6</p>
+<p>Can you spot the flaw in our reasoning if we want to compute the probability that we observe these data if there is no epitope?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>We looked at all 100 positions, looked for the largest value and found that it was 7. Due to this selection, a value as large as 7 is more likely to occur than if we only looked at one position.</p>
+<p>So instead of asking what the chances are of seeing a Poisson(0.5) as large as 7, we should ask ourselves, what are the chances that the maximum of 100 Poisson(0.5) trials is as large as 7? We use <strong>extreme value</strong> analysis here12. We order the data values \(x_1,x_2,… ,x_{100}\) and rename them \(x_{(1)},x_{(2)},x_{(3)},… ,x_{(100)}\), so that \(x_{(1)}\) denotes the smallest and \(x_{(100)}\) the largest of the counts over the 100 positions. Together, \(x_{(1)},… x_{(100)}\) are called the <strong>rank statistic</strong> of this sample of 100 values.</p>
+<p>12 Meaning that we’re interested in the behavior of the very large or very small values of a random distribution, for instance the maximum or the minimum.</p>
+<p>13 The notation with the \(\) is just a compact way to write the product of a series of terms, analogous to the \(\) for sums.</p>
+<p>The maximum value being as large as 7 is the <strong>complementary event</strong> of having all 100 counts be smaller than or equal to 6. Two complementary events have probabilities that sum to 1. Because the positions are supposed to be independent, we can now do the computation13:</p>
+<p>\[ ]</p>
+<p>Because we suppose each of these 100 events are independent, we can use our result from above:</p>
+<p>\[ _{i=1}^{100} P(x_i )= (P(x_i ))^{100}= (1-)^{100}. \]</p>
+</section>
+<section id="actually-computing-the-numbers" class="level4" data-number="3.2.4.5">
+<h4 data-number="3.2.4.5" class="anchored" data-anchor-id="actually-computing-the-numbers"><span class="header-section-number">3.2.4.5</span> Actually computing the numbers</h4>
+<p>We could just let R compute the value of this number, \((1-)^{100}\). For those interested in how such calculations can be shortcut through approximation, we give some details. These can be skipped on a first reading.</p>
+<p>We recall from above that \(^{-6}\) is much smaller than 1. To compute the value of \((1-)^{100}\) approximately, we can use the binomial theorem and drop all “higher order” terms of \(\), i.e., all terms with \(^2, ^3, …\), because they are negligibly small compared to the remaining (“leading”) terms.</p>
+<p>\[ (1-)^n = _{k=0}^n {nk} , 1^{n-k} , (-)^k = 1-n+{n} ^2 - {n} ^3 + … -n - 10^{-4} \]</p>
+<p>Another, equivalent, route goes by using the approximation \(e^{-} -\), which is the same as \((1-) -\). Hence</p>
+<p>\[ (1-)^{100} = e<sup>{((1-)</sup>{100})} = e^{ 100 (1-)} e^{-100 } e<sup>{-10</sup>{-4}} - 10^{-4}. \]</p>
+<p>Thus the correct probability of seeing a number of hits as large or larger than 7 in the 100 positions, if there is no epitope, is about 100 times the probability we wrongly calculated previously.</p>
+<p>Both computed probabilities \(10^{-6}\) and \(10^{-4}\) are smaller than standard significance thresholds (say, \(0.05, 0.01\) or \(0.001\)). The decision to reject the null of no epitope would have been the same. However if one has to stand up in court and defend the p-value to 8 significant digits as in some forensic court cases:14 that is another matter. The adjusted p-value that takes into account the multiplicity of the test is the one that should be reported, and we will return to this important issue in <a href="06-chap.html">Chapter 6</a>.</p>
+<p>14 This occurred in the examination of the forensic evidence in the OJ Simpson case.</p>
+</section>
+<section id="computing-probabilities-by-simulation" class="level4" data-number="3.2.4.6">
+<h4 data-number="3.2.4.6" class="anchored" data-anchor-id="computing-probabilities-by-simulation"><span class="header-section-number">3.2.4.6</span> Computing probabilities by simulation</h4>
+<p>In the case we just saw, the theoretical probability calculation was quite simple and we could figure out the result by an explicit calculation. In practice, things tend to be more complicated, and we are better to compute our probabilities using the <strong>Monte Carlo</strong> method: a computer simulation based on our generative model that finds the probabilities of the events we’re interested in. Below, we generate 100,000 instances of picking the maximum from 100 Poisson distributed numbers.</p>
+<pre><code>maxes = replicate(100000, {
+  max(rpois(100, 0.5))
+})
+table(maxes)__
+
+
+maxes
+    1     2     3     4     5     6     7     9 
+    7 23028 60840 14364  1604   141    15     1 </code></pre>
+<p>In 16 of 100000 trials, the maximum was 7 or larger. This gives the following approximation for \(P(X_{})\)15:</p>
+<p>15 In R, the expression <code>maxes &gt;= 7</code> evaluates into a logical vector of the same length as <code>maxes</code>, but with values of <code>TRUE</code> and <code>FALSE</code>. If we apply the function <code>mean</code> to it, that vector is converted into 0s and 1s, and the result of the computation is the fraction of 1s, which is the same as the fraction of <code>TRUE</code>s.</p>
+<pre><code>mean( maxes &gt;= 7 )__
+
+
+[1] 0.00016</code></pre>
+<p>which more or less agrees with our theoretical calculation. We already see one of the potential limitations of Monte Carlo simulations: the “granularity” of the simulation result is determined by the inverse of the number of simulations (100000) and so will be around 10^{-5}. Any estimated probability cannot be more precise than this granularity, and indeed the precision of our estimate will be a few multiples of that. Everything we have done up to now is only possible because we know the false positive rate per position, we know the number of patients assayed and the length of the protein, we suppose we have identically distributed independent draws from the model, and there are no unknown parameters. This is an example of <strong>probability or generative modeling</strong> : all the parameters are known and the mathematical theory allows us to work by <strong>deduction</strong> in a <strong>top-down</strong> fashion.</p>
+<p>We postulated the Poisson distribution for the noise, pretending we knew all the parameters and were able to conclude through mathematical deduction.</p>
+<p>If instead we are in the more realistic situation of knowing the number of patients and the length of the proteins, but don’t know the distribution of the data, then we have to use <strong>statistical modeling</strong>. This approach will be developed in <a href="02-chap.html">Chapter 2</a>. We will see that if we have only the data to start with, we first need to <strong>fit</strong> a reasonable distribution to describe it. However, before we get to this harder problem, let’s extend our knowledge of discrete distributions to more than binary, success-or-failure outcomes.</p>
+</section>
+</section>
+</section>
+<section id="multinomial-distributions-the-case-of-dna" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="multinomial-distributions-the-case-of-dna"><span class="header-section-number">3.3</span> 1.4 Multinomial distributions: the case of DNA</h2>
+<section id="more-than-two-outcomes." class="level4" data-number="3.3.0.1">
+<h4 data-number="3.3.0.1" class="anchored" data-anchor-id="more-than-two-outcomes."><span class="header-section-number">3.3.0.1</span> More than two outcomes.</h4>
+<p>When modeling four possible outcomes, as for instance the boxes in Figure 1.9 or when studying counts of the four nucleotides [A,C,G] and [T], we need to extend the [binomial] model.</p>
+<p><a href="imgs/BallsinBoxes4.png" title="Figure 1.9: The boxes represent four outcomes or levels of a discrete categorical variable. The box on the right represents the more likely outcome."><img src="imgs/BallsinBoxes4.png" class="img-fluid"></a></p>
+<p>Figure 1.9: The boxes represent four outcomes or levels of a discrete <strong>categorical</strong> variable. The box on the right represents the more likely outcome.</p>
+<p>Recall that when using the binomial, we can consider unequal probabilities for the two outcomes by assigning a probability \(p=P(1)=p_1\) to the outcome 1 and \(1-p=p(0)=p_0\) to the outcome 0. When there are more than two possible outcomes, say [A,C,G] and [T], we can think of throwing balls into boxes of differing sizes corresponding to different probabilities, and we can label these probabilities \(p_A,p_C,p_G,p_T\). Just as in the binomial case the sum of the probabilities of all possible outcomes is 1, \(p_A+p_C+p_G+p_T=1\).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="imgs/devil.png" title="You are secretly meeting a continuous distribution here, the uniform distribution: runif."><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
+<figcaption>You are secretly meeting a continuous distribution here, the uniform distribution: runif.</figcaption>
+</figure>
+</div>
+<p>You are secretly meeting a continuous distribution here, the uniform distribution: <code>runif</code>.</p>
+<p>__</p>
+<p>Task</p>
+<p>Experiment with the random number generator that generates all possible numbers between \(0\) and \(1\) through the function called <code>runif</code>. Use it to generate a random variable with 4 levels (A, C, G, T) where \(p_{}=, p_{}=, p_{}=, p_{}=\).</p>
+<p><strong>Mathematical formulation.</strong> Multinomial distributions are the most important model for tallying counts and R uses a general formula to compute the probability of a <strong>multinomial</strong> vector of counts \((x_1,…,x_m)\) for outcomes of \(n\) draws from \(m\) boxes with probabilities \(p_1,…,p_m\):</p>
+<p>The first term reads: the joint probability of observing count \(x_1\) in box 1 and \(x_2\) in 2 and … \(x_m\) in box m, given that box 1 has probability \(p_1\), box 2 has probability \(p_2\), … and box \(m\) has probability \(p_m\).</p>
+<p>\[<span class="math display">\[\begin{align} P(x_1,x_2,...,x_m) &amp;=\frac{n!}{\prod_{i=1}^m x_i!}
+\prod_{i=1}^m p_i^{x_i}\\\ &amp;={{n}\choose{x_1,x_2,...,x_m}} \;
+p_1^{x_1}\,p_2^{x_2}\cdots p_m^{x_m}. \end{align}\]</span>\]</p>
+<p>The term in brackets is called the multinomial coefficient and is an abbreviation for \[{nx_1,x_2,…,x_m}=.\] So this is a generalization of the binomial coefficient – for \(m=2\) it is the same as the binomial coefficient.</p>
+<p>__</p>
+<p>Question 1.7</p>
+<p>Suppose we have four boxes that are equally likely. Using the formula, what is the probability of observing 4 in the first box, 2 in the second box, and none in the two other boxes?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>\[ P(4,2,0,0)= =. \]</p>
+<pre><code>dmultinom(c(4, 2, 0, 0), prob = rep(1/4, 4))__
+
+
+[1] 0.003662109</code></pre>
+<p>We often run simulation experiments to check whether the data we see are consistent with the simplest possible four-box model where each box has the same probability 1/4. In some sense it is the strawman (nothing interesting is happening). We’ll see more examples of this in <a href="02-chap.html">Chapter 2</a>. Here we use a few R commands to generate such vectors of counts. First suppose we have 8 characters of four different, equally likely types:</p>
+<pre><code>pvec = rep(1/4, 4)
+t(rmultinom(1, prob = pvec, size = 8))__
+
+
+     [,1] [,2] [,3] [,4]
+[1,]    1    3    1    3</code></pre>
+<p>__</p>
+<p>Question 1.8</p>
+<p>Try the code without using the <code>t()</code> function; what does <code>t</code> stand for?</p>
+<p>__</p>
+<p>Question 1.9</p>
+<p>How do you interpret the difference between <code>rmultinom(n = 8, prob = pvec, size = 1)</code> and <code>rmultinom(n = 1, prob = pvec, size = 8)</code>? Hint: remember what we did in Sections 1.3.1 and 1.3.2.</p>
+</section>
+<section id="simulating-for-power" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="simulating-for-power"><span class="header-section-number">3.3.1</span> 1.4.1 Simulating for power</h3>
+<p>Let’s see an example of using Monte Carlo for the <strong>multinomial</strong> in a way which is related to a problem scientists often have to solve when planning their experiments: how big a sample size do I need?</p>
+<p><a href="imgs/SampleSize.png"><img src="imgs/SampleSize.png" class="img-fluid"></a></p>
+<p>Ask a statistician about sample size, they will always tell you they need more data. The larger the sample size, the more sensitive the results. However lab work is expensive, so there is a tricky cost-benefit tradeoff to be considered. This is such an important problem that we have dedicated a whole chapter to it at the end of the book (<a href="13-chap.html">Chapter 13</a>).</p>
+<p>The term <strong>power</strong> has a special meaning in statistics. It is the probability of detecting something if it <em>is</em> there, also called the <strong>true positive rate</strong>.</p>
+<p>Conventionally, experimentalists aim for a power of 80% (or more) when planning experiments. This means that if the same experiment is run many times, about 20% of the time it will fail to yield significant results even though it should.</p>
+<p>Let’s call \(H_0\) the null hypothesis that the DNA data we have collected comes from a <em>fair</em> process, where each of the 4 nucleotides is equally likely \((p_A,p_C,p_G,p_T)=(0.25,0.25,0.25,0.25)\). Null here just means: the baseline, where nothing interesting is going on. It’s the strawman that we are trying to disprove (or “reject”, in the lingo of statisticians), so the null hypothesis should be such that deviations from it are interesting16.</p>
+<p>16 If you know a little biology, you will know that DNA of living organisms rarely follows that null hypothesis – so disproving it may not be all that interesting. Here we proceed with this null hypothesis because it allows us to illustrate the calculations, but it can also serve us as a reminder that the choice of a good null hypothesis (one whose rejection is interesting) requires scientific input.</p>
+<p>As you saw by running the R commands for 8 characters and 4 equally likely outcomes, represented by equal-sized boxes, we do not always get 2 in each box. It is impossible to say, from looking at just 8 characters, whether the nucleotides come from a fair process or not.</p>
+<p>Let’s determine if, by looking at a sequence of length \(n=20\), we can detect whether the original distribution of nucleotides is fair or whether it comes from some other (“alternative”) process.</p>
+<p>We generate 1000 simulations from the null hypothesis using the <code>rmultinom</code> function. We display only the first 11 columns to save space.</p>
+<pre><code>obsunder0 = rmultinom(1000, prob = pvec, size = 20)
+dim(obsunder0)__
+
+
+[1]    4 1000
+
+
+obsunder0[, 1:11]__
+
+
+     [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11]
+[1,]    6    5    6    8    4    6    2    7    5     4     4
+[2,]    6    6    3    7    3    3    8    4    3     3     5
+[3,]    3    3    6    2    8    3    5    7    4     7     6
+[4,]    5    6    5    3    5    8    5    2    8     6     5</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="imgs/devil.png" title="Notice that the top of every column there is an index of the form [,1][,2]... These are the column indices. The rows are labeled [1,][2,].... The object obsunder0 is not a simple vector as those we have seen before, but an array of numbers in a matrix."><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
+<figcaption>Notice that the top of every column there is an index of the form [,1][,2]… These are the column indices. The rows are labeled [1,][2,]…. The object obsunder0 is not a simple vector as those we have seen before, but an array of numbers in a matrix.</figcaption>
+</figure>
+</div>
+<p>Notice that the top of every column there is an index of the form <code>[,1][,2]...</code> These are the column indices. The rows are labeled <code>[1,][2,]...</code>. The object <code>obsunder0</code> is not a simple vector as those we have seen before, but an array of numbers in a matrix.</p>
+<p>Each column in the matrix <code>obsunder0</code> is a simulated instance. You can see that the numbers in the boxes vary a lot: some are as big as 8, whereas the expected value is 5=20/4.</p>
+<section id="creating-a-test" class="level4" data-number="3.3.1.1">
+<h4 data-number="3.3.1.1" class="anchored" data-anchor-id="creating-a-test"><span class="header-section-number">3.3.1.1</span> Creating a test</h4>
+<p>Remember: we know these values come from a fair process. Clearly, knowing the process’ expected values isn’t enough. We also need a measure of variability that will enable us to describe how much variability is expected and how much is too much. We use as our measure the following statistic, which is computed as the sum of the squares of the differences between the observed values and the expected values relative to the expected values. Thus, for each instance,</p>
+<p>This measure weights each of the square residuals relative to their expected values.</p>
+<p>\[ {}=+ + + =_i \]</p>
+<p>How much do the first three columns of the generated data differ from what we expect? We get:</p>
+<pre><code>expected0 = pvec * 20
+sum((obsunder0[, 1] - expected0)^2 / expected0)__
+
+
+[1] 1.2
+
+
+sum((obsunder0[, 2] - expected0)^2 / expected0)__
+
+
+[1] 1.2
+
+
+sum((obsunder0[, 3] - expected0)^2 / expected0)__
+
+
+[1] 1.2</code></pre>
+<p>The values of the measure can differ- you can look at a few more than 3 columns, we’re going to see how to study all 1,000 of them. To avoid repetitive typing, we encapsulate the formula for <code>stat</code>, Equation 1.1, in a function:</p>
+<pre><code>stat = function(obsvd, exptd = 20 * pvec) {
+  sum((obsvd - exptd)^2 / exptd)
+}
+stat(obsunder0[, 1])__
+
+
+[1] 1.2</code></pre>
+<p>To get a more complete picture of this variation, we compute the measure for all 1000 instances and store these values in a vector we call <code>S0</code>: it contains values generated under \(H_0\). We can consider the histogram of the <code>S0</code> values shown in Figure 1.10 an estimate of our <strong>null distribution</strong>.</p>
+<pre><code>S0 = apply(obsunder0, 2, stat)
+summary(S0)__
+
+
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  0.000   1.200   2.800   3.126   4.400  17.600 
+
+
+hist(S0, breaks = 25, col = "lavender", main = "")__</code></pre>
+<p><a href="01-chap_files/figure- html/fig-histS0-1.png" title="Figure 1.10: The histogram of simulated values S0 of the statistic stat under the null (fair) distribution provides an approximation of the sampling distribution of the statistic stat."><img src="01-chap_files/figure-html/fig-histS0-1.png" class="img-fluid"></a></p>
+<p>Figure 1.10: The histogram of simulated values <code>S0</code> of the statistic <code>stat</code> under the null (fair) distribution provides an approximation of the <strong>sampling distribution</strong> of the statistic <code>stat</code>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="imgs/devil.png" title="The apply function is shorthand for a loop over the rows or columns of an array. Here the second argument, 2, indicates looping over the columns."><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
+<figcaption>The apply function is shorthand for a loop over the rows or columns of an array. Here the second argument, 2, indicates looping over the columns.</figcaption>
+</figure>
+</div>
+<p>The <code>apply</code> function is shorthand for a loop over the rows or columns of an array. Here the second argument, 2, indicates looping over the columns.</p>
+<p>The summary function shows us that <code>S0</code> takes on a spread of different values. From the simulated data we can approximate, for instance, the 95% quantile (a value that separates the smaller 95% of the values from the 5% largest values).</p>
+<pre><code>q95 = quantile(S0, probs = 0.95)
+q95 __
+
+
+95% 
+7.6 </code></pre>
+<p>So we see that 5% of the <code>S0</code> values are larger than 7.6. We’ll propose this as our critical value for testing data and will reject the hypothesis that the data come from a fair process, with equally likely nucleotides, if the weighted sum of squares <code>stat</code> is larger than 7.6.</p>
+</section>
+<section id="determining-our-tests-power" class="level4" data-number="3.3.1.2">
+<h4 data-number="3.3.1.2" class="anchored" data-anchor-id="determining-our-tests-power"><span class="header-section-number">3.3.1.2</span> Determining our test’s power</h4>
+<p>We must compute the probability that our test—based on the weighted sum-of- square differences—will detect that the data in fact do not come from the null hypothesis. We compute the probability of rejecting by simulation. We generate 1000 simulated instances from an alternative process, parameterized by <code>pvecA</code>.</p>
+<p><a href="imgs/roulette.png"><img src="imgs/roulette.png" class="img-fluid"></a></p>
+<pre><code>pvecA = c(3/8, 1/4, 1/4, 1/8)
+observed = rmultinom(1000, prob = pvecA, size = 20)
+dim(observed)__
+
+
+[1]    4 1000
+
+
+observed[, 1:7]__
+
+
+     [,1] [,2] [,3] [,4] [,5] [,6] [,7]
+[1,]   10    4    8    8    4    7    7
+[2,]    3   10    5    6    6    7    2
+[3,]    5    3    5    6    4    2    6
+[4,]    2    3    2    0    6    4    5
+
+
+apply(observed, 1, mean)__
+
+
+[1] 7.469 4.974 5.085 2.472
+
+
+expectedA = pvecA * 20
+expectedA __
+
+
+[1] 7.5 5.0 5.0 2.5</code></pre>
+<p>As with the simulation from the null hypothesis, the observed values vary considerably. The question is: how often (out of 1000 instances) will our test detect that the data depart from the null?</p>
+<p>The test doesn’t reject the first observation, (10, 3, 5, 2), because the value of the statistic is within the 95th percentile.</p>
+<pre><code>stat(observed[, 1])__
+
+
+[1] 7.6
+
+
+S1 = apply(observed, 2, stat)
+q95 __
+
+
+95% 
+7.6 
+
+
+sum(S1 &gt; q95)__
+
+
+[1] 199
+
+
+power = mean(S1 &gt; q95)
+power __
+
+
+[1] 0.199</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="imgs/devil.png" title="We read the vertical line as given or conditional on."><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
+<figcaption>We read the vertical line as given or conditional on.</figcaption>
+</figure>
+</div>
+<p>We read the vertical line as <strong>given</strong> or <strong>conditional on</strong>.</p>
+<p>Run across 1000 simulations, the test identified 199 as coming from an alternative distribution. We have thus computed that the probability \(P(H_0 ;|; H_A)\) is 0.199.</p>
+<p>With a sequence length of \(n = 20\) we have a <em>power</em> of about 20% to detect the difference between the fair generating process and our <strong>alternative</strong>.</p>
+<p>__</p>
+<p>Task</p>
+<p>In practice, as we mentioned, an acceptable value of power is \(0.8\) or more. Repeat the simulation experiments and suggest a new sequence length \(n\) that will ensure that the power is acceptable.</p>
+</section>
+<section id="classical-statistics-for-classical-data" class="level4" data-number="3.3.1.3">
+<h4 data-number="3.3.1.3" class="anchored" data-anchor-id="classical-statistics-for-classical-data"><span class="header-section-number">3.3.1.3</span> Classical statistics for classical data</h4>
+<p>We didn’t need to simulate the data using Monte Carlo to compute the 95th percentiles; there is an adequate theory to help us with the computations.</p>
+<p>Our statistic <code>stat</code> actually has a well-known distribution called the chi- square distribution (with 3 degrees of freedom) and written \({}^2_3\).</p>
+<p><a href="imgs/ProbaDiagram.png" title="Figure 1.11: We have studied how a probability model has a distribution, which we call F. F often depends on parameters, which are–by convention–denoted by Greek letters, such as \theta. The observed data are generated via the brown arrow and are represented by Latin letters, such as x. The vertical bar in the probability computation stands for supposing that or conditional on"><img src="imgs/ProbaDiagram.png" class="img-fluid"></a></p>
+<p>Figure 1.11: We have studied how a probability model has a distribution, which we call \(F\). \(F\) often depends on parameters, which are–by convention–denoted by Greek letters, such as \(\). The observed data are generated via the brown arrow and are represented by Latin letters, such as \(x\). The vertical bar in the probability computation stands for <strong>supposing that</strong> or <strong>conditional on</strong></p>
+<p>We will see in <a href="02-chap.html">Chapter 2</a> how to compare distributions using Q-Q plots (see <a href="02-chap.html#fig-qqplot3-1">Figure 2.8</a>). We could have used a more standard test instead of running a hand-made simulation. However, the procedure we’ve learned extends to many situations in which the chi-square distribution doesn’t apply. For instance, when some of the boxes have extremely low probabilities and their counts are mostly zero.</p>
+</section>
+</section>
+</section>
+<section id="summary-of-this-chapter" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="summary-of-this-chapter"><span class="header-section-number">3.4</span> 1.5 Summary of this chapter</h2>
+<p>We have used mathematical formulæ and R to compute probabilities of various discrete <em>events</em> , using a few basic distributions:</p>
+<p><strong>The <em>Bernoulli</em> distribution</strong> was our most basic building block – it is used to represent a single binary trial such as a coin flip. We can code the outcomes as 0 and 1. We call \(p\) the probability of success (the 1 outcome).</p>
+<p><strong>The <em>binomial</em> distribution</strong> is used for the number of 1s in \(n\) binary trials, and we can compute the probabilities of seeing \(k\) successes using the R function <code>dbinom</code>. We also saw how to simulate a binomial eperiment with \(n\) trials using the function <code>rbinom</code>.</p>
+<p><strong>The <em>Poisson</em> distribution</strong> is most appropriate for cases when \(p\) is small (the 1s are rare). It has only one parameter \(\), and the Poisson distribution for \(=np\) is approximately the same as the binomial distribution for \((n,p)\) if \(p\) is small. We used the Poisson distribution to model the number of randomly occurring false positives in an assay that tested for epitopes along a sequence, presuming that the per- position false positive rate \(p\) was small. We saw how such a parametric model enabled us to compute the probabilities of extreme events, as long as we knew all the parameters.</p>
+<p><strong>The <em>multinomial</em> distribution</strong> is used for discrete events that have more than two possible outcomes or <strong>levels</strong>. The power example showed us how to use Monte Carlo simulations to decide how much data we need to collect if we want to test whether a multinomial model with equal probabilities is consistent with the data. We used probability distributions and probabilistic models to evaluate hypotheses about how our data were generated, by making assumptions about the generative models. We term the probability of seeing the data, given a hypothesis, a <strong>p-value</strong>. This is not the same as the probability that the hypothesis is true!</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="imgs/devil.png &quot;P(H_0\;|\;\text{data}) is not the same as a p-value P(\text{data}\;|\;H_0).&quot;"><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
+<figcaption>P(H_0\;|\;\text{data}) is not the same as a p-value P(\text{data}\;|\;H_0).</figcaption>
+</figure>
+</div>
+<p>\(P(H_0;|;)\) is not the same as a p-value \(P(;|;H_0)\).</p>
+</section>
+<section id="further-reading" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">3.5</span> 1.6 Further reading</h2>
+<ul>
+<li><p>The elementary book by Freedman, Pisani, and Purves (<a href="16-chap.html#ref-Freedman:1997">1997</a>) provides the best introduction to probability through the type of box models we mention here.</p></li>
+<li><p>The book by Durbin et al.&nbsp;(<a href="16-chap.html#ref-DEKM">1998</a>) covers many useful probability distributions and provides in its appendices a more complete view of the theoretical background in probability theory and its applications to sequences in biology.</p></li>
+<li><p>Monte Carlo methods are used extensively in modern statistics. Robert and Casella (<a href="16-chap.html#ref-Casella2009">2009</a>) provides an introduction to these methods using R.</p></li>
+<li><p><a href="06-chap.html">Chapter 6</a> will cover the subject of hypothesis testing. We also suggest Rice (<a href="16-chap.html#ref-Rice:2007">2006</a>) for more advanced material useful for the type of more advanced probability distributions, beta, gamma, exponentials we often use in data analyses.</p></li>
+</ul>
+</section>
+<section id="exercises" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="exercises"><span class="header-section-number">3.6</span> 1.7 Exercises</h2>
+<p>__</p>
+<p>Exercise 1.1</p>
+<p>R can generate numbers from all known distributions. We now know how to generate random discrete data using the specialized R functions tailored for each type of distribution. We use the functions that start with an <code>r</code> as in <code>rXXXX</code>, where <code>XXXX</code> could be <code>pois</code>, <code>binom</code>, <code>multinom</code>. If we need a theoretical computation of a probability under one of these models, we use the functions <code>dXXXX</code>, such as <code>dbinom</code>, which computes the probabilities of events in the discrete binomial distribution, and <code>dnorm</code>, which computes the probability density function for the continuous normal distribution. When computing tail probabilities such as \(P(X&gt;a)\) it is convenient to use the cumulative distribution functions, which are called <code>pXXXX</code>. Find two other discrete distributions that could replace the <code>XXXX</code> above.</p>
+<p>__</p>
+<p>Exercise 1.2</p>
+<p>In this chapter we have concentrated on <em>discrete</em> random variables, where the probabilities are concentrated on a countable set of values. How would you calculate the <em>probability mass</em> at the value \(X=2\) for a binomial \(B(10, 0.3)\) with <code>dbinom</code>? Use <code>dbinom</code> to compute the <em>cumulative</em> distribution at the value 2, corresponding to \(P(X)\), and check your answer with another R function.</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<pre><code>dbinom(2, size = 10, prob = 0.3)__
+
+
+[1] 0.2334744
+
+
+pbinom(2, size = 10, prob = 0.3)__
+
+
+[1] 0.3827828
+
+
+sum(dbinom(0:2, size = 10, prob = 0.3)) __
+
+
+[1] 0.3827828</code></pre>
+<p>__</p>
+<p>Exercise 1.3</p>
+<p>Whenever we note that we keep needing a certain sequence of commands, it’s good to put them into a function. The function body contains the instructions that we want to do over and over again, the function arguments take those things that we may want to vary. Write a function to compute the probability of having a maximum as big as <code>m</code> when looking across <code>n</code> Poisson variables with rate <code>lambda</code>.</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<pre><code>poismax = function(lambda, n, m) {
+  epsilon = 1 - ppois(m - 1, lambda)
+  1 - exp( -n * epsilon)
+}
+poismax(lambda = 0.5, n = 100, m = 7)__
+
+
+[1] 0.0001002329
+
+
+poismax(lambda = mean(e100), n = 100, m = 7)__
+
+
+[1] 0.0001870183</code></pre>
+<p>__</p>
+<p>Exercise 1.4</p>
+<p>Rewrite the function to have default values for its arguments (i.e., values that are used by it if the argument is not specified in a call to the function).</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<pre><code>poismax = function(lambda, n = 100, m = 7) {
+  1 - exp( -n * (1 - ppois(m - 1, lambda)))
+}
+poismax(0.5)__
+
+
+[1] 0.0001002329
+
+
+poismax(0.5, m = 9)__
+
+
+[1] 3.43549e-07</code></pre>
+<p>__</p>
+<p>Exercise 1.5</p>
+<p>In the epitope example, use a simulation to find the probability of having a maximum of 9 or larger in 100 trials. How many simulations do you need if you would like to prove that “the probability is smaller than 0.000001”?</p>
+<p>__</p>
+<p>Exercise 1.6</p>
+<p>Use <code>?Distributions</code> in R to get a list of available distributions17. Make plots of the probability mass or density functions for various distributions (using the functions named <code>dXXXX</code>), and list five distributions that are not discrete.</p>
+<p>17 These are just the ones that come with a basic R installation. There are more in additional packages, see the <a href="https://cran.r-project.org/web/views/Distributions.html">CRAN task view: Probability Distributions</a>.</p>
+<p>__</p>
+<p>Exercise 1.7</p>
+<p>Generate 100 instances of a Poisson(3) random variable. What is the mean? What is the variance as computed by the R function <code>var</code>?</p>
+<p>__</p>
+<p>Exercise 1.8</p>
+<p><em>C. elegans</em> genome nucleotide frequency: Is the mitochondrial sequence of <em>C. elegans</em> consistent with a model of equally likely nucleotides?</p>
+<ol type="1">
+<li><p>Explore the nucleotide frequencies of chromosome M by using a dedicated function in the <strong><a href="https://bioconductor.org/packages/Biostrings/">Biostrings</a></strong> package from Bioconductor.</p></li>
+<li><p>Test whether the <em>C. elegans</em> data is consistent with the uniform model (all nucleotide frequencies the same) using a simulation. Hint: This is our opportunity to use Bioconductor for the first time. Since Bioconductor’s package management is more tightly controlled than CRAN’s, we need to use a special <code>install</code> function (from the <strong><a href="https://cran.r-project.org/web/packages/BiocManager/">BiocManager</a></strong> package) to install Bioconductor packages.</p></li>
+</ol>
+<pre><code>if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install(c("Biostrings", "BSgenome.Celegans.UCSC.ce2"))__</code></pre>
+<p>After that, we can load the genome sequence package as we load any other R packages.</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<pre><code>library("BSgenome.Celegans.UCSC.ce2")
+Celegans __
+
+
+| BSgenome object for Worm
+| - organism: Caenorhabditis elegans
+| - provider: UCSC
+| - genome: ce2
+| - release date: Mar. 2004
+| - 7 sequence(s):
+|     chrI   chrII  chrIII chrIV  chrV   chrX   chrM                       
+| 
+| Tips: call 'seqnames()' on the object to get all the sequence names, call
+| 'seqinfo()' to get the full sequence info, use the '$' or '[[' operator to
+| access a given sequence, see '?BSgenome' for more information.
+
+
+seqnames(Celegans)__
+
+
+[1] "chrI"   "chrII"  "chrIII" "chrIV"  "chrV"   "chrX"   "chrM"  
+
+
+Celegans$chrM __
+
+
+13794-letter DNAString object
+seq: CAGTAAATAGTTTAATAAAAATATAGCATTTGGGTT...TATTTATAGATATATACTTTGTATATATCTATATTA
+
+
+class(Celegans$chrM)__
+
+
+[1] "DNAString"
+attr(,"package")
+[1] "Biostrings"
+
+
+length(Celegans$chrM)__
+
+
+[1] 13794
+
+
+library("Biostrings")
+lfM = letterFrequency(Celegans$chrM, letters=c("A", "C", "G", "T"))
+lfM __
+
+
+   A    C    G    T 
+4335 1225 2055 6179 
+
+
+sum(lfM)__
+
+
+[1] 13794
+
+
+lfM / sum(lfM)__
+
+
+         A          C          G          T 
+0.31426707 0.08880673 0.14897782 0.44794838 </code></pre>
+<p>Create a random (each letter with equal probability) sequence of the same length as the <em>C. elegans</em> chromosome M:</p>
+<pre><code>t(rmultinom(1, length(Celegans$chrM), p = rep(1/4, 4)))__
+
+
+     [,1] [,2] [,3] [,4]
+[1,] 3409 3486 3476 3423</code></pre>
+<p>The expected frequencies are just</p>
+<pre><code>length(Celegans$chrM) / 4 __
+
+
+[1] 3448.5</code></pre>
+<p>We’re going to compute a statistic that measures how close two multinomial outputs are to each other. We’ll take the average squared difference between observed (<code>o</code>) and expected (<code>e</code>) counts, scaled by <code>e</code>. We will call the function <code>oestat</code>.</p>
+<pre><code>oestat = function(o, e) {
+  sum((o-e)^2 / e)
+}
+oe = oestat(o = lfM, e = length(Celegans$chrM) / 4)
+oe __
+
+
+[1] 4386.634</code></pre>
+<p>Is this larger than what randomness could explain? We already saw above a set of typical counts we could expect under the null model. But we need a whole set (distribution) of values. We compute these using the replicate function that evaluates a function many times. We run the following:</p>
+<pre><code>B = 10000
+n = length(Celegans$chrM)
+expected = rep(n / 4, 4)
+oenull = replicate(B,
+  oestat(e = expected, o = rmultinom(1, n, p = rep(1/4, 4))))__</code></pre>
+<p>Durbin, Richard, Sean Eddy, Anders Krogh, and Graeme Mitchison. 1998. <em>Biological Sequence Analysis</em>. Cambridge University Press.</p>
+<p>Freedman, David, Robert Pisani, and Roger Purves. 1997. <em>Statistics</em>. New York, NY: WW Norton.</p>
+<p>Rice, John. 2006. <em>Mathematical Statistics and Data Analysis</em>. Cengage Learning.</p>
+<p>Robert, Christian, and George Casella. 2009. <em>Introducing Monte Carlo Methods with R</em>. Springer Science &amp; Business Media.</p>
+<p>Page built at 01:33 on 2025-09-01 using R version 4.5.1 (2025-06-13)</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./00-chap.html" class="pagination-link" aria-label="The challenge: heterogeneity">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The challenge: heterogeneity</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./02-chap.html" class="pagination-link" aria-label="2.1 Goals for this chapter">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">2.1 Goals for this chapter</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

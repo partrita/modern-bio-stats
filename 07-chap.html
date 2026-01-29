@@ -1,0 +1,2109 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>9&nbsp; 7.1 Goals for this chapter – Modern Statistics for Modern Biology</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./08-chap.html" rel="next">
+<link href="./06-chap.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-22854ec117201859c8a7ba6f538122c9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="msmb.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./07-chap.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">7.1 Goals for this chapter</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Modern Statistics for Modern Biology</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Home</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The challenge: heterogeneity</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">1.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">2.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">3.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">4.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">5.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">6.1 Goals for this Chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-chap.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">7.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">8.1 Goals of this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">9.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">10.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">11.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">12.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">13.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">14-chap.html</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">15-chap.html</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">16-chap.html</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#what-are-the-data-matrices-and-their-motivation" id="toc-what-are-the-data-matrices-and-their-motivation" class="nav-link active" data-scroll-target="#what-are-the-data-matrices-and-their-motivation"><span class="header-section-number">9.1</span> 7.2 What are the data? Matrices and their motivation</a>
+  <ul class="collapse">
+  <li><a href="#low-dimensional-data-summaries-and-preparation" id="toc-low-dimensional-data-summaries-and-preparation" class="nav-link" data-scroll-target="#low-dimensional-data-summaries-and-preparation"><span class="header-section-number">9.1.1</span> 7.2.1 Low-dimensional data summaries and preparation</a></li>
+  <li><a href="#preprocessing-the-data" id="toc-preprocessing-the-data" class="nav-link" data-scroll-target="#preprocessing-the-data"><span class="header-section-number">9.1.2</span> 7.2.2 Preprocessing the data</a></li>
+  </ul></li>
+  <li><a href="#dimension-reduction" id="toc-dimension-reduction" class="nav-link" data-scroll-target="#dimension-reduction"><span class="header-section-number">9.2</span> 7.3 Dimension reduction</a>
+  <ul class="collapse">
+  <li><a href="#lower-dimensional-projections" id="toc-lower-dimensional-projections" class="nav-link" data-scroll-target="#lower-dimensional-projections"><span class="header-section-number">9.2.1</span> 7.3.1 Lower-dimensional projections</a></li>
+  <li><a href="#how-do-we-summarize-two-dimensional-data-by-a-line" id="toc-how-do-we-summarize-two-dimensional-data-by-a-line" class="nav-link" data-scroll-target="#how-do-we-summarize-two-dimensional-data-by-a-line"><span class="header-section-number">9.2.2</span> 7.3.2 How do we summarize two-dimensional data by a line?</a></li>
+  </ul></li>
+  <li><a href="#the-new-linear-combinations" id="toc-the-new-linear-combinations" class="nav-link" data-scroll-target="#the-new-linear-combinations"><span class="header-section-number">9.3</span> 7.4 The new linear combinations</a>
+  <ul class="collapse">
+  <li><a href="#optimal-lines" id="toc-optimal-lines" class="nav-link" data-scroll-target="#optimal-lines"><span class="header-section-number">9.3.1</span> 7.4.1 Optimal lines</a></li>
+  </ul></li>
+  <li><a href="#the-pca-workflow" id="toc-the-pca-workflow" class="nav-link" data-scroll-target="#the-pca-workflow"><span class="header-section-number">9.4</span> 7.5 The PCA workflow</a></li>
+  <li><a href="#the-inner-workings-of-pca-rank-reduction" id="toc-the-inner-workings-of-pca-rank-reduction" class="nav-link" data-scroll-target="#the-inner-workings-of-pca-rank-reduction"><span class="header-section-number">9.5</span> 7.6 The inner workings of PCA: rank reduction</a>
+  <ul class="collapse">
+  <li><a href="#rank-one-matrices" id="toc-rank-one-matrices" class="nav-link" data-scroll-target="#rank-one-matrices"><span class="header-section-number">9.5.1</span> 7.6.1 Rank-one matrices</a></li>
+  <li><a href="#how-do-we-find-such-a-decomposition-in-a-unique-way" id="toc-how-do-we-find-such-a-decomposition-in-a-unique-way" class="nav-link" data-scroll-target="#how-do-we-find-such-a-decomposition-in-a-unique-way"><span class="header-section-number">9.5.2</span> 7.6.2 How do we find such a decomposition in a unique way?</a></li>
+  <li><a href="#singular-value-decomposition" id="toc-singular-value-decomposition" class="nav-link" data-scroll-target="#singular-value-decomposition"><span class="header-section-number">9.5.3</span> 7.6.3 Singular value decomposition</a></li>
+  <li><a href="#principal-components" id="toc-principal-components" class="nav-link" data-scroll-target="#principal-components"><span class="header-section-number">9.5.4</span> 7.6.4 Principal components</a></li>
+  </ul></li>
+  <li><a href="#plotting-the-observations-in-the-principal-plane" id="toc-plotting-the-observations-in-the-principal-plane" class="nav-link" data-scroll-target="#plotting-the-observations-in-the-principal-plane"><span class="header-section-number">9.6</span> 7.7 Plotting the observations in the principal plane</a>
+  <ul class="collapse">
+  <li><a href="#pca-of-the-turtles-data" id="toc-pca-of-the-turtles-data" class="nav-link" data-scroll-target="#pca-of-the-turtles-data"><span class="header-section-number">9.6.1</span> 7.7.1 PCA of the turtles data</a></li>
+  <li><a href="#a-complete-analysis-the-decathlon-athletes" id="toc-a-complete-analysis-the-decathlon-athletes" class="nav-link" data-scroll-target="#a-complete-analysis-the-decathlon-athletes"><span class="header-section-number">9.6.2</span> 7.7.2 A complete analysis: the decathlon athletes</a></li>
+  <li><a href="#how-to-choose-k-the-number-of-dimensions" id="toc-how-to-choose-k-the-number-of-dimensions" class="nav-link" data-scroll-target="#how-to-choose-k-the-number-of-dimensions"><span class="header-section-number">9.6.3</span> 7.7.3 How to choose \(k\), the number of dimensions ?</a></li>
+  </ul></li>
+  <li><a href="#pca-as-an-exploratory-tool-using-extra-information" id="toc-pca-as-an-exploratory-tool-using-extra-information" class="nav-link" data-scroll-target="#pca-as-an-exploratory-tool-using-extra-information"><span class="header-section-number">9.7</span> 7.8 PCA as an exploratory tool: using extra information</a>
+  <ul class="collapse">
+  <li><a href="#mass-spectroscopy-data-analysis" id="toc-mass-spectroscopy-data-analysis" class="nav-link" data-scroll-target="#mass-spectroscopy-data-analysis"><span class="header-section-number">9.7.1</span> 7.8.1 Mass Spectroscopy Data Analysis</a></li>
+  <li><a href="#biplots-and-scaling" id="toc-biplots-and-scaling" class="nav-link" data-scroll-target="#biplots-and-scaling"><span class="header-section-number">9.7.2</span> 7.8.2 Biplots and scaling</a></li>
+  <li><a href="#an-example-of-weighted-pca" id="toc-an-example-of-weighted-pca" class="nav-link" data-scroll-target="#an-example-of-weighted-pca"><span class="header-section-number">9.7.3</span> 7.8.3 An example of weighted PCA</a></li>
+  </ul></li>
+  <li><a href="#summary-of-this-chapter" id="toc-summary-of-this-chapter" class="nav-link" data-scroll-target="#summary-of-this-chapter"><span class="header-section-number">9.8</span> 7.9 Summary of this chapter</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">9.9</span> 7.10 Further reading</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">9.10</span> 7.11 Exercises</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">7.1 Goals for this chapter</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><a href="imgs/TheMatrix.jpg"><img src="imgs/TheMatrix.jpg" class="img-fluid"></a></p>
+<p>Many datasets consist of several variables measured on the same set of subjects: patients, samples, or organisms. For instance, we may have biometric characteristics such as height, weight, age as well as clinical variables such as blood pressure, blood sugar, heart rate, and genetic data for, say, a thousand patients. The <em>raison d’être</em> for multivariate analysis is the investigation of connections or associations between the different variables measured. Usually the data are reported in a tabular data structure with one row for each subject and one column for each variable. In the following, we will focus on the special case where each of the variables is numeric, so we can represent the data structure as a <em>matrix</em> in R.</p>
+<p>If the columns of the matrix are all independent of each other (unrelated), we can simply study each column separately and do standard “univariate” statistics on them one by one; there would be no benefit in studying them as a matrix.</p>
+<p>More often, there will be patterns and dependencies. For instance, in the biology of cells, we know that the proliferation rate will influence the expression of many genes simultaneously. Studying the expression of 25,000 gene (columns) on many samples (rows) of patient-derived cells, we notice that many of the genes act together, either that they are positively correlated or that they are anti-correlated. We would miss a lot of important information if we were to only study each gene separately. Important connections between genes are detectable only if we consider the data as a whole: each row representing the many measurements made on the same observational unit. However, having 25,000 dimensions of variation to consider at once is daunting; we will show how to reduce our data to a smaller number of most important dimensions1 without losing too much information.</p>
+<p>1 We will elaborate this idea of dimension reduction in much more detail below. For the time being, remember we live in a four-dimensional world.</p>
+<p>This chapter presents many examples of multivariate data matrices that we encounter in high-throughput experiments, as well as some more elementary examples that we hope will enhance your intuition. We will focus in this chapter on <strong>P</strong> rincipal <strong>C</strong> omponent <strong>A</strong> nalysis, abbreviated as <strong>PCA</strong> , a <strong>dimension reduction</strong> method. We will provide geometric explanations of the algorithm as well as visualizations that help interprete the output of PCA analyses.</p>
+<p>In this chapter we will:</p>
+<ul>
+<li><p>See examples of matrices that come up in the study of biological data.</p></li>
+<li><p>Perform dimension reduction to understand correlations between variables.</p></li>
+<li><p>Preprocess, rescale and center the data before starting a multivariate analysis.</p></li>
+<li><p>Build new variables, called principal components (PC), that are more useful than the original measurements.</p></li>
+<li><p>See what is “under the hood” of PCA: the singular value decomposition of a matrix.</p></li>
+<li><p>Visualize what this decomposition achieves and learn how to choose the number of principal components.</p></li>
+<li><p>Run through a complete PCA analysis from start to finish.</p></li>
+<li><p>Project factor covariates onto the PCA map to enable a more useful interpretation of the results.</p></li>
+</ul>
+<section id="what-are-the-data-matrices-and-their-motivation" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="what-are-the-data-matrices-and-their-motivation"><span class="header-section-number">9.1</span> 7.2 What are the data? Matrices and their motivation</h2>
+<p>First, let’s look at a set of examples of rectangular <strong>matrices</strong> used to represent tables of measurements. In each matrix, the rows and columns represent specific entities.</p>
+<p><strong>Turtles:</strong> A simple data set that will help us understand the basic principles is a matrix of three dimensions of biometric measurements on painted turtles (<a href="16-chap.html#ref- Jolicoeur1960">Jolicoeur and Mosimann 1960</a>).</p>
+<pre><code>turtles = read.table("../data/PaintedTurtles.txt", header = TRUE)
+turtles[1:4, ]__
+
+
+  sex length width height
+1   f     98    81     38
+2   f    103    84     38
+3   f    103    86     42
+4   f    105    86     40</code></pre>
+<p>The last three columns are length measurements (in millimetres), whereas the first column is a factor variable that tells us the sex of each animal.</p>
+<p><strong>Athletes:</strong> This matrix is an interesting example from the sports world. It reports the performances for 33 athletes in the ten disciplines of the decathlon: <code>m100</code>, <code>m400</code> and <code>m1500</code> are times in seconds for the 100 meters, 400 meters, and 1500 meters respectively; <code>m110</code> is the time to finish the 110 meters hurdles; <code>pole</code> is the pole-vault height, and <code>high</code> and <code>long</code> are the results of the high and long jumps, all in meters; <code>weight</code>, <code>disc</code>, and <code>javel</code> are the lengths in meters the athletes were able to throw the weight, discus and javelin. Here are these variables for the first three athletes:</p>
+<pre><code>data("olympic", package = "ade4")
+athletes = setNames(olympic$tab, 
+  c("m100", "long", "weight", "high", "m400", "m110", "disc", "pole", "javel", "m1500"))
+athletes[1:3, ]__
+
+
+   m100 long weight high  m400  m110  disc pole javel  m1500
+1 11.25 7.43  15.48 2.27 48.90 15.13 49.28  4.7 61.32 268.95
+2 10.87 7.45  14.97 1.97 47.71 14.46 44.36  5.1 61.76 273.02
+3 11.18 7.44  14.20 1.97 48.29 14.81 43.66  5.2 64.16 263.20</code></pre>
+<p><strong>Cell Types:</strong> Holmes et al.&nbsp;(<a href="16-chap.html#ref-holmes2005memory">2005</a>) studied gene expression profiles of sorted T-cell populations from different subjects. The columns are a subset of gene expression measurements, they correspond to 156 genes that show differential expression between cell types.</p>
+<pre><code>load("../data/Msig3transp.RData")
+round(Msig3transp,2)[1:5, 1:6]__
+
+
+             X3968 X14831 X13492 X5108 X16348  X585
+HEA26_EFFE_1 -2.61  -1.19  -0.06 -0.15   0.52 -0.02
+HEA26_MEM_1  -2.26  -0.47   0.28  0.54  -0.37  0.11
+HEA26_NAI_1  -0.27   0.82   0.81  0.72  -0.90  0.75
+MEL36_EFFE_1 -2.24  -1.08  -0.24 -0.18   0.64  0.01
+MEL36_MEM_1  -2.68  -0.15   0.25  0.95  -0.20  0.17</code></pre>
+<p><strong>Bacterial Species Abundances:</strong> Matrices of counts are used in microbial ecology studies (as we saw in <a href="04-chap.html">Chapter 4</a>). Here the columns represent different species (or operational taxonomic units, OTUs) of bacteria, which are identified by numerical tags. The rows are labeled according to the samples in which they were measured, and the (integer) numbers represent the number of times of each of the OTUs was observed in each of the samples.</p>
+<pre><code>data("GlobalPatterns", package = "phyloseq")
+GPOTUs = as.matrix(t(phyloseq::otu_table(GlobalPatterns)))
+GPOTUs[1:4, 6:13]__
+
+
+OTU Table:          [4 taxa and 8 samples]
+                     taxa are rows
+        246140 143239 244960 255340 144887 141782 215972 31759
+CL3          0      7      0    153      3      9      0     0
+CC1          0      1      0    194      5     35      3     1
+SV1          0      0      0      0      0      0      0     0
+M31Fcsw      0      0      0      0      0      0      0     0</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="imgs/devil.png" title="Notice the propensity of the matrix entries to be zero; we call such data sparse."><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
+<figcaption>Notice the propensity of the matrix entries to be zero; we call such data sparse.</figcaption>
+</figure>
+</div>
+<p>Notice the propensity of the matrix entries to be zero; we call such data <strong>sparse</strong>.</p>
+<p><strong>mRNA reads:</strong> RNA-Seq transcriptome data report the number of sequence reads matching each gene2 in each of several biological samples. We will study this type of data in detail in <a href="08-chap.html">Chapter 8</a></p>
+<p>2 Or sub-gene structures, such as exons.</p>
+<pre><code>library("SummarizedExperiment")
+data("airway", package = "airway")
+assay(airway)[1:3, 1:4]__
+
+
+                SRR1039508 SRR1039509 SRR1039512 SRR1039513
+ENSG00000000003        679        448        873        408
+ENSG00000000005          0          0          0          0
+ENSG00000000419        467        515        621        365</code></pre>
+<p>It is customary in the RNA-Seq field—and so it is for the <code>airway</code> data above—to report the genes in the rows and the samples in the columns. Compared to the other matrices we look at here, this is <em>transposed</em> : rows and columns are swapped. Such different conventions easily lead to errors, so they are worthwhile paying attention to3. <strong>Proteomic profiles:</strong> Here, the columns are aligned <strong>mass spectroscopy</strong> peaks or molecules identified through their \(m/z\)-ratios; the entries in the matrix are the measured intensities4.</p>
+<p>3 The Bioconductor project tries to help users and developers to avoid such ambiguities by defining data containers in which such conventions are explicitly fixed. In <a href="08-chap.html">Chapter 8</a>, we will see the example of the <em>SummarizedExperiment</em> class.</p>
+<p>4 More details can be found, e.g., on <a href="https://en.wikipedia.org/wiki/Mass_spectrum">Wikipedia</a>.</p>
+<pre><code>metab = t(as.matrix(read.csv("../data/metabolites.csv", row.names = 1)))
+metab[1:4, 1:4]__
+
+
+         146.0985388 148.7053275 310.1505057 132.4512963
+KOGCHUM1    29932.36    17055.70     1132.82    785.5129
+KOGCHUM2    94067.61    74631.69    28240.85   5232.0499
+KOGCHUM3   146411.33   147788.71    64950.49  10283.0037
+WTGCHUM1   229912.57   384932.56   220730.39  26115.2007</code></pre>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="imgs/devil.png" title="In many of the matrices we have seen here, important information about the samples (subjects) and the measured features is stored in the row or column names, often through some ad hoc string concatenation. This is not the best place to store all available information, and quickly becomes limiting and error-prone. A much better approach is the Bioconductor SummarizedExperiment class."><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
+<figcaption>In many of the matrices we have seen here, important information about the samples (subjects) and the measured features is stored in the row or column names, often through some ad hoc string concatenation. This is not the best place to store all available information, and quickly becomes limiting and error-prone. A much better approach is the Bioconductor SummarizedExperiment class.</figcaption>
+</figure>
+</div>
+<p>In many of the matrices we have seen here, important information about the samples (subjects) and the measured features is stored in the row or column names, often through some ad hoc string concatenation. This is not the best place to store all available information, and quickly becomes limiting and error-prone. A much better approach is the Bioconductor <em>SummarizedExperiment</em> class.</p>
+<p>__</p>
+<p>Task</p>
+<p>When a peak was not detected for a particular \(m/z\) score in the mass spectrometry run, a zero was recorded in <code>metab</code>. Similarly, zeros in <code>GPOTUs</code> or in the <code>airway</code> object occur when there were no matching sequence reads detected. Tabulate the frequencies of zeros in these data matrices.</p>
+<p>__</p>
+<p>Question 7.1</p>
+<ol type="1">
+<li><p>What are the columns of these data matrices usually called?</p></li>
+<li><p>In each of these examples, what are the rows of the matrix?</p></li>
+<li><p>What does a cell in a matrix represent?</p></li>
+<li><p>If the data matrix is called <code>athletes</code> and you want to see the value of the third variable for the fifth athlete, what do you type into R?</p></li>
+</ol>
+<section id="low-dimensional-data-summaries-and-preparation" class="level3" data-number="9.1.1">
+<h3 data-number="9.1.1" class="anchored" data-anchor-id="low-dimensional-data-summaries-and-preparation"><span class="header-section-number">9.1.1</span> 7.2.1 Low-dimensional data summaries and preparation</h3>
+<p><a href="imgs/flatland.png" title="Figure 7.1: xkcd: What do we mean by low-dimensional? We live in 3 dimensions, or 4 if you count time, a plane has 2 dimensions, a line has one dimension. A point is said to be zero- dimensional. For the amusing novel referenced in the cartoon see @Abbott:1884."><img src="imgs/flatland.png" class="img-fluid"></a></p>
+<p>Figure 7.1: xkcd: What do we mean by low-dimensional? We live in 3 dimensions, or 4 if you count time, a plane has 2 dimensions, a line has one dimension. A point is said to be zero-dimensional. For the amusing novel referenced in the cartoon see Abbott (<a href="16-chap.html#ref-Abbott:1884">1884</a>).</p>
+<p>If we are studying only one variable, i.e., just the third column of the turtles matrix5, we say we are looking at one-dimensional data. Such a vector, say all the turtle weights, can be visualized by plots such as those that we saw in <a href="03-chap.html#sec-graphics-univar">Section 3.6</a>, e.g., a histogram. If we compute a one number summary, say mean or median, we have made a zero- dimensional summary of our one-dimensional data. This is already an example of dimension reduction.</p>
+<p>5 The third column of a matrix \(X\) is denoted mathematically by \({x}_{}\) or accessed in R using <code>X[, 3]</code>.</p>
+<p>In <a href="03-chap.html">Chapter 3</a> we studied two-dimensional scatterplots. We saw that if there are too many observations, it can be beneficial to group the data into (hexagonal) bins: these are <em>two-dimensional</em> histograms. When considering two variables (\(x\) and \(y\)) measured together on a set of observations, the <strong>correlation coefficient</strong> measures how the variables co- vary. This is a single number summary of two-dimensional data. Its formula involves the summaries \({x}\) and \({y}\):</p>
+<p>\[ = { } \]</p>
+<p>In R, we use the <code>cor</code> function to calculate its value. Applied to a matrix this function computes all the two way correlations between continuous variables. In <a href="09-chap.html">Chapter 9</a> we will see how to analyse multivariate categorical data.</p>
+<p>__</p>
+<p>Question 7.2</p>
+<p>Compute the matrix of all correlations between the measurements from the turtles data. What do you notice ?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>We take out the categorical variable and compute the matrix.</p>
+<pre><code>cor(turtles[, -1])__
+
+
+          length     width    height
+length 1.0000000 0.9783116 0.9646946
+width  0.9783116 1.0000000 0.9605705
+height 0.9646946 0.9605705 1.0000000</code></pre>
+<p>We see that this square matrix is symmetric and the values are all close to 1. The diagonal values are always 1.</p>
+<p>It is always beneficial to start a multidimensional analysis by checking these simple one-dimensional and two-dimensional summary statistics using visual displays such as those we look at in the next two questions.</p>
+<p>__</p>
+<p>Question 7.3</p>
+<ol type="1">
+<li><p>Produce all pairwise scatterplots, as well as the one-dimensional histograms on the diagonal, for the turtles data. Use the package <strong><a href="https://cran.r-project.org/web/packages/GGally/">GGally</a></strong>.</p></li>
+<li><p>Guess the underlying or “true dimension” of these data?</p></li>
+</ol>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<pre><code>library("ggplot2")
+library("dplyr")
+library("GGally")
+ggpairs(turtles[, -1], axisLabels = "none")__</code></pre>
+<p><a href="07-chap_files/figure- html/fig-turtlespairs-1.png" title="Figure 7.2: All pairs of bivariate scatterplots for the three biometric measurements on painted turtles."><img src="07-chap_files/figure-html/fig-turtlespairs-1.png" class="img-fluid"></a></p>
+<p>Figure 7.2: All pairs of bivariate scatterplots for the three biometric measurements on painted turtles.</p>
+<p>From Figure 7.2, it looks like all three of the variables are highly correlated and mostly reflect the same “underlying” variable, which we might interpret as <em>the size</em> of the turtle.</p>
+<p>__</p>
+<p>Question 7.4</p>
+<p>Compute all pairwise correlations of the variables in the <code>athletes</code> data and display the matrix in a heatmap. What do you notice?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<pre><code>library("pheatmap")
+pheatmap(cor(athletes), cell.width = 10, cell.height = 10)__</code></pre>
+<p><a href="07-chap_files/figure-html/fig-heatmapathletes-1.png &quot;Figure 7.3: Heatmap of correlations between variables in the athletes data. Higher values are color coded red-orange. The hierarchical clustering shows a grouping of related disciplines.&quot;"><img src="07-chap_files/figure-html/fig- heatmapathletes-1.png" class="img-fluid"></a></p>
+<p>Figure 7.3: Heatmap of correlations between variables in the <code>athletes</code> data. Higher values are color coded red-orange. The hierarchical clustering shows a grouping of related disciplines.</p>
+<p>Figure 7.3 shows how the 10 variables cluster into groups: running, throwing and jumping.</p>
+</section>
+<section id="preprocessing-the-data" class="level3" data-number="9.1.2">
+<h3 data-number="9.1.2" class="anchored" data-anchor-id="preprocessing-the-data"><span class="header-section-number">9.1.2</span> 7.2.2 Preprocessing the data</h3>
+<p>In many cases, different variables are measured in different units, so they have different baselines and different scales6. These are not directly comparable in their original form.</p>
+<p>6 Common measures of scale are the range and the standard deviation. For instance, the times for the 110 metres vary between 14.18 and 16.2, with a standard deviation of 0.51, whereas the times to complete the 1500 metres vary between 256.64 and 303.17, with a standard deviation of 13.66; more than an order of magnitude larger. Moreover, the <code>athletes</code> data also contain measurements in different units (seconds, metres), whose choice is arbitrary (lengths could also be recorded in centimetres or feet, times in milliseconds).</p>
+<p>For PCA and many other methods, we therefore need to transform the numeric values to some common scale in order to make comparisons meaningful. <strong>Centering</strong> means subtracting the mean, so that the mean of the centered data is at the origin. <strong>Scaling</strong> or <strong>standardizing</strong> then means dividing by the standard deviation, so that the new standard deviation is \(1\). In fact, we have already encountered these operations when computing the correlation coefficient (Equation 7.1): the correlation coefficient is simply the vector product of the centered and scaled variables. To perform these operations, there is the R function <code>scale</code>, whose default behavior when given a matrix or a data frame is to make every column have a mean of zero and a standard deviation of \(1\).</p>
+<p>__</p>
+<p>Question 7.5</p>
+<ol type="1">
+<li><p>Compute the means and standard deviations of the <code>turtle</code> data, then use the <code>scale</code> function to center and standardize the continuous variables. Call this <code>scaledTurtles</code>, then verify the new values for mean and standard deviation of <code>scaledTurtles</code>.</p></li>
+<li><p>Make a scatterplot of the scaled and centered width and height variables of the turtle data and color the points by their sex.</p></li>
+</ol>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<pre><code>apply(turtles[,-1], 2, sd)__
+
+
+   length     width    height 
+20.481602 12.675838  8.392837 
+
+
+apply(turtles[,-1], 2, mean)__
+
+
+   length     width    height 
+124.68750  95.43750  46.33333 
+
+
+scaledTurtles = scale(turtles[, -1])
+apply(scaledTurtles, 2, mean)__
+
+
+       length         width        height 
+-1.432050e-18  1.940383e-17 -2.870967e-16 
+
+
+apply(scaledTurtles, 2, sd)__
+
+
+length  width height 
+     1      1      1 
+
+
+data.frame(scaledTurtles, sex = turtles[, 1]) %&gt;%
+  ggplot(aes(x = width, y = height, group = sex)) +
+    geom_point(aes(color = sex)) + coord_fixed()__</code></pre>
+<p><a href="07-chap_files/figure- html/fig-turtlesDim12-1.png" title="Figure 7.4: Turtles data projected onto the plane defined by the width and height variables: each point colored according to sex."><img src="07-chap_files/figure-html/fig-turtlesDim12-1.png" class="img-fluid"></a></p>
+<p>Figure 7.4: Turtles data projected onto the plane defined by the <code>width</code> and <code>height</code> variables: each point colored according to <code>sex</code>.</p>
+<p>We have already encountered other data transformation choices in Chapters <a href="04-chap.html">4</a> and <a href="05-chap.html">5</a>, where we used the <code>log</code> and <code>asinh</code> functions. The aim of these transformations is (usually) variance stabilization, i.e., to make the variances of replicate measurements of <em>one and the same variable</em> in different parts of its dynamic range more similar. In contrast, the standardizing transformation described above aims to make the scale (as measured by mean and standard deviation) of <em>different variables</em> the same.</p>
+<p>Sometimes it is preferable to leave variables at different scales because they are truly of different importance. If their original scale is relevant, then we can (should) leave the data as is. In other cases, the variables have different precisions known a priori. We will see in <a href="09-chap.html">Chapter 9</a> that there are several ways of weighting such variables.</p>
+<p>After preprocessing the data, we are ready to undertake data <em>simplification</em> through <strong>dimension reduction</strong>.</p>
+<p><a href="imgs/book_icon.png"><img src="imgs/book_icon.png" class="img-fluid"></a></p>
+<p>Useful books with relevant chapters are Flury (<a href="16-chap.html#ref-Flury">1997</a>) for an introductory account and Mardia, Kent, and Bibby (<a href="16-chap.html#ref-Mardia">1979</a>) for a detailed mathematical approach.</p>
+</section>
+</section>
+<section id="dimension-reduction" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="dimension-reduction"><span class="header-section-number">9.2</span> 7.3 Dimension reduction</h2>
+<p>We will explain dimension reduction from several different perspectives. It was invented in 1901 by Karl Pearson (<a href="16-chap.html#ref- Pearson1901">Pearson 1901</a>) as a way to reduce a two-variable scatterplot to a single coordinate. It was used by statisticians in the 1930s to summarize a battery of psychological tests run on the same subjects (<a href="16-chap.html#ref-Hotelling:1933ki">Hotelling 1933</a>); thus providing overall scores that summarize many tested variables at once.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="imgs/devil.png" title="Principal and principle are two different words, which have different meanings. So please do not confuse them. With PCA, it is always principal."><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
+<figcaption>Principal and principle are two different words, which have different meanings. So please do not confuse them. With PCA, it is always principal.</figcaption>
+</figure>
+</div>
+<p><em>Principal</em> and <em>principle</em> are two different words, which have different meanings. So please do not confuse them. With PCA, it is always <em>principal</em>.</p>
+<p>This idea of <strong>principal</strong> scores inspired the name Principal Component Analysis (abbreviated PCA). PCA is called an <strong>unsupervised learning</strong> technique because, as in clustering, it treats all variables as having the same <strong>status</strong>. We are not trying to predict or explain one particular variable’s value from the others; rather, we are trying to find a mathematical model for an underlying structure for all the variables. PCA is primarily an exploratory technique that produces maps that show the relations between variables and between observations in a useful way.</p>
+<p>We first provide a flavor of what this multivariate analysis does to the data. There is an elegant mathematical formulation of these methods through linear algebra, although here we will try to minimize its use and focus on visualization and data examples.</p>
+<p>We use geometrical <strong>projections</strong> that take points in higher-dimensional spaces and projects them down onto lower dimensions. Figure 7.5 shows the projection of the point \(A\) onto the line generated by the vector \({v}\).</p>
+<p><a href="07-chap_files/figure- html/fig-projectv-1.png" title="Figure 7.5: Point A is projected onto the red line generated by the vector v. The dashed projection line is perpendicular (or orthogonal) to the red line. The intersection point of the projection line and the red line is called the orthogonal projection of A onto the red line generated by the vector v."><img src="07-chap_files/figure-html/fig-projectv-1.png" class="img-fluid"></a></p>
+<p>Figure 7.5: Point \(A\) is projected onto the red line generated by the vector \(v\). The dashed projection line is perpendicular (or <strong>orthogonal</strong>) to the red line. The intersection point of the projection line and the red line is called the orthogonal projection of A onto the red line generated by the vector \(v\).</p>
+<p>PCA is a <strong>linear</strong> technique, meaning that we look for linear relations between variables and that we will use new variables that are linear functions of the original ones (\(f(ax+by)=af(x)+b(y)\)). The linearity constraints makes computations particularly easy. We will see non-linear techniques in <a href="09-chap.html">Chapter 9</a>.</p>
+<section id="lower-dimensional-projections" class="level3" data-number="9.2.1">
+<h3 data-number="9.2.1" class="anchored" data-anchor-id="lower-dimensional-projections"><span class="header-section-number">9.2.1</span> 7.3.1 Lower-dimensional projections</h3>
+<p>Here we show one way of projecting two-dimensional data onto a line using the <code>athletes</code> data. The code below provides the preprocessing and plotting steps that were used to generate Figure 7.6:</p>
+<pre><code>athletes = data.frame(scale(athletes))
+ath_gg = ggplot(athletes, aes(x = weight, y = disc)) +
+  geom_point(size = 2, shape = 21)
+ath_gg + geom_point(aes(y = 0), colour = "red") +
+  geom_segment(aes(xend = weight, yend = 0), linetype = "dashed")__</code></pre>
+<p><a href="07-chap_files/figure- html/fig-SimpleScatter-1.png" title="Figure 7.6: Scatterplot of two variables showing the projection on the horizontal x axis (defined by y=0) in red and the lines of projection appear as dashed."><img src="07-chap_files/figure-html/fig-SimpleScatter-1.png" class="img-fluid"></a></p>
+<p>Figure 7.6: Scatterplot of two variables showing the projection on the horizontal x axis (defined by \(y=0\)) in red and the lines of projection appear as dashed.</p>
+<p>__</p>
+<p>Task</p>
+<ol type="1">
+<li><p>Calculate the variance of the red points in Figure 7.6.</p></li>
+<li><p>Make a plot showing projection lines onto the \(y\) axis and projected points.</p></li>
+<li><p>Compute the variance of the points projected onto the vertical \(y\) axis.</p></li>
+</ol>
+</section>
+<section id="how-do-we-summarize-two-dimensional-data-by-a-line" class="level3" data-number="9.2.2">
+<h3 data-number="9.2.2" class="anchored" data-anchor-id="how-do-we-summarize-two-dimensional-data-by-a-line"><span class="header-section-number">9.2.2</span> 7.3.2 How do we summarize two-dimensional data by a line?</h3>
+<p>In general, we lose information about the points when we project from two dimensions (a plane) to one (a line). If we do it just by using the original coordinates, as we did on the <code>weight</code> variable in Figure 7.6, we lose all the information about the <code>disc</code> variable. Our goal is to keep as much information as we can about <em>both</em> variables. There are actually many ways of projecting the point cloud onto a line. One is to use what are known as <strong>regression lines</strong>. Let’s look at these lines and how they are constructed in R.</p>
+<section id="regressing-one-variable-on-the-other" class="level4" data-number="9.2.2.1">
+<h4 data-number="9.2.2.1" class="anchored" data-anchor-id="regressing-one-variable-on-the-other"><span class="header-section-number">9.2.2.1</span> Regressing one variable on the other</h4>
+<p>If you have seen linear regression, you already know how to compute lines that summarize scatterplots; <strong>linear regression</strong> is a <strong>supervised</strong> method that gives preference minimizing the residual sum of squares in one direction: that of the response variable.</p>
+</section>
+<section id="regression-of-the-disc-variable-on-weight." class="level4" data-number="9.2.2.2">
+<h4 data-number="9.2.2.2" class="anchored" data-anchor-id="regression-of-the-disc-variable-on-weight."><span class="header-section-number">9.2.2.2</span> Regression of the <code>disc</code> variable on <code>weight</code>.</h4>
+<p>In Figure 7.7, we use the <code>lm</code> (linear model) function to find the regression line. Its slope and intercept are given by the values in the <code>coefficients</code> slot of the resulting object <code>reg1</code>.</p>
+<pre><code>reg1 = lm(disc ~ weight, data = athletes)
+a1 = reg1$coefficients[1] # intercept
+b1 = reg1$coefficients[2] # slope
+pline1 = ath_gg + geom_abline(intercept = a1, slope = b1,
+    col = "blue", linewidth = 1.5)
+pline1 + geom_segment(aes(xend = weight, yend = reg1$fitted),
+    colour = "red", arrow = arrow(length = unit(0.15, "cm")))__</code></pre>
+<p><a href="07-chap_files/figure-html/fig- Reg1-1.png" title="Figure 7.7: The blue line minimizes the sum of squares of the vertical residuals (in red)."><img src="07-chap_files/figure-html/fig-Reg1-1.png" class="img-fluid"></a></p>
+<p>Figure 7.7: The blue line minimizes the sum of squares of the vertical residuals (in red).</p>
+</section>
+<section id="regression-of-weight-on-discus." class="level4" data-number="9.2.2.3">
+<h4 data-number="9.2.2.3" class="anchored" data-anchor-id="regression-of-weight-on-discus."><span class="header-section-number">9.2.2.3</span> Regression of <code>weight</code> on <code>discus</code>.</h4>
+<p>Figure 7.8 shows the line produced when reversing the roles of the two variables; <code>weight</code> becomes the response variable.</p>
+<pre><code>reg2 = lm(weight ~ disc, data = athletes)
+a2 = reg2$coefficients[1] # intercept
+b2 = reg2$coefficients[2] # slope
+pline2 = ath_gg + geom_abline(intercept = -a2/b2, slope = 1/b2,
+    col = "darkgreen", linewidth = 1.5)
+pline2 + geom_segment(aes(xend=reg2$fitted, yend=disc),
+    colour = "orange", arrow = arrow(length = unit(0.15, "cm")))__</code></pre>
+<p><a href="07-chap_files/figure-html/fig- Reg2-1.png" title="Figure 7.8: The green line minimizes the sum of squares of the horizontal residuals (in orange)."><img src="07-chap_files/figure-html/fig-Reg2-1.png" class="img-fluid"></a></p>
+<p>Figure 7.8: The green line minimizes the sum of squares of the horizontal residuals (in orange).</p>
+<p>Each of the regression lines in Figures 7.7 and 7.8 gives us an approximate linear relationship between <code>disc</code> and <code>weight</code>. However, the relationship differs depending on which of the variables we choose to be the predictor and which the response.</p>
+<p>__</p>
+<p>Question 7.6</p>
+<p>How large is the variance of the projected points that lie on the blue regression line of Figure 7.7? Compare this to the variance of the data when projected on the original axes, <code>weight</code> and <code>disc</code>.</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>Pythagoras’ theorem tells us that the squared length of the hypotenuse of a right-angled triangle is equal to the sum of the squared lengths of the other two sides, which we apply as follows:</p>
+<pre><code>var(athletes$weight) + var(reg1$fitted)__
+
+
+[1] 1.650204</code></pre>
+<p>The variances of the points along the original axes <code>weight</code> and <code>disc</code> are 1, since we scaled the variables.</p>
+</section>
+<section id="a-line-that-minimizes-distances-in-both-directions" class="level4" data-number="9.2.2.4">
+<h4 data-number="9.2.2.4" class="anchored" data-anchor-id="a-line-that-minimizes-distances-in-both-directions"><span class="header-section-number">9.2.2.4</span> A line that minimizes distances in both directions</h4>
+<p>Figure 7.9 shows the line chosen to minimize the sum of squares of the orthogonal (perpendicular) projections of data points onto it; we call this the <strong>principal component</strong> line. All our three ways of fitting a line (Figures 7.7–7.9) together in one plot are shown in Figure 7.10.</p>
+<pre><code>xy = cbind(athletes$disc, athletes$weight)
+svda = svd(xy)
+pc = xy %*% svda$v[, 1] %*% t(svda$v[, 1])
+bp = svda$v[2, 1] / svda$v[1, 1]
+ap = mean(pc[, 2]) - bp * mean(pc[, 1])
+ath_gg + geom_segment(xend = pc[, 1], yend = pc[, 2]) +
+  geom_abline(intercept = ap, slope = bp, col = "purple", linewidth = 1.5)__</code></pre>
+<p><a href="07-chap_files/figure- html/fig-PCAmin-1.png" title="Figure 7.9: The purple principal component line minimizes the sums of squares of the orthogonal projections."><img src="07-chap_files/figure-html/fig-PCAmin-1.png" class="img-fluid"></a></p>
+<p>Figure 7.9: The purple <strong>principal component</strong> line minimizes the sums of squares of the orthogonal projections.</p>
+<p><a href="07-chap_files/figure- html/fig-PCAR1R2-1-1.png" title="Figure 7.10: The blue line minimizes the sum of squares of the vertical residuals, the green line minimizes the horizontal residuals, the purple line, called the principal component, minimizes the orthogonal projections. Notice the ordering of the slopes of the three lines."><img src="07-chap_files/figure-html/fig-PCAR1R2-1-1.png" class="img-fluid"></a></p>
+<p>Figure 7.10: The blue line minimizes the sum of squares of the vertical residuals, the green line minimizes the horizontal residuals, the purple line, called the <strong>principal component</strong> , minimizes the orthogonal projections. Notice the ordering of the slopes of the three lines.</p>
+<p>__</p>
+<p>Question 7.7</p>
+<ol type="1">
+<li><p>What is particular about the slope of the purple line?</p></li>
+<li><p>Redo the plots on the original (unscaled) variables. What happens?</p></li>
+</ol>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>The lines computed here depend on the choice of units. Because we have made the standard deviations equal to one for both variables, the PCA line is the diagonal that cuts exactly in the middle of both regression lines. Since the data were centered by subtracting their means, the line passes through the origin \((0,0)\).</p>
+<p>__</p>
+<p>Question 7.8</p>
+<p>Compute the variance of the points on the purple line.</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>We have computed the coordinates of the points when we made the plot, these are in the <code>pc</code> vector:</p>
+<pre><code>apply(pc, 2, var)__
+
+
+[1] 0.9031761 0.9031761
+
+
+sum(apply(pc, 2, var))__
+
+
+[1] 1.806352</code></pre>
+<p>We see that the variance along this axis is larger than the other variances we calculated in Question 7.6.</p>
+<p>Pythagoras’ theorem tells us two interesting things here:</p>
+<ul>
+<li><p>If we are minimizing in both horizontal and vertical directions we are in fact minimizing the orthogonal projections onto the line from each point.</p></li>
+<li><p>The total variability of the points is measured by the sum of squares of the projection of the points onto the center of gravity, which is the origin (0,0) if the data are centered. This is called the <em>total variance</em> or the <strong>inertia</strong> of the point cloud. This inertia can be decomposed into the sum of the squares of the projections onto the line plus the variances along that line. For a fixed variance, minimizing the projection distances also maximizes the variance along that line. Often we define the first principal component as the line with maximum variance.</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="the-new-linear-combinations" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="the-new-linear-combinations"><span class="header-section-number">9.3</span> 7.4 The new linear combinations</h2>
+<p><a href="imgs/Vegetables_small.jpg"><img src="imgs/Vegetables_small.jpg" class="img-fluid"></a></p>
+<p>The PC line we found in the previous section could be written</p>
+<p>Image credit: Sara Holmes</p>
+<p>\[ PC = + . \]</p>
+<p>Principal components are <em>linear combinations</em> of the variables that were originally measured, they provide a <em>new coordinate system</em>. To understand what a <strong>linear combination</strong> really is, we can take an analogy. When making a healthy juice mix, you will follow a recipe like</p>
+<p>\[ <span class="math display">\[\begin{align} V &amp;= 2 \times \text{Beet} + 1 \times \text{Carrot} \\\ &amp;\+
+\tfrac{1}{2} \text{Gala} + \tfrac{1}{2} \text{GrannySmith} \\\ &amp;\+ 0.02 \times
+\text{Ginger} + 0.25 \times \text{Lemon}. \end{align}\]</span> \]</p>
+<p>This recipe is a linear combination of individual juice types (the original variables). The result is a new variable, \(V\), and the coefficients \((2,1,,,0.02,0.25)\) are called the <strong>loadings</strong>.</p>
+<p>__</p>
+<p>Question 7.9</p>
+<p>How would you compute the calories in a glass of juice?</p>
+<section id="optimal-lines" class="level3" data-number="9.3.1">
+<h3 data-number="9.3.1" class="anchored" data-anchor-id="optimal-lines"><span class="header-section-number">9.3.1</span> 7.4.1 Optimal lines</h3>
+<p>A linear combination of variables defines a line in higher dimensions in the same way we constructed lines in the scatterplot plane of two dimensions. As we saw in that case, there are many ways to choose lines onto which we project the data, there is however a `best’ line for our purpose.</p>
+<p>The total variance of all the points in all the variables can de decomposed. In PCA, we use the fact that the total sums of squares of the distances between the points and any line can be decomposed into the distance to the line and the variance along the line.</p>
+<p>We saw that the principal component minimizes the distance to the line, and it also maximizes the variance of the projections along the line.</p>
+<p>Why is maximizing the variance along a line a good idea? Let’s look at another example of a projection from three dimensions into two. In fact, human vision depends on such dimension reduction:</p>
+<p><a href="imgs/CAM3.png" title="Figure 7.11: A mystery silhouette."><img src="imgs/CAM3.png" class="img-fluid"></a></p>
+<p>Figure 7.11: A mystery silhouette.</p>
+<p>__</p>
+<p>Question 7.10</p>
+<p>In Figure 7.11, there is a two-dimensional projection of a three-dimensional object. What is the object?</p>
+<p>__</p>
+<p>Question 7.11</p>
+<p>Which of the two projections, Figure 7.11 or 7.13, do you find more informative, and why?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>One can argue that the projection that maximizes the area of the shadow shows more `information’.</p>
+</section>
+</section>
+<section id="the-pca-workflow" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="the-pca-workflow"><span class="header-section-number">9.4</span> 7.5 The PCA workflow</h2>
+<p><a href="imgs/orgacp1.png" title="Figure 7.12: Many choices have to be made during PCA processing."><img src="imgs/orgacp1.png" class="img-fluid"></a></p>
+<p>Figure 7.12: Many choices have to be made during PCA processing.</p>
+<p>PCA is based on the principle of finding the axis showing the largest inertia/variability, removing the variability in that direction and then iterating to find the next best orthogonal axis, and so on. In fact, we do not have to run iterations, all the axes can be found in one linear algebra operation called the <strong>S</strong> ingular <strong>V</strong> alue <strong>D</strong> ecomposition (we will delve more deeply into the details below).</p>
+<p>In the diagram in Figure 7.12, we see that first the means and variances are computed and the choice of whether to work directly with the covariance matrix or with the correlation matrix has to be made. The next step is the choice of \(k\), the number of components we deem relevant to the data. We say that \(k\) is the rank of the approximation. The best choice of \(k\) is a difficult question, and we discuss on how to approach it below. The choice of \(k\) requires looking at a plot of the variances explained by the successive principal components. Once we have chosen \(k\), we can proceed to the projections of the data in the new \(k\)-dimensional subspace.</p>
+<p>The end results of the PCA workflow are useful maps of both the variables and the samples. Understanding how these maps are constructed will maximize the information we can gather from them.</p>
+</section>
+<section id="the-inner-workings-of-pca-rank-reduction" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="the-inner-workings-of-pca-rank-reduction"><span class="header-section-number">9.5</span> 7.6 The inner workings of PCA: rank reduction</h2>
+<p>This is a small section for those whose background in linear algebra is but a faint memory. It tries to give some intuition to the singular value decomposition method underlying PCA, without too much notation.</p>
+<p><a href="imgs/CAM4.png" title="Figure 7.13: Another two-dimensional projection of the same object shown in Figure fig-cam1. Here, the perspective is more informative. Generally, choosing the perspective such that the spread (in other words, the variance) of the points is maximal generally provides most information. We want to see as much of the variation as possible, that’s what PCA does."><img src="imgs/CAM4.png" class="img-fluid"></a></p>
+<p>Figure 7.13: Another two-dimensional projection of the same object shown in Figure 7.11. Here, the perspective is more informative. Generally, choosing the perspective such that the spread (in other words, the variance) of the points is maximal generally provides most information. We want to see as much of the variation as possible, that’s what PCA does.</p>
+<p>The singular value decomposition of a matrix finds horizontal and vertical vectors (called the singular vectors) and normalizing values (called singular values). As before, we start by giving the forward-generative explanation before doing the actual reverse engineering that is used in creating the decomposition. To calibrate the meaning of each step, we will start with an artificial example before moving to the complexity of real data.</p>
+<section id="rank-one-matrices" class="level3" data-number="9.5.1">
+<h3 data-number="9.5.1" class="anchored" data-anchor-id="rank-one-matrices"><span class="header-section-number">9.5.1</span> 7.6.1 Rank-one matrices</h3>
+A simple generative model demonstrates the meaning of the <strong>rank of a matrix</strong> and explains how we find it in practice. Suppose we have two vectors, \(u\) (a one-column matrix), and \(v^t=t(v)\) (a one-row matrix–the transpose of a one-column matrix \(v\)). For instance, \(u =(
+<span class="math display">\[\begin{smallmatrix}
+1\\\2\\\3\\\4 \end{smallmatrix}\]</span>
+)\) and \(v =(
+<span class="math display">\[\begin{smallmatrix} 2\\\4\\\8 \end{smallmatrix}\]</span>
+<p>)\). The transpose of \(v\) is written \(v^t = t(v) = (2; 4; 8)\). We multiply a copy of \(u\) by each of the elements of \(v^t\) in turn as follows:</p>
+<p>Step 0:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>X</th>
+<th>2</th>
+<th>4</th>
+<th>8</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Step 1:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>X</th>
+<th>2</th>
+<th>4</th>
+<th>8</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>2</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>4</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>6</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>8</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Step 2:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>X</th>
+<th>2</th>
+<th>4</th>
+<th>8</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>2</td>
+<td>4</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>4</td>
+<td>8</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>6</td>
+<td>12</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>8</td>
+<td>16</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Step 3:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>X</th>
+<th>2</th>
+<th>4</th>
+<th>8</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>2</td>
+<td>4</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>4</td>
+<td>8</td>
+<td>16</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>6</td>
+<td>12</td>
+<td>24</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>8</td>
+<td>16</td>
+<td>32</td>
+</tr>
+</tbody>
+</table>
+<p>Thus, the \((2,3)\) entry of the matrix \(X\), written \(x_{2,3}\), is obtained by multiplying \(u_2\) by \(v_3\). We can write this</p>
+<p>\[ X=]</p>
+<p>The matrix \(X\) we obtain here is said to be of rank 1, because both \(u\) and \(v\) have one column.</p>
+<p>__</p>
+<p>Question 7.12</p>
+<p>Why can we say that writing \(X = u*v^t\) is more economical than spelling out the full matrix \(X\)?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>\(X\) has \(4=12\) elements, while in terms of \(u\) and \(v\) it can be expressed by only \(4+3=7\) numbers. The compression is even more impressive when \(u\) or \(v\) are longer.</p>
+<p>On the other hand, suppose that we want to reverse the process and simplify another matrix \(X\) given below with 3 rows and 4 columns (12 numbers). Can we always express it in a similar way as a product of vectors without loss of information? In the diagrams shown in Figures 7.14 and 7.15, the colored boxes have areas proportional to the numbers in the cells of the matrix (7.4).</p>
+<p><a href="imgs/SVD-mosaicXplot0.png" title="Figure 7.14: Some special matrices have numbers in them that make them easy to decompose. Each colored rectangle in this diagram has an area that corresponds to the number in it."><img src="imgs/SVD-mosaicXplot0.png" class="img-fluid"></a></p>
+<p>Figure 7.14: Some special matrices have numbers in them that make them easy to decompose. Each colored rectangle in this diagram has an area that corresponds to the number in it.</p>
+<p>__</p>
+<p>Question 7.13</p>
+<p>Here is a matrix \(X\) we want to decompose.</p>
+<p>\[ ]</p>
+<p>\(X\) has been redrawn as series of rectangles in Figure 7.14. What numbers could we put in the white \(u\) and \(v\) boxes so that the values of the sides of the rectangle give the numbers as their product?</p>
+<p>A matrix with the special property of being perfectly “rectangular” like \(X\) is said to be of rank 1. We can represent the numbers in \(X\) by the areas of rectangles, where the sides of rectangles are given by the values in the side vectors (\(u\) and \(v\)).</p>
+<p><a href="imgs/SVD-mosaicXplot1.png" title="Figure 7.15 (a):"><img src="imgs/SVD-mosaicXplot1.png" class="img-fluid"></a></p>
+<ol type="a">
+<li></li>
+</ol>
+<p><a href="imgs/SVD-mosaicXplot2.png" title="Figure 7.15 (b):"><img src="imgs/SVD-mosaicXplot2.png" class="img-fluid"></a></p>
+<ol start="2" type="a">
+<li></li>
+</ol>
+<p><a href="imgs/SVD-mosaicXplot3.png" title="Figure 7.15 (c):"><img src="imgs/SVD-mosaicXplot3.png" class="img-fluid"></a></p>
+<ol start="3" type="a">
+<li></li>
+</ol>
+<p>Figure 7.15: The numbers in the cells are equal to the product of the corresponding margins in (a), (b) and (c). We could make the cells from products in several ways. In (c), we force the margins to have norm \(1\).</p>
+<p>We see in Figure 7.15 that the decomposition of \(X\) is not unique: there are several candidate choices for the vectors \(u\) and \(v\). We will make the choice unique by requiring that the sum of the squares of each vector’s elements add to 1 (we say the vectors \(v\) and \(u\) have norm 1). Then we have to keep track of one extra number by which to multiply each of the products, and which represents the “overall scale” of \(X\). This is the value we have put in the upper left hand corner. It is called the singular value \(s_1\). In the R code below, we start by supposing we know the values in <code>u</code>, <code>v</code> and <code>s1</code>; later we will see a function that finds them for us. Let’s check the multiplication and norm properties in R:</p>
+<pre><code>X = matrix(c(780,  75, 540,
+             936,  90, 648,
+            1300, 125, 900,
+             728,  70, 504), nrow = 3)
+u = c(0.8196, 0.0788, 0.5674)
+v = c(0.4053, 0.4863, 0.6754, 0.3782)
+s1 = 2348.2
+sum(u^2)__
+
+
+[1] 1
+
+
+sum(v^2)__
+
+
+[1] 1
+
+
+s1 * u %*% t(v)__
+
+
+     [,1] [,2] [,3] [,4]
+[1,]  780  936 1300  728
+[2,]   75   90  125   70
+[3,]  540  648  900  504
+
+
+X - s1 * u %*% t(v)__
+
+
+         [,1]   [,2]   [,3]   [,4]
+[1,] -0.03419 0.0745 0.1355 0.1221
+[2,]  0.00403 0.0159 0.0252 0.0186
+[3,] -0.00903 0.0691 0.1182 0.0982</code></pre>
+<p>__</p>
+<p>Question 7.14</p>
+<p>Try <code>svd(X)</code> in R. Look at the components of the output of the <code>svd</code> function carefully. Check the norm of the columns of the matrices that result from this call. Where did the above value of <code>s1</code> = 2348.2 come from?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<pre><code>svd(X)$u[, 1]
+svd(X)$v[, 1]
+sum(svd(X)$u[, 1]^2)
+sum(svd(X)$v[, 1]^2)
+svd(X)$d __</code></pre>
+<p>In fact, in this particular case we were lucky: we see that the second and third singular values are 0 (up to the numeric precision we care about). That is why we say that \(X\) is of <strong>rank</strong> 1. For a more general matrix \(X\), it is rare to be able to write \(X\) exactly as this type of two- vector product. The next subsection shows how we can decompose \(X\) when it is not of rank 1: we will just need more pieces.</p>
+</section>
+<section id="how-do-we-find-such-a-decomposition-in-a-unique-way" class="level3" data-number="9.5.2">
+<h3 data-number="9.5.2" class="anchored" data-anchor-id="how-do-we-find-such-a-decomposition-in-a-unique-way"><span class="header-section-number">9.5.2</span> 7.6.2 How do we find such a decomposition in a unique way?</h3>
+<p>In the above decomposition, there were three elements: the horizontal and vertical singular vectors, and the diagonal corner, called the singular value. These can be found using the singular value decomposition function (<code>svd</code>). For instance:</p>
+<pre><code>Xtwo = matrix(c(12.5, 35.0, 25.0, 25, 9, 14, 26, 18, 16, 21, 49, 32,
+       18, 28, 52, 36, 18, 10.5, 64.5, 36), ncol = 4, byrow = TRUE)
+USV = svd(Xtwo)__</code></pre>
+<p>__</p>
+<p>Question 7.15</p>
+<p>Look at the <code>USV</code> object, the result of calling the <code>svd</code> function. What are its components?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<pre><code>names(USV)__
+
+
+[1] "d" "u" "v"
+
+
+USV$d __
+
+
+[1] 1.350624e+02 2.805191e+01 3.111680e-15 2.290270e-15</code></pre>
+<p>So 135.1 is the first singular value <code>USV$d[1]</code>.</p>
+<p>__</p>
+<p>Question 7.16</p>
+<p>Check how each successive pair of singular vectors improves our approximation to <code>Xtwo</code>. What do you notice about the third and fourth singular values?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<pre><code>Xtwo - USV$d[1] * USV$u[, 1] %*% t(USV$v[, 1])
+Xtwo - USV$d[1] * USV$u[, 1] %*% t(USV$v[, 1]) -
+       USV$d[2] * USV$u[, 2] %*% t(USV$v[, 2])__</code></pre>
+<p>The third and fourth singular values are so small that they do not improve the approximation (within rounding errors), so we can conclude that <code>Xtwo</code> is of rank 2.</p>
+<p>Again, there are many ways to write a rank two matrix such as <code>Xtwo</code> as a sum of rank one matrices: in order to ensure uniqueness, we impose yet another7 condition on the singular vectors. The output vectors of the singular decomposition do not only have their norms equal to 1, each column vector in the \(U\) matrix is orthogonal to all the previous ones. We write \(u_{} u_{}\), this means that the sum of the products of the values in the same positions is \(0\): \(<em>i u</em>{i1} u_{i2} = 0\). Ditto for the \(V\) matrix.</p>
+<p>7 Above, we had chosen the norm of the vectors to be 1.</p>
+<p>__</p>
+<p>Task</p>
+<p>Check the orthonormality by computing the cross product of the \(U\) and \(V\) matrices:</p>
+<pre><code>t(USV$u) %*% USV$u
+t(USV$v) %*% USV$v __</code></pre>
+<p>Let’s submit our <code>scaledTurtles</code> matrix to a singular value decomposition.</p>
+<pre><code>turtles.svd = svd(scaledTurtles)
+turtles.svd$d __
+
+
+[1] 11.746475  1.419035  1.003329
+
+
+turtles.svd$v __
+
+
+          [,1]       [,2]        [,3]
+[1,] 0.5787981  0.3250273  0.74789704
+[2,] 0.5779840  0.4834699 -0.65741263
+[3,] 0.5752628 -0.8127817 -0.09197088
+
+
+dim(turtles.svd$u)__
+
+
+[1] 48  3</code></pre>
+<p>__</p>
+<p>Question 7.17</p>
+<p>What can you conclude about the turtles matrix from the <code>svd</code> output?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>The first column of <code>turtles.svd$v</code> shows that the coefficients for the three variables are practically equal. Other noticeable “coincidences” include:</p>
+<pre><code>sum(turtles.svd$v[,1]^2)__
+
+
+[1] 1
+
+
+sum(turtles.svd$d^2) / 47 __
+
+
+[1] 3</code></pre>
+<p>We see that the coefficients are in fact \(\) and the sum of squares of the singular values is equal to \((n-1)p\).</p>
+</section>
+<section id="singular-value-decomposition" class="level3" data-number="9.5.3">
+<h3 data-number="9.5.3" class="anchored" data-anchor-id="singular-value-decomposition"><span class="header-section-number">9.5.3</span> 7.6.3 Singular value decomposition</h3>
+<p><a href="imgs/SumRankOneD.png"><img src="imgs/SumRankOneD.png" class="img-fluid"></a></p>
+<p>\(X\) is decomposed additively into rank-one pieces. Each of the \(u\) vectors is combined into the \(U\) matrix, and each of \(v\) vectors into \(V\). The <em>Singular Value Decomposition</em> is</p>
+<p>\[ {X} = U S V^t, V^t V={I}, U^t U={I}, \]</p>
+<p>where \(S\) is the diagonal matrix of singular values, \(V^t\) is the transpose of \(V\), and \({I}\) is the Identity matrix. Expression 7.5 can be written elementwise as</p>
+<p>\[ X_{ij} = u_{i1}s_1v_{1j} + u_{i2}s_2v_{2j} + u_{i3}s_3v_{3j} +… + u_{ir}s_rv_{rj}, \]</p>
+<p>\(U\) and \(V\) are said to be orthonormal8, because their self- crossproducts are the identity matrix.</p>
+<p>8 Nothing to do with the normal distribution, it stands for orthogonal and having norm 1.</p>
+</section>
+<section id="principal-components" class="level3" data-number="9.5.4">
+<h3 data-number="9.5.4" class="anchored" data-anchor-id="principal-components"><span class="header-section-number">9.5.4</span> 7.6.4 Principal components</h3>
+<p>The singular vectors from the singular value decomposition (provided by the <code>svd</code> function in R) contain the coefficients to put in front of the original variables to make the more informative ones we call the principal components. We write this as:</p>
+<p>\[ Z_1=v_{11} X_{} +v_{21} X_{} + v_{31} X_{}+ + v_{p1} X_{p}. \]</p>
+<p>If <code>usv = svd(X)</code>, then \((v_{11},v_{21},v_{31},…)\) are given by the first column of <code>usv$v</code>; similarly for \(Z_2\) with the second column of <code>usv$v</code>, and so son. \(p\) is the number of columns of \(X\) and the number of rows of \(V\). These new variables \(Z_1, Z_2, Z_3, …\) have variances that decrease in size: \(s_1^2 s_2^2 s_3^2 …\).</p>
+<p>__</p>
+<p>Question 7.18</p>
+<p>Compute the first principal component for the turtles data by multiplying by the first singular value <code>d[1]</code> by <code>u[,1]</code>. What is another way of computing it ?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>We show this using the code:</p>
+<pre><code>US = turtles.svd$u[,1, drop = FALSE] %*% turtles.svd$d[1]
+XV = scaledTurtles %*% turtles.svd$v[, 1, drop = FALSE]
+max(abs(US-XV))__</code></pre>
+<p>We can also see using matrix algebra that \(XV\) and \(US\) are the same. Remember that \(V\) is orthogonal, so \(V^t V={I}\) and \(XV = USV^tV=US,{I}\).</p>
+<p><em>Note:</em> The <code>drop = FALSE</code> argument in the first line of the below code makes sure that the selected matrix column retains <em>matrix</em> / <em>array</em> class attributes and thus is eligible for the matrix multiplication operator. Alternatively, you could use the regular multiplication operator <code>*</code>. In the second line, the <code>drop = FALSE</code> is not strictly necessary, but we have it there for symmetry.</p>
+<p>Here are two useful facts, first in words, then with the mathematical shorthand.</p>
+<p>The number of principal components \(k\) is always chosen to be fewer than the number of original variables or the number of observations. We are “lowering” the dimension of the problem:</p>
+<p>\[ k(n,p). \]</p>
+<p>The principal component transformation is defined so that the first principal component has the largest possible variance (that is, accounts for as much of the variability in the data as possible), and each successive component in turn has the highest variance possible under the constraint that it be orthogonal to the preceding components:</p>
+<p>\[ <em>{aX bX}(</em>{aX} (X)), bX= \]</p>
+</section>
+</section>
+<section id="plotting-the-observations-in-the-principal-plane" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="plotting-the-observations-in-the-principal-plane"><span class="header-section-number">9.6</span> 7.7 Plotting the observations in the principal plane</h2>
+<p>We revisit our two-variable athletes data with the <code>discus</code> and the <code>weight</code> variables. In Section 7.3.2, we computed the first principal component and represented it as the purple line in Figure 7.10. We showed that \(Z_1\) was the linear combination given by the diagonal. As the coefficients have to have their sum of squares add to \(1\), we have that \[Z_1=-0.707<em>- 0.707</em>.\]</p>
+<p>This is the same as if the two coordinates were \(c_1=0.7071\) and \(c_2=0.7071\).</p>
+<p>__</p>
+<p>Question 7.19</p>
+<p>What part of the output of the <code>svd</code> functions leads us to the first PC coefficients, also known as the PC <strong>loadings</strong> ?</p>
+<p>Note that we use <code>svda</code> which was the svd applied to the two variables <code>discus</code> and <code>weight</code>.</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<pre><code>svda$v[,1]__
+
+
+[1] -0.7071068 -0.7071068</code></pre>
+<p>If we rotate the <code>(discus, weight)</code> plane by making the purple line the horizontal \(x\) axis, we obtain what is know as the first <strong>principal plane</strong>.</p>
+<pre><code>ppdf = tibble(PC1n = -svda$u[, 1] * svda$d[1],
+              PC2n =  svda$u[, 2] * svda$d[2])
+gg = ggplot(ppdf, aes(x = PC1n, y = PC2n)) + 
+    geom_point() + 
+    geom_hline(yintercept = 0, color = "purple", linewidth = 1.5, alpha = 0.5) +
+    xlab("PC1 ")+ ylab("PC2") + xlim(-3.5, 2.7) + ylim(-2, 2) + coord_fixed()
+gg + geom_point(aes(x = PC1n, y = 0), color = "red") +
+     geom_segment(aes(xend = PC1n, yend = 0), color = "red") 
+gg + geom_point(aes(x = 0, y = PC2n), color = "blue") +
+     geom_segment(aes(yend = PC2n, xend = 0), color = "blue") +
+     geom_vline(xintercept = 0, color = "skyblue", linewidth = 1.5, alpha = 0.5) __</code></pre>
+<p><a href="07-chap_files/figure- html/fig-pcablue-1.png" title="Figure 7.16 (a):"><img src="07-chap_files/figure-html/fig-pcablue-1.png" class="img-fluid"></a></p>
+<ol type="a">
+<li></li>
+</ol>
+<p><a href="07-chap_files/figure- html/fig-pcablue-2.png" title="Figure 7.16 (b):"><img src="07-chap_files/figure-html/fig-pcablue-2.png" class="img-fluid"></a></p>
+<ol start="2" type="a">
+<li></li>
+</ol>
+<p>Figure 7.16: In the case where we only have two original variables, the PCA transformation is a simple rotation; the new coordinates are always chosen to be the horizontal and vertical axes.</p>
+<p>__</p>
+<p>Question 7.20</p>
+<ol type="1">
+<li><p>What is the mean of the sums of squares of the red segments in Figure 7.16 equal to?</p></li>
+<li><p>How does this compare to the variance of the red points?</p></li>
+<li><p>Compute the ratio of the standard deviation of the blue segments to the red segments in Figure 7.16. Compare this to the ratio of singular values 1 and 2.</p></li>
+</ol>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<ol type="1">
+<li>The sum of squares of the red segments corresponds to the square of the second singular value:</li>
+</ol>
+<pre><code>sum(ppdf$PC2n^2) __
+
+
+[1] 6.196729
+
+
+svda$d[2]^2 __
+
+
+[1] 6.196729</code></pre>
+<p>Since the mean of the red segments is zero, the above quantities are also proportional to the variance:</p>
+<pre><code>mean(ppdf$PC2n) __
+
+
+[1] 5.451106e-16
+
+
+var(ppdf$PC2n) * (nrow(ppdf)-1)__
+
+
+[1] 6.196729</code></pre>
+<ol start="2" type="1">
+<li>The variance of the red points is <code>var(ppdf$PC1n)</code>, which is larger than what we calculated in a) by design of the first PC.</li>
+</ol>
+<pre><code>var(ppdf$PC1n) __
+
+
+[1] 1.806352
+
+
+var(ppdf$PC2n) __
+
+
+[1] 0.1936478</code></pre>
+<ol start="3" type="1">
+<li>We take the ratios of the standard deviations explained by the points on the vertical and horizontal axes by computing:</li>
+</ol>
+<pre><code>sd(ppdf$PC1n) / sd(ppdf$PC2n)__
+
+
+[1] 3.054182
+
+
+svda$d[1] / svda$d[2]__
+
+
+[1] 3.054182</code></pre>
+<p>__</p>
+<p>Task</p>
+<p>Use <code>prcomp</code> to compute the PCA of the first two columns of the athletes data, look at the output. Compare to the singular value decomposition.</p>
+<section id="pca-of-the-turtles-data" class="level3" data-number="9.6.1">
+<h3 data-number="9.6.1" class="anchored" data-anchor-id="pca-of-the-turtles-data"><span class="header-section-number">9.6.1</span> 7.7.1 PCA of the turtles data</h3>
+<p>We now want to do a complete PCA analysis on the turtles data. Remember, we already looked at the summary statistics for the one- and two-dimensional data. Now we are going to answer the question about the “true” dimensionality of these rescaled data.</p>
+<p>In the following code, we use the function <code>princomp</code>. Its return value is a list of all the important pieces of information needed to plot and interpret a PCA.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="imgs/devil.png" title="In fact, PCA is such a fundamental technique that there are many different implementations of it in various R packages. Unfortunately, the input arguments and the formatting and naming of their output is not standardized, and some even use different conventions for the scaling of their output. We will experiment with several different ones to familiarize ourselves with these choices."><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
+<figcaption>In fact, PCA is such a fundamental technique that there are many different implementations of it in various R packages. Unfortunately, the input arguments and the formatting and naming of their output is not standardized, and some even use different conventions for the scaling of their output. We will experiment with several different ones to familiarize ourselves with these choices.</figcaption>
+</figure>
+</div>
+<p>In fact, PCA is such a fundamental technique that there are many different implementations of it in various R packages. Unfortunately, the input arguments and the formatting and naming of their output is not standardized, and some even use different conventions for the scaling of their output. We will experiment with several different ones to familiarize ourselves with these choices.</p>
+<pre><code>cor(scaledTurtles)__
+
+
+          length     width    height
+length 1.0000000 0.9783116 0.9646946
+width  0.9783116 1.0000000 0.9605705
+height 0.9646946 0.9605705 1.0000000
+
+
+pcaturtles = princomp(scaledTurtles)
+pcaturtles __
+
+
+Call:
+princomp(x = scaledTurtles)
+
+Standard deviations:
+   Comp.1    Comp.2    Comp.3 
+1.6954576 0.2048201 0.1448180 
+
+ 3  variables and  48 observations.
+
+
+library("factoextra")
+fviz_eig(pcaturtles, geom = "bar", bar_width = 0.4) + ggtitle("")__</code></pre>
+<p><a href="07-chap_files/figure- html/fig-PCAturtles-1.png" title="Figure 7.17: The screeplot shows the eigenvalues for the standardized turtles data (scaledTurtles): there is one large value and two small ones. The data are (almost) one-dimensional. We will see why this dimension is called an axis of size, a frequent phenomenon in biometric data [@Jolicoeur1960]."><img src="07-chap_files/figure-html/fig-PCAturtles-1.png" class="img-fluid"></a></p>
+<p>Figure 7.17: The screeplot shows the eigenvalues for the standardized turtles data (<code>scaledTurtles</code>): there is one large value and two small ones. The data are (almost) one-dimensional. We will see why this dimension is called an axis of size, a frequent phenomenon in biometric data (<a href="16-chap.html#ref-Jolicoeur1960">Jolicoeur and Mosimann 1960</a>).</p>
+<p>__</p>
+<p>Question 7.21</p>
+<p>Many PCA functions have been created by different teams who worked in different areas at different times. This can lead to confusion, especially because they have different naming conventions. Let’s compare three of them; run the following lines of code and look at the resulting objects:</p>
+<pre><code>svd(scaledTurtles)$v[, 1]
+prcomp(turtles[, -1])$rotation[, 1]
+princomp(scaledTurtles)$loadings[, 1]
+library("ade4")
+dudi.pca(turtles[, -1], nf = 2, scannf = FALSE)$c1[, 1]__</code></pre>
+<p>What happens when you disable the scaling in the <code>prcomp</code> and <code>princomp</code> functions?</p>
+<p>In what follows, we always suppose that the matrix \(X\) represents the centered and scaled matrix.</p>
+<p>__</p>
+<p>Question 7.22</p>
+<p>The coordinates of the observations in the new variables from the <code>prcomp</code> function (call it <code>res</code>) are in the <code>scores</code> slot of the result. Take a look at PC1 for the <code>turtles</code> and compare it to <code>res$scores</code>. Compare the standard deviation <code>sd1</code> to that in the <code>res</code> object and to the standard deviation of the scores.</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<pre><code>res = princomp(scaledTurtles)
+PC1 = scaledTurtles %*% res$loadings[,1]
+sd1 = sqrt(mean(res$scores[, 1]^2))__</code></pre>
+<p>__</p>
+<p>Question 7.23</p>
+<p>Check the orthogonality of the <code>res$scores</code> matrix. Why can’t we say that it is <strong>orthonormal</strong>?</p>
+<p>Now we are going to combine both the PC scores (\(US\)) and the loadings- coefficients (\(V\)). The plots with both the samples and the variables represented are called <strong>biplots</strong>. This can be done in one line using the following <strong><a href="https://cran.r-project.org/web/packages/factoextra/">factoextra</a></strong> package function.</p>
+<pre><code>fviz_pca_biplot(pcaturtles, label = "var", habillage = turtles[, 1]) +
+  ggtitle("")__</code></pre>
+<p><a href="07-chap_files/figure- html/fig-turtlebiplot-1.png" title="Figure 7.18: A biplot of the first two dimensions showing both variables and observations. The arrows show the variables. The turtles are labeled by sex. The extended horizontal direction is due to the size of the first eigenvalue, which is much larger than the second."><img src="07-chap_files/figure-html/fig-turtlebiplot-1.png" class="img-fluid"></a></p>
+<p>Figure 7.18: A biplot of the first two dimensions showing both variables and observations. The arrows show the variables. The turtles are labeled by sex. The extended horizontal direction is due to the size of the first eigenvalue, which is much larger than the second.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="imgs/devil.png" title="Beware the aspect ratio when plotting a PCA. It is rare to have the two components be of similar norm, so square shaped plots will be the exception. More common are elongated plots, which show that the horizontal (first) principal component is more important than the second. This matters, e.g., for interpreting distances between points in the plots."><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
+<figcaption>Beware the aspect ratio when plotting a PCA. It is rare to have the two components be of similar norm, so square shaped plots will be the exception. More common are elongated plots, which show that the horizontal (first) principal component is more important than the second. This matters, e.g., for interpreting distances between points in the plots.</figcaption>
+</figure>
+</div>
+<p>Beware the aspect ratio when plotting a PCA. It is rare to have the two components be of similar norm, so square shaped plots will be the exception. More common are elongated plots, which show that the horizontal (first) principal component is more important than the second. This matters, e.g., for interpreting distances between points in the plots.</p>
+<p>__</p>
+<p>Question 7.24</p>
+<p>Is it possible to have a PCA plot with the PC1 as the horizontal axis whose height is longer than its width?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>The variance of points in the PC1 direction is \(_1=s_1^2\) which is always larger than \(_2=s_2^2\), so the PCA plot will always be wider than high.</p>
+<p>__</p>
+<p>Question 7.25</p>
+<p>Looking at Figure 7.18: a) Did the males or female turtles tend to be larger?<br>
+b) What do the arrows tell us about the correlations?</p>
+<p>__</p>
+<p>Question 7.26</p>
+<p>Compare the variance of each new coordinate to the eigenvalues returned by the PCA <code>dudi.pca</code> function.</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<pre><code>pcadudit = dudi.pca(scaledTurtles, nf = 2, scannf = FALSE)
+apply(pcadudit$li, 2, function(x) sum(x^2)/48)__
+
+
+     Axis1      Axis2 
+2.93573765 0.04284387 
+
+
+pcadudit$eig __
+
+
+[1] 2.93573765 0.04284387 0.02141848</code></pre>
+<p>Now we look at the relationships between the variables, both old and new by drawing what is known as the correlation circle. The aspect ratio is 1 here and the variables are represented by arrows as shown in Figure 7.19. The lengths of the arrows indicate the quality of the projections onto the first principal plane:</p>
+<pre><code>fviz_pca_var(pcaturtles, col.circle = "black") + ggtitle("") +
+  xlim(c(-1.2, 1.2)) + ylim(c(-1.2, 1.2))__</code></pre>
+<p><a href="07-chap_files/figure-html/fig-turtlesCirclef-1.png &quot;Figure 7.19: Part of the “circle of correlations” showing the original variables. Their correlations with each other and with the new principal components are given by the angles between the vectors and between the axes and the vectors.&quot;"><img src="07-chap_files/figure-html/fig- turtlesCirclef-1.png" class="img-fluid"></a></p>
+<p>Figure 7.19: Part of the “circle of correlations” showing the original variables. Their correlations with each other and with the new principal components are given by the angles between the vectors and between the axes and the vectors.</p>
+<p>__</p>
+<p>Question 7.27</p>
+<p>Explain the relationships between the number of rows of our turtles data matrix and the following numbers:</p>
+<pre><code>svd(scaledTurtles)$d/pcaturtles$sdev
+sqrt(47)__</code></pre>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>When computing the variance covariance matrix, many implementations use \(1/(n-1)\) as the denominator. Here, \(n=48\) so the sum of the variances are off by a factor of 48/47.</p>
+<p>These data are a good example of how sometimes almost all the variation in the data can be captured in a lower-dimensional space: here, three-dimensional data can be essentially replaced by a line. Keep in mind: \(X<sup>tC=VSU</sup>tUS=VS^2.\) The <strong>principal components</strong> are the columns of the matrix \(C=US\). The \(p\) columns of \(U\) (the matrix given as <code>USV$u</code> in the output from the <code>svd</code> function above) are rescaled to have norms \((s_1<sup>2,s_2</sup>2,…,s_p^2)\). Each column has a different variance it is <em>responsible</em> for explaining. Notice that these will be decreasing numbers.</p>
+<p>If we only want the first one then it is just \(c_1=s_1 u_1\). Notice that \(||c_1||<sup>2=s_1</sup>tu_1 u_1^t s_1= s_1^2 u_1<sup>tu_1=s_1</sup>2=_1\)</p>
+<p>If the matrix \(X\) comes from the study of \(n\) different samples or specimens, then the principal components provides new coordinates for these \(n\) points as in Figure 7.16. These are sometimes called the <em>scores</em> in the results of PCA functions.</p>
+<p><a href="imgs/xkcdEigenVectors.jpg" title="Figure 7.20: Another great xkcd take: this time eigenvectors."><img src="imgs/xkcdEigenVectors.jpg" class="img-fluid"></a></p>
+<p>Figure 7.20: Another great xkcd take: this time eigenvectors.</p>
+<p>Before we go into more detailed examples, let’s summarize what SVD and PCA provide:</p>
+<ul>
+<li><p>Each principal component has a variance measured by the corresponding eigenvalue, the square of the corresponding singular value.</p></li>
+<li><p>The new variables are made to be orthogonal. Since they are also centered, this means they are uncorrelated. In the case of normal distributed data, this also means they are independent.</p></li>
+<li><p>When the variables are have been rescaled, the sum of the variances of all the variables is the number of variables (\(=p\)). The sum of the variances is computed by adding the diagonal of the crossproduct matrix9.</p></li>
+<li><p>The principal components are ordered by the size of their eigenvalues. We always check the screeplot before deciding how many components to retain. It is also best practice to do as we did in Figure 7.18 and annotate each PC axis with the proportion of variance it explains.</p></li>
+</ul>
+<p><strong>Eigen Decomposition:</strong> The crossproduct of X with itself verifies \[X<sup>tX=VSU</sup>tUSV<sup>t=VS</sup>2V<sup>t=VV</sup>t\] where \(V\) is called the eigenvector matrix of the symmetric matrix \(X^tX\) and \(\) is the diagonal matrix of eigenvalues of \(X^tX\).</p>
+<p>9 This sum of the diagonal elements is called <strong>the trace</strong> of the matrix.</p>
+<p>__</p>
+<p>Task</p>
+<p>Look up eigenvalue in the Wikipedia. Try to find a sentence that defines it without using a formula. Why would eigenvectors come into use in Cinderella (at a stretch)? (See the xkcd cartoon in Figure 7.20.)</p>
+<p><a href="imgs/book_icon.png"><img src="imgs/book_icon.png" class="img-fluid"></a></p>
+<p>For help with the basics of linear algebra, a motivated student pressed for time may consult <a href="https://www.khanacademy.org/math/linear-%20algebra/alternate-bases/eigen-everything/v/linear-algebra-introduction-to-%20eigenvalues-and-eigenvectors">Khan’s Academy</a>. If you have more time and would like in depth coverage, <a href="http://ocw.mit.edu/courses/mathematics/18-06-linear-algebra-%20spring-2010">Gil Strang’s MIT course</a> is a classic, and <a href="http://math.mit.edu/linearalgebra">some of the book is available online</a> (<a href="16-chap.html#ref- Strang:09">Strang 2009</a>).</p>
+</section>
+<section id="a-complete-analysis-the-decathlon-athletes" class="level3" data-number="9.6.2">
+<h3 data-number="9.6.2" class="anchored" data-anchor-id="a-complete-analysis-the-decathlon-athletes"><span class="header-section-number">9.6.2</span> 7.7.2 A complete analysis: the decathlon athletes</h3>
+<p>We started looking at these data earlier in this chapter. Here, we will follow step by step a complete multivariate analysis. First, let us have another look at the correlation matrix (rounded to 2 digits after the decimal point), which captures the bivariate associations. We already plotted it as a colored heatmap in Figure 7.3.</p>
+<pre><code>cor(athletes) |&gt; round(2)__
+
+
+        m100  long weight  high  m400  m110  disc  pole javel m1500
+m100    1.00 -0.54  -0.21 -0.15  0.61  0.64 -0.05 -0.39 -0.06  0.26
+long   -0.54  1.00   0.14  0.27 -0.52 -0.48  0.04  0.35  0.18 -0.40
+weight -0.21  0.14   1.00  0.12  0.09 -0.30  0.81  0.48  0.60  0.27
+high   -0.15  0.27   0.12  1.00 -0.09 -0.31  0.15  0.21  0.12 -0.11
+m400    0.61 -0.52   0.09 -0.09  1.00  0.55  0.14 -0.32  0.12  0.59
+m110    0.64 -0.48  -0.30 -0.31  0.55  1.00 -0.11 -0.52 -0.06  0.14
+disc   -0.05  0.04   0.81  0.15  0.14 -0.11  1.00  0.34  0.44  0.40
+pole   -0.39  0.35   0.48  0.21 -0.32 -0.52  0.34  1.00  0.27 -0.03
+javel  -0.06  0.18   0.60  0.12  0.12 -0.06  0.44  0.27  1.00  0.10
+m1500   0.26 -0.40   0.27 -0.11  0.59  0.14  0.40 -0.03  0.10  1.00</code></pre>
+<p>Then we look at the screeplot, which will help us choose a rank \(k\) for representing the essence of these data.</p>
+<pre><code>pca.ath = dudi.pca(athletes, scannf = FALSE)
+pca.ath$eig __
+
+
+ [1] 3.4182381 2.6063931 0.9432964 0.8780212 0.5566267 0.4912275 0.4305952
+ [8] 0.3067981 0.2669494 0.1018542
+
+
+fviz_eig(pca.ath, geom = "bar", bar_width = 0.3) + ggtitle("")__</code></pre>
+<p><a href="07-chap_files/figure- html/fig-screeplota-1.png" title="Figure 7.21: The screeplot of the athletes data indicates that most of the variation in the data can be captured in a two- dimensional plane (spanned by the first two principal components)."><img src="07-chap_files/figure-html/fig-screeplota-1.png" class="img-fluid"></a></p>
+<p>Figure 7.21: The screeplot of the athletes data indicates that most of the variation in the data can be captured in a two-dimensional plane (spanned by the first two principal components).</p>
+<p>The screeplot in Figure 7.21 shows a clear drop in the eigenvalues after the second one. This indicates that a good approximation will be obtained at rank 2. Let’s look at an interpretation of the first two axes by projecting the loadings of the original variables onto the two new ones, the principal components.</p>
+<pre><code>fviz_pca_var(pca.ath, col.var = "blue", repel = TRUE) + ggtitle("")__</code></pre>
+<p><a href="07-chap_files/figure- html/fig-athletecorr-1.png" title="Figure 7.22: Correlation circle of the original variables."><img src="07-chap_files/figure-html/fig-athletecorr-1.png" class="img-fluid"></a></p>
+<p>Figure 7.22: Correlation circle of the original variables.</p>
+<p>The correlation circle Figure 7.22 displays the projection of the original variables onto the two first new principal axes. The angles between vectors are interpreted as correlations. On the right side of the plane, we have the track and field events (m110, m100, m400, m1500), and on the left, we have the throwing and jumping events. Maybe there is an opposition of skills as characterized in the correlation matrix. We did see the correlations were negative between variables from these two groups. How can we interpret this?</p>
+<p>It seems that those who throw the best have lower scores in the track competitions. In fact, if we look at the original measurements, we can see what is happening. The athletes who run in short times are the stronger ones, as are the ones who throw or jump longer distances. We should probably change the scores of the track variables and redo the analysis.</p>
+<p>__</p>
+<p>Question 7.28</p>
+<p>What transformations of the variables induce the best athletic performances to vary in the same direction, i.e., be mostly positively correlated?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>If we change the signs on the running performances, almost all the variables will be positively correlated.</p>
+<pre><code>runningvars = grep("^m", colnames(athletes), value = TRUE)
+runningvars __
+
+
+[1] "m100"  "m400"  "m110"  "m1500"
+
+
+athletes[, runningvars] = -athletes[, runningvars]
+cor(athletes) |&gt; round(2)__
+
+
+       m100 long weight high  m400 m110  disc pole javel m1500
+m100   1.00 0.54   0.21 0.15  0.61 0.64  0.05 0.39  0.06  0.26
+long   0.54 1.00   0.14 0.27  0.52 0.48  0.04 0.35  0.18  0.40
+weight 0.21 0.14   1.00 0.12 -0.09 0.30  0.81 0.48  0.60 -0.27
+high   0.15 0.27   0.12 1.00  0.09 0.31  0.15 0.21  0.12  0.11
+m400   0.61 0.52  -0.09 0.09  1.00 0.55 -0.14 0.32 -0.12  0.59
+m110   0.64 0.48   0.30 0.31  0.55 1.00  0.11 0.52  0.06  0.14
+disc   0.05 0.04   0.81 0.15 -0.14 0.11  1.00 0.34  0.44 -0.40
+pole   0.39 0.35   0.48 0.21  0.32 0.52  0.34 1.00  0.27  0.03
+javel  0.06 0.18   0.60 0.12 -0.12 0.06  0.44 0.27  1.00 -0.10
+m1500  0.26 0.40  -0.27 0.11  0.59 0.14 -0.40 0.03 -0.10  1.00
+
+
+pcan.ath = dudi.pca(athletes, nf = 2, scannf = FALSE)
+pcan.ath$eig __
+
+
+ [1] 3.4182381 2.6063931 0.9432964 0.8780212 0.5566267 0.4912275 0.4305952
+ [8] 0.3067981 0.2669494 0.1018542</code></pre>
+<p>Now all the negative correlations are quite small. The screeplot will show no change, as the eigenvalues of the matrix are unaffected by the above sign flips. The only ouput that changes are the signs of the coefficients of the principal component loadings for the variables whose signs we flipped.</p>
+<pre><code>fviz_pca_var(pcan.ath, col.var = "blue", repel = TRUE) + ggtitle("")__</code></pre>
+<p><a href="07-chap_files/figure- html/fig-athletecorrn-1.png" title="Figure 7.23: Correlation circle after changing the signs of the running variables."><img src="07-chap_files/figure-html/fig-athletecorrn-1.png" class="img-fluid"></a></p>
+<p>Figure 7.23: Correlation circle after changing the signs of the running variables.</p>
+<p>Figure 7.23 shows the correlation circle of the transformed variables. We now see we have a broad common overall axis: all the arrows are pointing broadly in the same direction.</p>
+<p>We now plot the athletes projected in the principal plane using:</p>
+<pre><code>fviz_pca_ind(pcan.ath, repel = TRUE) + ggtitle("") __</code></pre>
+<p><a href="07-chap_files/figure- html/fig-athletepc-1.png" title="Figure 7.24: First principal plane showing the projections of the athletes. Do you notice something about the organization of the numbers?"><img src="07-chap_files/figure-html/fig-athletepc-1.png" class="img-fluid"></a></p>
+<p>Figure 7.24: First principal plane showing the projections of the athletes. Do you notice something about the organization of the numbers?</p>
+<p>__</p>
+<p>Question 7.29</p>
+<p>If we look at the athletes themselves as they are shown in Figure 7.24, we notice a slight ordering effect. Do you see a relation between the performance of the athletes and their numbering in Figure 7.24 ?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>If you play join the dots following the order of the numbers, you will probably realize you are spending more time on one side of the plot than you would be if the numbers were randomly assigned.</p>
+<p>It turns out there is complementary information available in the <code>olympic</code> dataset. An extra vector variable called <code>score</code> reports the final scores at the competition, the men’s decathlon at the 1988 Olympics.</p>
+<pre><code>olympic$score __
+
+
+ [1] 8488 8399 8328 8306 8286 8272 8216 8189 8180 8167 8143 8114 8093 8083 8036
+[16] 8021 7869 7860 7859 7781 7753 7745 7743 7623 7579 7517 7505 7422 7310 7237
+[31] 7231 7016 6907</code></pre>
+<p>So let us look at the scatterplot comparing the first principal component coordinate of the athletes to this score. This is shown in Figure 7.25. We can see a strong correlation between the two variables. We note that athlete number 1 (who in fact won the Olympic decathlon gold medal) has the highest score, but not the highest value in PC1. Why do you think that is?</p>
+<pre><code>ggplot(data = tibble(pc1 = pcan.ath$li[, 1], score = olympic$score, label = rownames(athletes)),
+       mapping = aes(y = score, x = pc1)) + 
+   geom_text(aes(label = label)) + stat_smooth(method = "lm", se = FALSE)__</code></pre>
+<p><a href="07-chap_files/figure-html/fig-AthleteScorePCA-1.png &quot;Figure 7.25: Scatterplot between olympic$score and the first principal component. The points are labeled by their order in the data set. We can see a strong correlation. Why is it not a perfectly linear fit?&quot;"><img src="07-chap_files/figure-html/fig- AthleteScorePCA-1.png" class="img-fluid"></a></p>
+<p>Figure 7.25: Scatterplot between <code>olympic$score</code> and the first principal component. The points are labeled by their order in the data set. We can see a strong correlation. Why is it not a perfectly linear fit?</p>
+</section>
+<section id="how-to-choose-k-the-number-of-dimensions" class="level3" data-number="9.6.3">
+<h3 data-number="9.6.3" class="anchored" data-anchor-id="how-to-choose-k-the-number-of-dimensions"><span class="header-section-number">9.6.3</span> 7.7.3 How to choose \(k\), the number of dimensions ?</h3>
+<p><a href="07-chap_files/figure- html/fig-screeploteq-1.png" title="Figure 7.26: A screeplot showing ‘dangerously’ similar variances. Choosing to cutoff at a hard threshold of 80% of the variance would give unstable PC plots. With so such cutoff, the axes corresponding to the 3D subspace of 3 similar eigenvalues are unstable and cannot be individually interpreted."><img src="07-chap_files/figure-html/fig-screeploteq-1.png" class="img-fluid"></a></p>
+<p>Figure 7.26: A screeplot showing ‘dangerously’ similar variances. Choosing to cutoff at a hard threshold of 80% of the variance would give unstable PC plots. With so such cutoff, the axes corresponding to the 3D subspace of 3 similar eigenvalues are unstable and cannot be individually interpreted.</p>
+<p>We have seen in the examples that the first step in PCA is to make the screeplot of the variances of the new variables (equal to the <strong>eigenvalues</strong>). We cannot decide how many dimensions are needed before seeing this plot. The reason is that there are situations when the principal components are ill-defined: when two or three successive PCs have very similar variances, giving a screeplot as in Figure 7.26, the subspace corresponding to a group of similar eigenvalues exists. In this case this would be 3D space generated by \(u_2,u_3,u_4\). The vectors are not meaningful individually and one cannot interpret their loadings. This is because a very slight change in one observations could give a completely different set of three vectors. These would generate the same 3D space, but could have very different loadings. We say the PCs are unstable.</p>
+</section>
+</section>
+<section id="pca-as-an-exploratory-tool-using-extra-information" class="level2" data-number="9.7">
+<h2 data-number="9.7" class="anchored" data-anchor-id="pca-as-an-exploratory-tool-using-extra-information"><span class="header-section-number">9.7</span> 7.8 PCA as an exploratory tool: using extra information</h2>
+<p>We have seen that unlike regression, PCA treats all variables equally (to the extent that they were preprocessed to have equivalent standard deviations). However, it is still possible to map other continuous variables or categorical factors onto the plots in order to help interpret the results. Often we have complementary information on the samples, for example, diagnostic labels in the diabetes data or the cell types in the T-cell gene expression data.</p>
+<p>Here we see how we can use such extra variables to inform our interpretation. The best place to store such so-called <em>metadata</em> is in appropriate slots of the data object (such as in the Bioconductor <em>SummarizedExperiment</em> class); the second-best, in additional columns of the data frame that also contains the numeric data. In practice, such information is often stored in a more or less cryptic manner in the row names of the matrix. Below, we need to face the latter scenario, and we use <code>substr</code> gymnastics to extract the cell types and show the screeplot in Figure 7.27 and the PCA in Figure 7.28.</p>
+<pre><code>pcaMsig3 = dudi.pca(Msig3transp, center = TRUE, scale = TRUE,
+                    scannf = FALSE, nf = 4)
+fviz_screeplot(pcaMsig3) + ggtitle("")__</code></pre>
+<p><a href="07-chap_files/figure- html/fig-tcellexpr-1.png" title="Figure 7.27: T-cell expression PCA screeplot."><img src="07-chap_files/figure-html/fig-tcellexpr-1.png" class="img-fluid"></a></p>
+<p>Figure 7.27: T-cell expression PCA screeplot.</p>
+<pre><code>ids = rownames(Msig3transp)
+celltypes = factor(substr(ids, 7, 9))
+status = factor(substr(ids, 1, 3))
+table(celltypes)__
+
+
+celltypes
+EFF MEM NAI 
+ 10   9  11 
+
+
+cbind(pcaMsig3$li, tibble(Cluster = celltypes, sample = ids)) %&gt;%
+ggplot(aes(x = Axis1, y = Axis2)) +
+  geom_point(aes(color = Cluster), size = 5) +
+  geom_hline(yintercept = 0, linetype = 2) +
+  geom_vline(xintercept = 0, linetype = 2) +
+  scale_color_discrete(name = "Cluster") + coord_fixed()__</code></pre>
+<p><a href="07-chap_files/figure- html/fig-tcelltypes-1-1.png" title="Figure 7.28: PCA of gene expression for a subset of 156 genes involved in specificities of each of the three separate T-cell types: effector, naïve and memory. Again, we see that the plot is elongated along the the first axis, as that explains much of the variance. Notice that one of the T-cells seems to be mislabeled."><img src="07-chap_files/figure-html/fig-tcelltypes-1-1.png" class="img-fluid"></a></p>
+<p>Figure 7.28: PCA of gene expression for a subset of 156 genes involved in specificities of each of the three separate T-cell types: effector, naïve and memory. Again, we see that the plot is elongated along the the first axis, as that explains much of the variance. Notice that one of the T-cells seems to be mislabeled.</p>
+<section id="mass-spectroscopy-data-analysis" class="level3" data-number="9.7.1">
+<h3 data-number="9.7.1" class="anchored" data-anchor-id="mass-spectroscopy-data-analysis"><span class="header-section-number">9.7.1</span> 7.8.1 Mass Spectroscopy Data Analysis</h3>
+<p>These data requires delicate preprocessing before we obtain our desired matrix with the relevant features as columns and the samples as rows. Starting with the raw mass spectroscopy readings, the steps involve extracting peaks of relevant features, aligning them across multiple samples and estimating peak heights. We refer the reader to the vignette of the Bioconductor <strong><a href="https://bioconductor.org/packages/xcms/">xcms</a></strong> package for gruesome details. We load a matrix of data generated in such a way from the file <code>mat1xcms.RData</code>. The output of the below code is in Figures 7.29 and 7.30.</p>
+<pre><code>load("../data/mat1xcms.RData")
+dim(mat1)__
+
+
+[1] 399  12
+
+
+pcamat1 = dudi.pca(t(mat1), scannf = FALSE, nf = 3)
+fviz_eig(pcamat1, geom = "bar", bar_width = 0.7) + ggtitle("")__</code></pre>
+<p><a href="07-chap_files/figure- html/fig-xset3scree-1.png" title="Figure 7.29: Screeplot showing the eigenvalues for the mice data."><img src="07-chap_files/figure-html/fig-xset3scree-1.png" class="img-fluid"></a></p>
+<p>Figure 7.29: Screeplot showing the eigenvalues for the mice data.</p>
+<pre><code>dfmat1 = cbind(pcamat1$li, tibble(
+    label = rownames(pcamat1$li),
+    number = substr(label, 3, 4),
+    type = factor(substr(label, 1, 2))))
+pcsplot = ggplot(dfmat1,
+  aes(x=Axis1, y=Axis2, label=label, group=number, colour=type)) +
+ geom_text(size = 4, vjust = -0.5)+ geom_point(size = 3)+ylim(c(-18,19))
+pcsplot + geom_hline(yintercept = 0, linetype = 2) +
+  geom_vline(xintercept = 0, linetype = 2)__</code></pre>
+<p><a href="07-chap_files/figure-html/fig-Stretchedbiplot-1.png%20%22Figure%207.30:%20The%20first%20principal%20plane%20for%20the%20mat1%20data.%20It%20explains%2059%%20of%20the%20variance.%22"><img src="07-chap_files/figure-html/fig- Stretchedbiplot-1.png" class="img-fluid"></a></p>
+<p>Figure 7.30: The first principal plane for the <code>mat1</code> data. It explains 59% of the variance.</p>
+<p>__</p>
+<p>Question 7.30</p>
+<p>Looking at Figure 7.30, do the samples seem to be randomly placed in the plane? Do you notice any structure explained by the labels?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>The answer becomes (even more) evident if you make this plot. Knockouts are always below their paired wildtype sample. We will revisit this example when we look at supervised multivariate methods in our next chapter.</p>
+<pre><code>pcsplot + geom_line(colour = "red")__</code></pre>
+</section>
+<section id="biplots-and-scaling" class="level3" data-number="9.7.2">
+<h3 data-number="9.7.2" class="anchored" data-anchor-id="biplots-and-scaling"><span class="header-section-number">9.7.2</span> 7.8.2 Biplots and scaling</h3>
+<p>In the previous example, the number of variables measured was too large to enable useful concurrent plotting of both variables and samples. In this example we plot the PCA biplot of a simple data set where chemical measurements were made on different wines for which we also have a categorical <code>wine.class</code> variable. We start the analysis by looking at the two-dimensional correlations and a heatmap of the variables.</p>
+<pre><code>library("pheatmap")
+load("../data/wine.RData")
+load("../data/wineClass.RData")
+wine[1:2, 1:7]__
+
+
+  Alcohol MalicAcid  Ash AlcAsh  Mg Phenols Flav
+1   14.23      1.71 2.43   15.6 127    2.80 3.06
+2   13.20      1.78 2.14   11.2 100    2.65 2.76
+
+
+pheatmap(1 - cor(wine), treeheight_row = 0.2)__</code></pre>
+<p><a href="07-chap_files/figure- html/fig-WineHeatplot-1.png" title="Figure 7.31: The difference between 1 and the correlation can be used as a distance between variables and is used to make a heatmap of the associations between the variables."><img src="07-chap_files/figure-html/fig-WineHeatplot-1.png" class="img-fluid"></a></p>
+<p>Figure 7.31: The difference between 1 and the correlation can be used as a distance between variables and is used to make a heatmap of the associations between the variables.</p>
+<p>A <strong>biplot</strong> is a simultaneous representation of both the space of observations and the space of variables. In the case of a PCA biplot like Figure 7.32 the arrows represent the directions of the old variables as they project onto the plane defined by the first two new axes. Here the observations are just colored dots, the color has been chosen according to which type of wine is being plotted. We can interpret the variables’ directions with regards to the sample points, for instance the blue points are from the barbera group and show higher Malic Acid content than the other wines.</p>
+<pre><code>winePCAd = dudi.pca(wine, scannf=FALSE)
+table(wine.class)__
+
+
+wine.class
+    barolo grignolino    barbera 
+        59         71         48 
+
+
+fviz_pca_biplot(winePCAd, geom = "point", habillage = wine.class,
+   col.var = "violet", addEllipses = TRUE, ellipse.level = 0.69) +
+   ggtitle("") + coord_fixed()__</code></pre>
+<p><a href="07-chap_files/figure- html/fig-WineBiplot2-1.png" title="Figure 7.32: PCA biplot including ellipses for the three types of wine: barolo, grignolino and barbera. For each ellipsis, the axis lengths are given by one standard deviation. Small angles between the vectors Phenols, Flav and Proa indicate that they are strongly correlated, whereas Hue and Alcohol are uncorrelated."><img src="07-chap_files/figure-html/fig-WineBiplot2-1.png" class="img-fluid"></a></p>
+<p>Figure 7.32: PCA biplot including ellipses for the three types of wine: barolo, grignolino and barbera. For each ellipsis, the axis lengths are given by one standard deviation. Small angles between the vectors <code>Phenols</code>, <code>Flav</code> and <code>Proa</code> indicate that they are strongly correlated, whereas <code>Hue</code> and <code>Alcohol</code> are uncorrelated.</p>
+<p>Interpretation of multivariate plots requires the use of as much of the available information as possible; here we have used the samples and their groups as well as the variables to understand the main differences between the wines.</p>
+</section>
+<section id="an-example-of-weighted-pca" class="level3" data-number="9.7.3">
+<h3 data-number="9.7.3" class="anchored" data-anchor-id="an-example-of-weighted-pca"><span class="header-section-number">9.7.3</span> 7.8.3 An example of weighted PCA</h3>
+<p>Sometimes we want to see variability between different groups or observations, but want to weight them. This can be the case if, e.g., the groups have very different sizes. Let’s re-examine the Hiiragi data we already saw in <a href="03-chap.html">Chapter 3</a>. In the code below, we select the wildtype (WT) samples and the top 100 features with the highest overall variance.</p>
+<pre><code>data("x", package = "Hiiragi2013")
+xwt = x[, x$genotype == "WT"]
+sel = order(rowVars(Biobase::exprs(xwt)), decreasing = TRUE)[1:100]
+xwt = xwt[sel, ]
+tab = table(xwt$sampleGroup)
+tab __
+
+
+     E3.25 E3.5 (EPI)  E3.5 (PE) E4.5 (EPI)  E4.5 (PE) 
+        36         11         11          4          4 
+
+
+xwt$weight = 1 / as.numeric(tab[xwt$sampleGroup])
+pcaMouse = dudi.pca(as.data.frame(t(Biobase::exprs(xwt))),
+  row.w = xwt$weight,
+  center = TRUE, scale = TRUE, nf = 2, scannf = FALSE)
+fviz_eig(pcaMouse) + ggtitle("")__</code></pre>
+<p><a href="07-chap_files/figure- html/fig-resPCADscree-1.png" title="Figure 7.33: Screeplot from the weighted PCA of the Hiiragi data. The drop after the second eigenvalue suggests that a two- dimensional PCA is appropriate."><img src="07-chap_files/figure-html/fig-resPCADscree-1.png" class="img-fluid"></a></p>
+<p>Figure 7.33: Screeplot from the weighted PCA of the Hiiragi data. The drop after the second eigenvalue suggests that a two-dimensional PCA is appropriate.</p>
+<pre><code>fviz_pca_ind(pcaMouse, geom = "point", col.ind = xwt$sampleGroup) +
+  ggtitle("") + coord_fixed()__</code></pre>
+<p>We see from <code>tab</code> that the groups are represented rather unequally. To account for this, we reweigh each sample by the inverse of its group size. The function <code>dudi.pca</code> in the <strong><a href="https://cran.r-project.org/web/packages/ade4/">ade4</a></strong> package has a <code>row.w</code> argument into which we can enter the weights. The output of the code is in Figures 7.33 and 7.34.</p>
+<p><a href="07-chap_files/figure- html/fig-resPCADplot-1.png" title="Figure 7.34: Output from weighted PCA on the Hiiragi data. The samples are colored according to their groups."><img src="07-chap_files/figure-html/fig-resPCADplot-1.png" class="img-fluid"></a></p>
+<p>Figure 7.34: Output from weighted PCA on the Hiiragi data. The samples are colored according to their groups.</p>
+</section>
+</section>
+<section id="summary-of-this-chapter" class="level2" data-number="9.8">
+<h2 data-number="9.8" class="anchored" data-anchor-id="summary-of-this-chapter"><span class="header-section-number">9.8</span> 7.9 Summary of this chapter</h2>
+<p><strong>Preprocessing matrices</strong> Multivariate data analyses require “conscious” preprocessing. After consulting all the means, variances and one-dimensional histograms we saw how to rescale and recenter the data.</p>
+<p><strong>Projecting onto new variables</strong> We saw how we can make projections into lower dimensions (2D planes and 3D are the most frequently used) of high dimensional data without losing too much information. PCA searches for new “more informative” variables that are linear combinations of the original (old) ones.</p>
+<p><strong>Matrix decomposition</strong> PCA is based on finding decompositions of the matrix \(X\) called SVD. This decomposition provides a lower rank approximation and is equivalent to the eigendecomposition of \(X^tX\). The squares of the singular values are equal to the eigenvalues and to the variances of the new variables. We systematically plotted these values before deciding how many axes are necessary to reproduce the signal in the data.</p>
+<p>Two eigenvalues which are quite close can give rise to scores or PC scores which are highly unstable. It is always necessary to look at the screeplot of the eigenvalues and avoid separating the axes corresponding to the these close eigenvalues. This may require using interactive three or four-dimensional projections, which are available in several R packages.</p>
+<p><strong>Biplot representations</strong> The space of observations is naturally a \(p\)-dimensional space (the \(p\) original variables provide the coordinates). The space of variables is \(n\)-dimensional. Both decompositions we have studied (singular values / eigenvalues and singular vectors / eigenvectors) provide new coordinates for both of these spaces, sometimes we call one the dual of the other. We can plot the projection of both the observations and the variables onto the same eigenvectors. This provides a biplot that can be useful for interpreting the PCA output.</p>
+<p><strong>Projecting other group variables</strong> Interpretation of PCA can also be facilitated by redundant or contiguous data about the observations.</p>
+</section>
+<section id="further-reading" class="level2" data-number="9.9">
+<h2 data-number="9.9" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">9.9</span> 7.10 Further reading</h2>
+<p>The best way to deepen your understanding of singular value decomposition is to read Chapter 7 of Strang (<a href="16-chap.html#ref-Strang:09">2009</a>). The whole book sets the foundations for the linear algebra necessary to understanding the meaning of the rank of matrix and the duality between row spaces and column spaces (<a href="16-chap.html#ref-frenchway">Holmes 2006</a>).</p>
+<p>Complete textbooks have been written on the subject of PCA and related methods. Mardia, Kent, and Bibby (<a href="16-chap.html#ref-Mardia">1979</a>) is a standard text that covers all multivariate methods in a classical way, with linear algebra and matrices. By making the parametric assumptions that the data come from multivariate normal distributions, Mardia, Kent, and Bibby (<a href="16-chap.html#ref-Mardia">1979</a>) also provide inferential tests for the number of components and limiting properties for principal components. Jolliffe (<a href="16-chap.html#ref-Jolliffe">2002</a>) is a book-long treatment of everything to do with PCA with extensive examples.</p>
+<p>We can incorporate supplementary information into weights for the observations and the variables. This was introduced in the 1970’s by French data scientists, see Holmes (<a href="16-chap.html#ref-frenchway">2006</a>) for a review and <a href="09-chap.html">Chapter 9</a> for further examples.</p>
+<p>Improvements to the interpretation and stability of PCA can be obtained by adding a penalty that minimizes the number of nonzero coefficients that appear in the linear combinations. Zou, Hastie, and Tibshirani (<a href="16-chap.html#ref-Zou2006">2006</a>) and Witten, Tibshirani, and Hastie (<a href="16-chap.html#ref-Witten2009">2009</a>) have developed sparse versions of principal component analysis, and their packages <strong><a href="https://cran.r-project.org/web/packages/elasticnet/">elasticnet</a></strong> and <strong><a href="https://cran.r-project.org/web/packages/PMA/">PMA</a></strong> provide implementations in R.</p>
+</section>
+<section id="exercises" class="level2" data-number="9.10">
+<h2 data-number="9.10" class="anchored" data-anchor-id="exercises"><span class="header-section-number">9.10</span> 7.11 Exercises</h2>
+<p>__</p>
+<p>Exercise 7.1</p>
+<p>Revise the material about svd by reading sections 1, 2, and 3 of the <a href="http://en.wikipedia.org/wiki/Singular_value_decomposition">Wikipedia article about SVD</a>. It will also be beneficial to read about the related eigenvalue decomposition by reading sections 1, 2, and 2.1 of the <a href="http://en.wikipedia.org/wiki/Eigendecomposition_of_a_matrix">Wikipedia article about eigendecomposition of a matrix</a>. We know that we can decompose a \(n\) row by \(p\) column rank 1 matrix \(X\) as:</p>
+<p>\[ <strong>X</strong> = ]</p>
+<ol type="1">
+<li><p>If \(X\) has no rows and no columns which are all zeros, then is this decomposition unique?</p></li>
+<li><p>Generate a rank-one matrix. Start by taking a vector of length 15 with values from 2 to 30 in increments of 2, and a vector of length 4 with values 3, 6, 9, 12, then take their outer product.</p></li>
+</ol>
+<pre><code>u = seq(2, 30, by = 2)
+v = seq(3, 12, by = 3)
+X1 = u %*% t(v)__</code></pre>
+<p>Why do we have to take <code>t(v)</code>?</p>
+<ol start="3" type="1">
+<li>Now we add some noise in the form a matrix we call <code>Materr</code> so we have an “approximately rank-one” matrix.</li>
+</ol>
+<pre><code>Materr = matrix(rnorm(60,1),nrow=15,ncol=4)
+X = X1+Materr __</code></pre>
+<p>Visualize \(X\) using <code>ggplot</code>.</p>
+<ol start="4" type="1">
+<li>Redo the same analyses with a rank 2 matrix.</li>
+</ol>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>Note that <code>X1</code> can also be computed as</p>
+<pre><code>outer(u, v)__
+
+
+ggplot(data=data.frame(X), aes(x=X1, y=X2, col=X3, size=X4)) + geom_point()__</code></pre>
+<p>Here we see that the data looks linear in all four dimensions. This is what it means to be of rank-one. Now let’s consider a rank 2 matrix.</p>
+<pre><code>n = 100
+p = 4
+Y2 = outer(rnorm(n), rnorm(p)) + outer(rnorm(n), rnorm(p))
+head(Y2)__
+
+
+            [,1]       [,2]         [,3]        [,4]
+[1,] -0.44143871  2.3213197  0.433215525 -1.35523790
+[2,]  0.79620920 -1.0748037  1.217052906 -1.13096295
+[3,]  0.16787281  0.2259296  0.547203332 -0.75836031
+[4,]  0.87269426 -1.9208649  0.856966180 -0.38621340
+[5,]  0.03751521 -0.1480678 -0.005217966  0.05864122
+[6,]  0.50195482 -2.0409896 -0.108241027  0.85336630
+
+
+ggplot(data=data.frame(Y2), aes(x=X1, y=X2, col=X3, size=X4)) + geom_point()__</code></pre>
+<p>Now there are obviously at least two dimensions because if we project the data onto the first two coordinates (by default called <code>X1</code> and <code>X2</code> when you convert a matrix into a data frame in R), then the data varies in both dimensions. So the next step is to try to decide if there are more than two dimensions. The top right points are the closest to you (they’re biggest) and as you go down and left in the plot those points are farther away. In the left are the bluest points and they seem to get darker linearly as you move right. As you can probably tell, it is very hard to visually discover a low dimensional space in higher dimensions, even when “high dimensions” only means 4! This is one reason why we rely on the singular value decomposition.</p>
+<pre><code>svd(Y2)$d # two non-zero eigenvalues __
+
+
+[1] 2.637465e+01 1.266346e+01 3.144564e-15 1.023131e-15
+
+
+Y = Y2 + matrix(rnorm(n*p, sd=0.01),n,p) # add some noise to Y2
+svd(Y)$d # four non-zero eigenvalues (but only 2 big ones)__
+
+
+[1] 26.39673712 12.68547439  0.10735103  0.09104741</code></pre>
+<p>Here we have two dimensions which are non-zero and two dimensions which are approximately 0 (for “Y2”, they are within square root of computer tolerance of 0).</p>
+<p>__</p>
+<p>Exercise 7.2</p>
+<ol type="1">
+<li>create a first a matrix of highly correlated bivariate data such as that shown in Figure 7.35.<br>
+Hint: Use the function <code>mvrnorm</code>.</li>
+</ol>
+<p>Check the rank of the matrix by looking at its singular values.</p>
+<ol start="2" type="1">
+<li>perform a PCA and show the rotated principal component axes.</li>
+</ol>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<ol type="1">
+<li>we generate correlated bivariate normal data using:</li>
+</ol>
+<pre><code>library("MASS")
+mu1 = 1; mu2 = 2; s1=2.5; s2=0.8; rho=0.9;
+sigma = matrix(c(s1^2, s1*s2*rho, s1*s2*rho, s2^2),2)
+sim2d = data.frame(mvrnorm(50, mu = c(mu1,mu2), Sigma = sigma))
+svd(scale(sim2d))$d __
+
+
+[1] 9.647686 2.218592
+
+
+svd(scale(sim2d))$v[,1]__
+
+
+[1] 0.7071068 0.7071068</code></pre>
+<ol start="2" type="1">
+<li>We use <code>prcomp</code> to perform a PCA and the scores provide the desired rotation.</li>
+</ol>
+<pre><code>respc = princomp(sim2d)
+dfpc  = data.frame(pc1=respc$scores[,1], 
+                   pc2=respc$scores[,2])
+
+ggplot(data.frame(sim2d), aes(x=X1,y=X2)) + geom_point()
+ggplot(dfpc, aes(x=pc1, y=pc2)) + geom_point() + coord_fixed(2)__</code></pre>
+<p><a href="07-chap_files/figure- html/fig-binormalpc-1.png" title="Figure 7.35 (a): \text{}"><img src="07-chap_files/figure-html/fig-binormalpc-1.png" class="img-fluid"></a></p>
+<ol type="a">
+<li>\(\)</li>
+</ol>
+<p><a href="07-chap_files/figure- html/fig-binormalpc-2.png" title="Figure 7.35 (b): \text{}"><img src="07-chap_files/figure-html/fig-binormalpc-2.png" class="img-fluid"></a></p>
+<ol start="2" type="a">
+<li>\(\)</li>
+</ol>
+<p>Figure 7.35: The original data shown in scatterplot (A) and the plot obtained using the principal component rotation (B).</p>
+<p>__</p>
+<p>Exercise 7.3</p>
+<p>Part (a) in Figure 7.35 shows a very elongated plotting region, why?<br>
+What happens if you do not use the <code>coord_fixed()</code> option and have a square plotting zone? Why can this be misleading?</p>
+<p>__</p>
+<p>Exercise 7.4</p>
+<p>Let’s revisit the Hiiragi data and compare the weighted and unweighted approaches.</p>
+<ol type="1">
+<li><p>make a correlation circle for the unweighted Hiiragi data <code>xwt</code>. Which genes have the best projections on the first principal plane (best approximation)?</p></li>
+<li><p>make a biplot showing the labels of the extreme gene-variables that explain most of the variance in the first plane. Add the the sample-points.</p></li>
+</ol>
+<p>Abbott, Edwin A. 1884. <em>Flatland: A Romance of Many Dimensions</em>. OUP Oxford.</p>
+<p>Flury, Bernard. 1997. <em>A First Course in Multivariate Statistics</em>. Springer.</p>
+<p>Holmes, Susan. 2006. “Multivariate Analysis: The French way.” In <em>Probability and Statistics: Essays in Honor of David a. Freedman</em> , edited by D. Nolan and T. P. Speed. Vol. 56. IMS Lecture Notes–Monograph Series. Beachwood, OH: IMS. <a href="http://www.imstat.org/publications/lecnotes.htm" class="uri">http://www.imstat.org/publications/lecnotes.htm</a>.</p>
+<p>Holmes, Susan, Michael He, Tong Xu, and Peter P Lee. 2005. “Memory t Cells Have Gene Expression Patterns Intermediate Between Naive and Effector.” <em>PNAS</em> 102 (15): 5519–23.</p>
+<p>Hotelling, Harold. 1933. “Analysis of a Complex of Statistical Variables into Principal Components.” <em>Journal of Educational Psychology</em> 24 (6): 417–41.</p>
+<p>Jolicoeur, Pierre, and James E Mosimann. 1960. “Size and Shape Variation in the Painted Turtle. A Principal Component Analysis.” <em>Growth</em> 24: 339–54.</p>
+<p>Jolliffe, Ian. 2002. <em>Principal Component Analysis</em>. Wiley Online Library.</p>
+<p>Mardia, Kanti, John T Kent, and John M Bibby. 1979. <em>Multiariate Analysis</em>. New York: Academic Press.</p>
+<p>Pearson, Karl. 1901. “LIII. On Lines and Planes of Closest Fit to Systems of Points in Space.” <em>The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science</em> 2 (11): 559–72.</p>
+<p>Strang, Gilbert. 2009. <em>Introduction to Linear Algebra</em>. Fourth. Wellesley- Cambridge Press.</p>
+<p>Witten, Daniela M, Robert Tibshirani, and Trevor Hastie. 2009. “A Penalized Matrix Decomposition, with Applications to Sparse Principal Components and Canonical Correlation Analysis.” <em>Biostatistics</em> , kxp008.</p>
+<p>Zou, Hui, Trevor Hastie, and Robert Tibshirani. 2006. “Sparse Principal Component Analysis.” <em>Journal of Computational and Graphical Statistics</em> 15 (2): 265–86.</p>
+<p>Page built at 01:33 on 2025-09-01 using R version 4.5.1 (2025-06-13)</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./06-chap.html" class="pagination-link" aria-label="6.1 Goals for this Chapter">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">6.1 Goals for this Chapter</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./08-chap.html" class="pagination-link" aria-label="8.1 Goals of this chapter">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">8.1 Goals of this chapter</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

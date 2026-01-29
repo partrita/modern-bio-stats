@@ -1,0 +1,1939 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>12&nbsp; 10.1 Goals for this chapter – Modern Statistics for Modern Biology</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./11-chap.html" rel="next">
+<link href="./09-chap.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-22854ec117201859c8a7ba6f538122c9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="msmb.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-chap.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">10.1 Goals for this chapter</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Modern Statistics for Modern Biology</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Home</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The challenge: heterogeneity</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">1.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">2.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">3.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">4.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">5.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">6.1 Goals for this Chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">7.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">8.1 Goals of this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">9.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-chap.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">10.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">11.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">12.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">13.1 Goals for this chapter</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">14-chap.html</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">15-chap.html</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-chap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">16-chap.html</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#graphs" id="toc-graphs" class="nav-link active" data-scroll-target="#graphs"><span class="header-section-number">12.1</span> 10.2 Graphs</a>
+  <ul class="collapse">
+  <li><a href="#what-is-a-graph-and-how-can-it-be-encoded" id="toc-what-is-a-graph-and-how-can-it-be-encoded" class="nav-link" data-scroll-target="#what-is-a-graph-and-how-can-it-be-encoded"><span class="header-section-number">12.1.1</span> 10.2.1 What is a graph and how can it be encoded?</a></li>
+  <li><a href="#graphs-with-many-layers-labels-on-edges-and-nodes" id="toc-graphs-with-many-layers-labels-on-edges-and-nodes" class="nav-link" data-scroll-target="#graphs-with-many-layers-labels-on-edges-and-nodes"><span class="header-section-number">12.1.2</span> 10.2.2 Graphs with many layers: labels on edges and nodes</a></li>
+  </ul></li>
+  <li><a href="#from-gene-set-enrichment-to-networks" id="toc-from-gene-set-enrichment-to-networks" class="nav-link" data-scroll-target="#from-gene-set-enrichment-to-networks"><span class="header-section-number">12.2</span> 10.3 From gene set enrichment to networks</a>
+  <ul class="collapse">
+  <li><a href="#methods-using-pre-defined-gene-sets-gsea" id="toc-methods-using-pre-defined-gene-sets-gsea" class="nav-link" data-scroll-target="#methods-using-pre-defined-gene-sets-gsea"><span class="header-section-number">12.2.1</span> 10.3.1 Methods using pre-defined gene sets (GSEA)</a></li>
+  <li><a href="#gene-set-analysis-with-two-way-table-tests" id="toc-gene-set-analysis-with-two-way-table-tests" class="nav-link" data-scroll-target="#gene-set-analysis-with-two-way-table-tests"><span class="header-section-number">12.2.2</span> 10.3.2 Gene set analysis with two-way table tests</a></li>
+  <li><a href="#significant-subgraphs-and-high-scoring-modules" id="toc-significant-subgraphs-and-high-scoring-modules" class="nav-link" data-scroll-target="#significant-subgraphs-and-high-scoring-modules"><span class="header-section-number">12.2.3</span> 10.3.3 Significant subgraphs and high scoring modules</a></li>
+  <li><a href="#an-example-with-the-bionet-implementation" id="toc-an-example-with-the-bionet-implementation" class="nav-link" data-scroll-target="#an-example-with-the-bionet-implementation"><span class="header-section-number">12.2.4</span> 10.3.4 An example with the BioNet implementation</a></li>
+  </ul></li>
+  <li><a href="#phylogenetic-trees" id="toc-phylogenetic-trees" class="nav-link" data-scroll-target="#phylogenetic-trees"><span class="header-section-number">12.3</span> 10.4 Phylogenetic Trees</a>
+  <ul class="collapse">
+  <li><a href="#markovian-models-for-evolution." id="toc-markovian-models-for-evolution." class="nav-link" data-scroll-target="#markovian-models-for-evolution."><span class="header-section-number">12.3.1</span> 10.4.1 Markovian models for evolution.</a></li>
+  <li><a href="#simulating-data-and-plotting-a-tree" id="toc-simulating-data-and-plotting-a-tree" class="nav-link" data-scroll-target="#simulating-data-and-plotting-a-tree"><span class="header-section-number">12.3.2</span> 10.4.2 Simulating data and plotting a tree</a></li>
+  <li><a href="#estimating-a-phylogenetic-tree" id="toc-estimating-a-phylogenetic-tree" class="nav-link" data-scroll-target="#estimating-a-phylogenetic-tree"><span class="header-section-number">12.3.3</span> 10.4.3 Estimating a phylogenetic tree</a></li>
+  <li><a href="#application-to-16s-rrna-data" id="toc-application-to-16s-rrna-data" class="nav-link" data-scroll-target="#application-to-16s-rrna-data"><span class="header-section-number">12.3.4</span> 10.4.4 Application to 16S rRNA data</a></li>
+  </ul></li>
+  <li><a href="#combining-phylogenetic-trees-into-a-data-analysis" id="toc-combining-phylogenetic-trees-into-a-data-analysis" class="nav-link" data-scroll-target="#combining-phylogenetic-trees-into-a-data-analysis"><span class="header-section-number">12.4</span> 10.5 Combining phylogenetic trees into a data analysis</a>
+  <ul class="collapse">
+  <li><a href="#hierarchical-multiple-testing" id="toc-hierarchical-multiple-testing" class="nav-link" data-scroll-target="#hierarchical-multiple-testing"><span class="header-section-number">12.4.1</span> 10.5.1 Hierarchical multiple testing</a></li>
+  </ul></li>
+  <li><a href="#minimum-spanning-trees" id="toc-minimum-spanning-trees" class="nav-link" data-scroll-target="#minimum-spanning-trees"><span class="header-section-number">12.5</span> 10.6 Minimum spanning trees</a>
+  <ul class="collapse">
+  <li><a href="#mst-based-testing-the-friedmanrafsky-test" id="toc-mst-based-testing-the-friedmanrafsky-test" class="nav-link" data-scroll-target="#mst-based-testing-the-friedmanrafsky-test"><span class="header-section-number">12.5.1</span> 10.6.1 MST based testing: the Friedman–Rafsky test</a></li>
+  <li><a href="#example-bacteria-sharing-between-mice" id="toc-example-bacteria-sharing-between-mice" class="nav-link" data-scroll-target="#example-bacteria-sharing-between-mice"><span class="header-section-number">12.5.2</span> 10.6.2 Example: Bacteria sharing between mice</a></li>
+  <li><a href="#friedmanrafsky-test-with-nested-covariates" id="toc-friedmanrafsky-test-with-nested-covariates" class="nav-link" data-scroll-target="#friedmanrafsky-test-with-nested-covariates"><span class="header-section-number">12.5.3</span> 10.6.3 Friedman–Rafsky test with nested covariates</a></li>
+  </ul></li>
+  <li><a href="#summary-of-this-chapter" id="toc-summary-of-this-chapter" class="nav-link" data-scroll-target="#summary-of-this-chapter"><span class="header-section-number">12.6</span> 10.7 Summary of this chapter</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">12.7</span> 10.8 Further reading</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">12.8</span> 10.9 Exercises</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">10.1 Goals for this chapter</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><a href="imgs/Darwin_Tree_1837_web.png"><img src="imgs/Darwin_Tree_1837_web.png" class="img-fluid"></a></p>
+<p>Networks and trees are often used to represent knowledge about a biological system. They can also be used to directly encode observations from an experiment or study. Phylogenetic trees were drawn to represent family and similarity relationships between species, even before Darwin’s famous notebook sketch that gave these trees a mechanistic, causal interpretation. The meaning of the nodes and edges in a network can differ, and needs to be specified. For instance, a network might schematize relationships between proteins, such as in Figure 10.1, where the nodes could stand for genes or their encoded proteins, and edges could be direct physical interactions or more abstract “functional” or “genetic” interactions representing outcomes from an experiment. In this book, we use the terms <em>graph</em> and <em>network</em> largely exchangeably. The former term is a bit more evocative of the mathematical structure, the latter of the biological interpretation.</p>
+<p><a href="10-chap_files/figure- html/fig-chemo-1.png" title="Figure 10.1: A small protein-protein network that represents pairwise relationships between proteins."><img src="10-chap_files/figure-html/fig-chemo-1.png" class="img-fluid"></a></p>
+<p>Figure 10.1: A small protein-protein network that represents pairwise relationships between proteins.</p>
+<p>We saw in <a href="02-chap.html">Chapter 2</a> that we could model sequences of state transitions as a Markov chain, which can be represented as directed graphs with weights on the edges. Metabolic pathways in which nodes are chemical metabolites and the edges represent chemical reactions. Mutation history trees are used in cancer genomics to represent lineages of mutations.</p>
+<p>Transmission networks are important in studying the epidemiology of infectious diseases. As real networks can be very large, we will need special methods for representing and visualizing them. This chapter will be focused on ways of integrating graphs into a data analytic workflow.</p>
+<p>In this chapter we will</p>
+<ul>
+<li><p>Use the formal definition of a graph’s components: edges, vertices, layout to see how we can manipulate them in R using both adjacency matrices and lists of edges.</p></li>
+<li><p>We will transform a graph object from <strong><a href="https://cran.r-project.org/web/packages/igraph/">igraph</a></strong> into an object that can be visualized according to the layers approach in <strong><a href="https://bioconductor.org/packages/ggplot2/">ggplot2</a></strong> using <strong><a href="https://cran.r-project.org/web/packages/ggraph/">ggraph</a></strong>. We will experiment with covariates that we attach to graph edges and nodes.</p></li>
+<li><p>Graphs are useful ways of encoding prior knowledge about a system, and we will see how they enable us to go from simple gene set analyses to meaningful biological recommendations by mapping significance scores onto the network to detect perturbation <em>hotspots</em>.</p></li>
+<li><p>We will build phylogenetic trees starting with from DNA sequences and then visualize these trees with the specifically designed R packages <strong><a href="https://cran.r-project.org/web/packages/ape/">ape</a></strong> and <strong><a href="https://cran.r-project.org/web/packages/ggtree/">ggtree</a></strong>.</p></li>
+<li><p>We will combine a phylogenetic tree built from microbiome 16S rRNA data with covariates to show how the hierarchical relationship between taxa can increase the power in multiple hypothesis testing.</p></li>
+<li><p>A special tree called a minimum spanning tree (MST) is very useful for testing the relations between a graph and other covariates. We’ll see how to implement different versions of what is known as the Friedman-Rafsky test. We’ll study both co-occurrence of bacteria in mice litters and strain similarities in HIV contagion networks.</p></li>
+</ul>
+<section id="graphs" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="graphs"><span class="header-section-number">12.1</span> 10.2 Graphs</h2>
+<section id="what-is-a-graph-and-how-can-it-be-encoded" class="level3" data-number="12.1.1">
+<h3 data-number="12.1.1" class="anchored" data-anchor-id="what-is-a-graph-and-how-can-it-be-encoded"><span class="header-section-number">12.1.1</span> 10.2.1 What is a graph and how can it be encoded?</h3>
+<p>A <strong>graph</strong> is defined as a combination of two sets, often denoted as \((V,E)\). Here, \(V\) is a set of <strong>nodes</strong> or <strong>vertices</strong> , \(E\) is a set of <strong>edges</strong> between vertices. Each element of \(E\) is a pair of nodes, i.e., consists of two elements of \(V\). An intuitive way to represent a graph is by its <strong>from-to</strong> representation. If we denote the set of vertices as \(V=(, , , )\), then the from- to (or <strong>edge list</strong>) representation is a table of the following form.</p>
+<pre><code>  from to
+1    A  B
+2    B  C
+3    A  E
+4    C  D
+5    E  F</code></pre>
+<p>The ordering of the rows in the from-to table plays no role. In a <strong>directed</strong> or <strong>oriented graph</strong> , the edges are ordered pairs, i.e., the first line in the above table states that there is an edge from A to B, but does not say whether there is also an edge from B to A—this would need to be denoted in a separate row of the table.</p>
+<p>In an <strong>undirected graph</strong> , the edges are unordered pairs, i.e., an edge from A to B is not distinguished from an edge from B to A. Undirected graphs encode symmetric relationships between the nodes, directed graphs represent asymmetric relationships.</p>
+<p>It’s important not to confuse a graph with its visualization. It is possible to draw a graph onto a two-dimensional area like in Figure 10.1, but this is optional, and not unique—there are always many different ways to draw the same graph. There is also no guarantee that in such a visualization, edges do not overlap. Depending on the graph, this can happen. Graphs do not live in physical space (neither 2D nor 3D) but are literally just sets of nodes and edges.</p>
+<p>An alternative representation, equivalent to the from-to table, is the <strong>adjacency matrix</strong> , a quadratic matrix with as many rows (and columns) as nodes in the graph. The matrix contains a non-zero entry in the \(i\)th row and \(j\)th column to encode that there is an edge between the \(i\)th and \(j\)th vertices.</p>
+<p>__</p>
+<p>Question 10.1</p>
+<p>For undirected graphs, what is special about the adjacency matrix \(A\)?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>The adjacency matrix is symmetric, i.e., \(M = M^T\). An example is shown in Figures 10.2 and 10.3. <code>g1</code> is created from a from-to table (encoded in the two-column matrix <code>edges</code>) by the code below.</p>
+<pre><code>library("igraph")
+edges = matrix(c(1,3, 2,3, 3,4, 4,5, 4,6), byrow = TRUE, ncol = 2)
+g1 = graph_from_edgelist(edges, directed = FALSE)
+vertex_attr(g1, name = "name") = 1:6
+plot(g1, vertex.size = 25, edge.width = 5, vertex.color = "coral")__</code></pre>
+<p><a href="10-chap_files/figure- html/fig-igraphplot-1.png" title="Figure 10.2: A small undirected graph with numbered nodes."><img src="10-chap_files/figure-html/fig-igraphplot-1.png" class="img-fluid"></a></p>
+<p>Figure 10.2: A small undirected graph with numbered nodes.</p>
+<p><a href="10-chap_files/figure- html/fig-adjmatrix-1.png" title="Figure 10.3: The adjacency matrix of the graph shown in Figure fig-igraphplot is is a symmetric n \times n matrix of 0s and 1s, where is n is the number of nodes."><img src="10-chap_files/figure-html/fig-adjmatrix-1.png" class="img-fluid"></a></p>
+<p>Figure 10.3: The adjacency matrix of the graph shown in Figure 10.2 is is a symmetric \(n n\) matrix of \(0\)s and \(1\)s, where is \(n\) is the number of nodes.</p>
+<p>__</p>
+<p>Question 10.2</p>
+<p>Can you give an alternative way to that shown in the answer to Question 10.1 above for creating a graph from a list of edges dataframe?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<pre><code>edges = "1,3\n2,3\n3,4\n4,6\n4,5"
+df = read.csv(textConnection(edges), header = FALSE)
+sg = graph_from_data_frame(df, directed = FALSE)
+sg __
+
+
+IGRAPH 1467322 UN-- 6 5 -- 
++ attr: name (v/c)
++ edges from 1467322 (vertex names):
+[1] 1--3 2--3 3--4 4--6 4--5</code></pre>
+<p>Typically, you would use the <code>read.csv</code> function to read the from-to table from a separate file. Here the authors of the book decided to create the character string <code>edges</code> on the fly and to turn into a the equivalent of a file using the function <code>textConnection</code>, to keep the example more compact. The notation <code>"\n"</code> indicates a line break.</p>
+<section id="elements-of-a-simple-graph" class="level4" data-number="12.1.1.1">
+<h4 data-number="12.1.1.1" class="anchored" data-anchor-id="elements-of-a-simple-graph"><span class="header-section-number">12.1.1.1</span> Elements of a simple graph</h4>
+<ul>
+<li><p>The nodes or vertices. These are the colored circles with numbers in them in Figure 10.2.</p></li>
+<li><p>Edges or connections, the segments that join the nodes and which can be directed or not.</p></li>
+<li><p>Edge attributes, such edge length. When not specified, we suppose the edge lengths are all the same, typically, one. For instance, to compute the distance between two nodes in the graph, we sum up the lengths of the edges along the shortest path.</p></li>
+<li><p>Edge and node attributes: optionally, each edge or each node can be mapped to further continuous or categorical variables, such as type, color, weight, edge width, node size, \(…\) Pretty much anything is possible here, depending on the application and the intended computations.</p></li>
+</ul>
+<p>We also call a directed graph with edge lengths a <strong>network</strong>. The adjacency matric of a network is an \(nn\) matrix of positive numbers corresponding to the edge lengths.</p>
+</section>
+<section id="basic-concepts" class="level4" data-number="12.1.1.2">
+<h4 data-number="12.1.1.2" class="anchored" data-anchor-id="basic-concepts"><span class="header-section-number">12.1.1.2</span> Basic concepts</h4>
+<p>The <em>degree</em> of a node is the number of edges connected to it. In directed graphs we differentiate between <em>in-degree</em> and <em>out-degree</em> for incoming and outgoing edges. We may further distinguish between directed graphs that contain cycles and those that do not (termed cyclic and acyclic graphs).</p>
+<p>For large graphs, on can summarize overall graph structure by looking at the distributions of vertex degrees, and we can identify particularly interesting regions or specific nodes and edge in a graph with measures such as centrality and betweenness. These measures are available in various packages (<strong><a href="https://cran.r-project.org/web/packages/network/">network</a></strong> , <strong><a href="https://cran.r-project.org/web/packages/igraph/">igraph</a></strong>).</p>
+<p>If the number of edges is of the same order of magnitude as the number of nodes (written \(\#EO(\#V)\)), we say that the graph is <strong>sparse</strong>. Some graphs have many nodes, for instance, the package <strong><a href="https://bioconductor.org/packages/ppiData/">ppiData</a></strong> contains a predicted protein interaction (<code>ppipred</code>) graph on about 2500 proteins with around 20000 edges1. A complete adjacency matrix for such a graph requires more than 6 million memory units, of which most contain 0. This is needlessly wasteful. The edge list representation of the same graph is more compact: it only uses storage where there is an edge, in our example, this amounts to 20000 memory units. One particular choice of edge list representation is sparse matrix encodings, such as implemented in the package <strong><a href="https://cran.r-project.org/web/packages/Matrix/">Matrix</a></strong>.</p>
+<p>1 Gene and species phylogenies may even be much larger.</p>
+<p>On the other hand, in a <strong>dense</strong> graph, the number of edges is of the same order of magnitude as the number of potential edges, i.e., the square of the number of nodes (written \(\#EO(\#V^2)\). Memory space can be an issue for the storage of large dense graphs.</p>
+</section>
+<section id="graph-layout" class="level4" data-number="12.1.1.3">
+<h4 data-number="12.1.1.3" class="anchored" data-anchor-id="graph-layout"><span class="header-section-number">12.1.1.3</span> Graph layout</h4>
+<p>We will see several examples where the same graph is plotted in different ways, either for aesthetic or practical reasons. This is done through the choice of the <strong>graph layout</strong>.</p>
+<p>When the edges have lengths representing distances the problem of a 2D representation of the graph is the same as the multidimensional scaling we saw in <a href="09-chap.html">Chapter 9</a> It is often solved in a similar way by spreading out the vertex-points as much as possible. In the simple case of edges without lengths, the algorithms can choose different criteria. The method of Fruchterman and Reingold is a basic choice. It is based on a physics-inspired model where similar points attract and repel each other as if under the effect of (Newtonian) physical forces.</p>
+<p>__</p>
+<p>Task</p>
+<p>Use the <strong><a href="https://cran.r-project.org/web/packages/igraph/">igraph</a></strong> package to do the following</p>
+<ul>
+<li><p>Create a dense random graph with 12 nodes and more than 50 edges.</p></li>
+<li><p>Experiment plotting the graph with different layouts: place the nodes on a circle, or represent the graph as symmetrically as possible, avoid any overlapping nodes or edges.</p></li>
+</ul>
+</section>
+<section id="graphs-from-data" class="level4" data-number="12.1.1.4">
+<h4 data-number="12.1.1.4" class="anchored" data-anchor-id="graphs-from-data"><span class="header-section-number">12.1.1.4</span> Graphs from data</h4>
+<p>Usually data do not arrive in the form of graphs. Graphical or network representations are often the result of transforming from other data types.</p>
+<p><strong>From distances or similarities:</strong> graphs can simplify distance or similarity relationships between objects by binarising them. Nodes are connected if they are similar or close, and not connected if not. Thus, the input is a similarity or distance measure between all pairs of objects of interest (genes, proteins, species, phenotypes, \(…\)), to which a threshold is applied. The set of measures could be realized in a dense matrix or be computed on the fly.</p>
+<p><strong>Bipartite graphs:</strong> some data arrive naturally as absence or presence relationships between two types of objects, for instance, finch species and islands in the Galapagos archipelago (Figure 10.4), or transcription factors and gene regulatory regions they are considered to bind to. Such relationships can be encoded with 0/1 values in a rectangular matrix, where rows represent one object type and columns the other. The resulting graph has two types of nodes, e.g., finch-nodes and island-nodes, and edges can only exist between nodes of different types, e.g., between a taxon and an island, but not between taxa, nor between islands. Edges in Figure 10.4 represent <em>lives on</em> relationships.</p>
+<p><a href="imgs/BipartiteTaxa.png" title="Figure 10.4: This bipartite graph connects each taxon to the sites where it was observed."><img src="imgs/BipartiteTaxa.png" class="img-fluid"></a></p>
+<p>Figure 10.4: This <strong>bipartite</strong> graph connects each taxon to the sites where it was observed.</p>
+<p>__</p>
+<p>Question 10.3</p>
+<p>Load the <code>finch.csv</code> data and experiment plotting them to highlight that they represent a bipartite network.</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>The output of the following code is shown in Figure 10.5.</p>
+<pre><code>finch = readr::read_csv("../data/finch.csv", comment = "#", col_types = "cc")
+finch __
+
+
+# A tibble: 122 × 2
+   .tail .head             
+   &lt;chr&gt; &lt;chr&gt;             
+ 1 C     Large ground finch
+ 2 D     Large ground finch
+ 3 E     Large ground finch
+ 4 F     Large ground finch
+ 5 G     Large ground finch
+ 6 H     Large ground finch
+ 7 I     Large ground finch
+ 8 J     Large ground finch
+ 9 L     Large ground finch
+10 M     Large ground finch
+# ℹ 112 more rows
+
+
+library("network")
+finch.nw  = as.network(finch, bipartite = TRUE, directed = FALSE)
+is.island = nchar(network.vertex.names(finch.nw)) == 1
+plot(finch.nw, vertex.cex = 2.5, displaylabels = TRUE, 
+     vertex.col = ifelse(is.island, "forestgreen", "gold3"),
+     label= sub(" finch", "", network.vertex.names(finch.nw)))
+finch.nw |&gt; as.matrix() |&gt; t() |&gt; (\(x) x[, order(colnames(x))])()__
+
+
+                          A B C D E F G H I J K L M N O P Q
+Large ground finch        0 0 1 1 1 1 1 1 1 1 0 1 1 1 1 1 1
+Medium ground finch       1 1 1 1 1 1 1 1 1 1 0 1 0 1 1 0 0
+Small ground finch        1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 0 0
+Sharp-beaked ground finch 0 0 1 1 1 0 0 1 0 1 0 1 1 0 1 1 1
+Cactus ground finch       1 1 1 0 1 1 1 1 1 1 0 1 0 1 1 0 0
+Large cactus ground finch 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0
+Large tree finch          0 0 1 1 1 1 1 1 1 0 0 1 0 1 1 0 0
+Medium tree finch         0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0
+Small tree finch          0 0 1 1 1 1 1 1 1 1 0 1 0 0 1 0 0
+Vegetarian finch          0 0 1 1 1 1 1 1 1 1 0 1 0 1 1 0 0
+Woodpecker finch          0 0 1 1 1 0 1 1 0 1 0 0 0 0 0 0 0
+Mangrove finch            0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0
+Warbler finch             1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</code></pre>
+<p><a href="10-chap_files/figure- html/fig-finches-1-1.png" title="Figure 10.5: The finches graph. There are many ways to improve the layout, including better taking into account the bipartite nature of the graph."><img src="10-chap_files/figure-html/fig-finches-1-1.png" class="img-fluid"></a></p>
+<p>Figure 10.5: The <code>finches</code> graph. There are many ways to improve the layout, including better taking into account the bipartite nature of the graph.</p>
+<p>__</p>
+<p>Question 10.4</p>
+<p>Make a plot of the graph <code>g1</code> using the <strong><a href="https://cran.r-project.org/web/packages/ggraph/">ggraph</a></strong> package, with a choice of layout and provided geoms such as <code>geom_edge_link</code>, <code>geom_node_point</code> and <code>geom_node_text</code>.</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>The output of the following code is shown in Figure 10.6.</p>
+<pre><code>library("ggraph")
+ggraph(g1, layout = "nicely") + 
+  geom_edge_link() + 
+  geom_node_point(size=6,color="#8856a7") + 
+  geom_node_text(label=vertex_attr(g1)$name,  color="white")__</code></pre>
+<p><a href="10-chap_files/figure-html/fig-ggnetworkong1-1-1.png &quot;Figure 10.6: A ggraph example.&quot;"><img src="10-chap_files/figure-html/fig- ggnetworkong1-1-1.png" class="img-fluid"></a></p>
+<p>Figure 10.6: A <strong><a href="https://cran.r-project.org/web/packages/ggraph/">ggraph</a></strong> example.</p>
+</section>
+<section id="an-example-a-four-state-markov-chain" class="level4" data-number="12.1.1.5">
+<h4 data-number="12.1.1.5" class="anchored" data-anchor-id="an-example-a-four-state-markov-chain"><span class="header-section-number">12.1.1.5</span> An example: a four state Markov chain</h4>
+<p>In <a href="02-chap.html">Chapter 2</a>, we saw how a Markov chain can summarize transitions between nucleotides (considered the states of the system). This is often schematized by a graph. The <strong><a href="https://cran.r-project.org/web/packages/igraph/">igraph</a></strong> package provides many choices for graph “decoration”:</p>
+<pre><code>library("markovchain")
+statesNames = c("A", "C", "G","T")
+T1MC = new("markovchain", states = statesNames, transitionMatrix =
+  matrix(c(0.2,0.1,0.4,0.3,0,1,0,0,0.1,0.2,0.2,0.5,0.1,0.1,0.8,0.0),
+         nrow = 4,byrow = TRUE, dimnames = list(statesNames, statesNames)))
+plot(T1MC, edge.arrow.size = 0.4, vertex.color = "purple",
+     edge.arrow.width = 2.2, edge.width = 5, edge.color = "blue",
+     edge.curved = TRUE, edge.label.cex = 2.5, vertex.size= 32,
+     vertex.label.cex = 3.5, edge.loop.angle = 3,
+     vertex.label.family = "sans", vertex.label.color = "white")__</code></pre>
+<p><a href="imgs/MarkovACGT.png" title="Figure 10.7: A four state Markov chain with arrows representing possible transitions between states."><img src="imgs/MarkovACGT.png" class="img-fluid"></a></p>
+<p>Figure 10.7: A four state Markov chain with arrows representing possible transitions between states.</p>
+<p>Markov chains are simple models of dynamical systems, and the states are represented by the nodes in the graph. The transition matrix gives us the weights on the <strong>directed</strong> edges (arrows) between the states.</p>
+<p>__</p>
+<p>Question 10.5</p>
+<p>Which state do you think this Markov chain will end up in?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>All nodes except C have outgoing edges, C only has in-going edges and a self- edge. Thus, C is an absorbing state. Sooner or later any process from this chain ends up and stays in C.</p>
+<p>__</p>
+<p>Task</p>
+<ol type="1">
+<li><p>Try changing your <code>set.seed</code> function input and see if it changes the plot.</p></li>
+<li><p>Access the help for this particular <code>plot</code> function.</p></li>
+<li><p>Redo the graph and label the edges with the transition probabilities in green and vertices in brown.</p></li>
+</ol>
+<p>We will see how to build a complete example of annotated state space Markov chain graph in Exercise 10.3.</p>
+</section>
+</section>
+<section id="graphs-with-many-layers-labels-on-edges-and-nodes" class="level3" data-number="12.1.2">
+<h3 data-number="12.1.2" class="anchored" data-anchor-id="graphs-with-many-layers-labels-on-edges-and-nodes"><span class="header-section-number">12.1.2</span> 10.2.2 Graphs with many layers: labels on edges and nodes</h3>
+<p>Here is an example of plotting a graph downloaded from the <a href="https://string-db.org">STRING</a> database with annotations at the vertices.</p>
+<pre><code>datf = read.table("../data/string_graph.txt", header = TRUE)
+grs = graph_from_data_frame(datf[, c("node1", "node2")], directed = FALSE)
+E(grs)$weight = 1
+V(grs)$size = centr_degree(grs)$res
+ggraph(grs) +
+  geom_edge_arc(color = "black",  strength = 0.05, alpha = 0.8)+
+  geom_node_point(size = 2.5, alpha = 0.5, color = "orange") +
+  geom_node_label(aes(label=vertex_attr(grs)$name), size = 3, alpha = 0.9, color = "#8856a7", repel = TRUE) __</code></pre>
+<p><a href="10-chap_files/figure-html/fig- completechemokine-1.png" title="Figure 10.8: Perturbed chemokine subnetwork uncovered in @YuGXNA using differential gene expression patterns in sorted T-cells. Notice the clique-like structure of the genes CXCR3, CXCL13, CCL19, CSCR5 and CCR7 in the right hand corner."><img src="10-chap_files/figure-html/fig- completechemokine-1.png" class="img-fluid"></a></p>
+<p>Figure 10.8: Perturbed chemokine subnetwork uncovered in Yu et al. (<a href="16-chap.html#ref-YuGXNA">2012</a>) using differential gene expression patterns in sorted T-cells. Notice the clique-like structure of the genes CXCR3, CXCL13, CCL19, CSCR5 and CCR7 in the right hand corner.</p>
+<p>Figure 10.8 shows the full perturbed chemokine subnetwork discovered in the study of breast cancer metastasis using GXNA (<a href="16-chap.html#ref-GXNA">Nacu et al. 2007</a>) and reported by Yu et al. (<a href="16-chap.html#ref-YuGXNA">2012</a>).</p>
+</section>
+</section>
+<section id="from-gene-set-enrichment-to-networks" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="from-gene-set-enrichment-to-networks"><span class="header-section-number">12.2</span> 10.3 From gene set enrichment to networks</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="imgs/devil.png" title="A long unstructured laundry list of possibly differentially expressed genes can be daunting."><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
+<figcaption>A long unstructured laundry list of possibly differentially expressed genes can be daunting.</figcaption>
+</figure>
+</div>
+<p>A long unstructured laundry list of possibly differentially expressed genes can be daunting.</p>
+<p>In <a href="08-chap.html">Chapter 8</a>, we studied methods for finding a list of differentially expressed genes. Small sample sizes, coupled with efforts to maintain low FDRs, often result in low power to detect differential expression. Therefore, obtaining a long list of genes that can be confidently declared as differentially expressed is, initially, a triumph. However, understanding the underlying biology requires more than just a laundry list of significant players in a biological system.</p>
+<section id="methods-using-pre-defined-gene-sets-gsea" class="level3" data-number="12.2.1">
+<h3 data-number="12.2.1" class="anchored" data-anchor-id="methods-using-pre-defined-gene-sets-gsea"><span class="header-section-number">12.2.1</span> 10.3.1 Methods using pre-defined gene sets (GSEA)</h3>
+<p>One of the earliest approaches was to look for gene attributes that are <strong>overrepresented</strong> or <strong>enriched</strong> in the laundry list of significant genes. These gene classes are often based on Gene Ontology (GO) categories (for example, genes that are involved in organ growth, or genes that are involved in feeding behavior). The Gene Ontology (GO) is a collection of three ontologies that describe genes and gene products. These ontologies are restricted vocabularies that have the structure of directed acyclic graphs (DAGS). The most specific terms are the leaves of the graph. The GO graph consists of nodes (here, Gene Ontology terms) and edges from more specific terms (children) to less specific (parents), often these edges are directed. Nodes and edges can have multiple attributes that can be visualized. The main purpose of using GO annotations for a particular set of Genes designated as significant in an experiment is to look for the <strong>enrichment</strong> of a GO term in this list, we will give this term a statistical meaning below. Many other useful lists of important gene sets exist.</p>
+<p>__</p>
+<p>Task</p>
+<p>Find a useful database of gene sets.</p>
+<p>For instance, the <code>MsigDB</code> Molecular Signature Database (<a href="16-chap.html#ref-MSigDB">Liberzon et al. 2011</a>) contains many gene sets that can be accessed from within R using the function <code>getBroadSets</code> from the Bioconductor package <strong><a href="https://bioconductor.org/packages/GSEABase/">GSEABase</a></strong> roughly as follows:</p>
+<pre><code>library("GSEABase")
+## This requires a login to the website.
+fl   =  "/path/to/msigdb_v5.1.xml"
+gss  =  getBroadSets(fl) 
+organism(gss[[1]])
+table(sapply(gss, organism))__</code></pre>
+</section>
+<section id="gene-set-analysis-with-two-way-table-tests" class="level3" data-number="12.2.2">
+<h3 data-number="12.2.2" class="anchored" data-anchor-id="gene-set-analysis-with-two-way-table-tests"><span class="header-section-number">12.2.2</span> 10.3.2 Gene set analysis with two-way table tests</h3>
+<p>Table 10.1: Although there are the same number of each category of gene found in the <em>significant</em> set, both the simulation below and the theory of testing in two-way tables shows us that the blue category is enriched.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Yellow</th>
+<th>Blue</th>
+<th>Red</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Significant</td>
+<td>25</td>
+<td>25</td>
+<td>25</td>
+</tr>
+<tr class="even">
+<td>Universe</td>
+<td>500</td>
+<td>100</td>
+<td>400</td>
+</tr>
+</tbody>
+</table>
+<p>Here, we start by explaining a basic approach often called <strong>Fisher’s “exact” test</strong> or <strong>hypergeometric test</strong> ing.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="imgs/devil.png" title="So-called ‘exact’ tests because they are nonparametric and based on exhaustive enumerations: not because we are sure of the answer – this is statistics after all."><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
+<figcaption>So-called ‘exact’ tests because they are nonparametric and based on exhaustive enumerations: not because we are sure of the answer – this is statistics after all.</figcaption>
+</figure>
+</div>
+<p>So-called ‘exact’ tests because they are nonparametric and based on exhaustive enumerations: <strong>not</strong> because we are sure of the answer – this is statistics after all.</p>
+<p>Define a universe of candidate genes that may potentially be significant; say this universe is of size \(N\). We also have a record of the genes that actually <strong>did</strong> come out significant, of which we suppose there were \(m\).</p>
+<p>We make a toy model involving balls in boxes, with a total of \(N\) balls corresponding to the genes identified in the gene universe. These genes are split into different functional categories, suppose there are \(N=1,000\) genes, of which 500 are yellow, 100 are blue and 400 are red. Then a subset of \(m=75\) genes are labeled as <strong>significant</strong> , suppose among these significantly interesting genes, there are 25 yellow, 25 red and 25 blue. Is the blue category enriched or overrepresented?</p>
+<p>We use this hypergeometric two-way table testing to account for the fact that some categories are extremely numerous and others are rarer.</p>
+<p>__</p>
+<p>Question 10.6</p>
+<p>Run a Monte Carlo experiment with 20,000 simulations and compute the p-value of significance of having 25 blues under the null hypothesis that no category is over-represented in the significant set.</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>Under the null the 75 are sampled randomly from our unequal boxes as follows:</p>
+<pre><code>universe = c(rep("Yellow", 500), rep("Blue", 100), rep("Red", 400))
+countblue = replicate(20000, {
+  pick75 = sample(universe, 75, replace = FALSE)
+  sum(pick75 == "Blue")
+})
+summary(countblue)__
+
+
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  0.000   6.000   7.000   7.496   9.000  20.000 </code></pre>
+<p>The histogram in Figure 10.9 shows that having a value as large as 25 under the null model would be extremely rare.</p>
+<p><a href="10-chap_files/figure- html/fig-histblue-1.png" title="Figure 10.9: We can see that even in 20000 simulations, no blue count comes close to being 25. We can reject such an event as having happened by chance and conclude that the blue are enriched."><img src="10-chap_files/figure-html/fig-histblue-1.png" class="img-fluid"></a></p>
+<p>Figure 10.9: We can see that even in 20000 simulations, no blue count comes close to being 25. We can reject such an event as having happened by chance and conclude that the blue are <strong>enriched</strong>.</p>
+<p>In the general case, the gene universe is an urn with \(N\) balls, if we pick the \(m\) balls at random and there is a proportion of \(k/N\) blue balls, we expect to see \(km/N\) blue balls in a draw of size \(k\).</p>
+<section id="plotting-gene-enrichment-networks-with" class="level4" data-number="12.2.2.1">
+<h4 data-number="12.2.2.1" class="anchored" data-anchor-id="plotting-gene-enrichment-networks-with"><span class="header-section-number">12.2.2.1</span> Plotting gene enrichment networks with</h4>
+<p><strong><a href="https://cran.r-project.org/web/packages/GOplot/">GOplot</a></strong></p>
+<p>Here we show an attractive way of summarizing the connections between the gene functional categories and the significant gene set.</p>
+<pre><code>library("GOplot")
+data("EC")
+circ  =  circle_dat(EC$david, EC$genelist)
+chord =  chord_dat(circ, EC$genes, EC$process)
+GOChord(chord, limit = c(0, 5))__</code></pre>
+<p><a href="10-chap_files/figure- html/fig-GOplotEC-1.jpeg" title="Figure 10.10: This graph shows the correspondence between GO terms and significantly changed genes in a study on differential expression in endothelial cells from two steady state tissues (brain and heart, see @Nolan:2013). After normalization a differential expression analysis was performed giving a list of genes. A gene-annotation enrichment analysis of the set of differentially expressed genes (adjusted p-value < 0.05) was then performed with the GOplot package."><img src="10-chap_files/figure-html/fig-GOplotEC-1.jpeg" class="img-fluid"></a></p>
+<p>Figure 10.10: This graph shows the correspondence between GO terms and significantly changed genes in a study on differential expression in endothelial cells from two steady state tissues (brain and heart, see Nolan et al.&nbsp;(<a href="16-chap.html#ref-Nolan:2013">2013</a>)). After normalization a differential expression analysis was performed giving a list of genes. A gene-annotation enrichment analysis of the set of differentially expressed genes (adjusted p-value &lt; 0.05) was then performed with the <strong><a href="https://cran.r-project.org/web/packages/GOplot/">GOplot</a></strong> package.</p>
+<p>In fact, the Gene Ontology graph does not necessarily capture meaningful <em>gene interactions</em> as genes from different processes often interact productively. A large amount of information remains unused, for example, all significant genes are usually given equal weight, despite the potentially large variations in their p-values.</p>
+</section>
+</section>
+<section id="significant-subgraphs-and-high-scoring-modules" class="level3" data-number="12.2.3">
+<h3 data-number="12.2.3" class="anchored" data-anchor-id="significant-subgraphs-and-high-scoring-modules"><span class="header-section-number">12.2.3</span> 10.3.3 Significant subgraphs and high scoring modules</h3>
+<p>We have at our disposal more than just the Gene Ontology. There are many different databases of gene networks from which we can choose a <strong>known skeleton</strong> graph onto which we project significance scores such as p-values from our differential expression experiment. We will follow an idea first suggested by Ideker et al.&nbsp;(<a href="16-chap.html#ref-Ideker:2002">2002</a>). This is further developed in Nacu et al.&nbsp;(<a href="16-chap.html#ref-GXNA">2007</a>). A careful implementation with many improvements is available as the Bioconductor package <strong><a href="https://bioconductor.org/packages/BioNet/">BioNet</a></strong> (<a href="16-chap.html#ref-BioNet">Beisser et al. 2010</a>). These methods all search for the subgraphs or modules of a scored-skeleton network that seem to be particularly <strong>perturbed</strong>.</p>
+<p>Each gene-node in the network is assigned a score that can either be calculated from a t-statistic or a p-value. Often pathways contain both upregulated and downregulated genes; as pointed out in Ideker et al. (<a href="16-chap.html#ref-Ideker:2002">2002</a>), this can be captured by taking absolute values of the test statistic or just incorporating scores computed from the p-values2. Beisser et al.&nbsp;(<a href="16-chap.html#ref-BioNet">2010</a>) model the p-values of the genes as we did in <a href="06-chap.html">Chapter 6</a>: mixture of non- perturbed genes whose p-values will be uniformly distributed and non uniformly distributed p-values from the perturbed genes. We model the signal in the data using a beta distribution for the p-values following Pounds and Morris (<a href="16-chap.html#ref-Pounds2003">2003</a>).</p>
+<p>2 We’ll want something like \(-p\), so that small p-values give large scores.</p>
+<p>Given our node-scoring function, we search for connected hotspots in the graph, i.e., a subgraph of genes with high combined scores.</p>
+<section id="using-a-subgraph-search-algorithm" class="level4" data-number="12.2.3.1">
+<h4 data-number="12.2.3.1" class="anchored" data-anchor-id="using-a-subgraph-search-algorithm"><span class="header-section-number">12.2.3.1</span> Using a subgraph search algorithm</h4>
+<p>Finding the maximal scoring subgraph of a generic graph is known to be intractable in general (we say it is an NP-hard problem), so various approximate algorithms have been proposed. Ideker et al. (<a href="16-chap.html#ref-Ideker:2002">2002</a>) suggested using simulated annealing, however this is slow and tends to produce large subgraphs that are difficult to interpret. Nacu et al.&nbsp;(<a href="16-chap.html#ref-GXNA">2007</a>) started with a seed vertex and gradually expand around it. Beisser et al. (<a href="16-chap.html#ref-BioNet">2010</a>) started the search with a so-called minimal spanning tree (MST), a graph we we will study later in this chapter.</p>
+</section>
+</section>
+<section id="an-example-with-the-bionet-implementation" class="level3" data-number="12.2.4">
+<h3 data-number="12.2.4" class="anchored" data-anchor-id="an-example-with-the-bionet-implementation"><span class="header-section-number">12.2.4</span> 10.3.4 An example with the BioNet implementation</h3>
+<p>To illustrate the method, we show data from the <strong><a href="https://bioconductor.org/packages/BioNet/">BioNet</a></strong> package.</p>
+<p>The <code>interactome</code> data contains a connected component of the network comprising 2034 different gene products and 8399 interactions. This constitutes the skeleton graph with which we will work, see Beisser et al. (<a href="16-chap.html#ref-BioNet">2010</a>).</p>
+<p>The <code>dataLym</code> contains the relevant pvalues and \(t\) statistics for 3,583 genes, you can access them and do the analysis as follows:</p>
+<pre><code>library("BioNet")
+library("DLBCL")
+data("dataLym")
+data("interactome")
+interactome __
+
+
+A graphNEL graph with undirected edges
+Number of Nodes = 9386 
+Number of Edges = 36504 
+
+
+pval = dataLym$t.pval
+names(pval)  =  dataLym$label
+subnet = subNetwork(dataLym$label, interactome)
+subnet = rmSelfLoops(subnet)
+subnet __
+
+
+A graphNEL graph with undirected edges
+Number of Nodes = 2559 
+Number of Edges = 7788 </code></pre>
+<section id="fit-a-beta-uniform-model" class="level4" data-number="12.2.4.1">
+<h4 data-number="12.2.4.1" class="anchored" data-anchor-id="fit-a-beta-uniform-model"><span class="header-section-number">12.2.4.1</span> Fit a Beta-Uniform model</h4>
+<p>The p-values are fit to the type of mixture we studied in <a href="04-chap.html">Chapter 4</a>, with a uniform component from the null with probability \(_0\) and a beta distribution (proportional to \(a x^{a - 1}\)) for the p-values corresponding to the alternatives (<a href="16-chap.html#ref-Pounds2003">Pounds and Morris 2003</a>). \[f(x|a,_0)= _0 + (1-_0) a x^{a - 1} 0 &lt;x ; ; 0&lt;a&lt;1\] Running the model with an \[fdr\] of 0.001:</p>
+<p>The package actually gives a different name to \(\_0\): it uses \(\\) and calls it the mixing parameter.</p>
+<pre><code>fb = fitBumModel(pval, plot = FALSE)
+fb __
+
+
+Beta-Uniform-Mixture (BUM) model
+
+3583 pvalues fitted
+
+Mixture parameter (lambda): 0.482
+shape parameter (a):        0.180
+log-likelihood:         4471.8
+
+
+scores=scoreNodes(subnet, fb, fdr = 0.001)__</code></pre>
+<p><a href="10-chap_files/figure- html/fig-plotFITBum-1.png" title="Figure 10.11: The qqplot shows the quality of the fit of beta-uniform mixture model to the data. The red points have the theoretical quantiles from the beta distribution as the x coordinates the observed quantiles and the y coordinates. The blue line shows that this model fits nicely."><img src="10-chap_files/figure-html/fig-plotFITBum-1.png" class="img-fluid"></a></p>
+<p>Figure 10.11: The qqplot shows the quality of the fit of beta-uniform mixture model to the data. The red points have the theoretical quantiles from the beta distribution as the x coordinates the observed quantiles and the y coordinates. The blue line shows that this model fits nicely.</p>
+<p><a href="10-chap_files/figure- html/fig-histFITBum-1.png" title="Figure 10.12: A histogram of the mixture components for the p-values, the beta in red and the uniform in blue, \pi_0 is the mixing proportion assigned to the null component whose distribution should be uniform."><img src="10-chap_files/figure-html/fig-histFITBum-1.png" class="img-fluid"></a></p>
+<p>Figure 10.12: A histogram of the mixture components for the p-values, the beta in red and the uniform in blue, \(_0\) is the mixing proportion assigned to the null component whose distribution should be uniform.</p>
+<p>Then we run a heuristic search for a high scoring subgraph using:</p>
+<pre><code>hotSub  =  runFastHeinz(subnet, scores)
+hotSub __
+
+
+A graphNEL graph with undirected edges
+Number of Nodes = 144 
+Number of Edges = 221 
+
+
+logFC=dataLym$diff
+names(logFC)=dataLym$label __</code></pre>
+<p>__</p>
+<p>Question 10.7</p>
+<p>We made Figure 10.13 using the following code:</p>
+<pre><code>plotModule(hotSub, layout = layout.davidson.harel, scores = scores,
+                  diff.expr = logFC)__</code></pre>
+<p><a href="10-chap_files/figure- html/fig-plotBioNet-1.png" title="Figure 10.13: The subgraph found as maximally enriched for differential expression between ABC and GCB B-cell lymphoma. The nodes are colored in red and green: green shows an upregulation in ACB and red an upregulation in GBC. The shape of the nodes depicts the score: rectangles indicate a negative score, circles a positive score."><img src="10-chap_files/figure-html/fig-plotBioNet-1.png" class="img-fluid"></a></p>
+<p>Figure 10.13: The subgraph found as maximally enriched for differential expression between ABC and GCB B-cell lymphoma. The nodes are colored in red and green: green shows an upregulation in ACB and red an upregulation in GBC. The shape of the nodes depicts the score: rectangles indicate a negative score, circles a positive score.</p>
+<p>Using the function <code>igraph.from.graphNEL</code>, transform the module object and plot it using the <strong><a href="https://cran.r-project.org/web/packages/ggraph/">ggraph</a></strong> method shown in Section 10.2.2.</p>
+</section>
+</section>
+</section>
+<section id="phylogenetic-trees" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="phylogenetic-trees"><span class="header-section-number">12.3</span> 10.4 Phylogenetic Trees</h2>
+<p><a href="imgs/SameTreePhyl.png" title="Figure 10.14: As mathematical objects, the hierarchical clustering trees (studied in sec- clustering) are the same as phylogenetic trees. They are rooted binary trees with labels at the tips."><img src="imgs/SameTreePhyl.png" class="img-fluid"></a></p>
+<p>Figure 10.14: As mathematical objects, the hierarchical clustering trees (studied in <a href="05-chap.html">Chapter 5</a>) are the same as phylogenetic trees. They are <strong>rooted binary</strong> trees with labels at the tips.</p>
+<p>One really important use of graphs in biology is the construction of phylogenetic trees. Trees are graphs with no <strong>cycles</strong> (the official word for loops, whether self loops, or ones that go through several vertices). Phylogenetic trees are usually rooted binary trees that only have labels on the leaves corresponding to contemporary3 taxa at the tips. The inner nodes correspond to <strong>ancestral</strong> sequences which have to be inferred from the <strong>contemporaneous</strong> data on the tips. Many methods use aligned DNA sequences from the different species or populations to infer or estimate the tree. The tips of the tree are usually called <strong>OTU</strong> s (Operational Taxonomic Units). The statistical <strong>parameter</strong> of interest in these analyses is the rooted binary tree with OTU labels on its leaves (see Holmes (<a href="16-chap.html#ref-holmesima">1999</a>, <a href="16-chap.html#ref-holmes2003b">2003b</a>) for details).</p>
+<p>3 Because they are contemporary, the trees are often represented so that the leaves are a ll the same distance from the root.</p>
+<section id="the-example-of-hiv" class="level4" data-number="12.3.0.1">
+<h4 data-number="12.3.0.1" class="anchored" data-anchor-id="the-example-of-hiv"><span class="header-section-number">12.3.0.1</span> The example of HIV</h4>
+<p><a href="imgs/hivtreeplos.png" title="Figure 10.15: This phylogenetic tree describes the history of different HIV/SIV strains in Africa [@Wertheim:2009], [Figure from]."><img src="imgs/hivtreeplos.png" class="img-fluid"></a></p>
+<p>Figure 10.15: This phylogenetic tree describes the history of different HIV/SIV strains in Africa (<a href="16-chap.html#ref- Wertheim:2009">Wertheim and Worobey 2009</a>), [Figure from].</p>
+<p>HIV is a virus that protects itself by evolving very fast (within months, several mutations can appear). Its evolution can thus be followed in real time; whereas the evolution of large organisms which has happened over millions of years. HIV trees are built for medical purposes such as the detection and understanding of drug resistance. They are estimated for individual genes. Different genes can show differences in their evolutionary histories and thus produce different <strong>gene trees</strong>. The phylogenetic tree in Figure 10.15 shows times when the virus switched from monkeys to humans (<a href="16-chap.html#ref-Wertheim:2009">Wertheim and Worobey 2009</a>).</p>
+</section>
+<section id="special-elements-in-phylogenies" class="level4" data-number="12.3.0.2">
+<h4 data-number="12.3.0.2" class="anchored" data-anchor-id="special-elements-in-phylogenies"><span class="header-section-number">12.3.0.2</span> Special elements in phylogenies</h4>
+<ul>
+<li><p>Most phylogenetic trees are shown rooted, the `root’ is usually found by including an outgroup in the tree tips, as we will see later.</p></li>
+<li><p>Characters that are derived from this common ancestry are called homologous (geneticists doing population studies replace the term homology by identity by descent (IBD)).</p></li>
+<li><p>Sisters on the tree defined by a common ancestor are called clades or monophyletic groups, they have more than just <em>similarities</em> in common.</p></li>
+</ul>
+</section>
+<section id="markovian-models-for-evolution." class="level3" data-number="12.3.1">
+<h3 data-number="12.3.1" class="anchored" data-anchor-id="markovian-models-for-evolution."><span class="header-section-number">12.3.1</span> 10.4.1 Markovian models for evolution.</h3>
+<p>To infer what happened in the ancestral species from contemporary data collected on the tips of the tree, we have to make assumptions about how substitutions and deletions occur through time. The models we use are all Markovian and said to be time homogeneous: the mutation rate is constant across history.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="imgs/devil.png" title="This is called the molecular clock hypothesis, if we do not make this assumption we run into what is known as non-identifiability (ie we can’t tell the difference between the many possible mutational histories given the observed data)."><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
+<figcaption>This is called the molecular clock hypothesis, if we do not make this assumption we run into what is known as non-identifiability (ie we can’t tell the difference between the many possible mutational histories given the observed data).</figcaption>
+</figure>
+</div>
+<p>This is called the <strong>molecular clock</strong> hypothesis, if we do not make this assumption we run into what is known as non-identifiability (ie we can’t tell the difference between the many possible mutational histories given the observed data).</p>
+<section id="continuous-markov-chain-and-generator-matrix" class="level4" data-number="12.3.1.1">
+<h4 data-number="12.3.1.1" class="anchored" data-anchor-id="continuous-markov-chain-and-generator-matrix"><span class="header-section-number">12.3.1.1</span> Continuous Markov chain and generator matrix</h4>
+<p>We are going to use the Markov chain we saw in Figure 10.7 on the states [A,C,G,T]; however now we consider that the changes of state, i.e.&nbsp;mutations, occur at random times. The gaps between these mutational events will follow an exponential distribution. These continuous time Markov chains have the following properties:</p>
+<ul>
+<li><p><strong>No Memory</strong>. \(P(Y(u+t)=j;|;Y(t)=i)\) does not depend on times before \(t\).</p></li>
+<li><p><strong>Time homogeneity</strong>. The probability \(P(Y(h+t)=j,|,Y(t)=i)\) does not depend on \(t\), but on \(h\), the time between the events and on \(i\) and \(j\).</p></li>
+<li><p><strong>Linearity</strong>. The instantaneous transition rate is of an approximately linear form</p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="imgs/devil.png" title="We use an error term written here as o(h), we read this little o of h, which just means that this error terms grows much slower (i.e., sublinear) than h."><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
+<figcaption>We use an error term written here as o(h), we read this little o of h, which just means that this error terms grows much slower (i.e., sublinear) than h.</figcaption>
+</figure>
+</div>
+<p>We use an error term written here as \(o(h)\), we read this little \(o\) of \(h\), which just means that this error terms grows much slower (i.e., sublinear) than \(h\).</p>
+<p>\[ <span class="math display">\[\begin{align} P_{ij}(h)&amp;=q_{ij}h+o(h), \quad\text{for }j\neq i\\\
+P_{ii}(h)&amp;=1-q_i(h)+ o(h), \qquad\text{where }q_i=\sum_{j\neq i}q_{ij}.
+\end{align}\]</span>1-q_i(h)+ o(h), q_i=<em>{ji}q</em>{ij}. \end{align} \]</p>
+<p>\(q_{ij}\) is known as the instantaneous transition rate. These rates define matrices as in Table 10.2.</p>
+<ul>
+<li><strong>Exponential distribution</strong>. Times between changes are supposed to be exponentially distributed.</li>
+</ul>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>\(Q = </th>
+<th>\(Q = </th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<p>Table 10.2: Two examples of rate matrices, on the left:the Jukes-Cantor (<code>JC69</code>) model, on the right is shown the Kimura (<code>K80</code>) two parameter model.</p>
+<p>the instantaneous change probability matrix called <strong>the generator</strong>. In the simplest possible model, called a Jukes-Cantor model; all the mutations are equally likely (see the left of Table 10.2). A slightly more flexible model, called the Kimura model is shown on the right in Table 10.2.</p>
+<p>__</p>
+<p>Question 10.8</p>
+<p>Why do we say the Kimura model is more flexible?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>The Jukes-Cantor only has one parameter, that model supposes all transitions and transversions are equally likely. In the Kimura, there is one parameter for transitions and another for the transversions (mutations occurring from purine to pyrimidines, or vice versa).</p>
+<p>![Vocabulary overload here! : Transitions in this context mean mutational changes within the purines (A&lt;-&gt;G]) or within the pyrimidines (C &lt;-&gt; T); whereas when we talked about Markov chains earlier our <strong>transition</strong> matrix contains all probabilities of any state changes.](imgs/devil.png){fig- align=‘center’ width=123}</p>
+<p>The most flexible model is called the Generalized Time Reversible (GTR) model; it has 6 free parameters. We are going to show an example of data simulated according to these generative models from a known tree.</p>
+</section>
+</section>
+<section id="simulating-data-and-plotting-a-tree" class="level3" data-number="12.3.2">
+<h3 data-number="12.3.2" class="anchored" data-anchor-id="simulating-data-and-plotting-a-tree"><span class="header-section-number">12.3.2</span> 10.4.2 Simulating data and plotting a tree</h3>
+<p>Suppose we already know our phylogenetic tree and want to simulate the evolution of the nucleotides down this tree. First we visualize the tree <code>tree1</code> using <code>ggtree</code>; loading the tree and the relevant packages with:</p>
+<pre><code>library("phangorn")
+library("ggtree")
+load(file.path(DATA,"tree1.RData"))__</code></pre>
+<p>__</p>
+<p>Task</p>
+<p>Use the <code>ggtree</code> function to plot <code>tree1</code>; make the tips of the tree green triangles, the ancestral nodes, red circles.</p>
+<pre><code>ggtree(tree1, lwd = 2, color = "darkgreen", alpha = 0.8, right = TRUE) +
+  geom_tiplab(size = 7, angle = 90, offset = 0.05) +
+  geom_point(aes(shape = isTip, color = isTip), size = 5, alpha = 0.6)__</code></pre>
+<p><a href="10-chap_files/figure- html/fig-Atree1b-1.png" title="Figure 10.16: This is the tree we use as our true parameter. We generate nucleotides one at a time from the root and `dropping’ them down the tree. With some probability proportional to the edge lengths, mutations occur down the branches."><img src="10-chap_files/figure-html/fig-Atree1b-1.png" class="img-fluid"></a></p>
+<p>Figure 10.16: This is the tree we use as our <em>true</em> parameter. We generate nucleotides one at a time from the root and `dropping’ them down the tree. With some probability proportional to the edge lengths, mutations occur down the branches.</p>
+<p>Now we generate some sequences from our tree. Each sequence starts with a new nucleotide letter generated randomly at the root; mutations may occur as we go down the tree. You can see in Figure 10.17 that the colors are not equally represented, because the frequency at the root was chosen to be different from the uniform, see the following code.</p>
+<pre><code>seqs6 = simSeq(tree1, l = 60, type = "DNA", bf = c(1, 1, 3, 3)/8, rate = 0.1)
+seqs6 __
+
+
+6 sequences with 60 character and 30 different site patterns.
+The states are a c g t 
+
+
+mat6df = data.frame(as.character(seqs6))
+p = ggtree(tree1, lwd = 1.2) + geom_tiplab(aes(x = branch), size = 5, vjust = 2)
+gheatmap(p, mat6df[, 1:60], offset = 0.01, colnames = FALSE)__</code></pre>
+<p><a href="10-chap_files/figure-html/fig-ggtreeAlignment-1.png &quot;Figure 10.17: The tree on the left was used to generate the sequences on the right according to a Jukes Cantor model. The nucleotide frequencies generated at the root were quite unequal, with A and C being generated more rarely. As the sequences percolate down the tree, mutations occur, they are more likely to occur on the longer branches.&quot;"><img src="10-chap_files/figure-html/fig- ggtreeAlignment-1.png" class="img-fluid"></a></p>
+<p>Figure 10.17: The tree on the left was used to generate the sequences on the right according to a Jukes Cantor model. The nucleotide frequencies generated at the root were quite unequal, with <code>A</code> and <code>C</code> being generated more rarely. As the sequences percolate down the tree, mutations occur, they are more likely to occur on the longer branches.</p>
+<p>__</p>
+<p>Question 10.9</p>
+<p>Experiment with the code above. Change the <code>bf</code> and <code>rate</code> arguments in the <code>simSeq</code> function to make mutations more likely. Do you think sequences generated with a very high mutation rate would make it easier to infer the tree that generated them?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>Very high mutation rates result in mutations overwriting themselves and make inference more difficult. Of course, there is a sweet spot because some mutations have to occur in order for us to resolve the tree branches. After a certain time and a certain number of mutations it may be very difficult to see what was happening at the root. See Mossel (<a href="16-chap.html#ref- Mossel:2003">2003</a>) for details.</p>
+<p>__</p>
+<p>Question 10.10</p>
+<p><strong>Estimation bias: distance underestimation.</strong><br>
+1) If we only count the number of changes between two sequences using a simple Hamming distance, but there has been much evolutionary change between the two, why do we underestimate the distance between the sequences?<br>
+2) Will be the bias be larger for smaller evolutionary distances?</p>
+<p>The standard Markovian models of evolution we saw above enable us to improve these estimates.</p>
+</section>
+<section id="estimating-a-phylogenetic-tree" class="level3" data-number="12.3.3">
+<h3 data-number="12.3.3" class="anchored" data-anchor-id="estimating-a-phylogenetic-tree"><span class="header-section-number">12.3.3</span> 10.4.3 Estimating a phylogenetic tree</h3>
+<p><a href="imgs/Magnify.png"><img src="imgs/Magnify.png" class="img-fluid"></a></p>
+<p>“In solving a problem of this sort, the grand thing is to be able to reason backward. That is a very useful accomplishment, and a very easy one, but people do not practise it much. In the everyday affairs of life it is more useful to reason forward, and so the other comes to be neglected. There are fifty who can reason synthetically for one who can reason analytically”. <strong>Sherlock Holmes</strong></p>
+<p>When the true tree-parameter is known, the above-mentioned probabilistic generative models of evolution tells us what patterns to expect in the sequences. As we have seen in earlier chapters, statistics means going back from the data to reasonable estimates of the parameters; here the tree itself and the branch lengths, even the evolutionary rates can be considered to be the parameters.</p>
+<p><a href="10-chap_files/figure- html/fig-igraphsteiner-1.png" title="Figure 10.18: A Steiner tree, the inner points are represented as squares. The method for creating the shortest tree that passes through all outer 1,2,5,6 is to create two inside (“ancester”) points 3 and 4."><img src="10-chap_files/figure-html/fig-igraphsteiner-1.png" class="img-fluid"></a></p>
+<p>Figure 10.18: A Steiner tree, the inner points are represented as squares. The method for creating the shortest tree that passes through all outer 1,2,5,6 is to create two inside (“ancester”) points 3 and 4.</p>
+<p>There are several approaches to estimation: tree `building’ is no exception, here are the main ones:</p>
+<p><strong>A nonparametric estimate: the parsimony tree</strong> Parsimony is a nonparametric method that minimizes the number of changes necessary to explain the data, it’s solution is the same as that of the Steiner tree problem (see Figure 10.18).</p>
+<p><strong>A parametric estimate: the maximum likelihood tree</strong> In order to estimate the tree using a maximum likelihood or Bayesian approach one needs a model for molecular evolution that integrates mutation rates and branch edge lengths. ML estimation (e.g., <code>Phyml</code>, <code>FastML</code>, <code>RaxML</code>) use efficient optimization algorithms to maximize the likelihood of a tree under the model assumptions.</p>
+<p><strong>Bayesian posterior distributions for trees</strong> Bayesian estimation, MrBayes (<a href="16-chap.html#ref-mrbayes3">Ronquist et al.&nbsp;2012</a>) or BEAST (<a href="16-chap.html#ref-beast">Bouckaert et al.&nbsp;2014</a>) both use MCMC to find posterior distributions of the phylogenies. Bayesian methods are not directly integrated into R and require the user to import the collections of trees generated by Monte Carlo methods in order to summarize them and make confidence statements see Chakerian and Holmes (<a href="16-chap.html#ref-distory-paper">2012</a>) for simple examples.</p>
+<p><strong>The semi-parametric approach: distance based methods</strong> These methods, called Neighbor Joining and UPGMA, are quite similar to the hierachical clusering algorithms we already encountered in <a href="05-chap.html">Chapter 5</a>. However, the distance estimation steps uses the parametric evolutionary models of Table 10.2; the `parametric’ part of why we call the method semi-parametric.</p>
+<p>The neighbor-joining algorithm itself uses Steiner points as the summary of two combined points, and proceeds iteratively as in hierarchical clustering. It can be quite fast and is often used as a good starting point for the more time-consuming methods.</p>
+<p>Let’s start by estimating the tree from the data <code>seqs6</code> using the <code>nj</code> (neighbor joining) on DNA distances based on the one-parameter Jukes-Cantor model, we make Figure 10.19 using the <code>ggtree</code> function:</p>
+<pre><code>tree.nj = nj(dist.ml(seqs6, "JC69"))
+ggtree(tree.nj) + geom_tiplab(size = 7) __</code></pre>
+<p><a href="10-chap_files/figure- html/fig-njtree1-1.png" title="Figure 10.19: Trees built with a neighbor joining algorithm are very fast to compute and are often used as initial values for more expensive estimation procedures such as the maximum likelihood or parsimony."><img src="10-chap_files/figure-html/fig-njtree1-1.png" class="img-fluid"></a></p>
+<p>Figure 10.19: Trees built with a neighbor joining algorithm are very fast to compute and are often used as initial values for more expensive estimation procedures such as the maximum likelihood or parsimony.</p>
+<p>__</p>
+<p>Question 10.11</p>
+<p>Generate the maximum likelihood scores of the tree1 given the <code>seqs6</code> data and compare them to those of the neighbor joining tree.</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<pre><code>fit = pml(tree1, seqs6, k = 4)__</code></pre>
+<p>__</p>
+<p>Question 10.12</p>
+<p>When we have aligned amino acids from which we want to infer a tree, we use (\(20 \)) transition matrices. The methods for estimating the phylogenetic are very similar. Try this in phangorn with an HIV amino acid sequence downloaded from <a href="https://www.hiv.lanl.gov/content/sequence/NEWALIGN/align.html" class="uri">https://www.hiv.lanl.gov/content/sequence/NEWALIGN/align.html</a>.</p>
+<p>The quality of the tree estimates depend on the number of sequences per taxa and the distance to the root. We can evaluate the quality of the estimates either by using parametric and nonparametric bootstraps or performing Bayesian tree estimation using MCMC. For examples of how to visualize and compare the sampling distribution of trees, see Chakerian and Holmes (<a href="16-chap.html#ref-distory-paper">2012</a>).</p>
+</section>
+<section id="application-to-16s-rrna-data" class="level3" data-number="12.3.4">
+<h3 data-number="12.3.4" class="anchored" data-anchor-id="application-to-16s-rrna-data"><span class="header-section-number">12.3.4</span> 10.4.4 Application to 16S rRNA data</h3>
+<p>In <a href="05-chap.html">Chapter 5</a> we saw how to use a probabilistic clustering method to denoise 16S rRNA sequences. We can now reload these denoised sequences and preprocess them before building their phylogeny4.</p>
+<p>4 In order to keep all the information and be able to compare sequences from different experiments, we use the sequences themselves as their label(<a href="16-chap.html#ref-Callahan:2017">Callahan, McMurdie, and Holmes 2017</a>).</p>
+<pre><code>library("dada2")
+seqtab = readRDS(file.path(DATA,"seqtab.rds"))
+seqs = getSequences(seqtab)
+names(seqs) = seqs __</code></pre>
+<p>One of the benefits of using well-studied marker loci such as the 16S rRNA gene is the ability to taxonomically classify the sequenced variants. <strong><a href="https://bioconductor.org/packages/dada2/">dada2</a></strong> includes a naive Bayesian classifier method for this purpose (<a href="16-chap.html#ref-wang2007naive">Wang et al. 2007</a>). This classifier compares sequence variants to training sets of classified sequences. Here we use the RDP v16 training set (<a href="16-chap.html#ref-cole2009rdp">Cole et al.&nbsp;2009</a>)5. For example, code for such a classification might look like this.</p>
+<p>5 See the download link on the dada2 website: <a href="https://benjjneb.github.io/dada2/training.html" class="uri">https://benjjneb.github.io/dada2/training.html</a></p>
+<pre><code>fastaRef = "../tmp/rdp_train_set_16.fa.gz"
+taxtab = assignTaxonomy(seqtab, refFasta = fastaRef)__</code></pre>
+<p>Since the <code>assignTaxonomy</code> function runs for a while, the above code is not live and we here load a previously computed result, a table of taxonomic information:</p>
+<pre><code>taxtab = readRDS(file.path(DATA,"taxtab16.rds"))
+dim(taxtab)__
+
+
+[1] 268   6</code></pre>
+<p>__</p>
+<p>Question 10.13</p>
+<p>Write one line of code using R’s pipe operator <code>|&gt;</code> that shows just the first 6 rows of the taxonomic information without the row names.</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<pre><code>head(taxtab) |&gt; `rownames&lt;-`(NULL)__
+
+
+     Kingdom    Phylum          Class         Order          
+[1,] "Bacteria" "Bacteroidetes" "Bacteroidia" "Bacteroidales"
+[2,] "Bacteria" "Bacteroidetes" "Bacteroidia" "Bacteroidales"
+[3,] "Bacteria" "Bacteroidetes" "Bacteroidia" "Bacteroidales"
+[4,] "Bacteria" "Bacteroidetes" "Bacteroidia" "Bacteroidales"
+[5,] "Bacteria" "Bacteroidetes" "Bacteroidia" "Bacteroidales"
+[6,] "Bacteria" "Bacteroidetes" "Bacteroidia" "Bacteroidales"
+     Family               Genus        
+[1,] "Porphyromonadaceae" NA           
+[2,] "Porphyromonadaceae" NA           
+[3,] "Porphyromonadaceae" NA           
+[4,] "Porphyromonadaceae" "Barnesiella"
+[5,] "Bacteroidaceae"     "Bacteroides"
+[6,] "Porphyromonadaceae" NA           </code></pre>
+<p>__</p>
+<p>Question 10.14</p>
+<p>What is the difference between taxonomic and phylogenetic information?</p>
+<p>Note that as the <code>seqs</code> data are randomly generated, they are “cleaner” than the real data we will have to handle.</p>
+<p>In particular naturally occurring raw sequences have to be <strong>aligned</strong>. This is necessary as there are often extra nucleotides in some sequences, a consequence of what we call <em>indel</em> events6. Also mutations occur and appear as substitutions of one nucleotide by another.</p>
+<p>6 A nucleotide is deleted or inserted and it is often hard to distinguish which took place.</p>
+<p>Here is an example of what the first few characters of <strong>aligned</strong> sequences looks like:</p>
+<pre><code>readLines(file.path(DATA,"mal2.dna.txt")) |&gt; head(12) |&gt; cat(sep="\n")__
+
+
+    11   1620
+Pre1        GTACTTGTTA GGCCTTATAA GAAAAAAGT- TATTAACTTA AGGAATTATA
+Pme2        GTATCTGTTA AGCCTTATAA AAAGATAGT- T-TAAATTAA AGGAATTATA
+Pma3        GTATTTGTTA AGCCTTATAA GAGAAAAGTA TATTAACTTA AGGA-TTATA
+Pfa4        GTATTTGTTA GGCCTTATAA GAAAAAAGT- TATTAACTTA AGGAATTATA
+Pbe5        GTATTTGTTA AGCCTTATAA GAAAAA--T- TTTTAATTAA AGGAATTATA
+Plo6        GTATTTGTTA AGCCTTATAA GAAAAAAGT- TACTAACTAA AGGAATTATA
+Pfr7        GTACTTGTTA AGCCTTATAA GAAAGAAGT- TATTAACTTA AGGAATTATA
+Pkn8        GTACTTGTTA AGCCTTATAA GAAAAGAGT- TATTAACTTA AGGAATTATA
+Pcy9        GTACTCGTTA AGCCTTTTAA GAAAAAAGT- TATTAACTTA AGGAATTATA
+Pvi10       GTACTTGTTA AGCCTTTTAA GAAAAAAGT- TATTAACTTA AGGAATTATA
+Pga11       GTATTTGTTA AGCCTTATAA GAAAAAAGT- TATTAATTTA AGGAATTATA</code></pre>
+<p>We will perform this multiple-alignment on our <code>seqs</code> data using the <strong><a href="https://bioconductor.org/packages/DECIPHER/">DECIPHER</a></strong> package (<a href="16-chap.html#ref-wright2015decipher">Wright 2015</a>):</p>
+<pre><code>library("DECIPHER")
+alignment = AlignSeqs(DNAStringSet(seqs), anchor = NA, verbose = FALSE)__</code></pre>
+<p>We use the <strong><a href="https://cran.r-project.org/web/packages/phangorn/">phangorn</a></strong> package to build the MLE tree (under the GTR model), but will use the neighbor-joining tree as our starting point.</p>
+<pre><code>phangAlign = phangorn::phyDat(as(alignment, "matrix"), type = "DNA")
+dm = phangorn::dist.ml(phangAlign)
+treeNJ = phangorn::NJ(dm)   # Note: tip order != sequence order
+fit = phangorn::pml(treeNJ, data = phangAlign)
+fitGTR = update(fit, k = 4, inv = 0.2)
+fitGTR = phangorn::optim.pml(fitGTR, model = "GTR", optInv = TRUE,
+         optGamma = TRUE,  rearrangement = "stochastic",
+         control = phangorn::pml.control(trace = 0))__</code></pre>
+</section>
+</section>
+<section id="combining-phylogenetic-trees-into-a-data-analysis" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="combining-phylogenetic-trees-into-a-data-analysis"><span class="header-section-number">12.4</span> 10.5 Combining phylogenetic trees into a data analysis</h2>
+<p>We now need to combine the phylogenetic tree and the denoised read abundances with the complementary information provided about the samples from which the reads were gathered. This information about the sample is often provided as a spreadhseet (or <code>.csv</code>), and sometimes called the <em>meta</em> -data7. This data combination step is facilitated by the specialized containers and accessors that <strong><a href="https://bioconductor.org/packages/phyloseq/">phyloseq</a></strong> provides.</p>
+<p>7 We consider the prefix <em>meta</em> unhelpful and potentially confusing here: the data about the samples is just that: data.</p>
+<p>The following set of steps contains a few data cleanup and reorganization tasks—a dull but necessary part of applied statistics—that end in the creation of the object <code>ps1</code>.</p>
+<pre><code>samples = read.csv("../data/MIMARKS_Data_combined.csv", header = TRUE)
+samples$SampleID = paste0(gsub("00", "", samples$host_subject_id), 
+                          "D", samples$age-21) 
+samples = samples[!duplicated(samples$SampleID), ] 
+stopifnot(all(rownames(seqtab) %in% samples$SampleID))
+rownames(samples) = samples$SampleID 
+keepCols = c("collection_date", "biome", "target_gene", "target_subfragment", 
+  "host_common_name", "host_subject_id", "age", "sex", "body_product", "tot_mass",
+  "diet", "family_relationship", "genotype", "SampleID") 
+samples = samples[rownames(seqtab), keepCols] __</code></pre>
+<p>The sample-by-sequence feature table, the sample (meta)data, the sequence taxonomies, and the phylogenetic tree—are combined into a single object as follows:</p>
+<pre><code>library("phyloseq")
+pso = phyloseq(tax_table(taxtab), 
+               sample_data(samples),
+               otu_table(seqtab, taxa_are_rows = FALSE), 
+               phy_tree(fitGTR$tree))__</code></pre>
+<p>We have already encountered several cases of combining heterogeneous datasets into special data classes that automate the linking and keeping consistent the different parts of the dataset (e.g., in <a href="08-chap.html">Chapter 8</a>, when we studied the <code>pasilla</code> data).</p>
+<p>__</p>
+<p>Task</p>
+<p>Look at the detailed <strong><a href="https://bioconductor.org/packages/phyloseq/">phyloseq</a></strong> <a href="https://joey711.github.io/phyloseq/tutorials-index.html">documentation here</a>. Try a few filtering operations. For instance, create a subset of the data that contains the tree, taxa abundance table, the sample and taxa information for only the samples that have more than 5000 reads.</p>
+<p>This can be done in one line:</p>
+<pre><code>prune_samples(rowSums(otu_table(pso)) &gt; 5000, pso)__
+
+
+phyloseq-class experiment-level object
+otu_table()   OTU Table:         [ 268 taxa and 10 samples ]
+sample_data() Sample Data:       [ 10 samples by 14 sample variables ]
+tax_table()   Taxonomy Table:    [ 268 taxa by 6 taxonomic ranks ]
+phy_tree()    Phylogenetic Tree: [ 268 tips and 266 internal nodes ]</code></pre>
+<p>We can also make other data transformations while maintaining the integrity of the links between all the data components.</p>
+<p>__</p>
+<p>Question 10.15</p>
+<p>What do the following lines of code do?</p>
+<pre><code>prevalence = apply(X = otu_table(pso),
+                   MARGIN = ifelse(taxa_are_rows(pso), yes = 1, no = 2),
+                   FUN = function(x) {sum(x &gt; 0)})
+prevdf = data.frame(Prevalence = prevalence,
+                    TotalAbundance = taxa_sums(pso),
+                    tax_table(pso))
+tab = table(prevdf$Phylum)
+keepPhyla = names(tab)[tab&gt;5]
+prevdf1   = subset(prevdf,   Phylum %in% keepPhyla)
+ps2v      = subset_taxa(pso, Phylum %in% keepPhyla)__</code></pre>
+<p>Plotting the abundances for certain bacteria can be done using barcharts. <strong><a href="https://cran.r-project.org/web/packages/ggplot2/">ggplot2</a></strong> expressions have been hardwired into suitable one-line calls in the <strong><a href="https://bioconductor.org/packages/phyloseq/">phyloseq</a></strong> package. There is also an interactive <a href="http://joey711.github.io/shiny-phyloseq/">Shiny-phyloseq</a> browser based tool (<a href="16-chap.html#ref- mcmurdie2015">McMurdie and Holmes 2015</a>). For more details, please see the online vignettes.</p>
+<section id="hierarchical-multiple-testing" class="level3" data-number="12.4.1">
+<h3 data-number="12.4.1" class="anchored" data-anchor-id="hierarchical-multiple-testing"><span class="header-section-number">12.4.1</span> 10.5.1 Hierarchical multiple testing</h3>
+<p>Hypothesis testing can identify individual bacteria whose abundance relates to sample variables of interest. A standard approach is very similar to the approach we already visited in <a href="06-chap.html">Chapter 6</a>. Compute a test statistic for each taxa individually; then jointly adjust p-values to ensure a false discovery rate upper bound. However, this procedure does not exploit the structure among the tested hypotheses. For example, if we observe that one Ruminococcus species is strongly associated with age, but the biological reason for this sits at the genus level, then we would expect other species to have such an association as well. To integrate such information, Benjamini and Yekutieli (<a href="16-chap.html#ref-benjamini2003hierarchical">2003</a>) and Benjamini and Bogomolov (<a href="16-chap.html#ref-benjamini2014selective">2014</a>) proposed a hierarchical testing procedure, where lower level taxonomic groups are only tested if higher levels are found to be be associated. In the case where many related species have a slight signal, this pooling of information can increase power.</p>
+<p>We apply this method to test the association between microbial abundance and age. We use the data object <code>ps1</code>, which is similar to <code>pso</code> from above, but has undergone some additional transformation and filtering steps. We also need to apply the normalization protocols available in the <strong><a href="https://bioconductor.org/packages/DESeq2/">DESeq2</a></strong> package, which we discussed in <a href="08-chap.html">Chapter 8</a>, following Love, Huber, and Anders (<a href="16-chap.html#ref-LoveDESeq2">2014</a>) for RNA-Seq data and McMurdie and Holmes (<a href="16-chap.html#ref-mcmurdie2014">2014</a>) for 16S rRNA generated count data.</p>
+<pre><code># warning: !expr c("DESeqDataSet.se, design = design, ignoreRank.: some variables in design formula are characters, converting to factors")
+library("DESeq2")
+ps1 = readRDS(file.path(DATA,"ps1.rds"))
+ps_dds = phyloseq_to_deseq2(ps1, design = ~ ageBin + family_relationship)
+geometricmean = function(x)
+   if (all(x == 0)) { 0 } else { exp(mean(log(x[x != 0]))) }
+geoMeans = apply(counts(ps_dds), 1, geometricmean)
+ps_dds = estimateSizeFactors(ps_dds, geoMeans = geoMeans)
+ps_dds = estimateDispersions(ps_dds)
+abund = getVarianceStabilizedData(ps_dds)__</code></pre>
+<p>We use the <strong><a href="https://cran.r-project.org/web/packages/structSSI/">structSSI</a></strong> package to perform the hierarchical testing (<a href="16-chap.html#ref-sankaran2014structssi">Sankaran and Holmes 2014</a>). For more convenient printing, we first shorten the names of the taxa:</p>
+<pre><code>rownames(abund) = substr(rownames(abund), 1, 5) |&gt; make.names(unique = TRUE)__</code></pre>
+<p>The hierarchical testing procedure we are now going to do differs from standard multiple hypothesis testing in that univariate tests are done not only for every taxon, but for each higher-level taxonomic group. A helper function, <code>treePValues</code>, is available for this: it expects an edge list encoding parent-child relationships, with the first row specifying the root node.</p>
+<pre><code>library("structSSI")
+el = phy_tree(ps1)$edge
+el0 = el
+el0 = el0[rev(seq_len(nrow(el))), ]
+el_names = c(rownames(abund), seq_len(phy_tree(ps1)$Nnode))
+el[, 1] = el_names[el0[, 1]]
+el[, 2] = el_names[el0[, 2]]
+unadj_p = treePValues(el, abund, sample_data(ps1)$ageBin)__</code></pre>
+<p>We can now do our FDR calculations using the hierarchical testing procedure. The test results are guaranteed to control several variants of FDR, but at different levels; we defer details to (<a href="16-chap.html#ref-benjamini2003hierarchical">Benjamini and Yekutieli 2003</a>; <a href="16-chap.html#ref-benjamini2014selective">Benjamini and Bogomolov 2014</a>; <a href="16-chap.html#ref-sankaran2014structssi">Sankaran and Holmes 2014</a>).</p>
+<p>__</p>
+<p>Task</p>
+<p>Try the following code, including the interactive plotting command that will open a browser window:</p>
+<pre><code>hfdr_res = hFDR.adjust(unadj_p, el, 0.75)
+summary(hfdr_res)
+#plot(hfdr_res, height = 5000) # not run: opens in a browser __</code></pre>
+<p><a href="imgs/structssi-screenshot.png &quot;Figure 10.20: A screenshot of a subtree with many differentially abundant microbes, as determined by the hierarchical testing procedure. Currently the user is hovering over the node associated with microbe GCGAG.33; this causes the adjusted p-value (0.029) to appear.&quot;"><img src="imgs/structssi-screenshot.png" class="img-fluid"></a></p>
+<p>Figure 10.20: A screenshot of a subtree with many differentially abundant microbes, as determined by the hierarchical testing procedure. Currently the user is hovering over the node associated with microbe GCGAG.33; this causes the adjusted p-value (0.029) to appear.</p>
+<p>The plot opens in a new browser – a static screenshot of a subtree is displayed in Figure 10.20. Nodes are shaded according to p-values, from blue to orange, representing the strongest to weakest associations. Grey nodes were never tested, to focus power on more promising subtrees. Scanning the full tree; it becomes clear that the association between age group and taxonomic abundances is present in only a few isolated taxonomic groups. It is quite strong in those groups. To give context to these results, we can retrieve the taxonomic identity of the rejected hypotheses.</p>
+<pre><code>library("dplyr")
+options(digits = 3)
+tax = tax_table(ps1)[, c("Family", "Genus")] |&gt; data.frame()
+tax$seq = rownames(abund)
+hfdr_res@p.vals$seq = rownames(hfdr_res@p.vals)
+left_join(tax, hfdr_res@p.vals[,-3]) |&gt;
+  arrange(adjp) |&gt; head(9) |&gt; dplyr::select(1,2,4,5)__
+
+
+              Family       Genus hypothesisName hypothesisIndex
+1 Porphyromonadaceae        &lt;NA&gt;           &lt;NA&gt;              NA
+2 Porphyromonadaceae        &lt;NA&gt;           &lt;NA&gt;              NA
+3 Porphyromonadaceae        &lt;NA&gt;           &lt;NA&gt;              NA
+4 Porphyromonadaceae Barnesiella           &lt;NA&gt;              NA
+5     Bacteroidaceae Bacteroides           &lt;NA&gt;              NA
+6 Porphyromonadaceae Barnesiella           &lt;NA&gt;              NA
+7      Rikenellaceae   Alistipes           &lt;NA&gt;              NA
+8 Porphyromonadaceae        &lt;NA&gt;           &lt;NA&gt;              NA
+9 Porphyromonadaceae        &lt;NA&gt;           &lt;NA&gt;              NA</code></pre>
+<p>It seems that the most strongly associated bacteria all belong to family <em>Lachnospiraceae</em>.</p>
+</section>
+</section>
+<section id="minimum-spanning-trees" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="minimum-spanning-trees"><span class="header-section-number">12.5</span> 10.6 Minimum spanning trees</h2>
+<p>A very simple and useful graph is the so-called <strong>minimum spanning tree</strong> (<strong>MST</strong>). Given a set of vertices, a <strong>spanning tree</strong> is a tree that goes through all points at least once. Examples are shown in Figure 10.21. Given distances between vertices, the MST is the spanning tree with the minimum total length (see Figure 10.21).</p>
+<p>Greedy algorithms work well for computing the MST and there are many implementations in R: <code>mstree</code> in <strong><a href="https://cran.r-project.org/web/packages/ade4/">ade4</a></strong> , <code>mst</code> in <strong><a href="https://cran.r-project.org/web/packages/ape/">ape</a></strong> , <code>spantree</code> in <strong><a href="https://cran.r-project.org/web/packages/vegan/">vegan</a></strong> , <code>mst</code> in <strong><a href="https://cran.r-project.org/web/packages/igraph/">igraph</a></strong>.</p>
+<p><a href="10-chap_files/figure- html/fig-graphs-MST-1.png" title="Figure 10.21 (a):"><img src="10-chap_files/figure-html/fig-graphs-MST-1.png" class="img-fluid"></a></p>
+<ol type="a">
+<li></li>
+</ol>
+<p><a href="10-chap_files/figure- html/fig-graphs-MST-2.png" title="Figure 10.21 (b):"><img src="10-chap_files/figure-html/fig-graphs-MST-2.png" class="img-fluid"></a></p>
+<ol start="2" type="a">
+<li></li>
+</ol>
+<p>Figure 10.21: Two spanning trees for the same set of six vertices. The blue graph is the minimum spanning tree, if the Euclidean distances between the points in the 2D plane are used.</p>
+<p>Here we are going to take the DNA sequence distances between strains of HIV from patients all over the world and construct their minimum spanning tree. The result is shown in Figure 10.22.</p>
+<pre><code>load(file.path(DATA, "dist2009c.RData"))
+country09 = attr(dist2009c, "Label")
+mstree2009 = ape::mst(dist2009c)
+gr09 = graph_from_adjacency_matrix(mstree2009, mode = "undirected")
+ggraph(gr09, layout="fr") +
+  geom_edge_link(color = "black",alpha=0.5) +
+  geom_node_point(aes(color = vertex_attr(gr09)$name), size = 2) +
+  geom_node_text(aes(label = vertex_attr(gr09)$name), color="black",size=2) +
+  theme_void() +
+  guides(color=guide_legend(keyheight=0.1,keywidth=0.1,
+      title="Countries"))__</code></pre>
+<p><a href="10-chap_files/figure- html/fig-HIVMSTi-1.png" title="Figure 10.22: The minimum spanning tree computed from DNA distances between HIV sequences from samples taken in 2009 and whose country of origin was known, data as published in the HIVdb database [@HIVdb]."><img src="10-chap_files/figure-html/fig-HIVMSTi-1.png" class="img-fluid"></a></p>
+<p>Figure 10.22: The minimum spanning tree computed from DNA distances between HIV sequences from samples taken in 2009 and whose country of origin was known, data as published in the <code>HIVdb</code> database (<a href="16-chap.html#ref-HIVdb">Rhee et al. 2003</a>).</p>
+<p>__</p>
+<p>Question 10.16</p>
+<p>Make the network plot again, but replace <code>geom_node_text</code> with labels that repel each other to minimize the overlapping node labels.</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>See Figure 10.23. Maybe a better, or additional approach would be to first cluster those vertices that are very close together and from the same country.</p>
+<pre><code>library("ggraph")
+ggraph(gr09, layout="fr") +
+  geom_edge_link(color = "black",alpha=0.5) +
+  geom_node_point(aes(color = vertex_attr(gr09)$name), size = 2) +
+  geom_node_label(aes(label = vertex_attr(gr09)$name), color="black",size=2,repel=TRUE) +
+  theme_void() +
+  guides(color=guide_legend(keyheight=0.1,keywidth=0.1,
+      title="Countries"))__</code></pre>
+<p><a href="10-chap_files/figure-html/fig-graphs- networklabelrepel-1.png" title="Figure 10.23: Solution to Question wrn-graphs- networklabelrepel."><img src="10-chap_files/figure-html/fig-graphs- networklabelrepel-1.png" class="img-fluid"></a></p>
+<p>Figure 10.23: Solution to Question 10.16.</p>
+<p>It could be preferable to use a <strong>graph layout</strong> that incorporates the known geographic coordinates. Thus, we might be able to see how the virus jumped large distances across the world through traveller mobility. We introduce approximate country coordinates, which we then <strong>jitter</strong> slightly to reduce overlapping.</p>
+<pre><code>library("rworldmap")
+mat = match(country09, countriesLow$NAME)
+coords2009 = data.frame(
+  lat = countriesLow$LAT[mat],
+  lon = countriesLow$LON[mat],
+  country = country09)
+layoutCoordinates = cbind(
+  x = jitter(coords2009$lon, amount = 15),
+  y = jitter(coords2009$lat, amount = 8))
+labc = names(table(country09)[which(table(country09) &gt; 1)])
+matc = match(labc, countriesLow$NAME)
+dfc = data.frame(
+  latc = countriesLow$LAT[matc],
+  lonc = countriesLow$LON[matc],
+  labc)
+dfctrans = dfc
+dfctrans[, 1] = (dfc[,1] + 31) / 93
+dfctrans[, 2] = (dfc[,2] + 105) / 238
+Countries = vertex_attr(gr09)$name 
+
+ggraph(gr09, layout=layoutCoordinates) +
+  geom_node_point(aes(color=Countries),size = 3, alpha=0.75) +
+  geom_edge_arc(color = "black", alpha = 0.5, strength=0.15) +
+  geom_label(data=dfc,aes(x=lonc,y=latc,label=labc,fill=labc),colour="white",alpha=0.8,size=3,show.legend=F) +
+  theme_void()  __</code></pre>
+<p><a href="10-chap_files/figure- html/fig-HIVmap-1.png" title="Figure 10.24: A minimum spanning tree between HIV cases. The geographic locations of the cases were jittered to reduce overlapping. The DNA sequence distances between the HIV strains were used as input to an undirected minimum spanning tree algorithm."><img src="10-chap_files/figure-html/fig-HIVmap-1.png" class="img-fluid"></a></p>
+<p>Figure 10.24: A minimum spanning tree between HIV cases. The geographic locations of the cases were jittered to reduce overlapping. The DNA sequence distances between the HIV strains were used as input to an undirected minimum spanning tree algorithm.</p>
+<p>The input to the minimum spanning tree algorithm is a distance matrix or a graph with a length edge attribute. Figure 10.24 is the minimum spanning tree between cases of HIV, for which strain information was made available through the HIVdb database@HIVdb. The DNA distances were computed using the Jukes- Cantor mutation model.</p>
+<p>__</p>
+<p>Question 10.17</p>
+<p>The above analysis provided an <strong>undirected</strong> network of connections, in fact several implementations of the minimum spanning tree (ie for instance <code>mstree</code> in <strong><a href="https://cran.r-project.org/web/packages/ade4/">ade4</a></strong>) provide a directed path through the points, which can provide meaningful information on the (apparent) spread of disases. Make a directed network version of the above maps.</p>
+<p>MST is a very useful component of a simple nonparametric test for detecting differences between factors that are mapped onto its vertices.</p>
+<section id="mst-based-testing-the-friedmanrafsky-test" class="level3" data-number="12.5.1">
+<h3 data-number="12.5.1" class="anchored" data-anchor-id="mst-based-testing-the-friedmanrafsky-test"><span class="header-section-number">12.5.1</span> 10.6.1 MST based testing: the Friedman–Rafsky test</h3>
+<p>Graph-based two-sample tests8 were introduced by Friedman and Rafsky (<a href="16-chap.html#ref-friedman1979multivariate">Friedman and Rafsky 1979</a>) as a generalization of the Wald-Wolfowitz runs test (see Figure 10.25). Our previous examples show graph vertices associated with covariates such as country of origin. Here we test whether the covariate is significantly <strong>associated</strong> to the graph structure.</p>
+<p>8 Tests that explore whether two samples are drawn from the same distribution.</p>
+<p>The <strong>Friedman-Rafsky</strong> tests for two/multiple sample segregation on a minimum spanning tree. It was conceived as a generalization of the univariate Wald- Wolfowitz runs test. If we are comparing two samples, say men and women, whose coordinates represent a measurement of interest. We color the two groups blue and red as in Figure 10.25, the Wald-Wolfowitz test looks for long runs of the same color that would indicate that the two groups have different means.</p>
+<p><a href="10-chap_files/figure- html/fig-WWtest-1.png" title="Figure 10.25: Seeing the number of runs in a one- dimensional, two-sample, nonparametric Wald-Wolfowitz test can indicate whether the two groups have the same distributions."><img src="10-chap_files/figure-html/fig-WWtest-1.png" class="img-fluid"></a></p>
+<p>Figure 10.25: Seeing the number of runs in a one-dimensional, two-sample, nonparametric Wald-Wolfowitz test can indicate whether the two groups have the same distributions.</p>
+<p>Instead of looking for consecutive values of one type (‘runs’), we count the number of connected nodes of the same type.</p>
+<p>Once the minimum spanning tree has been constructed, the vertices are assigned `colors’ according to the different levels of a categorical variable. We call <strong>pure</strong> edges those whose two nodes have the same level of the factor variable. We use \(S_O\), the number of <strong>pure</strong> edges as our test statistic. To evaluate whether our observed value could have occurred by chance when the groups have the same distributions, we permute the vertix labels (colors) randomly and recount how many pure edges there are. This label swapping is repeated many times, creating our null distribution for \(S\).</p>
+</section>
+<section id="example-bacteria-sharing-between-mice" class="level3" data-number="12.5.2">
+<h3 data-number="12.5.2" class="anchored" data-anchor-id="example-bacteria-sharing-between-mice"><span class="header-section-number">12.5.2</span> 10.6.2 Example: Bacteria sharing between mice</h3>
+<p>Here we illustrate the idea on a collection of samples from mice whose stool were analyzed for their microbial content. We read in a data set with many mice and many taxa, we compute the Jaccard distance and then use the <code>mst</code> function from the <strong><a href="https://cran.r-project.org/web/packages/igraph/">igraph</a></strong> package. We annotate the graph with the relevant covariates as shown in the code below:</p>
+<pre><code>ps1  = readRDS(file.path(DATA,"ps1.rds"))
+sampledata = data.frame( sample_data(ps1))
+d1 = as.matrix(phyloseq::distance(ps1, method="jaccard"))
+gr = graph_from_adjacency_matrix(d1,  mode = "undirected", weighted = TRUE)
+net = igraph::mst(gr)
+V(net)$id = sampledata[names(V(net)), "host_subject_id"]
+V(net)$litter = sampledata[names(V(net)), "family_relationship"]__</code></pre>
+<p>We make a <code>ggraph</code> object from the resulting igraph generated minimum spanning tree and then plot it, as shown in Figure 10.26.</p>
+<pre><code>ggraph(net, layout="fr")+
+  geom_edge_arc(color = "darkgray") +
+  geom_node_point(aes(color = id, shape = litter)) + 
+  theme(legend.position="bottom")__</code></pre>
+<p><a href="10-chap_files/figure- html/fig-mstplot-1.png" title="Figure 10.26: The minimum spanning tree based on Jaccard dissimilarity and annotated with the mice ID and litter factors"><img src="10-chap_files/figure-html/fig-mstplot-1.png" class="img-fluid"></a></p>
+<p>Figure 10.26: The minimum spanning tree based on Jaccard dissimilarity and annotated with the mice ID and litter factors</p>
+<p>Now we compute the null distribution and p-value for the test, this is implemented in the <strong>phyloseqGraphTest</strong> package:</p>
+<pre><code>library("phyloseqGraphTest")
+gt = graph_perm_test(ps1, "host_subject_id", distance="jaccard",
+                     type="mst",  nperm=1000)
+gt$pval __
+
+
+[1] 0.000999</code></pre>
+<p>We can take a look at the complete histogram of the null distribution generatedby permutation using:</p>
+<pre><code>plot_permutations(gt)__</code></pre>
+<p><a href="10-chap_files/figure- html/fig-mstJaccard-1.png" title="Figure 10.27: The permutation histogram of the number of pure edges in the network obtained from the minimal spanning tree with Jaccard similarity."><img src="10-chap_files/figure-html/fig-mstJaccard-1.png" class="img-fluid"></a></p>
+<p>Figure 10.27: The permutation histogram of the number of pure edges in the network obtained from the minimal spanning tree with Jaccard similarity.</p>
+<section id="different-choices-for-the-skeleton-graph" class="level4" data-number="12.5.2.1">
+<h4 data-number="12.5.2.1" class="anchored" data-anchor-id="different-choices-for-the-skeleton-graph"><span class="header-section-number">12.5.2.1</span> Different choices for the skeleton graph</h4>
+<p>It is not necessary to use an MST for the skeleton graph that defines the edges. Graphs made by linking nearest neighbors (<a href="16-chap.html#ref-schilling1986multivariate">Schilling 1986</a>) or distance thresholding work as well.</p>
+<p>The Bioconductor package <strong><a href="https://bioconductor.org/packages/phyloseq/">phyloseq</a></strong> has functionality for creating graphs based on thresholding a distance matrix through the function <code>make_network</code>. We create a network by creating an edge between samples whose Jaccard dissimilarity is less than a threshold, which we set below via the parameter <code>max.dist</code>. We can also use the <strong><a href="https://cran.r-project.org/web/packages/ggraph/">ggraph</a></strong> package to add attributes to the vertices indicating which mouse the sample came from and which litter the mouse was in. We see that in the resulting network, shown in Figure 10.28, there is grouping of the samples by both mouse and litter.</p>
+<pre><code>net = make_network(ps1, max.dist = 0.35)
+sampledata = data.frame(sample_data(ps1))
+V(net)$id = sampledata[names(V(net)), "host_subject_id"]
+V(net)$litter = sampledata[names(V(net)), "family_relationship"]__
+
+
+ggraph(net, layout="fr") +
+  geom_edge_link(color = "darkgray") +
+  geom_node_point(aes(color = id, shape = litter)) + 
+    theme(plot.margin = unit(c(0, 5, 2, 0), "cm"))+
+    theme(legend.position = c(1.4, 0.3),legend.background = element_blank(),
+          legend.margin=margin(0, 3, 0, 0, "cm"))+
+         guides(color=guide_legend(ncol=2))+
+  theme_graph(background = "white")__</code></pre>
+<p><a href="10-chap_files/figure-html/fig-ggnetworkplotJ-1.png &quot;Figure 10.28: A co-occurrence network created by using a threshold on the Jaccard dissimilarity matrix. The colors represent which mouse the sample came from; the shape represents which litter the mouse was in.&quot;"><img src="10-chap_files/figure-html/fig- ggnetworkplotJ-1.png" class="img-fluid"></a></p>
+<p>Figure 10.28: A co-occurrence network created by using a threshold on the Jaccard dissimilarity matrix. The colors represent which mouse the sample came from; the shape represents which litter the mouse was in.</p>
+<p>Note that no matter which graph we build between the samples, we can approximate a null distribution by permuting the labels of the nodes of the graph. However, sometimes it will preferable to adjust the permutation distribution to account for known structure between the covariates.</p>
+</section>
+</section>
+<section id="friedmanrafsky-test-with-nested-covariates" class="level3" data-number="12.5.3">
+<h3 data-number="12.5.3" class="anchored" data-anchor-id="friedmanrafsky-test-with-nested-covariates"><span class="header-section-number">12.5.3</span> 10.6.3 Friedman–Rafsky test with nested covariates</h3>
+<p>In the test above, we took a rather naïve approach and showed there was a significant difference between individual mice (the <code>host_subject_id</code> variable). Here we perform a slightly different permutation test to find out if we control for the difference between mice; is there a litter (the <code>family_relationship</code> variable) effect? The setup of the test is similar, it is simply how the permutations are generated which differs. We maintain the nested structure of the two factors using the <code>grouping</code> argument. We permute the <code>family_relationship</code> labels but keep the <code>host_subject_id</code> structure intact.</p>
+<pre><code>gt = graph_perm_test(ps1, "family_relationship",
+        grouping = "host_subject_id",
+        distance = "jaccard", type = "mst", nperm= 1000)
+gt$pval __
+
+
+[1] 0.002</code></pre>
+<p>This test has a small p-value, and we reject the null hypothesis that the two samples come from the same distribution. From the plot of the minimum spanning tree in Figure 10.27, we see by eye that the samples group by litter more than we would expect by chance.</p>
+<pre><code>plot_permutations(gt)__</code></pre>
+<p><a href="10-chap_files/figure-html/fig-mstpermplotNest-1.png &quot;Figure 10.29: The permutation histogram obtained from the minimal spanning tree with Jaccard similarity.&quot;"><img src="10-chap_files/figure-html/fig- mstpermplotNest-1.png" class="img-fluid"></a></p>
+<p>Figure 10.29: The permutation histogram obtained from the minimal spanning tree with Jaccard similarity.</p>
+<p>__</p>
+<p>Question 10.18</p>
+<p>The \(k\)-nearest neighbors graph is obtained by putting an edge between two samples whenever one of them is in the set of \(k\)-nearest neighbors of the other. Redo the test, defining the graph using nearest neighbors defined with the Jaccard distance. What would you conclude?</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<pre><code>gtnn1 = graph_perm_test(ps1, "family_relationship",
+                      grouping = "host_subject_id",
+                      distance = "jaccard", type = "knn", knn = 1)
+gtnn1$pval __
+
+
+[1] 0.004</code></pre>
+<p>Figure 10.30 shows that pairs of samples having edges between them in this nearest neighbor graph are much more likely to be from the same litter.</p>
+<pre><code>plot_test_network(gtnn1)__</code></pre>
+<p><a href="10-chap_files/figure- html/fig-knn-1-plot-1.png" title="Figure 10.30: The graph obtained from a nearest- neighbor graph with Jaccard similarity."><img src="10-chap_files/figure-html/fig-knn-1-plot-1.png" class="img-fluid"></a></p>
+<p>Figure 10.30: The graph obtained from a nearest-neighbor graph with Jaccard similarity.</p>
+<p><strong>Note: The dual graph</strong><br>
+In the examples above we sought to show relationships between samples through their shared taxa. It can also be of interest to ask the question about taxa: do some of the taxa co-occur more often than one would expect? This approach can help study microbial `communities’ as they assemble in the microbiome. The methods we developed above all apply to this use-case, all one really does is transpose the data. It is always preferable with sparse data such as the microbiome to use Jaccard and not build correlation networks that can be appropriate in other settings.</p>
+</section>
+</section>
+<section id="summary-of-this-chapter" class="level2" data-number="12.6">
+<h2 data-number="12.6" class="anchored" data-anchor-id="summary-of-this-chapter"><span class="header-section-number">12.6</span> 10.7 Summary of this chapter</h2>
+<section id="annotated-graphs" class="level4" data-number="12.6.0.1">
+<h4 data-number="12.6.0.1" class="anchored" data-anchor-id="annotated-graphs"><span class="header-section-number">12.6.0.1</span> Annotated graphs</h4>
+<p>In this chapter we have learnt how to store and plot data that have more structure than simple arrays: graphs have edges and nodes that can also be associated to extra annotations that can be displayed usefully.</p>
+</section>
+<section id="important-examples-of-graphs-and-useful-r-packages" class="level4" data-number="12.6.0.2">
+<h4 data-number="12.6.0.2" class="anchored" data-anchor-id="important-examples-of-graphs-and-useful-r-packages"><span class="header-section-number">12.6.0.2</span> Important examples of graphs and useful R packages</h4>
+<p>We started by specific examples such as Markov chain graphs, phylogenetic trees and minimum spanning trees. We saw how to use the <strong><a href="https://cran.r-project.org/web/packages/ggraph/">ggraph</a></strong> and <strong><a href="https://cran.r-project.org/web/packages/igraph/">igraph</a></strong> packages to visualize graphs and show as much information as possible by using specific graph layout algorithms.</p>
+</section>
+<section id="combining-graphs-with-statistical-data" class="level4" data-number="12.6.0.3">
+<h4 data-number="12.6.0.3" class="anchored" data-anchor-id="combining-graphs-with-statistical-data"><span class="header-section-number">12.6.0.3</span> Combining graphs with statistical data</h4>
+<p>We then approached the problem of incorporating a known `skeleton’ graph into differential expression analyses. This enables use to pinpoint perturbation hotspots in a network. We saw how evolutionary models defined along rooted binary trees serve as the basis for phylogenetic tree estimation and how we can incorporate these trees as supplementary information in a differential abundance analysis using the R packages <strong><a href="https://cran.r-project.org/web/packages/structSSI/">structSSI</a></strong> and <strong><a href="https://bioconductor.org/packages/phyloseq/">phyloseq</a></strong>.</p>
+</section>
+<section id="linking-co-occurrence-to-other-variables" class="level4" data-number="12.6.0.4">
+<h4 data-number="12.6.0.4" class="anchored" data-anchor-id="linking-co-occurrence-to-other-variables"><span class="header-section-number">12.6.0.4</span> Linking co-occurrence to other variables</h4>
+<p>Graph and network tools also enable the creation of networks from co- occurrence data and can be used to visualize and test the effect of factor covariates. We saw the Friedman-Rafsky test which provides an easy way of testing dependencies of a variable with the edge structure of a skeleton graph.</p>
+</section>
+<section id="context-and-intepretation-aids" class="level4" data-number="12.6.0.5">
+<h4 data-number="12.6.0.5" class="anchored" data-anchor-id="context-and-intepretation-aids"><span class="header-section-number">12.6.0.5</span> Context and intepretation aids</h4>
+<p>This chapter illustrated ways of incorporating interactions of players in a network and we saw how useful it was to combine this with statistical scores. This often provides biological insight into analyses of complex biological systems.</p>
+</section>
+<section id="previous-knowledge-or-outcome" class="level4" data-number="12.6.0.6">
+<h4 data-number="12.6.0.6" class="anchored" data-anchor-id="previous-knowledge-or-outcome"><span class="header-section-number">12.6.0.6</span> Previous knowledge or outcome</h4>
+<p>We saw that graphs can be both useful to encode our previous knowledge, metabolic network information, gene ontologies and phylogenetic trees of known bacteria are all available in standard databases. It is beneficial in a study to incorprate all known information and doing so by combining these skeleton networks with observed data enhances our understanding of experimental results in the context of what is already known.</p>
+<p>On the other hand, the graph can be the outcome that we want to predict and we saw how to build graphs from data (phylogenetic trees, co-occurrence networks and minimum spanning trees).</p>
+</section>
+</section>
+<section id="further-reading" class="level2" data-number="12.7">
+<h2 data-number="12.7" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">12.7</span> 10.8 Further reading</h2>
+<p>For complete developments and many important consequences of the evolutionary models used in phylogenetic trees, see the books by Li (<a href="16-chap.html#ref-WHLi">1997</a>; <a href="16-chap.html#ref- LiandGraur">Li and Graur 1991</a>). The book by Felsenstein (<a href="16-chap.html#ref-fels:book">2004</a>) is the classic text on estimating phylogenetic trees.</p>
+<p>The book written by the author of the <strong><a href="https://cran.r-project.org/web/packages/ape/">ape</a></strong> packages, Paradis (<a href="16-chap.html#ref-paradis:2011">2011</a>) contains many use-cases and details about manipulation of trees in R. A review of bootstrapping for phylogenetic trees can be found in Holmes (<a href="16-chap.html#ref-Holmes-2003">2003a</a>).</p>
+<p>We can use a tree as well as abundances in a contingency table data through an extension of PCoA-MDS called DPCoA (Double principal coordinate analysis). For microbiome data, the phylogenetic tree provides distances between taxa; these distances serve as the basis for the first PCoA. A second PCoA enables the projection of the weighted sample points. This has proved very effective in microbial ecology applications, see Purdom (<a href="16-chap.html#ref- Purdom2010">2010</a>) or Fukuyama et al.&nbsp;(<a href="16-chap.html#ref-Fukuyama:2012">2012</a>) for details.</p>
+<p>Graphs can be used to predict vertex covariates. There is a large field of applied statistics and machine learning that considers the edges in the graph as a response variable for which one can make predictions based on covariates or partial knowledge of the graph; these include <strong>ERGM</strong> ’s (Exponential Random Graph Models, Robins et al.&nbsp;(<a href="16-chap.html#ref-robins:2007">2007</a>)) and kernel methods for graphs (<a href="16-chap.html#ref- VertKernel">Schölkopf, Tsuda, and Vert 2004</a>).</p>
+<p>For theoretical properties of the Friedman-Rafsky test and more examples see Bhattacharya (<a href="16-chap.html#ref-Bhattacharya:2015">2015</a>).</p>
+<p>A full list packages that deal with graphs and networks is available at: <a href="http://www.bioconductor.org/packages/release/BiocViews.html#___GraphAndNetwork" class="uri">http://www.bioconductor.org/packages/release/BiocViews.html#___GraphAndNetwork</a>.</p>
+</section>
+<section id="exercises" class="level2" data-number="12.8">
+<h2 data-number="12.8" class="anchored" data-anchor-id="exercises"><span class="header-section-number">12.8</span> 10.9 Exercises</h2>
+<p>__</p>
+<p>Exercise 10.1</p>
+<p>Create a function that plots a graph starting from an adjacency matrix. Show how it works on an example.</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<pre><code>ggplotadjacency = function(a) {
+  n = nrow(a)
+  p = ncol(a)
+  fromto  = reshape2::melt(a)
+  stopifnot(identical(nrow(fromto), n*p))
+  fromto$value = as.factor(fromto$value)
+  cols = c("white", "darkblue")
+  ggplot(data = fromto, aes(x = Var1, y = Var2, fill = value)) +
+    geom_tile(colour = "black") +
+    coord_fixed(ratio = 1, ylim = c(0.5, n + 0.5), xlim = c(0.5, p + 0.5)) +
+    scale_fill_manual(values = cols) +
+    scale_x_continuous(name = "" , breaks = 1:p, labels = paste(1:p)) +
+    scale_y_reverse(  name = "" , breaks = n:1, labels = paste(n:1)) + 
+    theme_bw() +
+    theme(axis.text = element_text(size = 14),
+      legend.key = element_rect(fill = "white"),
+      legend.background = element_rect(fill = "white"),
+      panel.border = element_blank(),
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank(),
+      axis.line = element_line(color = "white"),
+      axis.ticks.x = element_blank(),
+      axis.ticks.y = element_blank() 
+    )
+}__</code></pre>
+<p>__</p>
+<p>Exercise 10.2</p>
+<p>The relationships between gene functions is organized hierarchically into a graph called the Gene Ontology (GO) graph. The biological processes are organized at finer and finer scale. Take one of the databases providing the GO information for the organisms you are interested in. Choose a gene list and build the GO graph for that list.<br>
+Hint: Some examples can be found in the packages , , .</p>
+<p>__</p>
+<p>Exercise 10.3</p>
+<p><em>Markov chain graph of transitions between states of the vaginal microbiota</em> : In DiGiulio et al.&nbsp;(<a href="16-chap.html#ref-DigiulioCallahan:2015">2015</a>) the authors use an <strong><a href="https://cran.r-project.org/web/packages/igraph/">igraph</a></strong> plot to represent the transitions rates between community state types CSTs using the <strong><a href="https://cran.r-project.org/web/packages/markovchain/">markovchain</a></strong> package. Load the data and the transition rates and state names into an object of the special class <code>markovchain</code> and tailor the layout carefully to include the percentage of preterm birth as a covariate for the vertices (make the vertex size proportional to this variable). Include the size of transitions between states as the width of the arrows.</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>Note: the below code is not live, a version of it used to run for the authors at one point, here it is given as a starting point for the reader to finish, it has opportunities for modernization and improvement.</p>
+<p><a href="imgs/PSB_MC_s.png" title="Figure 10.31: This figure was originally created for the study done in @DigiulioCallahan:2015, where the nodes designate states of the vaginal microbiome and arrows represent transitions between states with different probabilities."><img src="imgs/PSB_MC_s.png" class="img-fluid"></a></p>
+<p>Figure 10.31: This figure was originally created for the study done in DiGiulio et al.&nbsp;(<a href="16-chap.html#ref-DigiulioCallahan:2015">2015</a>), where the nodes designate states of the vaginal microbiome and arrows represent transitions between states with different probabilities.</p>
+<pre><code>library("markovchain")
+# Make Markov chain object
+mcPreg  =  new("markovchain", states = CSTs,
+              transitionMatrix = trans, name="PregCST")
+mcPreg
+# Set up igraph of the markov chain
+netMC  =  markovchain:::.getNet(mcPreg, round = TRUE)__</code></pre>
+<p>Now define a number of plotting parameters, and assign node colors based on the association of that CST and preterm outcome.</p>
+<pre><code>wts  =  E(netMC)$weight/100
+edgel  =  get.edgelist(netMC)
+elcat  =  paste(edgel[,1], edgel[,2])
+elrev  =  paste(edgel[,2], edgel[,1])
+edge.curved  =  sapply(elcat, function(x) x %in% elrev)
+samples_def  =  data.frame(sample_data(ps))
+samples_def  =  samples_def[samples$Preterm | samples$Term,] # Only those definitely assigned, i.e. not marginal
+premat  =  table(samples_def$CST, samples_def$Preterm)
+rownames(premat)  =  markovchain::states(mcPreg)
+colnames(premat)  =  c("Term", "Preterm")
+premat
+premat  =  premat/rowSums(premat)
+vert.CSTclrs  =  CSTColors __
+
+
+default.par  =  par(no.readonly = TRUE)
+# Define color scale
+# Plotting function for markov chain
+plotMC  =  function(object, ...) {
+    netMC  =  markovchain:::.getNet(object, round = TRUE)
+    plot.igraph(x = netMC, ...)
+}
+# Color bar for the markov chain visualization, gradient in strength of preterm association
+color.bar  =  function(lut, min, max=-min, nticks=11, ticks=seq(min, max, len=nticks), title=NULL) {
+    scale = (length(lut)-1)/(max-min)
+    cur.par = par(no.readonly = TRUE)
+    par(mar = c(0, 4, 1, 4) + 0.1, oma = c(0, 0, 0, 0) + 0.1)
+    par(ps = 10, cex = 0.8)
+    par(tcl=-0.2, cex.axis=0.8, cex.lab = 0.8)
+    plot(c(min,max), c(0,10), type='n', bty='n', xaxt='n', xlab=", yaxt='n', ylab=", main=title)
+    axis(1, c(0, 0.5, 1))
+    for (i in 1:(length(lut)-1)) {
+      x = (i-1)/scale + min
+      rect(x,0,x+1/scale,10, col=lut[i], border=NA)
+    }
+}
+
+pal  =  colorRampPalette(c("grey50", "maroon", "magenta2"))(101)
+vert.clrs  =  sapply(states(mcPreg), function(x) pal[1+round(100*premat[x,"Preterm"])])
+vert.sz  =  4 + 2*sapply(states(mcPreg),
+              function(x) nrow(unique(sample_data(ps)[sample_data(ps)$CST==x,"SubjectID"])))
+vert.sz  =  vert.sz * 0.85
+vert.font.clrs  =  c("white", "white", "white", "white", "white")
+
+# E(netMC) to see edge list, have to define loop angles individually by the # in edge list, not vertex
+edge.loop.angle = c(0, 0, 0, 0, 3.14, 3.14, 0, 0, 0, 0, 3.14, 0, 0, 0, 0, 0)-0.45
+layout  =  matrix(c(0.6,0.95, 0.43,1, 0.3,0.66, 0.55,0.3, 0.75,0.65), nrow = 5, ncol = 2, byrow = TRUE)
+
+# Color by association with preterm birth
+layout(matrix(c(1,1,2,2), 2, 2, byrow = TRUE), heights=c(1,10))
+color.bar(pal, min=0, max=1, nticks=6, title="Fraction preterm")
+par(mar=c(0,1,1,1)+0.1)
+edge.arrow.size=0.8
+edge.arrow.width=1.4
+edge.width = (15*wts + 0.1)*0.6
+edge.labels  =  as.character(E(netMC)$weight/100)
+edge.labels[edge.labels&lt;0.4]  =  NA  # labels only for self-loops
+plotMC(mcPreg, edge.arrow.size=edge.arrow.size, edge.arrow.width = edge.arrow.width,
+       edge.width=edge.width, edge.curved=edge.curved,
+       vertex.color=vert.clrs, vertex.size=(vert.sz),
+       vertex.label.font = 2, vertex.label.cex = 1,
+       vertex.label.color = vert.font.clrs, vertex.frame.color = NA,
+       layout=layout, edge.loop.angle = edge.loop.angle)
+par(default.par)__</code></pre>
+<p>__</p>
+<p>Exercise 10.4</p>
+<p><strong>Protein interaction networks</strong> : Read the Wikipedia article about the <a href="https://en.wikipedia.org/wiki/STRING">STRING</a> database (http://www.string- db.org).<br>
+The protein Cyclin B1 is encoded by the CCNB1 gene. You can read about it on wikipedia here: <a href="https://en.wikipedia.org/wiki/Cyclin_B1" class="uri">https://en.wikipedia.org/wiki/Cyclin_B1</a>.<br>
+Use STRING to generate a text file (call it <em>ccnb1datsmall.txt</em>) of edges around the CCNB1 gene. Choose nodes that are connected by evidence of co- expression with a confidence higher than 0.9. Collect no more than 50 interactions and additional nodes that are two steps away from CCNB1 in the graph.</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<ol type="1">
+<li><p>Go to <a href="http://www.string-db.org" class="uri">http://www.string-db.org</a>.</p></li>
+<li><p>Enter CCNB1 as the protein name and Homo sapiens as the organism. Click “Continue!”</p></li>
+<li><p>Select the option with protein CCNB1 (the top one).</p></li>
+<li><p>Scroll down to “info and Parameters …” 4a. For Active Prediction Methods – unselect everything except “Co-Expression” 4b. For required confidence – select “highest confidence (0.900) 4c. For interactors shown – select”no more than 50 interactors” 4d. For additional (white) nodes – select “100” (these are nodes two steps away from CCNB1) 4e. Click “Update Parameters”. You should get something that looks like the image below.</p></li>
+<li><p>Click “save” under the picture (showing a diskette). This will open up a new window so you can choose which format to save the data.</p></li>
+<li><p>Scroll down to the “Text Summary (TXT - simple tab delimited flatfile)” file and save that document as <em>ccnb1datsmall.txt</em>.</p></li>
+</ol>
+<p>__</p>
+<p>Exercise 10.5</p>
+<p>Read the txt file <em>ccnb1datsmall.txt</em> into R and make a plot of the graph using one of the graph visualization methods covered in this chapter.</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p><a href="imgs/ccnb1img.png" title="Figure 10.32: This network was created with the STRING website by setting a 2 step neighborhood around the CCNB1 gene for co-expression levels \geq 0.900."><img src="imgs/ccnb1img.png" class="img-fluid"></a></p>
+<p>Figure 10.32: This network was created with the STRING website by setting a 2 step neighborhood around the CCNB1 gene for co-expression levels \(\) 0.900.</p>
+<pre><code>dat = read.table(file.path(DATA,"ccnb1datsmall.txt"), header = TRUE, comment.char = "", stringsAsFactors = TRUE)
+v = levels(unlist(dat[,1:2]))        # vertex names
+n = length(v)                        # number of vertices
+e = matrix(match(as.character(unlist(dat[,1:2])), v),ncol=2) # edge list
+w = dat$coexpression                 # edge weights __</code></pre>
+<p>M is our co-expression network adjacency matrix. Since the STRING data only says if proteins i and j are co-expressed and doesn’t distinguish between (i,j) and (j,i) we want to make M symmetric (undirected) by considering the weight on (i,j) is the same as from (j,i). A is our co-expression graph adjacency matrix and we make \(A_{ij} = 1\) if they are coexpressed.</p>
+<pre><code>M = matrix(0, n, n)
+M[e] = w
+M = M + t(M)
+dimnames(M) = list(v, v)
+A = 1*(M &gt; 0)__</code></pre>
+<p>We use default plotting parameters and generate the graph using the package <strong><a href="https://cran.r-project.org/web/packages/igraph/">igraph</a></strong> starting with <code>e</code>, the vector of edges (an alternative is to use the adjacency matrix A).</p>
+<p><em>Note:</em> We use a seed to make the graph always look the same. Graph layout often contains an optimization with a random component that makes the picture look different, although the graph itself is the same.</p>
+<pre><code>library(igraph)
+net = network(e, directed=FALSE)
+par(mar=rep(0,4))
+plot(net, label=v)__</code></pre>
+<p>You could make a graph with <strong><a href="https://cran.r-project.org/web/packages/ggraph/">ggraph</a></strong>.</p>
+<p>__</p>
+<p>Exercise 10.6</p>
+<p>Make a heatmap showing the adjacency matrix of the graph created in Exercise 10.5.</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<p>We use defaults in making a heatmap except for changing the colors, you can experiment and add additional parameters.</p>
+<pre><code>breaks  =  c(0, seq(0.9, 1, length=11))
+cols  =  grey(1-c(0,seq(0.5,1,length=10)))
+ccnb1ind  =  which(v == "CCNB1")
+vcols  =  rep("white",n)
+vcols[ccnb1ind]  =  "blue"
+vcols[which(M[,ccnb1ind]&gt;0 | M[ccnb1ind,])]  =  "red"
+par(mar = rep(0, 4))
+heatmap(M, symm = TRUE, ColSideColors = vcols, RowSideColors = vcols,
+        col = cols, breaks = breaks,  frame = TRUE)
+legend("topleft", c("Neighbors(CCNB1)", "CCNB1"),
+       fill = c("red","blue"),
+       bty = "n", inset = 0, xpd = TRUE,  border = FALSE)__</code></pre>
+<p><a href="10-chap_files/figure- html/fig-heatmapCCNB1-1.png" title="Figure 10.33: This represents the adjacency of the CCNB1 network – 2 step neighborhood with co-expression levels \geq 0.900, generated from R (darker is closer to 1, we ignore values < 0.9)."><img src="10-chap_files/figure-html/fig-heatmapCCNB1-1.png" class="img-fluid"></a></p>
+<p>Figure 10.33: This represents the adjacency of the CCNB1 network – 2 step neighborhood with co-expression levels \(\) 0.900, generated from R (darker is closer to 1, we ignore values &lt; 0.9).</p>
+<p>__</p>
+<p>Exercise 10.7</p>
+<p>The visualization shows the strongest interactions in the two step neighborhood of CCNB1. Both the plotted graph and the heatmap image show the same data: there seems to be a cluster of proteins which are all similar to CCNB1 and there is also another cluster in the other proteins. Many of the proteins in the CCNB1 cluster are coexpressed at the same time as each other.<br>
+Why might this be the case?<br>
+Conversely, proteins which are coexpressed with a protein that is coexpressed with CCNB1 (two steps away) do not tend to be coexpressed with each other.<br>
+Is it easier for you to see this in one of the figures (the plot or the heatmap) than the other?</p>
+<p>__</p>
+<p>Exercise 10.8</p>
+<p>Compare the use of <strong><a href="https://cran.r-project.org/web/packages/ape/">ape</a></strong> and <strong><a href="https://cran.r-project.org/web/packages/phangorn/">phangorn</a></strong> in the analysis of HIV GAG data. Compute the Jukes Cantor distances between the sequences using both packages and compare them to the Hamming distances.</p>
+<pre><code>library("ape")
+library("phangorn")
+GAG = read.dna(file.path(DATA, "DNA_GAG_20.txt"))__</code></pre>
+<p>__</p>
+<p>Exercise 10.9</p>
+<p>Perform the Friedman–Rafksy type test with a “two-nearest” neighbor-graph using the Bray-Curtis dissimilarity.</p>
+<p>__</p>
+<p>Solution</p>
+<p>__</p>
+<pre><code>gt = graph_perm_test(ps1, "family_relationship", distance = "bray", 
+                     grouping = "host_subject_id", type = "knn", knn = 2)
+gt$pval __
+
+
+[1] 0.004
+
+
+plot_test_network(gt)
+permdf = data.frame(perm=gt$perm)
+obs = gt$observed
+ymax = max(gt$perm)
+ggplot(permdf, aes(x = perm)) + geom_histogram(bins = 20) +
+  geom_segment(aes(x = obs, y = 0, xend = obs, yend = ymax/10), color = "red") +
+  geom_point(aes(x = obs, y = ymax/10), color = "red") + xlab("Number of pure edges")__</code></pre>
+<p><a href="10-chap_files/figure- html/fig-knn-2-plot-1.png" title="Figure 10.34 (a): \text{}"><img src="10-chap_files/figure-html/fig-knn-2-plot-1.png" class="img-fluid"></a></p>
+<ol type="a">
+<li>\(\)</li>
+</ol>
+<p><a href="10-chap_files/figure- html/fig-knn-2-plot-2.png" title="Figure 10.34 (b): \text{}"><img src="10-chap_files/figure-html/fig-knn-2-plot-2.png" class="img-fluid"></a></p>
+<ol start="2" type="a">
+<li>\(\)</li>
+</ol>
+<p>Figure 10.34: The graph (a) and permutation histogram (b) obtained from a two nearest-neighbor graph with Jaccard similarity.</p>
+<p>Beisser, Daniela, Gunnar W Klau, Thomas Dandekar, Tobias Müller, and Marcus T Dittrich. 2010. “BioNet: An R-Package for the Functional Analysis of Biological Networks.” <em>Bioinformatics</em> 26 (8): 1129–30.</p>
+<p>Benjamini, Yoav, and Marina Bogomolov. 2014. “Selective Inference on Multiple Families of Hypotheses.” <em>Journal of the Royal Statistical Society: Series B</em> 76 (1): 297–318.</p>
+<p>Benjamini, Yoav, and Daniel Yekutieli. 2003. “Hierarchical FDR Testing of Trees of Hypotheses.” Technical report, Department of Statistics; Operations Research, Tel Aviv University.</p>
+<p>Bhattacharya, Bhaswar B. 2015. “Power of Graph-Based Two-Sample Tests.” <em>arXiv Preprint arXiv:1508.07530</em>.</p>
+<p>Bouckaert, Remco, Joseph Heled, Denise Kühnert, Tim Vaughan, Chieh-Hsi Wu, Dong Xie, Marc A Suchard, Andrew Rambaut, and Alexei J Drummond. 2014. “BEAST 2: A Software Platform for Bayesian Evolutionary Analysis.” <em>PLoS Computational Biology</em> 10 (4): e1003537.</p>
+<p>Callahan, Benjamin J, Paul J McMurdie, and Susan P Holmes. 2017. “Exact Sequence Variants Should Replace Operational Taxonomic Units in Marker Gene Data Analysis.” <em>ISME Journal</em> , 1–5.</p>
+<p>Chakerian, John, and Susan Holmes. 2012. “Computational Tools for Evaluating Phylogenetic and Hierarchical Clustering Trees.” <em>Journal of Computational and Graphical Statistics</em> 21 (3): 581–99.</p>
+<p>Cole, J. R., Q. Wang, E. Cardenas, J. Fish, B. Chai, R. J. Farris, A. S. Kulam-Syed-Mohideen, et al.&nbsp;2009. “The Ribosomal Database Project: Improved Alignments and New Tools for rRNA Analysis.” <em>Nucleic Acids Research</em> 37 (Supplement 1): D141–45.</p>
+<p>DiGiulio, Daniel B., Benjamin J. Callahan, Paul J. McMurdie, Elizabeth K. Costello, Deirdre J. Lyelle, Anna Robaczewska, Christine L. Sun, et al.&nbsp;2015. “Temporal and Spatial Variation of the Human Microbiota During Pregnancy.” <em>PNAS</em>.</p>
+<p>Felsenstein, Joseph. 2004. <em>Inferring Phylogenies</em>. Boston: Sinauer.</p>
+<p>Friedman, Jerome H, and Lawrence C Rafsky. 1979. “Multivariate Generalizations of the Wald-Wolfowitz and Smirnov Two-Sample Tests.” <em>The Annals of Statistics</em> , 697–717.</p>
+<p>Fukuyama, Julia, Paul J McMurdie, Les Dethlefsen, David A Relman, and Susan Holmes. 2012. “Comparisons of Distance Methods for Combining Covariates and Abundances in Microbiome Studies.” In <em>Pac Symp Biocomput</em>. World Scientific.</p>
+<p>Holmes, Susan. 1999. “Phylogenetic Trees: An Overview.” In <em>Statistics and Genetics</em> , 81–118. IMA 112. New York: Springer.</p>
+<p>———. 2003a. “Bootstrapping Phylogenetic Trees: Theory and Methods.” <em>Statistical Science</em> 18 (2): 241–55.</p>
+<p>———. 2003b. “Statistics for phylogenetic trees.” <em>Theoretical Population Biology</em> 63 (1): 17–32.</p>
+<p>Ideker, Trey, Owen Ozier, Benno Schwikowski, and Andrew F Siegel. 2002. “Discovering Regulatory and Signalling Circuits in Molecular Interaction Networks.” <em>Bioinformatics</em> 18 Suppl 1 (January): S233–40. <a href="http://bioinformatics.oxfordjournals.org/cgi/reprint/18/suppl\_1/S233" class="uri">http://bioinformatics.oxfordjournals.org/cgi/reprint/18/suppl\_1/S233</a>.</p>
+<p>Li, Wen-Hsiung. 1997. <em>Molecular Evolution.</em> Sinauer Associates Incorporated.</p>
+<p>Li, Wen-Hsiung, and Dan Graur. 1991. <em>Fundamentals of Molecular Evolution</em>. Vol. 48. Sinauer Associates Sunderland, MA.</p>
+<p>Liberzon, Arthur, Aravind Subramanian, Reid Pinchback, Helga Thorvaldsdóttir, Pablo Tamayo, and Jill P Mesirov. 2011. “Molecular Signatures Database (MSigDB) 3.0.” <em>Bioinformatics</em> 27 (12): 1739–40.</p>
+<p>Love, Michael I, Wolfgang Huber, and Simon Anders. 2014. “Moderated Estimation of Fold Change and Dispersion for RNA-seq Data with DESeq2.” <em>Gnome Biology</em> 15 (12): 1–21.</p>
+<p>McMurdie, Paul J, and Susan Holmes. 2014. “Waste Not, Want Not: Why Rarefying Microbiome Data Is Inadmissible.” <em>PLoS Computational Biology</em> 10 (4): e1003531.</p>
+<p>———. 2015. “Shiny-Phyloseq: Web Application for Interactive Microbiome Analysis with Provenance Tracking.” <em>Bioinformatics</em> 31 (2): 282–83.</p>
+<p>Mossel, Elchanan. 2003. “On the Impossibility of Reconstructing Ancestral Data and Phylogenies.” <em>Journal of Computational Biology</em> 10 (5): 669–76.</p>
+<p>Nacu, Serban, Rebecca Critchley-Thorne, Peter Lee, and Susan Holmes. 2007. “Gene Expression Network Analysis and Applications to Immunology.” <em>Bioinformatics</em> 23 (7, 7): 850–58. <a href="https://doi.org/10.1093/bioinformatics/btm019" class="uri">https://doi.org/10.1093/bioinformatics/btm019</a>.</p>
+<p>Nolan, Daniel J, Michael Ginsberg, Edo Israely, Brisa Palikuqi, Michael G Poulos, Daylon James, Bi-Sen Ding, et al.&nbsp;2013. “Molecular Signatures of Tissue-Specific Microvascular Endothelial Cell Heterogeneity in Organ Maintenance and Regeneration.” <em>Developmental Cell</em> 26 (2): 204–19.</p>
+<p>Paradis, Emmanuel. 2011. <em>Analysis of Phylogenetics and Evolution with r</em>. Springer Science &amp; Business Media.</p>
+<p>Pounds, Stan, and Stephan W Morris. 2003. “Estimating the Occurrence of False Positives and False Negatives in Microarray Studies by Approximating and Partitioning the Empirical Distribution of p-Values.” <em>Bioinformatics</em> 19 (10): 1236–42.</p>
+<p>Purdom, Elizabeth. 2010. “Analysis of a Data Matrix and a Graph: Metagenomic Data and the Phylogenetic Tree.” <em>Annals of Applied Statistics</em> , July.</p>
+<p>Rhee, Soo-Yon, Matthew J Gonzales, Rami Kantor, Bradley J Betts, Jaideep Ravela, and Robert W Shafer. 2003. “Human Immunodeficiency Virus Reverse Transcriptase and Protease Sequence Database.” <em>Nucleic Acids Research</em> 31 (1): 298–303.</p>
+<p>Robins, Garry, Tom Snijders, Peng Wang, Mark Handcock, and Philippa Pattison. 2007. “Recent Developments in Exponential Random Graph (p*) Models for Social Networks.” <em>Social Networks</em> 29 (2): 192–215.</p>
+<p>Ronquist, Fredrik, Maxim Teslenko, Paul van der Mark, Daniel L Ayres, Aaron Darling, Sebastian Höhna, Bret Larget, Liang Liu, Marc A Suchard, and John P Huelsenbeck. 2012. “MrBayes 3.2: Efficient Bayesian Phylogenetic Inference and Model Choice Across a Large Model Space.” <em>Systematic Biology</em> 61 (3): 539–42.</p>
+<p>Sankaran, Kris, and Susan Holmes. 2014. “structSSI: Simultaneous and Selective Inference for Grouped or Hierarchically Structured Data.” <em>Journal of Statistical Software</em> 59 (1): 1–21.</p>
+<p>Schilling, Mark F. 1986. “Multivariate Two-Sample Tests Based on Nearest Neighbors.” <em>Journal of the American Statistical Association</em> 81 (395): 799–806.</p>
+<p>Schölkopf, Bernhard, Koji Tsuda, and Jean-Philippe Vert. 2004. <em>Kernel Methods in Computational Biology</em>. MIT press.</p>
+<p>Wang, Q., G. M. Garrity, J. M. Tiedje, and J. R. Cole. 2007. “Naive Bayesian Classifier for Rapid Assignment of rRNA Sequences into the New Bacterial Taxonomy.” <em>Applied and Environmental Microbiology</em> 73 (16): 5261.</p>
+<p>Wertheim, Joel O, and Michael Worobey. 2009. “Dating the Age of the SIV Lineages That Gave Rise to HIV-1 and HIV-2.” <em>PLoS Computational Biology</em> 5 (5): e1000377.</p>
+<p>Wright, Erik S. 2015. “DECIPHER: Harnessing Local Sequence Context to Improve Protein Multiple Sequence Alignment.” <em>BMC Bioinformatics</em> 16 (1): 1.</p>
+<p>Yu, Hongxiang, Diana L Simons, Ilana Segall, Valeria Carcamo-Cavazos, Erich J Schwartz, Ning Yan, Neta S Zuckerman, et al.&nbsp;2012. “PRC2/EED-EZH2 Complex Is up-Regulated in Breast Cancer Lymph Node Metastasis Compared to Primary Tumor and Correlates with Tumor Proliferation in Situ.” <em>PloS One</em> 7 (12): e51239.</p>
+<p>Page built at 01:33 on 2025-09-01 using R version 4.5.1 (2025-06-13)</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./09-chap.html" class="pagination-link" aria-label="9.1 Goals for this chapter">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">9.1 Goals for this chapter</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./11-chap.html" class="pagination-link" aria-label="11.1 Goals for this chapter">
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">11.1 Goals for this chapter</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
