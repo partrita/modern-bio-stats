@@ -1,63 +1,40 @@
-[![](imgs/t_distribution.png)](imgs/t_distribution.png)
+![](imgs/t_distribution.png)
 
-One of the main challenges of biological data analysis is dealing with
-heterogeneity. The quantities we are interested in often do not show a simple,
-unimodal “textbook distribution”. For example, in the last part of [Chapter
-2](02-chap.html) we saw how the histogram of sequence scores in [Figure
-2.27](02-chap.html#fig-ScoreMixture-1) had two separate modes, one for CpG-
-islands and one for non-islands. We can see the data as a simple mixture of a
-few (in this case: two) components. We call these _finite mixtures_. Other
-mixtures can involve almost as many components as we have observations. These
-we call _infinite mixtures_ 1.
+생물학적 데이터 분석의 주요 과제 중 하나는 이질성(heterogeneity)을 다루는 것입니다. 우리가 관심을 갖는 수치들은 종종 단순하고 단봉형(unimodal)인 "교과서적인 분포"를 따르지 않습니다. 예를 들어, [2장](02-chap.html)의 마지막 부분에서 [그림 2.27](02-chap.html#fig-ScoreMixture-1)의 서열 점수 히스토그램이 CpG 섬과 비섬(non-islands)이라는 두 개의 별개 최빈값(mode)을 갖는 것을 보았습니다. 우리는 이 데이터를 몇 가지(이 경우 두 개) 성분의 단순한 혼합으로 볼 수 있습니다. 이를 **유한 혼합(finite mixtures)**이라고 부릅니다. 다른 혼합물은 관측치 수만큼이나 많은 성분을 포함할 수 있는데, 이를 **무한 혼합(infinite mixtures)**이라고 부릅니다1.
 
-1 We will see that—as for so many modeling choices–the right complexity of the
-mixture is in the eye of the beholder and often depends on the amount of data
-and the resolution and smoothness we want to attain.
+1 모델링 선택의 많은 부분이 그러하듯이, 혼합물의 적절한 복잡성은 보는 사람의 관점에 달려 있으며, 종종 데이터의 양과 우리가 달성하고자 하는 해상도 및 매끄러움에 따라 달라집니다.
 
-In [Chapter 1](01-chap.html) we saw how a simple generative model with a
-Poisson distribution led us to make useful inference in the detection of an
-epitope. Unfortunately, a satisfactory fit to real data with such a simple
-model is often out of reach. However, simple models such as the normal or
-Poisson distributions can serve as building blocks for more realistic models
-using the mixing framework that we cover in this chapter. Mixtures occur
-naturally for flow cytometry data, biometric measurements, RNA-Seq, ChIP-Seq,
-microbiome and many other types of data collected using modern
-biotechnologies. In this chapter we will learn from simple examples how to
-build more realistic models of distributions using mixtures.
+[1장](01-chap.html)에서 포아송 분포를 이용한 단순한 생성 모델이 에피토프(epitope) 검출에서 어떻게 유용한 추론으로 이어지는지 보았습니다. 불행히도, 이러한 단순한 모델로 실제 데이터를 만족스럽게 피팅하는 것은 종종 어렵습니다. 그러나 정규 분포나 포아송 분포와 같은 단순한 모델은 이 장에서 다룰 혼합 프레임워크를 사용하여 더 현실적인 모델을 구축하기 위한 구성 요소 역할을 할 수 있습니다. 혼합물은 유세포 분석 데이터, 생체 측정값, RNA-Seq, ChIP-Seq, 마이크로바이옴 및 현대 생명공학 기술을 사용하여 수집된 다른 많은 유형의 데이터에서 자연스럽게 발생합니다. 이 장에서는 단순한 예제들을 통해 혼합물을 사용하여 더 현실적인 분포 모델을 구축하는 방법을 배울 것입니다.
 
-## 4.1 Goals for this chapter
+## 4.1 이 장의 목표
 
-In this chapter we will:
+이 장에서 우리는 다음을 수행할 것입니다:
 
-  * Generate our own mixture model data from distributions composed of two normal populations.
+  * 두 개의 정규 모집단으로 구성된 분포로부터 우리만의 혼합 모델 데이터를 생성합니다.
 
-  * See how the Expectation-Maximization (EM) algorithm enables us to “reverse engineer” the underlying mixtures in dataset.
+  * 기댓값-최대화(Expectation-Maximization, EM) 알고리즘을 통해 데이터 세트의 기저에 깔린 혼합물을 어떻게 "역설계(reverse engineer)"할 수 있는지 살펴봅니다.
 
-  * Use a special type of mixture called zero-inflation for data such as ChIP-Seq data that have many extra zeros.
+  * ChIP-Seq 데이터와 같이 0이 아주 많은 데이터를 위해 영-과잉(zero-inflation)이라고 불리는 특수한 유형의 혼합 모델을 사용합니다.
 
-  * Discover the empirical cumulative distribution: a special mixture that we can build from observed data. This will enable us to see how we can simulate the variability of our estimates using the bootstrap.
+  * 경험적 누적 분포(empirical cumulative distribution)를 발견합니다: 관측된 데이터로부터 구축할 수 있는 특수한 혼합물입니다. 이를 통해 붓스트랩(bootstrap)을 사용하여 추정치의 가변성을 어떻게 시뮬레이션할 수 있는지 살펴볼 것입니다.
 
-  * Build the Laplace distribution as an instance of an infinite mixture model with many components. We will use it to model promoter lengths and microarray intensities.
+  * 많은 성분을 가진 무한 혼합 모델의 사례로서 라플라스 분포(Laplace distribution)를 구축합니다. 이를 사용하여 프로모터 길이와 마이크로어레이 강도를 모델링할 것입니다.
 
-  * Have our first encounter with the gamma-Poisson distribution, a hierarchical model useful for RNA-Seq data. We will see it comes naturally from mixing different Poisson distributed sources.
+  * RNA-Seq 데이터에 유용한 계층적 모델인 감마-포아송(gamma-Poisson) 분포를 처음으로 접하게 됩니다. 이것이 서로 다른 포아송 분포 소스들을 혼합함으로써 자연스럽게 발생한다는 것을 보게 될 것입니다.
 
-  * See how mixture models enable us to choose data transformations.
+  * 혼합 모델을 통해 데이터 변환을 선택하는 방법을 살펴봅니다.
 
-## 4.2 Finite mixtures
+## 4.2 유한 혼합(Finite mixtures)
 
-### 4.2.1 Simple examples and computer experiments
+### 4.2.1 단순한 예제와 컴퓨터 실험
 
-Here is a first example of a mixture model with two equal-sized components.
-The generating process has two steps:
+여기에 두 개의 동일한 크기의 성분으로 구성된 혼합 모델의 첫 번째 예제가 있습니다. 생성 과정은 두 단계로 이루어집니다:
 
-**Flip a fair coin.**
+**공정한 동전을 던집니다.**
 
-If it comes up heads: Generate a random number from a normal distribution with
-mean 1 and variance 0.25.
+앞면이 나오면: 평균 1, 분산 0.25인 정규 분포에서 난수를 생성합니다.
 
-If it comes up tails: Generate a random number from a normal distribution with
-mean 3 and variance 0.25. The histogram shown in Figure 4.1 was produced by
-repeating these two steps 10000 times using the following code.
+뒷면이 나오면: 평균 3, 분산 0.25인 정규 분포에서 난수를 생성합니다. 그림 4.1에 표시된 히스토그램은 다음 코드를 사용하여 이 두 단계를 10,000번 반복하여 생성되었습니다.
 
     
     
@@ -84,24 +61,19 @@ repeating these two steps 10000 times using the following code.
          geom_histogram(fill = "purple", binwidth = 0.1)__
 
 [![](04-chap_files/figure-html/fig-twocoins-1.png)](04-chap_files/figure-
-html/fig-twocoins-1.png "Figure 4.1: Histogram of 10,000 random draws from a
-fair mixture of two normals. The left hand part of the histogram is dominated
-by numbers generated from \(A\), on the right from \(B\).")
+html/fig-twocoins-1.png "그림 4.1: 두 정규 분포의 공정한 혼합물로부터 얻은 10,000개의 난수 히스토그램. 히스토그램의 왼쪽 부분은 (A)에서 생성된 숫자가 지배적이고, 오른쪽은 (B)에서 생성된 숫자가 지배적입니다.")
 
-Figure 4.1: Histogram of 10,000 random draws from a fair mixture of two
-normals. The left hand part of the histogram is dominated by numbers generated
-from (A), on the right from (B).
+그림 4.1: 두 정규 분포의 공정한 혼합물로부터 얻은 10,000개의 난수 히스토그램. 히스토그램의 왼쪽 부분은 (A)에서 생성된 숫자가 지배적이고, 오른쪽은 (B)에서 생성된 숫자가 지배적입니다.
 
 __
 
-Question 4.1
+질문 4.1
 
-How can you use R’s vectorized syntax to remove the `vapply`-loop and generate
-the `fairmix` vector more efficiently?
+R의 벡터화된 구문을 사용하여 `vapply` 루프를 제거하고 `fairmix` 벡터를 더 효율적으로 생성하려면 어떻게 해야 할까요?
 
 __
 
-Solution
+해결책
 
 __
 
@@ -115,14 +87,13 @@ __
 
 __
 
-Question 4.2
+질문 4.2
 
-Using your improved code, use one million coin flips and make a histogram with
-200 bins. What do you notice?
+개선된 코드를 사용하여 백만 번의 동전 던지기를 수행하고 200개의 빈(bin)을 가진 히스토그램을 만들어 보세요. 무엇을 알 수 있나요?
 
 __
 
-Solution
+해결책
 
 __
 
@@ -138,32 +109,27 @@ __
 
 [![](04-chap_files/figure-html/fig-
 limitinghistogram-1.png)](04-chap_files/figure-html/fig-
-limitinghistogram-1.png "Figure 4.2: Similar to Figure fig-twocoins, but with
-one million observations.")
+limitinghistogram-1.png "그림 4.2: 그림 4.1과 유사하지만 백만 개의 관측치를 사용한 경우.")
 
-Figure 4.2: Similar to Figure 4.1, but with one million observations.
+그림 4.2: 그림 4.1과 유사하지만 백만 개의 관측치를 사용한 경우.
 
-Figure 4.2 illustrates that as we increase the number of bins and the number
-of observations per bin, the histogram approaches a smooth curve. This smooth
-limiting curve is called the **density** function of the random variable
-`fair$values`.
+그림 4.2는 빈의 수와 빈당 관측치 수를 늘림에 따라 히스토그램이 매끄러운 곡선에 가까워지는 것을 보여줍니다. 이 매끄러운 한계 곡선을 확률 변수 `fair$values`의 **밀도(density)** 함수라고 부릅니다.
 
-The density function for a normal \\(N(\mu,\sigma)\\) random variable can be
-written explicitly. We usually call it
+정규 분포 \\(N(\mu,\sigma)\\) 확률 변수의 밀도 함수는 다음과 같이 명시적으로 쓸 수 있습니다. 우리는 보통 이를 다음과 같이 부릅니다.
 
 \\[ \phi(x)=\frac{1}{\sigma
 \sqrt{2\pi}}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}. \\]
 
 __
 
-Question 4.3
+질문 4.3
 
-  1. Plot a histogram of those values of `fair$values` for which `coinflips` is `TRUE`. Hint: use `y = ..density..` in the call to `aes` (which means that the vertical axis is to show the proportion of counts) and set the binwidth to 0.01.
-  2. Overlay the line corresponding to \\(\phi(z)\\).
+  1. `coinflips`가 `TRUE`인 `fair$values` 값들에 대한 히스토그램을 그리세요. 힌트: `aes` 호출 시 `y = after_stat(density)`를 사용하고(이는 수직축이 비율을 나타냄을 의미함), binwidth를 0.01로 설정하세요.
+  2. \\(\phi(z)\\)에 해당하는 선을 겹쳐서 그리세요.
 
 __
 
-Solution
+해결책
 
 __
 
@@ -176,23 +142,15 @@ __
 
 [![](04-chap_files/figure-html/fig-
 overlaydensity-1.png)](04-chap_files/figure-html/fig-overlaydensity-1.png
-"Figure 4.3: Histogram of half a million draws from the normal distribution
-N\(\\mu=1,\\sigma^2=0.5^2\). The curve is the theoretical density \\phi\(x\)
-calculated using the function dnorm.")
+"그림 4.3: 정규 분포 N\(\\mu=1,\\sigma^2=0.5^2\)로부터 얻은 50만 개의 난수 히스토그램. 곡선은 dnorm 함수를 사용하여 계산된 이론적 밀도 \\phi\(x\)입니다.")
 
-Figure 4.3: Histogram of half a million draws from the normal distribution
-\\(N(\mu=1,\sigma^2=0.5^2)\\). The curve is the theoretical density
-\\(\phi(x)\\) calculated using the function `dnorm`.
+그림 4.3: 정규 분포 \\(N(\mu=1,\sigma^2=0.5^2)\\)로부터 얻은 50만 개의 난수 히스토그램. 곡선은 `dnorm` 함수를 사용하여 계산된 이론적 밀도 \\(\phi(x)\\)입니다.
 
-In fact we can write the mathematical formula for the density of all of
-`fair$values` (the limiting curve that the histograms tend to look like) as a
-sum of the two densities.
+사실 우리는 `fair$values` 전체의 밀도(히스토그램이 따라가는 한계 곡선)에 대한 수학적 공식을 두 밀도의 합으로 쓸 수 있습니다.
 
 \\[ f(x)=\frac{1}{2}\phi_1(x)+\frac{1}{2}\phi_2(x), \tag{4.1}\\]
 
-where \\(\phi_1\\) is the density of the normal \\(N(\mu_1=1,\sigma^2=0.25)\\)
-and \\(\phi_2\\) is the density of the normal \\(N(\mu_2=3,\sigma^2=0.25)\\).
-Figure 4.4 was generated by the following code.
+여기서 \\(\phi_1\\)은 정규 분포 \\(N(\mu_1=1,\sigma^2=0.25)\\)의 밀도이고, \\(\phi_2\\)는 정규 분포 \\(N(\mu_2=3,\sigma^2=0.25)\\)의 밀도입니다. 그림 4.4는 다음 코드를 통해 생성되었습니다.
 
     
     
@@ -204,42 +162,30 @@ Figure 4.4 was generated by the following code.
       geom_line(color = "red", linewidth = 1.5) + ylab("mixture density")__
 
 [![](04-chap_files/figure-html/fig-twodensity-1.png)](04-chap_files/figure-
-html/fig-twodensity-1.png "Figure 4.4: The theoretical density of the
-mixture.")
+html/fig-twodensity-1.png "그림 4.4: 혼합물의 이론적 밀도.")
 
-Figure 4.4: The theoretical density of the mixture.
+그림 4.4: 혼합물의 이론적 밀도.
 
-In this case, the mixture model is extremely visible as the two component
-distributions have little overlap. Figure 4.4 shows two distinct peaks: we
-call this a **bimodal** distribution. In practice, in many cases the
-separation between the mixture components is not so obvious—but nevertheless
-relevant.
+이 경우, 두 성분 분포의 겹침이 거의 없기 때문에 혼합 모델이 매우 뚜렷하게 보입니다. 그림 4.4는 두 개의 뚜렷한 정점을 보여줍니다. 우리는 이를 **이봉(bimodal)** 분포라고 부릅니다. 실제로는 많은 경우 혼합 성분 사이의 분리가 그렇게 명확하지 않지만, 그럼에도 불구하고 이는 중요합니다.
 
 [![](04-chap_files/figure-html/fig-histmystery-1.png)](04-chap_files/figure-
-html/fig-histmystery-1.png "Figure 4.5: A mixture of two normals that is
-harder to recognize.")
+html/fig-histmystery-1.png "그림 4.5: 인식하기 더 어려운 두 정규 분포의 혼합물.")
 
-Figure 4.5: A mixture of two normals that is harder to recognize.
-
-__
-
-Question 4.4
-
-Figure 4.5 is a histogram of a fair mixture of two normals with the same
-variances. Can you guess the two _mean_ parameters of the component
-distributions? Hint: you can use trial and error, and simulate various
-mixtures to see if you can make a matching histogram. Looking at the R code
-for the chapter will show you exactly how the data were generated.
+그림 4.5: 인식하기 더 어려운 두 정규 분포의 혼합물.
 
 __
 
-Solution
+질문 4.4
+
+그림 4.5는 분산이 동일한 두 정규 분포의 공정한 혼합물 히스토그램입니다. 성분 분포의 두 _평균_ 매개변수를 추측할 수 있나요? 힌트: 시행착오법을 사용하여 다양한 혼합물을 시뮬레이션하여 일치하는 히스토그램을 만들 수 있는지 확인할 수 있습니다. 이 장의 R 코드를 살펴보면 데이터가 정확히 어떻게 생성되었는지 알 수 있습니다.
 
 __
 
-The following code colors in red the points that were generated from the
-_heads_ coin flips and in blue those from the _tails_. Its output, in Figure
-4.6, shows the two underlying distributions.
+해결책
+
+__
+
+다음 코드는 동전의 _앞면_에서 생성된 점은 빨간색으로, _뒷면_에서 생성된 점은 파란색으로 표시합니다. 그림 4.6에 표시된 출력 결과는 두 기저 분포를 보여줍니다.
 
     
     
@@ -263,15 +209,11 @@ _heads_ coin flips and in blue those from the _tails_. Its output, in Figure
 
 [![](04-chap_files/figure-html/fig-
 betterhistogram-1-1.png)](04-chap_files/figure-html/fig-
-betterhistogram-1-1.png "Figure 4.6: The mixture from Figure fig-histmystery,
-but with the two components colored in red and blue.")
+betterhistogram-1-1.png "그림 4.6: 그림 4.5의 혼합물이지만, 두 성분을 빨간색과 파란색으로 표시한 경우.")
 
-Figure 4.6: The mixture from Figure 4.5, but with the two components colored
-in red and blue.
+그림 4.6: 그림 4.5의 혼합물이지만, 두 성분을 빨간색과 파란색으로 표시한 경우.
 
-In Figure 4.6, the bars from the two component distributions are plotted on
-top of each other. A different way of showing the components is Figure 4.7,
-produced by the code below.
+그림 4.6에서 두 성분 분포의 막대는 서로 겹쳐서 표시됩니다. 성분을 표시하는 다른 방법은 아래 코드로 생성된 그림 4.7입니다.
 
     
     
@@ -284,17 +226,15 @@ produced by the code below.
 
 [![](04-chap_files/figure-html/fig-
 comparecomponents-1-1.png)](04-chap_files/figure-html/fig-
-comparecomponents-1-1.png "Figure 4.7: As Figure fig-betterhistogram-1, with
-stacked bars for the two mixture components.")
+comparecomponents-1-1.png "그림 4.7: 그림 4.6과 유사하지만, 두 혼합 성분에 대해 누적 막대(stacked bars)를 사용한 경우.")
 
-Figure 4.7: As Figure 4.6, with stacked bars for the two mixture components.
+그림 4.7: 그림 4.6과 유사하지만, 두 혼합 성분에 대해 누적 막대(stacked bars)를 사용한 경우.
 
 __
 
-Question 4.5
+질문 4.5
 
-Why do the bars in Figure 4.7, but not those in Figure 4.6 have the same
-heights as in Figure 4.5?
+왜 그림 4.7의 막대 높이는 그림 4.5와 같지만, 그림 4.6의 막대 높이는 그렇지 않을까요?
 
 __
 
@@ -358,7 +298,7 @@ respectively. Then, the parameter vector \\(\theta\\) is a five-tuple of the
 two means, the two standard deviations, and the mixture parameter
 \\(\lambda\\). In other words,
 \\(\theta=(\mu_1,\mu_2,\sigma_1,\sigma_2,\lambda)\\). Here is an example of
-data generated according to such a model. The labels are denoted by \\(u\\).
+이러한 모델에 따라 생성된 데이터입니다. 레이블은 \\(u\\)로 표시됩니다.
 
     
     
@@ -380,17 +320,12 @@ data generated according to such a model. The labels are denoted by \\(u\\).
     5     2 1.10 
     6     2 1.96 
 
-If we know the labels \\(u\\), we can estimate the parameters using separate
-MLEs for each group. The overall likelihood is
+만약 레이블 \\(u\\)를 알고 있다면, 각 그룹에 대해 별도의 MLE를 사용하여 매개변수를 추정할 수 있습니다. 전체 가능도(likelihood)는 다음과 같습니다.
 
 \\[ p(x, u \,|\, \theta) = \left( \prod_{\\{i:\,u_i=1\\}} \phi_1(x_i) \right)
 \times \left( \prod_{\\{i:\,u_i=2\\}} \phi_2(x_i) \right). \tag{4.4}\\]
 
-Its maximization can be split into three independent pieces: we find
-\\(\mu_1\\) and \\(\sigma_1\\) by maximizing the first bracketed expression on
-the right hand side of Equation 4.4, \\(\mu_2\\) and \\(\sigma_2\\) by
-maximizing the second, and \\(\lambda\\) from the empirical frequencies of the
-labels:
+이 식을 최대화하는 작업은 세 가지 독립적인 부분으로 나눌 수 있습니다: 식 4.4의 우변에 있는 첫 번째 괄호 안의 식을 최대화하여 \\(\mu_1\\)과 \\(\sigma_1\\)을 찾고, 두 번째 괄호를 최대화하여 \\(\mu_2\\)와 \\(\sigma_2\\)를 찾으며, 레이블의 경험적 빈도로부터 \\(\lambda\\)를 찾습니다.
 
     
     
@@ -412,129 +347,71 @@ labels:
 
 __
 
-Question 4.6
+질문 4.6
 
-Suppose we knew the mixing proportion \\(\lambda=\frac{1}{2}\\), but not the
-\\(u_i\\), so that the density is
-\\(\frac{1}{2}\phi_1(x)+\frac{1}{2}\phi_2(x)\\). Try writing out the (log)
-likelihood. What prevents us from solving for the MLE explicitly here?
+혼합 비율 \\(\lambda=\frac{1}{2}\\)은 알고 있지만 \\(u_i\\)는 모른다고 가정해 봅시다. 이 경우 밀도는 \\(\frac{1}{2}\phi_1(x)+\frac{1}{2}\phi_2(x)\\)입니다. (로그) 가능도를 직접 써보세요. 여기에서 MLE를 명시적으로 구하는 것을 방해하는 요인은 무엇인가요?
 
 __
 
-Solution
+해결책
 
 __
 
-See, e.g., the chapter on _Mixture Models_ in Shalizi
-([2017](16-chap.html#ref-CosmaShalizi2017)) for the computation of the
-likelihood of a finite mixture of normals. “If we try to estimate the mixture
-model, then, we’re doing weighted maximum likelihood, with weights given by
-the posterior label probabilities. These, to repeat, depend on the parameters
-we are trying to estimate, so there seems to be a vicious circle.”
+정규 혼합물의 가능도 계산에 대해서는 Shalizi ([2017](16-chap.html#ref-CosmaShalizi2017))의 _혼합 모델(Mixture Models)_ 장을 참조하십시오. "혼합 모델을 추정하려고 하면, 사후 레이블 확률(posterior label probabilities)에 의해 주어진 가중치를 사용하여 가중 최대 가능도(weighted maximum likelihood)를 수행하게 됩니다. 거듭 강조하지만, 이 확률들은 우리가 추정하고자 하는 매개변수에 의존하므로, 이는 일종의 악순환처럼 보입니다."
 
-In many cases we neither know the \\(u\\) labels nor the mixture proportions.
-What we can do is start with an initial guess for the labels and pretend to
-know them, estimate the parameters as above, and then go through an iterative
-cycle, updating at each step our current best guess of the labels and the
-parameters until our estimates no longer substantially change (i.e., until
-they seem to have converged) and the likelihood has reached an optimum.
+대부분의 경우 우리는 \\(u\\) 레이블이나 혼합 비율을 알지 못합니다. 우리가 할 수 있는 일은 레이블에 대한 초기 추측에서 시작하여 이를 알고 있다고 가정하고 위와 같이 매개변수를 추정한 다음, 추정치가 실질적으로 변하지 않을 때까지(즉, 수렴할 때까지) 그리고 가능도가 최적값에 도달할 때까지 매 단계마다 레이블과 매개변수에 대한 현재의 최선의 추측을 업데이트하는 반복적인 사이클을 거치는 것입니다.
 
-In fact we can do something more elaborate and replace the “hard” labels
-\\(u\\) for each observation (it is either in group 1 or 2) by membership
-weights that sum up to 1. The mixture model 4.3 suggests that we interpret
+사실 우리는 각 관측치에 대해 "딱딱한(hard)" 레이블 \\(u\\)(그룹 1 아니면 2에 속함)를 부여하는 대신, 합이 1이 되는 멤버십 가중치(membership weights)로 대체하는 더 정교한 작업을 수행할 수 있습니다. 혼합 모델 4.3은 다음 식을 제안합니다.
 
 \\[ w(x, 1) = \frac{\lambda\phi_1(x)}{\lambda\phi_1(x)+(1-\lambda)\phi_2(x)}
 \tag{4.5}\\]
 
-as the probability that an observation with value \\(x\\) was generated by the
-first mixture component, and analogously \\(w(x, 2) = 1 - w(x, 1)\\) for the
-second component. In other words, while \\(\lambda\\) is the prior probability
-that an observation that we have not yet seen comes from mixture component 1,
-\\(w(x,1)\\) is the corresponding posterior probability once we have observed
-its value \\(x\\). This suggests the following iterative algorithm:
+이 식은 값 \\(x\\)를 갖는 관측치가 첫 번째 혼합 성분에 의해 생성되었을 확률로 해석될 수 있으며, 두 번째 성분에 대해서는 유사하게 \\(w(x, 2) = 1 - w(x, 1)\\)이 됩니다. 즉, \\(\lambda\\)가 아직 보지 못한 관측치가 혼합 성분 1에서 나올 사전 확률(prior probability)이라면, \\(w(x,1)\\)은 그 값 \\(x\\)를 관찰한 후의 상응하는 사후 확률(posterior probability)입니다. 이는 다음과 같은 반복 알고리즘을 제안합니다:
 
-**E step** : Assuming that \\(\theta\\) (i.e., the means, standard deviations
-and \\(\lambda\\)) is known, evaluate the membership weights 4.5.
+**E 단계** : \\(\theta\\)(즉, 평균, 표준 편차 및 \\(\lambda\\))가 알려져 있다고 가정하고, 멤버십 가중치 4.5를 평가합니다.
 
-**M step** : Given the membership weights of each observation \\(x_i\\),
-determine a new, improved maximum likelihood estimate of \\(\theta\\).
+**M 단계** : 각 관측치 \\(x_i\\)의 멤버십 가중치가 주어졌을 때, \\(\theta\\)의 새롭고 개선된 최대 가능도 추정치를 결정합니다.
 
-Iterate until \\(\theta\\) and the likelihood have converged. At this point,
-please check out Exercise 4.1 for a worked out demonstration with code. In
-fact, this algorithm is far more general than our particular application
-example here. A very readable exposition is presented by ([Bishop
-2006](16-chap.html#ref-Bishop:PRML)), here some of the highlights:
+\\(\theta\\)와 가능도가 수렴할 때까지 반복합니다. 이 시점에서 코드가 포함된 데모인 연습 문제 4.1을 확인해 보시기 바랍니다. 사실, 이 알고리즘은 여기서 다루는 특정 응용 예제보다 훨씬 더 일반적입니다. ([Bishop 2006](16-chap.html#ref-Bishop:PRML))은 매우 읽기 쉬운 설명을 제시하고 있으며, 주요 내용은 다음과 같습니다:
 
-Our goal is to maximize the marginal likelihood of a probabilistic model that
-involves an observed variable \\(x\\), an unobserved variable \\(u\\) and some
-parameter \\(\theta\\). In our simple example, \\(u\\) is a categorical
-variable with two possible values, and \\(x\\) a real number. In general, both
-\\(x\\) and \\(u\\) can be a tuple of multiple individual variables (i.e.,
-they can be multivariate) of any variable type. The marginal likelihood is
-computed by taking the expectation (i.e., a weighted average) across all
-possible values of \\(u\\):
+우리의 목표는 관측 변수 \\(x\\), 관측되지 않은 변수 \\(u\\) 및 일부 매개변수 \\(\theta\\)를 포함하는 확률 모델의 주변 가능도(marginal likelihood)를 최대화하는 것입니다. 우리의 단순한 예제에서 \\(u\\)는 두 가지 가능한 값을 갖는 범주형 변수이고, \\(x\\)는 실수입니다. 일반적으로 \\(x\\)와 \\(u\\) 모두 모든 유형의 개별 변수들의 튜플(즉, 다변량)일 수 있습니다. 주변 가능도는 \\(u\\)의 모든 가능한 값에 대해 기댓값(즉, 가중 평균)을 취하여 계산됩니다:
 
 \\[ L_\text{marg}(\theta; x) = \int_U p(x, u\,|\,\theta) \, \text{d}U.
 \tag{4.6}\\]
 
-In our specific example, the integration amounts to (probabilistically)
-averaging over all possible membership configurations, and thus, to the
-weighted sum taking into account the membership weights,
+우리의 구체적인 예제에서, 적분은 가능한 모든 멤버십 구성에 대해 (확률적으로) 평균을 내는 것에 해당하며, 따라서 멤버십 가중치를 고려한 가중 합이 됩니다.
 
 \\[ L_\text{marg}(\theta; x) = \prod_{i=1}^n \sum_{u=1}^2 p(x_i, u\,|\,\theta)
 \, w(x_i, u\,|\,\theta). \tag{4.7}\\]
 
-Directly maximizing this quantity is intractable.
+이 수치를 직접 최대화하는 것은 다루기 힘든(intractable) 일입니다.
 
-Something we do have a grip on, given the data and our current parameter
-estimate \\(\theta_t\\), is the conditional distribution of the latent
-variable, \\(p(u\,|\,x, \theta_t)\\). We can use it to find the expectation of
-the complete data log likelihood \\(\log p(x, u\,|\,\theta)\\) evaluated for
-some general parameter value \\(\theta\\). This expectation is often denoted
-as
+데이터와 현재의 매개변수 추정치 \\(\theta_t\\)가 주어졌을 때 우리가 파악할 수 있는 것은 잠재 변수의 조건부 분포 \\(p(u\,|\,x, \theta_t)\\)입니다. 우리는 이를 사용하여 일반적인 매개변수 값 \\(\theta\\)에 대해 평가된 완전 데이터 로그 가능도(complete data log likelihood) \\(\log p(x, u\,|\,\theta)\\)의 기댓값을 찾을 수 있습니다. 이 기댓값은 종종 다음과 같이 표시됩니다.
 
 \\[ Q(\theta, \theta_t) = \int_U \log p(x, u\,|\,\theta) \, p(u\,|\, x,
 \theta_t) \, \text{d}U. \tag{4.8}\\]
 
-In the M step, we determine the revised parameter estimate \\(\theta_{t+1}\\)
-by maximizing this function,
+M 단계에서 우리는 이 함수를 최대화하여 수정된 매개변수 추정치 \\(\theta_{t+1}\\)을 결정합니다.
 
 \\[ \theta_{t+1} = \arg \max_\theta \, Q(\theta, \theta_t). \tag{4.9}\\]
 
-The E step consists of computing \\(p(u\,|\, x, \theta_t)\\), the essential
-ingredient of \\(Q\\).
+E 단계는 \\(Q\\)의 핵심 요소인 \\(p(u\,|\, x, \theta_t)\\)를 계산하는 것으로 구성됩니다.
 
-These two steps (E and M) are iterated until the improvements are small; this
-is a numerical indication that we are close to a flattening of the likelihood
-and have reached a maximum. The iteration trajectory, but hopefully not the
-point that we arrive at, will depend on the starting point. This is analogous
-to a hike to the top of a mountain, which can start at different places and
-may take different routes, but always leads to the top of the hill—as long as
-there is only one hilltop and not several. Thus, as a precaution, it is good
-practice to repeat such a procedure several times from different starting
-points and make sure that we always get the same answer.
+이 두 단계(E와 M)는 개선 사항이 작아질 때까지 반복됩니다. 이는 우리가 가능도의 평평한 부분에 가까워졌고 최대값에 도달했음을 나타내는 수치적 지표입니다. 반복 궤적은 시작 지점에 따라 달라지겠지만, 도달하는 지점은 달라지지 않기를 바랍니다. 이는 산 정상에 오르는 것과 비슷합니다. 산 정상에 오르는 길은 시작 지점에 따라 다를 수 있고 경로도 다를 수 있지만, 산봉우리가 하나만 있고 여러 개가 아닌 이상 항상 정상으로 이어집니다. 따라서 예방 조치로서, 이러한 절차를 서로 다른 시작 지점에서 여러 번 반복하여 항상 동일한 답을 얻는지 확인하는 것이 좋습니다.
 
 __
 
-Question 4.7
+질문 4.7
 
-Several R packages provide EM implementations, including
-**[mclust](https://cran.r-project.org/web/packages/mclust/)** ,
-**[EMcluster](https://cran.r-project.org/web/packages/EMcluster/)** and
-**[EMMIXskew](https://cran.r-project.org/web/packages/EMMIXskew/)**. Choose
-one and run the EM function several times with different starting values. Then
-use the function `normalmixEM` from the
-**[mixtools](https://cran.r-project.org/web/packages/mixtools/)** package to
-compare the outputs.
+여러 R 패키지에서 **[mclust](https://cran.r-project.org/web/packages/mclust/)**, **[EMcluster](https://cran.r-project.org/web/packages/EMcluster/)**, **[EMMIXskew](https://cran.r-project.org/web/packages/EMMIXskew/)**를 포함한 EM 구현을 제공합니다. 하나를 선택하여 서로 다른 시작 값으로 EM 함수를 여러 번 실행해 보세요. 그런 다음 **[mixtools](https://cran.r-project.org/web/packages/mixtools/)** 패키지의 `normalmixEM` 함수를 사용하여 출력을 비교해 보세요.
 
 __
 
-Solution
+해결책
 
 __
 
-Here we show the output from
-**[mixtools](https://cran.r-project.org/web/packages/mixtools/)**.
+여기서는 **[mixtools](https://cran.r-project.org/web/packages/mixtools/)**의 출력을 보여줍니다.
 
     
     
@@ -555,56 +432,28 @@ Here we show the output from
     
     [1]    0.9263    0.0737   -0.1859    1.9216    0.6134    0.4746 -170.5662
 
-The EM algorithm is very instructive:
+EM 알고리즘은 매우 유익합니다:
 
-  1. We saw a first example of _soft_ averaging, where we don’t decide whether an observation belongs to one group or another, but allow it to participate in several groups by using membership probabilities as weights, and thus obtain more nuanced estimates ([Slonim et al. 2005](16-chap.html#ref-Slonim:2005)).
+  1. 우리는 관측치가 한 그룹에 속하는지 다른 그룹에 속하는지 결정하지 않고, 멤버십 확률을 가중치로 사용하여 여러 그룹에 참여할 수 있게 함으로써 더 미묘한 추정치를 얻는 "부드러운(soft)" 평균화의 첫 번째 사례를 보았습니다 ([Slonim et al. 2005](16-chap.html#ref-Slonim:2005)).
 
-  2. It shows us how we can tackle a difficult problem with too many unknowns by alternating between solving simpler problems.
+  2. 미지수가 너무 많은 어려운 문제를 더 간단한 문제들을 번갈아 가며 해결함으로써 어떻게 다룰 수 있는지 보여줍니다.
 
-  3. We were able to consider a data generating model with hidden variables, and still estimate its parameters. We could do so even without explicitly commiting on the values of the hidden variables: we took a (weighted) average over them, in the Expecation step of Equation 4.8, embodied by the membership probabilities. This basic idea is so powerful that it is the starting point for many more advanced algorithms in machine learning ([Bishop 2006](16-chap.html#ref-Bishop:PRML)).
+  3. 숨겨진 변수(hidden variables)가 있는 데이터 생성 모델을 고려하면서도 그 매개변수를 추정할 수 있었습니다. 숨겨진 변수의 값을 명시적으로 확정하지 않고도 그렇게 할 수 있었습니다: 식 4.8의 기댓값 단계에서 멤버십 확률로 구체화된 이들에 대해 (가중) 평균을 취했습니다. 이 기본 아이디어는 매우 강력하여 머신러닝의 많은 고급 알고리즘의 출발점이 됩니다 ([Bishop 2006](16-chap.html#ref-Bishop:PRML)).
 
-  4. It can be extended to the more general case of model averaging ([Hoeting et al. 1999](16-chap.html#ref-hoeting1999)). It can be sometimes beneficial to consider several models simultaneously if we are unsure which one is relevant for our data. We can combine them together into a weighted model. The weights are provided by the likelihoods of the models.
+  4. 이는 모델 평균화(model averaging, [Hoeting et al. 1999](16-chap.html#ref-hoeting1999))의 더 일반적인 경우로 확장될 수 있습니다. 우리 데이터에 어떤 모델이 적합한지 확신할 수 없는 경우 여러 모델을 동시에 고려하는 것이 때때로 유익할 수 있습니다. 우리는 이들을 가중 모델로 결합할 수 있습니다. 가중치는 모델의 가능도에 의해 제공됩니다.
 
-### 4.2.3 Models for zero inflated data
+### 4.2.3 영-과잉 데이터(zero inflated data)를 위한 모델
 
-Ecological and molecular data often come in the form of counts. For instance,
-this may be the number of individuals from each of several species at each of
-several locations. Such data can often be seen as a mixture of two scenarios:
-if the species is not present, the count is necessarily zero, but _if_ the
-species is present, the number of individuals we observe varies, with a random
-sampling distribution; this distribution may also include zeros. We model this
-as a mixture:
+생태학적 및 분자적 데이터는 종종 카운트(counts)의 형태로 나타납니다. 예를 들어, 여러 장소 각각에 있는 여러 종 각각의 개체 수일 수 있습니다. 이러한 데이터는 종종 두 가지 시나리오의 혼합으로 볼 수 있습니다: 종이 존재하지 않으면 카운트는 반드시 0이지만, 종이 존재한다면 우리가 관찰하는 개체 수는 무작위 샘플링 분포에 따라 달라지며, 이 분포에도 0이 포함될 수 있습니다. 우리는 이를 다음과 같은 혼합 모델로 모델링합니다:
 
 \\[ f_{\text{zi}}(x) = \lambda \, \delta(x) + (1-\lambda) \,
 f_{\text{count}}(x), \tag{4.10}\\]
 
-where \\(\delta\\) is Dirac’s delta function, which represents a probability
-distribution that has all its mass at 0. The zeros from the first mixture
-component are called “structural”: in our example, they occur because certain
-species do not live in certain habitats. The second component,
-\\(f_{\text{count}}\\) may also include zeros and other small numbers, simply
-due to random sampling. The R packages
-**[pscl](https://cran.r-project.org/web/packages/pscl/)** ([Zeileis, Kleiber,
-and Jackman 2008](16-chap.html#ref-Zeileis:2008)) and
-**[zicounts](https://cran.r-project.org/web/packages/zicounts/)** provide many
-examples and functions for working with **zero inflated** counts.
+여기서 \\(\delta\\)는 모든 질량이 0에 있는 확률 분포를 나타내는 디랙 델타 함수입니다. 첫 번째 혼합 성분에서 발생하는 0은 "구조적(structural)"이라고 불립니다. 우리의 예제에서 이는 특정 종이 특정 서식지에 살지 않기 때문에 발생합니다. 두 번째 성분인 \\(f_{\text{count}}\\) 역시 단순히 무작위 샘플링으로 인해 0 및 다른 작은 숫자를 포함할 수 있습니다. R 패키지 **[pscl](https://cran.r-project.org/web/packages/pscl/)** ([Zeileis, Kleiber, and Jackman 2008](16-chap.html#ref-Zeileis:2008))과 **[zicounts](https://cran.r-project.org/web/packages/zicounts/)**는 **영-과잉(zero inflated)** 카운트를 다루기 위한 많은 예제와 함수를 제공합니다.
 
-#### Example: ChIP-Seq data
+#### 예시: ChIP-Seq 데이터
 
-Let’s consider the example of ChIP-Seq data. These data are sequences of
-pieces of DNA that are obtained from chromatin immunoprecipitation (ChIP).
-This technology enables the mapping of the locations along genomic DNA of
-transcription factors, nucleosomes, histone modifications, chromatin
-remodeling enzymes, chaperones, polymerases and other protein. It was the main
-technology used by the Encyclopedia of DNA Elements (ENCODE) Project. Here we
-use an example ([Kuan et al. 2011](16-chap.html#ref-Kuan2011statistical)) from
-the **[mosaicsExample](https://bioconductor.org/packages/mosaicsExample/)**
-package, which shows data measured on chromosome 22 from ChIP-Seq of
-antibodies for the STAT1 protein and the H3K4me3 histone modification applied
-to the GM12878 cell line. Here we do not show the code to construct the
-`binTFBS` object; it is shown in the source code file for this chapter and
-follows the vignette of the
-**[mosaics](https://bioconductor.org/packages/mosaics/)** package.
+ChIP-Seq 데이터의 예를 들어보겠습니다. 이 데이터는 염색질 면역 침전(chromatin immunoprecipitation, ChIP)을 통해 얻은 DNA 조각의 서열입니다. 이 기술을 사용하면 전사 인자, 뉴클레오솜, 히스톤 수정, 염색질 리모델링 효소, 샤페론, 중합효소 및 기타 단백질의 게놈 DNA 상의 위치를 매핑할 수 있습니다. 이는 DNA 요소 백과사전(ENCODE) 프로젝트에서 사용된 주요 기술이었습니다. 여기서는 **[mosaicsExample](https://bioconductor.org/packages/mosaicsExample/)** 패키지의 예제([Kuan et al. 2011](16-chap.html#ref-Kuan2011statistical))를 사용합니다. 이 예제는 GM12878 세포주에 적용된 STAT1 단백질 및 H3K4me3 히스톤 수정에 대한 항체의 ChIP-Seq으로부터 22번 염색체에서 측정된 데이터를 보여줍니다. 여기서는 `binTFBS` 객체를 생성하는 코드는 보여주지 않지만, 이 장의 소스 코드 파일에 나와 있으며 **[mosaics](https://bioconductor.org/packages/mosaics/)** 패키지의 비네트를 따릅니다.
 
     
     
@@ -622,7 +471,7 @@ follows the vignette of the
     - uni-reads are assumed
     ----------------------------------------
 
-From this object, we can create the histogram of per-bin counts.
+이 객체로부터 빈(bin)당 카운트의 히스토그램을 생성할 수 있습니다.
 
     
     
@@ -631,27 +480,23 @@ From this object, we can create the histogram of per-bin counts.
       geom_histogram(binwidth = 1, fill = "forestgreen")__
 
 [![](04-chap_files/figure-html/fig-chipseqzeros-1.png)](04-chap_files/figure-
-html/fig-chipseqzeros-1.png "Figure 4.8: The number of binding sites found in
-200nt windows along chromosome 22 in a ChIP-Seq dataset.")
+html/fig-chipseqzeros-1.png "그림 4.8: ChIP-Seq 데이터 세트에서 22번 염색체를 따라 200nt 창(window)에서 발견된 결합 부위의 수입니다.")
 
-Figure 4.8: The number of binding sites found in 200nt windows along
-chromosome 22 in a ChIP-Seq dataset.
+그림 4.8: ChIP-Seq 데이터 세트에서 22번 염색체를 따라 200nt 창(window)에서 발견된 결합 부위의 수.
 
-We see in Figure 4.8 that there are many zeros, although from this plot it is
-not immediately obvious whether the number of zeros is really extraordinary,
-given the frequencies of the other small numbers (\\(1,2,...\\)).
+그림 4.8을 보면 0이 아주 많다는 것을 알 수 있는데, 이 플롯만으로는 다른 작은 숫자들(\\(1, 2, ...\\))의 빈도를 고려할 때 0의 개수가 정말로 특별한지는 즉각적으로 명확하지 않습니다.
 
 __
 
-Question 4.8
+질문 4.8
 
-  1. Redo the histogram of the counts using a logarithm base 10 scale on the \\(y\\)-axis.  
+  1. \(y\)축에 로그(밑 10) 스케일을 사용하여 카운트 히스토그램을 다시 그리세요.  
 
-  2. Estimate \\(\pi_0\\), the proportion of bins with zero counts.
+  2. 카운트가 0인 빈의 비율인 \(\pi_0\)을 추정하세요.
 
 __
 
-Solution
+해결책
 
 __
 
@@ -761,81 +606,36 @@ Figure 4.11: The observed sample can be seen as a mixture of point masses at
 each of the values (real point masses would be bars without any width
 whatsoever).
 
-In [Section 3.6.7](03-chap.html#sec-graphics-ecdf) we saw that the empirical
-cumulative distribution function (ECDF) for a sample of size \\(n\\) is
+[Section 3.6.7](03-chap.html#sec-graphics-ecdf)에서 우리는 크기 \\(n\\)인 표본에 대한 경험적 누적 분포 함수(empirical cumulative distribution function, ECDF)가 다음과 같음을 보았습니다.
 
 \\[ \hat{F}_n(x)= \frac{1}{n}\sum_{i=1}^n {\mathbb 1}_{x \leq x_i},
 \tag{4.11}\\]
 
-and we saw ECDF plots in [Figure 3.24](03-chap.html#fig-graphics-onedecdf). We
-can also write the _density_ of our sample as
+그리고 [그림 3.24](03-chap.html#fig-graphics-onedecdf)에서 ECDF 플롯을 보았습니다. 우리는 또한 우리 표본의 _밀도_를 다음과 같이 쓸 수 있습니다.
 
 \\[ \hat{f}_n(x) =\frac{1}{n}\sum_{i=1}^n \delta_{x_i}(x) \tag{4.12}\\]
 
-In general, the density of a probability distribution is the derivative (if it
-exists) of the distribution function. We have applied this principle here: the
-density of the distribution defined by Equation 4.11 is Equation 4.12. We
-could do this since one can consider the function \\(\delta_a\\) the
-“derivative” of the step function \\({\mathbb 1}_{x \leq a}\\): it is
-completely flat almost everywhere, except at the one point \\(a\\) where there
-is the step, and where its value is “infinite” . Equation 4.12 highlights that
-our data sample can be considered a mixture of \\(n\\) **point masses** at the
-observed values \\(x_1,x_2,..., x_{n}\\), such as in Figure 4.11.
+일반적으로 확률 분포의 밀도는 (존재한다면) 분포 함수의 도함수입니다. 우리는 여기서 이 원리를 적용했습니다: 식 4.11로 정의된 분포의 밀도는 식 4.12입니다. 함수 \\(\delta_a\\)를 계단 함수(step function) \\({\mathbb 1}_{x \leq a}\\)의 "도함수"로 간주할 수 있기 때문에 이렇게 할 수 있었습니다: 이 함수는 계단이 있는 한 점 \\(a\\)를 제외하고는 거의 모든 곳에서 완전히 평평하며, 그 점에서의 값은 "무한"입니다. 식 4.12는 우리의 데이터 표본이 그림 4.11에서와 같이 관측된 값 \\(x_1, x_2, ..., x_n\\)에서의 \\(n\\)개 **점 질량(point masses)**의 혼합물로 간주될 수 있음을 강조합니다.
 
-There is a bit of advanced mathematics (beyond standard calculus) required for
-this to make sense, which is however beyond the scope of our treatment here.
+이것이 타당하기 위해서는 (표준 미적분학을 넘어서는) 약간의 고급 수학이 필요하지만, 여기서는 다루지 않겠습니다.
 
 [![](imgs/BootstrapPrincipleNew.png)](imgs/BootstrapPrincipleNew.png
-"Figure 4.12: The value of a statistic \\tau is estimated from data \(the grey
-matrices\) generated from an underlying distribution F. Different samples from
-F lead to different data, and so to different values of the estimate
-\\hat{\\tau}: this is called sampling variability. The distribution of all the
-\\hat{\\tau}’s is the sampling distribution.")
+"그림 4.12: 통계량 \\tau의 값은 기저 분포 F로부터 생성된 데이터(회색 행렬들)로부터 추정됩니다. F로부터 얻은 서로 다른 표본들은 서로 다른 데이터를 생성하고, 따라서 추정치 \\hat{\\tau}의 값도 달라집니다: 이를 표집 가변성(sampling variability)이라고 합니다. 모든 \\hat{\\tau}들의 분포가 표집 분포(sampling distribution)입니다.")
 
-Figure 4.12: The value of a statistic \\(\tau\\) is estimated from data (the
-grey matrices) generated from an underlying distribution \\(F\\). Different
-samples from \\(F\\) lead to different data, and so to different values of the
-estimate \\(\hat{\tau}\\): this is called **sampling variability**. The
-distribution of all the \\(\hat{\tau}\\)’s is the **sampling distribution**.
+그림 4.12: 통계량 \\(\tau\\)의 값은 기저 분포 \\(F\\)로부터 생성된 데이터(회색 행렬들)로부터 추정됩니다. \\(F\\)로부터 얻은 서로 다른 표본들은 서로 다른 데이터를 생성하고, 따라서 추정치 \\(\hat{\\tau}\\)의 값도 달라집니다: 이를 **표집 가변성(sampling variability)**이라고 합니다. 모든 \\(\hat{\\tau}\\)들의 분포가 **표집 분포(sampling distribution)**입니다.
 
-Statistics of our sample, such as the mean, minimum or median, can now be
-written as a function of the ECDF, for instance, \\(\bar{x} = \int
-\delta_{x_i}(x)\,\text{d}x\\). As another instance, if \\(n\\) is an odd
-number, the median is \\(x_{(\frac{n+1}{2})}\\), the value right in the middle
-of the ordered list.
+평균, 최솟값 또는 중앙값과 같은 우리 표본의 통계량은 이제 ECDF의 함수로 쓰여질 수 있습니다. 예를 들어, \\(\bar{x} = \int \delta_{x_i}(x)\,\text{d}x\\)입니다. 또 다른 예로, 만약 \\(n\\)이 홀수라면 중앙값은 정렬된 리스트의 정중앙에 있는 값인 \\(x_{(\frac{n+1}{2})}\\)입니다.
 
-The true **sampling distribution** of a statistic \\(\hat{\tau}\\) is often
-hard to know as it requires many different data samples from which to compute
-the statistic; this is shown in Figure 4.12.
+통계량 \\(\hat{\\tau}\\)의 실제 **표집 분포**는 통계량을 계산하기 위한 많은 서로 다른 데이터 표본을 필요로 하기 때문에 알기 어려운 경우가 많습니다. 이는 그림 4.12에 나와 있습니다.
 
-The **bootstrap** principle approximates the true sampling distribution of
-\\(\hat{\tau}\\) by creating new samples drawn from the empirical distribution
-built from the original sample (Figure 4.13). We _reuse_ the data (by
-considering it a mixture distribution of \\(\delta\\)s) to create new
-“datasets” by taking samples and looking at the sampling distribution of the
-statistics \\(\hat{\tau}^*\\) computed on them. This is called the
-**nonparametric bootstrap** resampling approach, see Bradley Efron and
-Tibshirani ([1994](16-chap.html#ref-Efron:1994)) for a complete reference. It
-is very versatile and powerful method that can be applied to basically any
-statistic, no matter how complicated it is. We will see example applications
-of this method, in particular to clustering, in [Chapter 5](05-chap.html).
+**붓스트랩(bootstrap)** 원리는 원래 표본으로부터 구축된 경험적 분포에서 뽑은 새로운 표본들을 생성함으로써 \\(\hat{\\tau}\\)의 실제 표집 분포를 근사합니다(그림 4.13). 우리는 데이터를 (\\(\delta\\)들의 혼합 분포로 간주하여) _재사용_하여 표본을 추출하고 그로부터 계산된 통계량 \\(\hat{\\tau}^*\\)의 표집 분포를 살펴봄으로써 새로운 "데이터 세트"를 만듭니다. 이를 **비모수적 붓스트랩(nonparametric bootstrap)** 재표본 추출 접근법이라고 하며, 완전한 참고 문헌으로는 Bradley Efron과 Tibshirani ([1994](16-chap.html#ref-Efron:1994))를 참조하십시오. 이는 아무리 복잡하더라도 기본적으로 모든 통계량에 적용할 수 있는 매우 다재다능하고 강력한 방법입니다. [5장](05-chap.html)에서 이 방법의 응용 예시, 특히 클러스터링에 대한 적용 사례를 살펴볼 것입니다.
 
 [![](imgs/BootstrapPrinciple2New.png)](imgs/BootstrapPrinciple2New.png
-"Figure 4.13: The bootstrap simulates the sampling variability by drawing
-samples not from the underlying true distribution F \(as in Figure fig-
-samplingdist\), but from the empirical distribution function \\hat{F}_n.")
+"그림 4.13: 붓스트랩은 (그림 4.12에서처럼) 기저의 실제 분포 F가 아니라 경험적 분포 함수 \\hat{F}_n으로부터 표본을 추출함으로써 표집 가변성을 시뮬레이션합니다.")
 
-Figure 4.13: The bootstrap simulates the sampling variability by drawing
-samples not from the underlying true distribution \\(F\\) (as in Figure 4.12),
-but from the empirical distribution function \\(\hat{F}_n\\).
+그림 4.13: 붓스트랩은 (그림 4.12에서처럼) 기저의 실제 분포 \\(F\\)가 아니라 경험적 분포 함수 \\(\hat{F}_n\\)으로부터 표본을 추출함으로써 표집 가변성을 시뮬레이션합니다.
 
-Using these ideas, let’s try to estimate the sampling distribution of the
-median of the Zea Mays differences we saw in Figure 4.11. We use similar
-simulations to those in the previous sections: Draw \\(B=1000\\) samples of
-size 15 from the 15 values (each being a component in the 15-component
-mixture). Then compute the 1000 medians of each of these samples of 15 values
-and look at their distribution: this is the bootstrap sampling distribution of
-the median.
+이러한 아이디어를 사용하여 그림 4.11에서 보았던 Zea Mays 차이값의 중앙값에 대한 표집 분포를 추정해 봅시다. 이전 섹션들과 유사한 시뮬레이션을 사용합니다: 15개의 값(각각이 15개 성분 혼합물의 한 성분임)으로부터 크기가 15인 표본을 \\(B=1000\\)번 추출합니다. 그런 다음 이 15개 값으로 구성된 1000개 표본 각각의 중앙값을 계산하고 그 분포를 살펴봅니다. 이것이 중앙값의 붓스트랩 표집 분포입니다.
 
     
     
@@ -848,31 +648,25 @@ the median.
       geom_histogram(bins = 30, fill = "purple")__
 
 [![](04-chap_files/figure-html/fig-bootmedian-1.png)](04-chap_files/figure-
-html/fig-bootmedian-1.png "Figure 4.14: The bootstrap sampling distribution of
-the median of the Zea Mays differences.")
+html/fig-bootmedian-1.png "그림 4.14: Zea Mays 차이값의 중앙값에 대한 붓스트랩 표집 분포.")
 
-Figure 4.14: The bootstrap sampling distribution of the median of the Zea Mays
-differences.
+그림 4.14: Zea Mays 차이값의 중앙값에 대한 붓스트랩 표집 분포.
 
 __
 
-Question 4.12
+질문 4.12
 
-Estimate a 99% confidence interval for the median based on these simulations.
-What can you conclude from looking at the overlap between this interval and 0?
-
-__
-
-Question 4.13
-
-Use the **[bootstrap](https://cran.r-project.org/web/packages/bootstrap/)**
-package to redo the same analysis using the function `bootstrap` for both
-`median` and `mean`. What differences do you notice between the sampling
-distribution of the mean and the median?
+이 시뮬레이션을 바탕으로 중앙값에 대한 99% 신뢰 구간을 추정해 보세요. 이 구간과 0 사이의 겹침을 보고 무엇을 결론지을 수 있나요?
 
 __
 
-Solution
+질문 4.13
+
+**[bootstrap](https://cran.r-project.org/web/packages/bootstrap/)** 패키지의 `bootstrap` 함수를 사용하여 `median`과 `mean` 모두에 대해 동일한 분석을 다시 수행해 보세요. 평균과 중앙값의 표집 분포 사이에서 어떤 차이점을 발견했나요?
+
+__
+
+해결책
 
 __
 
@@ -882,47 +676,29 @@ __
     bootstrap(ZeaMays$diff, B, mean)
     bootstrap(ZeaMays$diff, B, median)__
 
-#### Why nonparametric?
+#### 왜 비모수적(nonparametric)인가요?
 
-In theoretical statistics, nonparametric methods are those that have
-infinitely many degrees of freedom or numbers of unknown parameters.
+이론 통계학에서 비모수적 방법이란 무한히 많은 자유도나 알 수 없는 매개변수의 수를 가진 방법을 말합니다.
 
-[![](imgs/devil.png)](imgs/devil.png)
+![](imgs/devil.png)
 
-In practice, we do not wait for infinity; when the number of parameters
-becomes as large or larger than the amount of data available, we say the
-method is nonparametric. The bootstrap uses a mixture with \\(n\\) components,
-so with a sample of size \\(n\\), it qualifies as a nonparametric method.
+실제로 우리는 무한대까지 기다리지 않습니다. 매개변수의 수가 가용 데이터의 양만큼 많거나 그보다 많아지면 그 방법을 비모수적이라고 부릅니다. 붓스트랩은 \\(n\\)개의 성분을 가진 혼합물을 사용하므로, 크기가 \\(n\\)인 표본의 경우 비모수적 방법의 자격을 갖춥니다.
 
-Despite their name, nonparametric methods are not methods that do not use
-parameters: all statistical methods estimate unknown quantities.
+그 이름에도 불구하고, 비모수적 방법이 매개변수를 사용하지 않는 방법은 아닙니다. 모든 통계적 방법은 알 수 없는 수치를 추정합니다.
 
 __
 
-Question 4.14
+질문 4.14
 
-If the sample is composed of \\(n=3\\) different values, how many different
-bootstrap resamples are possible? Answer the same question with \\(n=15\\).
-
-__
-
-Solution
+표본이 \\(n=3\\)개의 서로 다른 값으로 구성되어 있다면, 몇 가지의 서로 다른 붓스트랩 재표본이 가능할까요? \\(n=15\\)인 경우에 대해서도 답해 보세요.
 
 __
 
-The set of all bootstrap resamples is equivalent to the set of all vectors of
-\\(n\\) integers whose sum is \\(n\\). Denote by \\(\mathbf{k} =
-(k_1,k_2,...,k_n)\\) the number of times the observations \\(x_1,x_2,...,
-x_n\\) occur in a bootstrap sample. We can think of each \\(k_i\\) as a box
-(as in the multinomial distribution), and there are \\(n\\) boxes in which to
-drop \\(n\\) balls. We can count the number of configurations by counting the
-number of ways of separating \\(n\\) balls into the boxes, i.e. by writing
-down \\(n\\) times an `o` (for the balls) and \\(n-1\\) times a separator `|`
-between them. So we have \\(2n-1\\) positions to fill, for which we must
-choose either `o` (a ball) or `|` (a separator). For \\(n=3\\), a possible
-placement would be `oo||o`, which corresponds to \\(\mathbf{k} = (2,0,1)\\).
-In general, this number is \\({2n-1} \choose {n-1}\\), and thus the answers
-for \\(n=3\\) and \\(15\\) are:
+해결책
+
+__
+
+모든 붓스트랩 재표본의 집합은 합이 \\(n\\)인 \\(n\\)개 정수 벡터의 집합과 동일합니다. 관측치 \\(x_1, x_2, ..., x_n\\)이 붓스트랩 표본에 나타나는 횟수를 \\(\mathbf{k} = (k_1, k_2, ..., k_n)\\)이라고 합시다. 각 \\(k_i\\)를 (다항 분포에서처럼) 상자로 생각할 수 있고, \\(n\\)개의 공을 떨어뜨릴 \\(n\\)개의 상자가 있습니다. 구성을 세는 방법은 \\(n\\)개의 공을 상자에 나누는 방법의 수를 세는 것입니다. 즉, 공을 나타내는 `o`를 \\(n\\)번 쓰고 그 사이에 구분선 `|`를 \\(n-1\\)번 쓰는 것입니다. 따라서 우리는 `o`(공) 또는 `|`(구분선) 중 하나를 선택해야 하는 \\(2n-1\\)개의 자리를 채워야 합니다. \\(n=3\\)인 경우, 가능한 배치는 `oo||o`일 수 있으며, 이는 \\(\mathbf{k} = (2,0,1)\\)에 해당합니다. 일반적으로 이 숫자는 \\({2n-1} \choose {n-1}\\)이며, 따라서 \\(n=3\\)과 \\(15\\)에 대한 답은 다음과 같습니다.
 
     
     
@@ -934,27 +710,17 @@ for \\(n=3\\) and \\(15\\) are:
 
 __
 
-Question 4.15
+질문 4.15
 
-What are the two types of error that can occur when using the bootstrap as it
-is implemented in the
-**[bootstrap](https://cran.r-project.org/web/packages/bootstrap/)** package?
-Which parameter can you modify to improve one of them?
+**[bootstrap](https://cran.r-project.org/web/packages/bootstrap/)** 패키지에 구현된 붓스트랩을 사용할 때 발생할 수 있는 두 가지 유형의 오류는 무엇인가요? 그중 하나를 개선하기 위해 어떤 매개변수를 수정할 수 있나요?
 
 __
 
-Solution
+해결책
 
 __
 
-Monte Carlo simulations of subsets of the data by resampling randomly
-approximate the exhaustive bootstrap ([Diaconis and Holmes
-1994](16-chap.html#ref-Diaconis1994)). Increasing the size of `nboot` argument
-in the `bootstrap` function reduces the Monte Carlo error, however, the
-exhaustive bootstrap is still not exact: we are still using an approximate
-distribution function, that of the data instead of the true distribution. If
-the sample size is small or the original sample biased, the approximation can
-still be quite poor, no matter how large we choose `nboot`.
+무작위 재표본 추출을 통한 데이터 하위 집합의 몬테카를로 시뮬레이션은 전수 붓스트랩(exhaustive bootstrap)을 근사합니다([Diaconis and Holmes 1994](16-chap.html#ref-Diaconis1994)). `bootstrap` 함수의 `nboot` 인수의 크기를 늘리면 몬테카를로 오류를 줄일 수 있지만, 전수 붓스트랩도 여전히 정확하지는 않습니다. 우리는 여전히 실제 분포 대신 데이터의 근사 분포 함수를 사용하고 있기 때문입니다. 표본 크기가 작거나 원래 표본에 편향이 있는 경우, `nboot`를 아무리 크게 선택하더라도 근사는 여전히 상당히 좋지 않을 수 있습니다.
 
 ## 4.4 Infinite mixtures
 
@@ -1080,7 +846,7 @@ Saccharomyces cerevisiae as studied by @Kristiansson2009.")
 cerevisiae as studied by Kristiansson et al. ([2009](16-chap.html#ref-
 Kristiansson2009)).
 
-[![](imgs/tcellhist.png)](imgs/tcellhist.png "Figure 4.18 \(b\): The log-
+![](imgs/tcellhist.png): The log-
 ratios of microarray gene expression measurements for 20,000 genes
 \[@Purdom2005\].")
 

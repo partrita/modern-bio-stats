@@ -1,111 +1,89 @@
-# Home
+# 홈
 
-**Please navigate between and within the chapters of this book via the
-dropdown menu (“Chapters”) at the top.**
+**이 책의 챕터 간 이동은 상단의 드롭다운 메뉴("Chapters")를 이용해 주세요.**
 
-How to cite this book: Modern Statistics for Modern Biology, by Susan Holmes
+책 인용 방법: Modern Statistics for Modern Biology, by Susan Holmes
 and Wolfgang Huber, Cambridge University Press (2019). ISBN: 9781108705295.  
-License: [**CC BY-NC-SA**](https://creativecommons.org/licenses/by-nc-sa/2.0/)
+라이센스: [**CC BY-NC-SA**](https://creativecommons.org/licenses/by-nc-sa/2.0/)
 
-[ ![](./imgs/MSMB-Cover2-smallest.jpg) Introduction  ](./00-chap.html)
+[ ![](./imgs/MSMB-Cover2-smallest.jpg) 소개  ](./00-chap.html)
 
-[ ![](./imgs/Pile_ou_face.png) Generative Models for Discrete Data
+[ ![](./imgs/Pile_ou_face.png) 이산 데이터를 위한 생성 모델
 ](./01-chap.html)
 
-[ ![](./imgs/StatDiagram.png) Statistical Modeling  ](./02-chap.html)
+[ ![](./imgs/StatDiagram.png) 통계적 모델링  ](./02-chap.html)
 
-[ ![](./03-chap_files/figure-html/fig-graphics-onedridge4-1.png) Data
-visualization  ](./03-chap.html)
+[ ![](./03-chap_files/figure-html/fig-graphics-onedridge4-1.png) 데이터 시각화  ](./03-chap.html)
 
-[ ![](imgs/t_distribution.png) Mixture Models  ](./04-chap.html)
+[ ![](imgs/t_distribution.png) 혼합 모델  ](./04-chap.html)
 
-[ ![](imgs/starlings_copyrightfree.jpg) Clustering  ](./05-chap.html)
+[ ![](imgs/starlings_copyrightfree.jpg) 클러스터링  ](./05-chap.html)
 
-[ ![](./imgs/active-substance-discovery-robot-screening-robot-sm.jpeg) Testing
+[ ![](./imgs/active-substance-discovery-robot-screening-robot-sm.jpeg) 가설 검정
 ](./06-chap.html)
 
-[ ![](imgs/TheMatrix.jpg) Multivariate Analysis  ](./07-chap.html)
+[ ![](imgs/TheMatrix.jpg) 다변량 분석  ](./07-chap.html)
 
-[ ![](./08-chap_files/figure-html/fig-countdata-MA-1.png) High-Throughput
-Count Data & Generalized Linear Models  ](./08-chap.html)
+[ ![](./08-chap_files/figure-html/fig-countdata-MA-1.png) 고처리량
+카운트 데이터 & 일반화 선형 모델  ](./08-chap.html)
 
-[ ![](./imgs/Brighton_West_Pier_20090214_sunset.jpg) Multivariate methods for
-heterogeneous data  ](./09-chap.html)
+[ ![](./imgs/Brighton_West_Pier_20090214_sunset.jpg) 이질적 데이터를 위한 다변량 방법  ](./09-chap.html)
 
-[ ![](imgs/Darwin_Tree_1837_web.png) Networks and Trees  ](./10-chap.html)
+[ ![](imgs/Darwin_Tree_1837_web.png) 네트워크와 트리  ](./10-chap.html)
 
-[ ![](./11-chap_files/figure-html/fig-voronoiPaint-1.png) Image data
+[ ![](./11-chap_files/figure-html/fig-voronoiPaint-1.png) 이미지 데이터
 ](./11-chap.html)
 
-[ ![](imgs/BuildWall.png) Supervised Learning  ](./12-chap.html)
+[ ![](imgs/BuildWall.png) 지도 학습  ](./12-chap.html)
 
-[ ![](./imgs/maizeDarwin.png) Design of High Throughput Experiments and their
-Analyses  ](./13-chap.html)
+[ ![](./imgs/maizeDarwin.png) 고처리량 실험 설계 및 분석  ](./13-chap.html)
 
-[ ![](./imgs/the-library-of-alexandria-and-its-legacy.jpg) Statistical
-Concordance  ](./14-chap.html)
+[ ![](./imgs/the-library-of-alexandria-and-its-legacy.jpg) 통계적
+일치성  ](./14-chap.html)
 
-[ ![](./imgs/Monetflowers.jpg) Acknowledgements  ](./15-chap.html)
+[ ![](./imgs/Monetflowers.jpg) 감사의 말  ](./15-chap.html)
 
-[ ![](./imgs/bibliothek.jpeg) References  ](./16-chap.html)
+[ ![](./imgs/bibliothek.jpeg) 참고 문헌  ](./16-chap.html)
 
-No matching items
+## 독자들에게
 
-## Note to readers
+이 책의 인쇄본(아래 참조)은 2019년에 출판되었지만, 온라인 버전은 계속 업데이트하고 있습니다. 오류, 실수, 오타를 발견하시면 알려주세요. 최선을 다해 수정하겠습니다.
 
-The print version of the book (see below) was published in 2019, but we are
-continually updating the online version. So if you spot any inaccuracies,
-mistakes, typos, please let us know and we will do our best to improve the
-book accordingly.
+코드 예제와 관련하여: R과 CRAN 및 Bioconductor의 패키지들은 매우 역동적인 환경입니다. 인쇄본은 2018년 R 3.5와 Bioconductor 3.7을 기준으로 마무리되었습니다. 우리는 R이나 패키지의 변경 사항에 맞춰 코드를 지속적으로 업데이트하고 있습니다. 여기에서 보시는 내용은 2025-06-13 기준 R 버전 4.5.1과 2025-09-01 기준 최신 패키지 버전을 사용하여 빌드되었습니다. 자동화된 탐지로 발견하기 어려운 의도치 않은 변경 사항(예: 플롯 출력이나 특정 계산 결과)을 간과했을 수 있습니다. 우리는 이러한 위험이 독자들이 최신 컴퓨팅 환경에서 작업할 수 있도록 하는 가치 있는 대가라고 생각하지만, 혼란을 드릴 수 있는 점에 대해 사과드립니다.
 
-A particular issue is the code examples. R and its many packages on CRAN and
-Bioconductor are a highly dynamic environment. We finalized the print version
-in 2018 on R 3.5 and Bioconductor 3.7. We have been constantly updating the
-code to changes in R or the packages. What you see here has been built using R
-version 4.5.1 (2025-06-13) using the most recent release versions of all
-packages on 2025-09-01. It is possible that we have overlooked unintended
-changes whose detection is not easy to automate, e.g., in plot outputs or in
-results from certain computations. We think that this risk is a prize worth
-paying to enable readers to work in an up-to-date compute environment, but
-apologize to our readers for possible confusions.
+발견하신 점이 있다면 wolfgang.huber [at] embl.org 로 이메일을 보내주세요.
 
-If you spot anything, please alert us via email to wolfgang.huber [at]
-embl.org.
+## 코드와 데이터
 
-## Code and data
+### 패키지 설치
 
-### Package Installation
-
-You can install all the packages required to run every code example in the
-book via the following command:
+이 책의 모든 코드 예제를 실행하는 데 필요한 모든 패키지는 다음 명령어로 설치할 수 있습니다:
 
     
     
-    source("https://www.huber.embl.de/msmb/install_packages.R")__
+    source("https://www.huber.embl.de/msmb/install_packages.R")
 
-### Data
+### 데이터
 
-  * [Data files (zipped folder)](https://www.huber.embl.de/msmb/data.tar.gz)  
+  * [데이터 파일 (zip 폴더)](https://www.huber.embl.de/msmb/data.tar.gz)  
 last modified: 2022-12-15 16:05:03  
 md5 hash: `4aefffbcd826d9645b9e0e5b12274f07 -`
 
-### Code
+### 코드
 
-  * [R code (zipped folder)](https://www.huber.embl.de/msmb/code/)
+  * [R 코드 (zip 폴더)](https://www.huber.embl.de/msmb/code/)
 
-### Download an electronic copy of the whole book
+### 전체 책 전자 사본 다운로드
 
-  * [HTML tree for the book (zipped)](https://www.huber.embl.de/msmb/msmb.tar.gz)
+  * [책 HTML 트리 (zip)](https://www.huber.embl.de/msmb/msmb.tar.gz)
 
-## Physical Copy
+## 실물 책
 
-If you would like a hard copy of Modern Statistics for Modern Biology, the
-book can be purchased from [Cambridge University
+Modern Statistics for Modern Biology의 하드카피를 원하신다면 [Cambridge University
 Press](https://www.cambridge.org/it/academic/subjects/statistics-
 probability/statistics-life-sciences-medicine-and-health/modern-statistics-
-modern-biology?format=HB)
+modern-biology?format=HB) 에서 구매하실 수 있습니다.
 
-[![](imgs/book-cover-photo.jpg)](imgs/book-cover-photo.jpg)
+![](imgs/book-cover-photo.jpg)
 
 Page built at 01:33 on 2025-09-01 using R version 4.5.1 (2025-06-13)
-

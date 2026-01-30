@@ -1,126 +1,54 @@
-[![](imgs/xkcd-1725-linear_regression_2x.png)](imgs/xkcd-1725-linear_regression_2x.png)
+![](imgs/xkcd-1725-linear_regression_2x.png)
 
-Many measurement devices in biotechnology are based on massively parallel
-sampling and counting of molecules. One example is high-throughput DNA
-sequencing. Its applications fall broadly into two main classes of data
-output: in the first case, the output of interest are the sequences
-themselves, perhaps also their polymorphisms or differences to other sequences
-seen before. In the second case, the sequences themselves are more or less
-well-understood (say, we have a well-assembled and annotated genome), and our
-interest is on how abundant different sequence regions are in our sample.
+생명공학의 많은 측정 장치들은 분자의 대규모 병렬 샘플링과 카운팅에 기초합니다. 한 가지 예로 고처리량 DNA 시퀀싱(high-throughput DNA sequencing)이 있습니다. 그 응용 분야는 데이터 출력 방식에 따라 크게 두 가지 주요 클래스로 나뉩니다: 첫 번째 경우, 관심 있는 출력은 서열 그 자체이며, 아마도 그들의 다형성(polymorphisms)이나 이전에 보았던 다른 서열들과의 차이일 것입니다. 두 번째 경우, 서열 그 자체는 어느 정도 잘 이해되어 있으며(예를 들어, 잘 조립되고 어노테이션된 게놈을 가지고 있음), 우리의 관심은 샘플 내에서 서로 다른 서열 영역들이 얼마나 풍부하게 존재하는지에 있습니다.
 
-For instance, in **RNA-Seq** ([Ozsolak and Milos 2011](16-chap.html#ref-
-OzsolakMilos)), we sequence the RNA molecules found in a population of cells
-or in a tissue.
+예를 들어, **RNA-Seq** ([Ozsolak and Milos 2011](16-chap.html#ref-OzsolakMilos))에서는 세포 집단이나 조직에서 발견되는 RNA 분자들의 서열을 분석합니다.
 
-[![Strictly speaking, we don’t sequence the RNA but the complementary DNA
-\(cDNA\) obtained from reverse transcription. The pool of all RNA might be
-reduced to a subset of interest \(e.,g., messenger RNA\) by biochemical means,
-such as poly-A selection or ribosomal RNA depletion. Sensitive variants of
-RNA-Seq exist that enable assaying single cells, and large numbers of
-them.](imgs/devil.png)](imgs/devil.png "Strictly speaking, we don’t sequence
-the RNA but the complementary DNA \(cDNA\) obtained from reverse
-transcription. The pool of all RNA might be reduced to a subset of interest
-\(e.,g., messenger RNA\) by biochemical means, such as poly-A selection or
-ribosomal RNA depletion. Sensitive variants of RNA-Seq exist that enable
-assaying single cells, and large numbers of them.")
+[![엄밀히 말하면, 우리는 RNA의 서열을 분석하는 것이 아니라 역전사를 통해 얻은 상보적 DNA(cDNA)의 서열을 분석합니다. 전체 RNA 풀은 폴리-A 선택(poly-A selection)이나 리보솜 RNA 고갈(ribosomal RNA depletion)과 같은 생화학적 수단을 통해 관심 있는 하위 집합(예: 메신저 RNA)으로 줄어들 수 있습니다. 단일 세포와 대량의 세포를 분석할 수 있게 해주는 RNA-Seq의 민감한 변체들이 존재합니다.](imgs/devil.png)](imgs/devil.png "엄밀히 말하면, 우리는 RNA의 서열을 분석하는 것이 아니라 역전사를 통해 얻은 상보적 DNA(cDNA)의 서열을 분석합니다. 전체 RNA 풀은 폴리-A 선택(poly-A selection)이나 리보솜 RNA 고갈(ribosomal RNA depletion)과 같은 생화학적 수단을 통해 관심 있는 하위 집합(예: 메신저 RNA)으로 줄어들 수 있습니다. 단일 세포와 대량의 세포를 분석할 수 있게 해주는 RNA-Seq의 민감한 변체들이 존재합니다.")
 
-Strictly speaking, we don’t sequence the RNA but the complementary DNA (cDNA)
-obtained from reverse transcription. The pool of all RNA might be reduced to a
-subset of interest (e.,g., messenger RNA) by biochemical means, such as poly-A
-selection or ribosomal RNA depletion. Sensitive variants of RNA-Seq exist that
-enable assaying single cells, and large numbers of them.
+엄밀히 말하면, 우리는 RNA의 서열을 분석하는 것이 아니라 역전사를 통해 얻은 상보적 DNA(cDNA)의 서열을 분석합니다. 전체 RNA 풀은 폴리-A 선택(poly-A selection)이나 리보솜 RNA 고갈(ribosomal RNA depletion)과 같은 생화학적 수단을 통해 관심 있는 하위 집합(예: 메신저 RNA)으로 줄어들 수 있습니다. 단일 세포와 대량의 세포를 분석할 수 있게 해주는 RNA-Seq의 민감한 변체들이 존재합니다.
 
-In **ChIP-Seq** , we sequence DNA regions that are bound to particular DNA-
-binding proteins (selected by immuno-precipitation); in **RIP-Seq** , RNA
-molecules or regions of them bound to a particular RNA-binding protein; in
-**DNA-Seq** , we sequence genomic DNA and are interested in the prevalence of
-genetic variants in heterogeneous populations of cells, for instance the
-clonal composition of a tumor. In high-throughput chromatin conformation
-capture (**HiC**) we aim to map the 3D spatial arrangement of DNA; in
-**genetic screens** (using, say, RNAi or CRISPR-Cas9 libraries for
-perturbation and high-throughput sequencing for readout), we’re interested in
-the proliferation or survival of cells upon gene knockdown, knockout or
-modification. In microbiome analysis, we study the abundance of different
-microbial species in complex microbial habitats.
+**ChIP-Seq**에서는 특정 DNA 결합 단백질에 결합된 DNA 영역(면역 침전을 통해 선택됨)의 서열을 분석합니다. **RIP-Seq**에서는 특정 RNA 결합 단백질에 결합된 RNA 분자나 그 영역을, **DNA-Seq**에서는 게놈 DNA의 서열을 분석하며 이질적인 세포 집단에서의 유전적 변이의 유병률(예: 종양의 클론 구성)에 관심을 가집니다. 고처리량 염색질 구조 포착(**HiC**)에서는 DNA의 3차원 공간적 배치를 매핑하는 것을 목표로 하며, **유전적 스크리닝**(변동을 위해 RNAi나 CRISPR-Cas9 라이브러리를 사용하고 리드아웃을 위해 고처리량 시퀀싱을 사용하는 경우)에서는 유전자 넉다운(knockdown), 넉아웃(knockout) 또는 수정에 따른 세포의 증식이나 생존에 관심을 가집니다. 마이크로바이옴 분석에서는 복잡한 미생물 서식지에 있는 서로 다른 미생물 종의 풍부도를 연구합니다.
 
-Ideally we might want to sequence and count _all_ molecules of interest in the
-sample. Generally this is not possible: the biochemical protocols are not 100%
-efficient, and some molecules or intermediates get lost along the way.
-Moreover it’s often also not even necessary. Instead, we sequence and count a
-_statistical sample_. The sample size will depend on the complexity of the
-sequence pool assayed; it can go from tens of thousands to billions. This
-_sampling_ nature of the data is important when it comes to analyzing them. We
-hope that the sampling is sufficiently representative for us to identify
-interesting trends and patterns.
+이상적으로는 샘플 내의 관심 있는 _모든_ 분자를 시퀀싱하고 세고 싶을 것입니다. 일반적으로 이는 불가능합니다: 생화학적 프로토콜은 100% 효율적이지 않으며, 일부 분자나 중간 생성물은 과정 중에 소실됩니다. 게다가 대개 그럴 필요조차 없습니다. 대신, 우리는 _통계적 표본(statistical sample)_을 시퀀싱하고 셉니다. 표본 크기는 분석되는 서열 풀의 복잡성에 따라 달라질 것이며, 수만 개에서 수십억 개에 이를 수 있습니다. 이러한 데이터의 _샘플링_ 특성은 이를 분석할 때 중요합니다. 우리는 샘플링이 충분히 대표성이 있어 흥미로운 경향과 패턴을 식별할 수 있기를 희망합니다.
 
-## 8.1 Goals of this chapter
+## 8.1 이 장의 목표
 
-In this chapter, we will become familiar with count data in high-throughput
-sequencing applications such as RNA-Seq. We will understand and model the
-sampling processes that underlie the data in order to interpret them. Our main
-aim is to detect and quantify systematic changes between samples from
-different conditions, say _untreated_ versus _treated_ , where the task is to
-distinguish such systematic changes from sampling variations and experimental
-variability within the same conditions. In order to do this, we will also
-equip ourselves with a set of needed statistical concepts and tools:
+이 장에서 우리는 RNA-Seq과 같은 고처리량 시퀀싱 응용 분야의 카운트 데이터(count data)에 익숙해질 것입니다. 데이터를 해석하기 위해 데이터의 근간이 되는 샘플링 프로세스를 이해하고 모델링할 것입니다. 우리의 주요 목표는 서로 다른 조건(예: _처리되지 않은_ 군 대 _처리된_ 군)의 샘플들 사이에서 체계적인 변화를 감지하고 정량화하는 것이며, 이때의 과제는 그러한 체계적인 변화를 동일한 조건 내에서의 샘플링 변동 및 실험적 가변성과 구별하는 것입니다. 이를 위해 다음과 같은 필요한 통계적 개념과 도구들을 갖출 것입니다:
 
-  * multifactorial designs, linear models and analysis of variance
+  * 다요인 설계(multifactorial designs), 선형 모델 및 분산 분석(analysis of variance)
 
-  * generalized linear models
+  * 일반화 선형 모델(generalized linear models)
 
-  * robustness and outlier detection
+  * 강건성(robustness) 및 이상치 탐지
 
-  * shrinkage estimation
+  * 수축 추정(shrinkage estimation)
 
-In fact, these concepts have a much wider range of applications: they can also
-be applied to other types of data where want to detect differences in noisy
-data as a function of some experimental covariate. In particular, the
-framework of generalized linear models is quite abstract and generic, but this
-has the advantage that it can be adapted to many different data types, so that
-we don’t need to reinvent the wheel, but rather can immediately enjoy a wide
-range of associated tools and diagnostics.
+사실 이러한 개념들은 훨씬 더 넓은 범위의 응용 분야를 가집니다: 이들은 어떤 실험적 공변량의 함수로서 노이즈가 섞인 데이터의 차이를 감지하고자 하는 다른 유형의 데이터에도 적용될 수 있습니다. 특히 일반화 선형 모델의 프레임워크는 상당히 추상적이고 일반적이지만, 이는 많은 서로 다른 데이터 유형에 맞춰 조정될 수 있다는 장점이 있습니다. 따라서 우리는 바퀴를 새로 발명할 필요 없이 관련된 광범위한 도구와 진단 기능을 즉시 즐길 수 있습니다.
 
-As a bonus, we will also look at data transformations that make the data
-amenable to unsupervised methods such as those that we saw in Chapters
-[5](05-chap.html) and [7](07-chap.html), and which make it easier to visualize
-the data.
+보너스로, [5장](05-chap.html)과 [7장](07-chap.html)에서 보았던 비지도 학습 방법들에 데이터를 적합하게 만들고 데이터 시각화를 더 쉽게 만들어주는 데이터 변환에 대해서도 살펴볼 것입니다.
 
-## 8.2 Some core concepts
+## 8.2 몇 가지 핵심 개념
 
-Before we start, let’s settle some key terminology.
+시작하기 전에 몇 가지 주요 용어를 정리해 봅시다.
 
-  * A _sequencing library_ is the collection of DNA molecules used as input for the sequencing machine.
+  * _시퀀싱 라이브러리(sequencing library)_는 시퀀싱 장비의 입력으로 사용되는 DNA 분자들의 집합입니다.
 
-  * _Fragments_ are the molecules being sequenced. Since the currently most widely used technology1 can only deal with molecules of length around 300–1000 nucleotides, these are obtained by fragmenting the (generally longer) DNA or cDNA molecules of interest.
+  * _단편(Fragments)_은 시퀀싱되는 분자들입니다. 현재 가장 널리 사용되는 기술1은 길이가 약 300~1000 뉴클레오타이드인 분자만 처리할 수 있기 때문에, 이들은 관심 있는 (일반적으로 더 긴) DNA나 cDNA 분자를 단편화하여 얻어집니다.
 
-  * A **read** is the sequence obtained from a fragment. With the current technology, the read covers not the whole fragment, but only one or both ends of it, and the read length on either side is up to around 150 nucleotides.
+  * **리드(read)**는 단편으로부터 얻은 서열입니다. 현재 기술로 리드는 단편 전체가 아니라 그 단편의 한쪽 끝 또는 양쪽 끝만을 포괄하며, 양쪽의 리드 길이는 최대 약 150 뉴클레오타이드입니다.
 
-1 We refer to <https://www.illumina.com/techniques/sequencing.html>
+1 <https://www.illumina.com/techniques/sequencing.html>를 참조하십시오.
 
-2 For any particular application, it’s best to check the recent literature on
-the most appropriate approaches and choices.
+2 특정 응용 분야의 경우, 가장 적절한 접근 방식과 선택에 대해 최신 문헌을 확인하는 것이 가장 좋습니다.
 
-3 E.g., in the case of RNA-Seq, the genome together with an annotation of its
-transcripts.
+3 예: RNA-Seq의 경우, 게놈과 그 전사체에 대한 어노테이션.
 
-Between sequencing and counting, there is an important _aggregation_ or
-clustering step involved, which aggregates sequences that belong together: for
-instance, all reads belonging to the same gene (in RNA-Seq), or to the same
-binding region (ChIP-Seq). There are several approaches to this and choices to
-be made, depending on the aim of the experiment2. The methods include explicit
-alignment or hash-based mapping to a reference sequence3, and reference-
-independent sequence-similarity based clustering of the reads – especially if
-there is no obvious reference, such as in metagenomics or metatranscriptomics.
-We need to choose whether to consider different alleles or isoforms
-separately, or to merge them into an equivalence class. For simplicity, we’ll
-use the term _gene_ in this chapter for these operational aggregates, even
-though they can be various things depending on the particular application.
+시퀀싱과 카운팅 사이에는 함께 속하는 서열들을 모으는 중요한 _집계(aggregation)_ 또는 군집화 단계가 포함됩니다: 예를 들어, (RNA-Seq에서) 동일한 유전자에 속하는 모든 리드나, (ChIP-Seq에서) 동일한 결합 영역에 속하는 모든 리드를 모으는 것입니다. 실험의 목적에 따라 이에 대한 여러 접근 방식과 선택 사항이 있습니다2. 방법에는 참조 서열(reference sequence)에 대한 명시적인 정렬(alignment) 또는 해시 기반 매핑3, 그리고 리드들의 참조 독립적인 서열 유사성 기반 군집화가 포함됩니다 — 특히 메타제노믹스나 메타전사체학에서와 같이 명확한 참조 서열이 없는 경우에 그렇습니다. 우리는 서로 다른 대립유전자(alleles)나 이소형(isoforms)을 별도로 고려할지, 아니면 이들을 하나의 동등 클래스(equivalence class)로 병합할지 선택해야 합니다. 단순함을 위해 이 장에서는 특정 응용 분야에 따라 다양한 대상이 될 수 있음에도 불구하고 이러한 운영상의 집계 단위에 대해 _유전자(gene)_라는 용어를 사용하겠습니다.
 
-## 8.3 Count data
+## 8.3 카운트 데이터(Count data)
 
-Let us load an example dataset. It resides in the experiment data package
-**[pasilla](https://bioconductor.org/packages/pasilla/)**.
+예시 데이터 세트를 불러와 봅시다. 이 데이터는 실험 데이터 패키지인 **[pasilla](https://bioconductor.org/packages/pasilla/)**에 들어 있습니다.
 
     
     
@@ -128,22 +56,11 @@ Let us load an example dataset. It resides in the experiment data package
                       package = "pasilla", mustWork = TRUE)
     counts = as.matrix(read.csv(fn, sep = "\t", row.names = "gene_id"))__
 
-[![In the code shown here, we use the function system.file to locate a file
-that is shipped together with the pasilla package. When you work with your own
-data, you will need to prepare the matrix counts
-yourself.](imgs/devil.png)](imgs/devil.png "In the code shown here, we use the
-function system.file to locate a file that is shipped together with the
-pasilla package. When you work with your own data, you will need to prepare
-the matrix counts yourself.")
+[![여기서 보여주는 코드에서는 pasilla 패키지와 함께 제공되는 파일을 찾기 위해 system.file 함수를 사용합니다. 여러분 자신의 데이터로 작업할 때는 counts 행렬을 직접 준비해야 할 것입니다.](imgs/devil.png)](imgs/devil.png "여기서 보여주는 코드에서는 pasilla 패키지와 함께 제공되는 파일을 찾기 위해 system.file 함수를 사용합니다. 여러분 자신의 데이터로 작업할 때는 counts 행렬을 직접 준비해야 할 것입니다.")
 
-In the code shown here, we use the function `system.file` to locate a file
-that is shipped together with the
-**[pasilla](https://bioconductor.org/packages/pasilla/)** package. When you
-work with your own data, you will need to prepare the matrix `counts`
-yourself.
+여기서 보여주는 코드에서는 `system.file` 함수를 사용하여 **[pasilla](https://bioconductor.org/packages/pasilla/)** 패키지와 함께 제공되는 파일을 찾습니다. 여러분 자신의 데이터로 작업할 때는 `counts` 행렬을 직접 준비해야 할 것입니다.
 
-The data are stored as a rectangular table in a tab-delimited file, which
-we’ve read into the matrix `counts`.
+데이터는 탭으로 구분된 파일에 직사각형 표 형태로 저장되어 있으며, 이를 `counts` 행렬로 읽어 들였습니다.
 
     
     
@@ -167,137 +84,55 @@ we’ve read into the matrix `counts`.
     FBgn0020371        0
     FBgn0020372       27
 
-The matrix tallies the number of reads seen for each gene in each sample. We
-call it the **count table**. It has 14599 rows, corresponding to the genes,
-and 7 columns, corresponding to the samples. When loading data from a file, a
-good plausibility check is to print out some of the data, and maybe not only
-at the very beginning, but also at some random point in the middle, as we have
-done above.
+이 행렬은 각 샘플에서 각 유전자에 대해 관찰된 리드의 수를 집계합니다. 우리는 이를 **카운트 테이블(count table)**이라고 부릅니다. 유전자에 해당하는 14,599개의 행과 샘플에 해당하는 7개의 열로 이루어져 있습니다. 파일에서 데이터를 불러올 때 좋은 타당성 검사는 데이터의 일부를 출력해 보는 것인데, 위에서 했던 것처럼 아주 앞부분뿐만 아니라 중간의 무작위 지점도 확인해 보는 것이 좋습니다.
 
-The table is a matrix of integer values: the value in the \\(i\\)th row and
-the \\(j\\)th column of the matrix indicates how many reads have been mapped
-to gene \\(i\\) in sample \\(j\\). The statistical sampling models that we
-discuss in this chapter rely on the fact that the values are the direct, “raw”
-counts of sequencing reads – not some derived quantity, such as normalized
-counts, counts of covered base pairs, or the like; this would only lead to
-nonsensical results.
+이 표는 정수 값들의 행렬입니다: 행렬의 \\(i\\)번째 행과 \\(j\\)번째 열의 값은 샘플 \\(j\\)에서 유전자 \\(i\\)에 매핑된 리드가 몇 개인지를 나타냅니다. 이 장에서 논의할 통계적 샘플링 모델은 이 값들이 시퀀싱 리드의 직접적이고 "가공되지 않은(raw)" 카운트라는 사실에 의존합니다 — 정규화된 카운트나 포괄된 염기쌍의 수와 같은 파생된 수치가 아닙니다. 그러한 수치들은 무의미한 결과로 이어질 뿐입니다.
 
-### 8.3.1 The challenges of count data
+### 8.3.1 카운트 데이터의 과제들
 
-What are the challenges that we need to overcome with such count data?
+우리가 이러한 카운트 데이터로 극복해야 할 과제들은 무엇일까요?
 
-  * The data have a large dynamic range, starting from zero up to millions. The variance, and more generally, the distribution shape of the data in different parts of the dynamic range are very different. We need to take this phenomenon, called **heteroskedasticity** , into account.
+  * 데이터는 0부터 수백만까지 넓은 동적 범위를 가집니다. 동적 범위의 서로 다른 부분에서 데이터의 분산, 그리고 더 일반적으로 분포의 형태가 매우 다릅니다. 우리는 **이분산성(heteroskedasticity)**이라고 불리는 이러한 현상을 고려해야 합니다.
 
-  * The data are non-negative integers, and their distribution is not symmetric – thus normal or log-normal distribution models may be a poor fit.
+  * 데이터는 음수가 아닌 정수이며, 그 분포는 대칭적이지 않습니다 — 따라서 정규 분포나 로그-정규 분포 모델은 적합도가 낮을 수 있습니다.
 
-  * We need to understand the systematic sampling biases and adjust for them. Confusingly, this is often called **normalization**. Examples are the total sequencing depth of an experiment (even if the true abundance of a gene in two libraries is the same, we expect different numbers of reads for it depending on the total number of reads sequenced), or differing sampling probabilities (even if the true abundance of two genes within a biological sample is the same, we expect different numbers of reads for them if their biophysical properties differ, such as length, GC content, secondary structure, binding partners).
+  * 우리는 체계적인 샘플링 편향을 이해하고 이를 보정해야 합니다. 혼란스럽게도 이를 흔히 **정규화(normalization)**라고 부릅니다. 예로는 실험의 전체 시퀀싱 깊이(두 라이브러리에서 한 유전자의 실제 풍부도가 같더라도, 시퀀싱된 전체 리드 수에 따라 해당 유전자에 대해 서로 다른 리드 수를 예상함), 또는 서로 다른 샘플링 확률(생물학적 샘플 내에서 두 유전자의 실제 풍부도가 같더라도 길이, GC 함량, 2차 구조, 결합 파트너와 같은 생물물리학적 특성이 다르면 서로 다른 리드 수를 예상함) 등이 있습니다.
 
-  * We need to understand the stochastic properties of the sampling, as well as other sources of stochastic experimental variation. For studies with large numbers of biological samples, this is usually straightforward, and we can even fall back on resampling- or permutation-based methods. For designed experiments, however, sample sizes tend to be limited.
+  * 우리는 샘플링의 확률적 특성뿐만 아니라 다른 확률적 실험 변동의 원인들도 이해해야 합니다. 생물학적 샘플 수가 많은 연구의 경우 이는 대개 간단하며, 재표본 추출이나 순열 기반 방법에 의존할 수도 있습니다. 그러나 설계된 실험(designed experiments)의 경우 표본 크기가 제한적인 경향이 있습니다.
 
-[![There are important conceptual and practical differences between
-experiments and studies – see also sec-
-design.](imgs/devil.png)](imgs/devil.png "There are important conceptual and
-practical differences between experiments and studies – see also sec-design.")
+[![실험(experiments)과 연구(studies) 사이에는 중요한 개념적 및 실무적 차이가 있습니다 – 13장을 참조하십시오.](imgs/devil.png)](imgs/devil.png "실험(experiments)과 연구(studies) 사이에는 중요한 개념적 및 실무적 차이가 있습니다 – 13장을 참조하십시오.")
 
-There are important conceptual and practical differences between experiments
-and studies – see also [Chapter 13](13-chap.html).
+실험(experiments)과 연구(studies) 사이에는 중요한 개념적 및 실무적 차이가 있습니다 — [13장](13-chap.html)을 참조하십시오.
 
-For instance, there are four replicates from the _untreated_ and three from
-the _treated_ condition in the pasilla data. This means that resampling- or
-permutation-based methods will not have enough power. To proceed, we need to
-make distributional assumptions. Essentially, what such assumptions do is that
-they let us compute the probabilities of rare events in the tails of the
-distribution – i.e., extraordinarily high or low counts – from a small number
-of distribution parameters.
+예를 들어, pasilla 데이터에는 _처리되지 않은_ 군에서 4개의 반복(replicates)이, _처리된_ 군에서 3개의 반복이 있습니다. 이는 재표본 추출이나 순열 기반 방법이 충분한 검정력을 갖지 못함을 의미합니다. 진행하기 위해 우리는 분포에 대한 가정을 해야 합니다. 본질적으로 그러한 가정들이 하는 일은 소수의 분포 매개변수로부터 분포의 꼬리 부분에 있는 드문 사건의 확률 — 즉, 비정상적으로 높거나 낮은 카운트 — 을 계산할 수 있게 해주는 것입니다.
 
-  * But even that is often not enough, in particular the estimation of dispersion parameters4 is difficult with small sample sizes. In that case, we need to make further assumptions, such as that genes with similar locations also have similar dispersions. This is called sharing of information across genes, and we’ll come back to it in Section 8.10.1.
+  * 하지만 그것만으로도 부족한 경우가 많은데, 특히 **분산(dispersion)** 매개변수4의 추정은 작은 표본 크기에서 어렵습니다. 이 경우, 비슷한 위치에 있는 유전자들은 비슷한 분산을 가진다는 것과 같은 추가적인 가정을 해야 합니다. 이를 유전자 간 정보 공유(sharing of information across genes)라고 하며, 8.10.1절에서 다시 다룰 것입니다.
 
-4 Distributions can be parameterized in various ways; often the parameters
-correspond to some measure of location and some measure of dispersion; a
-familiar measure of location is the mean, and a familiar measure of dispersion
-is the variance (or standard deviation), but for some distributions other
-measures are also in use.
+4 분포는 다양한 방식으로 매개변수화될 수 있습니다. 종종 매개변수들은 위치(location)의 척도와 분산(dispersion)의 척도에 대응합니다. 친숙한 위치의 척도는 평균이고, 친숙한 분산의 척도는 분산(또는 표준 편차)이지만, 일부 분포의 경우 다른 척도들이 사용되기도 합니다.
 
-### 8.3.2 RNA-Seq: what about gene structures, splicing, isoforms?
+### 8.3.2 RNA-Seq: 유전자 구조, 스플라이싱, 이소형은 어떠한가요?
 
-Eukaryotic genes are complex: most of them consist of multiple exons, and
-mRNAs result from concatenation of exons through a process called splicing.
-Alternative splicing and multiple possible choices of start and stop sites
-enable the generation of multiple, alternative isoforms from the same gene
-locus. It is possible to use high-throughput sequencing to detect the isoform
-structures of transcripts. From the fragments that are characteristic for
-specific isoforms, it is also possible to detect isoform specific abundances.
-With current RNA-Seq data, which only give us relatively short fragments of
-the full-length isoforms, it tends to be difficult to assemble and deconvolute
-full-length isoform structures and abundances ([Steijger et al.
-2013](16-chap.html#ref-SteijgerBertone:2013)). Because of that, procedures
-with the more modest aim of making only local statements (e.g., inclusion or
-exclusion of individual exons) have been formulated ([Anders, Reyes, and Huber
-2012](16-chap.html#ref-Reyes:GnomeResearch:2012)), and these can be more
-robust. We can expect that future technologies will sequence full-length
-transcripts.
+진핵생물의 유전자는 복잡합니다: 대부분의 유전자는 여러 개의 엑손으로 구성되며, mRNA는 스플라이싱(splicing)이라는 과정을 통해 엑손들이 연결되어 만들어집니다. 대안적 스플라이싱(alternative splicing)과 전사 시작 및 종료 지점의 다양한 선택은 동일한 유전자 좌위(locus)로부터 여러 개의 대안적 이소형(alternative isoforms) 생성을 가능하게 합니다. 고처리량 시퀀싱을 사용하여 전사체의 이소형 구조를 탐지하는 것이 가능합니다. 특정 이소형에 특징적인 단편들로부터 이소형 특이적 풍부도를 탐지하는 것도 가능합니다. 전체 길이 이소형의 비교적 짧은 단편들만을 제공하는 현재의 RNA-Seq 데이터로는 전체 길이 이소형 구조와 풍부도를 조립하고 분리해내는 것이 어려운 경향이 있습니다 ([Steijger et al. 2013](16-chap.html#ref-SteijgerBertone:2013)). 이 때문에 국소적인 판단(예: 개별 엑손의 포함 또는 제외)만을 내리는 좀 더 겸손한 목표를 가진 절차들이 공식화되었으며 ([Anders, Reyes, and Huber 2012](16-chap.html#ref-Reyes:GnomeResearch:2012)), 이들이 더 강건(robust)할 수 있습니다. 미래의 기술들은 전체 길이 전사체의 서열을 분석할 것으로 기대할 수 있습니다.
 
-## 8.4 Modeling count data
+## 8.4 카운트 데이터 모델링
 
-### 8.4.1 Dispersion
+### 8.4.1 분산(Dispersion)
 
-Consider a sequencing library that contains \\(n_1\\) fragments corresponding
-to gene 1, \\(n_2\\) fragments for gene 2, and so on, with a total library
-size of \\(n = n_1+n_2+\cdots\\). We submit the library to sequencing and
-determine the identity of \\(r\\) randomly sampled fragments. A welcome
-simplification comes from looking at the orders of magnitude of these numbers:
+유전자 1에 해당하는 단편 \\(n_1\\)개, 유전자 2에 해당하는 단편 \\(n_2\\)개 등을 포함하며 전체 라이브러리 크기가 \\(n = n_1+n_2+\cdots\\)인 시퀀싱 라이브러리를 생각해 봅시다. 우리는 라이브러리를 시퀀싱하여 무작위로 샘플링된 \\(r\\)개 단편의 정체를 결정합니다. 이 숫자들의 크기 정도를 살펴보면 반가운 단순화가 가능해집니다:
 
-  * the number of genes is in the tens of thousands;
+  * 유전자의 수는 수만 개입니다.
 
-  * the value of \\(n\\) depends on the amount of cells that were used to prepare, but for bulk RNA-Seq it will be in the billions or trillions;
+  * \\(n\\)의 값은 준비에 사용된 세포의 양에 따라 달라지지만, 벌크(bulk) RNA-Seq의 경우 수십억 또는 수조 개에 달할 것입니다.
 
-  * the number of reads \\(r\\) is usually in the tens of millions, and thus much smaller than \\(n\\).
+  * 리드 수 \\(r\\)은 보통 수천만 개이며, 따라서 \\(n\\)보다 훨씬 작습니다.
 
-From this we can conclude that the probability that a given read maps to the
-\\(i^{\text{th}}\\) gene is \\(p_i=n_i/n\\), and that this is pretty much
-independent of the outcomes for all the other reads. So we can model the
-number of reads for gene \\(i\\) by a Poisson distribution, where the _rate_
-of the Poisson process is the product of \\(p_i\\), the initial proportion of
-fragments for the \\(i^{\text{th}}\\) gene, times \\(r\\), that is:
-\\(\lambda_i=rp_i\\).
+이로부터 우리는 주어진 리드가 \\(i\\)번째 유전자에 매핑될 확률이 \\(p_i=n_i/n\\)이며, 이것이 다른 모든 리드에 대한 결과와 거의 독립적이라는 결론을 내릴 수 있습니다. 따라서 우리는 \\(i\\)번째 유전자에 대한 리드 수를 포아송 분포로 모델링할 수 있으며, 이때 포아송 프로세스의 _비율(rate)_은 \\(i\\)번째 유전자에 대한 단편의 초기 비율인 \\(p_i\\)와 \\(r\\)의 곱, 즉 \\(\lambda_i=rp_i\\)가 됩니다.
 
-[![In principle, we should consider sampling without replacement and the
-multinomial distribution here: the probability of sampling a read for the
-i^{\\text{th}} gene depends on how many times the same gene, and other genes,
-have already been sampled. However, these dependencies are so negligibly small
-that we’ll ignore them. This is because n is so much larger than r, the number
-of genes is large, and each individual n_i is small compared to
-n.](imgs/devil.png)](imgs/devil.png "In principle, we should consider sampling
-without replacement and the multinomial distribution here: the probability of
-sampling a read for the i^{\\text{th}} gene depends on how many times the same
-gene, and other genes, have already been sampled. However, these dependencies
-are so negligibly small that we’ll ignore them. This is because n is so much
-larger than r, the number of genes is large, and each individual n_i is small
-compared to n.")
+[![원칙적으로 우리는 여기서 비복원 추출과 다항 분포를 고려해야 합니다: i번째 유전자에 대한 리드를 샘플링할 확률은 동일한 유전자와 다른 유전자들이 이미 몇 번 샘플링되었는지에 달려 있습니다. 그러나 이러한 의존성은 무시할 수 있을 정도로 작아서 무시할 것입니다. 이는 n이 r보다 훨씬 크고, 유전자의 수가 많으며, 각 n_i가 n에 비해 작기 때문입니다.](imgs/devil.png)](imgs/devil.png "원칙적으로 우리는 여기서 비복원 추출과 다항 분포를 고려해야 합니다: i번째 유전자에 대한 리드를 샘플링할 확률은 동일한 유전자와 다른 유전자들이 이미 몇 번 샘플링되었는지에 달려 있습니다. 그러나 이러한 의존성은 무시할 수 있을 정도로 작아서 무시할 것입니다. 이는 n이 r보다 훨씬 크고, 유전자의 수가 많으며, 각 n_i가 n에 비해 작기 때문입니다.")
 
-In principle, we should consider **sampling without replacement** and the
-multinomial distribution here: the probability of sampling a read for the
-\\(i^{\text{th}}\\) gene depends on how many times the same gene, and other
-genes, have already been sampled. However, these dependencies are so
-negligibly small that we’ll ignore them. This is because \\(n\\) is so much
-larger than \\(r\\), the number of genes is large, and each individual
-\\(n_i\\) is small compared to \\(n\\).
+원칙적으로 우리는 여기서 **비복원 추출(sampling without replacement)**과 다항 분포를 고려해야 합니다: \\(i\\)번째 유전자에 대한 리드를 샘플링할 확률은 동일한 유전자와 다른 유전자들이 이미 몇 번 샘플링되었는지에 달려 있습니다. 그러나 이러한 의존성은 무시할 수 있을 정도로 작아서 무시할 것입니다. 이는 \\(n\\)이 \\(r\\)보다 훨씬 크고, 유전자의 수가 많으며, 각 \\(n_i\\)가 \\(n\\)에 비해 작기 때문입니다.
 
-In practice, we are usually not interested in modeling the read counts within
-a single library, but in comparing the counts between libraries. That is, we
-want to know whether any differences that we see between different biological
-conditions – say, the same cell line with and without drug treatment – are
-larger than expected “by chance”, i.e., larger than what we may expect even
-between biological replicates. Empirically, it turns out that replicate
-experiments vary more than what the Poisson distribution predicts.
-Intuitively, what happens is that \\(p_i\\) and therefore also \\(\lambda_i\\)
-vary even between biological replicates; perhaps the temperature at which the
-cells grew was slightly different, or the amount of drug added varied by a few
-percent, or the incubation time was slightly longer. To account for that, we
-need to add another layer of modeling on top. We already saw hierarchical
-models and mixtures in [Chapter 4](04-chap.html). It turns out that the
-**gamma-Poisson** (a.k.a. negative binomial) distribution suits our modeling
-needs. Instead of a single \\(\lambda\\) – which represents both mean and
+실제로 우리는 대개 단일 라이브러리 내의 리드 카운트를 모델링하는 데 관심이 있는 것이 아니라, 라이브러리 간의 카운트를 비교하는 데 관심이 있습니다. 즉, 우리는 서로 다른 생물학적 조건 사이에서 — 예를 들어 약물 처리를 한 세포주와 하지 않은 동일한 세포주 사이에서 — 보이는 차이가 "우연히" 예상되는 것보다 큰지, 즉 생물학적 반복 사이에서도 예상할 수 있는 것보다 큰지 알고 싶어 합니다. 경험적으로 반복 실험들은 포아송 분포가 예측하는 것보다 더 많이 변하는 것으로 나타납니다. 직관적으로 일어나는 일은 \\(p_i\\)와 따라서 \\(\lambda_i\\)가 생물학적 반복 사이에서도 변한다는 것입니다. 아마도 세포가 자란 온도가 약간 달랐거나, 첨가된 약물의 양이 몇 퍼센트 차이 났거나, 배양 시간이 약간 더 길었을 수 있습니다. 이를 설명하기 위해 우리는 그 위에 또 다른 모델링 층을 추가해야 합니다. 우리는 이미 [4장](04-chap.html)에서 계층 모델과 혼합물을 보았습니다. **감마-포아송**(일명 음이항) 분포가 우리의 모델링 요구에 적합하다는 것이 밝혀졌습니다. 평균과... 모두를 나타내는 단일 \\(\lambda\\) 대신...
 variance –, this distribution has two parameters. In principle, these can be
 different for each gene, and we will come back to the question of how to
 estimate them from the data.
@@ -484,15 +319,7 @@ like `pasillaSampleAnno`.
     7 untrea… untreated pair…                 2 12214974 (x2)               11653031
     # ℹ abbreviated name: ¹​`total number of reads`
 
-As we see here, the overall dataset was produced in two batches, the first one
-consisting of three sequencing libraries that were subjected to single read
-sequencing, the second batch consisting of four libraries for which paired end
-sequencing was used. As so often, we need to do some data wrangling: we
-replace the hyphens in the `type` column by underscores, as arithmetic
-operators in factor levels are discouraged by
-**[DESeq2](https://bioconductor.org/packages/DESeq2/)** , and convert the
-`type` and `condition` columns into factors, explicitly specifying our
-prefered order of the levels (the default is alphabetical).
+여기서 보듯이, 전체 데이터 세트는 두 개의 배치(batch)로 생성되었습니다. 첫 번째 배치는 단일 리드(single-read) 시퀀싱을 거친 3개의 시퀀싱 라이브러리로 구성되었고, 두 번째 배치는 쌍말단(paired-end) 시퀀싱이 사용된 4개의 라이브러리로 구성되었습니다. 종종 그렇듯이, 우리는 약간의 데이터 가공(wrangling)이 필요합니다: `type` 열의 하이픈(-)을 언더스코어(_)로 바꿉니다. 왜냐하면 **[DESeq2](https://bioconductor.org/packages/DESeq2/)**에서는 요인 수준(factor levels)에 산술 연산자를 사용하는 것을 권장하지 않기 때문입니다. 그리고 `type`과 `condition` 열을 요인(factors)으로 변환하면서, 우리가 선호하는 수준의 순서를 명시적으로 지정합니다(기본값은 알파벳순입니다).
 
     
     
@@ -501,8 +328,7 @@ prefered order of the levels (the default is alphabetical).
     condition = factor(condition, levels = c("untreated", "treated")),
     type = factor(sub("-.*", "", type), levels = c("single", "paired")))__
 
-We note that the design is approximately balanced between the factor of
-interest, `condition`, and the “nuisance factor” `type`:
+우리는 설계(design)가 관심 요인인 `condition`과 "성가신 요인(nuisance factor)"인 `type` 사이에서 대략적으로 균형을 이루고 있음에 주목합니다:
 
     
     
@@ -515,35 +341,13 @@ interest, `condition`, and the “nuisance factor” `type`:
       untreated      2      2
       treated        1      2
 
-**[DESeq2](https://bioconductor.org/packages/DESeq2/)** uses a specialized
-data container, called _DESeqDataSet_ to store the datasets it works with.
-Such use of specialized containers – or, in R terminology, _classes_ – is a
-common principle of the Bioconductor project, as it helps users to keep
-together related data. While this way of doing things requires users to invest
-a little more time upfront to understand the classes, compared to just using
-basic R data types like _matrix_ and dataframe, it helps avoiding bugs due to
-loss of synchronization between related parts of the data. It also enables the
-abstraction and encapsulation of common operations that could be quite wordy
-if always expressed in basic terms5. _DESeqDataSet_ is an extension of the
-class _SummarizedExperiment_ in Bioconductor. The _SummarizedExperiment_ class
-is also used by many other packages, so learning to work with it will enable
-you to use quite a range of tools.
+**[DESeq2](https://bioconductor.org/packages/DESeq2/)**는 작업하는 데이터 세트를 저장하기 위해 _DESeqDataSet_ 이라 불리는 특수 데이터 컨테이너를 사용합니다. 이러한 특수 컨테이너 — 또는 R 용어로 _클래스(classes)_ — 의 사용은 관련 데이터를 함께 묶어두는 데 도움이 되기 때문에 Bioconductor 프로젝트의 공통적인 원칙입니다. 이러한 방식은 _matrix_나 dataframe과 같은 기본 R 데이터 유형만을 사용하는 것에 비해 사용자가 클래스를 이해하기 위해 초기에 약간 더 많은 시간을 투자해야 하지만, 데이터의 관련 부분들 사이의 동기화 손실로 인한 버그를 피하는 데 도움이 됩니다. 또한 기본 용어로 항상 표현한다면 상당히 장황해질 수 있는 일반적인 연산들의 추상화와 캡슐화를 가능하게 합니다5. _DESeqDataSet_은 Bioconductor의 _SummarizedExperiment_ 클래스의 확장입니다. _SummarizedExperiment_ 클래스는 다른 많은 패키지에서도 사용되므로, 이를 다루는 법을 익히면 상당히 다양한 도구들을 사용할 수 있게 될 것입니다.
 
-5 Another advantage is that classes can contain _validity_ methods, which make
-sure that the data always fulfill certain expectations, for instance, that the
-counts are positive integers, or that the columns of the counts matrix align
-with the rows of the sample annotation dataframe.
+5 또 다른 장점은 클래스가 _유효성(validity)_ 메서드를 포함할 수 있다는 것인데, 이는 데이터가 항상 특정 기대치(예: 카운트는 양의 정수여야 함, 카운트 행렬의 열이 샘플 어노테이션 데이터 프레임의 행과 일치해야 함 등)를 충족하는지 확인해 줍니다.
 
-6 Note how in the code below, we have to put in extra work to match the column
-names of the `counts` object with the `file` column of the `pasillaSampleAnno`
-dataframe, in particular, we need to remove the `"fb"` that happens to be used
-in the `file` column for some reason. Such data wrangling is very common. One
-of the reasons for storing the data in a _DESeqDataSet_ object is that we then
-no longer have to worry about such things.
+6 아래 코드에서 `counts` 객체의 열 이름과 `pasillaSampleAnno` 데이터 프레임의 `file` 열을 일치시키기 위해 추가적인 작업이 필요함에 주목하세요. 특히 `file` 열에서 왠지 모르게 사용된 `"fb"`를 제거해야 합니다. 이러한 데이터 가공은 매우 흔한 일입니다. 데이터를 _DESeqDataSet_ 객체에 저장하는 이유 중 하나는 일단 저장하고 나면 더 이상 그런 걱정을 할 필요가 없기 때문입니다.
 
-We use the constructor function `DESeqDataSetFromMatrix` to create a
-_DESeqDataSet_ from the count data matrix `counts` and the sample annotation
-dataframe `pasillaSampleAnno`6.
+우리는 생성자 함수 `DESeqDataSetFromMatrix`를 사용하여 카운트 데이터 행렬 `counts`와 샘플 어노테이션 데이터 프레임 `pasillaSampleAnno`로부터 _DESeqDataSet_을 만듭니다6.
 
     
     
@@ -567,51 +371,31 @@ dataframe `pasillaSampleAnno`6.
     
     [1] TRUE
 
-The _SummarizedExperiment_ class – and therefore _DESeqDataSet_ – also
-contains facilities for storing annotation of the rows of the count matrix.
-For now, we are content with the gene identifiers from the row names of the
-`counts` table.
+_SummarizedExperiment_ 클래스 — 따라서 _DESeqDataSet_ — 는 카운트 행렬 행(rows)의 어노테이션을 저장하기 위한 기능도 포함하고 있습니다. 지금은 `counts` 표의 행 이름에 있는 유전자 식별자로 만족하겠습니다.
 
 __
 
-Question 8.3
+질문 8.3
 
-How can we access the row metadata of a _SummarizedExperiment_ object, i.e.,
-how can we read it out, how can we change it?
-
-__
-
-Solution
+우리는 어떻게 _SummarizedExperiment_ 객체의 행 메타데이터에 접근할 수 있을까요? 즉, 어떻게 읽어내고, 어떻게 변경할 수 있을까요?
 
 __
 
-Check the manual page of the _SummarizedExperiment_ class and of the methods
-`rowData` and `rowData<-`.
+해결책
 
-### 8.5.2 The **[DESeq2](https://bioconductor.org/packages/DESeq2/)** method
+__
 
-After these preparations, we are now ready to jump straight into differential
-expression analysis. Our aim is to identify genes that are differentially
-abundant between the treated and the untreated cells. To this end, we will
-apply a test that is conceptually similar to the \\(t\\)-test, which we
-encountered in [Section 6.5](06-chap.html#sec-testing-ttest), although
-mathematically somewhat more involved. We will postpone these details for now,
-and will come back to them in Section 8.7. A choice of standard analysis steps
-are wrapped into a single function, `DESeq`.
+_SummarizedExperiment_ 클래스와 `rowData` 및 `rowData<-` 메서드의 매뉴얼 페이지를 확인해 보세요.
+
+### 8.5.2 **[DESeq2](https://bioconductor.org/packages/DESeq2/)** 방법
+
+이러한 준비를 마친 후, 우리는 이제 곧바로 차등 발현 분석으로 뛰어들 준비가 되었습니다. 우리의 목표는 처리된 세포와 처리되지 않은 세포 사이에서 풍부도가 차이 나는 유전자를 식별하는 것입니다. 이를 위해 우리는 [6.5절](06-chap.html#sec-testing-ttest)에서 접했던 \\(t\\)-검정과 개념적으로 유사하지만 수학적으로는 좀 더 복잡한 검정을 적용할 것입니다. 이러한 세부 사항은 일단 미뤄두고 8.7절에서 다시 다룰 것입니다. 일련의 표준 분석 단계들이 `DESeq`라는 단일 함수로 묶여 있습니다.
 
     
     
     pasilla = DESeq(pasilla)__
 
-The `DESeq` function is simply a wrapper that calls, in order, the functions
-`estimateSizeFactors` (for normalization, as discussed in Section 8.4.2),
-`estimateDispersions` (dispersion estimation) and `nbinomWaldTest` (hypothesis
-tests for differential abundance). The test is between the two levels
-extttuntreated and exttttreated of the factor `condition`, since this is what
-we specified when we constructed the `pasilla` object through the argument
-`design=\simcondition`. You can always call each of these three functions
-individually if you want to modify their behavior or interject custom steps.
-Let us look at the results.
+`DESeq` 함수는 단순히 `estimateSizeFactors`(8.4.2절에서 논의한 정규화를 위해), `estimateDispersions`(분산 추정) 및 `nbinomWaldTest`(차등 풍부도에 대한 가설 검정) 함수를 순서대로 호출하는 래퍼(wrapper)입니다. 검정은 요인 `condition`의 두 수준인 `untreated`와 `treated` 사이에서 이루어지는데, 이는 우리가 `design=~condition` 인수를 통해 `pasilla` 객체를 구성할 때 지정한 것이기 때문입니다. 그들의 거동을 수정하거나 사용자 정의 단계를 삽입하고 싶다면 언제든지 이 세 함수를 개별적으로 호출할 수 있습니다. 결과를 살펴봅시다.
 
     
     
@@ -639,24 +423,21 @@ Let us look at the results.
     FBgn0035085  2.14354e-74
     FBgn0039827  1.74316e-68
 
-### 8.5.3 Exploring the results
+### 8.5.3 결과 탐색하기
 
-The first step after a differential expression analysis is the visualization
-of the following three or four basic plots:
+차등 발현 분석 후의 첫 번째 단계는 다음의 서너 가지 기본 플롯을 시각화하는 것입니다:
 
-  * the histogram of p-values (Figure 8.4),
+  * p-값의 히스토그램 (그림 8.4),
 
-  * the MA plot (Figure 8.5) and
+  * MA 플롯 (그림 8.5), 그리고
 
-  * an ordination plot (Figure 8.6).
+  * 서열화 플롯(ordination plot) (그림 8.6).
 
-  * In addition, a heatmap (Figure 8.7) can be instructive.
+  * 추가로, 히트맵 (그림 8.7)도 유익할 수 있습니다.
 
-These are essential data quality assessment measures – and the general advice
-on quality assessment and control given in [Section 13.6](13-chap.html#sec-
-design-quality) also applies here.
+이들은 필수적인 데이터 품질 평가 척도입니다 — [13.6절](13-chap.html#sec-design-quality)에서 제공된 품질 평가 및 제어에 대한 일반적인 조언도 여기에서 똑같이 적용됩니다.
 
-The p-value histogram is straightforward (Figure 8.4).
+p-값 히스토그램은 직관적입니다 (그림 8.4).
 
     
     
@@ -664,53 +445,28 @@ The p-value histogram is straightforward (Figure 8.4).
       geom_histogram(binwidth = 0.01, fill = "Royalblue", boundary = 0)__
 
 [![](08-chap_files/figure-html/fig-countdata-
-hist1-1.png)](08-chap_files/figure-html/fig-countdata-hist1-1.png "Figure 8.4:
-Histogram of p-values of a differential expression analysis.")
+hist1-1.png)](08-chap_files/figure-html/fig-countdata-hist1-1.png "그림 8.4: 차등 발현 분석의 p-값 히스토그램.")
 
-Figure 8.4: Histogram of p-values of a differential expression analysis.
+그림 8.4: 차등 발현 분석의 p-값 히스토그램.
 
-The distribution displays two main components: a uniform background with
-values between 0 and 1, and a peak of small p-values at the left. The uniform
-background corresponds to the non-differentially expressed genes. Usually this
-is the majority of genes. The left hand peak corresponds to differentially
-expressed genes7. As we already saw in [Chapter 6](06-chap.html), the ratio of
-the level of the background to the height of the peak gives us a rough
-indication of the false discovery rate (FDR) that would be associated with
-calling the genes in the leftmost bin differentially expressed. In our case,
-the leftmost bin contains all p-values between 0 and 0.01, which correspond to
-993 genes. The background level is at around 100, so the FDR associated with
-calling all genes in the leftmost bin would be around 10%.
+분포는 두 가지 주요 성분을 보여줍니다: 0과 1 사이의 값을 갖는 균등한 배경(background)과, 왼쪽의 작은 p-값들의 정점입니다. 균등한 배경은 차등 발현되지 않는 유전자들에 해당합니다. 대개 이것이 유전자의 대다수입니다. 왼쪽의 정점은 차등 발현되는 유전자들에 해당합니다7. 우리가 이미 [6장](06-chap.html)에서 보았듯이, 배경의 수준과 정점의 높이 사이의 비율은 가장 왼쪽 빈(bin)에 있는 유전자들을 차등 발현된 것으로 판정할 때 수반될 허위 발견율(FDR)에 대한 대략적인 지표를 제공합니다. 우리의 경우, 가장 왼쪽 빈은 0과 0.01 사이의 모든 p-값을 포함하며 이는 993개 유전자에 해당합니다. 배경 수준은 약 100이므로, 가장 왼쪽 빈의 모든 유전자를 판정하는 것과 관련된 FDR은 약 10%가 될 것입니다.
 
-7 For the data shown here, the histogram also contains a few isolated peaks in
-the middle or towards the right; these stem from genes with small counts and
-reflect the discreteness of the data.
+7 여기서 보여주는 데이터의 경우, 히스토그램은 중간이나 오른쪽에 몇 개의 고립된 정점들도 포함하고 있습니다. 이들은 카운트가 적은 유전자들로부터 유래하며 데이터의 이산성을 반영합니다.
 
-Sometimes it turns out that the background distribution is not uniform, but
-shows a tilted shape with an increase towards the right. This tends to be an
-indication of batch effects; you can explore this further in Exercise 8.1.
+때때로 배경 분포가 균등하지 않고 오른쪽으로 갈수록 증가하는 기울어진 형태를 보이는 경우가 있습니다. 이는 대개 배치 효과의 징후입니다. 연습 문제 8.1에서 이를 더 탐구해 볼 수 있습니다.
 
-To produce the MA plot, we can use the function `plotMA` in the
-**[DESeq2](https://bioconductor.org/packages/DESeq2/)** package (Figure 8.5).
+MA 플롯을 생성하기 위해 우리는 **[DESeq2](https://bioconductor.org/packages/DESeq2/)** 패키지의 `plotMA` 함수를 사용할 수 있습니다 (그림 8.5).
 
     
     
     plotMA(pasilla, ylim = c( -2, 2))__
 
 [![](08-chap_files/figure-html/fig-countdata-MA-1.png)](08-chap_files/figure-
-html/fig-countdata-MA-1.png "Figure 8.5: MA plot: fold change versus mean of
-size-factor normalized counts. Logarithmic scaling is used for both axes. By
-default, points are colored red if the adjusted p-value is less than 0.1.
-Points which fall out of the y-axis range are plotted as triangles.")
+html/fig-countdata-MA-1.png "그림 8.5: MA 플롯: 크기 인자(size-factor)로 정규화된 카운트의 평균 대 폴드 변화(fold change). 두 축 모두 로그 스케일이 사용되었습니다. 기본적으로 조정된 p-값이 0.1보다 작으면 점들은 빨간색으로 표시됩니다. y축 범위를 벗어나는 점들은 삼각형으로 표시됩니다.")
 
-Figure 8.5: [MA plot](https://en.wikipedia.org/wiki/MA_plot): fold change
-versus mean of size-factor normalized counts. Logarithmic scaling is used for
-both axes. By default, points are colored red if the adjusted p-value is less
-than 0.1. Points which fall out of the \\(y\\)-axis range are plotted as
-triangles.
+그림 8.5: [MA 플롯](https://en.wikipedia.org/wiki/MA_plot): 크기 인자(size-factor)로 정규화된 카운트의 평균 대 폴드 변화(fold change). 두 축 모두 로그 스케일이 사용되었습니다. 기본적으로 조정된 p-값이 0.1보다 작으면 점들은 빨간색으로 표시됩니다. \\(y\\)축 범위를 벗어나는 점들은 삼각형으로 표시됩니다.
 
-To produce PCA plots similar to those we saw in [Chapter 7](07-chap.html), we
-can use the **[DESeq2](https://bioconductor.org/packages/DESeq2/)** function
-`plotPCA` (Figure 8.6).
+[7장](07-chap.html)에서 보았던 것과 유사한 PCA 플롯을 생성하기 위해 우리는 **[DESeq2](https://bioconductor.org/packages/DESeq2/)**의 `plotPCA` 함수를 사용할 수 있습니다 (그림 8.6).
 
     
     
@@ -718,33 +474,21 @@ can use the **[DESeq2](https://bioconductor.org/packages/DESeq2/)** function
     plotPCA(pas_rlog, intgroup=c("condition", "type")) + coord_fixed()__
 
 [![](08-chap_files/figure-html/fig-countdata-PCA-1.png)](08-chap_files/figure-
-html/fig-countdata-PCA-1.png "Figure 8.6: PCA plot. The 7 samples are shown in
-the 2D plane spanned by their first two principal components.")
+html/fig-countdata-PCA-1.png "그림 8.6: PCA 플롯. 7개의 샘플이 처음 두 주성분에 의해 확장된 2D 평면에 표시되어 있습니다.")
 
-Figure 8.6: PCA plot. The 7 samples are shown in the 2D plane spanned by their
-first two principal components.
+그림 8.6: PCA 플롯. 7개의 샘플이 처음 두 주성분에 의해 확장된 2D 평면에 표시되어 있습니다.
 
-As we saw in the previous chapter, this type of plot is useful for visualizing
-the overall effect of experimental covariates and/or to detect batch effects.
-Here, the first principal axis, PC1, is mostly aligned with the experimental
-covariate of interest (untreated / treated), while the second axis is roughly
-aligned with the sequencing protocol (single / paired).
+이전 장에서 보았듯이, 이 유형의 플롯은 실험 공변량의 전체적인 효과를 시각화하거나 배치 효과를 탐지하는 데 유용합니다. 여기서 첫 번째 주축인 PC1은 주로 관심 있는 실험 공변량(untreated / treated)과 일치하며, 두 번째 축은 대략 시퀀싱 프로토콜(single / paired)과 일치합니다.
 
-We used a data transformation, the **regularized logarithm** or **rlog** ,
-which we will investigate more closely in Section 8.10.2.
+우리는 데이터 변환의 일종인 **정규화 로그(regularized logarithm)** 또는 **rlog**를 사용했는데, 이에 대해서는 8.10.2절에서 더 자세히 살펴볼 것입니다.
 
 __
 
-Question 8.4
+질문 8.4
 
-Do the axes of PCA plot always have to align with known experimental
-covariates?
+PCA 플롯의 축들이 항상 알려진 실험 공변량과 일치해야 하나요?
 
-Heatmaps can be a powerful way of quickly getting an overview over a matrix-
-like dataset, count tables included. Below you see how to make a heatmap from
-the rlog-transformed data. For a matrix as large as `counts(pasilla)`, it is
-not practical to plot all of it, so we plot the submatrix of the 30 genes with
-the highest average expression.
+히트맵은 카운트 테이블을 포함한 행렬 형태의 데이터 세트에 대한 개요를 빠르게 얻을 수 있는 강력한 방법이 될 수 있습니다. 아래에서 rlog 변환된 데이터로부터 히트맵을 만드는 방법을 볼 수 있습니다. `counts(pasilla)`만큼 큰 행렬의 경우 전체를 플롯하는 것은 실용적이지 않으므로, 평균 발현량이 가장 높은 상위 30개 유전자의 하위 행렬을 플롯합니다.
 
     
     
@@ -756,13 +500,11 @@ the highest average expression.
             colData(pas_rlog)[, c("condition", "type")] ))__
 
 [![](08-chap_files/figure-html/fig-figHeatmap-1-1.png)](08-chap_files/figure-
-html/fig-figHeatmap-1-1.png "Figure 8.7: Heatmap of regularized log
-transformed data of the top 30 genes.")
+html/fig-figHeatmap-1-1.png "그림 8.7: 상위 30개 유전자의 정규화 로그 변환된 데이터 히트맵.")
 
-Figure 8.7: Heatmap of regularized log transformed data of the top 30 genes.
+그림 8.7: 상위 30개 유전자의 정규화 로그 변환된 데이터 히트맵.
 
-In Figure 8.7, `pheatmap` arranged the rows and columns of the matrix by the
-dendrogram from an unsupervised clustering, and the clustering of the columns
+그림 8.7에서 `pheatmap`은 비지도 군집화(unsupervised clustering)를 통한 덴드로그램에 따라 행과 열을 정렬했습니다. 열의 군집화 결과는...
 (samples) is dominated by the `type` factor. This highlights that our
 differential expression analysis above was probably too naive, and that we
 should adjust for this strong “nuisance” factor when we are interested in
@@ -857,286 +599,158 @@ analyse this experiment, we can use the notation
 
 \\[ y = \beta_0 + x_1 \beta_1 + x_2 \beta_2 + x_1x_2\beta_{12}. \tag{8.1}\\]
 
-This equation can be parsed as follows. The left hand side, \\(y\\), is the
-experimental measurement of interest. In our case, this is the suitably
-transformed expression level (we’ll discuss this in Section 8.8.3) of a gene.
-Since in an RNA-Seq experiment there are lots of genes, we’ll have as many
-copies of Equation 8.1, one for each. The coefficient \\(\beta_0\\) is the
-base level of the measurement in the negative control; often it is called the
-**intercept**.
+## 8.6 차등 풍부도(Differential abundance)
 
-[![Sometimes Equation eq-countdata-basiclm is written with an additional term
-x_0 that is multiplied with \\beta_0, where it is understood that x_0=1
-always. It turns out that this makes subsequent notation and bookkeeping
-easier since then the intercept can be handled consistently together with the
-other \\betas, instead of being a separate
-case.](imgs/devil.png)](imgs/devil.png "Sometimes Equation eq-countdata-
-basiclm is written with an additional term x_0 that is multiplied with
-\\beta_0, where it is understood that x_0=1 always. It turns out that this
-makes subsequent notation and bookkeeping easier since then the intercept can
-be handled consistently together with the other \\betas, instead of being a
-separate case.")
+우리의 주요 목표는 서로 다른 생물학적 조건(예: 약물 처리 대 대조군) 사이에서 통계적으로 유의미한 방식으로 풍부도가 변하는 유전자를 찾는 것입니다. 이를 위해 우리는 각 유전자에 대해 다음 가설들을 검정합니다:
 
-Sometimes Equation 8.1 is written with an additional term \\(x_0\\) that is
-multiplied with \\(\beta_0\\), where it is understood that \\(x_0=1\\) always.
-It turns out that this makes subsequent notation and bookkeeping easier since
-then the intercept can be handled consistently together with the other
-\\(\beta\\)s, instead of being a separate case.
+**귀무 가설 \\(H_0\\):** 유전자의 풍부도가 두 조건 사이에서 동일하다.
 
-The design factors \\(x_1\\) and \\(x_2\\) are binary indicator variables:
-\\(x_1\\) takes the value 1 if the siRNA was transfected and 0 if not, and
-similarly, \\(x_2\\) indicates whether the drug was administered. In the
-experiment where only the siRNA is used, \\(x_1=1\\) and \\(x_2=0\\), and the
-third and fourth terms of Equation 8.1 vanish. Then, the equation simplifies
-to \\(y=\beta_0+\beta_1\\). This means that \\(\beta_1\\) represents the
-difference between treatment and control. If our measurements are on a
-logarithmic scale, then
+**대립 가설 \\(H_1\\):** 두 조건 사이에서 풍부도가 다르다.
+
+이것은 우리가 [6장](06-chap.html)에서 논의한 가설 검정 프레임워크와 정확히 일치합니다. 유일한 차이점은 우리가 수천 개의 유전자에 대해 이 검정을 동시에 수행한다는 것이며, 따라서 다중 검정(multiple testing) 보정이 필요하다는 점입니다.
+
+## 8.7 선형 모델
+
+여러 실험적 요인들이 동시에 작용하는 더 복잡한 실험 설계를 분석하기 위해, 우리는 선형 모델(linear models)이라는 매우 강력한 프레임워크를 사용합니다.
+
+### 8.7.1 요인 설계 및 상호작용
+
+두 가지 실험적 요인이 있는 실험을 생각해 봅시다: siRNA를 이용한 유전자 넉다운과 약물 처리입니다. 우리는 네 가지 가능한 조건을 가집니다:
+
+  1. 처리되지 않음 (negative control)
+
+  2. siRNA만 처리됨
+
+  3. 약물만 처리됨
+
+  4. siRNA와 약물 모두 처리됨
+
+이러한 실험의 결과를 다음과 같은 선형 방정식으로 모델링할 수 있습니다:
+
+\\[ y = \beta_0 + x_1 \beta_1 + x_2 \beta_2 + x_1 x_2 \beta_{12} + \varepsilon.
+\tag{8.1}\\]
+
+이 방정식은 다음과 같이 해석될 수 있습니다. 좌변인 \\(y\\)는 관심 있는 실험 측정값입니다. 우리의 경우, 이는 적절하게 변환된 유전자의 발현 수준입니다(이에 대해서는 8.8.3절에서 논의할 것입니다). RNA-Seq 실험에는 수많은 유전자가 있으므로, 각 유전자에 대해 하나씩 식 8.1과 같은 수많은 방정식을 갖게 될 것입니다. 계수 \\(\beta_0\\)는 대조군에서의 측정 기본 수준이며, 종종 **절편(intercept)**이라고 불립니다.
+
+[![때때로 식 8.1은 \beta_0와 곱해지는 추가 항 x_0를 포함하여 쓰여지기도 하는데, 이때 x_0는 항상 1로 이해됩니다. 이렇게 하면 절편을 별개의 사례로 다루는 대신 다른 \beta들과 함께 일관되게 처리할 수 있어 이후의 표기법과 장부 관리가 더 쉬워집니다.](imgs/devil.png)](imgs/devil.png "때때로 식 8.1은 \beta_0와 곱해지는 추가 항 x_0를 포함하여 쓰여지기도 하는데, 이때 x_0는 항상 1로 이해됩니다. 이렇게 하면 절편을 별개의 사례로 다루는 대신 다른 \beta들과 함께 일관되게 처리할 수 있어 이후의 표기법과 장부 관리가 더 쉬워집니다.")
+
+때때로 식 8.1은 \\(\beta_0\\)와 곱해지는 추가 항 \\(x_0\\)를 포함하여 쓰여지기도 하는데, 이때 \\(x_0=1\\)은 항상 성립하는 것으로 이해됩니다. 이렇게 하면 절편을 별개의 사례로 다루는 대신 다른 \\(\beta\\)들과 함께 일관되게 처리할 수 있어 이후의 표기법과 장부 관리가 더 쉬워진다는 점이 밝혀졌습니다.
+
+설계 요인 \\(x_1\\)과 \\(x_2\\)는 이진 지시 변수(binary indicator variables)입니다: siRNA가 형질감염(transfected)되었으면 \\(x_1\\)은 1, 아니면 0의 값을 가지며, 유사하게 \\(x_2\\)는 약물이 투여되었는지 여부를 나타냅니다. siRNA만 사용된 실험에서는 \\(x_1=1\\)이고 \\(x_2=0\\)이므로, 식 8.1의 세 번째와 네 번째 항은 사라집니다. 그러면 방정식은 \\(y=\beta_0+\beta_1\\)로 단순화됩니다. 이는 \\(\beta_1\\)이 처리군과 대조군 사이의 차이를 나타냄을 의미합니다. 만약 우리의 측정값이 로그 스케일이라면,
 
 \\[ \begin{align} \beta_1 = y-\beta_0
-&=\log_2(\text{expression}_{\text{treated}})
--\log_2(\text{expression}_{\text{untreated}})\\\ &=\log_2\frac
-{\text{expression}_{\text{treated}}} {\text{expression}_{\text{untreated}}}
+&=\log_2(\text{발현}_{\text{처리군}})
+-\log_2(\text{발현}_{\text{대조군}})\\\ &=\log_2\frac
+{\text{발현}_{\text{처리군}}} {\text{발현}_{\text{대조군}}}
 \end{align} \tag{8.2}\\]
 
-is the logarithmic fold change due to treatment with the siRNA. In exactly the
-same way, \\(\beta_2\\) is the logarithmic fold change due to treatment with
-the drug. What happens if we treat the cells with both siRNA and drug? In that
-case, \\(x_1=x_2=1\\), and Equation 8.1 can be rewritten as
+은 siRNA 처리에 의한 로그 폴드 변화(logarithmic fold change)입니다. 정확히 같은 방식으로, \\(\beta_2\\)는 약물 처리에 의한 로그 폴드 변화입니다. 세포에 siRNA와 약물을 모두 처리하면 어떻게 될까요? 그 경우 \\(x_1=x_2=1\\)이며, 식 8.1은 다음과 같이 다시 쓰여질 수 있습니다.
 
 \\[ \beta_{12} = y - (\beta_0 + \beta_1 + \beta_2). \tag{8.3}\\]
 
-This means that \\(\beta_{12}\\) is the difference between the observed
-outcome, \\(y\\), and the outcome expected from the individual treatments,
-obtained by adding to the baseline the effect of siRNA alone, \\(\beta_1\\),
-and of drug alone, \\(\beta_2\\).
+이는 \\(\beta_{12}\\)가 관찰된 결과인 \\(y\\)와, 기본 수준에 siRNA 단독 효과 \\(\beta_1\\) 및 약물 단독 효과 \\(\beta_2\\)를 더하여 얻은 개별 처리들로부터 예상되는 결과 사이의 차이임을 의미합니다.
 
-We call \\(\beta_{12}\\) the _interaction_ effect of siRNA and drug. It has
-nothing to do with a physical interaction, the terminology indicates that the
-effects of these two different experimental factors do not simply add up, but
-combine in a more complicated fashion.
+우리는 \\(\beta_{12}\\)를 siRNA와 약물의 _상호작용(interaction)_ 효과라고 부릅니다. 이는 물리적 상호작용과는 무관하며, 이 용어는 이 두 가지 서로 다른 실험 요인의 효과가 단순히 더해지는 것이 아니라 더 복잡한 방식으로 결합됨을 나타냅니다.
 
-[![Note that the addition is on the logarithmic scale, which corresponds to
-multiplication on the original scale.](imgs/devil.png)](imgs/devil.png "Note
-that the addition is on the logarithmic scale, which corresponds to
-multiplication on the original scale.")
+[![덧셈은 로그 스케일에서 이루어지며, 이는 원래 스케일에서의 곱셈에 해당함에 유의하세요.](imgs/devil.png)](imgs/devil.png "덧셈은 로그 스케일에서 이루어지며, 이는 원래 스케일에서의 곱셈에 해당함에 유의하세요.")
 
-Note that the addition is on the logarithmic scale, which corresponds to
-multiplication on the original scale.
+덧셈은 로그 스케일에서 이루어지며, 이는 원래 스케일에서의 곱셈에 해당함에 유의하세요.
 
-For instance, if the target of the drug and of the siRNA were equivalent,
-leading to the same effect on the cells, then we biologically expect that
-\\(\beta_1=\beta_2\\). We also expect that their combination has no further
-effect, so that \\(\beta_{12}=-\beta_1\\). If, on the other hand, the targets
-of the drug and of the siRNA are in parallel pathways that can buffer each
-other, we’ll expect that \\(\beta_1\\) and \\(\beta_2\\) are both relatively
-small, but that the combined effect is synergistic, and \\(\beta_{12}\\) is
-large.
+예를 들어, 만약 약물의 타겟과 siRNA의 타겟이 동등하여 세포에 동일한 효과를 준다면, 생물학적으로 \\(\beta_1=\beta_2\\)일 것으로 예상합니다. 또한 우리는 그들의 조합이 추가적인 효과를 주지 않을 것으로 예상하므로, \\(\beta_{12}=-\beta_1\\)이 됩니다. 반면에, 약물의 타겟과 siRNA의 타겟이 서로 완충 작용을 할 수 있는 평행한 경로에 있다면, \\(\beta_1\\)과 \\(\beta_2\\)는 둘 다 비교적 작겠지만 결합된 효과는 시너지 작용을 하여 \\(\beta_{12}\\)가 클 것으로 예상할 것입니다.
 
-Not always do we care about interactions. Many experiments are designed with
-multiple factors where we care most about each of their individual effects. In
-that case, the combinatorial treatment might not be present in the
-experimental design, and the model to use for the analysis is a version of
-Equation 8.1 with the rightmost term removed.
+우리가 항상 상호작용에 관심을 갖는 것은 아닙니다. 많은 실험들이 여러 요인을 가지고 설계되지만 각각의 개별 효과에 가장 큰 관심을 가집니다. 그 경우, 조합 처리는 실험 설계에 포함되지 않을 수 있으며, 분석에 사용할 모델은 식 8.1에서 가장 오른쪽 항을 제거한 버전입니다.
 
-We can succinctly encode the design of the experiment in the _design matrix_.
-For instance, for the combinatorial experiment described above, the design
-matrix is
+우리는 실험 설계를 _설계 행렬(design matrix)_로 간결하게 인코딩할 수 있습니다. 예를 들어, 위에서 설명한 조합 실험의 경우 설계 행렬은 다음과 같습니다.
 
 \\[ \begin{array}{c|c|c} x_0 & x_1 & x_2\\\ \hline 1&0&0\\\ 1&1&0\\\ 1&0&1\\\
 1&1&1\end{array} \tag{8.4}\\]
 
-The columns of the design matrix correspond to the experimental factors, and
-its rows represent the different experimental conditions, four in our case.
-If, instead, the combinatorial treatment is not performed, then the design
-matrix is reduced to only the first three rows of 8.4.
+설계 행렬의 열들은 실험 요인들에 대응하고, 행들은 서로 다른 실험 조건들(우리의 경우 4가지)을 나타냅니다. 만약 조합 처리가 수행되지 않는다면, 설계 행렬은 8.4의 처음 세 행으로만 축소됩니다.
 
-### 8.7.2 What about noise and replicates?
+### 8.7.2 노이즈와 반복 실험(Replicates)은 어떠한가요?
 
-Equation 8.1 provides a conceptual decomposition of the observed data into the
-effects caused by the different experimental variables. If our data (the
-\\(y\\)s) were absolutely precise, we could set up a linear system of
-equations, one equation for each of the four possible experimental conditions
-represented by the \\(x\\)s, and solve for the \\(\beta\\)s.
+식 8.1은 관측된 데이터를 서로 다른 실험 변수들에 의해 발생한 효과들로 개념적으로 분해하는 방법을 제공합니다. 만약 우리의 데이터(\\(y\\)들)가 절대적으로 정확하다면, 우리는 \\(x\\)들로 표현되는 네 가지 가능한 실험 조건 각각에 대해 하나씩 선형 방정식 시스템을 세우고 \\(\beta\\)들을 풀 수 있을 것입니다.
 
-Of course, we usually wish to analyze real data that are affected by noise. We
-then need replicates to estimate the levels of noise and assess the
-uncertainty of our estimated \\(\beta\\)s. Only then we can empirically assess
-whether any of the observed changes between conditions are significantly
-larger than those occuring just due to experimental or natural variation. We
-need to slightly extend the equation,
+물론, 우리는 대개 노이즈의 영향을 받는 실제 데이터를 분석하고자 합니다. 그러면 노이즈 수준을 추정하고 추정된 \\(\beta\\)들의 불확실성을 평가하기 위해 반복 실험이 필요합니다. 그래야만 조건 사이에서 관찰된 변화가 단지 실험적 또는 자연적 변동에 의해 발생하는 것보다 유의미하게 큰지 경험적으로 평가할 수 있습니다. 우리는 방정식을 약간 확장해야 합니다.
 
 \\[ y_{j} = x_{j0} \; \beta_0 + x_{j1} \; \beta_1 + x_{j2} \; \beta_2 +
 x_{j1}\,x_{j2}\;\beta_{12} + \varepsilon_j. \tag{8.5}\\]
 
-We have added the index \\(j\\) and a new term \\(\varepsilon_j\\). The index
-\\(j\\) now explicitly counts over our individual replicate experiments; for
-instance, if for each of the four conditions we perform three replicates, then
-\\(j\\) counts from 1 to 12. The design matrix has now 12 rows, and
-\\(x_{jk}\\) is the value of the matrix in its \\(j\\)th row and \\(k\\)th
-column.
+우리는 인덱스 \\(j\\)와 새로운 항 \\(\varepsilon_j\\)를 추가했습니다. 인덱스 \\(j\\)는 이제 우리의 개별 반복 실험들을 명시적으로 셉니다; 예를 들어, 네 가지 조건 각각에 대해 세 번의 반복 실험을 수행한다면 \\(j\\)는 1부터 12까지 셉니다. 설계 행렬은 이제 12개의 행을 가지며, \\(x_{jk}\\)는 행렬의 \\(j\\)번째 행과 \\(k\\)번째 열의 값입니다.
 
-[![Remember that since \\beta_0 is the intercept, x_{j0}=1 for all
-j.](imgs/devil.png)](imgs/devil.png "Remember that since \\beta_0 is the
-intercept, x_{j0}=1 for all j.")
+[![ \beta_0가 절편이므로 모든 j에 대해 x_{j0}=1임을 기억하세요.](imgs/devil.png)](imgs/devil.png "\beta_0가 절편이므로 모든 j에 대해 x_{j0}=1임을 기억하세요.")
 
-Remember that since \\(\beta_0\\) is the intercept, \\(x_{j0}=1\\) for all
-\\(j\\).
+\\(\beta_0\\)가 절편이므로 모든 \\(j\\)에 대해 \\(x_{j0}=1\\)임을 기억하세요.
 
-The additional terms \\(\varepsilon_j\\), which we call the **residuals** ,
-are there to absorb differences between replicates. However, one additional
-modeling component is needed: the system of twelve equations 8.5 would be
-underdetermined without further information, since it has now more variables
-(twelve epsilons and four betas) than it has equations (twelve, one for each
-\\(j\\)). To fix this, we require that the \\(\varepsilon_j\\) be small. One
-popular way – we’ll encounter others – to overcome this is to minimize the sum
-of squared residuals,
+우리가 **잔차(residuals)**라고 부르는 추가 항 \\(\varepsilon_j\\)는 반복 실험들 사이의 차이를 흡수하기 위해 존재합니다. 그러나 한 가지 추가적인 모델링 구성 요소가 필요합니다: 12개의 방정식 시스템 8.5는 추가 정보 없이는 과소 결정(underdetermined)될 것인데, 왜냐하면 이제 방정식의 수(12개, 각 \\(j\\)에 대해 하나씩)보다 변수의 수(12개의 입실론과 4개의 베타)가 더 많기 때문입니다. 이를 해결하기 위해 우리는 \\(\varepsilon_j\\)가 작을 것을 요구합니다. 이를 극복하기 위해 널리 쓰이는 한 가지 방법은 — 다른 방법들도 만나게 되겠지만 — 잔차 제곱합을 최소화하는 것입니다.
 
 \\[ \sum_j \varepsilon_j^2 \quad\to\quad\text{min}. \tag{8.6}\\]
 
-It turns out that with this requirement satisfied, the \\(\beta\\)s represent
-the _average_ effects of each of the experimental factors, while the residuals
-\\(\varepsilon_j\\) reflect the experimental fluctuations around the mean
-between the replicates. This approach, which is called the **least sum of
-squares fitting** , is mathematically convenient, since it can achieved by
-straightforward matrix algebra. It is what the R function `lm` does.
+이 요구 조건이 충족되면, \\(\beta\\)들은 각 실험 요인의 _평균적_ 효과를 나타내고, 잔차 \\(\varepsilon_j\\)는 반복 실험들 사이의 평균 주변의 실험적 변동을 반영하게 됩니다. **최소제곱법 적합(least sum of squares fitting)**이라 불리는 이 접근 방식은 간단한 행렬 대수로 달성될 수 있기 때문에 수학적으로 편리합니다. 이것이 R 함수 `lm`이 하는 일입니다.
 
 __
 
-Question 8.5
+질문 8.5
 
-An alternative way to write Equation 8.5 is
+식 8.5를 쓰는 대안적인 방법은 다음과 같습니다.
 
 \\[ y_{j} = \sum_k x_{jk} \; \beta_k + \varepsilon_j. \tag{8.7}\\]
 
-How can this be mapped to Equation 8.5, i.e., what’s with the interaction term
-\\(x_{j1}\,x_{j2}\;\beta_{12}\\)?
+이것이 어떻게 식 8.5와 매핑될 수 있을까요? 즉, 상호작용 항 \\(x_{j1}x_{j2}\beta_{12}\\)는 어떻게 된 것인가요?
 
 __
 
-Solution
+해결책
 
 __
 
-This is really just a trivial matter of notation: the sum extends over
-\\(k=0,...,3\\), where the terms for \\(k=0,1,2\\) are exactly as we know them
-already. We write \\(\beta_{3}\\) instead of \\(\beta_{12}\\), and
-\\(x_{j3}\\) is defined to be \\(x_{j1}x_{j2}\\). The generic notation 8.7 is
-practical to use in computer software that implements linear models and in
-mathematical proofs. It also highlights that the “scientific content” of a
-linear model is condensed in its design matrix.
+이것은 정말 사소한 표기법의 문제입니다: 합은 \\(k=0,...,3\\)에 대해 확장되며, \\(k=0,1,2\\)에 대한 항들은 우리가 이미 알고 있는 것과 정확히 같습니다. 우리는 \\(\beta_{12}\\) 대신 \\(\beta_{3}\\)라고 쓰고, \\(x_{j3}\\)는 \\(x_{j1}x_{j2}\\)로 정의됩니다. 일반적인 표기법 8.7은 선형 모델을 구현하는 컴퓨터 소프트웨어와 수학적 증명에서 사용하기에 실용적입니다. 또한 선형 모델의 "과학적 내용"이 그 설계 행렬에 응축되어 있음을 강조합니다.
 
 __
 
-Task
+태스크
 
-Show that if we have fit Equation 8.5 to data such that objective 8.6 holds,
-the fit residuals \\(\hat{\varepsilon}_j\\) have an average of 0.
+목적 함수 8.6이 성립하도록 식 8.5를 데이터에 적합시켰다면, 적합 잔차 \\(\hat{\varepsilon}_j\\)의 평균이 0임을 보이세요.
 
-### 8.7.3 Analysis of variance
+### 8.7.3 분산 분석(Analysis of variance)
 
-A model like 8.5 is called a **linear model** , and often it is implied that
-criterion 8.6 is used to fit it to data. This approach is elegant and
-powerful, but for novices it can take some time to appreciate all its facets.
-What is the advantage over just simply taking, for each distinct experimental
-condition, the average over replicates and comparing these values across
-conditions? In simple cases, the latter approach can be intuitive and
-effective. However, it comes to its limits when the replicate numbers are not
-all the same in the different groups, or when one or more of the
-\\(x\\)-variables is continuous-valued. In these cases, one will invariably
-end up with something like fitting 8.5 to the data. A useful way to think
-about 8.5 is contained in the term **analysis of variance** , abbreviated
-ANOVA. In fact, what Equation 8.5 does is decompose the variability of \\(y\\)
-that we observed in the course of our experiments into elementary components:
-its baseline value \\(\beta_0\\), its variability caused by the effect of the
-first variable, \\(\beta_1\\), its variability caused by the effect of the
-second variable, \\(\beta_2\\), its variability caused by the effect of the
-interaction, \\(\beta_{12}\\), and variability that is unaccounted for. The
-last of these we commonly call _noise_ , the other ones, _systematic
-variability_.
+8.5와 같은 모델을 **선형 모델(linear model)**이라고 부르며, 종종 기준 8.6이 데이터를 적합시키는 데 사용됨을 암시합니다. 이 접근 방식은 우아하고 강력하지만, 초보자가 그 모든 측면을 이해하는 데는 시간이 좀 걸릴 수 있습니다. 각기 다른 실험 조건에 대해 단순히 반복 실험들의 평균을 취하고 이 값들을 조건들 사이에서 비교하는 것에 비해 어떤 이점이 있을까요? 단순한 경우에 후자의 접근 방식은 직관적이고 효과적일 수 있습니다. 그러나 서로 다른 그룹에서 반복 실험의 수가 모두 같지 않거나, 하나 이상의 \\(x\\) 변수가 연속형 값을 가질 때 한계에 부딪히게 됩니다. 이러한 경우, 결국 데이터에 8.5와 같은 것을 적합시키는 것으로 귀결될 것입니다. 8.5를 생각하는 유용한 방법은 **분산 분석(analysis of variance)**, 약어로 ANOVA라는 용어에 담겨 있습니다. 사실 식 8.5가 하는 일은 우리가 실험 과정에서 관찰한 \\(y\\)의 가변성을 기초적인 성분들로 분해하는 것입니다: 기본 수준 값 \\(\beta_0\\), 첫 번째 변수의 효과에 의해 발생하는 가변성 \\(\beta_1\\), 두 번째 변수의 효과에 의해 발생하는 가변성 \\(\beta_2\\), 상호작용의 효과에 의해 발생하는 가변성 \\(\beta_{12}\\), 그리고 설명되지 않는 가변성입니다. 이들 중 마지막 것을 우리는 흔히 _노이즈(noise)_라고 부르고, 다른 것들은 _체계적 가변성(systematic variability)_이라고 부릅니다.
 
-[![The distinction between noise and systematic variability is in the eye of
-the beholder, and depends on our model, not on
-reality.](imgs/devil.png)](imgs/devil.png "The distinction between noise and
-systematic variability is in the eye of the beholder, and depends on our
-model, not on reality.")
+[![노이즈와 체계적 가변성의 구분은 보는 사람의 관점에 달려 있으며, 현실이 아니라 우리의 모델에 달려 있습니다.](imgs/devil.png)](imgs/devil.png "노이즈와 체계적 가변성의 구분은 보는 사람의 관점에 달려 있으며, 현실이 아니라 우리의 모델에 달려 있습니다.")
 
-The distinction between noise and systematic variability is in the eye of the
-beholder, and depends on our model, not on reality.
+노이즈와 체계적 가변성의 구분은 보는 사람의 관점에 달려 있으며, 현실이 아니라 우리의 모델에 달려 있습니다.
 
-### 8.7.4 Robustness
+### 8.7.4 강건성(Robustness)
 
-The sum 8.6 is sensitive to outliers in the data. A single measurement
-\\(y_{j}\\) with an outlying value can draw the \\(\beta\\) estimates far away
-from the values implied by the other replicates. This is the well-known fact
-that methods based on least sum of squares have a low **breakdown point** : if
-even only a single data point is outlying, the whole statistical result can be
-strongly affected. For instance, the average of a set of \\(n\\) numbers has a
-breakdown point of \\(\frac{1}{n}\\), meaning that it can be arbitrarily
-changed by changing only a single one of the numbers. On the other hand, the
-median has a much higher breakdown point. Changing a single number often has
-no effect at all, and when it does, the effect is limited to the range of the
-data points in the middle of the ranking (i.e., those adjacent to rank
-\\(\frac{n}{2}\\)). To change the median by an arbitrarily high amount, you
-need to change half the observations. We call the median **robust** , and its
-breakdown point is \\(\frac{1}{2}\\). Remember that the median of a set of
-numbers \\(y_1, y_2, ...\\) minimizes the sum \\(\sum_j|y_j-\beta_0|\\).
+합 8.6은 데이터의 이상치(outliers)에 민감합니다. 이상치를 가진 단 하나의 측정값 \\(y_{j}\\)가 \\(\beta\\) 추정치를 다른 반복 실험들에 의해 함축된 값들로부터 멀리 끌어당길 수 있습니다. 이는 최소제곱법에 기반한 방법들이 낮은 **붕괴점(breakdown point)**을 갖는다는 잘 알려진 사실입니다: 단 하나의 데이터 포인트만 이상치여도 전체 통계 결과가 강력하게 영향을 받을 수 있습니다. 예를 들어, \\(n\\)개 숫자 세트의 평균은 \\(\frac{1}{n}\\)의 붕괴점을 갖는데, 이는 숫자들 중 단 하나만 바꿈으로써 평균을 임의로 바꿀 수 있음을 의미합니다. 반면에 중앙값(median)은 훨씬 더 높은 붕괴점을 갖습니다. 숫자 하나를 바꾸는 것은 종종 아무런 영향을 주지 않으며, 영향이 있더라도 그 효과는 순위의 중간에 있는 데이터 포인트들의 범위(즉, \\(\frac{n}{2}\\) 순위에 인접한 것들)로 제한됩니다. 중앙값을 임의로 높게 바꾸려면 관측치의 절반을 바꾸어야 합니다. 우리는 중앙값을 **강건(robust)**하다고 부르며, 그 붕괴점은 \\(\frac{1}{2}\\)입니다. 숫자 세트 \\(y_1, y_2, ...\\)의 중앙값이 합 \\(\sum_j|y_j-\beta_0|\\)을 최소화한다는 점을 기억하세요.
 
-To achieve a higher degree of robustness against outliers, other choices than
-the sum of squares 8.6 can be used as the objective of minimization. Among
-these are:
+이상치에 대해 더 높은 수준의 강건성을 달성하기 위해, 최소화의 목적 함수로 제곱합 8.6 대신 다른 선택지들이 사용될 수 있습니다. 그중에는 다음과 같은 것들이 있습니다:
 
-\\[ \begin{align} R &= \sum_j |\varepsilon_j| & \text{Least absolute
-deviations} \\\ R &= \sum_j \rho_s(\varepsilon_j) & \text{M-estimation} \\\ R
-&= Q_{\theta}\left( \\{\varepsilon_1^2, \varepsilon_2^2,... \\} \right) &
-\text{LTS, LQS} \\\ R &= \sum_j w_j \varepsilon_j^2 & \text{general weighted
-regression} \end{align} \tag{8.8}\\]
+\\[ \begin{align} R &= \sum_j |\varepsilon_j| & \text{최소 절대 편차 (Least absolute deviations)} \\\ R &= \sum_j \rho_s(\varepsilon_j) & \text{M-추정 (M-estimation)} \\\ R &= Q_{\theta}\left( \\{\varepsilon_1^2, \varepsilon_2^2,... \\} \right) & \text{LTS, LQS} \\\ R &= \sum_j w_j \varepsilon_j^2 & \text{일반화 가중 회귀 (general weighted regression)} \end{align} \tag{8.8}\\]
 
-Here, \\(R\\) is the quantity to be minimized. The first choice in Equation
-8.8 is called **least absolute deviations** regression. It can be viewed as a
-generalization of the median. Although conceptually simple, and attractive on
-first sight, it is harder to minimize than the sum of squares, and it can be
-less stable and less efficient especially if the data are limited, or do not
-fit the model8. The second choice in Equation 8.8, also called
-**M-estimation** , uses a penalization function \\(\rho_s\\) (least-squares
-regression is the special case with \\(\rho_s(\varepsilon)=\varepsilon^2\\))
-that looks like a quadratic function for a limited range of \\(\varepsilon\\),
-but has a smaller slope, flattens out, or even drops back to zero, for
-absolute values \\(|\varepsilon|\\) that are larger than the scale parameter
-\\(s\\). The intention behind this is to downweight the effect of outliers,
-i.e. of data points that have large residuals ([Huber 1964](16-chap.html#ref-
-Huber:AMS:1964)). A choice of \\(s\\) needs to be made and determines what is
-called an outlier. One can even drop the requirement that \\(\rho_s\\) is
-quadratic around 0 (as long as its second derivative is positive), and a
-variety of choices for the function \\(\rho_s\\) have been proposed in the
-literature. The aim is to give the estimator desirable statistical properties
-(say, bias and efficiency) when and where the data fit the model, but to limit
-or nullify the influence of those data points that do not, and to keep
-computations tractable.
+여기서 \\(R\\)은 최소화되어야 할 양입니다. 식 8.8의 첫 번째 선택지는 **최소 절대 편차(least absolute deviations)** 회귀라고 불립니다. 이는 중앙값의 일반화로 볼 수 있습니다. 개념적으로는 단순하고 언뜻 보기에 매력적이지만, 제곱합보다 최소화하기가 더 어렵고, 특히 데이터가 제한적이거나 모델에 잘 맞지 않을 때 덜 안정적이고 덜 효율적일 수 있습니다8. 식 8.8의 두 번째 선택지인 **M-추정(M-estimation)**은 제한된 범위의 \\(\varepsilon\\)에 대해서는 이차 함수(quadratic function)처럼 보이지만, 절대값 \\(|\varepsilon|\\)이 스케일 매개변수 \\(s\\)보다 큰 경우에는 기울기가 더 작아지거나, 평평해지거나, 심지어 다시 0으로 떨어지는 페널티 함수 \\(\rho_s\\)를 사용합니다 (최소제곱 회귀는 \\(\rho_s(\varepsilon)=\varepsilon^2\\)인 특수한 경우입니다). 이 이면의 의도는 이상치, 즉 큰 잔차를 가진 데이터 포인트의 효과를 낮게 가중하는 것입니다 ([Huber 1964](16-chap.html#ref-Huber:AMS:1964)). \\(s\\)의 선택이 이루어져야 하며 이것이 무엇을 이상치로 부를지 결정합니다. 심지어 0 근처에서 \\(\rho_s\\)가 이차 함수여야 한다는 요구 조건을 버릴 수도 있으며(그의 이계 도함수가 양수이기만 하다면), 문헌에서는 다양한 \\(\rho_s\\) 함수 선택지가 제안되었습니다. 그 목표는 데이터가 모델에 잘 맞을 때와 그곳에서 추정기에 바람직한 통계적 속성(예: 편향과 효율성)을 부여하면서도, 그렇지 않은 데이터 포인트의 영향력을 제한하거나 무효화하고 계산을 다루기 쉽게 유지하는 것입니다.
 
-8 The [Wikipedia
-article](https://en.wikipedia.org/wiki/Least_absolute_deviations) gives an
-overview.
+8 [위키백과 문서](https://en.wikipedia.org/wiki/Least_absolute_deviations)에서 개요를 제공합니다.
 
 __
 
-Question 8.6
+질문 8.6
 
-Plot the graph of the function \\(\rho_s(\varepsilon)\\) proposed by Huber
-([1964](16-chap.html#ref-Huber:AMS:1964)) for M-estimators.
-
-__
-
-Solution
+M-추정기를 위해 Huber ([1964](16-chap.html#ref-Huber:AMS:1964))가 제안한 함수 \\(\rho_s(\varepsilon)\\)의 그래프를 그려보세요.
 
 __
 
-Huber’s paper defines, on Page 75:
+해결책
+
+__
+
+Huber의 논문은 75페이지에서 다음과 같이 정의합니다:
 
 \\[ \rho_s(\varepsilon) = \left\\{ \begin{array}{cc} \frac{1}{2}\varepsilon^2,
 \quad\text{for }|\varepsilon|< s\\\ s|\varepsilon|-\frac{1}{2}s^2,
 \quad\text{for }|\varepsilon|\ge s\\\ \end{array} \right. \\]
 
-The graph produced by the below code is shown in Figure 8.8.
+아래 코드로 생성된 그래프는 그림 8.8에 나와 있습니다.
 
     
     
@@ -1153,9 +767,9 @@ The graph produced by the below code is shown in Figure 8.8.
 
 [![](08-chap_files/figure-html/fig-countdata-
 mestimator-1.png)](08-chap_files/figure-html/fig-countdata-mestimator-1.png
-"Figure 8.8: Graph of \\rho_s\(\\varepsilon\), for a choice of s=2.")
+"그림 8.8: s=2를 선택했을 때의 \rho_s(\varepsilon) 그래프.")
 
-Figure 8.8: Graph of \\(\rho_s(\varepsilon)\\), for a choice of \\(s=2\\).
+그림 8.8: \\(s=2\\)를 선택했을 때의 \\(\rho_s(\varepsilon)\\) 그래프.
 
 Choice three in 8.8 generalises the least sum of squares method in yet another
 way. In **least quantile of squares** (LQS) regression, the the sum over the
@@ -2034,7 +1648,7 @@ Code for the file `server.R` in the app:
       })
     })__
 
-Of course you can add many more features.
+물론 더 많은 기능을 추가할 수 있습니다.
 
 Anders, Simon, and Wolfgang Huber. 2010. “Differential Expression Analysis for
 Sequence Count Data.” _Genome Biology_ 11: R106.
@@ -2094,7 +1708,7 @@ Rousseeuw, Peter J., and Annick M. Leroy. 1987. _Robust Regression and Outlier
 Detection_. Wiley. <https://doi.org/10.1002/0471725382>.
 
 Stegle, O., L. Parts, R. Durbin, and J. Winn. 2010. “A Bayesian framework to
-account for complex non-genetic factors in gene expression levels greatly
+account for some complex non-genetic factors in gene expression levels greatly
 increases power in eQTL studies.” _PLoS Computational Biology_ 6 (5):
 e1000770.
 

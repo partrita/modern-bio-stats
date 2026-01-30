@@ -1,64 +1,37 @@
-[![](imgs/Darwin_Tree_1837_web.png)](imgs/Darwin_Tree_1837_web.png)
+![](imgs/Darwin_Tree_1837_web.png)
 
-Networks and trees are often used to represent knowledge about a biological
-system. They can also be used to directly encode observations from an
-experiment or study. Phylogenetic trees were drawn to represent family and
-similarity relationships between species, even before Darwin’s famous notebook
-sketch that gave these trees a mechanistic, causal interpretation. The meaning
-of the nodes and edges in a network can differ, and needs to be specified. For
-instance, a network might schematize relationships between proteins, such as
-in Figure 10.1, where the nodes could stand for genes or their encoded
-proteins, and edges could be direct physical interactions or more abstract
-“functional” or “genetic” interactions representing outcomes from an
-experiment. In this book, we use the terms _graph_ and _network_ largely
-exchangeably. The former term is a bit more evocative of the mathematical
-structure, the latter of the biological interpretation.
+네트워크와 트리는 생물학적 시스템에 대한 지식을 표현하는 데 종종 사용됩니다. 또한 실험이나 연구로부터 얻은 관측치를 직접 인코딩하는 데에도 사용될 수 있습니다. 계통수(Phylogenetic trees)는 종들 사이의 가족 및 유사성 관계를 표현하기 위해 그려졌으며, 심지어 이러한 트리에 기계론적이고 인과적인 해석을 부여한 다윈의 유명한 노트북 스케치 이전부터 존재했습니다. 네트워크에서 노드(nodes)와 에지(edges)의 의미는 다를 수 있으며 명시되어야 합니다. 예를 들어, 네트워크는 [그림 10.1](10-chap.html#fig-chemo-1)에서처럼 단백질들 사이의 관계를 도식화할 수 있는데, 여기서 노드는 유전자나 그들이 인코딩하는 단백질을 나타낼 수 있고, 에지는 직접적인 물리적 상호작용이거나 실험 결과를 나타내는 좀 더 추상적인 "기능적" 또는 "유전적" 상호작용일 수 있습니다. 이 책에서 우리는 _그래프(graph)_와 _네트워크(network)_라는 용어를 거의 혼용하여 사용합니다. 전자는 수학적 구조를 좀 더 연상시키고, 후자는 생물학적 해석을 좀 더 연상시킵니다.
 
 [![](10-chap_files/figure-html/fig-chemo-1.png)](10-chap_files/figure-
-html/fig-chemo-1.png "Figure 10.1: A small protein-protein network that
-represents pairwise relationships between proteins.")
+html/fig-chemo-1.png "그림 10.1: 단백질 사이의 쌍별 관계를 나타내는 작은 단백질-단백질 네트워크.")
 
-Figure 10.1: A small protein-protein network that represents pairwise
-relationships between proteins.
+그림 10.1: 단백질 사이의 쌍별 관계를 나타내는 작은 단백질-단백질 네트워크.
 
-We saw in [Chapter 2](02-chap.html) that we could model sequences of state
-transitions as a Markov chain, which can be represented as directed graphs
-with weights on the edges. Metabolic pathways in which nodes are chemical
-metabolites and the edges represent chemical reactions. Mutation history trees
-are used in cancer genomics to represent lineages of mutations.
+리는 [2장](02-chap.html)에서 상태 전이의 시퀀스를 마르코프 체인으로 모델링할 수 있음을 보았으며, 이는 에지에 가중치가 있는 유향 그래프(directed graphs)로 표현될 수 있습니다. 노드가 화학적 대사산물이고 에지가 화학 반응을 나타내는 대사 경로(Metabolic pathways)가 그 예입니다. 암 유전체학에서는 돌연변이의 계통을 나타내기 위해 돌연변이 이력 트리(Mutation history trees)가 사용됩니다.
 
-Transmission networks are important in studying the epidemiology of infectious
-diseases. As real networks can be very large, we will need special methods for
-representing and visualizing them. This chapter will be focused on ways of
-integrating graphs into a data analytic workflow.
+전염 네트워크(Transmission networks)는 감염병의 역학을 연구하는 데 중요합니다. 실제 네트워크는 매우 클 수 있으므로, 이를 표현하고 시각화하기 위한 특수한 방법들이 필요할 것입니다. 이 장은 데이터 분석 워크플로에 그래프를 통합하는 방법들에 초점을 맞출 것입니다.
 
-## 10.1 Goals for this chapter
+## 10.1 이 장의 목표
 
-In this chapter we will
+이 장에서 우리는 다음을 수행할 것입니다:
 
-  * Use the formal definition of a graph’s components: edges, vertices, layout to see how we can manipulate them in R using both adjacency matrices and lists of edges.
+  * 에지, 정점(vertices), 레이아웃(layout)과 같은 그래프 구성 요소의 공식적인 정의를 사용하여, 인접 행렬(adjacency matrices)과 에지 리스트(lists of edges)를 모두 이용해 R에서 이들을 어떻게 조작할 수 있는지 살펴봅니다.
 
-  * We will transform a graph object from **[igraph](https://cran.r-project.org/web/packages/igraph/)** into an object that can be visualized according to the layers approach in **[ggplot2](https://bioconductor.org/packages/ggplot2/)** using **[ggraph](https://cran.r-project.org/web/packages/ggraph/)**. We will experiment with covariates that we attach to graph edges and nodes.
+  * **[igraph](https://cran.r-project.org/web/packages/igraph/)**의 그래프 객체를 **[ggraph](https://cran.r-project.org/web/packages/ggraph/)**를 사용하여 **[ggplot2](https://bioconductor.org/packages/ggplot2/)**의 레이어 접근 방식에 따라 시각화할 수 있는 객체로 변환합니다. 그래프의 에지와 노드에 부착하는 공변량(covariates)을 실험해 봅니다.
 
-  * Graphs are useful ways of encoding prior knowledge about a system, and we will see how they enable us to go from simple gene set analyses to meaningful biological recommendations by mapping significance scores onto the network to detect perturbation _hotspots_.
+  * 그래프는 시스템에 대한 사전 지식을 인코딩하는 유용한 방법입니다. 우리는 그래프가 어떻게 단순한 유전자 세트 분석을 넘어, 네트워크 상에 유의성 점수(significance scores)를 매핑하여 섭동 **핫스팟(hotspots)**을 탐지함으로써 의미 있는 생물학적 권고안을 제시할 수 있게 해주는지 살펴볼 것입니다.
 
-  * We will build phylogenetic trees starting with from DNA sequences and then visualize these trees with the specifically designed R packages **[ape](https://cran.r-project.org/web/packages/ape/)** and **[ggtree](https://cran.r-project.org/web/packages/ggtree/)**.
+  * DNA 서열로부터 계통수(phylogenetic trees)를 구축하고, 이를 위해 특별히 설계된 R 패키지인 **[ape](https://cran.r-project.org/web/packages/ape/)**와 **[ggtree](https://cran.r-project.org/web/packages/ggtree/)**를 사용하여 시각화합니다.
 
-  * We will combine a phylogenetic tree built from microbiome 16S rRNA data with covariates to show how the hierarchical relationship between taxa can increase the power in multiple hypothesis testing.
+  * 마이크로바이옴 16S rRNA 데이터로부터 구축된 계통수와 공변량을 결합하여, 분류군(taxa) 간의 계층적 관계가 어떻게 다중 가설 검정의 검정력을 높일 수 있는지 보여줍니다.
 
-  * A special tree called a minimum spanning tree (MST) is very useful for testing the relations between a graph and other covariates. We’ll see how to implement different versions of what is known as the Friedman-Rafsky test. We’ll study both co-occurrence of bacteria in mice litters and strain similarities in HIV contagion networks.
+  * 최소 신장 트리(minimum spanning tree, MST)라고 불리는 특수한 트리는 그래프와 다른 공변량 사이의 관계를 테스트하는 데 매우 유용합니다. 프리드먼-라프스키(Friedman-Rafsky) 검정이라 알려진 방법의 서로 다른 버전들을 어떻게 구현하는지 살펴볼 것입니다. 생쥐 집단에서의 박테리아 공동 발생과 HIV 전염 네트워크에서의 균주 유사성을 모두 연구할 것입니다.
 
-## 10.2 Graphs
+## 10.2 그래프(Graphs)
 
-### 10.2.1 What is a graph and how can it be encoded?
+### 10.2.1 그래프란 무엇이며 어떻게 인코딩할 수 있는가?
 
-A **graph** is defined as a combination of two sets, often denoted as
-\\((V,E)\\). Here, \\(V\\) is a set of **nodes** or **vertices** , \\(E\\) is
-a set of **edges** between vertices. Each element of \\(E\\) is a pair of
-nodes, i.e., consists of two elements of \\(V\\). An intuitive way to
-represent a graph is by its **from-to** representation. If we denote the set
-of vertices as \\(V=(\text{A}, \text{B}, \text{C}, \ldots)\\), then the from-
-to (or **edge list**) representation is a table of the following form.
+**그래프(graph)**는 흔히 \\((V,E)\\)로 표시되는 두 세트의 조합으로 정의됩니다. 여기서 \\(V\\)는 **노드(nodes)** 또는 **정점(vertices)**의 세트이고, \\(E\\)는 정점들 사이의 **에지(edges)** 세트입니다. \\(E\\)의 각 원소는 노드 쌍으로, 즉 \\(V\\)의 두 원소로 구성됩니다. 그래프를 표현하는 직관적인 방법은 **출발-도착(from-to)** 표현입니다. 정점 세트를 \\(V=(\text{A}, \text{B}, \text{C}, \ldots)\\)라고 하면, 출발-도착(또는 **에지 리스트**) 표현은 다음과 같은 형태의 표입니다.
 
     
     
@@ -69,46 +42,27 @@ to (or **edge list**) representation is a table of the following form.
     4    C  D
     5    E  F
 
-The ordering of the rows in the from-to table plays no role. In a **directed**
-or **oriented graph** , the edges are ordered pairs, i.e., the first line in
-the above table states that there is an edge from A to B, but does not say
-whether there is also an edge from B to A—this would need to be denoted in a
-separate row of the table.
+출발-도착 표에서 행의 순서는 아무런 역할을 하지 않습니다. **유향 그래프(directed graph)** 또는 **지향 그래프(oriented graph)**에서 에지는 순서가 있는 쌍입니다. 즉, 위 표의 첫 번째 줄은 A에서 B로 가는 에지가 있음을 나타내지만, B에서 A로 가는 에지도 있는지는 말해주지 않습니다 — 이는 표의 별도 행에 표시되어야 합니다.
 
-In an **undirected graph** , the edges are unordered pairs, i.e., an edge from
-A to B is not distinguished from an edge from B to A. Undirected graphs encode
-symmetric relationships between the nodes, directed graphs represent
-asymmetric relationships.
+**무향 그래프(undirected graph)**에서 에지는 순서가 없는 쌍입니다. 즉, A에서 B로 가는 에지는 B에서 A로 가는 에지와 구분되지 않습니다. 무향 그래프는 노드 사이의 대칭적인 관계를 인코딩하고, 유향 그래프는 비대칭적인 관계를 나타냅니다.
 
-It’s important not to confuse a graph with its visualization. It is possible
-to draw a graph onto a two-dimensional area like in Figure 10.1, but this is
-optional, and not unique—there are always many different ways to draw the same
-graph. There is also no guarantee that in such a visualization, edges do not
-overlap. Depending on the graph, this can happen. Graphs do not live in
-physical space (neither 2D nor 3D) but are literally just sets of nodes and
-edges.
+그래프를 그 시각화와 혼동하지 않는 것이 중요합니다. [그림 10.1](10-chap.html#fig-chemo-1)에서처럼 그래프를 2차원 영역에 그리는 것이 가능하지만, 이는 선택 사항이며 유일하지 않습니다 — 동일한 그래프를 그리는 방법은 항상 여러 가지가 있습니다. 또한 그러한 시각화에서 에지가 겹치지 않는다는 보장도 없습니다. 그래프에 따라 그런 일이 발생할 수 있습니다. 그래프는 물리적 공간(2D든 3D든)에 살고 있는 것이 아니라 말 그대로 노드와 에지의 세트일 뿐입니다.
 
-An alternative representation, equivalent to the from-to table, is the
-**adjacency matrix** , a quadratic matrix with as many rows (and columns) as
-nodes in the graph. The matrix contains a non-zero entry in the \\(i\\)th row
-and \\(j\\)th column to encode that there is an edge between the \\(i\\)th and
-\\(j\\)th vertices.
+출발-도착 표와 동등한 대안적인 표현은 **인접 행렬(adjacency matrix)**입니다. 이는 그래프의 노드 수만큼의 행(및 열)을 가진 정사각 행렬입니다. 행렬의 \\(i\\)번째 행과 \\(j\\)번째 열에 0이 아닌 항목이 있으면 이는 \\(i\\)번째 정점과 \\(j\\)번째 정점 사이에 에지가 있음을 인코딩합니다.
 
 __
 
-Question 10.1
+질문 10.1
 
-For undirected graphs, what is special about the adjacency matrix \\(A\\)?
-
-__
-
-Solution
+무향 그래프의 경우, 인접 행렬 \\(A\\)의 어떤 점이 특별한가요?
 
 __
 
-The adjacency matrix is symmetric, i.e., \\(M = M^T\\). An example is shown in
-Figures 10.2 and 10.3. `g1` is created from a from-to table (encoded in the
-two-column matrix `edges`) by the code below.
+해결책
+
+__
+
+인접 행렬은 대칭입니다. 즉, \\(M = M^T\\)입니다. 예시가 그림 10.2와 10.3에 나와 있습니다. `g1`은 아래 코드를 통해 출발-도착 표(2열 행렬 `edges`에 인코딩됨)로부터 생성되었습니다.
 
     
     
@@ -119,30 +73,24 @@ two-column matrix `edges`) by the code below.
     plot(g1, vertex.size = 25, edge.width = 5, vertex.color = "coral")__
 
 [![](10-chap_files/figure-html/fig-igraphplot-1.png)](10-chap_files/figure-
-html/fig-igraphplot-1.png "Figure 10.2: A small undirected graph with numbered
-nodes.")
+html/fig-igraphplot-1.png "그림 10.2: 번호가 매겨진 노드가 있는 작은 무향 그래프.")
 
-Figure 10.2: A small undirected graph with numbered nodes.
+그림 10.2: 번호가 매겨진 노드가 있는 작은 무향 그래프.
 
 [![](10-chap_files/figure-html/fig-adjmatrix-1.png)](10-chap_files/figure-
-html/fig-adjmatrix-1.png "Figure 10.3: The adjacency matrix of the graph shown
-in Figure fig-igraphplot is is a symmetric n \\times n matrix of 0s and 1s,
-where is n is the number of nodes.")
+html/fig-adjmatrix-1.png "그림 10.3: 그림 10.2에 표시된 그래프의 인접 행렬은 0과 1로 구성된 대칭 n x n 행렬이며, 여기서 n은 노드의 수입니다.")
 
-Figure 10.3: The adjacency matrix of the graph shown in Figure 10.2 is is a
-symmetric \\(n \times n\\) matrix of \\(0\\)s and \\(1\\)s, where is \\(n\\)
-is the number of nodes.
+그림 10.3: 그림 10.2에 표시된 그래프의 인접 행렬은 0과 1로 구성된 대칭 \\(n \times n\\) 행렬이며, 여기서 \\(n\\)은 노드의 수입니다.
 
 __
 
-Question 10.2
+질문 10.2
 
-Can you give an alternative way to that shown in the answer to Question 10.1
-above for creating a graph from a list of edges dataframe?
+위의 질문 10.1의 답변에 나온 방법 외에, 에지 리스트 데이터 프레임으로부터 그래프를 생성하는 대안적인 방법을 제시할 수 있나요?
 
 __
 
-Solution
+해결책
 
 __
 
@@ -159,130 +107,73 @@ __
     + edges from 1467322 (vertex names):
     [1] 1--3 2--3 3--4 4--6 4--5
 
-Typically, you would use the `read.csv` function to read the from-to table
-from a separate file. Here the authors of the book decided to create the
-character string `edges` on the fly and to turn into a the equivalent of a
-file using the function `textConnection`, to keep the example more compact.
-The notation `"\n"` indicates a line break.
+일반적으로 여러분은 별도의 파일에서 출발-도착 표를 읽기 위해 `read.csv` 함수를 사용할 것입니다. 여기서는 예제를 더 간결하게 유지하기 위해 책의 저자들이 즉석에서 문자열 `edges`를 만들고 `textConnection` 함수를 사용하여 이를 파일과 동등하게 만들기로 결정했습니다. 표기법 `"\n"`은 줄바꿈을 나타냅니다.
 
-#### Elements of a simple graph
+#### 단순 그래프의 요소들
 
-  * The nodes or vertices. These are the colored circles with numbers in them in Figure 10.2.
+  * 노드 또는 정점. 이들은 그림 10.2에서 번호가 들어 있는 색칠된 원들입니다.
 
-  * Edges or connections, the segments that join the nodes and which can be directed or not.
+  * 에지 또는 연결, 노드들을 잇는 세그먼트이며 방향이 있을 수도 있고 없을 수도 있습니다.
 
-  * Edge attributes, such edge length. When not specified, we suppose the edge lengths are all the same, typically, one. For instance, to compute the distance between two nodes in the graph, we sum up the lengths of the edges along the shortest path.
+  * 에지 속성(edge length 등). 별도로 지정되지 않으면 에지 길이는 모두 동일하게 대개 1이라고 가정합니다. 예를 들어, 그래프 상의 두 노드 사이의 거리를 계산하려면 최단 경로를 따라 에지들의 길이를 합산합니다.
 
-  * Edge and node attributes: optionally, each edge or each node can be mapped to further continuous or categorical variables, such as type, color, weight, edge width, node size, \\(...\\) Pretty much anything is possible here, depending on the application and the intended computations.
+  * 에지 및 노드 속성: 선택적으로, 각 에지나 각 노드는 유형, 색상, 가중치, 에지 너비, 노드 크기 등과 같은 추가적인 연속형 또는 범주형 변수들에 매핑될 수 있습니다. 응용 분야와 의도된 계산에 따라 거의 모든 것이 가능합니다.
 
-We also call a directed graph with edge lengths a **network**. The adjacency
-matric of a network is an \\(n\times n\\) matrix of positive numbers
-corresponding to the edge lengths.
+우리는 또한 에지 길이가 있는 유향 그래프를 **네트워크(network)**라고 부릅니다. 네트워크의 인접 행렬은 에지 길이에 대응하는 양수들로 이루어진 \\(n\times n\\) 행렬입니다.
 
-#### Basic concepts
+#### 기본 개념들
 
-The _degree_ of a node is the number of edges connected to it. In directed
-graphs we differentiate between _in-degree_ and _out-degree_ for incoming and
-outgoing edges. We may further distinguish between directed graphs that
-contain cycles and those that do not (termed cyclic and acyclic graphs).
+노드의 _차수(degree)_는 그 노드에 연결된 에지의 수입니다. 유향 그래프에서는 들어오는 에지와 나가는 에지에 대해 _진입 차수(in-degree)_와 _진출 차수(out-degree)_를 구분합니다. 또한 사이클(cycles)을 포함하는 유향 그래프와 그렇지 않은 그래프(순환 및 비순환 그래프라고 함)를 추가로 구분할 수 있습니다.
 
-For large graphs, on can summarize overall graph structure by looking at the
-distributions of vertex degrees, and we can identify particularly interesting
-regions or specific nodes and edge in a graph with measures such as centrality
-and betweenness. These measures are available in various packages
-(**[network](https://cran.r-project.org/web/packages/network/)** ,
-**[igraph](https://cran.r-project.org/web/packages/igraph/)**).
+큰 그래프의 경우, 정점 차수의 분포를 살펴봄으로써 전체적인 그래프 구조를 요약할 수 있으며, 중심성(centrality)이나 매개 중심성(betweenness)과 같은 척도를 사용하여 그래프에서 특히 흥미로운 영역이나 특정 노드 및 에지를 식별할 수 있습니다. 이러한 척도들은 **[network](https://cran.r-project.org/web/packages/network/)** , **[igraph](https://cran.r-project.org/web/packages/igraph/)**와 같은 다양한 패키지에서 사용할 수 있습니다.
 
-If the number of edges is of the same order of magnitude as the number of
-nodes (written \\(\\#E\sim O(\\#V)\\)), we say that the graph is **sparse**.
-Some graphs have many nodes, for instance, the package
-**[ppiData](https://bioconductor.org/packages/ppiData/)** contains a predicted
-protein interaction (`ppipred`) graph on about 2500 proteins with around 20000
-edges1. A complete adjacency matrix for such a graph requires more than 6
-million memory units, of which most contain 0. This is needlessly wasteful.
-The edge list representation of the same graph is more compact: it only uses
-storage where there is an edge, in our example, this amounts to 20000 memory
-units. One particular choice of edge list representation is sparse matrix
-encodings, such as implemented in the package
-**[Matrix](https://cran.r-project.org/web/packages/Matrix/)**.
+만약 에지의 수가 노드의 수와 같은 규모(order of magnitude)라면(\\(\#E\sim O(\#V)\\)라고 씀), 우리는 그 그래프가 **희소(sparse)**하다고 말합니다. 일부 그래프는 노드가 매우 많습니다. 예를 들어, **[ppiData](https://bioconductor.org/packages/ppiData/)** 패키지에는 약 20,000개의 에지를 가진 약 2,500개의 단백질에 대한 예측된 단백질 상호작용(`ppipred`) 그래프가 들어 있습니다1. 그러한 그래프에 대한 완전한 인접 행렬은 600만 개 이상의 메모리 단위를 필요로 하며, 그 중 대부분은 0을 포함합니다. 이는 불필요한 낭비입니다. 동일한 그래프의 에지 리스트 표현은 더 콤팩트합니다: 에지가 있는 곳에만 저장 공간을 사용하며, 우리 예제에서는 20,000개의 메모리 단위에 해당합니다. 에지 리스트 표현의 한 가지 구체적인 선택은 **[Matrix](https://cran.r-project.org/web/packages/Matrix/)** 패키지에 구현된 것과 같은 희소 행렬 인코딩입니다.
 
-1 Gene and species phylogenies may even be much larger.
+1 유전자 및 종 계통수(phylogenies)는 이보다 훨씬 더 클 수도 있습니다.
 
-On the other hand, in a **dense** graph, the number of edges is of the same
-order of magnitude as the number of potential edges, i.e., the square of the
-number of nodes (written \\(\\#E\sim O(\\#V^2)\\). Memory space can be an
-issue for the storage of large dense graphs.
+반면에 **조밀한(dense)** 그래프에서는 에지의 수가 잠재적인 에지의 수, 즉 노드 수의 제곱(\\(\#E\sim O(\#V^2)\\)라고 씀)과 같은 규모입니다. 크고 조밀한 그래프의 경우 저장 메모리 공간이 문제가 될 수 있습니다.
 
-#### Graph layout
+#### 그래프 레이아웃(Graph layout)
 
-We will see several examples where the same graph is plotted in different
-ways, either for aesthetic or practical reasons. This is done through the
-choice of the **graph layout**.
+우리는 미적 또는 실무적인 이유로 동일한 그래프가 서로 다른 방식으로 그려지는 여러 예시를 보게 될 것입니다. 이는 **그래프 레이아웃**의 선택을 통해 이루어집니다.
 
-When the edges have lengths representing distances the problem of a 2D
-representation of the graph is the same as the multidimensional scaling we saw
-in [Chapter 9](09-chap.html) It is often solved in a similar way by spreading
-out the vertex-points as much as possible. In the simple case of edges without
-lengths, the algorithms can choose different criteria. The method of
-Fruchterman and Reingold is a basic choice. It is based on a physics-inspired
-model where similar points attract and repel each other as if under the effect
-of (Newtonian) physical forces.
+에지가 거리를 나타내는 길이를 가질 때, 그래프의 2D 표현 문제는 [9장](09-chap.html)에서 보았던 다차원 척도법과 동일합니다. 이는 종종 정점 지점들을 가능한 한 멀리 퍼뜨림으로써 유사한 방식으로 해결됩니다. 길이가 없는 에지의 단순한 경우, 알고리즘은 서로 다른 기준을 선택할 수 있습니다. 프루히터만과 라잉골드(Fruchterman and Reingold) 방법이 기본적인 선택입니다. 이는 마치 (뉴턴의) 물리적 힘의 영향을 받는 것처럼 유사한 점들이 서로 끌어당기고 밀어내는 물리 기반 모델에 기초합니다.
 
 __
 
-Task
+태스크
 
-Use the **[igraph](https://cran.r-project.org/web/packages/igraph/)** package
-to do the following
+**[igraph](https://cran.r-project.org/web/packages/igraph/)** 패키지를 사용하여 다음을 수행하세요.
 
-  * Create a dense random graph with 12 nodes and more than 50 edges.
+  * 12개의 노드와 50개 이상의 에지를 가진 조밀한 무작위 그래프를 만듭니다.
 
-  * Experiment plotting the graph with different layouts: place the nodes on a circle, or represent the graph as symmetrically as possible, avoid any overlapping nodes or edges.
+  * 서로 다른 레이아웃으로 그래프를 그리는 실험을 해보세요: 노드들을 원형으로 배치하거나, 그래프를 가능한 한 대칭적으로 표현하고 노드나 에지가 겹치지 않게 해보세요.
 
-#### Graphs from data
+#### 데이터로부터의 그래프
 
-Usually data do not arrive in the form of graphs. Graphical or network
-representations are often the result of transforming from other data types.
+대개 데이터는 그래프 형태로 도착하지 않습니다. 그래픽이나 네트워크 표현은 종종 다른 데이터 유형으로부터 변환된 결과입니다.
 
-**From distances or similarities:** graphs can simplify distance or similarity
-relationships between objects by binarising them. Nodes are connected if they
-are similar or close, and not connected if not. Thus, the input is a
-similarity or distance measure between all pairs of objects of interest
-(genes, proteins, species, phenotypes, \\(...\\)), to which a threshold is
-applied. The set of measures could be realized in a dense matrix or be
-computed on the fly.
+**거리나 유사성으로부터:** 그래프는 거리나 유사성 관계를 이진화(binarising)함으로써 이를 단순화할 수 있습니다. 노드들이 비슷하거나 가까우면 연결하고, 그렇지 않으면 연결하지 않습니다. 따라서 입력값은 관심 있는 모든 객체 쌍(유전자, 단백질, 종, 표현형, \\(...\\)) 사이의 유사성 또는 거리 척도이며, 여기에 임계값(threshold)이 적용됩니다. 척도 세트는 조밀한 행렬로 구현되거나 즉석에서 계산될 수 있습니다.
 
-**Bipartite graphs:** some data arrive naturally as absence or presence
-relationships between two types of objects, for instance, finch species and
-islands in the Galapagos archipelago (Figure 10.4), or transcription factors
-and gene regulatory regions they are considered to bind to. Such relationships
-can be encoded with 0/1 values in a rectangular matrix, where rows represent
-one object type and columns the other. The resulting graph has two types of
-nodes, e.g., finch-nodes and island-nodes, and edges can only exist between
-nodes of different types, e.g., between a taxon and an island, but not between
-taxa, nor between islands. Edges in Figure 10.4 represent _lives on_
-relationships.
+**이분 그래프(Bipartite graphs):** 일부 데이터는 갈라파고스 제도의 핀치새 종과 섬들(그림 10.4), 또는 전사 인자와 그들이 결합하는 것으로 간주되는 유전자 조절 영역 사이의 관계처럼 두 가지 유형의 객체 사이의 존재 또는 부재 관계로 자연스럽게 나타납니다. 그러한 관계는 직사각형 행렬에서 0/1 값으로 인코딩될 수 있으며, 여기서 행은 한 객체 유형을 나타내고 열은 다른 유형을 나타냅니다. 결과로 나오는 그래프는 두 가지 유형의 노드(예: 핀치새 노드와 섬 노드)를 가지며, 에지는 서로 다른 유형의 노드 사이에만 존재할 수 있습니다(예: 분류군과 섬 사이에는 존재하지만 분류군 사이나 섬 사이에는 존재하지 않음). 그림 10.4의 에지는 _~에 산다_는 관계를 나타냅니다.
 
-[![](imgs/BipartiteTaxa.png)](imgs/BipartiteTaxa.png "Figure 10.4: This
-bipartite graph connects each taxon to the sites where it was observed.")
+[![](imgs/BipartiteTaxa.png)](imgs/BipartiteTaxa.png "그림 10.4: 이 이분 그래프는 각 분류군을 그것이 관찰된 사이트들과 연결합니다.")
 
-Figure 10.4: This **bipartite** graph connects each taxon to the sites where
-it was observed.
+그림 10.4: 이 **이분(bipartite)** 그래프는 각 분류군을 그것이 관찰된 사이트들과 연결합니다.
 
 __
 
-Question 10.3
+질문 10.3
 
-Load the `finch.csv` data and experiment plotting them to highlight that they
-represent a bipartite network.
-
-__
-
-Solution
+`finch.csv` 데이터를 불러오고, 이것이 이분 네트워크를 나타냄을 강조하도록 그리는 실험을 해보세요.
 
 __
 
-The output of the following code is shown in Figure 10.5.
+해결책
+
+__
+
+다음 코드의 출력은 그림 10.5에 나와 있습니다.
 
     
     
@@ -409,31 +300,27 @@ Which state do you think this Markov chain will end up in?
 
 __
 
-Solution
+해결책
 
 __
 
-All nodes except C have outgoing edges, C only has in-going edges and a self-
-edge. Thus, C is an absorbing state. Sooner or later any process from this
-chain ends up and stays in C.
+C를 제외한 모든 노드는 나가는 에지(outgoing edges)를 가지고 있으며, C는 들어오는 에지와 자기 자신으로 향하는 에지만을 가집니다. 따라서 C는 흡수 상태(absorbing state)입니다. 이 체인의 모든 프로세스는 조만간 C에 도달하여 머물게 됩니다.
 
 __
 
-Task
+태스크
 
-  1. Try changing your `set.seed` function input and see if it changes the plot.
+  1. `set.seed` 함수의 입력값을 바꾸어 보고 플롯이 변하는지 확인해 보세요.
 
-  2. Access the help for this particular `plot` function.
+  2. 이 특정 `plot` 함수에 대한 도움말에 접속해 보세요.
 
-  3. Redo the graph and label the edges with the transition probabilities in green and vertices in brown.
+  3. 그래프를 다시 그리고, 전이 확률(transition probabilities) 레이블은 녹색으로, 정점(vertices)은 갈색으로 표시해 보세요.
 
-We will see how to build a complete example of annotated state space Markov
-chain graph in Exercise 10.3.
+연습 문제 10.3에서 어노테이션이 달린 상태 공간 마르코프 체인 그래프의 완전한 예시를 구축하는 방법을 살펴볼 것입니다.
 
-### 10.2.2 Graphs with many layers: labels on edges and nodes
+### 10.2.2 여러 레이어가 있는 그래프: 에지와 노드의 레이블
 
-Here is an example of plotting a graph downloaded from the
-[STRING](https://string-db.org) database with annotations at the vertices.
+여기에 정점에 어노테이션이 달린, [STRING](https://string-db.org) 데이터베이스에서 다운로드한 그래프를 그리는 예시가 있습니다.
 
     
     
@@ -448,131 +335,75 @@ Here is an example of plotting a graph downloaded from the
 
 [![](10-chap_files/figure-html/fig-
 completechemokine-1.png)](10-chap_files/figure-html/fig-
-completechemokine-1.png "Figure 10.8: Perturbed chemokine subnetwork uncovered
-in @YuGXNA using differential gene expression patterns in sorted T-cells.
-Notice the clique-like structure of the genes CXCR3, CXCL13, CCL19, CSCR5 and
-CCR7 in the right hand corner.")
+completechemokine-1.png "그림 10.8: @YuGXNA에서 정렬된 T 세포의 차등 유전자 발현 패턴을 사용하여 발견된 섭동된 케모카인 하위 네트워크. 오른쪽 모서리에 있는 CXCR3, CXCL13, CCL19, CSCR5 및 CCR7 유전자의 클릭(clique)과 유사한 구조에 주목하세요.")
 
-Figure 10.8: Perturbed chemokine subnetwork uncovered in Yu et al.
-([2012](16-chap.html#ref-YuGXNA)) using differential gene expression patterns
-in sorted T-cells. Notice the clique-like structure of the genes CXCR3,
-CXCL13, CCL19, CSCR5 and CCR7 in the right hand corner.
+그림 10.8: Yu 등 ([2012](16-chap.html#ref-YuGXNA))에서 정렬된 T 세포의 차등 유전자 발현 패턴을 사용하여 발견된 섭동된 케모카인 하위 네트워크. 오른쪽 모서리에 있는 CXCR3, CXCL13, CCL19, CSCR5 및 CCR7 유전자의 클릭(clique)과 유사한 구조에 주목하세요.
 
-Figure 10.8 shows the full perturbed chemokine subnetwork discovered in the
-study of breast cancer metastasis using GXNA ([Nacu et al.
-2007](16-chap.html#ref-GXNA)) and reported by Yu et al.
-([2012](16-chap.html#ref-YuGXNA)).
+그림 10.8은 ([Nacu et al. 2007](16-chap.html#ref-GXNA))에서 GXNA를 사용하여 유방암 전이 연구에서 발견되고 Yu 등 ([2012](16-chap.html#ref-YuGXNA))에 의해 보고된 전체 섭동 케모카인 하위 네트워크를 보여줍니다.
 
-## 10.3 From gene set enrichment to networks
+## 10.3 유전자 세트 농축에서 네트워크로
 
-[![A long unstructured laundry list of possibly differentially expressed genes
-can be daunting.](imgs/devil.png)](imgs/devil.png "A long unstructured laundry
-list of possibly differentially expressed genes can be daunting.")
+[![차등 발현될 가능성이 있는 유전자들의 길고 구조화되지 않은 세탁물 리스트(laundry list)는 위협적일 수 있습니다.](imgs/devil.png)](imgs/devil.png "차등 발현될 가능성이 있는 유전자들의 길고 구조화되지 않은 세탁물 리스트(laundry list)는 위협적일 수 있습니다.")
 
-A long unstructured laundry list of possibly differentially expressed genes
-can be daunting.
+차등 발현될 가능성이 있는 유전자들의 길고 구조화되지 않은 세탁물 리스트(laundry list)는 위협적일 수 있습니다.
 
-In [Chapter 8](08-chap.html), we studied methods for finding a list of
-differentially expressed genes. Small sample sizes, coupled with efforts to
-maintain low FDRs, often result in low power to detect differential
-expression. Therefore, obtaining a long list of genes that can be confidently
-declared as differentially expressed is, initially, a triumph. However,
-understanding the underlying biology requires more than just a laundry list of
-significant players in a biological system.
+[8장](08-chap.html)에서 우리는 차등 발현된 유전자 리스트를 찾는 방법들을 공부했습니다. 적은 표본 크기와 낮은 FDR을 유지하려는 노력은 종종 차등 발현을 감지하는 낮은 검정력으로 이어집니다. 따라서 차등 발현된 것으로 자신 있게 선언할 수 있는 긴 유전자 리스트를 얻는 것은 초기에는 승리입니다. 그러나 기저의 생물학을 이해하려면 생물학적 시스템에서 유의미한 행위자들의 단순한 리스트 이상의 것이 필요합니다.
 
-### 10.3.1 Methods using pre-defined gene sets (GSEA)
+### 10.3.1 사전 정의된 유전자 세트를 사용하는 방법(GSEA)
 
-One of the earliest approaches was to look for gene attributes that are
-**overrepresented** or **enriched** in the laundry list of significant genes.
-These gene classes are often based on Gene Ontology (GO) categories (for
-example, genes that are involved in organ growth, or genes that are involved
-in feeding behavior). The Gene Ontology (GO) is a collection of three
-ontologies that describe genes and gene products. These ontologies are
-restricted vocabularies that have the structure of directed acyclic graphs
-(DAGS). The most specific terms are the leaves of the graph. The GO graph
-consists of nodes (here, Gene Ontology terms) and edges from more specific
-terms (children) to less specific (parents), often these edges are directed.
-Nodes and edges can have multiple attributes that can be visualized. The main
-purpose of using GO annotations for a particular set of Genes designated as
-significant in an experiment is to look for the **enrichment** of a GO term in
-this list, we will give this term a statistical meaning below. Many other
-useful lists of important gene sets exist.
+가장 초기 접근 방식 중 하나는 유의미한 유전자 리스트에서 **과다하게 나타나거나(overrepresented)** **농축된(enriched)** 유전자 속성을 찾는 것이었습니다. 이러한 유전자 클래스들은 종종 유전자 온톨로지(Gene Ontology, GO) 범주에 기반합니다(예: 기관 성장에 관여하는 유전자, 또는 섭식 행동에 관여하는 유전자). 유전자 온톨로지(GO)는 유전자와 유전자 산물을 설명하는 세 가지 온톨로지의 모음입니다. 이러한 온톨로지들은 유향 비순환 그래프(DAGS) 구조를 가진 제한된 어휘들입니다. 가장 구체적인 용어들이 그래프의 잎(leaves)이 됩니다. GO 그래프는 노드(여기서는 유전자 온톨로지 용어)와 더 구체적인 용어(자식)에서 덜 구체적인 용어(부모)로 가는 에지들로 구성되며, 흔히 이러한 에지들은 방향성이 있습니다. 노드와 에지는 시각화될 수 있는 여러 속성을 가질 수 있습니다. 실험에서 유의미한 것으로 지정된 특정 유전자 세트에 대해 GO 어노테이션을 사용하는 주된 목적은 이 리스트에서 특정 GO 용어의 **농축(enrichment)**을 찾는 것이며, 우리는 아래에서 이 용어에 통계적 의미를 부여할 것입니다. 다른 많은 유용한 중요 유전자 세트 리스트들이 존재합니다.
 
 __
 
-Task
+태스크
 
-Find a useful database of gene sets.
+유용한 유전자 세트 데이터베이스를 찾아보세요.
 
-For instance, the `MsigDB` Molecular Signature Database ([Liberzon et al.
-2011](16-chap.html#ref-MSigDB)) contains many gene sets that can be accessed
-from within R using the function `getBroadSets` from the Bioconductor package
-**[GSEABase](https://bioconductor.org/packages/GSEABase/)** roughly as
-follows:
+예를 들어, `MsigDB` 분자 시그니처 데이터베이스([Liberzon et al. 2011](16-chap.html#ref-MSigDB))에는 많은 유전자 세트가 포함되어 있으며, 이는 Bioconductor 패키지 **[GSEABase](https://bioconductor.org/packages/GSEABase/)**의 `getBroadSets` 함수를 사용하여 R 내부에서 대략 다음과 같이 액세스할 수 있습니다:
 
     
     
     library("GSEABase")
-    ## This requires a login to the website.
+    ## 웹사이트 로그인이 필요합니다.
     fl   =  "/path/to/msigdb_v5.1.xml"
     gss  =  getBroadSets(fl) 
     organism(gss[[1]])
     table(sapply(gss, organism))__
 
-### 10.3.2 Gene set analysis with two-way table tests
+### 10.3.2 2원 분할표 검정을 이용한 유전자 세트 분석
 
-Table 10.1: Although there are the same number of each category of gene found
-in the _significant_ set, both the simulation below and the theory of testing
-in two-way tables shows us that the blue category is enriched.
+표 10.1: _유의미한_ 세트에서 각 범주의 유전자 수가 동일하더라도, 아래의 시뮬레이션과 2원 분할표(two-way tables)의 검정 이론은 모두 파란색 범주가 농축되었음을 보여줍니다.
 
-| Yellow | Blue | Red  
+| 노란색 | 파란색 | 빨간색  
 ---|---|---|---  
-Significant | 25 | 25 | 25  
-Universe | 500 | 100 | 400  
+유의미함 | 25 | 25 | 25  
+전체(Universe) | 500 | 100 | 400  
   
-Here, we start by explaining a basic approach often called **Fisher’s “exact”
-test** or **hypergeometric test** ing.
+여기서는 흔히 **피셔의 "정확" 검정(Fisher’s “exact” test)** 또는 **초기하 검정(hypergeometric test)**이라 불리는 기본적인 접근 방식을 설명하는 것부터 시작하겠습니다.
 
-[![So-called ‘exact’ tests because they are nonparametric and based on
-exhaustive enumerations: not because we are sure of the answer – this is
-statistics after all.](imgs/devil.png)](imgs/devil.png "So-called ‘exact’
-tests because they are nonparametric and based on exhaustive enumerations: not
-because we are sure of the answer – this is statistics after all.")
+[![소위 '정확' 검정이라고 불리는 이유는 비모수적이며 전수 조사(exhaustive enumerations)에 기반하기 때문이지, 답이 확실하기 때문은 아닙니다. 결국 이것은 통계학이니까요.](imgs/devil.png)](imgs/devil.png "소위 '정확' 검정이라고 불리는 이유는 비모수적이며 전수 조사(exhaustive enumerations)에 기반하기 때문이지, 답이 확실하기 때문은 아닙니다. 결국 이것은 통계학이니까요.")
 
-So-called ‘exact’ tests because they are nonparametric and based on exhaustive
-enumerations: **not** because we are sure of the answer – this is statistics
-after all.
+소위 ‘정확’ 검정이라고 불리는 이유는 비모수적이며 전수 조사(exhaustive enumerations)에 기반하기 때문이지, 답이 확실하기 때문은 **아닙니다**. 결국 이것은 통계학이니까요.
 
-Define a universe of candidate genes that may potentially be significant; say
-this universe is of size \\(N\\). We also have a record of the genes that
-actually **did** come out significant, of which we suppose there were \\(m\\).
+잠재적으로 유의미할 수 있는 후보 유전자들의 전체 집합(universe)을 정의하십시오; 이 유니버스의 크기를 \\(N\\)이라고 합시다. 우리는 또한 실제로 유의미하게 **나타난** 유전자들의 기록을 가지고 있는데, 그 수가 \\(m\\)개라고 가정해 봅시다.
 
-We make a toy model involving balls in boxes, with a total of \\(N\\) balls
-corresponding to the genes identified in the gene universe. These genes are
-split into different functional categories, suppose there are \\(N=1,000\\)
-genes, of which 500 are yellow, 100 are blue and 400 are red. Then a subset of
-\\(m=75\\) genes are labeled as **significant** , suppose among these
-significantly interesting genes, there are 25 yellow, 25 red and 25 blue. Is
-the blue category enriched or overrepresented?
+우리는 유전자 유니버스에서 식별된 유전자들에 대응하는 총 \\(N\\)개의 공이 상자 안에 들어 있는 장난감 모델을 만듭니다. 이 유전자들은 서로 다른 기능적 범주로 나뉘어 있습니다. \\(N=1,000\\)개의 유전자가 있고 그중 500개는 노란색, 100개는 파란색, 400개는 빨간색이라고 가정해 봅시다. 그런 다음 \\(m=75\\)개의 유전자 하위 집합에 **유의미함(significant)**이라는 레이블이 붙습니다. 이 유의미하게 흥미로운 유전자들 중에 노란색 25개, 빨간색 25개, 파란색 25개가 있다고 가정합시다. 파란색 범주가 농축되었거나 과다하게 나타났다고 할 수 있을까요?
 
-We use this hypergeometric two-way table testing to account for the fact that
-some categories are extremely numerous and others are rarer.
+우리는 일부 범주는 매우 수가 많고 다른 범주는 드물다는 사실을 고려하기 위해 이 초기하 2원 분할표 검정을 사용합니다.
 
 __
 
-Question 10.6
+질문 10.6
 
-Run a Monte Carlo experiment with 20,000 simulations and compute the p-value
-of significance of having 25 blues under the null hypothesis that no category
-is over-represented in the significant set.
+20,000번의 시뮬레이션을 통해 몬테카를로 실험을 실행하고, 유의미한 세트에서 어떤 범주도 과다하게 나타나지 않는다는 귀무 가설하에서 파란색이 25개일 때의 유의성 p-값을 계산하세요.
 
 __
 
-Solution
+해결책
 
 __
 
-Under the null the 75 are sampled randomly from our unequal boxes as follows:
+귀무 가설하에서 75개는 다음과 같이 우리의 균등하지 않은 상자들로부터 무작위로 샘플링됩니다:
 
     
     
@@ -587,27 +418,18 @@ Under the null the 75 are sampled randomly from our unequal boxes as follows:
        Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
       0.000   6.000   7.000   7.496   9.000  20.000 
 
-The histogram in Figure 10.9 shows that having a value as large as 25 under
-the null model would be extremely rare.
+그림 10.9의 히스토그램은 귀무 모델하에서 25만큼 큰 값을 갖는 것이 매우 드물 것임을 보여줍니다.
 
 [![](10-chap_files/figure-html/fig-histblue-1.png)](10-chap_files/figure-
-html/fig-histblue-1.png "Figure 10.9: We can see that even in 20000
-simulations, no blue count comes close to being 25. We can reject such an
-event as having happened by chance and conclude that the blue are enriched.")
+html/fig-histblue-1.png "그림 10.9: 20,000번의 시뮬레이션에서도 파란색 카운트가 25에 근접하는 경우가 없음을 볼 수 있습니다. 우리는 그러한 사건이 우연히 일어났을 가능성을 기각하고 파란색이 농축되었다고 결론 내릴 수 있습니다.")
 
-Figure 10.9: We can see that even in 20000 simulations, no blue count comes
-close to being 25. We can reject such an event as having happened by chance
-and conclude that the blue are **enriched**.
+그림 10.9: 20,000번의 시뮬레이션에서도 파란색 카운트가 25에 근접하는 경우가 없음을 볼 수 있습니다. 우리는 그러한 사건이 우연히 일어났을 가능성을 기각하고 파란색이 **농축되었다**고 결론 내릴 수 있습니다.
 
-In the general case, the gene universe is an urn with \\(N\\) balls, if we
-pick the \\(m\\) balls at random and there is a proportion of \\(k/N\\) blue
-balls, we expect to see \\(km/N\\) blue balls in a draw of size \\(k\\).
+일반적인 경우, 유전자 유니버스는 \\(N\\)개의 공이 들어 있는 항아리이며, 만약 우리가 \\(m\\)개의 공을 무작위로 뽑고 파란색 공의 비율이 \\(k/N\\)이라면, \\(k\\)개 크기의 추출에서 \\(km/N\\)개의 파란색 공을 볼 것으로 기대합니다.
 
-#### Plotting gene enrichment networks with
-**[GOplot](https://cran.r-project.org/web/packages/GOplot/)**
+#### **[GOplot](https://cran.r-project.org/web/packages/GOplot/)**을 이용한 유전자 농축 네트워크 플로팅
 
-Here we show an attractive way of summarizing the connections between the gene
-functional categories and the significant gene set.
+여기서는 유전자 기능 범주와 유의미한 유전자 세트 사이의 연결을 요약하는 매력적인 방법을 보여줍니다.
 
     
     
@@ -618,85 +440,33 @@ functional categories and the significant gene set.
     GOChord(chord, limit = c(0, 5))__
 
 [![](10-chap_files/figure-html/fig-GOplotEC-1.jpeg)](10-chap_files/figure-
-html/fig-GOplotEC-1.jpeg "Figure 10.10: This graph shows the correspondence
-between GO terms and significantly changed genes in a study on differential
-expression in endothelial cells from two steady state tissues \(brain and
-heart, see @Nolan:2013\). After normalization a differential expression
-analysis was performed giving a list of genes. A gene-annotation enrichment
-analysis of the set of differentially expressed genes \(adjusted p-value <
-0.05\) was then performed with the GOplot package.")
+html/fig-GOplotEC-1.jpeg "그림 10.10: 이 그래프는 두 가지 정상 상태 조직(뇌와 심장, @Nolan:2013 참조)의 내피 세포에서의 차등 발현 연구에서 GO 용어와 유의미하게 변한 유전자 사이의 대응 관계를 보여줍니다. 정규화 후 차등 발현 분석이 수행되어 유전자 리스트를 얻었습니다. 그 다음 GOplot 패키지를 사용하여 차등 발현된 유전자 세트(조정된 p-값 < 0.05)에 대한 유전자 어노테이션 농축 분석을 수행했습니다.")
 
-Figure 10.10: This graph shows the correspondence between GO terms and
-significantly changed genes in a study on differential expression in
-endothelial cells from two steady state tissues (brain and heart, see Nolan et
-al. ([2013](16-chap.html#ref-Nolan:2013))). After normalization a differential
-expression analysis was performed giving a list of genes. A gene-annotation
-enrichment analysis of the set of differentially expressed genes (adjusted
-p-value < 0.05) was then performed with the
-**[GOplot](https://cran.r-project.org/web/packages/GOplot/)** package.
+그림 10.10: 이 그래프는 두 가지 정상 상태 조직(뇌와 심장, Nolan 등 ([2013](16-chap.html#ref-Nolan:2013)) 참조)의 내피 세포에서의 차등 발현 연구에서 GO 용어와 유의미하게 변한 유전자 사이의 대응 관계를 보여줍니다. 정규화 후 차등 발현 분석이 수행되어 유전자 리스트를 얻었습니다. 그 다음 **[GOplot](https://cran.r-project.org/web/packages/GOplot/)** 패키지를 사용하여 차등 발현된 유전자 세트(조정된 p-값 < 0.05)에 대한 유전자 어노테이션 농축 분석을 수행했습니다.
 
-In fact, the Gene Ontology graph does not necessarily capture meaningful _gene
-interactions_ as genes from different processes often interact productively. A
-large amount of information remains unused, for example, all significant genes
-are usually given equal weight, despite the potentially large variations in
-their p-values.
+사실, 유전자 온톨로지 그래프는 서로 다른 프로세스의 유전자들이 종종 생산적으로 상호작용하기 때문에 의미 있는 _유전자 상호작용_을 반드시 캡처하는 것은 아닙니다. 많은 양의 정보가 사용되지 않은 채로 남아 있는데, 예를 들어 모든 유의미한 유전자는 p-값의 잠재적으로 큰 변동에도 불구하고 보통 동일한 가중치가 부여됩니다.
 
-### 10.3.3 Significant subgraphs and high scoring modules
+### 10.3.3 유의미한 하위 그래프 및 고득점 모듈
 
-We have at our disposal more than just the Gene Ontology. There are many
-different databases of gene networks from which we can choose a **known
-skeleton** graph onto which we project significance scores such as p-values
-from our differential expression experiment. We will follow an idea first
-suggested by Ideker et al. ([2002](16-chap.html#ref-Ideker:2002)). This is
-further developed in Nacu et al. ([2007](16-chap.html#ref-GXNA)). A careful
-implementation with many improvements is available as the Bioconductor package
-**[BioNet](https://bioconductor.org/packages/BioNet/)** ([Beisser et al.
-2010](16-chap.html#ref-BioNet)). These methods all search for the subgraphs or
-modules of a scored-skeleton network that seem to be particularly
-**perturbed**.
+우리는 유전자 온톨로지 이상의 것을 마음대로 사용할 수 있습니다. 유전자 네트워크의 다양한 데이터베이스가 있으며, 그중에서 우리의 차등 발현 실험에서 얻은 p-값과 같은 유의성 점수를 투영할 **알려진 골격(skeleton)** 그래프를 선택할 수 있습니다. 우리는 Ideker 등 ([2002](16-chap.html#ref-Ideker:2002))이 처음 제안한 아이디어를 따를 것입니다. 이는 Nacu 등 ([2007](16-chap.html#ref-GXNA))에서 더 발전되었습니다. 많은 개선 사항이 포함된 세심한 구현체는 Bioconductor 패키지 **[BioNet](https://bioconductor.org/packages/BioNet/)** ([Beisser et al. 2010](16-chap.html#ref-BioNet))으로 제공됩니다. 이러한 방법들은 모두 점수가 매겨진 골격 네트워크에서 특히 **섭동된** 것으로 보이는 하위 그래프나 모듈을 검색합니다.
 
-Each gene-node in the network is assigned a score that can either be
-calculated from a t-statistic or a p-value. Often pathways contain both
-upregulated and downregulated genes; as pointed out in Ideker et al.
-([2002](16-chap.html#ref-Ideker:2002)), this can be captured by taking
-absolute values of the test statistic or just incorporating scores computed
-from the p-values2. Beisser et al. ([2010](16-chap.html#ref-BioNet)) model the
-p-values of the genes as we did in [Chapter 6](06-chap.html): mixture of non-
-perturbed genes whose p-values will be uniformly distributed and non uniformly
-distributed p-values from the perturbed genes. We model the signal in the data
-using a beta distribution for the p-values following Pounds and Morris
-([2003](16-chap.html#ref-Pounds2003)).
+네트워크의 각 유전자 노드에는 t-통계량이나 p-값으로부터 계산된 점수가 할당됩니다. 종종 경로(pathways)는 상향 조절된 유전자와 하향 조절된 유전자를 모두 포함하는데, Ideker 등 ([2002](16-chap.html#ref-Ideker:2002))에서 지적했듯이, 이는 검정 통계량의 절대값을 취하거나 p-값으로부터 계산된 점수를 통합함으로써 캡처될 수 있습니다2. Beisser 등 ([2010](16-chap.html#ref-BioNet))은 [6장](06-chap.html)에서 했던 것처럼 유전자의 p-값을 모델링합니다: p-값이 균등하게 분포할 섭동되지 않은 유전자와, 섭동된 유전자로부터 나온 균등하지 않게 분포된 p-값의 혼합물입니다. 우리는 Pounds와 Morris ([2003](16-chap.html#ref-Pounds2003))를 따라 p-값에 대해 베타 분포를 사용하여 데이터의 신호를 모델링합니다.
 
-2 We’ll want something like \\(-\log p\\), so that small p-values give large
-scores.
+2 작은 p-값이 큰 점수를 주도록 \\(-\log p\\)와 같은 것이 필요할 것입니다.
 
-Given our node-scoring function, we search for connected hotspots in the
-graph, i.e., a subgraph of genes with high combined scores.
+노드 점수 함수가 주어지면, 그래프에서 연결된 핫스팟, 즉 높은 결합 점수를 가진 유전자들의 하위 그래프를 검색합니다.
 
-#### Using a subgraph search algorithm
+#### 하위 그래프 검색 알고리즘 사용하기
 
-Finding the maximal scoring subgraph of a generic graph is known to be
-intractable in general (we say it is an NP-hard problem), so various
-approximate algorithms have been proposed. Ideker et al.
-([2002](16-chap.html#ref-Ideker:2002)) suggested using simulated annealing,
-however this is slow and tends to produce large subgraphs that are difficult
-to interpret. Nacu et al. ([2007](16-chap.html#ref-GXNA)) started with a seed
-vertex and gradually expand around it. Beisser et al.
-([2010](16-chap.html#ref-BioNet)) started the search with a so-called minimal
-spanning tree (MST), a graph we we will study later in this chapter.
+일반적인 그래프의 최대 점수 하위 그래프를 찾는 것은 일반적으로 다루기 힘든(intractable) 것으로 알려져 있으므로(NP-어렵 문제라고 함), 다양한 근사 알고리즘이 제안되었습니다. Ideker 등 ([2002](16-chap.html#ref-Ideker:2002))은 시뮬레이티드 어닐링(simulated annealing) 사용을 제안했지만, 이는 속도가 느리고 해석하기 어려운 큰 하위 그래프를 생성하는 경향이 있습니다. Nacu 등 ([2007](16-chap.html#ref-GXNA))은 시드 정점에서 시작하여 그 주변을 점진적으로 확장했습니다. Beisser 등 ([2010](16-chap.html#ref-BioNet))은 소위 최소 신장 트리(MST)를 사용하여 검색을 시작했는데, 이 그래프는 이 장의 뒷부분에서 공부할 것입니다.
 
-### 10.3.4 An example with the BioNet implementation
+### 10.3.4 BioNet 구현 예시
 
-To illustrate the method, we show data from the
-**[BioNet](https://bioconductor.org/packages/BioNet/)** package.
+방법을 설명하기 위해 **[BioNet](https://bioconductor.org/packages/BioNet/)** 패키지의 데이터를 보여줍니다.
 
-The `interactome` data contains a connected component of the network
-comprising 2034 different gene products and 8399 interactions. This
-constitutes the skeleton graph with which we will work, see Beisser et al.
-([2010](16-chap.html#ref-BioNet)).
+`interactome` 데이터는 2,034개의 서로 다른 유전자 산물과 8,399개의 상호작용으로 구성된 네트워크의 연결 성분(connected component)을 포함합니다. 이것이 우리가 작업할 골격 그래프를 구성합니다 (Beisser et al. ([2010](16-chap.html#ref-BioNet)) 참조).
 
-The `dataLym` contains the relevant pvalues and \\(t\\) statistics for 3,583
-genes, you can access them and do the analysis as follows:
+`dataLym`은 3,583개 유전자에 대한 관련 p-값과 \\(t\\) 통계량을 포함하며, 다음과 같이 액세스하여 분석을 수행할 수 있습니다:
 
     
     
@@ -723,18 +493,11 @@ genes, you can access them and do the analysis as follows:
     Number of Nodes = 2559 
     Number of Edges = 7788 
 
-#### Fit a Beta-Uniform model
+#### 베타-균등 모델 적합시키기 (Fit a Beta-Uniform model)
 
-The p-values are fit to the type of mixture we studied in [Chapter
-4](04-chap.html), with a uniform component from the null with probability
-\\(\pi_0\\) and a beta distribution (proportional to \\(a x^{a - 1}\\)) for
-the p-values corresponding to the alternatives ([Pounds and Morris
-2003](16-chap.html#ref-Pounds2003)). \\[f(x|a,\pi_0)= \pi_0 + (1-\pi_0) a x^{a
-- 1}\qquad \mbox{ for } 0 <x \leq 1; \; 0<a<1\\] Running the model with an
-\\[fdr\\] of 0.001:
+p-값은 [4장](04-chap.html)에서 공부한 혼합 모델 유형으로 적합됩니다. 여기에는 확률 \(\pi_0\)을 갖는 귀무 가설의 균등 성분과 대립 가설에 해당하는 p-값에 대한 베타 분포(\(a x^{a - 1}\)에 비례)가 포함됩니다 ([Pounds and Morris 2003](16-chap.html#ref-Pounds2003)). \[f(x|a,\pi_0)= \pi_0 + (1-\pi_0) a x^{a - 1}\qquad \mbox{ for } 0 <x \leq 1; \; 0<a<1\] \[fdr\]을 0.001로 설정하여 모델을 실행합니다:
 
-The package actually gives a different name to \\(\\\pi_0\\): it uses
-\\(\\\lambda\\) and calls it the mixing parameter.
+패키지는 실제로 \(\pi_0\)에 다른 이름을 부여합니다: \(\lambda\)를 사용하고 이를 혼합 매개변수(mixing parameter)라고 부릅니다.
 
     
     
@@ -754,28 +517,16 @@ The package actually gives a different name to \\(\\\pi_0\\): it uses
     scores=scoreNodes(subnet, fb, fdr = 0.001)__
 
 [![](10-chap_files/figure-html/fig-plotFITBum-1.png)](10-chap_files/figure-
-html/fig-plotFITBum-1.png "Figure 10.11: The qqplot shows the quality of the
-fit of beta-uniform mixture model to the data. The red points have the
-theoretical quantiles from the beta distribution as the x coordinates the
-observed quantiles and the y coordinates. The blue line shows that this model
-fits nicely.")
+html/fig-plotFITBum-1.png "그림 10.11: qqplot은 데이터에 대한 베타-균등 혼합 모델 적합의 품질을 보여줍니다. 빨간색 점은 베타 분포의 이론적 분위수를 x 좌표로, 관측된 분위수를 y 좌표로 가집니다. 파란색 선은 이 모델이 잘 들어맞음을 보여줍니다.")
 
-Figure 10.11: The qqplot shows the quality of the fit of beta-uniform mixture
-model to the data. The red points have the theoretical quantiles from the beta
-distribution as the x coordinates the observed quantiles and the y
-coordinates. The blue line shows that this model fits nicely.
+그림 10.11: qqplot은 데이터에 대한 베타-균등 혼합 모델 적합의 품질을 보여줍니다. 빨간색 점은 베타 분포의 이론적 분위수를 x 좌표로, 관측된 분위수를 y 좌표로 가집니다. 파란색 선은 이 모델이 잘 들어맞음을 보여줍니다.
 
 [![](10-chap_files/figure-html/fig-histFITBum-1.png)](10-chap_files/figure-
-html/fig-histFITBum-1.png "Figure 10.12: A histogram of the mixture components
-for the p-values, the beta in red and the uniform in blue, \\pi_0 is the
-mixing proportion assigned to the null component whose distribution should be
-uniform.")
+html/fig-histFITBum-1.png "그림 10.12: p-값에 대한 혼합 성분의 히스토그램입니다. 베타 분포는 빨간색, 균등 분포는 파란색으로 표시됩니다. \\pi_0는 분포가 균등해야 하는 귀무 성분에 할당된 혼합 비율입니다.")
 
-Figure 10.12: A histogram of the mixture components for the p-values, the beta
-in red and the uniform in blue, \\(\pi_0\\) is the mixing proportion assigned
-to the null component whose distribution should be uniform.
+그림 10.12: p-값에 대한 혼합 성분의 히스토그램입니다. 베타 분포는 빨간색, 균등 분포는 파란색으로 표시됩니다. \\(\pi_0\\)는 분포가 균등해야 하는 귀무 성분에 할당된 혼합 비율입니다.
 
-Then we run a heuristic search for a high scoring subgraph using:
+그 다음 다음을 사용하여 고득점 하위 그래프에 대한 휴리스틱 검색을 실행합니다:
 
     
     
@@ -793,9 +544,9 @@ Then we run a heuristic search for a high scoring subgraph using:
 
 __
 
-Question 10.7
+질문 10.7
 
-We made Figure 10.13 using the following code:
+다음 코드를 사용하여 그림 10.13을 만들었습니다:
 
     
     
@@ -803,171 +554,92 @@ We made Figure 10.13 using the following code:
                       diff.expr = logFC)__
 
 [![](10-chap_files/figure-html/fig-plotBioNet-1.png)](10-chap_files/figure-
-html/fig-plotBioNet-1.png "Figure 10.13: The subgraph found as maximally
-enriched for differential expression between ABC and GCB B-cell lymphoma. The
-nodes are colored in red and green: green shows an upregulation in ACB and red
-an upregulation in GBC. The shape of the nodes depicts the score: rectangles
-indicate a negative score, circles a positive score.")
+html/fig-plotBioNet-1.png "그림 10.13: ABC와 GCB B세포 림프종 사이의 차등 발현에 대해 최대로 농축된 것으로 찾아진 하위 그래프입니다. 노드는 빨간색과 초록색으로 칠해져 있습니다: 초록색은 ACB에서의 상향 조절을, 빨간색은 GBC에서의 상향 조절을 나타냅니다. 노드의 모양은 점수를 나타냅니다: 직사각형은 음수 점수를, 원은 양수 점수를 나타냅니다.")
 
-Figure 10.13: The subgraph found as maximally enriched for differential
-expression between ABC and GCB B-cell lymphoma. The nodes are colored in red
-and green: green shows an upregulation in ACB and red an upregulation in GBC.
-The shape of the nodes depicts the score: rectangles indicate a negative
-score, circles a positive score.
+그림 10.13: ABC와 GCB B세포 림프종 사이의 차등 발현에 대해 최대로 농축된 것으로 찾아진 하위 그래프입니다. 노드는 빨간색과 초록색으로 칠해져 있습니다: 초록색은 ACB에서의 상향 조절을, 빨간색은 GBC에서의 상향 조절을 나타냅니다. 노드의 모양은 점수를 나타냅니다: 직사각형은 음수 점수를, 원은 양수 점수를 나타냅니다.
 
-Using the function `igraph.from.graphNEL`, transform the module object and
-plot it using the
-**[ggraph](https://cran.r-project.org/web/packages/ggraph/)** method shown in
-Section 10.2.2.
+`igraph.from.graphNEL` 함수를 사용하여 모듈 객체를 변환하고 섹션 10.2.2에 표시된 **[ggraph](https://cran.r-project.org/web/packages/ggraph/)** 방법을 사용하여 플로팅하세요.
 
-## 10.4 Phylogenetic Trees
+## 10.4 계통수 (Phylogenetic Trees)
 
-[![](imgs/SameTreePhyl.png)](imgs/SameTreePhyl.png "Figure 10.14: As
-mathematical objects, the hierarchical clustering trees \(studied in sec-
-clustering\) are the same as phylogenetic trees. They are rooted binary trees
-with labels at the tips.")
+[![](imgs/SameTreePhyl.png)](imgs/SameTreePhyl.png "그림 10.14: 수학적 객체로서, 계층적 클러스터링 트리(sec-clustering에서 연구됨)는 계통수와 동일합니다. 이들은 팁에 레이블이 있는 뿌리가 있는 이진 트리입니다.")
 
-Figure 10.14: As mathematical objects, the hierarchical clustering trees
-(studied in [Chapter 5](05-chap.html)) are the same as phylogenetic trees.
-They are **rooted binary** trees with labels at the tips.
+그림 10.14: 수학적 객체로서, 계층적 클러스터링 트리([5장](05-chap.html)에서 연구됨)는 계통수와 동일합니다. 이들은 팁에 레이블이 있는 **뿌리가 있는 이진(rooted binary)** 트리입니다.
 
-One really important use of graphs in biology is the construction of
-phylogenetic trees. Trees are graphs with no **cycles** (the official word for
-loops, whether self loops, or ones that go through several vertices).
-Phylogenetic trees are usually rooted binary trees that only have labels on
-the leaves corresponding to contemporary3 taxa at the tips. The inner nodes
-correspond to **ancestral** sequences which have to be inferred from the
-**contemporaneous** data on the tips. Many methods use aligned DNA sequences
-from the different species or populations to infer or estimate the tree. The
-tips of the tree are usually called **OTU** s (Operational Taxonomic Units).
-The statistical **parameter** of interest in these analyses is the rooted
-binary tree with OTU labels on its leaves (see Holmes
-([1999](16-chap.html#ref-holmesima), [2003b](16-chap.html#ref-holmes2003b))
-for details).
+생물학에서 그래프의 정말 중요한 용도 중 하나는 계통수를 구축하는 것입니다. 트리는 **사이클(cycles)**(셀프 루프나 여러 정점을 거치는 루프를 일컫는 공식 용어)이 없는 그래프입니다. 계통수는 보통 팁에 있는 현대의3 분류군(taxa)에 해당하는 잎(leaves)에만 레이블이 있는 뿌리가 있는 이진 트리입니다. 내부 노드는 팁에 있는 **현대(contemporaneous)** 데이터로부터 추론되어야 하는 **조상(ancestral)** 서열에 해당합니다. 많은 방법들이 서로 다른 종이나 집단에서 얻은 정렬된 DNA 서열을 사용하여 트리를 추론하거나 추정합니다. 트리의 팁은 보통 **OTU**(Operational Taxonomic Units)라고 불립니다. 이러한 분석에서 관심 있는 통계적 **매개변수(parameter)**는 잎에 OTU 레이블이 있는 뿌리가 있는 이진 트리입니다 (자세한 내용은 Holmes ([1999](16-chap.html#ref-holmesima), [2003b](16-chap.html#ref-holmes2003b))를 참조하세요).
 
-3 Because they are contemporary, the trees are often represented so that the
-leaves are a ll the same distance from the root.
+3 현대적이기 때문에, 트리는 종종 잎들이 모두 뿌리에서 같은 거리에 있도록 표현됩니다.
 
-#### The example of HIV
+#### HIV의 예
 
-[![](imgs/hivtreeplos.png)](imgs/hivtreeplos.png "Figure 10.15: This
-phylogenetic tree describes the history of different HIV/SIV strains in Africa
-\[@Wertheim:2009\], \[Figure from\].")
+[![](imgs/hivtreeplos.png)](imgs/hivtreeplos.png "그림 10.15: 이 계통수는 아프리카에서의 서로 다른 HIV/SIV 균주의 역사를 설명합니다 [@Wertheim:2009], [그림 출처].")
 
-Figure 10.15: This phylogenetic tree describes the history of different
-HIV/SIV strains in Africa ([Wertheim and Worobey 2009](16-chap.html#ref-
-Wertheim:2009)), [Figure from].
+그림 10.15: 이 계통수는 아프리카에서의 서로 다른 HIV/SIV 균주의 역사를 설명합니다 ([Wertheim and Worobey 2009](16-chap.html#ref-Wertheim:2009)), [그림 출처].
 
-HIV is a virus that protects itself by evolving very fast (within months,
-several mutations can appear). Its evolution can thus be followed in real
-time; whereas the evolution of large organisms which has happened over
-millions of years. HIV trees are built for medical purposes such as the
-detection and understanding of drug resistance. They are estimated for
-individual genes. Different genes can show differences in their evolutionary
-histories and thus produce different **gene trees**. The phylogenetic tree in
-Figure 10.15 shows times when the virus switched from monkeys to humans
-([Wertheim and Worobey 2009](16-chap.html#ref-Wertheim:2009)).
+HIV는 매우 빠르게 진화함으로써(수개월 내에 여러 돌연변이가 나타날 수 있음) 스스로를 보호하는 바이러스입니다. 따라서 그 진화는 실시간으로 추적될 수 있는 반면, 대형 유기체의 진화는 수백만 년에 걸쳐 일어났습니다. HIV 트리는 약물 내성 탐지 및 이해와 같은 의료 목적으로 구축됩니다. 이들은 개별 유전자에 대해 추정됩니다. 서로 다른 유전자는 진화 역사에서 차이를 보일 수 있으며 따라서 서로 다른 **유전자 트리(gene trees)**를 생성할 수 있습니다. 그림 10.15의 계통수는 바이러스가 원숭이에서 인간으로 옮겨간 시기를 보여줍니다 ([Wertheim and Worobey 2009](16-chap.html#ref-Wertheim:2009)).
 
-#### Special elements in phylogenies
+#### 계통수의 특별한 요소들
 
-  * Most phylogenetic trees are shown rooted, the `root’ is usually found by including an outgroup in the tree tips, as we will see later.
+  * 대부분의 계통수는 뿌리가 있는 것으로 표시되며, `뿌리(root)`는 나중에 보게 되겠지만 보통 트리의 팁에 외집단(outgroup)을 포함시킴으로써 찾아집니다.
 
-  * Characters that are derived from this common ancestry are called homologous (geneticists doing population studies replace the term homology by identity by descent (IBD)).
+  * 이 공통 조상으로부터 유래된 형질을 상동(homologous)이라고 합니다(집단 연구를 수행하는 유전학자들은 상동이라는 용어 대신 가계에 의한 동일성(identity by descent, IBD)으로 대체합니다).
 
-  * Sisters on the tree defined by a common ancestor are called clades or monophyletic groups, they have more than just _similarities_ in common.
+  * 공통 조상에 의해 정의된 트리의 자매들을 분기군(clades) 또는 단계통군(monophyletic groups)이라고 하며, 이들은 단순한 _유사성_ 이상의 공통점을 가집니다.
 
-### 10.4.1 Markovian models for evolution.
+### 10.4.1 진화를 위한 마르코프 모델 (Markovian models for evolution)
 
-To infer what happened in the ancestral species from contemporary data
-collected on the tips of the tree, we have to make assumptions about how
-substitutions and deletions occur through time. The models we use are all
-Markovian and said to be time homogeneous: the mutation rate is constant
-across history.
+현대 데이터로부터 조상 종에서 일어난 일을 추론하기 위해, 우리는 시간이 지남에 따라 치환(substitutions)과 삭제(deletions)가 어떻게 발생하는지에 대한 가정을 세워야 합니다. 우리가 사용하는 모델은 모두 마르코프 모델이며 시간 동질적(time homogeneous)이라고 합니다. 즉, 돌연변이율이 역사 전반에 걸쳐 일정합니다.
 
-[![This is called the molecular clock hypothesis, if we do not make this
-assumption we run into what is known as non-identifiability \(ie we can’t tell
-the difference between the many possible mutational histories given the
-observed data\).](imgs/devil.png)](imgs/devil.png "This is called the
-molecular clock hypothesis, if we do not make this assumption we run into what
-is known as non-identifiability \(ie we can’t tell the difference between the
-many possible mutational histories given the observed data\).")
+[![](imgs/devil.png)](imgs/devil.png "이것을 분자 시계 가설이라고 합니다. 만약 이 가정을 하지 않는다면 비식별성(non-identifiability) 문제에 직면하게 됩니다 (즉, 관측된 데이터가 주어졌을 때 가능한 많은 돌연변이 역사들 사이의 차이를 말할 수 없습니다).")
 
-This is called the **molecular clock** hypothesis, if we do not make this
-assumption we run into what is known as non-identifiability (ie we can’t tell
-the difference between the many possible mutational histories given the
-observed data).
+이것을 **분자 시계(molecular clock)** 가설이라고 합니다. 만약 이 가정을 하지 않는다면 비식별성(non-identifiability) 문제에 직면하게 됩니다 (즉, 관측된 데이터가 주어졌을 때 가능한 많은 돌연변이 역사들 사이의 차이를 말할 수 없습니다).
 
-#### Continuous Markov chain and generator matrix
+#### 연속 마르코프 체인과 생성 행렬 (Generator matrix)
 
-We are going to use the Markov chain we saw in Figure 10.7 on the states
-[A,C,G,T]; however now we consider that the changes of state, i.e. mutations,
-occur at random times. The gaps between these mutational events will follow an
-exponential distribution. These continuous time Markov chains have the
-following properties:
+우리는 그림 10.7에서 본 [A, C, G, T] 상태에 대한 마르코프 체인을 사용할 것입니다. 그러나 이제는 상태의 변화, 즉 돌연변이가 무작위 시간에 발생한다고 가정합니다. 이러한 돌연변이 사건 사이의 간격은 지수 분포를 따를 것입니다. 이러한 연속 시간 마르코프 체인은 다음과 같은 속성을 가집니다:
 
-  * **No Memory**. \\(P(Y(u+t)=j\;|\;Y(t)=i)\\) does not depend on times before \\(t\\).
+  * **기억 없음(No Memory)**. \(P(Y(u+t)=j\;|\;Y(t)=i)\)는 \(t\) 이전의 시간에 의존하지 않습니다.
 
-  * **Time homogeneity**. The probability \\(P(Y(h+t)=j\,|\,Y(t)=i)\\) does not depend on \\(t\\), but on \\(h\\), the time between the events and on \\(i\\) and \\(j\\).
+  * **시간 동질성(Time homogeneity)**. 확률 \(P(Y(h+t)=j\,|\,Y(t)=i)\)는 \(t\)에 의존하지 않고, 사건 사이의 시간인 \(h\)와 \(i\) 및 \(j\)에 의존합니다.
 
-  * **Linearity**. The instantaneous transition rate is of an approximately linear form
+  * **선형성(Linearity)**. 순간 전이율은 대략 선형 형태입니다.
 
-[![We use an error term written here as o\(h\), we read this little o of h,
-which just means that this error terms grows much slower \(i.e., sublinear\)
-than h.](imgs/devil.png)](imgs/devil.png "We use an error term written here as
-o\(h\), we read this little o of h, which just means that this error terms
-grows much slower \(i.e., sublinear\) than h.")
+[![](imgs/devil.png)](imgs/devil.png "여기서 o(h)라고 쓴 오차항을 사용합니다. 이것은 리틀 o 오브 h라고 읽으며, 이 오차항이 h보다 훨씬 느리게(즉, 하위 선형으로) 커진다는 것을 의미합니다.")
 
-We use an error term written here as \\(o(h)\\), we read this little \\(o\\)
-of \\(h\\), which just means that this error terms grows much slower (i.e.,
-sublinear) than \\(h\\).
+여기서 \(o(h)\)라고 쓴 오차항을 사용합니다. 이것은 리틀 \(o\) 오브 \(h\)라고 읽으며, 이 오차항이 \(h\)보다 훨씬 느리게(즉, 하위 선형으로) 커진다는 것을 의미합니다.
 
-\\[ \begin{align} P_{ij}(h)&=q_{ij}h+o(h), \quad\text{for }j\neq i\\\
+\[ \begin{align} P_{ij}(h)&=q_{ij}h+o(h), \quad\text{for }j\neq i\\
 P_{ii}(h)&=1-q_i(h)+ o(h), \qquad\text{where }q_i=\sum_{j\neq i}q_{ij}.
-\end{align} \tag{10.1}\\]
+\end{align} \tag{10.1}\]
 
-\\(q_{ij}\\) is known as the instantaneous transition rate. These rates define
-matrices as in Table 10.2.
+\(q_{ij}\)는 순간 전이율(instantaneous transition rate)로 알려져 있습니다. 이러한 비율은 표 10.2와 같은 행렬을 정의합니다.
 
-  * **Exponential distribution**. Times between changes are supposed to be exponentially distributed.
-
-\\(Q = \begin{array}{lcccc} & A & T & C & G \\\ A & -3\alpha & \alpha & \alpha & \alpha \\\ T & \alpha & -3\alpha & \alpha & \alpha \\\ C & \alpha & \alpha & -3\alpha & \alpha \\\ G & \alpha & \alpha & \alpha & -3\alpha \\\ \end{array}\\) | \\(Q = \begin{array}{lcccc} & A & T & C & G \\\ A & -\alpha-2 \beta & \beta & \beta & \alpha \\\ T & \beta & -\alpha-2 \beta & \alpha & \beta \\\ C & \beta & \alpha & -\alpha-2 \beta & \beta \\\ G & \alpha & \beta & \beta & -\alpha-2 \beta \\\ \end{array}\\)  
----|---  
+      * **지수 분포(Exponential distribution)**. 변화 사이의 시간은 지수 분포를 따른다고 가정합니다.
   
-Table 10.2: Two examples of rate matrices, on the left:the Jukes-Cantor
-(`JC69`) model, on the right is shown the Kimura (`K80`) two parameter model.
-
-the instantaneous change probability matrix called **the generator**. In the
-simplest possible model, called a Jukes-Cantor model; all the mutations are
-equally likely (see the left of Table 10.2). A slightly more flexible model,
-called the Kimura model is shown on the right in Table 10.2.
-
-__
-
-Question 10.8
-
-Why do we say the Kimura model is more flexible?
-
-__
-
-Solution
-
-__
-
-The Jukes-Cantor only has one parameter, that model supposes all transitions
-and transversions are equally likely. In the Kimura, there is one parameter
-for transitions and another for the transversions (mutations occurring from
-purine to pyrimidines, or vice versa).
-
-![Vocabulary overload here! : Transitions in this context mean mutational
-changes within the purines (A<->G]) or within the pyrimidines (C <-> T);
-whereas when we talked about Markov chains earlier our **transition** matrix
-contains all probabilities of any state changes.](imgs/devil.png){fig-
-align=‘center’ width=123}
-
-The most flexible model is called the Generalized Time Reversible (GTR) model;
-it has 6 free parameters. We are going to show an example of data simulated
-according to these generative models from a known tree.
-
+  \(Q = \begin{array}{lcccc} & A & T & C & G \\ A & -3\alpha & \alpha & \alpha & \alpha \\ T & \alpha & -3\alpha & \alpha & \alpha \\ C & \alpha & \alpha & -3\alpha & \alpha \\ G & \alpha & \alpha & \alpha & -3\alpha \\ \end{array}\) | \(Q = \begin{array}{lcccc} & A & T & C & G \\ A & -\alpha-2 \beta & \beta & \beta & \alpha \\ T & \beta & -\alpha-2 \beta & \alpha & \beta \\ C & \beta & \alpha & -\alpha-2 \beta & \beta \\ G & \alpha & \beta & \beta & -\alpha-2 \beta \\ \end{array}\)  
+  ---|---  
+      
+  표 10.2: 두 가지 전이율 행렬의 예입니다. 왼쪽은 Jukes-Cantor(`JC69`) 모델이고, 오른쪽은 Kimura(`K80`) 2-매개변수 모델을 보여줍니다.
+  
+  **생성기(generator)**라고 불리는 순간 변화 확률 행렬입니다. 가장 단순한 모델인 Jukes-Cantor 모델에서는 모든 돌연변이가 동일하게 발생할 가능성이 있습니다 (표 10.2의 왼쪽 참조). 좀 더 유연한 모델인 Kimura 모델은 표 10.2의 오른쪽에 나와 있습니다.
+  
+  __
+  
+  질문 10.8
+  
+  왜 Kimura 모델이 더 유연하다고 말할까요?
+  
+  __
+  
+  해결책
+  
+  __
+  
+  Jukes-Cantor 모델은 하나의 매개변수만 가지며, 모든 전이(transitions)와 트랜스버전(transversions)이 동일하게 발생할 가능성이 있다고 가정합니다. Kimura 모델에는 전이와 트랜스버전(퓨린에서 피리미딘으로 또는 그 반대로 발생하는 돌연변이)에 대해 각각 하나씩 매개변수가 있습니다.
+  
+  [![](imgs/devil.png)](imgs/devil.png "여기서 용어의 혼란이 있을 수 있습니다! : 이 문맥에서 전이(Transitions)는 퓨린 내(A<->G) 또는 피리미딘 내(C <-> T)의 돌연변이 변화를 의미합니다. 반면 앞서 마르코프 체인에 대해 이야기했을 때의 전이(transition) 행렬은 모든 상태 변화의 모든 확률을 포함합니다.")
+  
+  가장 유연한 모델은 일반화된 시간 가역적(Generalized Time Reversible, GTR) 모델이라고 하며, 6개의 자유 매개변수를 가집니다. 우리는 알려진 트리로부터 이러한 생성 모델에 따라 시뮬레이션된 데이터의 예를 보여줄 것입니다.
 ### 10.4.2 Simulating data and plotting a tree
 
 Suppose we already know our phylogenetic tree and want to simulate the
@@ -1075,7 +747,7 @@ these estimates.
 
 ### 10.4.3 Estimating a phylogenetic tree
 
-[![](imgs/Magnify.png)](imgs/Magnify.png)
+![](imgs/Magnify.png)
 
 “In solving a problem of this sort, the grand thing is to be able to reason
 backward. That is a very useful accomplishment, and a very easy one, but

@@ -1,81 +1,43 @@
-[![](imgs/xkcd-plotting.png)](imgs/xkcd-plotting.png)
+![](imgs/xkcd-plotting.png)
 
-There are (at least) two types of data visualization. The first enables a
-scientist to explore data and make discoveries about the complex processes at
-work. The other type of visualization provides informative, clear and visually
-attractive illustrations of her results that she can show to others and
-eventually include in a publication.
+데이터 시각화에는 적어도 두 가지 유형이 있습니다. 첫 번째는 과학자가 데이터를 탐색하고 복잡한 프로세스에 대한 발견을 할 수 있도록 합니다. 다른 유형의 시각화는 다른 사람들에게 보여주고 궁극적으로 출판물에 포함할 수 있는 유익하고 명확하며 시각적으로 매력적인 결과의 삽화를 제공합니다.
 
-Both of these types of visualizations can be made with R. In fact, R offers
-multiple graphics systems. This is because R is extensible, and because
-progress in R graphics over the years has proceeded largely not by replacing
-the old functions, but by adding packages. Each of the different graphics
-systems has its advantages and limitations. In this chapter we will get to
-know two of them. First, we have a cursory look at the base R plotting
-functions1. Subsequently we will switch to
-**[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)**.
+이 두 가지 유형의 시각화는 모두 R로 만들 수 있습니다. 실제로 R은 여러 그래픽 시스템을 제공합니다. 이는 R이 확장 가능하기 때문이며, 수년에 걸친 R 그래픽의 발전은 기존 함수를 대체하는 것이 아니라 주로 패키지를 추가함으로써 이루어졌기 때문입니다. 각 그래픽 시스템에는 장점과 한계가 있습니다. 이 장에서는 그 중 두 가지를 알아보겠습니다. 먼저 기본 R 플로팅 함수를 간략히 살펴보겠습니다1. 그 후에 **[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)**로 전환할 것입니다.
 
-1 They live in the
-**[graphics](https://cran.r-project.org/web/packages/graphics/)** package,
-which ships with every basic R installation.
+1 이 함수들은 모든 기본 R 설치와 함께 제공되는 **[graphics](https://cran.r-project.org/web/packages/graphics/)** 패키지에 있습니다.
 
 [![](imgs/Automatisches_Zeichengeraet_ZUSE_Z64_ubt_web.jpg)](imgs/Automatisches_Zeichengeraet_ZUSE_Z64_ubt_web.jpg
-"Figure 3.1: The ZUSE Plotter Z64 \(presented in 1961\). Source:
-https://en.wikipedia.org/wiki/Plotter.")
+"그림 3.1: ZUSE 플로터 Z64 (1961년 발표). 출처: https://en.wikipedia.org/wiki/Plotter.")
 
-Figure 3.1: The ZUSE Plotter Z64 (presented in 1961). Source:
-<https://en.wikipedia.org/wiki/Plotter>.
+그림 3.1: ZUSE 플로터 Z64 (1961년 발표). 출처: <https://en.wikipedia.org/wiki/Plotter>.
 
-Base R graphics came historically first: simple, procedural, conceptually
-motivated by drawing on a canvas. There are specialized functions for
-different types of plots. These are easy to call – but when you want to
-combine them to build up more complex plots, or exchange one for another, this
-quickly gets messy, or even impossible. The user plots (the word harks back to
-some of the first graphics devices – see Figure 3.1) directly onto a
-(conceptual) canvas. She explicitly needs to deal with decisions such as how
-much space to allocate to margins, axes labels, titles, legends, subpanels;
-once something is “plotted” it cannot be moved or erased.
+기본 R 그래픽은 역사적으로 먼저 나왔습니다. 간단하고 절차적이며 개념적으로 캔버스에 그리는 것에서 동기를 얻었습니다. 다양한 유형의 플롯을 위한 특수 함수가 있습니다. 이 함수들은 호출하기 쉽지만, 더 복잡한 플롯을 만들기 위해 결합하거나 서로 교환하고 싶을 때, 이것은 금방 지저분해지거나 심지어 불가능해집니다. 사용자는 (개념적인) 캔버스에 직접 플롯을 그립니다(이 단어는 최초의 그래픽 장치 중 일부로 거슬러 올라갑니다 - 그림 3.1 참조). 사용자는 여백, 축 레이블, 제목, 범례, 하위 패널에 할당할 공간과 같은 결정을 명시적으로 처리해야 합니다. 일단 무언가가 '플롯'되면 이동하거나 지울 수 없습니다.
 
-There is a more high-level approach: in the _grammar of graphics_ , graphics
-are built up from modular logical pieces, so that we can easily try different
-visualization types for our data in an intuitive and easily deciphered way,
-like we can switch in and out parts of a sentence in human language. There is
-no concept of a canvas or a plotter, rather, the user gives
-**[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)** a high-level
-description of the plot she wants, in the form of an R object, and the
-rendering engine takes a wholistic view on the scene to lay out the graphics
-and render them on the output device.
+더 높은 수준의 접근 방식이 있습니다. _그래픽의 문법_에서는 그래픽이 모듈식 논리 조각으로 구성되므로, 인간 언어에서 문장의 일부를 바꾸고 제외할 수 있는 것처럼 직관적이고 쉽게 해독할 수 있는 방식으로 데이터에 대한 다양한 시각화 유형을 쉽게 시도할 수 있습니다. 캔버스나 플로터의 개념이 없습니다. 대신 사용자는 **[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)**에 R 객체 형태로 원하는 플롯에 대한 높은 수준의 설명을 제공하고, 렌더링 엔진은 장면을 전체적으로 파악하여 그래픽을 배치하고 출력 장치에 렌더링합니다.
 
-## 3.1 Goals for this chapter
+## 3.1 이 장의 목표
 
-In this chapter, we will:
+이 장에서는 다음을 수행합니다:
 
-  * Learn how to rapidly and flexibly explore datasets by visualization.
+  * 시각화를 통해 데이터 세트를 빠르고 유연하게 탐색하는 방법을 배웁니다.
 
-  * Create beautiful and intuitive plots for scientific presentations and publications.
+  * 과학 발표 및 출판물을 위한 아름답고 직관적인 그림을 만듭니다.
 
-  * Review the basics of base R plotting.
+  * 기본 R 플로팅의 기본 사항을 검토합니다.
 
-  * Understand the logic behind the _grammar of graphics_ concept.
+  * _그래픽의 문법_ 개념 뒤에 있는 논리를 이해합니다.
 
-  * Introduce **[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)** ’s `ggplot` function.
+  * **[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)**의 `ggplot` 함수를 소개합니다.
 
-  * See how to plot data in one, two, or even three to five dimensions, and explore faceting.
+  * 1, 2 또는 3~5차원으로 데이터를 플로팅하는 방법을 보고 패싯(facet)을 탐색합니다.
 
-  * Create “along-genome” plots for molecular biology data (or along other sequences, e.g., peptides).
+  * 분자 생물학 데이터(또는 다른 서열, 예: 펩타이드)에 대한 '게놈' 플롯을 만듭니다.
 
-  * Discuss some of our options of interactive graphics.
+  * 대화형 그래픽의 몇 가지 옵션에 대해 논의합니다.
 
-## 3.2 Base R plotting
+## 3.2 기본 R 플로팅
 
-The most basic function is `plot`. In the code below, the output of which is
-shown in Figure 3.2, it is used to plot data from an enzyme-linked
-immunosorbent assay (ELISA) assay. The assay was used to quantify the activity
-of the enzyme deoxyribonuclease (DNase), which degrades DNA. The data are
-assembled in the R object `DNase`, which conveniently comes with base R. The
-object `DNase` is a dataframe whose columns are `Run`, the assay run; `conc`,
-the protein concentration that was used; and `density`, the measured optical
-density.
+가장 기본적인 함수는 `plot`입니다. 아래 코드(그림 3.2에 출력이 표시됨)에서는 효소 결합 면역 흡착 분석(ELISA)의 데이터를 플로팅하는 데 사용됩니다. 이 분석은 DNA를 분해하는 효소인 데옥시리보뉴클레아제(DNase)의 활성을 정량화하는 데 사용되었습니다. 데이터는 기본 R과 함께 편리하게 제공되는 R 객체 `DNase`에 수집됩니다. `DNase` 객체는 `Run`(분석 실행), `conc`(사용된 단백질 농도), `density`(측정된 광학 밀도) 열이 있는 데이터 프레임입니다.
 
     
     
@@ -118,34 +80,23 @@ basicplotting2-1.png)](03-chap_files/figure-html/fig-graphics-
 basicplotting2-1.png "Figure 3.3: Same data as in Figure fig-graphics-
 basicplotting1 but with better axis labels and a different plot symbol.")
 
-Figure 3.3: Same data as in Figure 3.2 but with better axis labels and a
-different plot symbol.
+그림 3.3: 그림 3.2와 동일한 데이터이지만 더 나은 축 레이블과 다른 플롯 기호를 사용했습니다.
 
 __
 
-Question 3.1
+질문 3.1
 
-Annotating dataframe columns with “metadata” such as longer descriptions,
-physical units, provenance information, etc., seems like a useful feature. Is
-this way of storing such information, as in the `DNase` object, standardized
-or common across the R ecosystem? Are there other standardized or common ways
-for doing this?
+더 긴 설명, 물리적 단위, 출처 정보 등과 같은 "메타데이터"로 데이터 프레임 열에 주석을 달아두는 것은 유용한 기능처럼 보입니다. `DNase` 객체처럼 이러한 정보를 저장하는 방식이 R 생태계 전반에서 표준화되거나 일반적인가요? 이 작업을 수행하는 다른 표준화되거나 일반적인 방법이 있습니까?
 
 __
 
-Solution
+해결책
 
 __
 
-There is no good or widely used infrastructure in regular R _data.frame_ s for
-this, nor in the tidyverse (_data_frame_ , _tibble_). But have a look at the
-_DataFrame_ class in the Bioconductor package
-**[S4Vectors](https://bioconductor.org/packages/S4Vectors/)**. Among other
-things it is used to annotate the rows and columns of a
-_SummarizedExperiment_.
+일반적인 R _data.frame_이나 tidyverse(_data_frame_, _tibble_)에는 이를 위한 훌륭하거나 널리 사용되는 인프라가 없습니다. 하지만 Bioconductor 패키지 **[S4Vectors](https://bioconductor.org/packages/S4Vectors/)**의 _DataFrame_ 클래스를 살펴보세요. 무엇보다도 이것은 _SummarizedExperiment_의 행과 열에 주석을 다는 데 사용됩니다.
 
-Besides scatterplots, we can also use built-in functions to create histograms
-and boxplots (Figure 3.4).
+산점도 외에도 내장 함수를 사용하여 히스토그램 및 상자 그림을 만들 수도 있습니다(그림 3.4).
 
     
     
@@ -170,54 +121,21 @@ along the axis in lexicographical order because the runs were stored as text
 strings. We could use R’s type conversion functions to achieve numerical
 ordering.
 
-Boxplots are convenient for showing multiple distributions next to each other
-in a compact space. We will see more about plotting multiple univariate
-distributions in Section 3.6.
+상자 그림(Boxplot)은 좁은 공간에 여러 분포를 나란히 보여주기에 편리합니다. 3.6절에서 여러 단변량 분포를 그리는 것에 대해 더 자세히 다룰 것입니다.
 
-The base R plotting functions are great for quick interactive exploration of
-data; but we run soon into their limitations if we want to create more
-sophisticated displays. We are going to use a visualization framework called
-the grammar of graphics, implemented in the package
-**[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)** , that enables
-step by step construction of high quality graphics in a logical and elegant
-manner. First let us introduce and load an example dataset.
+기본 R 플로팅 함수는 빠른 대화형 데이터 탐색에 유용하지만, 더 정교한 디스플레이를 만들고 싶다면 곧 그 한계에 부딪히게 됩니다. 우리는 **[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)** 패키지에 구현된 '그래픽의 문법(grammar of graphics)'이라는 시각화 프레임워크를 사용할 것입니다. 이 프레임워크는 논리적이고 우아한 방식으로 고품질 그래픽을 단계별로 구성할 수 있게 해줍니다. 먼저 예제 데이터 세트를 소개하고 로드해 보겠습니다.
 
-## 3.3 An example dataset
+## 3.3 예제 데이터 세트
 
-[![](imgs/Yusukecells-2_web.jpg)](imgs/Yusukecells-2_web.jpg "Figure 3.5:
-Single-section immunofluorescence image of the E3.5 mouse blastocyst stained
-for Serpinh1, a marker of primitive endoderm \(blue\), Gata6 \(red\) and Nanog
-\(green\).")
+[![](imgs/Yusukecells-2_web.jpg)](imgs/Yusukecells-2_web.jpg "그림 3.5: 원시 내배엽(primitive endoderm)의 마커인 Serpinh1(파란색), Gata6(빨간색), Nanog(녹색)으로 염색된 E3.5 마우스 배반포의 단일 절편 면역형광 이미지.")
 
-Figure 3.5: Single-section immunofluorescence image of the E3.5 mouse
-blastocyst stained for Serpinh1, a marker of primitive endoderm (blue), Gata6
-(red) and Nanog (green).
+그림 3.5: 원시 내배엽(primitive endoderm)의 마커인 Serpinh1(파란색), Gata6(빨간색), Nanog(녹색)으로 염색된 E3.5 마우스 배반포의 단일 절편 면역형광 이미지.
 
-To properly testdrive the
-**[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)** functionality,
-we are going to need a dataset that is big enough and has some complexity so
-that it can be sliced and viewed from many different angles. We’ll use a gene
-expression microarray dataset that reports the transcriptomes of around 100
-individual cells from mouse embryos at different time points in early
-development. The mammalian embryo starts out as a single cell, the fertilized
-egg. Through synchronized waves of cell divisions, the egg multiplies into a
-clump of cells that at first show no discernible differences between them. At
-some point, though, cells choose different lineages. By further and further
-specification, the different cell types and tissues arise that are needed for
-a full organism. The aim of the experiment, explained by Ohnishi et al.
-([2014](16-chap.html#ref-Ohnishi2014)), was to investigate the gene expression
-changes associated with the first symmetry breaking event in the embryo. We’ll
-further explain the data as we go. More details can be found in the paper and
-in the documentation of the Bioconductor data package
-**[Hiiragi2013](https://bioconductor.org/packages/Hiiragi2013/)**. We first
-load the data:
+**[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)** 기능을 제대로 테스트하려면, 여러 다른 각도에서 자르고 볼 수 있도록 충분히 크고 복잡한 데이터 세트가 필요합니다. 초기 발달의 다른 시점에서 얻은 약 100개의 개별 마우스 배아 세포의 전사체를 보고하는 유전자 발현 마이크로어레이 데이터 세트를 사용할 것입니다. 포유류 배아는 단일 세포인 수정란에서 시작됩니다. 동기화된 세포 분열의 물결을 통해, 난자는 처음에는 눈에 띄는 차이가 없는 세포 덩어리로 증식합니다. 그러나 어느 시점에서 세포는 다른 계통(lineage)을 선택합니다. 점점 더 세분화되면서 완전한 유기체에 필요한 다양한 세포 유형과 조직이 발생합니다. Ohnishi 등([2014](16-chap.html#ref-Ohnishi2014))이 설명한 실험의 목표는 배아에서 첫 번째 대칭성 깨짐 현상과 관련된 유전자 발현 변화를 조사하는 것이었습니다. 진행하면서 데이터를 더 설명하겠습니다. 자세한 내용은 논문과 Bioconductor 데이터 패키지 **[Hiiragi2013](https://bioconductor.org/packages/Hiiragi2013/)**의 문서에서 찾을 수 있습니다. 먼저 데이터를 로드합니다.
 
-[![](imgs/devil.png)](imgs/devil.png)
+![](imgs/devil.png)
 
-It is unfortunate that the data object has the rather generic name `x`, rather
-than a more descriptive name. To avoid name collisions, perhaps the most
-pragmatic solution would be to run code such as following: `esHiiragi = x;
-rm(list="x")`.
+데이터 객체가 더 설명적인 이름 대신 다소 일반적인 이름인 `x`를 갖는 것은 유감입니다. 이름 충돌을 피하기 위해 가장 실용적인 해결책은 `esHiiragi = x; rm(list="x")`와 같은 코드를 실행하는 것입니다.
 
     
     
@@ -236,21 +154,11 @@ rm(list="x")`.
     
     [1] 45101   101
 
-You can print out a more detailed summary of the _ExpressionSet_ object `x` by
-just typing `x` at the R prompt. The 101 columns of the data matrix (accessed
-above through the `exprs` function from the
-**[Biobase](https://bioconductor.org/packages/Biobase/)** package) correspond
-to the samples (each of these is a single cell), the 45101 rows correspond to
-the genes probed by the array, an Affymetrix mouse4302 array. The data were
-normalized using the RMA method ([Irizarry et al. 2003](16-chap.html#ref-
-Irizarry:Biostat:2003)). The raw data are also available in the package (in
-the data object `a`) and at EMBL-EBI’s ArrayExpress database under the
-accession code E-MTAB-1681.
+R 프롬프트에 `x`를 입력하여 _ExpressionSet_ 객체 `x`의 더 자세한 요약을 출력할 수 있습니다. 데이터 행렬의 101개 열(**[Biobase](https://bioconductor.org/packages/Biobase/)** 패키지의 `exprs` 함수를 통해 위에서 접근)은 표본(각각 단일 세포)에 해당하고, 45101개 행은 Affymetrix mouse4302 어레이에 의해 프로브된 유전자에 해당합니다. 데이터는 RMA 방법을 사용하여 정규화되었습니다([Irizarry et al. 2003](16-chap.html#ref-Irizarry:Biostat:2003)). 원시 데이터는 패키지(데이터 객체 `a`)와 EMBL-EBI의 ArrayExpress 데이터베이스(접근 코드 E-MTAB-1681)에서도 사용할 수 있습니다.
 
-Let’s have a look at what information is available about the samples2.
+표본에 대해 어떤 정보가 있는지 살펴보겠습니다2.
 
-2 The notation #CAB2D6 is a hexadecimal representation of the RGB coordinates
-of a color; more on this in Section 3.10.2.
+2 #CAB2D6 표기법은 색상의 RGB 좌표를 16진수로 표현한 것입니다. 이에 대한 자세한 내용은 3.10.2절을 참조하세요.
 
     
     
@@ -264,21 +172,9 @@ of a color; more on this in Section 3.10.2.
     1 E3.25 2011-03-16       E3.25      #CAB2D6
     2 E3.25 2011-03-16       E3.25      #CAB2D6
 
-The information provided is a mix of information about the cells (i.e., age,
-size and genotype of the embryo from which they were obtained) and technical
-information (scan date, raw data file name). By convention, time in the
-development of the mouse embryo is measured in days, and reported as, for
-instance, `E3.5`. Moreover, in the paper the authors divided the cells into 8
-biological groups (`sampleGroup`), based on age, genotype and lineage, and
-they defined a color scheme to represent these groups (`sampleColour`3). Using
-the following code (see below for explanations), we define a small dataframe
-`groups` that contains summary information for each group: the number of cells
-and the preferred color.
+제공된 정보는 세포에 대한 정보(즉, 세포를 얻은 배아의 나이, 크기, 유전자형)와 기술적 정보(스캔 날짜, 원시 데이터 파일 이름)가 혼합된 것입니다. 관례에 따라, 마우스 배아의 발달 시간은 일 단위로 측정되며, 예를 들어 `E3.5`로 보고됩니다. 또한, 논문에서 저자들은 나이, 유전자형, 계통을 기준으로 세포를 8개의 생물학적 그룹(`sampleGroup`)으로 나누고, 이 그룹들을 나타내는 색상 구성표(`sampleColour`3)를 정의했습니다. 다음 코드(설명은 아래 참조)를 사용하여 각 그룹에 대한 요약 정보, 즉 세포 수와 선호하는 색상을 포함하는 작은 데이터 프레임 `groups`를 정의합니다.
 
-3 This identifier in the dataset uses the British spelling. Everywhere else in
-this book, we use the US spelling (color). The
-**[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)** package
-generally accepts both spellings.
+3 데이터 세트의 이 식별자는 영국식 철자법을 사용합니다. 이 책의 다른 곳에서는 미국식 철자법(color)을 사용합니다. **[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)** 패키지는 일반적으로 두 철자법을 모두 허용합니다.
 
     
     
@@ -300,48 +196,20 @@ generally accepts both spellings.
     7 E4.5 (FGF4-KO)     10 #E31A1C
     8 E4.5 (PE)           4 #33A02C
 
-The cells in the groups whose name contains `FGF4-KO` are from embryos in
-which the FGF4 gene, an important regulator of cell differentiation, was
-knocked out. Starting from E3.5, the wildtype cells (without the FGF4 knock-
-out) undergo the first symmetry breaking event and differentiate into
-different cell lineages, called pluripotent epiblast (EPI) and primitive
-endoderm (PE).
+`FGF4-KO`라는 이름이 포함된 그룹의 세포는 세포 분화의 중요한 조절자인 FGF4 유전자가 녹아웃된 배아에서 유래했습니다. E3.5부터, 야생형 세포(FGF4 녹아웃 없음)는 첫 번째 대칭성 깨짐 현상을 겪고, 전분화능 외배엽(pluripotent epiblast, EPI)과 원시 내배엽(primitive endoderm, PE)이라는 다른 세포 계통으로 분화됩니다.
 
-Since the code chunk above is the first instance that we encounter the pipe
-operator `|>` and the functions `group_by` and `summarise` from the
-**[dplyr](https://cran.r-project.org/web/packages/dplyr/)** package, let’s
-unpack the code. First, the pipe `|>`4. Generally, the pipe is useful for
-making nested function calls easier to read for humans. The following two
-lines of code are equivalent to R.
+위의 코드 청크는 **[dplyr](https://cran.r-project.org/web/packages/dplyr/)** 패키지의 파이프 연산자 `|>`와 `group_by`, `summarise` 함수를 처음 접하는 경우이므로, 코드를 풀어보겠습니다. 먼저 파이프 `|>`4입니다. 일반적으로 파이프는 중첩된 함수 호출을 사람이 더 쉽게 읽을 수 있도록 만드는 데 유용합니다. 다음 두 줄의 코드는 R에서 동일합니다.
 
-4 `|>` is the pipe operator that has been coming with base R since version
-4.1, released in 2021. The package
-**[magrittr](https://cran.r-project.org/web/packages/magrittr/)** has provided
-the `%>%` operator, which has similar although not identical semantics,
-already since a long time before, as well as several other piping related
-operators, such as `%<>%` and `%T>%`. As much of the book was written before
-2021, **[magrittr](https://cran.r-project.org/web/packages/magrittr/)** ’s
-`%>%` operator is used in many places. We are occasionally updating from `%>%`
-to `|>` during book maintenance, as in the code shown here.
+4 `|>`는 2021년에 출시된 버전 4.1부터 기본 R과 함께 제공되는 파이프 연산자입니다. **[magrittr](https://cran.r-project.org/web/packages/magrittr/)** 패키지는 의미는 동일하지 않지만 유사한 `%>%` 연산자를 오래 전부터 제공해 왔으며, `%<>%` 및 `%T>%`와 같은 여러 다른 파이핑 관련 연산자도 제공합니다. 이 책의 대부분은 2021년 이전에 작성되었으므로 **[magrittr](https://cran.r-project.org/web/packages/magrittr/)**의 `%>%` 연산자가 여러 곳에서 사용됩니다. 여기에 표시된 코드에서처럼 책을 유지 관리하는 동안 `%>%`를 `|>`로 가끔 업데이트하고 있습니다.
 
     
     
     f(x) |> g(y) |> h()
     h(g(f(x), y))__
 
-It says: “Evaluate `f(x)`, then pass the result to function `g` as the first
-argument, while `y` is passed to `g` as the second argument. Then pass the
-output of `g` to the function `h`.” You could repeat this ad infinitum.
-Especially if the arguments `x` and `y` are complex expressions themselves, or
-if there is quite a chain of functions involved, the first version tends to be
-easier to read.
+이것은 "먼저 `f(x)`를 평가한 다음, 그 결과를 `g` 함수의 첫 번째 인수로 전달하고, `y`는 `g`의 두 번째 인수로 전달합니다. 그런 다음 `g`의 출력을 `h` 함수에 전달합니다."라는 의미입니다. 이를 무한히 반복할 수 있습니다. 특히 인수 `x`와 `y`가 그 자체로 복잡한 표현식이거나, 여러 함수의 연쇄가 관련된 경우 첫 번째 버전이 더 읽기 쉬운 경향이 있습니다.
 
-The `group_by` function simply “marks” the dataframe with a note that all
-subsequent operations should not be applied to the whole dataframe at once,
-but to blocks defined by the `sampleGroup` factor. Finally, `summarise`
-computes summary statistics; this could be, e.g., the `mean`, `sum`; in this
-case, we just compute the number of rows in each block, `n()`, and the
-prevalent color.
+`group_by` 함수는 모든 후속 작업이 전체 데이터 프레임에 한 번에 적용되는 것이 아니라 `sampleGroup` 요인에 의해 정의된 블록에 적용되어야 한다는 메모로 데이터 프레임을 "표시"합니다. 마지막으로, `summarise`는 요약 통계를 계산합니다. 예를 들어 `mean`, `sum` 등이 될 수 있습니다. 이 경우, 우리는 단순히 각 블록의 행 수(`n()`)와 대표 색상을 계산합니다.
 
 ## 3.4 ggplot2
 
@@ -472,69 +340,36 @@ used its choice of default colors. We also added a call to `theme` stating
 that we want the \\(x\\)-axis labels rotated by 90 degrees and right-aligned
 (`hjust`; the default would be to center).
 
-### 3.4.1 Data flow
+### 3.4.1 데이터 흐름
 
-[![](imgs/devil.png)](imgs/devil.png)
+![](imgs/devil.png)
 
-The function `ggplot` expects your data in a dataframe. If they are in a
-matrix, in separate vectors, or other types of objects, you will have to
-convert them. The packages
-**[dplyr](https://cran.r-project.org/web/packages/dplyr/)** and
-**[broom](https://cran.r-project.org/web/packages/broom/)** , among others,
-offer facilities to this end. We will discuss this more in [Section
-13.10](13-chap.html#sec-design-datarep), and you will see examples of such
-conversions throughout the book.
+`ggplot` 함수는 데이터를 데이터 프레임 형식으로 기대합니다. 데이터가 행렬이나 별도의 벡터, 또는 다른 유형의 객체에 있다면 변환해야 합니다. **[dplyr](https://cran.r-project.org/web/packages/dplyr/)** 및 **[broom](https://cran.r-project.org/web/packages/broom/)** 등의 패키지가 이 목적을 위한 기능을 제공합니다. 이에 대해서는 13.10절에서 더 자세히 다룰 것이며, 책 전체에서 이러한 변환의 예시를 보게 될 것입니다.
 
-This includes the base R _data.frame_ as well as the _tibble_ (and synonymous
-_data_frame_) classes from the
-**[tibble](https://cran.r-project.org/web/packages/tibble/)** package in the
-tidyverse.
+여기에는 기본 R의 _data.frame_뿐만 아니라 tidyverse의 **[tibble](https://cran.r-project.org/web/packages/tibble/)** 패키지에 있는 _tibble_(및 동의어 _data_frame_) 클래스도 포함됩니다.
 
-The result of a call to the `ggplot` is a _ggplot_ object. Let’s recall a
-piece of code from above:
+`ggplot` 호출의 결과는 _ggplot_ 객체입니다. 앞서 보았던 코드 조각을 다시 상기해 봅시다.
 
     
     
     gg = ggplot(DNase, aes(x = conc, y = density)) + geom_point()__
 
-We have now assigned the output of `ggplot` to the object `gg`, instead of
-sending it directly to the console, where it was “printed” and produced Figure
-3.6. The situation is completely analogous to what you’re used to from working
-with the R console: when you enter an expression such as `1+1` and hit
-“Enter”, the result is printed. When the expression is an assignment, such as
-`s = 1+1`, the side effect takes place (the name `"s"` is bound to an object
-in memory that represents the value of `1+1`), but nothing is printed.
-Similarly, when an expression is evaluated as part of a script called with
-`source`, it is not printed. Thus, the above code also does not create any
-graphic output, since no `print` method is invoked. To print `gg`, type its
-name (in an interactive session) or call `print` on it:
+여기서는 `ggplot`의 출력을 콘솔로 직접 보내 그림 3.6을 "출력"하는 대신, `gg` 객체에 할당했습니다. 이는 R 콘솔에서 작업할 때와 완전히 동일합니다. `1+1` 같은 표현식을 입력하고 "Enter"를 누르면 결과가 출력되지만, `s = 1+1`처럼 할당 표현식인 경우 부작용(이름 `"s"`가 메모리의 객체에 바인딩됨)만 발생하고 아무것도 출력되지 않는 것과 같습니다. 마찬가지로 `source`로 호출된 스크립트 내에서 표현식이 평가될 때도 출력되지 않습니다. 따라서 위 코드도 `print` 메서드가 호출되지 않았기 때문에 그래픽 출력을 생성하지 않습니다. `gg`를 출력하려면 (대화형 세션에서) 그 이름을 입력하거나 `print`를 호출하면 됩니다.
 
     
     
     gg
     print(gg)__
 
-### 3.4.2 Saving figures
+### 3.4.2 그림 저장하기
 
-**[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)** has a built-in
-plot saving function called `ggsave`:
+**[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)**에는 `ggsave`라는 내장 플롯 저장 함수가 있습니다.
 
     
     
     ggplot2::ggsave("DNAse-histogram-demo.pdf", plot = gg)__
 
-There are two major ways of storing plots: vector graphics and raster (pixel)
-graphics. In vector graphics, the plot is stored as a series of geometrical
-primitives such as points, lines, curves, shapes and typographic characters.
-The preferred format in R for saving plots into a vector graphics format is
-PDF. In raster graphics, the plot is stored in a dot matrix data structure.
-The main limitation of raster formats is their limited resolution, which
-depends on the number of pixels available. In R, the most commonly used device
-for raster graphics output is `png`. Generally, it’s preferable to save your
-plots in a vector graphics format, since it is always possible later to
-convert a vector graphics file into a raster format of any desired resolution,
-while the reverse is quite difficult. And you don’t want the figures in your
-talks or papers look poor because of pixelization artefacts!
+플롯을 저장하는 두 가지 주요 방법은 벡터 그래픽과 래스터(픽셀) 그래픽입니다. 벡터 그래픽에서 플롯은 점, 선, 곡선, 도형 및 타이포그래피 문자와 같은 일련의 기하학적 원형(primitives)으로 저장됩니다. R에서 플롯을 벡터 그래픽 형식으로 저장할 때 선호되는 형식은 PDF입니다. 래스터 그래픽에서 플롯은 도트 매트릭스 데이터 구조에 저장됩니다. 래스터 형식의 주요 한계는 사용 가능한 픽셀 수에 따른 제한된 해상도입니다. R에서 래스터 그래픽 출력에 가장 흔히 사용되는 장치는 `png`입니다. 일반적으로 플롯을 벡터 그래픽 형식으로 저장하는 것이 바람직합니다. 나중에 언제든지 벡터 그래픽 파일을 원하는 해상도의 래스터 형식으로 변환할 수 있는 반면, 그 반대는 매우 어렵기 때문입니다. 발표나 논문의 그림이 픽셀화 아티팩트 때문에 보기 흉해지는 것을 원치 않으실 것입니다!
 
 ## 3.5 The grammar of graphics
 
@@ -636,39 +471,23 @@ cell variability.
 
 __
 
-Question 3.2
+질문 3.2
 
-In the code above we defined the `color` aesthetics (`aes`) only for the
-`geom_point` layer, while we defined the `x` and `y` aesthetics for all
-layers. What happens if we set the `color` aesthetics for all layers, i.e.,
-move it into the argument list of `ggplot`?
+위의 코드에서 우리는 `geom_point` 레이어에 대해서만 `color` 미학(`aes`)을 정의한 반면, `x`와 `y` 미학은 모든 레이어에 대해 정의했습니다. 만약 모든 레이어에 대해 `color` 미학을 설정한다면, 즉 `ggplot`의 인수 목록으로 옮긴다면 어떻게 될까요?
 
 __
 
-Question 3.3
+질문 3.3
 
-Is it always meaningful to visualize scatterplot data together with a
-regression line as in Figures 3.9 and 3.10?
+그림 3.9와 3.10에서처럼 산점도 데이터를 회귀선과 함께 시각화하는 것이 항상 의미가 있을까요?
 
-As an aside, if we want to find out which genes are targeted by these probe
-identifiers, and what they might do, we can call:
+여담으로, 이러한 프로브 식별자가 어떤 유전자를 타겟팅하고 그 유전자들이 어떤 역할을 하는지 알고 싶다면 다음과 같이 호출할 수 있습니다.
 
-[![](imgs/devil.png)](imgs/devil.png)
+![](imgs/devil.png)
 
-Note that here were need to use the original feature identifiers (e.,g.,
-“1426642_at”, without the leading “X”). This is the notation used by the
-microarray manufacturer, by the Bioconductor annotation packages, and also
-inside the object `x`. The leading “X” that we used above when working with
-`dftx` was inserted during the creation of `dftx` by the constructor function
-`data.frame`, since its argument `check.names` is set to `TRUE` by default.
-Alternatively, we could have kept the original identifier notation by setting
-`check.names = FALSE`, but then our code (e.g., the calls to `aes()`) would
-need to use backticks around the identifiers to make sure R interprets them
-correctly.
+여기서는 원래의 피처 식별자(예: 선행 "X"가 없는 "1426642_at")를 사용해야 합니다. 이는 마이크로어레이 제조업체, Bioconductor 주석 패키지, 그리고 객체 `x` 내부에서 사용되는 표기법입니다. 위에서 `dftx`로 작업할 때 사용한 선행 "X"는 `data.frame` 생성자 함수에 의해 `dftx` 생성 중에 삽입된 것인데, 이는 `check.names` 인수가 기본적으로 `TRUE`로 설정되어 있기 때문입니다. 또는 `check.names = FALSE`로 설정하여 원래 식별자 표기법을 유지할 수도 있었지만, 그럴 경우 코드(예: `aes()` 호출)에서 R이 이를 올바르게 해석할 수 있도록 식별자 주위에 역따옴표(backtick)를 사용해야 합니다.
 
-Note the use of the `::` operator to call the `select` function by its fully
-qualified name, including the package. We already encountered this in [Chapter
-2](02-chap.html).
+패키지 이름을 포함한 전체 이름(fully qualified name)으로 `select` 함수를 호출하기 위해 `::` 연산자를 사용한 것에 주목하세요. 우리는 이미 [2장](02-chap.html)에서 이를 접했습니다.
 
     
     
@@ -684,45 +503,30 @@ qualified name, including the package. We already encountered this in [Chapter
     1 1426642_at    Fn1                                       fibronectin 1
     2 1418765_at  Timd2 T cell immunoglobulin and mucin domain containing 2
 
-Often when using `ggplot` you will only need to specify the data, aesthetics
-and a geometric object. Most geometric objects implicitly call a suitable
-default statistical summary of the data. For example, if you are using
-`geom_smooth`, then
-**[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)** uses `stat =
-"smooth"` by default and displays a line; if you use `geom_histogram`, the
-data are binned and the result is displayed in barplot format. Here’s an
-example:
+`ggplot`을 사용할 때 종종 데이터, 미학, 그리고 기하학적 객체만 지정하면 됩니다. 대부분의 기하학적 객체는 데이터에 적합한 기본 통계 요약을 암시적으로 호출합니다. 예를 들어 `geom_smooth`를 사용하면 **[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)**는 기본적으로 `stat = "smooth"`를 사용하여 선을 표시합니다. `geom_histogram`을 사용하면 데이터가 구간화(binning)되고 결과가 막대 그림 형식으로 표시됩니다. 다음은 예시입니다.
 
     
     
     dfx = as.data.frame(Biobase::exprs(x))
     ggplot(dfx, aes(x = `20 E3.25`)) + geom_histogram(binwidth = 0.2)__
 
-[![](03-chap_files/figure-html/fig-graphics-
-hists-1.png)](03-chap_files/figure-html/fig-graphics-hists-1.png "Figure 3.11:
-Histogram of probe intensities for one particular sample, cell number 20,
-which was from day E3.25.")
+[![](03-chap_files/figure-html/fig-graphics-hists-1.png)](03-chap_files/figure-html/fig-graphics-hists-1.png "그림 3.11: E3.25일차의 특정 샘플 하나(세포 번호 20)에 대한 프로브 강도의 히스토그램입니다.")
 
-Figure 3.11: Histogram of probe intensities for one particular sample, cell
-number 20, which was from day E3.25.
+그림 3.11: E3.25일차의 특정 샘플 하나(세포 번호 20)에 대한 프로브 강도의 히스토그램.
 
 __
 
-Question 3.4
+질문 3.4
 
-What is the difference between the objects `dfx` and `dftx`? Why did we need
-to create them both?
+객체 `dfx`와 `dftx`의 차이점은 무엇인가요? 왜 두 객체를 모두 만들어야 했을까요?
 
-Let’s come back to the barplot example from above.
+위의 막대 그림 예제로 돌아가 봅시다.
 
     
     
     pb = ggplot(groups, aes(x = sampleGroup, y = n))__
 
-This creates a plot object `pb`. If we try to display it, it creates an empty
-plot, because we haven’t specified what geometric object we want to use. All
-that we have in our `pb` object so far are the data and the aesthetics (Figure
-3.12).
+이것은 플롯 객체 `pb`를 생성합니다. 이를 표시하려고 하면 기하학적 객체를 지정하지 않았기 때문에 빈 플롯이 생성됩니다. 지금까지 `pb` 객체에 있는 것은 데이터와 미학뿐입니다(그림 3.12).
 
     
     
@@ -734,18 +538,11 @@ that we have in our `pb` object so far are the data and the aesthetics (Figure
     
     pb __
 
-[![](03-chap_files/figure-html/fig-graphics-
-figbpempty-1.png)](03-chap_files/figure-html/fig-graphics-figbpempty-1.png
-"Figure 3.12: pb: without a geometric object \(a geom\), the plot area remains
-empty. With the default style parameters, the tick labels on the x-axis are
-not legible.")
+[![](03-chap_files/figure-html/fig-graphics-figbpempty-1.png)](03-chap_files/figure-html/fig-graphics-figbpempty-1.png "그림 3.12: pb: 기하학적 객체(geom)가 없으면 플롯 영역이 비어 있습니다. 기본 스타일 매개변수 하에서는 x축의 눈금 레이블을 읽을 수 없습니다.")
 
-Figure 3.12: `pb`: without a geometric object (a `geom`), the plot area
-remains empty. With the default style parameters, the tick labels on the
-\\(x\\)-axis are not legible.
+그림 3.12: `pb`: 기하학적 객체(`geom`)가 없으면 플롯 영역이 비어 있습니다. 기본 스타일 매개변수 하에서는 \(x\)축의 눈금 레이블을 읽을 수 없습니다.
 
-Now we can simply add on the other components of our plot through using the
-`+` operator (Figure 3.13):
+이제 `+` 연산자를 사용하여 플롯의 다른 구성 요소들을 간단히 추가할 수 있습니다(그림 3.13).
 
     
     
@@ -755,22 +552,13 @@ Now we can simply add on the other components of our plot through using the
     pb = pb + scale_fill_manual(values = groupColor, name = "Groups")
     pb __
 
-[![](03-chap_files/figure-html/fig-graphics-
-bpgg3-1.png)](03-chap_files/figure-html/fig-graphics-bpgg3-1.png "Figure 3.13:
-The graphics object bp in its full glory.")
+[![](03-chap_files/figure-html/fig-graphics-bpgg3-1.png)](03-chap_files/figure-html/fig-graphics-bpgg3-1.png "그림 3.13: 그래픽 객체 bp의 완전한 모습입니다.")
 
-Figure 3.13: The graphics object `bp` in its full glory.
+그림 3.13: 그래픽 객체 `bp`의 완전한 모습.
 
-This step-wise buildup –taking a graphics object already produced in some way
-and then further refining it– can be more convenient and easy to manage than,
-say, providing all the instructions upfront to the single function call that
-creates the graphic.
+어떤 방식으로든 이미 생성된 그래픽 객체를 가져와서 더 정제하는 이러한 단계별 구축 방식은, 그래픽을 생성하는 단일 함수 호출에 모든 지침을 미리 제공하는 것보다 더 편리하고 관리하기 쉬울 수 있습니다.
 
-We can quickly try out different visualization ideas without having to rebuild
-our plots each time from scratch, but rather store the partially finished
-object and then modify it in different ways. For example we can switch our
-plot to polar coordinates to create an alternative visualization of the
-barplot.
+매번 처음부터 플롯을 다시 만들 필요 없이, 부분적으로 완성된 객체를 저장한 다음 다른 방식으로 수정함으로써 다양한 시각화 아이디어를 빠르게 시도해 볼 수 있습니다. 예를 들어, 막대 그림의 대안적인 시각화를 만들기 위해 플롯을 극좌표계(polar coordinates)로 전환할 수 있습니다.
 
     
     
@@ -781,38 +569,26 @@ barplot.
       xlab("") + ylab("")
     pb.polar __
 
-[![](03-chap_files/figure-html/fig-graphics-
-bpgg7-1.png)](03-chap_files/figure-html/fig-graphics-bpgg7-1.png "Figure 3.14:
-A barplot in a polar coordinate system.")
+[![](03-chap_files/figure-html/fig-graphics-bpgg7-1.png)](03-chap_files/figure-html/fig-graphics-bpgg7-1.png "그림 3.14: 극좌표계에서의 막대 그림입니다.")
 
-Figure 3.14: A barplot in a polar coordinate system.
+그림 3.14: 극좌표계에서의 막대 그림.
 
-Note above that we can override previously set `theme` parameters by simply
-setting them to a new value – no need to go back to recreating `pb`, where we
-originally set them.
+위에서 이전에 설정한 `theme` 매개변수를 단순히 새 값으로 설정하여 덮어쓸 수 있음에 주목하세요. 원래 설정했던 `pb`를 다시 생성할 필요가 없습니다.
 
-## 3.6 Visualizing data in 1D
+## 3.6 1차원 데이터 시각화
 
-A common task in biological data analysis is the comparison between several
-samples of univariate measurements. In this section we’ll explore some
-possibilities for visualizing and comparing such samples. As an example, we’ll
-use the intensities of a set of four genes: Fgf4, Gata4, Gata6 and Sox26. On
-the microarray, they are represented by
+생물학적 데이터 분석에서 일반적인 작업은 단변량 측정값(univariate measurements)의 여러 샘플을 비교하는 것입니다. 이 절에서는 이러한 샘플을 시각화하고 비교하는 몇 가지 가능성을 살펴보겠습니다. 예시로 Fgf4, Gata4, Gata6, Sox2라는 네 유전자의 강도를 사용하겠습니다6. 마이크로어레이에서 이들은 다음과 같이 표시됩니다.
 
-6 You can read more about these genes in ([Ohnishi et al.
-2014](16-chap.html#ref-Ohnishi2014)).
+6 이 유전자들에 대해서는 ([Ohnishi et al. 2014](16-chap.html#ref-Ohnishi2014))에서 더 자세히 읽을 수 있습니다.
 
     
     
     selectedProbes = c( Fgf4 = "1420085_at", Gata4 = "1418863_at",
                        Gata6 = "1425463_at",  Sox2 = "1416967_at")__
 
-To extract data from this representation and convert them into a dataframe, we
-use the function `melt` from the
-**[reshape2](https://cran.r-project.org/web/packages/reshape2/)** package7.
+이 표현에서 데이터를 추출하여 데이터 프레임으로 변환하기 위해 **[reshape2](https://cran.r-project.org/web/packages/reshape2/)** 패키지의 `melt` 함수를 사용합니다7.
 
-7 We’ll talk more about the concepts and mechanics of different data
-representations in [Section 13.10](13-chap.html#sec-design-datarep).
+7 다양한 데이터 표현 방식의 개념과 원리에 대해서는 [13.10절](13-chap.html#sec-design-datarep)에서 더 자세히 다룰 것입니다.
 
     
     
@@ -838,10 +614,9 @@ with the probe identifiers.
     5 1420085_at 2 E3.25 9.293016  Fgf4
     6 1418863_at 2 E3.25 5.530016 Gata4
 
-### 3.6.1 Barplots
+### 3.6.1 막대 그림(Barplots)
 
-A popular way to display data such as in our dataframe `genes` is through
-barplots (Figure 3.15).
+우리 데이터 프레임 `genes`와 같은 데이터를 표시하는 일반적인 방법은 막대 그림입니다(그림 3.15).
 
     
     
@@ -856,18 +631,11 @@ measurements from four probes.")
 Figure 3.15: Barplots showing the means of the distributions of expression
 measurements from four probes.
 
-In Figure 3.15, each bar represents the mean of the values for that gene. Such
-plots are commonly used in the biological sciences, as well as in the popular
-media. However, summarizing the data into only a single number, the mean,
-loses much of the information, and given the amount of space they take,
-barplot are a poor way to visualize data8.
+그림 3.15에서 각 막대는 해당 유전자의 값의 평균을 나타냅니다. 이러한 플롯은 생물 과학뿐만 아니라 대중 매체에서도 흔히 사용됩니다. 하지만 데이터를 평균이라는 단 하나의 숫자로 요약하면 많은 정보가 손실됩니다. 차지하는 공간에 비해 막대 그림은 데이터를 시각화하는 효율적인 방법이 아닙니다8.
 
-8 In fact, if the mean is not an appropriate summary, such as for highly
-skewed or multimodal distributions, or for datasets with large outliers, this
-kind of visualization can be outright misleading.
+8 실제로 데이터 분포가 심하게 치우치거나(skewed), 다봉 분포(multimodal)이거나, 큰 이상치(outlier)가 있는 경우처럼 평균이 적절한 요약 통계량이 아닐 때는 이러한 종류의 시각화가 완전히 오해를 불러일으킬 수 있습니다.
 
-Sometimes we want to add error bars, and one way to achieve this in
-**[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)** is as follows.
+가끔은 오차 막대(error bars)를 추가하고 싶을 때가 있는데, **[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)**에서 이를 수행하는 한 가지 방법은 다음과 같습니다.
 
     
     
@@ -884,19 +652,11 @@ mean.")
 
 Figure 3.16: Barplots with error bars indicating standard error of the mean.
 
-Here, we see again the principle of layered graphics: we use two summary
-functions, `mean` and `mean_cl_normal`, and two associated geometric objects,
-`bar` and `errorbar`. The function `mean_cl_normal` is from the
-**[Hmisc](https://cran.r-project.org/web/packages/Hmisc/)** package and
-computes the standard error (or **c** onfidence **l** imits) of the mean; it’s
-a simple function, and we could also compute it ourselves using base R
-expressions if we wished to do so. We have also colored the bars to make the
-plot more visually pleasing.
+여기서 우리는 다시 계층화된 그래픽(layered graphics)의 원칙을 볼 수 있습니다. 두 개의 요약 함수 `mean`과 `mean_cl_normal`, 그리고 이와 연관된 두 개의 기하학적 객체 `bar`와 `errorbar`를 사용합니다. `mean_cl_normal` 함수는 **[Hmisc](https://cran.r-project.org/web/packages/Hmisc/)** 패키지에서 제공하며, 평균의 표준 오차(또는 신뢰 한계, **c**onfidence **l** imits)를 계산합니다. 이는 간단한 함수이므로, 원한다면 기본 R 표현식을 사용하여 직접 계산할 수도 있습니다. 또한 플롯을 시각적으로 더 보기 좋게 만들기 위해 막대에 색상을 입혔습니다.
 
-### 3.6.2 Boxplots
+### 3.6.2 상자 그림(Boxplots)
 
-Boxplots take up a similar amount of space as barplots, but are much more
-informative.
+상자 그림은 막대 그림과 비슷한 공간을 차지하면서도 훨씬 더 많은 정보를 제공합니다.
 
     
     
@@ -909,22 +669,11 @@ onedboxpl-1.png)](03-chap_files/figure-html/fig-graphics-onedboxpl-1.png
 
 Figure 3.17: Boxplots.
 
-In Figure 3.17 we see that two of the genes (Gata4, Gata6) have relatively
-concentrated distributions, with only a few data points venturing out in the
-direction of higher values. For Fgf4, we see that the distribution is right-
-skewed: the median, indicated by the horizontal black bar within the box is
-closer to the lower (or left) side of the box. Conversely, for Sox2 the
-distribution is left-skewed.
+그림 3.17에서 두 유전자(Gata4, Gata6)는 분포가 비교적 집중되어 있으며, 높은 값 방향으로 몇 개의 데이터 포인트만 벗어나 있음을 알 수 있습니다. Fgf4의 경우 분포가 오른쪽으로 치우쳐(right-skewed) 있습니다. 상자 안의 검은 수평선으로 표시된 중앙값이 상자의 아래쪽(또는 왼쪽)에 더 가깝기 때문입니다. 반대로 Sox2의 분포는 왼쪽으로 치우쳐(left-skewed) 있습니다.
 
-### 3.6.3 Dot plots and beeswarm plots
+### 3.6.3 점 그림(Dot plots)과 벌떼 그림(Beeswarm plots)
 
-If the number of data points is not too large, it is possible to show the data
-points directly, and it is good practice to do so, compared to the summaries
-we saw above. However, plotting the data directly will often lead to
-overlapping points, which can be visually unpleasant, or even obscure the
-data. We can try to lay out the points so that they are as near possible to
-their proper locations without overlap ([Wilkinson 1999](16-chap.html#ref-
-Wilkinson:DotPlots:1999)).
+데이터 포인트의 수가 너무 많지 않다면, 앞서 본 요약 방식 대신 데이터 포인트를 직접 보여주는 것이 가능하며 권장되는 방법입니다. 하지만 데이터를 직접 플로팅하면 점들이 서로 겹치는(overlapping) 경우가 많아 시각적으로 좋지 않거나 데이터를 가릴 수 있습니다. 점들이 겹치지 않으면서 원래 위치에 최대한 가깝게 배치되도록 시도할 수 있습니다([Wilkinson 1999](16-chap.html#ref-Wilkinson:DotPlots:1999)).
 
     
     
@@ -946,29 +695,15 @@ oneddot-2.png)](03-chap_files/figure-html/fig-graphics-oneddot-2.png
 
 (b)
 
-Figure 3.18: (a) Dot plots, made using `geom_dotplot` from
-**[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)**. (b) Beeswarm
-plots, made using `geom_beeswarm` from
-**[ggbeeswarm](https://cran.r-project.org/web/packages/ggbeeswarm/)**.
+Figure 3.18: (a) **[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)**의 `geom_dotplot`을 사용해 만든 점 그림. (b) **[ggbeeswarm](https://cran.r-project.org/web/packages/ggbeeswarm/)** 패키지의 `geom_beeswarm`을 사용해 만든 벌떼 그림.
 
-The plot in panel (a) of Figure 3.18. The \\(y\\)-coordinates of the points
-are discretized into bins (above we chose a bin size of 1/6), and then they
-are stacked next to each other.
+그림 3.18의 (a) 패널에 있는 플롯은 점들의 \(y\) 좌표를 구간(bin)으로 이산화하고(위에서는 구간 크기를 1/6로 선택함), 그 다음 서로 옆으로 쌓아 올린 것입니다.
 
-An alternative is provided by the package
-**[ggbeeswarm](https://cran.r-project.org/web/packages/ggbeeswarm/)** , which
-provides `geom_beeswarm`. The plot is shown in panel (b) of Figure 3.18. The
-layout algorithm aims to avoid overlaps between the points. If a point were to
-overlap an existing point, it is shifted along the \\(x\\)-axis by a small
-amount sufficient to avoid overlap. Some tweaking of the layout parameters is
-usually needed for each new dataset to make a dot plot or a beeswarm plot look
-good.
+**[ggbeeswarm](https://cran.r-project.org/web/packages/ggbeeswarm/)** 패키지의 `geom_beeswarm`을 사용하는 대안도 있습니다. 이 플롯은 그림 3.18의 (b) 패널에 나와 있습니다. 배치 알고리즘은 점들 사이의 겹침을 피하는 것을 목표로 합니다. 점이 기존 점과 겹치게 되면, 겹침을 피할 수 있을 만큼만 \(x\)축 방향으로 조금 이동시킵니다. 점 그림이나 벌떼 그림을 보기 좋게 만들려면 대개 새로운 데이터 세트마다 배치 매개변수를 약간씩 조정해야 합니다.
 
-### 3.6.4 Density plots
+### 3.6.4 밀도 그림(Density plots)
 
-Yet another way to represent the same data is by density plots. Here, we try
-to estimate the underlying data-generating density by smoothing out the data
-points (Figure 3.19).
+동일한 데이터를 나타내는 또 다른 방법은 밀도 그림입니다. 여기서는 데이터 포인트를 평활화(smoothing)하여 기저의 데이터 생성 밀도를 추정하려고 시도합니다(그림 3.19).
 
     
     
@@ -978,32 +713,15 @@ points (Figure 3.19).
 oneddens-1.png)](03-chap_files/figure-html/fig-graphics-oneddens-1.png
 "Figure 3.19: Density plots.")
 
-Figure 3.19: Density plots.
+Figure 3.19: 밀도 그림.
 
-As you can see from Figures 3.17—3.19, boxplots work fairly well for unimodal
-data, but they can be misleading if the data distribution is multimodal, and
-they also do not always give a fair impression of long-tailed distributions.
-By showing the data points, or their densities, directly, Figures 3.18—3.19)
-give a better impression of such features. For instance, we can see that the
-data for Fgf4 and Sox2 are bimodal, while Gata4 and Gata6 have most of their
-values concentrated around a baseline, but a certain fraction of cells have
-elevated expression levels, across a wide range of values.
+그림 3.17—3.19에서 볼 수 있듯이, 상자 그림은 단봉(unimodal) 데이터에는 꽤 잘 작동하지만 데이터 분포가 다봉(multimodal)일 경우에는 오해를 불러일으킬 수 있으며, 긴 꼬리(long-tailed) 분포의 특성을 항상 공정하게 보여주지는 못합니다. 데이터 포인트나 그 밀도를 직접 보여주는 그림 3.18—3.19는 이러한 특징을 더 잘 보여줍니다. 예를 들어 Fgf4와 Sox2의 데이터는 이봉(bimodal) 분포임을 알 수 있고, Gata4와 Gata6은 대부분의 값이 기준선 근처에 모여 있지만 일부 세포들은 넓은 값 범위에 걸쳐 발현 수준이 높아져 있음을 알 수 있습니다.
 
-Density estimation has, however, a number of complications, in particular, the
-need for choosing a smoothing window. A window size that is small enough to
-capture peaks in the dense regions of the data may lead to instable (“wiggly”)
-estimates elsewhere. On the other hand, if the window is made bigger,
-pronounced features of the density, such as sharp peaks, may be smoothed out.
-Moreover, the density lines do not convey the information on how much data was
-used to estimate them, and plots like Figure 3.19 can be especially
-problematic if the sample sizes for the curves differ.
+그러나 밀도 추정에는 여러 복잡한 문제가 있습니다. 특히 평활 창(smoothing window)의 크기를 선택해야 합니다. 데이터가 밀집된 영역의 봉우리를 포착할 만큼 작은 창 크기를 선택하면 다른 영역에서는 불안정한("구불구불한") 추정치가 나올 수 있습니다. 반면 창을 너무 크게 잡으면 뾰족한 봉우리와 같은 밀도의 뚜렷한 특징들이 뭉개질 수 있습니다. 또한 밀도 선은 밀도를 추정하는 데 얼마나 많은 데이터가 사용되었는지에 대한 정보를 전달하지 않으므로, 그림 3.19와 같은 플롯은 곡선들 간의 샘플 크기가 다를 경우 특히 문제가 될 수 있습니다.
 
-### 3.6.5 Violin plots
+### 3.6.5 바이올린 그림(Violin plots)
 
-Density plots such as Figure 3.19 can look crowded if there are several
-densities, and one idea is to arrange the densities in a layout inspired by
-boxplots: the violin plot (Figure 3.20). Here, the density estimate is used to
-draw a symmetric shape, which sometimes visually reminds of a violin.
+그림 3.19와 같은 밀도 그림은 밀도가 여러 개일 경우 복잡해 보일 수 있습니다. 한 가지 아이디어는 상자 그림에서 영감을 얻은 레이아웃으로 밀도를 배치하는 것인데, 이것이 바로 바이올린 그림입니다(그림 3.20). 여기서는 밀도 추정치를 사용하여 대칭적인 모양을 그리는데, 이 모양이 때때로 시각적으로 바이올린을 연상시킵니다.
 
     
     
@@ -1013,11 +731,11 @@ draw a symmetric shape, which sometimes visually reminds of a violin.
 onedviolin-1.png)](03-chap_files/figure-html/fig-graphics-onedviolin-1.png
 "Figure 3.20: Violin plots.")
 
-Figure 3.20: Violin plots.
+Figure 3.20: 바이올린 그림.
 
-### 3.6.6 Ridgeline plots
+### 3.6.6 능선 그림(Ridgeline plots)
 
-Another play on density plots are ridgeline plots (Figure 3.21):
+밀도 그림의 또 다른 변형은 능선 그림입니다(그림 3.21).
 
     
     
@@ -1029,10 +747,9 @@ Another play on density plots are ridgeline plots (Figure 3.21):
 onedridge4-1.png)](03-chap_files/figure-html/fig-graphics-onedridge4-1.png
 "Figure 3.21: Ridgeline plots.")
 
-Figure 3.21: Ridgeline plots.
+Figure 3.21: 능선 그림.
 
-This type of display is perhaps most appropriate if the number of densities
-shown goes into the dozens.
+이러한 방식의 표시는 표시해야 할 밀도의 수가 수십 개에 달할 때 가장 적합합니다.
 
     
     
@@ -1044,32 +761,21 @@ shown goes into the dozens.
 onedridge42-1.png)](03-chap_files/figure-html/fig-graphics-onedridge42-1.png
 "Figure 3.22: Like Figure fig-graphics-onedridge4, with more genes.")
 
-Figure 3.22: Like Figure 3.21, with more genes.
+그림 3.22: 그림 3.21과 유사하지만 더 많은 유전자를 포함하고 있습니다.
 
-### 3.6.7 ECDF plots
+### 3.6.7 ECDF 그림
 
-The mathematically most convenient way to describe the distribution of a one-
-dimensional random variable \\(X\\) is its **cumulative distribution
-function** (**CDF**), i.e., the function defined by
+1차원 확률 변수 \(X\)의 분포를 설명하는 수학적으로 가장 편리한 방법은 **누적 분포 함수(cumulative distribution function, CDF)**입니다. 즉, 다음과 같이 정의되는 함수입니다.
 
-\\[ F(x) = P(X\le x), \tag{3.1}\\]
+\[ F(x) = P(X \le x), \tag{3.1}\]
 
-where \\(x\\) takes all values along the real axis. The density of \\(X\\) is
-then the derivative of \\(F\\), if it exists9. The finite sample version of
-the probability 3.1 is called the **empirical cumulative distribution
-function** (**ECDF**),
+여기서 \(x\)는 실수축 전체의 값을 가집니다. \(X\)의 밀도는 \(F\)가 존재할 경우 \(F\)의 도함수입니다9. 식 3.1의 확률에 대한 유한 표본 버전은 **경험적 누적 분포 함수(empirical cumulative distribution function, ECDF)**라고 합니다.
 
-9 By its definition, \\(F\\) tends to 0 for small \\(x\\) (\\(x\to-\infty\\))
-and to 1 for large \\(x\\) (\\(x\to+\infty\\)).
+9 정의에 따라 \(F\)는 \(x\)가 작아질수록 0에 수렴하고(\(x \to -\infty\)), \(x\)가 커질수록 1에 수렴합니다(\(x \to +\infty\)).
 
-\\[ F_{n}(x) = \frac{\text{number of $i$ for which } x_i \le x}{n} =
-\frac{1}{n}\sum_{i=1}^n 𝟙({x\le x_i}), \tag{3.2}\\]
+\[ F_{n}(x) = \frac{\text{\(x_i \le x\)를 만족하는 \(i\)의 개수}}{n} = \frac{1}{n}\sum_{i=1}^n 𝟙({x \le x_i}), \tag{3.2}\]
 
-where \\(x_1,...,x_n\\) denote a sample of \\(n\\) draws from \\(X\\) and
-\\(𝟙\\) is the indicator function, i.e., the function that takes the value 1
-if the expression in its argument is true and 0 otherwise. If this sounds
-abstract, we can get a perhaps more intuitive understanding from the following
-example (Figure 3.23):
+여기서 \(x_1, ..., x_n\)은 \(X\)에서 추출한 \(n\)개의 표본을 나타내고, \(𝟙\)은 인수의 표현식이 참이면 1, 아니면 0의 값을 갖는 지시 함수(indicator function)입니다. 이 설명이 추상적으로 들린다면 다음 예제(그림 3.23)를 통해 좀 더 직관적으로 이해할 수 있을 것입니다.
 
     
     
@@ -1101,48 +807,26 @@ onedecdf-1.png)](03-chap_files/figure-html/fig-graphics-onedecdf-1.png
 
 Figure 3.24: Empirical cumulative distribution functions (ECDF).
 
-The ECDF has several nice properties:
+ECDF는 몇 가지 유용한 속성을 가지고 있습니다:
 
-  * It is lossless: the ECDF \\(F_{n}(x)\\) contains all the information contained in the original sample \\(x_1,...,x_n\\), except for the order of the values, which is assumed to be unimportant.
+  * 무손실(Lossless): ECDF \\(F_{n}(x)\\)는 값의 순서(중요하지 않다고 가정함)를 제외하고 원래 표본 \\(x_1,...,x_n\\)에 포함된 모든 정보를 유지합니다.
 
-  * As \\(n\\) grows, the ECDF \\(F_{n}(x)\\) converges to the true CDF \\(F(x)\\). Even for limited sample sizes \\(n\\), the difference between the two functions tends to be small. Note that this is not the case for the empirical density! Without smoothing, the empirical density of a finite sample is a sum of Dirac delta functions, which is difficult to visualize and quite different from any underlying smooth, true density. With smoothing, the difference can be less pronounced, but is difficult to control, as we discussed above.
+  * \\(n\\)이 커짐에 따라 ECDF \\(F_{n}(x)\\)는 실제 CDF \\(F(x)\\)로 수렴합니다. 제한된 표본 크기 \\(n\\)의 경우에도 두 함수 사이의 차이는 작은 경향이 있습니다. 이는 경험적 밀도(empirical density)의 경우에는 해당되지 않는다는 점에 유의하세요! 평활화(smoothing)가 없으면 유한 표본의 경험적 밀도는 디랙 델타 함수(Dirac delta functions)의 합으로 나타나며, 이는 시각화하기 어렵고 기저의 매끄러운 실제 밀도와는 상당히 다릅니다. 평활화를 사용하면 그 차이가 덜 두드러질 수 있지만, 앞서 논의한 것처럼 이를 제어하기는 어렵습니다.
 
 [![](imgs/Lawrence-TCGA-Nature-2013-Fig1.png)](imgs/Lawrence-TCGA-
-Nature-2013-Fig1.png "Figure 3.25: Part of Figure 1 from
-@Lawrence:Nature:2013. Each dot corresponds to a tumour-normal pair, with
-vertical position indicating the total frequency of somatic mutations in the
-exome. The resulting curves are, in essence, ECDF plots, and conceptually this
-plot is similar to Figure fig-graphics-onedecdf, just that the graphs are
-rotated by 90 degrees \(i.e., the roles of x- and y-axis are exchanged\) and
-the curves for the individual tumor types are horizontally displaced to keep
-them better apart.")
+Nature-2013-Fig1.png "그림 3.25: Lawrence 등(2013)의 그림 1의 일부입니다. 각 점은 종양-정상 쌍에 대응하며, 수직 위치는 엑솜(exome) 내 체세포 돌연변이의 총 빈도를 나타냅니다. 결과 곡선은 본질적으로 ECDF 그림이며, 개념적으로 이 플롯은 그림 3.24와 유사하지만 그래프가 90도 회전(즉, x축과 y축의 역할이 바뀜)되어 있고 개별 종양 유형에 대한 곡선이 서로 더 잘 분리되도록 수평으로 이동되어 있다는 점이 다릅니다.")
 
-Figure 3.25: Part of Figure 1 from Lawrence et al. ([2013](16-chap.html#ref-
-Lawrence:Nature:2013)). Each dot corresponds to a tumour-normal pair, with
-vertical position indicating the total frequency of somatic mutations in the
-exome. The resulting curves are, in essence, ECDF plots, and conceptually this
-plot is similar to Figure 3.24, just that the graphs are rotated by 90 degrees
-(i.e., the roles of \\(x\\)\- and \\(y\\)-axis are exchanged) and the curves
-for the individual tumor types are horizontally displaced to keep them better
-apart.
+그림 3.25: Lawrence 등 ([2013](16-chap.html#ref-Lawrence:Nature:2013))의 그림 1의 일부. 각 점은 종양-정상 쌍에 대응하며, 수직 위치는 엑솜(exome) 내 체세포 돌연변이의 총 빈도를 나타냅니다. 결과 곡선은 본질적으로 ECDF 그림이며, 개념적으로 이 플롯은 그림 3.24와 유사하지만 그래프가 90도 회전(즉, \\(x\\)\-와 \\(y\\)-축의 역할이 바뀜)되어 있고 개별 종양 유형에 대한 곡선이 서로 더 잘 분리되도록 수평으로 이동되어 있다는 점이 다릅니다.
 
 __
 
-Task
+태스크
 
-**tibbles.** In the above code we saw the `tibble` for the first time. Have a
-look at the vignette of the
-**[tibble](https://cran.r-project.org/web/packages/tibble/)** package for what
-it does.
+**티블(tibbles).** 위 코드에서 처음으로 `tibble`을 접했습니다. **[tibble](https://cran.r-project.org/web/packages/tibble/)** 패키지의 비네트(vignette)를 살펴보고 그 기능을 확인해 보세요.
 
-### 3.6.8 The effect of transformations on densities
+### 3.6.8 밀도에 대한 변환의 영향
 
-It is tempting to look at histograms or density plots and inspect them for
-evidence of **bimodality** (or multimodality) as an indication of some
-underlying biological phenomenon. Before doing so, it is important to remember
-that the number of modes of a density depends on scale transformations of the
-data, via the **chain rule**. For instance, let’s look at the data from one of
-the arrays in the Hiiragi dataset (Figure 3.26):
+히스토그램이나 밀도 그림을 보고 일부 기저의 생물학적 현상의 지표로서 **이봉성(bimodality)**(또는 다봉성)의 증거를 조사하고 싶은 유혹이 생길 수 있습니다. 그렇게 하기 전에, 밀도의 최빈값(mode)의 수는 **연쇄 법칙(chain rule)**을 통해 데이터가 변환되는 척도에 따라 달라진다는 점을 기억하는 것이 중요합니다. 예를 들어, Hiiragi 데이터 세트의 어레이 중 하나에서 얻은 데이터를 살펴보겠습니다(그림 3.26).
 
     
     
@@ -1152,59 +836,36 @@ the arrays in the Hiiragi dataset (Figure 3.26):
 
 [![](03-chap_files/figure-html/fig-graphics-
 onedtrsf-1.png)](03-chap_files/figure-html/fig-graphics-onedtrsf-1.png
-"Figure 3.26 \(a\): ")
+"그림 3.26 (a): ")
 
 (a)
 
 [![](03-chap_files/figure-html/fig-graphics-
 onedtrsf-2.png)](03-chap_files/figure-html/fig-graphics-onedtrsf-2.png
-"Figure 3.26 \(b\): ")
+"그림 3.26 (b): ")
 
 (b)
 
-Figure 3.26: Histograms of the same data, with and without logarithm
-transform. (a) The data are shown on the scale on which they are stored in the
-data object `x`, which resulted from logarithm (base 2) transformation of the
-microarray fluorescence intensities ([Irizarry et al. 2003](16-chap.html#ref-
-Irizarry:Biostat:2003)); (b) after re-exponentiating them back to the
-fluorescence scale. For better use of space, we capped the \\(x\\)-axis range
-at 1500.
+그림 3.26: 로그 변환 여부에 따른 동일한 데이터의 히스토그램. (a) 데이터는 데이터 객체 `x`에 저장된 척도로 표시되며, 이는 마이크로어레이 형광 강도를 로그(밑 2) 변환한 결과입니다([Irizarry et al. 2003](16-chap.html#ref-Irizarry:Biostat:2003)). (b) 다시 지수화하여 원래의 형광 척도로 되돌린 후의 모습입니다. 공간을 더 잘 활용하기 위해 \(x\)축의 범위를 1500으로 제한했습니다.
 
 __
 
-Question 3.5
+질문 3.5
 
-(Advanced:) Consider a random variable \\(X\\) and a non-linear 1:1
-transformation \\(f: x \mapsto y\\) that defines the transformed random
-variable \\(Y = f(X)\\). Suppose the density function of \\(Y\\) is
-\\(p(y)\\). What is the density of \\(X\\)? How is the mode (or: the modes) of
-\\(X\\) related to the mode(s) of \\(Y\\)?  
-Hint: note that a mode of a function \\(p\\) is a root of its derivative
-\\(p'=dp/dx\\). Is it generally true that if \\(x_0\\) is a mode of \\(X\\),
-then \\(y_0=f(x_0)\\) is a mode of \\(Y\\)?
+(심화:) 확률 변수 \\(X\\)와, 변환된 확률 변수 \\(Y = f(X)\\)를 정의하는 비선형 1:1 변환 \\(f: x \mapsto y\\)를 생각해 봅시다. \\(Y\\)의 밀도 함수를 \\(p(y)\\)라고 가정할 때, \\(X\\)의 밀도는 무엇일까요? \\(X\\)의 최빈값(또는 최빈값들)은 \\(Y\\)의 최빈값(들)과 어떤 관련이 있을까요?  
+힌트: 함수 \\(p\\)의 최빈값은 그 도함수 \\(p'=dp/dx\\)의 근(root)이라는 점에 유의하세요. \\(x_0\\)이 \\(X\\)의 최빈값이라면 \\(y_0=f(x_0)\\)이 \\(Y\\)의 최빈값이라는 것이 일반적으로 성립할까요?
 
 __
 
-Solution
+해결책
 
 __
 
-According to the chain rule, \\(p(y)\, dy = p(f(x))\,f'(x)\,dx\\), so the
-density of \\(X\\) is \\(\tilde{p}(x) = p(f(x))\,f'(x)\\). The modes of
-\\(\tilde{p}\\) are roots of its derivative \\(d\tilde{p}/dx\\), i.e., they
-obey \\(p'(f(x))\,f'^2(x) + p(f(x))f"(x) = 0\\). The second term in the sum
-vanishes if \\(f\\) is affine linear (\\(f"\equiv0\\)), but in general there
-is no simple relationship between the roots of the two densities, and
-therefore between the modes of \\(X\\) and \\(Y\\).
+연쇄 법칙에 따르면 \\(p(y)\, dy = p(f(x))\,f'(x)\,dx\\)이므로, \\(X\\)의 밀도는 \\(\tilde{p}(x) = p(f(x))\,f'(x)\\)입니다. \\(\tilde{p}\\)의 최빈값은 그 도함수 \\(d\tilde{p}/dx\\)의 근이며, 즉 이들은 \\(p'(f(x))\,f'^2(x) + p(f(x))f"(x) = 0\\)을 따릅니다. 합의 두 번째 항은 \\(f\\)가 아핀 선형(affine linear, \\(f"\equiv0\\))인 경우 사라지지만, 일반적으로 두 밀도의 근 사이에는, 따라서 \\(X\\)와 \\(Y\\)의 최빈값 사이에는 간단한 관계가 없습니다.
 
-## 3.7 Visualizing data in 2D: scatterplots
+## 3.7 2차원 데이터 시각화: 산점도(Scatterplots)
 
-Scatterplots are useful for visualizing treatment–response comparisons (as in
-Figure 3.3), associations between variables (as in Figure 3.10), or paired
-data (e.g., a disease biomarker in several patients before and after
-treatment). We use the two dimensions of our plotting paper, or screen, to
-represent the two variables. Let’s take a look at differential expression
-between a wildtype and an FGF4-KO sample.
+산점도는 처리-반응 비교(그림 3.3에서처럼), 변수 간의 연관성(그림 3.10에서처럼), 또는 쌍을 이룬 데이터(예: 치료 전후 여러 환자의 질병 바이오마커)를 시각화하는 데 유용합니다. 두 변수를 나타내기 위해 플로팅 종이나 화면의 두 차원을 사용합니다. 야생형과 FGF4-KO 샘플 사이의 차등 발현을 살펴보겠습니다.
 
     
     
@@ -1214,24 +875,13 @@ between a wildtype and an FGF4-KO sample.
 
 [![](03-chap_files/figure-html/fig-graphics-
 twodsp1-1.png)](03-chap_files/figure-html/fig-graphics-twodsp1-1.png
-"Figure 3.27: Scatterplot of 45101 expression measurements for two of the
-samples.")
+"그림 3.27: 두 샘플에 대한 45,101개 발현 측정값의 산점도입니다.")
 
-Figure 3.27: Scatterplot of 45101 expression measurements for two of the
-samples.
+그림 3.27: 두 샘플에 대한 45,101개 발현 측정값의 산점도.
 
-The labels 59 E4.5 (PE) and 92 E4.5 (FGF4-KO) refer to column names (sample
-names) in the dataframe `dfx`, which we created above. Since they contain
-special characters (spaces, parentheses, hyphen) and start with numerals, we
-need to enclose them with the downward sloping quotes to make them
-syntactically digestible for R. The plot is shown in Figure 3.27. We get a
-dense point cloud that we can try and interpret on the outskirts of the cloud,
-but we really have no idea visually how the data are distributed within the
-denser regions of the plot.
+레이블 59 E4.5 (PE)와 92 E4.5 (FGF4-KO)는 위에서 만든 데이터 프레임 `dfx`의 열 이름(샘플 이름)을 나타냅니다. 이들은 특수 문자(공백, 괄호, 하이픈)를 포함하고 숫자로 시작하기 때문에, R이 구문적으로 이해할 수 있도록 역따옴표(backtick)로 묶어줄 필요가 있습니다. 플롯은 그림 3.27에 나와 있습니다. 밀집된 점 구름(point cloud)을 얻게 되는데, 구름의 외곽 부분은 해석을 시도해 볼 수 있겠지만, 플롯의 밀집된 영역 내에서 데이터가 어떻게 분포되어 있는지는 시각적으로 알 방법이 없습니다.
 
-One easy way to ameliorate the overplotting is to adjust the transparency
-(alpha value) of the points by modifying the `alpha` parameter of `geom_point`
-(Figure 3.28).
+겹쳐그리기(overplotting) 문제를 개선하는 한 가지 쉬운 방법은 `geom_point`의 `alpha` 매개변수를 수정하여 점들의 투명도(알파 값)를 조절하는 것입니다(그림 3.28).
 
     
     
@@ -1239,22 +889,13 @@ One easy way to ameliorate the overplotting is to adjust the transparency
 
 [![](03-chap_files/figure-html/fig-graphics-
 twodsp2-1.png)](03-chap_files/figure-html/fig-graphics-twodsp2-1.png
-"Figure 3.28: As Figure fig-graphics-twodsp1, but with semi-transparent points
-to resolve some of the overplotting.")
+"그림 3.28: 그림 3.27과 유사하지만, 일부 겹쳐그리기를 해결하기 위해 반투명한 점을 사용했습니다.")
 
-Figure 3.28: As Figure 3.27, but with semi-transparent points to resolve some
-of the overplotting.
+그림 3.28: 그림 3.27과 유사하지만, 일부 겹쳐그리기를 해결하기 위해 반투명한 점을 사용했습니다.
 
-This is already better than Figure 3.27, but in the more dense regions even
-the semi-transparent points quickly overplot to a featureless black mass,
-while the more isolated, outlying points are getting faint. An alternative is
-a contour plot of the 2D density, which has the added benefit of not rendering
-all of the points on the plot, as in Figure 3.29.
+이것은 이미 그림 3.27보다 낫지만, 더 밀집된 영역에서는 반투명한 점들조차 특징 없는 검은 덩어리로 겹쳐지는 반면, 더 고립된 바깥쪽 점들은 희미해집니다. 대안으로는 2D 밀도의 등고선 그림(contour plot)이 있으며, 이는 그림 3.29에서처럼 플롯의 모든 점을 다 그리지 않아도 된다는 장점이 있습니다.
 
-However, we see in Figure 3.29 that the point cloud at the bottom right (which
-contains a relatively small number of points) is no longer represented. We can
-somewhat overcome this by tweaking the bandwidth and binning parameters of
-`geom_density2d` (Figure 3.30, left panel).
+하지만 그림 3.29를 보면 오른쪽 하단의 점 구름(상대적으로 적은 수의 점을 포함)이 더 이상 표현되지 않는 것을 알 수 있습니다. `geom_density2d`의 대역폭(bandwidth)과 구간화(binning) 매개변수를 조정하여 이 문제를 어느 정도 극복할 수 있습니다(그림 3.30, 왼쪽 패널).
 
     
     
@@ -1262,11 +903,9 @@ somewhat overcome this by tweaking the bandwidth and binning parameters of
 
 [![](03-chap_files/figure-html/fig-graphics-
 twodsp3-1.png)](03-chap_files/figure-html/fig-graphics-twodsp3-1.png
-"Figure 3.29: As Figure fig-graphics-twodsp1, but rendered as a contour plot
-of the 2D density estimate.")
+"그림 3.29: 그림 3.27과 유사하지만, 2D 밀도 추정치의 등고선 그림으로 렌더링되었습니다.")
 
-Figure 3.29: As Figure 3.27, but rendered as a contour plot of the 2D density
-estimate.
+그림 3.29: 그림 3.27과 유사하지만, 2D 밀도 추정치의 등고선 그림으로 렌더링되었습니다.
 
     
     
@@ -1282,40 +921,25 @@ estimate.
 
 [![](03-chap_files/figure-html/fig-graphics-
 twodsp4-1.png)](03-chap_files/figure-html/fig-graphics-twodsp4-1.png
-"Figure 3.30 \(a\): ")
+"그림 3.30 (a): ")
 
 (a)
 
 [![](03-chap_files/figure-html/fig-graphics-
 twodsp4-2.png)](03-chap_files/figure-html/fig-graphics-twodsp4-2.png
-"Figure 3.30 \(b\): ")
+"그림 3.30 (b): ")
 
 (b)
 
-Figure 3.30: 2D density plots. (a) As Figure 3.29, but with smaller smoothing
-bandwidth and tighter binning for the contour lines. (b) With color filling.
+그림 3.30: 2D 밀도 그림. (a) 그림 3.29와 같지만 더 작은 평활 대역폭과 더 촘촘한 등고선 구간을 사용했습니다. (b) 색상 채우기가 추가된 모습입니다.
 
-We can fill in each space between the contour lines with the relative density
-of points by explicitly calling the function `stat_density2d` (for which
-`geom_density2d` is a wrapper) and using the geometric object _polygon_ , as
-in the right panel of Figure 3.30.
+그림 3.30의 오른쪽 패널에서처럼, `stat_density2d` 함수(`geom_density2d`의 래퍼 함수)를 명시적으로 호출하고 기하학적 객체로 _polygon_을 사용함으로써 등고선 사이의 각 공간을 점들의 상대적 밀도로 채울 수 있습니다.
 
-We used the function `brewer.pal` from the package
-**[RColorBrewer](https://cran.r-project.org/web/packages/RColorBrewer/)** to
-define the color scale, and we added a call to `coord_fixed` to fix the aspect
-ratio of the plot, to make sure that the mapping of data range to \\(x\\)\-
-and \\(y\\)-coordinates is the same for the two variables. Both of these
-issues merit a deeper look, and we’ll talk more about plot shapes in Section
-3.7.1 and about colors in Section 3.9.
+우리는 **[RColorBrewer](https://cran.r-project.org/web/packages/RColorBrewer/)** 패키지의 `brewer.pal` 함수를 사용해 색상 척도를 정의했고, `coord_fixed`를 호출하여 플롯의 종횡비(aspect ratio)를 고정했습니다. 이는 두 변수에 대해 데이터 범위에서 \(x\) 및 \(y\) 좌표로의 매핑이 동일하게 이루어지도록 보장합니다. 이 두 이슈 모두 더 깊이 살펴볼 가치가 있으며, 3.7.1절에서는 플롯의 모양에 대해, 3.9절에서는 색상에 대해 더 이야기하겠습니다.
 
-The density based plotting methods in Figure 3.30 are more visually appealing
-and interpretable than the overplotted point clouds of Figures 3.27 and 3.28,
-though we have to be careful in using them as we lose much of the information
-on the outlier points in the sparser regions of the plot. One possibility is
-using `geom_point` to add such points back in.
+그림 3.30의 밀도 기반 플로팅 방법은 그림 3.27 및 3.28의 겹쳐진 점 구름보다 시각적으로 더 매력적이고 해석하기 쉽지만, 플롯의 희소한 영역에 있는 이상치 점들에 대한 정보를 많이 잃게 되므로 주의해서 사용해야 합니다. 한 가지 방법은 `geom_point`를 사용하여 그러한 점들을 다시 추가하는 것입니다.
 
-But arguably the best alternative, which avoids the limitations of smoothing,
-is hexagonal binning ([Carr et al. 1987](16-chap.html#ref-Carr1987hexbin)).
+하지만 평활화의 한계를 피할 수 있는 아마도 가장 좋은 대안은 육각형 구간화(hexagonal binning)일 것입니다([Carr et al. 1987](16-chap.html#ref-Carr1987hexbin)).
 
     
     
@@ -1325,30 +949,21 @@ is hexagonal binning ([Carr et al. 1987](16-chap.html#ref-Carr1987hexbin)).
 
 [![](03-chap_files/figure-html/fig-graphics-
 twodsp6-1.png)](03-chap_files/figure-html/fig-graphics-twodsp6-1.png
-"Figure 3.31 \(a\): ")
+"그림 3.31 (a): ")
 
 (a)
 
 [![](03-chap_files/figure-html/fig-graphics-
 twodsp6-2.png)](03-chap_files/figure-html/fig-graphics-twodsp6-2.png
-"Figure 3.31 \(b\): ")
+"그림 3.31 (b): ")
 
 (b)
 
-Figure 3.31: Hexagonal binning. (a) Default parameters. (b) Finer bin sizes
-and customized color scale.
+그림 3.31: 육각형 구간화. (a) 기본 매개변수 사용. (b) 더 미세한 구간 크기와 사용자 정의 색상 척도 사용.
 
-### 3.7.1 Plot shapes
+### 3.7.1 플롯 모양(Plot shapes)
 
-Choosing the proper shape for your plot is important to make sure the
-information is conveyed well. By default, the shape parameter, that is, the
-ratio between the height of the graph and its width, is chosen by
-**[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)** based on the
-available space in the current plotting device. The width and height of the
-device are specified when it is opened in R, either explicitly by you or
-through default parameters10. Moreover, the graph dimensions also depend on
-the presence or absence of additional decorations, like the color scale bars
-in Figure 3.31.
+플롯에 적절한 모양을 선택하는 것은 정보가 잘 전달되도록 하는 데 중요합니다. 기본적으로 그래프의 높이와 너비 사이의 비율인 모양 매개변수(shape parameter)는 현재 플로팅 장치(plotting device)에서 사용 가능한 공간을 기반으로 **[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)**에 의해 선택됩니다. 장치의 너비와 높이는 명시적으로 지정하거나 기본 매개변수10를 통해 R에서 열릴 때 지정됩니다. 더욱이 그래프의 크기는 그림 3.31의 색상 척도 막대와 같은 추가적인 장식 요소의 유무에 따라서도 달라집니다.
 
 10 See for example the manual pages of the `pdf` and `png` functions.
 
@@ -1402,12 +1017,9 @@ this quantity becomes 1. The result is shown in the lower panel of Figure
 space, we see more on it! In particular, we can see the saw-tooth shape of the
 sunspot cycles, with sharp rises and more slow declines.
 
-## 3.8 Visualizing more than two dimensions
+## 3.8 2차원 이상의 시각화
 
-Sometimes we want to show the relationships between more than two variables.
-Obvious choices for including additional dimensions are the plot symbol shapes
-and colors. The `geom_point` geometric object offers the following aesthetics
-(beyond `x` and `y`):
+때로는 두 개 이상의 변수 간의 관계를 보여주고 싶을 때가 있습니다. 추가적인 차원을 포함하기 위한 당연한 선택은 플롯 기호의 모양과 색상입니다. `geom_point` 기하학적 객체는 (\(x\)와 \(y\) 외에) 다음과 같은 미학(aesthetics)을 제공합니다:
 
   * `fill`
 
@@ -1419,41 +1031,15 @@ and colors. The `geom_point` geometric object offers the following aesthetics
 
   * `alpha`
 
-They are explored in the manual page of the `geom_point` function. `fill` and
-`color` refer to the fill and outline color of an object, and `alpha` to its
-transparency level. Above, in Figures 3.28 and following, we have used color
-or transparency to reflect point density and avoid the obscuring effects of
-overplotting. We can also use these properties to show other dimensions of the
-data. In principle, we could use all five aesthetics listed above
-simultaneously to show up to seven-dimensional data; however, such a plot
-would be hard to decipher. Usually we are better off to limit ourselves to
-choosing only one or two of these aesthetics and varying them to show one or
-two additional dimensions in the data.
+이들은 `geom_point` 함수의 매뉴얼 페이지에서 살펴볼 수 있습니다. `fill`과 `color`는 객체의 채우기 및 테두리 색상을 의미하며, `alpha`는 투명도를 나타냅니다. 앞서 그림 3.28 등에서 우리는 점의 밀도를 반영하고 겹쳐그리기(overplotting)에 의한 가려짐 효과를 피하기 위해 색상이나 투명도를 사용했습니다. 또한 이러한 속성들을 사용하여 데이터의 다른 차원을 보여줄 수도 있습니다. 원칙적으로는 위에 나열된 5가지 미학을 모두 동시에 사용하여 최대 7차원의 데이터를 보여줄 수 있지만, 그러한 플롯은 해독하기가 매우 어려울 것입니다. 대개는 이 미학들 중 한두 가지만 선택하여 데이터의 추가적인 한두 차원을 보여주는 정도로 제한하는 것이 좋습니다.
 
-### 3.8.1 Faceting
+### 3.8.1 패싯(Faceting)
 
-[![Sometimes this is also called trellis or lattice graphics, in an allusion
-to how these arrays of plots look like. The first major R package to implement
-faceting was lattice. In this book, we’ll use the faceting functionalities
-provided through ggplot2.](imgs/devil.png)](imgs/devil.png "Sometimes this is
-also called trellis or lattice graphics, in an allusion to how these arrays of
-plots look like. The first major R package to implement faceting was lattice.
-In this book, we’ll use the faceting functionalities provided through
-ggplot2.")
+[![때로는 이러한 플롯 배열의 모양을 빗대어 트렐리스(trellis) 또는 래티스(lattice) 그래픽이라고도 부릅니다. 패싯을 구현한 첫 번째 주요 R 패키지는 lattice였습니다. 이 책에서는 ggplot2를 통해 제공되는 패싯 기능을 사용할 것입니다.](imgs/devil.png)](imgs/devil.png "때로는 이러한 플롯 배열의 모양을 빗대어 트렐리스(trellis) 또는 래티스(lattice) 그래픽이라고도 부릅니다. 패싯을 구현한 첫 번째 주요 R 패키지는 lattice였습니다. 이 책에서는 ggplot2를 통해 제공되는 패싯 기능을 사용할 것입니다.")
 
-Sometimes this is also called _trellis_ or _lattice_ graphics, in an allusion
-to how these arrays of plots look like. The first major R package to implement
-faceting was **[lattice](https://cran.r-project.org/web/packages/lattice/)**.
-In this book, we’ll use the faceting functionalities provided through
-**[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)**.
+때로는 이러한 플롯 배열의 모양을 빗대어 _트렐리스(trellis)_ 또는 _래티스(lattice)_ 그래픽이라고도 부릅니다. 패싯을 구현한 첫 번째 주요 R 패키지는 **[lattice](https://cran.r-project.org/web/packages/lattice/)**였습니다. 이 책에서는 **[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)**를 통해 제공되는 패싯 기능을 사용할 것입니다.
 
-Another way to show additional dimensions of the data is to show multiple
-plots that result from repeatedly subsetting (or “slicing”) our data based on
-one (or more) of the variables, so that we can visualize each part separately.
-This is called **faceting** and it enables us to visualize data in up to four
-or five dimensions. So we can, for instance, investigate whether the observed
-patterns among the other variables are the same or different across the range
-of the faceting variable. Let’s look at an example:
+데이터의 추가적인 차원을 보여주는 또 다른 방법은 하나(또는 그 이상)의 변수를 기반으로 데이터를 반복적으로 하위 집합화(subsetting, 또는 "슬라이싱")하여 여러 개의 플롯을 보여줌으로써 각 부분을 따로 시각화하는 것입니다. 이를 **패싯(faceting)**이라고 하며, 이를 통해 최대 4~5차원의 데이터를 시각화할 수 있습니다. 예를 들어, 패싯 변수의 범위에 따라 다른 변수들 간에 관찰된 패턴이 동일한지 아니면 다른지 조사할 수 있습니다. 예제를 살펴보겠습니다:
 
     
     
@@ -1466,17 +1052,11 @@ of the faceting variable. Let’s look at an example:
 
 [![](03-chap_files/figure-html/fig-graphics-
 facet1-1.png)](03-chap_files/figure-html/fig-graphics-facet1-1.png
-"Figure 3.33: An example of faceting: the same data as in Figure fig-graphics-
-scp2layers1, but now split by the categorical variable lineage.")
+"그림 3.33: 패싯의 예시: 그림 3.9와 동일한 데이터이지만, 이제 범주형 변수 lineage에 의해 분할되었습니다.")
 
-Figure 3.33: An example of **faceting** : the same data as in Figure 3.9, but
-now split by the categorical variable `lineage`.
+그림 3.33: **패싯(faceting)**의 예시: 그림 3.9와 동일한 데이터이지만, 이제 범주형 변수 `lineage`에 의해 분할되었습니다.
 
-The result is shown in Figure 3.33. We have used R’s formula language to
-specify the variable by which we want to split the data, and that the separate
-panels should be in different columns: `facet_grid( . ~ lineage )`. In fact,
-we can specify two faceting variables, as follows; the result is shown in
-Figure 3.34.
+결과는 그림 3.33에 나와 있습니다. 우리는 R의 포뮬러(formula) 언어를 사용하여 데이터를 분할할 변수를 지정했고, 개별 패널이 서로 다른 열에 배치되도록 했습니다: `facet_grid( . ~ lineage )`. 사실 다음과 같이 두 개의 패싯 변수를 지정할 수도 있습니다. 그 결과는 그림 3.34에 나와 있습니다.
 
     
     
@@ -1486,19 +1066,11 @@ Figure 3.34.
 
 [![](03-chap_files/figure-html/fig-graphics-
 facet2-1.png)](03-chap_files/figure-html/fig-graphics-facet2-1.png
-"Figure 3.34: Faceting: the same data as in Figure fig-graphics-scp2layers1,
-split by the categorical variables Embryonic.day \(rows\) and lineage
-\(columns\).")
+"그림 3.34: 패싯: 그림 3.9와 동일한 데이터이지만, 범주형 변수 Embryonic.day(행)와 lineage(열)에 의해 분할되었습니다.")
 
-Figure 3.34: **Faceting** : the same data as in Figure 3.9, split by the
-categorical variables `Embryonic.day` (rows) and `lineage` (columns).
+그림 3.34: **패싯(Faceting)**: 그림 3.9와 동일한 데이터이지만, 범주형 변수 `Embryonic.day`(행)와 `lineage`(열)에 의해 분할되었습니다.
 
-Another useful function is `facet_wrap`: if the faceting variable has too many
-levels for all the plots to fit in one row or one column, then this function
-can be used to wrap them into a specified number of columns or rows. So far we
-have seen faceting by categorical variables, but we can also use it with
-continuous variables by discretizing them into levels. The function `cut` is
-useful for this purpose.
+또 다른 유용한 함수는 `facet_wrap`입니다. 패싯 변수의 수준(level)이 너무 많아 모든 플롯을 한 행이나 한 열에 맞추기 어려울 때, 이 함수를 사용하여 지정된 수의 열이나 행으로 배열할 수 있습니다. 지금까지는 범주형 변수에 의한 패싯을 보았지만, 연속형 변수를 수준별로 이산화하여 사용할 수도 있습니다. 이를 위해 `cut` 함수가 유용합니다.
 
     
     
@@ -1508,160 +1080,78 @@ useful for this purpose.
 
 [![](03-chap_files/figure-html/fig-graphics-
 facet3-1.png)](03-chap_files/figure-html/fig-graphics-facet3-1.png
-"Figure 3.35: Faceting: the same data as in Figure fig-graphics-scp2layers1,
-split by the continuous variable X1450989_at and arranged by facet_wrap.")
+"그림 3.35: 패싯: 그림 3.9와 동일한 데이터이지만, 연속형 변수 X1450989_at에 의해 분할되고 facet_wrap에 의해 배열되었습니다.")
 
-Figure 3.35: **Faceting** : the same data as in Figure 3.9, split by the
-continuous variable `X1450989_at` and arranged by `facet_wrap`.
+그림 3.35: **패싯(Faceting)**: 그림 3.9와 동일한 데이터이지만, 연속형 변수 `X1450989_at`에 의해 분할되고 `facet_wrap`에 의해 배열되었습니다.
 
-We see in Figure 3.35 that the number of points in the four panels is
-different. This is because `cut` splits into bins of equal length, not equal
-number of points. If we want the latter, then we can use `quantile` in
-conjunction with `cut`, or cut on the ranks of the variable’s values.
+그림 3.35에서 네 패널의 점 개수가 서로 다른 것을 볼 수 있습니다. 이는 `cut`이 점 개수가 아니라 구간의 길이를 동일하게 나누기 때문입니다. 만약 점 개수를 동일하게 맞추고 싶다면 `cut`과 함께 `quantile`을 사용하거나, 변수 값의 순위(rank)를 기준으로 나눌 수 있습니다.
 
-#### Axes scales
+#### 축 스케일(Axes scales)
 
-In Figures 3.33—3.35, the axes scales are the same for all panels.
-Alternatively, we could let them vary by setting the `scales` argument of the
-`facet_grid` and `facet_wrap` functions. This argument lets you control
-whether \\(x\\)-axis and \\(y\\)-axis in each panel have the same scale, or
-whether either of them or both adapt to each panel’s data range. There is a
-trade-off: adaptive axes scales might let us see more detail, on the other
-hand, the panels are then less comparable across the groupings.
+그림 3.33—3.35에서 축의 스케일은 모든 패널에서 동일합니다. 대신 `facet_grid`와 `facet_wrap` 함수의 `scales` 인수를 설정하여 이를 변경할 수 있습니다. 이 인수를 통해 각 패널의 \(x\)축과 \(y\)축이 동일한 스케일을 가질지, 아니면 각 패널의 데이터 범위에 맞게 조정될지 제어할 수 있습니다. 여기에는 상충 관계(trade-off)가 있습니다. 축 스케일을 패널별로 조정하면 세부 사항을 더 잘 볼 수 있는 반면, 그룹 간 패널 비교는 더 어려워집니다.
 
-#### Implicit faceting
+#### 암시적 패싯(Implicit faceting)
 
-You can also facet your plots (without explicit calls to `facet_grid` and
-`facet_wrap`) by specifying the aesthetics. A very simple version of implicit
-faceting is using a factor as your \\(x\\)-axis, such as in Figures 3.15—3.18.
+`facet_grid`나 `facet_wrap`을 명시적으로 호출하지 않고도 미학(aesthetics)을 지정하여 플롯을 패싯할 수 있습니다. 암시적 패싯의 매우 간단한 예는 그림 3.15—3.18에서처럼 요인(factor)을 \(x\)축으로 사용하는 것입니다.
 
-### 3.8.2 Interactive graphics
+### 3.8.2 대화형 그래픽
 
-The plots generated thus far have been static images. You can add an enormous
-amount of information and expressivity by making your plots interactive. We do
-not try here to to convey interactive visualizations in any depth, but we
-provide pointers to a few important resources. This is a dynamic space, so
-readers should explore the R ecosystem for recent developments.
+지금까지 생성된 플롯은 정적인 이미지였습니다. 플롯을 대화형(interactive)으로 만들면 엄청난 양의 정보와 표현력을 더할 수 있습니다. 여기서는 대화형 시각화를 깊이 있게 다루지는 않겠지만, 몇 가지 중요한 자료를 소개하겠습니다. 이는 역동적인 분야이므로 독자들은 최신 동향을 파악하기 위해 R 생태계를 탐색해 보아야 합니다.
 
-#### shiny
+#### Shiny
 
-Rstudio’s **[shiny](https://cran.r-project.org/web/packages/shiny/)** is a web
-application framework for R. It makes it easy to create interactive displays
-with sliders, selectors and other control elements that allow changing all
-aspects of the plot(s) shown – since the interactive elements call back
-directly into the R code that produces the plot(s). See the [shiny
-gallery](https://shiny.posit.co/r/gallery) for some great examples.
+Posit(구 RStudio)의 **[shiny](https://cran.r-project.org/web/packages/shiny/)**는 R용 웹 애플리케이션 프레임워크입니다. 대화형 요소가 플롯을 생성하는 R 코드를 직접 호출하므로, 슬라이더, 선택기 및 기타 제어 요소를 사용하여 표시되는 플롯의 모든 측면을 변경할 수 있는 대화형 디스플레이를 쉽게 만들 수 있습니다. 훌륭한 예시들을 [Shiny 갤러리](https://shiny.posit.co/r/gallery)에서 확인해 보세요.
 
-As a graphics engine for
-**[shiny](https://cran.r-project.org/web/packages/shiny/)** -based interactive
-visualizations you can use
-**[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)** , and indeed,
-base R graphics or any other graphics package. What may be a little awkward
-here is that the language used for describing the interactive options is
-separated from the production of the graphics via
-**[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)** and the
-grammar of graphics. The
-**[ggvis](https://cran.r-project.org/web/packages/ggvis/)** package aims to
-overcome this limitation:
+**[Shiny](https://cran.r-project.org/web/packages/shiny/)** 기반 대화형 시각화를 위한 그래픽 엔진으로 **[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)**를 사용할 수 있으며, 사실 기본 R 그래픽이나 다른 그래픽 패키지도 사용할 수 있습니다. 여기서 약간 어색한 점은 대화형 옵션을 설명하는 데 사용되는 언어가 **[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)**를 통한 그래픽 생성 및 그래픽의 문법과 분리되어 있다는 것입니다. **[ggvis](https://cran.r-project.org/web/packages/ggvis/)** 패키지는 이러한 한계를 극복하는 것을 목표로 합니다.
 
 #### ggvis
 
-**[ggvis](https://cran.r-project.org/web/packages/ggvis/)** 11 is an attempt
-at extending the good features of
-**[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)** into the realm
-of interactive graphics. In contrast to
-**[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)** , which
-produces graphics into R’s traditional graphics devices (PDF, PNG, etc.),
-**[ggvis](https://cran.r-project.org/web/packages/ggvis/)** builds upon a
-JavaScript infrastructure called [Vega](https://github.com/trifacta/vega), and
-its plots are intended to be viewed in an HTML browser. Like
-**[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)** , the
-**[ggvis](https://cran.r-project.org/web/packages/ggvis/)** package is
-inspired by grammar of graphics concepts, but uses distinct syntax. It
-leverages **[shiny](https://cran.r-project.org/web/packages/shiny/)** ’s
-infrastructure to connect to R to perform the computations needed for the
-interactivity. As its author put it12, “The goal is to combine the best of R
-(e.g., every modeling function you can imagine) and the best of the web
-(everyone has a web browser). Data manipulation and transformation are done in
-R, and the graphics are rendered in a web browser, using Vega.”
+**[ggvis](https://cran.r-project.org/web/packages/ggvis/)**11는 **[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)**의 장점들을 대화형 그래픽 영역으로 확장하려는 시도입니다. **[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)**가 R의 전통적인 그래픽 장치(PDF, PNG 등)에 그래픽을 생성하는 것과 대조적으로, **[ggvis](https://cran.r-project.org/web/packages/ggvis/)**는 [Vega](https://github.com/trifacta/vega)라는 JavaScript 인프라를 기반으로 하며, 그 플롯은 웹 브라우저에서 볼 수 있도록 의도되었습니다. **[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)**와 마찬가지로 **[ggvis](https://cran.r-project.org/web/packages/ggvis/)** 패키지도 그래픽의 문법 개념에서 영감을 받았지만, 별개의 구문을 사용합니다. 상호 작용에 필요한 계산을 수행하기 위해 R에 연결하는 **[Shiny](https://cran.r-project.org/web/packages/shiny/)**의 인프라를 활용합니다. 저자가 말했듯이12, 목표는 R의 최고(예: 상상할 수 있는 모든 모델링 기능)와 웹의 최고(모든 사람이 웹 브라우저를 가지고 있음)를 결합하는 것입니다. 데이터 조작 및 변환은 R에서 수행되며, 그래픽은 Vega를 사용하여 웹 브라우저에서 렌더링됩니다.
 
-11 At the time of writing (summer 2017), it is not clear whether the initial
-momentum of **[ggvis](https://cran.r-project.org/web/packages/ggvis/)**
-development will be maintained, and its current functionality and maturity do
-no yet match **[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)**.
+11 이 글을 쓰는 시점(2017년 여름)에는 **[ggvis](https://cran.r-project.org/web/packages/ggvis/)** 개발의 초기 추진력이 유지될지 불분명하며, 현재 기능과 완성도는 아직 **[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)**에 미치지 못합니다.
 
 12 https://ggvis.rstudio.com
 
-As a consequence of the interactivity in
-**[shiny](https://cran.r-project.org/web/packages/shiny/)** and
-**[ggvis](https://cran.r-project.org/web/packages/ggvis/)** , there needs to
-be an R interpreter running with the underlying data and code to respond to
-the user’s actions while she views the graphic. This R interpreter can be on
-the local machine or on a server; in both cases, the viewing application is a
-web browser, and the interaction with R goes through web protocols (http or
-https). That is, of course, different from a graphic stored in a self-
-contained file, which is produced once by R and can then be viewed in a PDF or
-HTML viewer without any connection to a running instance of R.
+**[Shiny](https://cran.r-project.org/web/packages/shiny/)**와 **[ggvis](https://cran.r-project.org/web/packages/ggvis/)**의 상호 작용 결과로, 사용자가 그래픽을 보는 동안 사용자의 동작에 응답하기 위해 기본 데이터와 코드를 실행하는 R 인터프리터가 필요합니다. 이 R 인터프리터는 로컬 머신이나 서버에 있을 수 있습니다. 두 경우 모두 뷰어 애플리케이션은 웹 브라우저이며, R과의 상호 작용은 웹 프로토콜(HTTP 또는 HTTPS)을 통해 이루어집니다. 물론 이는 R에 의해 한 번 생성되어 실행 중인 R 인스턴스에 연결되지 않고 PDF 또는 HTML 뷰어에서 볼 수 있는 자체 포함 파일에 저장된 그래픽과는 다릅니다.
 
 #### plotly
 
-A great web-based tool for interactive graphic generation is **plotly**. You
-can view some examples of interactive graphics online at <https://plot.ly/r>.
-To create your own interactive plots in R, you can use code such as
+대화형 그래픽 생성을 위한 또 다른 훌륭한 웹 기반 도구는 **plotly**입니다. [온라인](https://plot.ly/r)에서 대화형 그래픽의 몇 가지 예를 볼 수 있습니다. R에서 자신만의 대화형 플롯을 만들려면 다음과 같은 코드를 사용할 수 있습니다:
 
     
     
     library("plotly")
-    plot_ly(economics, x = ~ date, y = ~ unemploy / pop)__
+    plot_ly(economics, x = ~date, y = ~unemploy/pop)__
 
-As with **[shiny](https://cran.r-project.org/web/packages/shiny/)** and
-**[ggvis](https://cran.r-project.org/web/packages/ggvis/)** , the graphics are
-viewed in an HTML browser; however, no running R session is required. The
-graphics are self-contained HTML documents whose “logic” is coded in
-JavaScript, or more precisely, in the D3.js system.
+**[Shiny](https://cran.r-project.org/web/packages/shiny/)** 및 **[ggvis](https://cran.r-project.org/web/packages/ggvis/)**와 마찬가지로, 그래픽은 웹 브라우저에서 볼 수 있습니다. 그러나 실행 중인 R 세션이 반드시 필요한 것은 아닙니다. 그래픽은 로직이 JavaScript 또는 D3.js 시스템으로 코딩된 자체 포함 HTML 문서로 구성될 수 있습니다.
 
-[![](imgs/chap3-rglvolcano.png)](imgs/chap3-rglvolcano.png "Figure 3.36: rgl
-rendering of the volcano data, the topographic information for Maunga Whau
-\(Mt Eden\), one of about 50 volcanos in the Auckland volcanic field.")
+[![](imgs/chap3-rglvolcano.png)](imgs/chap3-rglvolcano.png "그림 3.36: 오클랜드 화산 지대의 약 50개 화산 중 하나인 Maunga Whau(Mt Eden)의 지형 정보인 volcano 데이터의 rgl 렌더링입니다.")
 
-Figure 3.36: **[rgl](https://cran.r-project.org/web/packages/rgl/)** rendering
-of the `volcano` data, the topographic information for Maunga Whau (Mt Eden),
-one of about 50 volcanos in the Auckland volcanic field.
+그림 3.36: **[rgl](https://cran.r-project.org/web/packages/rgl/)**을 이용한 `volcano` 데이터 렌더링. 오클랜드 화산 지대의 약 50개 화산 중 하나인 Maunga Whau(Mt Eden)의 지형 정보입니다.
 
 #### rgl, webgl
 
-For visualizing 3D objects (say, a geometrical structure), there is the
-package **[rgl](https://cran.r-project.org/web/packages/rgl/)**. It produces
-interactive viewer windows (either in specialized graphics device on your
-screen or through a web browser) in which you can rotate the scene, zoom and
-in out, etc. A screenshot of the scene produced by the code below is shown in
-Figure 3.36; such screenshots can be produced using the function `snapshot3d`.
+3D 객체(예: 기하학적 구조)를 시각화하려면 **[rgl](https://cran.r-project.org/web/packages/rgl/)** 패키지가 있습니다. 이 패키지는 화면의 특수 그래픽 창이나 웹 브라우저를 통해 장면을 회전시키거나 확대/축소할 수 있는 대화형 뷰어를 생성합니다. 아래 코드에서 생성된 장면의 스크린샷이 그림 3.36에 나와 있습니다. 이러한 스크린샷은 `snapshot3d` 함수를 사용하여 생성할 수 있습니다.
 
     
     
     data("volcano")
-    volcanoData = list(
+    volcanodata = list(
       x = 10 * seq_len(nrow(volcano)),
       y = 10 * seq_len(ncol(volcano)),
       z = volcano,
       col = terrain.colors(500)[cut(volcano, breaks = 500)]
     )
     library("rgl")
-    with(volcanoData, persp3d(x, y, z, color = col))__
+    with(volcanodata, persp3d(x, y, z, color = col))__
 
-In the code above, the base R function `cut` computes a mapping from the value
-range of the `volcano` data to the integers between 1 and 50013, which we use
-to index the color scale, `terrain.colors(500)`. For more information, consult
-the package’s excellent vignette.
+위의 코드에서 기본 R 함수 `cut`은 `volcano` 데이터의 값 범위에서 1부터 500 사이의 정수로의 매핑을 계산하며13, 우리는 이 정수들을 사용하여 `terrain.colors(500)`에서 색상 스케일을 인덱싱합니다. 자세한 내용은 이 패키지의 훌륭한 비네트(vignettes)를 참조하세요.
 
-13 More precisely, it returns a factor with as many levels, which we let R
-autoconvert to integers.
+13 더 정확하게는, `cut`은 500개의 수준(level)을 가진 요인(factor)을 반환하며, 우리는 이를 정수로 강제 변환(coerce)할 수 있습니다.
 
-## 3.9 Color
+## 3.9 색상(Color)
 
-An important consideration when making plots is the coloring that we use in
-them. Most R users are likely familiar with the built-in R color scheme, used
-by base R graphics, as shown in Figure 3.37.
+플롯을 만들 때 중요하게 고려해야 할 사항 중 하나는 플롯에 사용하는 색상입니다. 대부분의 R 사용자는 그림 3.37에 표시된 것과 같이 기본 R 그래픽에서 사용하는 내장 색상 체계에 익숙할 것입니다.
 
     
     
@@ -1669,19 +1159,13 @@ by base R graphics, as shown in Figure 3.37.
 
 [![](03-chap_files/figure-html/fig-graphics-
 simplecolorpie-1.png)](03-chap_files/figure-html/fig-graphics-
-simplecolorpie-1.png "Figure 3.37: The first eight colors in the base R color
-palette.")
+simplecolorpie-1.png "그림 3.37: 기본 R 색상 팔레트의 처음 8가지 색상입니다.")
 
-Figure 3.37: The first eight colors in the base R color palette.
+그림 3.37: 기본 R 색상 팔레트의 처음 8가지 색상.
 
-The origins of this color palette date back to 1980s hardware, where graphics
-cards handled colors by letting each pixel either use or not use each of the
-three basic color channels of a cathode-ray tube: red, green and blue (RGB).
-This led to \\(2^3=8\\) combinations at the eight corners of an RGB color
-cube14.
+이 색상 팔레트의 기원은 1980년대 하드웨어로 거슬러 올라갑니다. 당시 그래픽 카드는 음극선관(CRT)의 세 가지 기본 색상 채널인 빨강, 초록, 파랑(RGB)을 각각 켜거나 끄는 방식으로 색상을 처리했습니다. 이로 인해 RGB 색상 입방체의 여덟 개 모서리에서 \\(2^3=8\\)가지 조합이 만들어졌습니다14.
 
-14 Thus, the \\(8^\text{th}\\) color in Figure 3.37 should be white, instead
-it is grey.
+14 따라서 그림 3.37의 8번째 색상은 흰색이어야 하지만, 대신 회색으로 표시됩니다.
 
 The first eight colors for a categorical variable in
 **[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)** are shown in
@@ -1855,73 +1339,55 @@ default choice of colors for the annotation bars. The `pheatmap` function has
 many further options, and if you want to use it for your own data
 visualizations, it’s worth studying them.
 
-### 3.10.1 Dendrogram ordering
+### 3.10.1 덴드로그램 순서(Dendrogram ordering)
 
-In Figure 3.41, the trees at the left and the top represent the result of a
-hierarchical clustering algorithm and are also called **dendrograms**. The
-ordering of the rows and columns is based on the dendrograms. It has an
-enormous effect on the visual impact of the heatmap. However, it can be
-difficult to decide which of the apparent patterns are real and which are
-consequences of arbitrary tree layout decisions17. Let’s keep in mind that:
+그림 3.41에서 왼쪽과 상단의 나무 모양은 계층적 클러스터링 알고리즘의 결과를 나타내며 **덴드로그램(dendrograms)**이라고도 불립니다. 행과 열의 순서는 덴드로그램을 기반으로 합니다. 이는 히스토그램의 시각적 효과에 엄청난 영향을 미칩니다. 그러나 나타나는 패턴 중 어느 것이 실제이고 어느 것이 임의적인 트리 레이아웃 결정의 결과인지 결정하기 어려울 수 있습니다17. 다음 사항을 염두에 둡시다:
 
-17 We will learn about clustering and methods for evaluating cluster
-significance in [Chapter 5](05-chap.html).
+17 우리는 [5장](05-chap.html)에서 클러스터링과 클러스터의 유의성을 평가하는 방법에 대해 배울 것입니다.
 
-  * Ordering the rows and columns by cluster dendrogram (as in Figure 3.41) is an arbitrary choice, and you could just as well make others.
+  * 클러스터 덴드로그램에 따라 행과 열을 정렬하는 것(그림 3.41에서처럼)은 임의적인 선택이며, 다른 방식으로 정렬할 수도 있습니다.
 
-  * Even if you settle on dendrogram ordering, there is an essentially arbitrary choice at each internal branch, as each branch could be flipped without changing the topology of the tree (see also [Figure 5.21](05-chap.html#fig-mobile)).
+  * 덴드로그램 순서로 결정하더라도, 각 내부 분기(internal branch)에서 어느 쪽을 왼쪽 또는 오른쪽으로 둘지는 본질적으로 임의적인 선택입니다. 트리의 위상(topology)을 바꾸지 않고도 각 분기를 뒤집을 수 있기 때문입니다([그림 5.21](05-chap.html#fig-mobile) 참조).
 
 __
 
-Question 3.6
+질문 3.6
 
-How does the `pheatmap` function deal with the decision of how to pick which
-branches of the subtree go left and right?
-
-__
-
-Solution
+`pheatmap` 함수는 서브트리의 어느 분기를 왼쪽과 오른쪽으로 보낼지 결정하는 문제를 어떻게 처리하나요?
 
 __
 
-This is described in the manual page of the `hclust` function in the
-**[stats](https://cran.r-project.org/web/packages/stats/)** package, which, by
-default, is used by `pheatmap`.
+해결책
 
 __
 
-Question 3.7
-
-What other ordering methods can you think of?
+이는 기본적으로 `pheatmap`에서 사용되는 **[stats](https://cran.r-project.org/web/packages/stats/)** 패키지의 `hclust` 함수 매뉴얼 페이지에 설명되어 있습니다.
 
 __
 
-Solution
+질문 3.7
+
+다른 어떤 정렬 방법들을 생각할 수 있나요?
 
 __
 
-Among the methods proposed is the travelling salesman problem ([McCormick Jr,
-Schweitzer, and White 1972](16-chap.html#ref-McCormick:1972:MatrixClustering))
-or projection on the first principal component (for instance, see the examples
-in the manual page of `pheatmap`).
+해결책
 
 __
 
-Question 3.8
+제안된 방법들 중에는 외판원 문제(travelling salesman problem, [McCormick Jr, Schweitzer, and White 1972](16-chap.html#ref-McCormick:1972:MatrixClustering))나 첫 번째 주성분으로의 투영(예를 들어 `pheatmap` 매뉴얼 페이지의 예제 참조) 등이 있습니다.
 
-Check the argument `clustering_callback` of the `pheatmap` function.
+__
 
-### 3.10.2 Color spaces
+질문 3.8
 
-Color perception in humans ([Helmholtz 1867](16-chap.html#ref-Helmholtz:1867))
-is three-dimensional18. There are different ways of parameterizing this space.
-Above we already encountered the RGB color model, which uses three values in
-[0,1], for instance at the beginning of Section 3.4, where we printed out the
-contents of `groupColor`:
+`pheatmap` 함수의 `clustering_callback` 인수를 확인해 보세요.
 
-18 Physically, there is an infinite number of wave-lengths of light and an
-infinite number of ways of mixing them, so for other species, or robots, color
-space can have fewer or more dimensions.
+### 3.10.2 색 공간(Color spaces)
+
+인간의 색 지각([Helmholtz 1867](16-chap.html#ref-Helmholtz:1867))은 3차원적입니다18. 이 공간을 매개변수화하는 방법은 여러 가지가 있습니다. 위에서 우리는 이미 3.4절 시작 부분에서 `groupColor`의 내용을 출력할 때 [0,1] 범위의 세 값을 사용하는 RGB 색상 모델을 접했습니다.
+
+18 물리적으로는 빛의 파장이 무수히 많고 이를 혼합하는 방법도 무수히 많기 때문에, 다른 종이나 로봇의 경우 색 공간이 더 적거나 더 많은 차원을 가질 수 있습니다.
 
     
     
@@ -1931,93 +1397,39 @@ space can have fewer or more dimensions.
         E3.25 
     "#CAB2D6" 
 
-Here, CA is the hexadecimal representation for the strength of the red color
-channel, B2 of the green and D6 of the blue color channel. In decimal, these
-numbers are 202, 178 and 214. The range of these values goes from to 0 to 255,
-so by dividing by this maximum value, an RGB triplet can also be thought of as
-a point in the three-dimensional unit cube.
+여기서 CA는 빨간색 채널의 강도를 나타내는 16진수 표현이며, B2는 녹색, D6은 파란색 채널의 강도를 나타냅니다. 십진수로 변환하면 이 숫자들은 각각 202, 178, 214입니다. 이 값들의 범위는 0에서 255까지이므로, 이를 최대값으로 나누면 RGB 삼중항(triplet)을 3차원 단위 입방체 내의 한 점으로 생각할 수도 있습니다.
 
 [![](03-chap_files/figure-html/fig-graphics-hcl-1.png)](03-chap_files/figure-
-html/fig-graphics-hcl-1.png "Figure 3.42 \(a\): ")
+html/fig-graphics-hcl-1.png "그림 3.42 (a): ")
 
 (a)
 
 [![](03-chap_files/figure-html/fig-graphics-hcl-2.png)](03-chap_files/figure-
-html/fig-graphics-hcl-2.png "Figure 3.42 \(b\): ")
+html/fig-graphics-hcl-2.png "그림 3.42 (b): ")
 
 (b)
 
-Figure 3.42: Circles in HCL colorspace. (a) Luminance \\(L\\) fixed at
-\\(75\\), while the angular coordinate \\(H\\) (hue) varies from 0 to 360 and
-the radial coordinate \\(C\\) takes the values \\(0, 10, ..., 60\\). (b)
-Constant chroma \\(C\\) at \\(50\\), \\(H\\) as above, and the radial
-coordinate is luminance \\(L\\) at values \\(10, 20, ..., 90\\).
+그림 3.42: HCL 색 공간의 원. (a) 휘도(Luminance) \\(L\\)은 75로 고정된 상태에서 각도 좌표 \\(H\\)(색상, hue)는 0에서 360까지 변하고 반지름 좌표 \\(C\\)는 0, 10, ..., 60의 값을 가집니다. (b) 크로마(Chroma) \\(C\\)는 50으로 고정되고 \\(H\\)는 위와 같으며, 반지름 좌표는 휘도 \\(L\\)로 10, 20, ..., 90의 값을 가집니다.
 
-The function `hcl` uses a different coordinate system. Again this consists of
-three coordinates: hue \\(H\\), an angle in the range \\([0, 360]\\), chroma
-\\(C\\), a positive number, and luminance \\(L\\), a value in \\([0, 100]\\).
-The upper bound for \\(C\\) depends on on hue and luminance.
+`hcl` 함수는 다른 좌표계를 사용합니다. 이 역시 색상(hue) \\(H\\)(\\([0, 360]\\) 범위의 각도), 크로마(chroma) \\(C\\)(양수), 휘도(luminance) \\(L\\)(\\([0, 100]\\) 범위의 값)라는 세 가지 좌표로 구성됩니다. \\(C\\)의 상한선은 색상과 휘도에 따라 달라집니다.
 
-The `hcl` function corresponds to polar coordinates in the CIE-LUV19 and is
-designed for area fills. By keeping chroma and luminance coordinates constant
-and only varying hue, it is easy to produce color palettes that are harmonious
-and avoid irradiation illusions that make light colored areas look bigger than
-dark ones. Our attention also tends to get drawn to loud colors, and fixing
-the value of chroma makes the colors equally attractive to our eyes.
+`hcl` 함수는 CIE-LUV19의 극좌표(polar coordinates)에 대응하며 영역 채우기(area fill)를 위해 설계되었습니다. 크로마와 휘도 좌표를 일정하게 유지하고 색상만 변화시킴으로써, 조화로운 색상 팔레트를 쉽게 만들 수 있으며 밝은 색 영역이 어두운 영역보다 더 커 보이는 조사(irradiation) 착시를 피할 수 있습니다. 또한 우리의 시선은 강렬한 색상에 끌리는 경향이 있는데, 크로마 값을 고정하면 모든 색상이 우리 눈에 동일하게 매력적으로 보이게 됩니다.
 
-19 CIE: Commission Internationale de l’Éclairage – see e.g. Wikipedia for more
-on this.
+19 CIE: 국제 조명 위원회(Commission Internationale de l’Éclairage) – 자세한 내용은 위키백과 등을 참조하세요.
 
-There are many ways of choosing colors from a color wheel. _Triads_ are three
-colors chosen equally spaced around the color wheel; for example,
-\\(H=0,120,240\\) gives red, green, and blue. _Tetrads_ are four equally
-spaced colors around the color wheel, and some graphic artists describe the
-effect as “dynamic”. _Warm colors_ are a set of equally spaced colors close to
-yellow, _cool colors_ a set of equally spaced colors close to blue. _Analogous
-color_ sets contain colors from a small segment of the color wheel, for
-example, yellow, orange and red, or green, cyan and blue. _Complementary
-colors_ are colors diametrically opposite each other on the color wheel. A
-tetrad is two pairs of complementaries. _Split complementaries_ are three
-colors consisting of a pair of complementaries, with one partner split equally
-to each side, for example, \\(H=60,\,240-30,\,240+30\\). This is useful to
-emphasize the difference between a pair of similar categories and a third
-different one. A more thorough discussion is provided in the references
-([Mollon 1995](16-chap.html#ref-Mollon:1995); [Ihaka 2003](16-chap.html#ref-
-IhakaColorPres)).
+색상환(color wheel)에서 색을 선택하는 방법은 여러 가지가 있습니다. _삼합색(Triads)_은 색상환에서 등간격으로 떨어진 세 가지 색상을 선택하는 것입니다. 예를 들어 \\(H=0,120,240\\)은 빨강, 초록, 파랑을 줍니다. _사합색(Tetrads)_은 색상환에서 등간격인 네 가지 색상이며, 일부 그래픽 아티스트들은 그 효과를 "역동적"이라고 설명합니다. _따뜻한 색(Warm colors)_은 노란색에 가까운 등간격 색상 세트이고, _차가운 색(Cool colors)_은 파란색에 가까운 등간격 색상 세트입니다. _유사 색(Analogous color)_ 세트는 노랑, 주황, 빨강 또는 초록, 청록, 파랑과 같이 색상환의 작은 세그먼트 내의 색상들을 포함합니다. _보색(Complementary colors)_은 색상환에서 서로 정반대편에 위치한 색상들입니다. 사합색은 두 쌍의 보색으로 이루어집니다. _분할 보색(Split complementaries)_은 한 쌍의 보색 중 하나를 양옆으로 등간격인 두 색으로 나눈 세 가지 색상입니다. 예를 들어 \\(H=60,\,240-30,\,240+30\\)입니다. 이는 두 개의 유사한 범주와 세 번째 다른 범주 사이의 차이를 강조할 때 유용합니다. 참고 문헌([Mollon 1995](16-chap.html#ref-Mollon:1995); [Ihaka 2003](16-chap.html#ref-IhakaColorPres))에서 더 자세한 논의를 확인할 수 있습니다.
 
-#### Lines versus areas
+#### 선 대 영역(Lines versus areas)
 
-For lines and points, we want a strong contrast to the background, so on a
-white background, we want them to be relatively dark (low luminance \\(L\\)).
-For area fills, lighter, more pastel-type colors with low to moderate
-chromatic content are usually more pleasant.
+선과 점의 경우 배경과 강한 대비를 원하므로, 흰색 배경에서는 상대적으로 어둡게(낮은 휘도 \\(L\\)) 만드는 것이 좋습니다. 영역 채우기의 경우, 채도가 낮거나 중간 정도인 더 밝은 파스텔 톤의 색상이 보통 더 보기 좋습니다.
 
-## 3.11 Data transformations
+## 3.11 데이터 변환(Data transformations)
 
-Plots in which most points are huddled up in one area, with much of the
-available space sparsely populated, are difficult to read. If the histogram of
-the marginal distribution of a variable has a sharp peak and then long tails
-to one or both sides, transforming the data can be helpful. These
-considerations apply both to `x` and `y` aesthetics, and to color scales. In
-the plots of this chapter that involved the microarray data, we used the
-logarithmic transformation20 – not only in scatterplots like Figure 3.27 for
-the \\(x\\) and \\(y\\)-coordinates, but also in Figure 3.41 for the color
-scale that represents the expression fold changes. The logarithm
-transformation is attractive because it has a definitive meaning - a move up
-or down by the same amount on a log-transformed scale corresponds to the same
-multiplicative change on the original scale: \\(\log(ax)=\log a+\log x\\).
+대부분의 점이 한 영역에 뭉쳐 있고 가용 공간의 상당 부분이 비어 있는 플롯은 읽기 어렵습니다. 변수의 주변 분포(marginal distribution) 히스토그램이 날카로운 정점을 갖고 한쪽 또는 양쪽으로 긴 꼬리를 가진다면, 데이터를 변환하는 것이 도움이 될 수 있습니다. 이러한 고려 사항은 \(x\) 및 \(y\) 미학뿐만 아니라 색상 척도에도 적용됩니다. 마이크로어레이 데이터를 포함하는 이 장의 플롯들에서 우리는 로그 변환20을 사용했습니다. 이는 그림 3.27과 같은 산점도의 \(x\) 및 \(y\) 좌표뿐만 아니라, 발현 배수 변화(fold changes)를 나타내는 그림 3.41의 색상 척도에서도 마찬가지입니다. 로그 변환은 확실한 의미를 갖기 때문에 매력적입니다. 로그 변환된 척도에서 동일한 양만큼 위아래로 움직이는 것은 원래 척도에서 동일한 배수 변화에 대응합니다: \\(\log(ax)=\log a+\log x\\).
 
-20 We used it implicitly since the data in the _ExpressionSet_ object `x`
-already come log-transformed.
+20 `ExpressionSet` 객체 `x`의 데이터가 이미 로그 변환된 상태로 제공되므로 우리는 이를 암시적으로 사용했습니다.
 
-Sometimes the logarithm however is not good enough, for instance when the data
-include zero or negative values, or when even on the logarithmic scale the
-data distribution is highly uneven. From the upper panel of Figure 3.43, it is
-easy to take away the impression that the distribution of `M` depends on `A`,
-with higher variances for lower `A`. However, this is entirely a visual
-artefact, as the lower panel confirms: the distribution of `M` is independent
-of `A`, and the apparent trend we saw in the upper panel was caused by the
-higher point density at smaller `A`.
+하지만 때로는 로그 변환만으로는 충분하지 않을 수 있습니다. 예를 들어 데이터에 0이나 음수 값이 포함되어 있거나, 로그 척도에서도 데이터 분포가 매우 불균등한 경우입니다. 그림 3.43의 위쪽 패널을 보면, `A`가 낮을수록 분산이 더 커 보이는 등 `M`의 분포가 `A`에 의존한다는 인상을 받기 쉽습니다. 그러나 이는 전적으로 시각적 착시이며, 아래쪽 패널이 이를 확인해 줍니다. `M`의 분포는 `A`와 독립적이며, 위쪽 패널에서 보았던 겉보기 추세는 작은 `A`에서 점 밀도가 더 높았기 때문에 발생한 것입니다.
 
     
     
@@ -2027,41 +1439,37 @@ higher point density at smaller `A`.
     gg + geom_point(aes(x = rank(A)), size = 0.2)__
 
 [![](03-chap_files/figure-html/fig-graphics-MA-1.png)](03-chap_files/figure-
-html/fig-graphics-MA-1.png "Figure 3.43 \(a\): ")
+html/fig-graphics-MA-1.png "그림 3.43 (a): ")
 
 (a)
 
 [![](03-chap_files/figure-html/fig-graphics-MA-2.png)](03-chap_files/figure-
-html/fig-graphics-MA-2.png "Figure 3.43 \(b\): ")
+html/fig-graphics-MA-2.png "그림 3.43 (b): ")
 
 (b)
 
-Figure 3.43: The effect of rank transformation on the visual perception of
-dependency.
+그림 3.43: 순위 변환(rank transformation)이 의존성의 시각적 지각에 미치는 영향.
 
 __
 
-Question 3.9
+질문 3.9
 
-Can the visual artefact be avoided by using a density- or binning-based
-plotting method, as in Figure 3.31?
+그림 3.31에서처럼 밀도 기반 또는 구간화 기반 플로팅 방법을 사용하여 시각적 착시를 피할 수 있을까요?
 
 __
 
-Question 3.10
+질문 3.10
 
-Can the rank transformation also be applied when choosing color scales e.g.
-for heatmaps? What does _histogram equalization_ in image processing do?
+순위 변환을 히트맵 등의 색상 척도를 선택할 때도 적용할 수 있을까요? 이미지 처리에서 _히스토그램 평활화(histogram equalization)_는 무엇을 하나요?
 
-## 3.12 Mathematical symbols and other fonts
+## 3.12 수학 기호 및 기타 글꼴
 
-We can use mathematical notation in plot labels, using a notation that is a
-mix of R syntax and LaTeX-like notation (see `help("plotmath")` for details):
+우리는 R 구문과 LaTeX 스타일 표기법이 혼합된 방식을 사용하여 플롯 레이블에 수학적 표기법을 사용할 수 있습니다(자세한 내용은 `help("plotmath")`를 참조하세요):
 
 [![](imgs/chap3-ecdfs-bauhaus93font.png)](imgs/chap3-ecdfs-bauhaus93font.png
-"Figure 3.44: As Figure fig-graphics-onedecdf, with font “Bauhaus 93”.")
+"그림 3.44: 그림 3.24와 유사하지만, “Bauhaus 93” 글꼴을 사용했습니다.")
 
-Figure 3.44: As Figure 3.24, with font “Bauhaus 93”.
+그림 3.44: 그림 3.24와 유사하지만, “Bauhaus 93” 글꼴을 사용했습니다.
 
     
     
@@ -2078,14 +1486,11 @@ Figure 3.44: As Figure 3.24, with font “Bauhaus 93”.
 
 [![](03-chap_files/figure-html/fig-graphics-
 mathnot-1.png)](03-chap_files/figure-html/fig-graphics-mathnot-1.png
-"Figure 3.45: Volume \\Omega of the \\nu-dimensional sphere with radius
-\\rho=1, for \\nu=1,...,15.")
+"그림 3.45: 반지름 \\rho=1인 \\nu차원 구의 부피 \\Omega (\\nu=1,...,15).")
 
-Figure 3.45: Volume \\(\Omega\\) of the \\(\nu\\)-dimensional sphere with
-radius \\(\rho=1\\), for \\(\nu=1,...,15\\).
+그림 3.45: 반지름 \\(\rho=1\\)인 \\(\nu\\)차원 구의 부피 \\(\Omega\\) (\\(\nu=1,...,15\\)).
 
-The result is shown in Figure 3.45. It’s also easy to switch to other fonts,
-for instance the serif font Times (Figure 3.46).
+결과는 그림 3.45에 나와 있습니다. 또한 세리프(serif) 글꼴인 Times와 같은 다른 글꼴로 전환하는 것도 쉽습니다(그림 3.46).
 
     
     
@@ -2094,37 +1499,17 @@ for instance the serif font Times (Figure 3.46).
 
 [![](03-chap_files/figure-html/fig-graphics-
 timesfont-1.png)](03-chap_files/figure-html/fig-graphics-timesfont-1.png
-"Figure 3.46: As Figure fig-graphics-onedecdf, with a different font.")
+"그림 3.46: 그림 3.24와 유사하지만, 다른 글꼴을 사용했습니다.")
 
-Figure 3.46: As Figure 3.24, with a different font.
+그림 3.46: 그림 3.24와 유사하지만, 다른 글꼴을 사용했습니다.
 
-In fact, the set of fonts that can be used with a standard R installation are
-limited, but luckily there is the package
-**[extrafont](https://cran.r-project.org/web/packages/extrafont/)** , which
-facilitates using fonts other than R’s standard set of PostScript fonts.
-There’s some extra work needed before we can use it, since fonts external to R
-first need to be made known to it. They could come shipped with your operating
-system, with a word processor or with another graphics application. The set of
-fonts available and their physical location is therefore not standardized, but
-will depend on your operating system and further configurations. In the first
-session after attaching the
-**[extrafont](https://cran.r-project.org/web/packages/extrafont/)** package,
-you will need to run the function `font_import` to import fonts and make them
-known to the package. Then in each session in which you want to use them, you
-need to call the `loadfonts` function to register them with one or more of R’s
-graphics devices. Finally you can use the `fonttable` function to list the
-available fonts. You will need to refer to the documentation of the
-**[extrafonts](https://cran.r-project.org/web/packages/extrafonts/)** package
-to see how to make this work on your machine.
+사실 표준 R 설치에서 사용할 수 있는 글꼴 세트는 제한적이지만, 다행히 R의 표준 PostScript 글꼴 이외의 글꼴을 쉽게 사용할 수 있도록 도와주는 **[extrafont](https://cran.r-project.org/web/packages/extrafont/)** 패키지가 있습니다. R 외부의 글꼴을 먼저 R에 인식시켜야 하므로 사용하기 전에 추가 작업이 필요합니다. 글꼴은 운영 체제, 워드 프로세서 또는 다른 그래픽 애플리케이션과 함께 설치되었을 수 있습니다. 따라서 사용 가능한 글꼴 세트와 물리적 위치는 표준화되어 있지 않으며, 운영 체제 및 추가 구성에 따라 달라집니다. **[extrafont](https://cran.r-project.org/web/packages/extrafont/)** 패키지를 불러온 후 첫 번째 세션에서는 글꼴을 가져와 패키지에 알리기 위해 `font_import` 함수를 실행해야 합니다. 그런 다음 글꼴을 사용하려는 각 세션에서 하나 이상의 R 그래픽 장치에 등록하기 위해 `loadfonts` 함수를 호출해야 합니다. 마지막으로 `fonttable` 함수를 사용하여 사용 가능한 글꼴 목록을 확인할 수 있습니다. 자신의 머신에서 이 작업을 수행하는 방법은 **[extrafonts](https://cran.r-project.org/web/packages/extrafonts/)** 패키지의 문서를 참조해야 합니다.
 
 __
 
-Task
+태스크
 
-Use the package
-**[extrafont](https://cran.r-project.org/web/packages/extrafont/)** to produce
-a version of Figure 3.46 with the font “Bauhaus 93” (or another one available
-on your system).
+**[extrafont](https://cran.r-project.org/web/packages/extrafont/)** 패키지를 사용하여 "Bauhaus 93"(또는 시스템에서 사용 가능한 다른 글꼴) 글꼴로 그림 3.46의 버전을 만들어 보세요.
 
 ## 3.13 Genomic data
 
@@ -2163,18 +1548,32 @@ Let’s start with some fun examples, an ideogram plot of human chromosome 1
     
     library("ggbio")
     data("hg19IdeogramCyto", package = "biovizBase")
+## 3.13 게놈 데이터(Genomic data)
+
+[![](imgs/EBI-genomebrowser-rnaseq.png)](imgs/EBI-genomebrowser-rnaseq.png
+"그림 3.47: Ensembl 게놈 브라우저의 스크린샷으로, 게놈 지역의 유전자 어노테이션과 RNA-Seq 실험의 리드 파일업(read pile-up) 시각화를 보여줍니다.")
+
+그림 3.47: Ensembl 게놈 브라우저의 스크린샷. 게놈 지역의 유전자 어노테이션과 RNA-Seq 실험의 리드 파일업(read pile-up) 시각화를 보여줍니다.
+
+게놈 데이터를 시각화하려면 이 장에서 논의한 일반적인 원칙 외에도 몇 가지 구체적인 고려 사항이 있습니다. 데이터는 대개 게놈 좌표와 연관되어 있습니다. 사실 게놈 좌표는 게놈 데이터 통합을 위한 훌륭한 조직화 원칙을 제공합니다. 그림 3.47과 같은 게놈 브라우저 디스플레이를 본 적이 있을 것입니다. 여기서는 공공 어노테이션뿐만 아니라 여러분의 데이터를 사용하여 이러한 플롯을 프로그래밍 방식으로 생성하는 방법을 간단히 보여드리겠습니다. 이는 짧은 맛보기에 불과하며, 더 완전한 그림을 보려면 [Bioconductor](https://www.bioconductor.org)와 같은 자료를 참조하시기 바랍니다.
+
+게놈 데이터 시각화의 주요 과제는 게놈의 크기입니다. 전체 게놈에서 뉴클레오타이드 수준까지 다중 척도에서의 시각화가 필요합니다. 확대 및 축소가 쉬워야 하며, 크기 척도에 따라 서로 다른 시각화 전략이 필요할 수 있습니다. 생물학적 분자(게놈, 유전자, 전사체, 단백질)를 선형적으로 시각화하는 것이 편리할 수 있지만, 3D 물리적 세계에서의 배치가 (매우) 중요할 수도 있습니다.
+
+몇 가지 재미있는 예시부터 시작해 보겠습니다. 인간 1번 염색체의 이데오그램(ideogram) 플롯(그림 3.48)과 RNA 편집 부위의 전 게놈 분포 플롯(그림 3.49)입니다.
+
+    
+    
+    library("ggbio")
+    data("hg19IdeogramCyto", package = "biovizBase")
     plotIdeogram(hg19IdeogramCyto, subchr = "chr1")__
 
 [![](03-chap_files/figure-html/fig-graphics-
 ideogram-1-1.png)](03-chap_files/figure-html/fig-graphics-ideogram-1-1.png
-"Figure 3.48: Chromosome 1 of the human genome: ideogram plot.")
+"그림 3.48: 인간 게놈의 1번 염색체: 이데오그램 플롯.")
 
-Figure 3.48: Chromosome 1 of the human genome: ideogram plot.
+그림 3.48: 인간 게놈의 1번 염색체: 이데오그램 플롯.
 
-The `darned_hg19_subset500` lists a selection of 500 RNA editing sites in the
-human genome. It was obtained from the _Database of RNA editing in Flies, Mice
-and Humans_ (DARNED, <https://darned.ucc.ie/>). The result is shown in Figure
-3.49.
+`darned_hg19_subset500`은 인간 게놈에서 선택된 500개의 RNA 편집 부위를 나열합니다. 이는 파리, 생쥐 및 인간의 RNA 편집 데이터베이스(DARNED, <https://darned.ucc.ie/>)에서 가져온 것입니다. 결과는 그림 3.49에 나와 있습니다.
 
     
     
@@ -2185,28 +1584,23 @@ and Humans_ (DARNED, <https://darned.ucc.ie/>). The result is shown in Figure
 
 [![](03-chap_files/figure-html/fig-graphics-
 darned1-1.png)](03-chap_files/figure-html/fig-graphics-darned1-1.png
-"Figure 3.49: Karyogram with RNA editing sites. exReg indicates whether a site
-is in the coding region \(C\), 3’- or 5’-UTR.")
+"그림 3.49: RNA 편집 부위가 포함된 카리오그램(Karyogram). exReg는 해당 부위가 코딩 영역(C), 3’- 또는 5’-UTR에 있는지 여부를 나타냅니다.")
 
-Figure 3.49: Karyogram with RNA editing sites. `exReg` indicates whether a
-site is in the coding region (C), 3’- or 5’-UTR.
+그림 3.49: RNA 편집 부위가 포함된 카리오그램(Karyogram). `exReg`는 해당 부위가 코딩 영역(C), 3’- 또는 5’-UTR에 있는지 여부를 나타냅니다.
 
 __
 
-Question 3.11
+질문 3.11
 
-How do you fix the ordering of the chromosomes in Figure 3.49 and get rid of
-the warning about chromosome lengths?
-
-__
-
-Solution
+그림 3.49에서 염색체의 순서를 어떻게 고치고 염색체 길이에 대한 경고를 어떻게 없앨 수 있을까요?
 
 __
 
-The information on chromosome lengths in the hg19 assembly of the human genome
-is (for instance) stored in the `ideoCyto` dataset. We use the function
-`keepSeqlevels` to reorder the chromosomes. See Figure 3.50.
+해결책
+
+__
+
+인간 게놈의 hg19 어셈블리에서의 염색체 길이에 대한 정보는 (예를 들어) `ideoCyto` 데이터 세트에 저장되어 있습니다. 염색체의 순서를 다시 정하기 위해 `keepSeqlevels` 함수를 사용합니다. 그림 3.50을 참조하세요.
 
     
     
@@ -2218,19 +1612,19 @@ is (for instance) stored in the `ideoCyto` dataset. We use the function
 
 [![](03-chap_files/figure-html/fig-graphics-
 darned2-1.png)](03-chap_files/figure-html/fig-graphics-darned2-1.png
-"Figure 3.50: Improved version of Figure fig-graphics-darned1.")
+"그림 3.50: 그림 3.49의 개선된 버전입니다.")
 
-Figure 3.50: Improved version of Figure 3.49.
-
-__
-
-Question 3.12
-
-What type of object is `darned_hg19_subset500`?
+그림 3.50: 그림 3.49의 개선된 버전.
 
 __
 
-Solution
+질문 3.12
+
+`darned_hg19_subset500`은 어떤 유형의 객체인가요?
+
+__
+
+해결책
 
 __
 
@@ -2255,69 +1649,27 @@ __
       -------
       seqinfo: 23 sequences from an unspecified genome; no seqlengths
 
-It is a _GRanges_ object, that is, a specialized class from the Bioconductor
-project for storing data that are associated with genomic coordinates. The
-first three columns are obligatory: `seqnames`, the name of the containing
-biopolymer (in our case, these are names of human chromosomes), `ranges`, the
-genomic coordinates of the intervals (in this case, the intervals all have
-length 1, as they each refer to a single nucleotide), and the DNA `strand`
-from which the RNA is transcribed. You can find out more on how to use this
-class and its associated infrastructure in the documentation, e.g., the
-vignette of the
-**[GenomicRanges](https://bioconductor.org/packages/GenomicRanges/)** package.
-Learning it is worth the effort if you want to work with genome-associated
-datasets, as it allows for convenient, efficient and safe manipulation of
-these data and provides many powerful utilities.
+이는 게놈 좌표와 연관된 데이터를 저장하기 위한 Bioconductor 프로젝트의 특수 클래스인 _GRanges_ 객체입니다. 처음 세 개의 열은 필수 사항입니다: `seqnames`는 포함된 생체 고분자의 이름(우리의 경우 인간 염색체 이름), `ranges`는 구간의 게놈 좌표(이 경우 각 구간은 단일 뉴클레오타이드를 나타내므로 길이는 모두 1임), 그리고 RNA가 전사되는 DNA `strand`입니다. 이 클래스와 관련 인프라를 사용하는 방법에 대한 자세한 내용은 문서(예: **[GenomicRanges](https://bioconductor.org/packages/GenomicRanges/)** 패키지의 비네트)를 참조하세요. 게놈 연관 데이터 세트로 작업하려면 이를 배울 가치가 있습니다. 왜냐하면 이러한 데이터를 편리하고 효율적이며 안전하게 조작할 수 있게 해주고 많은 강력한 유틸리티를 제공하기 때문입니다.
 
-## 3.14 Summary of this chapter
+## 3.14 이 장의 요약
 
-Visualizing data, either “raw” or along the various steps of processing,
-summarization and inference, is one of the most important activities in
-applied statistics, and indeed, in science. It sometimes gets short shrift in
-textbooks since there is not much deductive theory. However, there is a large
-number of good (and bad) practices, and once you pay attention to it, you will
-quickly see whether a certain graphic is effective in conveying its message,
-or what choices you could make to create powerful and aesthetically attrative
-data visualizations. Among the important options are the plot type (what is
-called a `geom` in
-**[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)**), proportions
-(incl. aspect ratios) and colors. The _grammar of graphics_ is a powerful set
-of concepts to reason about graphics and to communicate our intentions for a
-data visualization to a computer.
+데이터를 "가공되지 않은" 상태로 보거나 처리, 요약 및 추론의 다양한 단계에서 시각화하는 것은 응용 통계학뿐만 아니라 과학 전반에서 가장 중요한 활동 중 하나입니다. 연역적 이론이 많지 않기 때문에 교과서에서는 때때로 소홀히 다루어지기도 합니다. 하지만 수많은 좋은(그리고 나쁜) 관행들이 있으며, 일단 주의를 기울이기 시작하면 특정 그래픽이 메시지를 전달하는 데 효과적인지, 또는 강력하고 미적으로 매력적인 데이터 시각화를 만들기 위해 어떤 선택을 할 수 있는지 금방 알게 될 것입니다. 중요한 옵션 중에는 플롯 유형(**[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)**에서 `geom`이라 부르는 것), 비율(종횡비 포함) 및 색상이 있습니다. _그래픽의 문법(grammar of graphics)_은 그래픽에 대해 추론하고 데이터 시각화에 대한 우리의 의도를 컴퓨터에 전달하기 위한 강력한 개념 세트입니다.
 
-Avoid _laziness_ —just using the software’s defaults without thinking about
-the options—, and avoid _getting carried away_ —adding lots of visual candy
-that just clutters up the plot but has no real message. Creating your own
-visualizations is in many ways like good writing. It is extremely important to
-get your message across (in talks, in papers), but there is no simple recipe
-for it. Look carefully at lots of visualizations made by others, experiment
-with making your own visualizations to learn the ropes, and then decide what
-is your style.
+옵션에 대해 생각하지 않고 소프트웨어의 기본값만 사용하는 _게으름_을 피하고, 플롯을 복잡하게 만들 뿐 실제 메시지는 없는 시각적 장식들을 잔뜩 추가하는 _지나침_도 피하십시오. 자신만의 시각화를 만드는 것은 여러 면에서 좋은 글을 쓰는 것과 비슷합니다. (발표나 논문에서) 여러분의 메시지를 전달하는 것은 매우 중요하지만, 이를 위한 간단한 비법은 없습니다. 다른 사람들이 만든 수많은 시각화 자료를 주의 깊게 살펴보고, 요령을 터득하기 위해 자신만의 시각화를 직접 만드는 실험을 해본 다음, 여러분만의 스타일을 결정하십시오.
 
-## 3.15 Further reading
+## 3.15 더 읽을거리
 
-The most useful resources about
-**[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)** are the second
-edition of Wickham ([2016](16-chap.html#ref-ggplot2)) and the
-[ggplot2](https://ggplot2.tidyverse.org) website. There are many
-**[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)** code snippets
-online, which you will find through search engines after some practice. But be
-critical and check your sources: sometimes, code examples you find online
-refer to outdated versions of the package, and sometimes they are of poor
-quality.
+**[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)**에 관한 가장 유용한 자료는 Wickham ([2016](16-chap.html#ref-ggplot2))의 2판과 [ggplot2](https://ggplot2.tidyverse.org) 웹사이트입니다. 온라인에는 수많은 **[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)** 코드 스니펫이 있으며, 약간의 연습을 거치면 검색 엔진을 통해 찾을 수 있을 것입니다. 하지만 비판적으로 정보를 확인하십시오. 온라인에서 찾는 코드 예제는 때때로 패키지의 구버전을 참조하거나 품질이 좋지 않을 수 있습니다.
 
-The foundation of the system is based on Wilkinson ([2005](16-chap.html#ref-
-GrofGrbook)) and the ideas by Tukey ([1977](16-chap.html#ref-Tukey77);
-[William S. Cleveland 1988](16-chap.html#ref-Tukey:1988)).
+이 시스템의 기초는 Wilkinson ([2005](16-chap.html#ref-GrofGrbook))과 Tukey ([1977](16-chap.html#ref-Tukey77); [William S. Cleveland 1988](16-chap.html#ref-Tukey:1988))의 아이디어에 기반하고 있습니다.
 
-## 3.16 Exercises
+## 3.16 연습 문제
 
 __
 
-Exercise 3.1
+연습 문제 3.1
 
-Use _themes_ to change the visual appearance of your plots. Start by running
-the following example:
+_테마(themes)_를 사용하여 플롯의 시각적 외관을 변경해 보세요. 다음 예제를 실행하는 것부터 시작하십시오:
 
     
     
@@ -2326,71 +1678,51 @@ the following example:
     ggcars + theme_bw()
     ggcars + theme_minimal()__
 
-What other themes are there? (Hint: have a look at the section for themes in
-the [online documentation of
-ggplot2](https://ggplot2.tidyverse.org/reference).) Are these all the themes?
-(Hint: have a look at the
-**[ggthemes](https://cran.r-project.org/web/packages/ggthemes/)** package.)
-Make a version of the above plot in the style of the _Economist_ magazine. Add
-a smoothing line
+어떤 다른 테마들이 있나요? (힌트: [ggplot2 온라인 문서](https://ggplot2.tidyverse.org/reference)의 themes 섹션을 살펴보세요.) 이것들이 테마의 전부인가요? (힌트: **[ggthemes](https://cran.r-project.org/web/packages/ggthemes/)** 패키지를 살펴보세요.) 위의 플롯을 _Economist_ 잡지 스타일로 만들어 보세요. 평활 선(smoothing line)을 추가해 보세요.
 
 __
 
-Exercise 3.2
+연습 문제 3.2
 
-What are admissible _color names_ in base R? Have a look at the manual page of
-the `colors` function. Ryun the examples and the demo.
+기본 R에서 허용되는 _색상 이름(color names)_은 무엇인가요? `colors` 함수의 매뉴얼 페이지를 살펴보세요. 예제와 데모를 실행해 보세요.
 
-Use an internet search engine to search for “R color names” and explore some
-of the resources that come up, e.g., cheat sheets with all the colors
-diplayed.
+인터넷 검색 엔진을 사용하여 "R color names"를 검색하고 검색 결과로 나오는 자료들을 탐색해 보세요. 예를 들어, 모든 색상이 표시된 치트 시트(cheat sheets) 등이 있습니다.
 
-Produce a version of the heatmap in Figure 3.41 that uses a color palette from
-the [R package **beyonce**](https://github.com/dill/beyonce).
+그림 3.41의 히트맵을 [R 패키지 **beyonce**](https://github.com/dill/beyonce)의 색상 팔레트를 사용하는 버전으로 만들어 보세요.
 
 __
 
-Exercise 3.3
+연습 문제 3.3
 
-Create plots in the style of the [xkcd](https://xkcd.com) webcomic. Have a
-look at
+[xkcd](https://xkcd.com) 웹툰 스타일의 플롯을 만들어 보세요. 다음 자료들을 참고하십시오:
 
-  * a thread on Stackoverflow titled [How can we make xkcd style graphs?](https://stackoverflow.com/questions/12675147/how-can-we-make-xkcd-style-graphs)
+  * Stackoverflow의 [How can we make xkcd style graphs?](https://stackoverflow.com/questions/12675147/how-can-we-make-xkcd-style-graphs)라는 제목의 스레드
 
-  * the R source code of this book for the code that produces the chapter’s opening figure,
+  * 이 장의 시작 부분을 생성하는 코드가 포함된 이 책의 R 소스 코드
 
-  * the vignette of the **[xkcd](https://cran.r-project.org/web/packages/xkcd/)** package.
+  * **[xkcd](https://cran.r-project.org/web/packages/xkcd/)** 패키지의 비네트(vignette)
 
-[![](imgs/xkcdgraph.png)](imgs/xkcdgraph.png)
-
-__
-
-Exercise 3.4
-
-Check out the **[shiny](https://cran.r-project.org/web/packages/shiny/)**
-tutorials on the RStudio website. Write a _shiny app_ that displays one of the
-plots from this chapter, but with interactive elements to control, e.g., which
-genes are displayed (Figures 3.33—3.35).
+![](imgs/xkcdgraph.png)
 
 __
 
-Exercise 3.5
+연습 문제 3.4
 
-What options are there for _serializing_ a graphic, i.e., for storing a
-graphic in a file that you can save for later use, or load up in another
-software? How can you serialize interactive graphics?
+RStudio 웹사이트의 **[shiny](https://cran.r-project.org/web/packages/shiny/)** 튜토리얼을 확인해 보세요. 이 장의 플롯 중 하나를 표시하지만, 표시되는 유전자 등을 제어할 수 있는 대화형 요소가 포함된 _shiny 앱_을 작성해 보세요(그림 3.33—3.35).
 
 __
 
-Exercise 3.6
+연습 문제 3.5
 
-Important and well done graphics do not have to be complex. For instance,
-check out Figure 9 (page 82) of the [public assessment report by the European
-Medicines Agency on Comirnaty](extras/comirnaty-epar-public-assessment-
-report_en.pdf)21 and [XKCD 2400](https://xkcd.com/2400/).
+그래픽을 _직렬화(serializing)_하는 방법, 즉 나중에 사용하기 위해 파일로 저장하거나 다른 소프트웨어에서 불러오기 위한 방법에는 어떤 것들이 있나요? 대화형 그래픽은 어떻게 직렬화할 수 있나요?
 
-21 You can also get this from
-<https://www.ema.europa.eu/en/medicines/human/EPAR/comirnaty>.
+__
+
+연습 문제 3.6
+
+중요하고 잘 만들어진 그래픽이 반드시 복잡할 필요는 없습니다. 예를 들어, [Comirnaty에 대한 유럽 의약품청(EMA)의 공공 평가 보고서](extras/comirnaty-epar-public-assessment-report_en.pdf)21의 그림 9(82페이지)와 [XKCD 2400](https://xkcd.com/2400/)을 확인해 보세요.
+
+21 <https://www.ema.europa.eu/en/medicines/human/EPAR/comirnaty>에서도 확인할 수 있습니다.
 
 Carr, Daniel B, Richard J Littlefield, WL Nicholson, and JS Littlefield. 1987.
 “Scatterplot Matrix Techniques for Large N.” _Journal of the American

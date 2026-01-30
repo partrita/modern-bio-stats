@@ -1,6 +1,6 @@
-[![](imgs/BuildWall.png)](imgs/BuildWall.png)
+![](imgs/BuildWall.png)
 
-[![](imgs/EWall.png)](imgs/EWall.png)
+![](imgs/EWall.png)
 
 In a supervised learning setting, we have a yardstick or plumbline to judge
 how well we are doing: the response itself.
@@ -919,7 +919,7 @@ one-out cross-validation**.
 
 6 Unless we have such an excess of data that it doesn’t matter.
 
-[![](imgs/book_icon.png)](imgs/book_icon.png)
+![](imgs/book_icon.png)
 
 See Chapter _Model Assessment and Selection_ in the book by Hastie,
 Tibshirani, and Friedman ([2008](16-chap.html#ref-HastieTibshiraniFriedman))
@@ -1304,11 +1304,11 @@ called **[metrics](https://cran.r-project.org/web/packages/metrics/)**.
 
 ## 12.6 Variance–bias trade-off
 
-[![](imgs/TargetBias.png)](imgs/TargetBias.png "Figure 12.18 \(a\): ")
+![Figure 12.18 \(a\):](imgs/TargetBias.png)
 
 (a)
 
-[![](imgs/TargetVariance.png)](imgs/TargetVariance.png "Figure 12.18 \(b\): ")
+![Figure 12.18 \(b\):](imgs/TargetVariance.png)
 
 (b)
 

@@ -1,65 +1,40 @@
-[![](imgs/Brighton_West_Pier_20090214_sunset.jpg)](imgs/Brighton_West_Pier_20090214_sunset.jpg)
+![](imgs/Brighton_West_Pier_20090214_sunset.jpg)
 
-Real situations often involve point clouds, gradients, graphs, attraction
-points, noise and different spatial milieux, a little like this picture where
-we have a rigid skeleton, waves, sun and starlings.
+::: {.column-margin}
+실제 상황에는 종종 포인트 구름, 그라디언트, 그래프, 어트랙션 포인트, 소음 및 다른 공간 환경이 포함됩니다.
+:::
 
-In [Chapter 7](07-chap.html), we saw how to summarize rectangular matrices
-whose columns were continuous variables. The maps we made used unsupervised
-dimensionality reduction techniques such as principal component analysis aimed
-at isolating the most important _signal_ component in a matrix \\(X\\) when
-all the columns have meaningful variances.
+[7장](07-chap.html)에서 우리는 열이 연속 변수인 직사각형 행렬을 요약하는 방법을 보았습니다. 우리가 만든 지도는 모든 열이 의미 있는 분산을 가질 때 행렬 \\(X\\)에서 가장 중요한 _신호_ 성분을 분리하는 것을 목표로 하는 주성분 분석과 같은 비지도 차원 축소 기법을 사용했습니다.
 
-Here we extend these ideas to more complex heterogeneous data where continuous
-and categorical variables are combined. Indeed, sometimes our observations
-cannot be easily described by sets of individual variables or coordinates –
-but it is possible to determine distances or (dis)similarities between them,
-or to describe relationships between them using a graph or a tree. Examples
-include species in a species tree or biological sequences. Outside of biology,
-examples include text documents or movie files, where we may have a reasonable
-method to determine (dis)similarity between them, but no obvious variables or
-coordinates.
+여기서 우리는 이러한 아이디어를 연속 변수와 범주형 변수가 결합된 더 복잡한 이종 데이터로 확장합니다. 실제로 때때로 우리의 관측치는 개별 변수나 좌표 세트로 쉽게 설명될 수 없지만, 그들 사이의 거리나 (비)유사성을 결정하거나 그래프나 트리를 사용하여 그들 사이의 관계를 설명하는 것이 가능합니다. 예로는 종 계통수의 종이나 생물학적 서열이 있습니다. 생물학 이외의 예로는 텍스트 문서나 영화 파일이 있는데, 여기서 우리는 그들 사이의 (비)유사성을 결정하는 합리적인 방법을 가질 수 있지만 명백한 변수나 좌표는 없습니다.
 
-This chapter contains more advanced techniques, for which we often omit
-technical details. Having come this far, we hope that by giving you some
-hands-on experience with examples, and extensive references, to enable you to
-understand and use some of the more `cutting edge’ techniques in nonlinear
-multivariate analysis.
+이 장에는 더 고급 기법들이 포함되어 있으며, 이를 위해 종종 기술적인 세부 사항은 생략합니다. 여기까지 온 만큼, 예제를 통한 실습 경험과 광범위한 참고 문헌을 제공하여 여러분이 비선형 다변량 분석에서 더 '최첨단'인 기법 중 일부를 이해하고 사용할 수 있기를 바랍니다.
 
-## 9.1 Goals for this chapter
+## 9.1 이 장의 목표
 
-In this chapter, we will:
+이 장에서 우리는 다음을 수행할 것입니다:
 
-  * Extend linear dimension reduction methods to cases when the distances between observations are available, known as **m** ulti**d** imensional **s** caling (MDS) or principal coordinates analysis.
+  * 관측치 간의 거리를 사용할 수 있는 경우로 선형 차원 축소 방법을 확장합니다. 이를 **다**차원 **척**도법(multidimensional scaling, **MDS**) 또는 주좌표 분석이라고 합니다.
 
-  * Find modifications of MDS that are nonlinear and robust to outliers.
+  * 비선형적이고 이상치에 강건한 MDS의 변형들을 찾아봅니다.
 
-  * Encode combinations of categorical data and continuous data as well as so-called ‘supplementary’ information. We will see that this enables us to deal with _batch effects_.
+  * 범주형 데이터와 연속형 데이터의 조합뿐만 아니라 소위 '보조' 정보를 인코딩합니다. 이를 통해 _배치 효과(batch effects)_를 다룰 수 있음을 보게 될 것입니다.
 
-  * Use chi-square distances and **c** orrespondence **a** nalysis (CA) to see where categorical data (contingency tables) contain notable dependencies.
+  * 카이제곱 거리와 **대**응 **분**석(**CA**)을 사용하여 범주형 데이터(분할표)에 주목할 만한 의존성이 포함된 위치를 확인합니다.
 
-  * Generalize clustering methods that can uncover latent variables that are not categorical. This will allow us to detect gradients, “pseudotime” and hidden nonlinear effects in our data.
+  * 범주형이 아닌 잠재 변수를 밝혀낼 수 있는 군집화 방법을 일반화합니다. 이를 통해 우리 데이터에서 그래디언트, "의사 시간(pseudotime)" 및 숨겨진 비선형 효과를 감지할 수 있습니다.
 
-  * Generalize the notion of variance and covariance to the study of tables of data from multiple different data domains.
+  * 분산과 공분산의 개념을 여러 다른 데이터 도메인의 데이터 표 연구로 일반화합니다.
 
-## 9.2 Multidimensional scaling and ordination
+## 9.2 다차원 척도법과 서열화
 
-Sometimes, data are _not_ represented as points in a feature space. This can
-occur when we are provided with (dis)similarity matrices between objects such
-as drugs, images, trees or other complex objects, which have no obvious
-coordinates in \\({\mathbb R}^n\\).
+때때로 데이터는 특징 공간의 점으로 표현되지 _않습니다_. 이는 \\({\mathbb R}^n\\)에 명백한 좌표가 없는 약물, 이미지, 트리 또는 기타 복잡한 객체와 같은 객체 사이의 (비)유사성 행렬이 제공될 때 발생할 수 있습니다.
 
-In [Chapter 5](05-chap.html) we saw how to produce _clusters_ from distances.
-Here our goal is to visualize the data in maps in low dimensional spaces
-(e.g., planes) reminiscent of the ones we make from the first few principal
-axes in PCA.
+[5장](05-chap.html)에서 우리는 거리로부터 _클러스터_를 생성하는 방법을 보았습니다. 여기서 우리의 목표는 PCA의 처음 몇몇 주축으로 만든 것과 유사하게, 저차원 공간(예: 평면)의 맵에 데이터를 시각화하는 것입니다.
 
-We start with an intuitive example using geography data. In Figure 9.1, a
-heatmap and clustering of the distances between cities and places in Ukraine1
-are shown.
+우리는 지리 데이터를 사용하는 직관적인 예제로 시작합니다. 그림 9.1에는 우크라이나의 도시와 장소 사이의 거리에 대한 열도(heatmap)와 클러스터링이 나와 있습니다1.
 
-1 The provenance of these data are described in the script ukraine-dists.R in
-the data folder.
+1 이 데이터의 출처는 data 폴더의 `ukraine-dists.R` 스크립트에 설명되어 있습니다.
 
     
     
@@ -80,32 +55,17 @@ the data folder.
       breaks = seq(0, max(ukraine_dists)^(1/2), length.out = 51)^2,
       treeheight_row = 10, treeheight_col = 10)__
 
-[![](09-chap_files/figure-html/fig-HeatDists-1.png)](09-chap_files/figure-
-html/fig-HeatDists-1.png "Figure 9.1: A heatmap of the ukraine_dists distance
-matrix. Distances are measured in kilometres. The function has re-arranged the
-order of the cities, and grouped the closest ones.")
+[![](09-chap_files/figure-html/fig-HeatDists-1.png)](09-chap_files/figure-html/fig-HeatDists-1.png "그림 9.1: ukraine_dists 거리 행렬의 열도. 거리는 킬로미터 단위로 측정됩니다. 함수가 도시의 순서를 재배열하고 가장 가까운 것들을 그룹화했습니다.")
 
-Figure 9.1: A heatmap of the `ukraine_dists` distance matrix. Distances are
-measured in kilometres. The function has re-arranged the order of the cities,
-and grouped the closest ones.
+그림 9.1: `ukraine_dists` 거리 행렬의 열도. 거리는 킬로미터 단위로 측정됩니다. 함수가 도시의 순서를 재배열하고 가장 가까운 것들을 그룹화했습니다.
 
-Besides `ukraine_dists`, which contains the pairwise distances, the RData file
-that we loaded above also contains the dataframe `ukraine_coords` with the
-longitudes and latitudes; we will use this later as a ground truth. Given the
-distances, multidimensional scaling (MDS) provides a “map” of their relative
-locations. It will not be possible to arrange the cities such that their
-Euclidean distances on a 2D plane exactly reproduce the given distance matrix:
-the cities lie on the curved surface of the Earth rather than in a plane.
-Nevertheless, we can expect to find a two dimensional embedding that
-represents the data well. With biological data, our 2D embeddings are likely
-to be much less clearcut. We call the function with:
+쌍별 거리를 포함하는 `ukraine_dists` 외에도, 위에서 로드한 RData 파일에는 경도와 위도가 포함된 `ukraine_coords` 데이터 프레임도 포함되어 있습니다. 우리는 이를 나중에 실측 자료(ground truth)로 사용할 것입니다. 거리가 주어지면 다차원 척도법(MDS)은 그들의 상대적 위치에 대한 "지도"를 제공합니다. 도시들이 2D 평면상에서 갖는 유클리드 거리가 주어진 거리 행렬을 정확하게 재현하도록 배치하는 것은 불가능할 것입니다. 도시들은 평면이 아니라 지구의 곡면 위에 있기 때문입니다. 그럼에도 불구하고, 우리는 데이터를 잘 표현하는 2차원 임베딩을 찾을 수 있을 것으로 기대할 수 있습니다. 생물학적 데이터의 경우, 우리의 2차원 임베딩은 이보다 훨씬 덜 명확할 가능성이 높습니다. 다음과 같이 함수를 호출합니다:
 
     
     
     ukraine_mds = cmdscale(ukraine_dists, eig = TRUE)__
 
-We make a function that we will reuse several times in this chapter to make a
-screeplot from the result of a call to the `cmdscale` function:
+이 장에서 여러 번 재사용하여 `cmdscale` 함수의 호출 결과로부터 스크리 플롯(screeplot)을 만드는 함수를 만듭니다:
 
     
     
@@ -122,28 +82,23 @@ screeplot from the result of a call to the `cmdscale` function:
     plotscree(ukraine_mds, m = 4)__
 
 [![](09-chap_files/figure-html/fig-plotscreeeig-1.png)](09-chap_files/figure-
-html/fig-plotscreeeig-1.png "Figure 9.2: Screeplot of the first four
-eigenvalues. There is a pronounced drop after the first two eigenvalues, which
-indicates that the data are well described by a two-dimensional embedding.")
+html/fig-plotscreeeig-1.png "그림 9.2: 처음 네 개의 고윳값에 대한 스크리 플롯. 처음 두 개의 고윳값 이후에 뚜렷한 감소가 있으며, 이는 데이터가 2차원 임베딩으로 잘 설명됨을 나타냅니다.")
 
-Figure 9.2: Screeplot of the first four eigenvalues. There is a pronounced
-drop after the first two eigenvalues, which indicates that the data are well
-described by a two-dimensional embedding.
+그림 9.2: 처음 네 개의 고윳값에 대한 스크리 플롯. 처음 두 개의 고윳값 이후에 뚜렷한 감소가 있으며, 이는 데이터가 2차원 임베딩으로 잘 설명됨을 나타냅니다.
 
 __
 
-Question 9.1
+질문 9.1
 
-Look at all the eigenvalues output by the `cmdscale` function: what do you
-notice?
-
-__
-
-Solution
+`cmdscale` 함수에 의해 출력된 모든 고윳값들을 살펴보세요: 무엇을 발견했나요?
 
 __
 
-If you execute:
+해결책
+
+__
+
+다음을 실행하면:
 
     
     
@@ -161,16 +116,13 @@ If you execute:
 
 [![](09-chap_files/figure-html/fig-
 plotscreeeigall-1.png)](09-chap_files/figure-html/fig-plotscreeeigall-1.png
-"Figure 9.3: Screeplot of all the eigenvalues.")
+"그림 9.3: 모든 고윳값에 대한 스크리 플롯.")
 
-Figure 9.3: Screeplot of all the eigenvalues.
+그림 9.3: 모든 고윳값에 대한 스크리 플롯.
 
-you will note that unlike in PCA, there are some negative eigenvalues. These
-are due to the way `cmdscale` works.
+PCA와 달리 일부 음의 고윳값이 있음을 알 수 있습니다. 이는 `cmdscale`이 작동하는 방식 때문입니다.
 
-The main output from the `cmdscale` function are the coordinates of the two-
-dimensional embedding, which we show in Figure 9.4 (we will discuss how the
-algorithm works in the next section).
+`cmdscale` 함수의 주요 출력은 2차원 임베딩의 좌표이며, 이를 그림 9.4에 나타냈습니다(알고리즘의 작동 방식은 다음 섹션에서 논의할 것입니다).
 
     
     
@@ -185,31 +137,20 @@ algorithm works in the next section).
     g __
 
 [![](09-chap_files/figure-html/fig-ukrainemds1-1.png)](09-chap_files/figure-
-html/fig-ukrainemds1-1.png "Figure 9.4: MDS map based on the distances.")
+html/fig-ukrainemds1-1.png "그림 9.4: 거리 기반의 MDS 맵.")
 
-Figure 9.4: MDS map based on the distances.
+그림 9.4: 거리 기반의 MDS 맵.
 
-Note that while relative positions are correct, the orientation of the map is
-unconventional: Crimea is at the top. This is a common phenomenon with methods
-that reconstruct planar embeddings from distances. Since the distances between
-the points are invariant under rotations and reflections (axis flips), any
-solution is as good as any other solution that relates to it via rotation or
-reflection. Functions like `cmdscale` will pick one of the equally optimal
-solutions, and the particular choice can depend on minute details of the data
-or the computing platform being used. Here, we can transform our result into a
-more conventional orientation by reversing the sign of the \\(y\\)-axis. We
-redraw the map in Figure 9.5 and compare this to the true longitudes and
-latitudes from the `ukraine_coords` dataframe (Figure 9.6).
+상대적인 위치는 정확하지만 지도의 방향이 관습적이지 않다는 점에 유의하세요: 크림 반도가 상단에 있습니다. 이는 거리로부터 평면 임베딩을 재구성하는 방법들에서 흔히 나타나는 현상입니다. 점들 사이의 거리는 회전과 반사(축 뒤집기)에 대해 불변이기 때문에, 회전이나 반사를 통해 연관되는 어떠한 솔루션도 다른 솔루션만큼 좋습니다. `cmdscale`과 같은 함수들은 똑같이 최적인 솔루션들 중 하나를 선택할 것이며, 그 구체적인 선택은 데이터의 미세한 세부 사항이나 사용 중인 컴퓨팅 플랫폼에 따라 달라질 수 있습니다. 여기서 우리는 \\(y\\)축의 부호를 반전시켜 결과를 더 관습적인 방향으로 변환할 수 있습니다. 그림 9.5에서 지도를 다시 그리고, 이를 `ukraine_coords` 데이터 프레임의 실제 경도 및 위도와 비교합니다(그림 9.6).
 
     
     
     g %+% mutate(ukraine_mds_df, PCo1 = PCo1, PCo2 = -PCo2)__
 
 [![](09-chap_files/figure-html/fig-ukrainemds2-1.png)](09-chap_files/figure-
-html/fig-ukrainemds2-1.png "Figure 9.5: Same as Figure fig-ukrainemds1, but
-with y-axis flipped.")
+html/fig-ukrainemds2-1.png "그림 9.5: 그림 9.4와 같지만, y축이 뒤집힌 모습.")
 
-Figure 9.5: Same as Figure 9.4, but with y-axis flipped.
+그림 9.5: 그림 9.4와 같지만, y축이 뒤집힌 모습.
 
     
     
@@ -228,52 +169,37 @@ Figure 9.5: Same as Figure 9.4, but with y-axis flipped.
       geom_point() + geom_text_repel(col = "#0057b7")__
 
 [![](09-chap_files/figure-html/fig-ukrainecoord1-1.png)](09-chap_files/figure-
-html/fig-ukrainecoord1-1.png "Figure 9.6: True latitudes and longitudes, taken
-from the ukraine_coords dataframe.")
+html/fig-ukrainecoord1-1.png "그림 9.6: ukraine_coords 데이터 프레임에서 가져온 실제 위도와 경도.")
 
-Figure 9.6: True latitudes and longitudes, taken from the `ukraine_coords`
-dataframe.
+그림 9.6: `ukraine_coords` 데이터 프레임에서 가져온 실제 위도와 경도.
 
 __
 
-Question 9.2
+질문 9.2
 
-We drew the longitudes and latitudes in the right panel of Figure 9.6 without
-attention to aspect ratio. What is the right aspect ratio for this plot?
-
-__
-
-Solution
+우리는 종횡비에 주의를 기울이지 않고 그림 9.6의 오른쪽 패널에 경도와 위도를 그렸습니다. 이 플롯에 적절한 종횡비는 얼마일까요?
 
 __
 
-There is no simple relationship between the distances that correspond to 1
-degree change in longitude and to 1 degree change in latitude, so the choice
-is difficult to make. Even under the simplifying assumption that our Earth is
-spherical and has a radius of 6371 km, it’s complicated: one degree in
-latitude always corresponds to a distance of 111 km
-(\\(6371\times2\pi/360\\)), as does one degree of longitude on the equator.
-However, when you move away from the equator, a degree of longitude
-corresponds to shorter and shorter distances (and to no distance at all at the
-poles). Pragmatically, for displays such as in Figure 9.6, we could choose a
-value for the aspect ratio that’s somewhere in the middle between the Northern
-and Southern most points, say, the cosine for 48 degrees.
+해결책
 
 __
 
-Question 9.3
-
-Add international borders and geographic features such as rivers to Figure
-9.6.
+경도의 1도 변화에 해당하는 거리와 위도의 1도 변화에 해당하는 거리 사이에는 단순한 관계가 없으므로 선택하기가 어렵습니다. 지구가 구형이고 반지름이 6371km라는 단순화된 가정 하에서도 복잡합니다: 위도의 1도는 항상 111km 거리(\\(6371\times2\pi/360\\))에 해당하며, 적도에서의 경도 1도 마찬가지입니다. 그러나 적도에서 멀어지면 경도 1도는 점점 더 짧은 거리에 해당하게 됩니다(극점에서는 거리가 아예 없습니다). 실용적으로 그림 9.6과 같은 디스플레이의 경우, 가장 북쪽 지점과 남쪽 지점의 중간 정도인 48도에 대한 코사인 값을 종횡비로 선택할 수 있습니다.
 
 __
 
-Solution
+질문 9.3
+
+그림 9.6에 국제 경계와 강 같은 지리적 특징을 추가해 보세요.
 
 __
 
-A start point is provided by the code below, which adds the international
-borders as a polygon (Figure 9.7).
+해결책
+
+__
+
+국제 경계를 다각형으로 추가하는 아래 코드가 시작점이 될 수 있습니다(그림 9.7).
 
     
     
@@ -285,54 +211,33 @@ borders as a polygon (Figure 9.7).
       geom_text_repel(aes(label = city)) +
       coord_fixed(1/cos(48/180*pi))__
 
-There is a lot of [additional infrastructure available in R for geospatial
-data](https://cran.r-project.org/web/views/Spatial.html), including vector and
-raster data types.
+벡터 및 래스터 데이터 유형을 포함하여 [지리 공간 데이터를 위해 R에서 사용할 수 있는 추가 인프라](https://cran.r-project.org/web/packages/spatial.html)가 많이 있습니다.
 
 [![](09-chap_files/figure-html/fig-
 ukrainewithborders-1.png)](09-chap_files/figure-html/fig-
-ukrainewithborders-1.png "Figure 9.7: International borders added to
-Figure fig-ukrainecoord1.")
+ukrainewithborders-1.png "그림 9.7: 그림 9.6에 국제 경계가 추가된 모습.")
 
-Figure 9.7: International borders added to Figure 9.6.
+그림 9.7: 그림 9.6에 국제 경계가 추가된 모습.
 
-**Note:** MDS creates similar output as PCA, however there is only one
-‘dimension’ to the data (the sample points). There is no ‘dual’ dimension,
-there are no biplots and no loading vectors. This is a drawback when coming to
-interpreting the maps. Interpretation can be facilitated by examining
-carefully the extreme points and their differences.
+**참고:** MDS는 PCA와 유사한 출력을 생성하지만, 데이터(샘플 포인트)에 대한 한 종류의 '차원'만 가집니다. '쌍대(dual)' 차원이 없으며, 
+바이플롯이나 로딩 벡터가 없다는 점입니다. 이는 맵을 해석할 때 단점이 됩니다. 극단적인 점들과 그들 사이의 차이점을 주의 깊게 살펴봄으로써 해석을 용이하게 할 수 있습니다.
 
-### 9.2.1 How does the method work?
+### 9.2.1 방법은 어떻게 작동하나요?
 
-Let’s take a look at what would happen if we really started with points whose
-coordinates were known2. We put these coordinates into the two columns of a
-matrix with as many rows as there are points. Now we compute the distances
-between points based on these coordinates. To go from the coordinates \\(X\\)
-to distances, we write \\[d^2_{i,j} = (x_i^1 - x_j^1)^2 + \dots + (x_i^p -
-x_j^p)^2.\\] We will call the matrix of squared distances `DdotD` in R and
-\\(D\bullet D\\) in the text . We want to find points such that the square of
-their distances is as close as possible to the \\(D\bullet D\\) observed.3
+좌표가 알려진 점들로부터 실제로 시작했다면 어떤 일이 일어날지 살펴봅시다2. 우리는 이 좌표들을 점의 수만큼의 행을 가진 행렬의 두 열에 넣습니다. 이제 이 좌표들을 바탕으로 점들 사이의 거리를 계산합니다. 좌표 \\(X\\)에서 거리로 가려면 다음과 같이 씁니다: \\[d^2_{i,j} = (x_i^1 - x_j^1)^2 + \dots + (x_i^p - x_j^p)^2.\\] 우리는 제곱 거리 행렬을 R에서 `DdotD`라고 부르고 텍스트에서는 \\(D\bullet D\\)라고 부를 것입니다. 우리는 그 거리의 제곱이 관측된 \\(D\bullet D\\)에 가능한 한 가까운 점들을 찾고 싶습니다.3
 
-This is different from \\(DD\\) or \\(D^2\\), the matrix-multiplication of
-\\(D\\) with itself.
+이는 \\(D\\)와 그 자신과의 행렬 곱인 \\(DD\\) 또는 \\(D^2\\)과는 다릅니다.
 
-3 Here we commit a slight ‘abuse’ by using the longitudes and latitudes of our
-cities as Cartesian coordinates and ignoring the fact that they are
-curvilinear coordinates on a sphere-like surface.
+3 여기서는 도시의 경도와 위도를 데카르트 좌표로 사용하고, 그것들이 구형 표면 위의 곡선 좌표라는 사실을 무시함으로써 약간의 '남용'을 저지르고 있습니다.
 
-2 Here we commit a slight ‘abuse’ by using the longitude and longitude of our
-cities as Cartesian coordinates and ignoring the curvature of the earth’s
-surface. Check out the internet for information on the Haversine formula.
+2 여기서는 우리 도시의 경도와 위도를 데카르트 좌표로 사용하고 지구 표면의 곡률을 무시함으로써 약간의 '남용'을 저지르고 있습니다. 하버사인(Haversine) 공식에 대한 정보를 인터넷에서 찾아보세요.
 
     
     
     X = with(ukraine_coords, cbind(lon, lat * cos(48)))
     DdotD = as.matrix(dist(X)^2)__
 
-The relative distances do not depend on the point of origin of the data. We
-center the data by using the centering matrix \\(H\\) defined as
-\\(H=I-\frac{1}{n}{\mathbf{11}}^t\\). Let’s check the _centering_ property of
-\\(H\\) using:
+상대적 거리는 데이터의 원점에 의존하지 않습니다. 우리는 \\(H=I-\frac{1}{n}{\mathbf{11}}^t\\)로 정의된 중앙화 행렬(centering matrix) \\(H\\)를 사용하여 데이터를 중앙에 맞춥니다. 다음을 사용하여 \\(H\\)의 _중앙화_ 속성을 확인해 봅시다:
 
     
     
@@ -364,16 +269,13 @@ center the data by using the centering matrix \\(H\\) defined as
 
 __
 
-Question 9.4
+질문 9.4
 
-Call `B0` the matrix obtained by applying the centering matrix both to the
-right and to the left of `DdotD` Consider the points centered at the origin
-given by the \\(HX\\) matrix and compute its cross product, we’ll call this
-`B2`. What do you have to do to `B0` to make it equal to `B2`?
+`DdotD`의 오른쪽과 왼쪽에 모두 중앙화 행렬을 적용하여 얻은 행렬을 `B0`라고 합시다. \\(HX\\) 행렬에 의해 주어지는 원점에 중앙화된 점들을 고려하고 그 교차 곱(cross product)을 계산하여 이를 `B2`라고 부릅시다. `B0`를 `B2`와 같게 만들려면 `B0`에 무엇을 해야 할까요?
 
 __
 
-Solution
+해결책
 
 __
 
@@ -395,60 +297,41 @@ __
     
     [1] 9.237056e-14
 
-Therefore, given the squared distances between rows (\\(D\bullet D\\)) and the
-cross product of the centered matrix \\(B=(HX)(HX)^t\\), we have shown:
+따라서, 행들 사이의 제곱 거리(\\(D\bullet D\\))와 중앙화된 행렬의 교차 곱 \\(B=(HX)(HX)^t\\)가 주어졌을 때, 우리는 다음을 보였습니다:
 
 \\[ -\frac{1}{2} H(D\bullet D) H=B \tag{9.1}\\]
 
-This is always true, and we use it to reverse-engineer an \\(X\\) which
-satisfies Equation 9.1 when we are given \\(D\bullet D\\) to start with.
+이는 항상 참이며, 처음에 \\(D\bullet D\\)가 주어졌을 때 식 9.1을 만족하는 \\(X\\)를 역설계하는 데 이를 사용합니다.
 
-#### From \\(D\bullet D\\) to \\(X\\) using singular vectors.
+#### 특잇값 벡터를 사용하여 \\(D\bullet D\\)에서 \\(X\\) 구하기.
 
-We can go backwards from a matrix \\(D\bullet D\\) to \\(X\\) by taking the
-eigen-decomposition of \\(B\\) as defined in Equation 9.1. This also enables
-us to choose how many coordinates, or columns, we want for the \\(X\\) matrix.
-This is very similar to how PCA provides the best rank \\(r\\) approximation.  
-**Note** : As in PCA, we can write this using the singular value decomposition
-of \\(HX\\) (or the eigen decomposition of \\(HX(HX)^t\\)):
+식 9.1에서 정의된 \\(B\\)의 고유 분해(eigen-decomposition)를 취함으로써 행렬 \\(D\bullet D\\)에서 \\(X\\)로 거꾸로 갈 수 있습니다. 이는 또한 우리가 \\(X\\) 행렬에 대해 몇 개의 좌표 또는 열을 원하는지 선택할 수 있게 해줍니다. 이는 PCA가 최선의 계수 \\(r\\) 근사를 제공하는 방식과 매우 유사합니다.  
+**참고** : PCA에서와 마찬가지로, 이를 \\(HX\\)의 특잇값 분해(또는 \\(HX(HX)^t\\)의 고유 분해)를 사용하여 다음과 같이 쓸 수 있습니다:
 
-\\[ HX^{(r)} = US^{(r)}V^t \mbox{ with } S^{(r)} \mbox{ the diagonal matrix of
-the first } r \mbox{ singular values}, \\]
+\\[ HX^{(r)} = US^{(r)}V^t \mbox{ 여기서 } S^{(r)} \mbox{ 는 처음 } r \mbox{ 개의 특잇값들의 대각 행렬}, \\]
 
-This provides the best approximate representation in an Euclidean space of
-dimension \\(r\\). The algorithm gives us the coordinates of points that have
-approximately the same distances as those provided by the \\(D\\) matrix.
+이는 \\(r\\)차원 유클리드 공간에서의 최선의 근사 표현을 제공합니다. 이 알고리즘은 \\(D\\) 행렬에 의해 제공된 것과 대략 동일한 거리를 가진 점들의 좌표를 우리에게 제공합니다.
 
 \\[S^{(r)} = \begin{pmatrix} s_1 & 0 & 0 & 0 & ...\\\ 0 & s_2 & 0 & 0 & ...\\\
 0 & 0 & ... & ... & ...\\\ 0 & 0 & ... & s_r & ...\\\ ...& ...& ...& 0 & 0 \\\
-\end{pmatrix}\\]The method is often called Principal Coordinates Analysis, or
-PCoA which stresses the connection to PCA.
+\end{pmatrix}\\] 이 방법은 종종 주좌표 분석(Principal Coordinates Analysis) 또는 PCoA라고 불리며, 이는 PCA와의 연결성을 강조합니다.
 
-#### Classical MDS Algorithm.
+#### 고전적 MDS 알고리즘.
 
-In summary, given an \\(n \times n\\) matrix of squared interpoint distances
-\\(D\bullet D\\), we can find points and their coordinates \\(\tilde{X}\\) by
-the following operations:
+요약하자면, 점 간 제곱 거리의 \\(n \times n\\) 행렬 \\(D\bullet D\\)가 주어졌을 때, 다음 연산들을 통해 점들과 그들의 좌표 \\(\tilde{X}\\)를 찾을 수 있습니다:
 
-  1. Double center the interpoint distance squared and multiply it by \\(-\frac{1}{2}\\):  
+  1. 점 간 제곱 거리를 이중 중앙화(double center)하고 \\(-\frac{1}{2}\\)을 곱합니다:  
 \\(B = -\frac{1}{2}H D\bullet D H\\).
 
-  2. Diagonalize \\(B\\): \\(\quad B = U \Lambda U^t\\).
+  2. \\(B\\)를 대각화합니다: \\(\quad B = U \Lambda U^t\\).
 
-  3. Extract \\(\tilde{X}\\): \\(\quad \tilde{X} = U \Lambda^{1/2}\\).
+  3. \\(\tilde{X}\\)를 추출합니다: \\(\quad \tilde{X} = U \Lambda^{1/2}\\).
 
-#### Finding the right underlying dimensionality.
+#### 적절한 기저 차원 찾기.
 
-As an example, let’s take objects for which we have similarities (surrogrates
-for distances) but for which there is no natural underlying Euclidean space.
+예시로서, 유사성(거리를 대신함)은 있지만 자연적인 기저 유클리드 공간은 없는 객체들을 살펴보겠습니다.
 
-In a psychology experiment from the 1950s, Ekman ([1954](16-chap.html#ref-
-Ekman:1954)) asked 31 subjects to rank the similarities of 14 different
-colors. His goal was to understand the underlying dimensionality of color
-perception. The similarity or confusion matrix was scaled to have values
-between 0 and 1. The colors that were often confused had similarities close to
-1. We transform the data into a dissimilarity by subtracting the values from
-1:
+1950년대의 한 심리학 실험에서, Ekman ([1954](16-chap.html#ref-Ekman:1954))은 31명의 피험자에게 14가지 서로 다른 색상의 유사성을 평가하도록 요청했습니다. 그의 목표는 색상 인지의 기저 차원을 이해하는 것이었습니다. 유사성 또는 혼동 행렬(confusion matrix)은 0과 1 사이의 값을 갖도록 스케일이 조정되었습니다. 자주 혼동되는 색상들은 1에 가까운 유사성을 가졌습니다. 우리는 값들을 1에서 뺌으로써 데이터를 비유사성(dissimilarity)으로 변환합니다:
 
     
     
@@ -468,8 +351,7 @@ between 0 and 1. The colors that were often confused had similarities close to
     
     disekm = as.dist(disekm)__
 
-We compute the MDS coordinates and eigenvalues. We combine the eigenvalues in
-the screeplot shown in Figure 9.8:
+우리는 MDS 좌표와 고윳값을 계산합니다. 우리는 그림 9.8에 표시된 스크리 플롯에 고윳값들을 결합합니다:
 
     
     
@@ -477,14 +359,11 @@ the screeplot shown in Figure 9.8:
     plotscree(mdsekm)__
 
 [![](09-chap_files/figure-html/fig-ekmanMDSeig-1.png)](09-chap_files/figure-
-html/fig-ekmanMDSeig-1.png "Figure 9.8: The screeplot shows us that the
-phenomenon is largely two dimensional.")
+html/fig-ekmanMDSeig-1.png "그림 9.8: 스크리 플롯은 현상이 주로 2차원적임을 보여줍니다.")
 
-Figure 9.8: The screeplot shows us that the phenomenon is largely two
-dimensional.
+그림 9.8: 스크리 플롯은 현상이 주로 2차원적임을 보여줍니다.
 
-We plot the different colors using the first two principal coordinates as
-follows:
+우리는 다음과 같이 처음 두 개의 주좌표를 사용하여 서로 다른 색상들을 플롯합니다:
 
     
     
@@ -499,76 +378,27 @@ follows:
       geom_text_repel(aes(label = name)) + coord_fixed()__
 
 [![](09-chap_files/figure-html/fig-ekmanMDS-1-1.png)](09-chap_files/figure-
-html/fig-ekmanMDS-1-1.png "Figure 9.9: The layout of the scatterpoints in the
-first two dimensions has a horseshoe shape. The labels and colors show that
-the arch corresponds to the wavelengths.")
+html/fig-ekmanMDS-1-1.png "그림 9.9: 처음 두 차원에서의 산점도 배치는 말편자(horseshoe) 모양을 하고 있습니다. 레이블과 색상은 아치형 구조가 파장에 대응함을 보여줍니다.")
 
-Figure 9.9: The layout of the scatterpoints in the first two dimensions has a
-horseshoe shape. The labels and colors show that the arch corresponds to the
-wavelengths.
+그림 9.9: 처음 두 차원에서의 산점도 배치는 말편자(horseshoe) 모양을 하고 있습니다. 레이블과 색상은 아치형 구조가 파장에 대응함을 보여줍니다.
 
-Figure 9.9 shows the Ekman data in the new coordinates. There is a striking
-pattern that calls for explanation. This horseshoe or arch structure in the
-points is often an indicator of a sequential latent ordering or gradient in
-the data ([Diaconis, Goel, and Holmes 2008](16-chap.html#ref-Goel:2007aa)). We
-will revisit this in Section 9.5.
+그림 9.9는 새로운 좌표계에서의 Ekman 데이터를 보여줍니다. 설명을 요약하는 눈에 띄는 패턴이 있습니다. 점들의 이러한 말편자 또는 아치 구조는 종종 데이터에 순차적인 잠재적 순서나 그래디언트가 존재함을 나타내는 지표입니다 ([Diaconis, Goel, and Holmes 2008](16-chap.html#ref-Goel:2007aa)). 우리는 9.5절에서 이를 다시 살펴볼 것입니다.
 
-### 9.2.2 Robust versions of MDS
+### 9.2.2 MDS의 강건한 버전들
 
-Multidimensional scaling aims to minimize the difference between the squared
-distances as given by \\(D\bullet D\\) and the squared distances between the
-points with their new coordinates. Unfortunately, this objective tends to be
-sensitive to outliers: one single data point with large distances to everyone
-else can dominate, and thus skew, the whole analysis. Often, we like to use
-something that is more robust, and one way to achieve this is to disregard the
-actual values of the distances and only ask that the relative rankings of the
-original and the new distances are as similar as possible. Such a rank based
-approach is robust: its sensitivity to outliers is reduced.
+다차원 척도법은 \\(D\bullet D\\)에 의해 주어지는 제곱 거리와 새로운 좌표를 가진 점들 사이의 제곱 거리 간의 차이를 최소화하는 것을 목표로 합니다. 불행히도, 이 목적 함수는 이상치에 민감한 경향이 있습니다: 다른 모든 점들과의 거리가 큰 단 하나의 데이터 포인트가 분석 전체를 지배하고 왜곡할 수 있습니다. 종종 우리는 좀 더 강건한(robust) 무언가를 사용하고 싶어 하며, 이를 달성하는 한 가지 방법은 거리의 실제 값을 무시하고 원래 거리와 새로운 거리의 상대적 순위(rankings)가 가능한 한 비슷할 것만을 요구하는 것입니다. 이러한 순위 기반 접근 방식은 강건합니다: 이상치에 대한 민감도가 줄어듭니다.
 
-**Robustness:** A method is robust if it is not too influenced by a few
-outliers. For example, the median of a set of \\(n\\) numbers does not change
-by a lot even if we change 20 the numbers by arbitrarily large amounts; to
-drastically shift the median, we need to change more than half of the numbers.
-In contrast, we can change the mean by a large amount by just manipulating one
-of the numbers. We say that the _breakdown point_ of the median is 1/2, while
-that of the mean is only \\(1/n\\). Both mean and median are estimators of the
-_location_ of a distribution (i.e., what is a "typical" value of the numbers),
-but the median is more robust. The median is based on the ranks; more
-generally, methods based on ranks are often more robust than those based on
-the actual values. Many nonparametric tests are based on reductions of data to
-their ranks.
+**강건성(Robustness):** 소수의 이상치에 의해 너무 크게 영향을 받지 않는다면 그 방법은 강건합니다. 예를 들어, \\(n\\)개 숫자 세트의 중앙값은 우리가 20개 숫자를 임의로 크게 바꾸더라도 크게 변하지 않습니다; 중앙값을 급격하게 이동시키려면 숫자들의 절반 이상을 바꾸어야 합니다. 대조적으로, 평균은 단 하나의 숫자만 조작해도 크게 바꿀 수 있습니다. 우리는 중앙값의 _붕괴점(breakdown point)_이 1/2인 반면, 평균의 붕괴점은 오직 \\(1/n\\)이라고 말합니다. 평균과 중앙값 모두 분포의 _위치(location)_ (즉, 숫자들의 "전형적인" 값이 무엇인지)에 대한 추정량이지만, 중앙값이 더 강건합니다. 중앙값은 순위에 기반합니다; 더 일반적으로, 순위에 기반한 방법들은 종종 실제 값에 기반한 방법들보다 더 강건합니다. 많은 비모수적 검정들은 데이터를 그들의 순위로 축소하는 것에 기반합니다.
 
-We will use the Ekman data to show how useful robust methods are when we are
-not quite sure about the ‘scale’ of our measurements. Robust ordination,
-called non metric multidimensional scaling (NMDS for short) only attempts to
-embed the points in a new space such that the **order** of the reconstructed
-distances in the new map is the same as the ordering of the original distance
-matrix.
+우리는 측정값의 '스케일'에 대해 확신이 없을 때 강건한 방법들이 얼마나 유용한지 보여주기 위해 Ekman 데이터를 사용할 것입니다. 비계량 다차원 척도법(non metric multidimensional scaling, 줄여서 NMDS)이라 불리는 강건한 서열화는, 오직 새로운 맵에서 재구성된 거리의 **순서**가 원래 거리 행렬의 순서와 동일하도록 점들을 새로운 공간에 임베딩하려고 시도합니다.
 
-Non metric MDS looks for a transformation \\(f\\) of the given dissimilarities
-in the matrix \\(d\\) and a set of coordinates in a low dimensional space
-(_the map_) such that the distance in this new map is \\(\tilde{d}\\) and
-\\(f(d)\thickapprox \tilde{d}\\). The quality of the approximation can be
-measured by the standardized residual sum of squares (stress) function:
+비계량 MDS는 행렬 \\(d\\)에 주어진 비유사성의 변환 \\(f\\)와, 이 새로운 맵에서의 거리 \\(\tilde{d}\\)가 \\(f(d)\thickapprox \tilde{d}\\)가 되도록 하는 낮은 차원 공간(_맵_)에서의 좌표 세트를 찾습니다. 근사의 품질은 표준화된 잔차 제곱합(stress) 함수로 측정될 수 있습니다:
 
 \\[ \text{stress}^2=\frac{\sum(f(d)-\tilde{d})^2}{\sum d^2}. \\]
 
-NMDS is not sequential in the sense that we have to specify the underlying
-dimensionality at the outset and the optimization is run to maximize the
-reconstruction of the distances according to that number. There is no notion
-of percentage of variation explained by individual axes as provided in PCA.
-However, we can make a simili-screeplot by running the program for all the
-successive values of \\(k\\) (\\(k=1, 2, 3, ...\\)) and looking at how well
-the stress drops. Here is an example of looking at these successive
-approximations and their goodness of fit. As in the case of diagnostics for
-clustering, we will take the number of axes **after** the stress has a steep
-drop.
+NMDS는 처음에 기저 차원수를 지정해야 하고 그 숫자에 따라 거리의 재구성을 최대화하도록 최적화가 실행된다는 점에서 순차적(sequential)이지 않습니다. PCA에서 제공되는 것처럼 개별 축에 의해 설명되는 변동의 백분율이라는 개념은 없습니다. 그러나 모든 연속적인 \\(k\\) 값(\\(k=1, 2, 3, ...\\))에 대해 프로그램을 실행하고 스트레스(stress)가 얼마나 잘 떨어지는지 살펴봄으로써 유사-스크리 플롯(simili-screeplot)을 만들 수 있습니다. 여기 이러한 연속적인 근사치들과 그들의 적합도를 살펴보는 예시가 있습니다. 군집화를 위한 진단 사례에서와 마찬가지로, 우리는 스트레스가 급격히 떨어진 **후**의 축의 개수를 택할 것입니다.
 
-Because each calculation of a NMDS result requires a new optimization that is
-both random and dependent on the \\(k\\) value, we use a similar procedure to
-what we did for clustering in [Chapter 4](04-chap.html). We execute the
-`metaMDS` function, say, 100 times for each of the four possible values of
-\\(k\\) and record the stress values.
+NMDS 결과의 각 계산은 무작위적이면서 \\(k\\) 값에 의존하는 새로운 최적화를 필요로 하므로, 우리는 [4장](04-chap.html)에서 군집화를 위해 했던 것과 유사한 절차를 사용합니다. 우리는 `metaMDS` 함수를 각 네 가지 가능한 \\(k\\) 값에 대해 예를 들어 100번씩 실행하고 스트레스 값들을 기록합니다.
 
     
     
@@ -580,8 +410,7 @@ what we did for clustering in [Chapter 4](04-chap.html). We execute the
     stress = nmds.stress(disekm, sim = 100)
     dim(stress)__
 
-Let’s look at the boxplots of the results. This can be a useful diagnostic
-plot for choosing \\(k\\) (Figure 9.10).
+결과의 박스플롯을 살펴봅시다. 이는 \\(k\\)를 선택하기 위한 유용한 진단 플롯이 될 수 있습니다 (그림 9.10).
 
     
     
@@ -589,44 +418,22 @@ plot for choosing \\(k\\) (Figure 9.10).
     ggplot(dfstr, aes(y = value, x = dimensions, group = dimensions)) +
       geom_boxplot()__
 
-[![](09-chap_files/figure-html/fig-
-NMDSscreeplot-1-1.png)](09-chap_files/figure-html/fig-NMDSscreeplot-1-1.png
-"Figure 9.10: Several replicates at each dimension were run to evaluate the
-stability of the stress. We see that the stress drops dramatically with two or
-more dimensions, thus indicating that a two dimensional solution is
-appropriate here.")
+[![](09-chap_files/figure-html/fig-NMDSscreeplot-1-1.png)](09-chap_files/figure-html/fig-NMDSscreeplot-1-1.png "그림 9.10: 스트레스의 안정성을 평가하기 위해 각 차원에서 여러 번의 반복 실험이 수행되었습니다. 우리는 2차원 이상에서 스트레스가 급격히 떨어지는 것을 볼 수 있으며, 이는 여기서 2차원 솔루션이 적절함을 나타냅니다.")
 
-Figure 9.10: Several replicates at each dimension were run to evaluate the
-stability of the stress. We see that the stress drops dramatically with two or
-more dimensions, thus indicating that a two dimensional solution is
-appropriate here.
+그림 9.10: 스트레스의 안정성을 평가하기 위해 각 차원에서 여러 번의 반복 실험이 수행되었습니다. 우리는 2차원 이상에서 스트레스가 급격히 떨어지는 것을 볼 수 있으며, 이는 여기서 2차원 솔루션이 적절함을 나타냅니다.
 
-We can also compare the distances and their approximations using what is known
-as a Shepard plot for \\(k=2\\) for instance, computed with:
+또한 예를 들어 \\(k=2\\)에 대해 셰퍼드 플롯(Shepard plot)이라고 알려진 것을 사용하여 거리와 그 근사치를 비교할 수 있습니다:
 
     
     
     nmdsk2 = metaMDS(disekm, k = 2, autotransform = FALSE)
     stressplot(nmdsk2, pch = 20)__
 
-[![](09-chap_files/figure-html/fig-
-Shepardsplot-1-1.png)](09-chap_files/figure-html/fig-Shepardsplot-1-1.png
-"Figure 9.11: The Shepard’s plot compares the original distances or
-dissimilarities \(along the horizonal axis\) to the reconstructed distances,
-in this case for k=2 \(vertical axis\).")
+[![](09-chap_files/figure-html/fig-Shepardsplot-1-1.png)](09-chap_files/figure-html/fig-Shepardsplot-1-1.png "그림 9.11: 셰퍼드 플롯은 원래의 거리 또는 비유사성(가로축)을 재구성된 거리(세로축, 이 경우 k=2)와 비교합니다.")
 
-Figure 9.11: The Shepard’s plot compares the original distances or
-dissimilarities (along the horizonal axis) to the reconstructed distances, in
-this case for \\(k=2\\) (vertical axis).
+그림 9.11: 셰퍼드 플롯은 원래의 거리 또는 비유사성(가로축)을 재구성된 거리(세로축, 이 경우 \\(k=2\\))와 비교합니다.
 
-Both the Shepard’s plot in Figure 9.11 and the screeplot in Figure 9.10 point
-to a two-dimensional solution for Ekman’s color confusion study. Let us
-compare the output of the two different MDS programs, the classical metric
-least squares approximation and the nonmetric rank approximation method. The
-right panel of Figure 9.12 shows the result from the nonmetric rank
-approximation, the left panel is the same as Figure 9.9. The projections are
-almost identical in both cases. For these data, it makes little difference
-whether we use a Euclidean or nonmetric multidimensional scaling method.
+그림 9.11의 셰퍼드 플롯과 그림 9.10의 스크리 플롯 모두 Ekman의 색상 혼동 연구에 대해 2차원 솔루션을 가리킵니다. 두 가지 서로 다른 MDS 프로그램인 고전적 계량 최소제곱 근사법과 비계량 순위 근사법의 출력을 비교해 봅시다. 그림 9.12의 오른쪽 패널은 비계량 순위 근사의 결과를 보여주며, 왼쪽 패널은 그림 9.9와 동일합니다. 두 경우 모두 투영이 거의 동일합니다. 이 데이터의 경우, 유클리드 다차원 척도법을 사용하든 비계량 다차원 척도법을 사용하든 거의 차이가 없습니다.
 
     
     
@@ -638,20 +445,17 @@ whether we use a Euclidean or nonmetric multidimensional scaling method.
         geom_point(col = dfekm$rgb, size = 4) +
         geom_text_repel(aes(label = name))__
 
-[![](09-chap_files/figure-html/fig-ekmannonMDS-1-1.png)](09-chap_files/figure-
-html/fig-ekmannonMDS-1-1.png "Figure 9.12 \(a\): ")
+[![](09-chap_files/figure-html/fig-ekmannonMDS-1-1.png)](09-chap_files/figure-html/fig-ekmannonMDS-1-1.png "그림 9.12 (a): ")
 
 (a)
 
-[![](09-chap_files/figure-html/fig-ekmannonMDS-1-2.png)](09-chap_files/figure-
-html/fig-ekmannonMDS-1-2.png "Figure 9.12 \(b\): ")
+[![](09-chap_files/figure-html/fig-ekmannonMDS-1-2.png)](09-chap_files/figure-html/fig-ekmannonMDS-1-2.png "그림 9.12 (b): ")
 
 (b)
 
-Figure 9.12: Comparison of the output from (a) the classical multidimensional
-scaling (same as Figure 9.9) and (b) the nonmetric version.
+그림 9.12: (a) 고전적 다차원 척도법(그림 9.9와 동일)과 (b) 비계량 버전의 출력 비교.
 
-## 9.3 Contiguous or supplementary information
+## 9.3 연속 정보 또는 보조 정보
 
 [![Metadata: Many programs and workflows for biological sequence analysis or
 assays separate the environmental and contextual information, which they call
@@ -695,44 +499,23 @@ Here we show an example of an analysis that was done by Holmes et al.
 ([2011](16-chap.html#ref-holmes2011psb)) on bacterial abundance data from
 _Phylochip_ ([Brodie et al. 2006](16-chap.html#ref-Brodie:2006)) microarrays.
 The experiment was designed to detect differences between a group of healthy
-rats and a group who had Irritable Bowel Disease ([Nelson et al.
-2010](16-chap.html#ref-Nelson:2011)). This example shows a case where the
-nuisance batch effects become apparent in the analysis of experimental data.
-It is an illustration of the fact that best practices in data analyses are
-sequential and that it is better to analyse data as they are collected to
-adjust for severe problems in the experimental design _as they occur_ ,
-instead of having to deal with them _post mortem_ 4.
+## 9.3 불균질 데이터 연구: 배치를 보조 정보로 사용하기
 
-4 Fisher’s terminology, see [Chapter 13](13-chap.html).
+우리는 종종 관심 있는 실험 변수 외에도, 그 효과를 가릴 수 있는 보조 정보(성가신 공변량)를 가지고 있습니다. 예를 들어, 샘플이 수집된 날짜나 시퀀싱 프로토콜 등이 이에 해당합니다. 이러한 "배치 효과(batch effects)"를 시각화하고 보정하는 것은 데이터 분석의 필수적인 단계입니다.
 
-When data collection started on this project, days 1 and 2 were delivered and
-we made the plot that appears in Figure 9.14. This showed a definite _day_
-effect. When investigating the source of this effect, we found that both the
-protocol and the array were different in days 1 and 2. This leads to
-uncertainty in the source of variation, we call this **confounding** of
-effects.
+### 9.3.1 사례 연구: 쥐 마이크로바이옴 데이터
 
-[![Bioconductor container: These data are an example of an awkward way of
-combining batch information with the actual data. The day information has been
-combined with the array data and encoded as a number and could be confused
-with a continuous variable. We will see in the next section a better practice
-for storing and manipulating heterogeneous data using a Bioconductor container
-called SummarizedExperiment.](imgs/devil.png)](imgs/devil.png "Bioconductor
-container: These data are an example of an awkward way of combining batch
-information with the actual data. The day information has been combined with
-the array data and encoded as a number and could be confused with a continuous
-variable. We will see in the next section a better practice for storing and
-manipulating heterogeneous data using a Bioconductor container called
-SummarizedExperiment.")
+건강한 쥐 그룹과 과민성 대장 증후군(IBS)을 앓고 있는 쥐 그룹으로부터 얻은 마이크로바이옴 칩 데이터 세트를 고려해 봅시다 ([Nelson et al. 2010](16-chap.html#ref-Nelson:2011)). 이 예시는 실험 데이터 분석에서 성가신 배치 효과가 어떻게 나타나는지 보여줍니다. 이는 데이터 분석의 모범 사례가 순차적이어야 한다는 것과, 실험 설계상의 심각한 문제가 _발생할 때마다_ 이를 조정하기 위해 데이터를 수집되는 대로 분석하는 것이 사후에 처리하는 것보다 더 낫다는 사실을 잘 보여줍니다4.
 
-**Bioconductor container:** These data are an example of an awkward way of
-combining batch information with the actual data. The `day` information has
-been combined with the array data and encoded as a number and could be
-confused with a continuous variable. We will see in the next section a better
-practice for storing and manipulating heterogeneous data using a Bioconductor
-container called _SummarizedExperiment_.
+4 피셔(Fisher)의 용어, [13장](13-chap.html)을 참조하십시오.
 
-We load the data and the packages we use for this section:
+이 프로젝트에서 데이터 수집이 시작되었을 때, 1일째와 2일째의 데이터가 전달되었고 우리는 그림 9.14에 나타난 플롯을 만들었습니다. 이는 분명한 _날짜(day)_ 효과를 보여주었습니다. 이 효과의 원인을 조사한 결과, 1일째와 2일째에 사용된 프로토콜과 칩(array)이 모두 달랐음을 발견했습니다. 이는 변동의 원인에 대한 불확실성을 초래하며, 우리는 이를 효과의 **혼동(confounding)**이라고 부릅니다.
+
+[![Bioconductor 컨테이너: 이 데이터는 배치 정보를 실제 데이터와 결합하는 다소 어색한 방식의 예입니다. 날짜 정보가 어레이 데이터와 결합되어 숫자로 인코딩되었으며, 이는 연속형 변수와 혼동될 수 있습니다. 다음 섹션에서는 Bioconductor의 SummarizedExperiment라는 컨테이너를 사용하여 불균질한 데이터를 저장하고 조작하는 더 나은 실무 방식을 살펴볼 것입니다.](imgs/devil.png)](imgs/devil.png "Bioconductor 컨테이너: 이 데이터는 배치 정보를 실제 데이터와 결합하는 다소 어색한 방식의 예입니다. 날짜 정보가 어레이 데이터와 결합되어 숫자로 인코딩되었으며, 이는 연속형 변수와 혼동될 수 있습니다. 다음 섹션에서는 Bioconductor의 SummarizedExperiment라는 컨테이너를 사용하여 불균질한 데이터를 저장하고 조작하는 더 나은 실무 방식을 살펴볼 것입니다.")
+
+**Bioconductor 컨테이너:** 이 데이터는 배치 정보를 실제 데이터와 결합하는 다소 어색한 방식의 예입니다. `day` 정보가 어레이 데이터와 결합되어 숫자로 인코딩되었으며, 이는 연속형 변수와 혼동될 수 있습니다. 다음 섹션에서는 Bioconductor의 _SummarizedExperiment_라는 컨테이너를 사용하여 불균질한 데이터를 저장하고 조작하는 더 나은 실무 방식을 살펴볼 것입니다.
+
+우리는 데이터를 불러오고 이 섹션에서 사용할 패키지들을 로드합니다:
 
     
     
@@ -743,14 +526,13 @@ We load the data and the packages we use for this section:
 
 __
 
-Question 9.5
+질문 9.5
 
-What class is the `IBDchip` ? Look at the last row of the matrix, what do you
-notice?
+`IBDchip`의 클래스는 무엇인가요? 행렬의 마지막 행을 살펴보세요. 무엇을 알 수 있나요?
 
 __
 
-Solution
+해결책
 
 __
 
@@ -786,24 +568,16 @@ __
      1  2  3 
      8 16  4 
 
-The data are normalized abundance measurements of 8634 taxa measured on 28
-samples. We use a rank-threshold transformation, giving the top 3000 most
-abundant taxa scores from 3000 to 1, and letting the remaining (low abundant)
-ones all have a score of 1. We also separate out the proper assay data from
-the (awkwardly placed) day variable, which should be considered a factor5:
+데이터는 28개 샘플에서 측정된 8634개 분류군(taxa)의 정규화된 풍부도 측정값입니다. 우리는 순위-임계값(rank-threshold) 변환을 사용하여, 가장 풍부한 상위 3000개 분류군에는 3000에서 1까지의 점수를 부여하고 나머지(낮은 풍부도) 분류군은 모두 1의 점수를 갖게 합니다. 또한 요인(factor)으로 간주되어야 할 (어색하게 배치된) `day` 변수를 적절한 분석 데이터와 분리합니다5:
 
-5 Below, we show how to arrange these data into a Bioconductor
-`SummarizedExperiment`, which is a much more sane way of storing such data.
+5 아래에서 우리는 이러한 데이터를 Bioconductor의 `SummarizedExperiment`로 정리하는 방법을 보여줄 것인데, 이는 이러한 데이터를 저장하는 훨씬 더 합리적인 방식입니다.
 
     
     
     assayIBD = IBDchip[-nrow(IBDchip), ]
     day      = factor(IBDchip[nrow(IBDchip), ])__
 
-Instead of using the continuous, somehow normalized data, we use a robust
-analysis replacing the values by their ranks. The lower values are considered
-ties encoded as a threshold chosen to reflect the number of expected taxa
-thought to be present:
+연속형의 정규화된 데이터를 사용하는 대신, 값을 순위로 대체하는 강건한 분석을 사용합니다. 낮은 풍부도 값들은 실제 존재하는 것으로 생각되는 예상 분류군 수를 반영하도록 선택된 임계값으로 인코딩된 동점(ties)으로 간주됩니다:
 
     
     
@@ -817,11 +591,9 @@ thought to be present:
     fviz_eig(pcaDay12, bar_width = 0.6) + ggtitle("")__
 
 [![](09-chap_files/figure-html/fig-screepc12-1.png)](09-chap_files/figure-
-html/fig-screepc12-1.png "Figure 9.13: The screeplot shows us that the samples
-can be usefully represented in a two dimensional embedding.")
+html/fig-screepc12-1.png "그림 9.13: 스크리 플롯은 샘플들이 2차원 임베딩으로 유용하게 표현될 수 있음을 보여줍니다.")
 
-Figure 9.13: The screeplot shows us that the samples can be usefully
-represented in a two dimensional embedding.
+그림 9.13: 스크리 플롯은 샘플들이 2차원 임베딩으로 유용하게 표현될 수 있음을 보여줍니다.
 
     
     
@@ -833,43 +605,27 @@ represented in a two dimensional embedding.
     rtPCA1 __
 
 [![](09-chap_files/figure-html/fig-rankthreshPCA-1.png)](09-chap_files/figure-
-html/fig-rankthreshPCA-1.png "Figure 9.14: We have used colors to identify the
-different days and have kept the sample labels as well. We have also added
-convex hulls for each day. The group mean is identified as the point with the
-larger symbol \(circle, triangle or square\).")
+html/fig-rankthreshPCA-1.png "그림 9.14: 우리는 색상을 사용하여 서로 다른 날짜를 식별하고 샘플 레이블도 유지했습니다. 또한 각 날짜에 대해 볼록 껍질(convex hulls)을 추가했습니다. 그룹 평균은 더 큰 기호(원, 삼각형 또는 사각형)를 가진 점으로 표시됩니다.")
 
-Figure 9.14: We have used colors to identify the different days and have kept
-the sample labels as well. We have also added convex hulls for each day. The
-group mean is identified as the point with the larger symbol (circle, triangle
-or square).
+그림 9.14: 우리는 색상을 사용하여 서로 다른 날짜를 식별하고 샘플 레이블도 유지했습니다. 또한 각 날짜에 대해 볼록 껍질(convex hulls)을 추가했습니다. 그룹 평균은 더 큰 기호(원, 삼각형 또는 사각형)를 가진 점으로 표시됩니다.
 
 __
 
-Question 9.6
+질문 9.6
 
-Why do we use a threshold for the ranks?
-
-__
-
-Solution
+왜 순위에 임계값(threshold)을 사용하나요?
 
 __
 
-Low abundances, at noise level occur for species that are not really present,
-of which there are more than half. A large jump in rank for these observations
-could easily occur without any meaningful reason. Thus we create a large
-number of ties for low abundance.
+해결책
 
-Figure 9.14 shows that the sample arrange themselves naturally into two
-different groups according to the day of the samples. After discovering this
-effect, we delved into the differences that could explain these distinct
-clusters. There were two different protocols used (protocol 1 on day 1,
-protocol 2 on day 2) _and_ unfortunately two different provenances for the
-arrays used on those two days (array 1 on day 1, array 2 on day 2).
+__
 
-A third set of data of four samples had to be collected to deconvolve the
-confounding effect. Array 2 was used with protocol 2 on Day 3, Figure 9.15
-shows the new PCA plot with all the samples created by the following:
+실제로 존재하지 않는 종들의 경우 노이즈 수준의 낮은 풍부도가 나타나는데, 이들이 전체의 절반 이상입니다. 이러한 관측치들에 대해 어떠한 유의미한 이유 없이 순위에서 큰 도약이 쉽게 일어날 수 있습니다. 따라서 우리는 낮은 풍부도에 대해 많은 수의 동점(ties)을 만듭니다.
+
+그림 9.14는 샘플들이 샘플링 날짜에 따라 자연스럽게 두 개의 서로 다른 그룹으로 나뉘는 것을 보여줍니다. 이 효과를 발견한 후, 우리는 이러한 뚜렷한 클러스터들을 설명할 수 있는 차이점들을 조사했습니다. 두 가지 서로 다른 프로토콜이 사용되었고(1일째는 프로토콜 1, 2일째는 프로토콜 2), 불행히도 그 이틀 동안 사용된 어레이의 출처도 달랐습니다(1일째는 어레이 1, 2일째는 어레이 2).
+
+혼동 효과를 풀어내기 위해 4개 샘플로 구성된 세 번째 데이터 세트를 수집해야 했습니다. 3일째에는 어레이 2가 프로토콜 2와 함께 사용되었습니다. 그림 9.15는 다음 코드로 생성된 모든 샘플을 포함하는 새로운 PCA 플롯을 보여줍니다:
 
     
     
@@ -881,28 +637,23 @@ shows the new PCA plot with all the samples created by the following:
 
 [![](09-chap_files/figure-html/fig-
 Threesetspca123-1.png)](09-chap_files/figure-html/fig-Threesetspca123-1.png
-"Figure 9.15 \(a\): ")
+"그림 9.15 (a): ")
 
 (a)
 
 [![](09-chap_files/figure-html/fig-
 Threesetspca123-2.png)](09-chap_files/figure-html/fig-Threesetspca123-2.png
-"Figure 9.15 \(b\): ")
+"그림 9.15 (b): ")
 
 (b)
 
-Figure 9.15: When comparing the three day analysis to that of the first two
-days, we notice the inversion of signs in the coordinates on the second axis:
-this has no biological relevance. The important finding is that group 3
-overlaps heavily with group 1 indicating that it was the protocol change on
-Day 2 which created the variability.
+그림 9.15: 3일간의 분석을 처음 이틀간의 분석과 비교해 보면, 두 번째 축 좌표의 부호가 반전된 것을 알 수 있습니다: 이는 생물학적 관련성이 없습니다. 중요한 발견은 그룹 3이 그룹 1과 크게 겹친다는 것인데, 이는 가변성을 만든 것이 2일째의 프로토콜 변경이었음을 나타냅니다.
 
 __
 
-Question 9.7
+질문 9.7
 
-In which situation would it be preferable to make confidence ellipses around
-the group means using the following code?
+어떤 상황에서 다음 코드를 사용하여 그룹 평균 주변에 신뢰 타원(confidence ellipses)을 만드는 것이 더 선호될까요?
 
     
     
@@ -910,43 +661,19 @@ the group means using the following code?
       palette = "Dark2", addEllipses = TRUE, ellipse.level = 0.69)__
 
 [![](09-chap_files/figure-html/fig-screepc123-1.png)](09-chap_files/figure-
-html/fig-screepc123-1.png "Figure 9.16: The eigenvalue screeplot the case of 3
-groups is extremely similar to that with two groups shown in Figure fig-
-screepc12.")
+html/fig-screepc123-1.png "그림 9.16: 3개 그룹의 경우 고윳값 스크리 플롯은 그림 9.13에 표시된 2개 그룹의 경우와 매우 유사합니다.")
 
-Figure 9.16: The eigenvalue screeplot the case of 3 groups is extremely
-similar to that with two groups shown in Figure 9.13.
+그림 9.16: 3개 그룹의 경우 고윳값 스크리 플롯은 그림 9.13에 표시된 2개 그룹의 경우와 매우 유사합니다.
 
-Through this visualization we were able to uncover a flaw in the original
-experimental design. The first two batches shown in green and brown were both
-balanced with regards to IBS and healthy rats. They do show very different
-levels of variability and overall multivariate coordinates. In fact, there are
-two **confounded** effects. Both the arrays and protocols were different on
-those two days. We had to run a third batch of experiments on day 3,
-represented in purple, this used protocol from day 1 and the arrays from day
-2. The third group faithfully overlaps with batch 1, telling us that the
-change in protocol was responsible for the variability.
+이 시각화를 통해 우리는 원래의 실험 설계에 있었던 결함을 발견할 수 있었습니다. 녹색과 갈색으로 표시된 처음 두 배치는 모두 IBS 쥐와 건강한 쥐에 대해 균형이 잡혀 있었습니다. 하지만 그들은 매우 다른 수준의 가변성과 전반적인 다변량 좌표를 보여줍니다. 사실, 두 개의 **혼동된** 효과가 있습니다. 그 이틀 동안 어레이와 프로토콜이 모두 달랐습니다. 우리는 3일째에 세 번째 배치 실험을 실행해야 했으며(보라색으로 표시됨), 이는 1일째의 프로토콜과 2일째의 어레이를 사용했습니다. 세 번째 그룹은 배치 1과 충실하게 겹치며, 이는 프로토콜의 변경이 가변성의 원인이었음을 말해줍니다.
 
-### 9.3.2 Removing batch effects
+### 9.3.2 배치 효과 제거하기
 
-Through the combination of the continuous measurements from `assayIBD` and the
-**supplementary** batch number as a factor, the PCA map has provided an
-invaluable investigation tool. This is a good example of the use of
-**supplementary points** 6. The mean-barycenter points are created by using
-the group-means of points in each of the three groups and serve as extra
-markers on the plot.
+`assayIBD`의 연속형 측정값과 **보충(supplementary)** 배치 번호를 요인으로 결합함으로써, PCA 맵은 귀중한 조사 도구를 제공했습니다. 이것은 **보충 점(supplementary points)**6을 사용한 좋은 예입니다. 평균-중심 점들은 세 그룹 각각에 있는 점들의 그룹 평균을 사용하여 만들어지며 플롯에서 추가 마커 역할을 합니다.
 
-6 This is called a supplementary point because the new observation-point is
-not used in the matrix decomposition.
+6 새로운 관측 점이 행렬 분해에 사용되지 않기 때문에 이를 보충 점이라고 부릅니다.
 
-We can decide to re-align the three groups by subtracting the group means so
-that all the batches are centered on the origin. A slightly more effective way
-is to use the `ComBat` function available in the
-**[sva](https://bioconductor.org/packages/sva/)** package. This function uses
-a similar, but slightly more sophisticated method (Empirical Bayes mixture
-approach ([Leek et al. 2010](16-chap.html#ref-Leek:2010:batch))). We can see
-its effect on the data by redoing our robust PCA (see the result in Figure
-9.17):
+우리는 모든 배치가 원점에 중심을 맞추도록 그룹 평균을 뺌으로써 세 그룹을 재정렬하기로 결정할 수 있습니다. 약간 더 효과적인 방법은 **[sva](https://bioconductor.org/packages/sva/)** 패키지에서 제공하는 `ComBat` 함수를 사용하는 것입니다. 이 함수는 유사하지만 약간 더 정교한 방법(경험적 베이즈 혼합 접근법, [Leek et al. 2010](16-chap.html#ref-Leek:2010:batch))을 사용합니다. 우리는 강건한 PCA를 다시 수행하여 데이터에 미치는 효과를 확인할 수 있습니다 (그림 9.17의 결과 참조):
 
     
     
@@ -958,35 +685,19 @@ its effect on the data by redoing our robust PCA (see the result in Figure
       ellipse.type = "convex", axes =c(1,2)) + coord_fixed() + ggtitle("")__
 
 [![](09-chap_files/figure-html/fig-CombatIBD-1.png)](09-chap_files/figure-
-html/fig-CombatIBD-1.png "Figure 9.17: The modified data with the batch
-effects removed now show three batch-groups heavily overlapping and centered
-almost at the origin.")
+html/fig-CombatIBD-1.png "그림 9.17: 배치 효과가 제거된 수정된 데이터는 이제 거의 원점에 중심을 두고 심하게 겹쳐진 세 개의 배치 그룹을 보여줍니다.")
 
-Figure 9.17: The modified data with the batch effects removed now show three
-batch-groups heavily overlapping and centered almost at the origin.
+그림 9.17: 배치 효과가 제거된 수정된 데이터는 이제 거의 원점에 중심을 두고 심하게 겹쳐진 세 개의 배치 그룹을 보여줍니다.
 
-### 9.3.3 Hybrid data and Bioconductor containers
+### 9.3.3 하이브리드 데이터 및 Bioconductor 컨테이너
 
-A more rational way of combining the batch and treatment information into
-compartments of a composite object is to use the _SummarizedExperiment_ class.
-It includes special _slots_ for the assay(s) where rows represent features of
-interest (e.g., genes, transcripts, exons, etc.) and columns represent
-samples. Supplementary information about the features can be stored in a
-_DataFrame_ object, accessible using the function `rowData`. Each row of the
-_DataFrame_ provides information on the feature in the corresponding row of
-the _SummarizedExperiment_ object.
+배치와 처리 정보를 복합 객체의 구획으로 결합하는 더 합리적인 방법은 _SummarizedExperiment_ 클래스를 사용하는 것입니다. 이는 행이 관심 있는 특성(예: 유전자, 전사체, 엑손 등)을 나타내고 열이 샘플을 나타내는 분석(assay)을 위한 특수 _슬롯(slots)_을 포함합니다. 특성에 대한 보충 정보는 `rowData` 함수를 사용하여 액세스할 수 있는 _DataFrame_ 객체에 저장될 수 있습니다. _DataFrame_의 각 행은 _SummarizedExperiment_ 객체의 상응하는 행에 있는 특성에 대한 정보를 제공합니다.
 
-[![A confusing notational similarity occurs here, in the SummarizedExperiment
-framework a DataFrame is not the same as a
-data.frame.](imgs/devil.png)](imgs/devil.png "A confusing notational
-similarity occurs here, in the SummarizedExperiment framework a DataFrame is
-not the same as a data.frame.")
+[![여기서 혼동스러운 표기법상의 유사성이 발생하는데, SummarizedExperiment 프레임워크에서 DataFrame은 data.frame과 다릅니다.](imgs/devil.png)](imgs/devil.png "여기서 혼동스러운 표기법상의 유사성이 발생하는데, SummarizedExperiment 프레임워크에서 DataFrame은 data.frame과 다릅니다.")
 
-A confusing notational similarity occurs here, in the SummarizedExperiment
-framework a `DataFrame` is not the same as a _data.frame._
+여기서 혼동스러운 표기법상의 유사성이 발생하는데, _SummarizedExperiment_ 프레임워크에서 `DataFrame`은 _data.frame_ 과 다릅니다.
 
-Here we insert the two covariates day and treatment in the `colData` object
-and combine it with assay data in a new _SummarizedExperiment_ object.
+여기서 우리는 날짜와 처리라는 두 공변량을 `colData` 객체에 삽입하고, 이를 분석 데이터와 결합하여 새로운 _SummarizedExperiment_ 객체를 만듭니다.
 
     
     
@@ -1110,7 +821,7 @@ following interactive code:
 
 (a)
 
-[![](imgs/plotnormpclust1.png)](imgs/plotnormpclust1.png "Figure 9.19 \(b\):
+![](imgs/plotnormpclust1.png):
 ")
 
 (b)
@@ -1299,17 +1010,11 @@ __
     fviz_ca_row(HIVca, axes=c(1, 3), geom="text", col.row="purple", labelsize=3) +
       ggtitle("") + theme_minimal() + coord_fixed()__
 
-This first example showed how to map all the different levels of one
-categorical variable (the mutations) in a similar way to how PCA projects
-continuous variables. We will now explore how this can be extended to two or
-more categorical variables.
+이 첫 번째 예제는 PCA가 연속형 변수를 투영하는 것과 유사한 방식으로 하나의 범주형 변수(돌연변이)의 모든 서로 다른 수준을 매핑하는 방법을 보여주었습니다. 이제 이를 두 개 이상의 범주형 변수로 확장하는 방법을 살펴보겠습니다.
 
-### 9.4.2 Hair color, eye color and phenotype co-occurrence
+### 9.4.2 머리카락 색깔, 눈 색깔 및 표현형 공동 발생
 
-We will consider a small table, so we can follow the analysis in detail. The
-data are a contingency table of hair-color and eye-color phenotypic co-
-occurrence from students as shown in Table 9.3. In [Chapter 2](02-chap.html),
-we used a \\(\chi^2\\) test to detect possible dependencies:
+분석을 자세히 따라갈 수 있도록 작은 표를 고려하겠습니다. 데이터는 표 9.3에 표시된 학생들의 머리카락 색깔과 눈 색깔 표현형 공동 발생에 대한 분할표입니다. [2장](02-chap.html)에서 우리는 가능한 의존성을 탐지하기 위해 \\(\chi^2\\) 검정을 사용했습니다.
 
     
     
@@ -1322,27 +1027,20 @@ we used a \\(\chi^2\\) test to detect possible dependencies:
     data:  HairColor
     X-squared = 106.66, df = 9, p-value < 2.2e-16
 
-Table 9.3: Cross tabulation of students hair and eye color.
+표 9.3: 학생들의 머리카락 색깔과 눈 색깔 분할표.
 
-| Brown | Blue | Hazel | Green  
+| 갈색 | 파란색 | 헤이즐 | 초록색  
 ---|---|---|---|---  
-Black | 36 | 9 | 5 | 2  
-Brown | 66 | 34 | 29 | 14  
-Red | 16 | 7 | 7 | 7  
-Blond | 4 | 64 | 5 | 8  
+검은색 | 36 | 9 | 5 | 2  
+갈색 | 66 | 34 | 29 | 14  
+빨간색 | 16 | 7 | 7 | 7  
+금발 | 4 | 64 | 5 | 8  
   
-However, stating _non independence_ between hair and eye color is not enough.
-We need a more detailed explanation of where the dependencies occur: which
-hair color occurs more often with green eyes ? Are some of the variable levels
-independent? In fact we can study the departure from independence using a
-special weighted version of SVD. This method can be understood as a simple
-extension of PCA and MDS to contingency tables.
+그러나 머리카락 색깔과 눈 색깔 사이의 _비독립성_을 진술하는 것만으로는 충분하지 않습니다. 우리는 의존성이 어디에서 발생하는지에 대한 더 자세한 설명이 필요합니다: 어떤 머리카락 색깔이 초록색 눈과 더 자주 발생하나요? 일부 변수 수준은 독립적인가요? 사실 우리는 SVD의 특수한 가중치 버전을 사용하여 독립성으로부터의 이탈을 연구할 수 있습니다. 이 방법은 PCA와 MDS를 분할표로 확장한 단순한 것으로 이해될 수 있습니다.
 
-#### Independence: computationally and visually.
+#### 독립성: 계산 및 시각화.
 
-We start by computing the row and column sums; we use these to build the table
-that would be expected if the two phenotypes were independent. We call this
-expected table `HCexp`.
+우리는 행과 열의 합을 계산하는 것으로 시작합니다. 우리는 이를 사용하여 두 표현형이 독립적일 경우 예상되는 표를 만듭니다. 이 예상 표를 `HCexp`라고 부릅니다.
 
     
     
@@ -1367,8 +1065,7 @@ expected table `HCexp`.
     
     HCexp = rowsums %*%t (colsums) / sum(colsums)__
 
-Now we compute the \\(\chi^2\\) (chi-squared) statistic, which is the sum of
-the scaled residuals for each of the cells of the table:
+이제 표의 각 셀에 대한 척도 조정된 잔차의 합인 \\(\chi^2\\)(카이제곱) 통계량을 계산합니다.
 
     
     
@@ -1377,8 +1074,7 @@ the scaled residuals for each of the cells of the table:
     
     [1] 106.6637
 
-We can study these residuals from the expected table, first numerically then
-in Figure 9.23.
+우리는 이 잔차들을 예상 표로부터 연구할 수 있으며, 먼저 수치적으로 확인한 다음 그림 9.23에서 살펴보겠습니다.
 
     
     
@@ -1397,59 +1093,35 @@ in Figure 9.23.
     mosaicplot(HairColor, shade=TRUE, las=1, type="pearson", cex.axis=0.7, main="")__
 
 [![](09-chap_files/figure-html/fig-MosaicHair-1.png)](09-chap_files/figure-
-html/fig-MosaicHair-1.png "Figure 9.23: Visualization of the departure from
-independence. Now, the boxes are proportional in size to the actual observed
-counts and we no longer have a ‘rectangular’ property. The departure from
-independence is measured in Chisquared distance for each of the boxes and
-colored according to whether the residuals are large and positive. Dark blue
-indicates a positive association, for instance between blue eyes and blonde
-hair, red indicates a negative association such as in the case of blond hair
-and brown eyes.")
+html/fig-MosaicHair-1.png "그림 9.23: 독립성으로부터의 이탈 시각화. 이제 상자들의 크기는 실제 관측된 카운트에 비례하며, 더 이상 '직사각형' 속성을 갖지 않습니다. 독립성으로부터의 이탈은 각 상자에 대해 카이제곱 거리로 측정되며, 잔차가 크고 양(+)수인지 여부에 따라 색상이 입혀집니다. 짙은 파란색은 양의 연관성을 나타내며(예: 파란색 눈과 금발), 빨간색은 음의 연관성을 나타냅니다(예: 금발과 갈색 눈).")
 
-Figure 9.23: Visualization of the departure from independence. Now, the boxes
-are proportional in size to the actual observed counts and we no longer have a
-‘rectangular’ property. The departure from independence is measured in
-Chisquared distance for each of the boxes and colored according to whether the
-residuals are large and positive. Dark blue indicates a positive association,
-for instance between blue eyes and blonde hair, red indicates a negative
-association such as in the case of blond hair and brown eyes.
+그림 9.23: 독립성으로부터의 이탈 시각화. 이제 상자들의 크기는 실제 관측된 카운트에 비례하며, 더 이상 '직사각형' 속성을 갖지 않습니다. 독립성으로부터의 이탈은 각 상자에 대해 카이제곱 거리로 측정되며, 잔차가 크고 양(+)수인지 여부에 따라 색상이 입혀집니다. 짙은 파란색은 양의 연관성을 나타내며(예: 파란색 눈과 금발), 빨간색은 음의 연관성을 나타냅니다(예: 금발과 갈색 눈).
 
-#### Mathematical Formulation.
+#### 수학적 공식화.
 
-Here are the computations we just did in R in a more mathematical form. For a
-general contingency table \\({\mathbf N}\\) with \\(I\\) rows and \\(J\\)
-columns and a total sample size of \\(n=\sum_{i=1}^I \sum_{j=1}^J n_{ij}=
-n_{\cdot \cdot}\\). If the two categorical variables were independent, each
-cell frequency would be approximately equal to
+우리가 방금 R에서 수행한 계산들을 좀 더 수학적인 형식으로 정리하면 다음과 같습니다. \\(I\\)개의 행과 \\(J\\)개의 열을 가지고 전체 표본 크기가 \\(n=\sum_{i=1}^I \sum_{j=1}^J n_{ij}= n_{\cdot \cdot}\\)인 일반적인 분할표 \\({\mathbf N}\\)에 대해, 만약 두 범주형 변수가 독립적이라면 각 셀의 빈도는 대략 다음과 같을 것입니다.
 
 \\[ n_{ij} = \frac{n_{i \cdot}}{n} \frac{n_{\cdot j}}{n} \times n \\]
 
-can also be written:
+이는 다음과 같이 쓰여질 수도 있습니다:
 
-\\[ {\mathbf N} = {\mathbf c r'} \times n, \qquad \mbox{ where } c=
-\frac{1}{n} {{\mathbf N}} {\mathbb 1}_m \;\mbox{ and }\; r'=\frac{1}{n}
+\\[ {\mathbf N} = {\mathbf c r'} \times n, \qquad \mbox{ 여기서 } c=
+\frac{1}{n} {{\mathbf N}} {\mathbb 1}_m \;\mbox{ 이고 }\; r'=\frac{1}{n}
 {\mathbf N}' {\mathbb 1}_p \\]
 
-The departure from independence is measured by the \\(\chi^2\\) statistic
+독립성으로부터의 이탈은 \\(\chi^2\\) 통계량으로 측정됩니다.
 
 \\[ {\cal X}^2=\sum_{i,j}
 \frac{\left(n_{ij}-\frac{n_{i\cdot}}{n}\frac{n_{\cdot j}}{n}n\right)^2}
 {\frac{n_{i\cdot}n_{\cdot j}}{n^2}n} \\]
 
-Once we have ascertained that the two variables are not independent, we use a
-weighted multidimensional scaling using \\(\chi^2\\) distances to visualize
-the associations.
+두 변수가 독립적이지 않다는 것을 확인하고 나면, 연관성을 시각화하기 위해 \\(\chi^2\\) 거리를 사용하는 가중 다차원 척도법을 사용합니다.
 
-**Correspondece Analysis functions** `CCA` in
-**[vegan](https://cran.r-project.org/web/packages/vegan/)** , `CA` in
-**[FactoMineR](https://cran.r-project.org/web/packages/FactoMineR/)** ,
-`ordinate` in **[phyloseq](https://bioconductor.org/packages/phyloseq/)** ,
-`dudi.coa` in **[ade4](https://cran.r-project.org/web/packages/ade4/)**.
+**대응 분석 함수들** **[vegan](https://cran.r-project.org/web/packages/vegan/)**의 `CCA`, **[FactoMineR](https://cran.r-project.org/web/packages/FactoMineR/)**의 `CA`, **[phyloseq](https://bioconductor.org/packages/phyloseq/)**의 `ordinate`, **[ade4](https://cran.r-project.org/web/packages/ade4/)**의 `dudi.coa`.
 
-The method is called **Correspondence Analysis (CA)** or **Dual Scaling** and
-there are multiple R packages that implement it.
+이 방법은 **대응 분석(Correspondence Analysis, CA)** 또는 **쌍대 척도법(Dual Scaling)**이라고 불리며, 이를 구현하는 여러 R 패키지가 있습니다.
 
-Here we make a simple biplot of the Hair and Eye colors.
+여기서는 머리카락 색깔과 눈 색깔에 대한 단순한 바이플롯을 만듭니다.
 
     
     
@@ -1465,40 +1137,25 @@ Here we make a simple biplot of the Hair and Eye colors.
       ggtitle("") + ylim(c(-0.5,0.5))__
 
 [![](09-chap_files/figure-html/fig-HCscatter-1.png)](09-chap_files/figure-
-html/fig-HCscatter-1.png "Figure 9.24: The CA plot gives a representation of a
-large proportion of the chisquare distance between the data and the values
-expected under independence. The first axis shows a contrast between black
-haired and blonde haired students, mirrored by the brown eye, blue eye
-opposition. In CA the two categories play symmetric roles and we can interpret
-the proximity of Blue eyes and Blond hair has meaning that there is strong co-
-occurence of these categories.")
+html/fig-HCscatter-1.png "그림 9.24: CA 플롯은 데이터와 독립성 가정하의 예상 값 사이의 카이제곱 거리의 상당 부분을 나타냅니다. 첫 번째 축은 검은 머리와 금발 학생 사이의 대비를 보여주며, 이는 갈색 눈과 파란 눈의 대립에 의해 반영됩니다. CA에서 두 범주는 대칭적인 역할을 하며, 우리는 파란 눈과 금발의 근접성을 이들 범주의 강력한 공동 발생을 의미하는 것으로 해석할 수 있습니다.")
 
-Figure 9.24: The CA plot gives a representation of a large proportion of the
-chisquare distance between the data and the values expected under
-independence. The first axis shows a contrast between black haired and blonde
-haired students, mirrored by the brown eye, blue eye opposition. In CA the two
-categories play symmetric roles and we can interpret the proximity of Blue
-eyes and Blond hair has meaning that there is strong co-occurence of these
-categories.
+그림 9.24: CA 플롯은 데이터와 독립성 가정하의 예상 값 사이의 카이제곱 거리의 상당 부분을 나타냅니다. 첫 번째 축은 검은 머리와 금발 학생 사이의 대비를 보여주며, 이는 갈색 눈과 파란 눈의 대립에 의해 반영됩니다. CA에서 두 범주는 대칭적인 역할을 하며, 우리는 파란 눈과 금발의 근접성을 이들 범주의 강력한 공동 발생을 의미하는 것으로 해석할 수 있습니다.
 
 __
 
-Question 9.14
+질문 9.14
 
-What percentage of the Chisquare statistic is explained by the first two axes
-of the Correspondence Analysis?
-
-__
-
-Question 9.15
-
-Compare the results with those obtained by using `CCA` in the
-**[vegan](https://cran.r-project.org/web/packages/vegan/)** package with the
-appropriate value for the `scaling` parameter.
+카이제곱 통계량의 몇 퍼센트가 대응 분석의 처음 두 축에 의해 설명되나요?
 
 __
 
-Solution
+질문 9.15
+
+적절한 `scaling` 매개변수 값을 사용하여 **[vegan](https://cran.r-project.org/web/packages/vegan/)** 패키지의 `CCA`로 얻은 결과와 비교해 보세요.
+
+__
+
+해결책
 
 __
 
@@ -1508,36 +1165,19 @@ __
     res.ca = vegan::cca(HairColor)
     plot(res.ca, scaling=3)__
 
-#### Interpreting the biplots
+#### 바이플롯 해석하기
 
-CA has a special barycentric property: the biplot scaling is chosen so that
-the row points are placed at the center of gravity of the column levels with
-their respective weights. For instance, the Blue eyes column point is at the
-center gravity of the (Black, Brown, Red, Blond) with weights proportional to
-(9, 34, 7, 64). The Blond row point is very heavily weighted, this is why
-Figure 9.24 shows Blond and Blue quite close together.
+CA는 특별한 무게 중심(barycentric) 속성을 가집니다: 바이플롯 스케일링은 행 지점들이 각자의 가중치를 가진 채 열 수준들의 무게 중심에 놓이도록 선택됩니다. 예를 들어, 파란 눈(Blue eyes) 열 지점은 (검정, 갈색, 빨강, 금발)의 무게 중심에 위치하며 그 가중치는 (9, 34, 7, 64)에 비례합니다. 금발(Blond) 행 지점은 매우 무겁게 가중치가 부여되며, 이것이 그림 9.24에서 금발과 파란 눈이 매우 가깝게 나타나는 이유입니다.
 
-## 9.5 Finding time…and other important gradients.
+## 9.5 시간... 및 기타 중요한 그래디언트 찾기.
 
-All the methods we have studied in the last sections are commonly known as
-**ordination** methods. In the same way **clustering** allowed us to detect
-and interpret a hidden factor/categorical variable, ordination enables us to
-detect and interpret a hidden ordering, gradient or latent variable in the
-data.
+지난 섹션에서 공부한 모든 방법들은 흔히 **서열화(ordination)** 방법으로 알려져 있습니다. **군집화**가 우리에게 숨겨진 요인/범주형 변수를 탐지하고 해석할 수 있게 해준 것과 같은 방식으로, 서열화는 데이터에서 숨겨진 순서, 그래디언트(gradient) 또는 잠재 변수를 탐지하고 해석할 수 있게 해줍니다.
 
-[![](imgs/ProustProxy.png)](imgs/ProustProxy.png)
+![](imgs/ProustProxy.png)
 
-Ecologists have a long history of interpreting the arches formed by
-observations points in correspondence analysis and principal components as
-ecological gradients ([Prentice 1977](16-chap.html#ref-Prentice:1977)). Let’s
-illustrate this first with a very simple data set on which we perform a
-correspondence analysis.
+생태학자들은 대응 분석과 주성분 분석에서 관측 점들에 의해 형성되는 아치 구조를 생태학적 그래디언트로 해석해 온 오랜 역사를 가지고 있습니다 ([Prentice 1977](16-chap.html#ref-Prentice:1977)). 먼저 대응 분석을 수행하는 매우 간단한 데이터 세트를 통해 이를 설명해 보겠습니다.
 
-The first examples of seriation or chronology detection was that of
-archaelogical artifacts by Kendall ([1969](16-chap.html#ref-Kendall:1969)),
-who used presence/absence of features on pottery to date them. These so-called
-seriation methods are still relevant today as we follow developmental
-trajectories in single cell data for instance.
+서열화(seriation) 또는 연대 측정의 첫 번째 예시는 Kendall ([1969](16-chap.html#ref-Kendall:1969))에 의한 고고학 유물 연구였습니다. 그는 도자기의 특징 유무를 사용하여 도자기의 연대를 측정했습니다. 이러한 소위 서열화 방법은 오늘날 예를 들어 단일 세포 데이터의 발달 궤적을 추적할 때도 여전히 유효합니다.
 
     
     
@@ -1557,9 +1197,7 @@ trajectories in single cell data for instance.
     
     [1] 0.56 0.25 0.09 0.03 0.03 0.02 0.01 0.00
 
-We plot both the row-location points (Figure 9.25 (a)) and the biplot of both
-location and plant species in the lower part of Figure 9.25 (b); this plot was
-made with:
+우리는 행-위치 점들(그림 9.25 (a))과 위치 및 식물 종 모두의 바이플롯을 그림 9.25 (b)의 하단에 플롯합니다; 이 플롯은 다음과 같이 만들어졌습니다:
 
     
     
@@ -1567,47 +1205,33 @@ made with:
     fviz_ca_biplot(reslake,repel=TRUE)+ggtitle("")+ylim(c(-0.55,1.7))__
 
 [![](09-chap_files/figure-html/fig-LakeCAr-1.png)](09-chap_files/figure-
-html/fig-LakeCAr-1.png "Figure 9.25 \(a\): ")
+html/fig-LakeCAr-1.png "그림 9.25 (a): ")
 
 (a)
 
 [![](09-chap_files/figure-html/fig-LakeCAr-2.png)](09-chap_files/figure-
-html/fig-LakeCAr-2.png "Figure 9.25 \(b\): ")
+html/fig-LakeCAr-2.png "그림 9.25 (b): ")
 
 (b)
 
-Figure 9.25: The locations near the lake are ordered along an arch as shown in
-(a). In the biplot (b), we can see which plants are most frequent at which
-locations by looking at the red triangles closest to the blue points.
+그림 9.25: 호수 근처의 위치들은 (a)에서 보듯이 아치를 따라 정렬되어 있습니다. 바이플롯 (b)에서는 파란색 점들에 가장 가까운 빨간색 삼각형들을 살펴봄으로써 어떤 위치에서 어떤 식물이 가장 빈번한지 알 수 있습니다.
 
 __
 
-Question 9.16
+질문 9.16
 
-Looking back at the raw matrix `lakes` as it appears, do you see a pattern in
-its entries?  
-What would happen if the plants had been ordered by actual taxa names for
-instance?
+나타난 그대로의 원시 행렬 `lakes`를 다시 살펴보면, 그 항목들에서 어떤 패턴이 보이나요?  
+만약 식물들이 실제 분류군 이름에 따라 정렬되었다면 어떤 일이 일어났을까요?
 
-### 9.5.1 Dynamics of cell development
+### 9.5.1 세포 발발의 역학
 
-We will now analyse a more interesting data set that was published by Moignard
-et al. ([2015](16-chap.html#ref-Moignard:2015)). This paper describes the
-dynamics of blood cell development. The data are single cell gene expression
-measurements of 3,934 cells with blood and endothelial potential from five
-populations from between embryonic days E7.0 and E8.25.
+이제 Moignard 등 ([2015](16-chap.html#ref-Moignard:2015))에 의해 발표된 더 흥미로운 데이터 세트를 분석해 보겠습니다. 이 논문은 혈액 세포 발달의 역학을 설명합니다. 데이터는 배아기 7.0일(E7.0)과 8.25일 사이의 5개 모집단으로부터 얻은, 혈액 및 내피 세포 잠재력을 가진 3,934개 세포의 단일 세포 유전자 발현 측정값입니다.
 
-[![](imgs/CellTree.png)](imgs/CellTree.png "Figure 9.26: The four cell
-populations studied here are representative of three sequential states
-\(PS,NP,HF\) and two possible final branches \(4SG and 4SFG^{-}\).")
+[![](imgs/CellTree.png)](imgs/CellTree.png "그림 9.26: 여기서 연구된 네 가지 세포 모집단은 세 가지 순차적 상태(PS, NP, HF)와 두 가지 가능한 최종 분기(4SG 및 4SFG^{-})를 대표합니다.")
 
-Figure 9.26: The four cell populations studied here are representative of
-three sequential states (PS,NP,HF) and two possible final branches (4SG and
-4SFG\\(^{-}\\)).
+그림 9.26: 여기서 연구된 네 가지 세포 모집단은 세 가지 순차적 상태(PS, NP, HF)와 두 가지 가능한 최종 분기(4SG 및 4SFG\\(^{-}\\))를 대표합니다.
 
-Remember from [Chapter 4](04-chap.html) that several different distances are
-available for comparing our cells. Here, we start by computing both an
-\\(L_2\\) distance and the \\(\ell_1\\) distance between the 3,934 cells.
+세포들을 비교하기 위해 여러 가지 서로 다른 거리를 사용할 수 있음을 [4장](04-chap.html)에서 상기해 보세요. 여기서는 3,934개 세포 사이의 \\(L_2\\) 거리와 \\(\ell_1\\) 거리를 모두 계산하는 것부터 시작합니다.
 
     
     
@@ -1618,8 +1242,7 @@ available for comparing our cells. Here, we start by computing both an
     dist2n.euclid = dist(blom)
     dist1n.l1     = dist(blom, "manhattan")__
 
-The classical multidimensional scaling on these two distances matrices can be
-carried out using:
+이 두 거리 행렬에 대한 고전적 다차원 척도법은 다음과 같이 수행될 수 있습니다:
 
     
     
@@ -1628,8 +1251,7 @@ carried out using:
     perc1  = round(100*sum(ce1Mds$eig[1:2])/sum(ce1Mds$eig))
     perc2  = round(100*sum(ce2Mds$eig[1:2])/sum(ce2Mds$eig))__
 
-We look at the underlying dimension and see in Figure 9.27 that two dimensions
-can provide a substantial fraction of the variance.
+우리는 기저 차원을 살펴보고, 그림 9.27에서 두 개 차원이 분산의 상당 부분을 제공할 수 있음을 확인합니다.
 
     
     
@@ -1637,23 +1259,18 @@ can provide a substantial fraction of the variance.
     plotscree(ce2Mds, m = 4)__
 
 [![](09-chap_files/figure-html/fig-CMDSplotscree-1.png)](09-chap_files/figure-
-html/fig-CMDSplotscree-1.png "Figure 9.27 \(a\): ")
+html/fig-CMDSplotscree-1.png "그림 9.27 (a): ")
 
 (a)
 
 [![](09-chap_files/figure-html/fig-CMDSplotscree-2.png)](09-chap_files/figure-
-html/fig-CMDSplotscree-2.png "Figure 9.27 \(b\): ")
+html/fig-CMDSplotscree-2.png "그림 9.27 (b): ")
 
 (b)
 
-Figure 9.27: Screeplots from MDS on \\(\ell_1\\) (a) and \\(L_2\\) (b)
-distances. We see that the eigenvalues are extremely similar and both point to
-a \\(2\\) dimensional phenomenon.
+그림 9.27: \(\ell_1\) (a) 및 \(L_2\) (b) 거리에 대한 MDS의 스크리 플롯. 우리는 고윳값들이 매우 유사하며 둘 다 2차원 현상을 가리키고 있음을 알 수 있습니다.
 
-The first 2 coordinates account for 78 % of the variability when the
-\\(\ell_1\\) distance is used between cells, and 57% when the \\(L^2\\)
-distance is used. We see in Figure 9.28 (a) the first plane for the MDS on the
-\\(\ell_1\\) distances between cells:
+처음 2개 좌표는 세포 간에 \\(\ell_1\\) 거리가 사용되었을 때 가변성의 78%를 차지하고, \\(L_2\\) 거리가 사용되었을 때는 57%를 차지합니다. 그림 9.28 (a)에서 세포 간의 \\(\ell_1\\) 거리에 대한 MDS의 첫 번째 평면을 봅니다:
 
     
     
@@ -1671,22 +1288,18 @@ distance is used. We see in Figure 9.28 (a) the first plane for the MDS on the
        scale_colour_manual(values = colsn) + guides(color = "none")__
 
 [![](09-chap_files/figure-html/fig-CMDSplotL2-1.png)](09-chap_files/figure-
-html/fig-CMDSplotL2-1.png "Figure 9.28 \(a\): ")
+html/fig-CMDSplotL2-1.png "그림 9.28 (a): ")
 
 (a)
 
 [![](09-chap_files/figure-html/fig-CMDSplotL2-2.png)](09-chap_files/figure-
-html/fig-CMDSplotL2-2.png "Figure 9.28 \(b\): ")
+html/fig-CMDSplotL2-2.png "그림 9.28 (b): ")
 
 (b)
 
-Figure 9.28: Moignard cell data colored according to the cell types (blue: PS,
-green: NP, yellow: HF, red: 4SG, purple: 4SFG\\(^-\\)) in the two dimensional
-MDS plots created. In (a) using \\(\ell_1\\) distances and in (b) using the L2
-distances.
+그림 9.28: 생성된 2차원 MDS 플롯에서 세포 유형(파란색: PS, 초록색: NP, 노란색: HF, 빨간색: 4SG, 보라색: 4SFG^{-})에 따라 색상이 입혀진 Moignard 세포 데이터. (a)는 \(\ell_1\) 거리를, (b)는 \(L_2\) 거리를 사용한 경우입니다.
 
-Figure 9.28 (b) is created in the same way and shows the two-dimensional
-projection created by using MDS on the L2 distances.
+그림 9.28 (b)는 같은 방식으로 만들어졌으며, \\(L_2\\) 거리에 대한 MDS를 사용하여 생성된 2차원 투영을 보여줍니다.
 
 Figure 9.28 shows that both distances (L1 and L2) give the same first plane
 for the MDS with very similar representations of the underlying gradient
@@ -1772,60 +1385,45 @@ html/fig-tsnecells-1.jpeg "Figure 9.29 \(a\): ")
 (a)
 
 [![](09-chap_files/figure-html/fig-tsnecells-2.jpeg)](09-chap_files/figure-
-html/fig-tsnecells-2.jpeg "Figure 9.29 \(b\): ")
+html/fig-tsnecells-2.jpeg "그림 9.29 (b): ")
 
 (b)
 
-Figure 9.29: The four cell populations studied here are representative of
-three sequential states (PS,NP,HF) and two possible final branches (4SG and
-4SFG\\(^{-}\\)). The plot on the left was obtained by choosing 2 dimensions
-for t-sne at a perplexity of 30. The lower plot has obtained by choosing 3
-dimensions, we can see that this third t-SNE axis represented here as the
-horizontal axis.
+그림 9.29: 여기서 연구된 네 가지 세포 모집단은 세 가지 순차적 상태(PS, NP, HF)와 두 가지 가능한 최종 분기(4SG 및 4SFG\\(^{-}\\))를 대표합니다. 왼쪽 플롯은 당혹감(perplexity)을 30으로 설정하고 t-SNE에 대해 2개 차원을 선택하여 얻은 것입니다. 하단 플롯은 3개 차원을 선택하여 얻은 것인데, 여기서 수평축으로 표시된 것이 세 번째 t-SNE 축임을 알 수 있습니다.
 
-In this case in order to see the subtle differences between MDS and t-SNE, it
-is really necessary to use 3d plotting.
+이 경우 MDS와 t-SNE 사이의 미세한 차이를 확인하려면 3D 플로팅을 사용하는 것이 정말 필요합니다.
 
 __
 
-Task
+태스크
 
-Use the **[rgl](https://cran.r-project.org/web/packages/rgl/)** package to
-look at the three t-SNE dimensions and add the correct cell type colors to the
-display.
+**[rgl](https://cran.r-project.org/web/packages/rgl/)** 패키지를 사용하여 3개의 t-SNE 차원을 살펴보고 디스플레이에 올바른 세포 유형 색상을 추가해 보세요.
 
-Two of these 3d snapshots are shown in Figure 9.30, we see a much stronger
-grouping of the purple points than in the MDS plots.
+이러한 3D 스냅샷 중 두 개가 그림 9.30에 나와 있습니다. MDS 플롯에서보다 보라색 점들이 훨씬 더 강력하게 그룹화된 것을 볼 수 있습니다.
 
-**Note:** A site worth visiting in order to appreciate more about the
-sensitivity of the t-SNE method to the complexity and \\(\sigma\\) parameters
-can be found at <http://distill.pub/2016/misread-tsne>.
+**참고:** 복잡성(complexity) 및 \\(\sigma\\) 매개변수에 대한 t-SNE 방법의 민감도에 대해 더 자세히 알아보려면 방문할 가치가 있는 사이트가 <http://distill.pub/2016/misread-tsne>에 있습니다.
 
 [![](imgs/tsnemoignard3scrop.png)](imgs/tsnemoignard3scrop.png
-"Figure 9.30 \(a\): ")
+"그림 9.30 (a): ")
 
 (a)
 
 [![](imgs/tsnemoignard3crop.png)](imgs/tsnemoignard3crop.png
-"Figure 9.30 \(b\): ")
+"그림 9.30 (b): ")
 
 (b)
 
-Figure 9.30: Moignard cell data colored according to the cell types (blue: PS,
-green: NP, yellow: HF, red: 4SG, purple: 4SFG\\(^-\\)) in the three-
-dimensional t-SNE layouts. We can see that the purple cells (4SFG\\(^-\\))
-segregate at the outer shell on the top of the point cloud.
+그림 9.30: 3차원 t-SNE 레이아웃에서 세포 유형(파란색: PS, 초록색: NP, 노란색: HF, 빨간색: 4SG, 보라색: 4SFG\\(^-\\))에 따라 색상이 입혀진 Moignard 세포 데이터. 보라색 세포(4SFG\\(^-\\))가 점 구름 상단의 외곽 껍질에 분리되어 있는 것을 볼 수 있습니다.
 
 __
 
-Question 9.18
+질문 9.18
 
-Visualize a two-dimensional t-SNE embedding of the Ukraine distances from
-Section 9.2.
+9.2절의 우크라이나 거리 데이터에 대해 2차원 t-SNE 임베딩을 시각화해 보세요.
 
 __
 
-Solution
+해결책
 
 __
 
@@ -1841,207 +1439,106 @@ __
       geom_point() + geom_text_repel(col = "#0057b7") + coord_fixed() __
 
 [![](09-chap_files/figure-html/fig-ukrainetsne-1.png)](09-chap_files/figure-
-html/fig-ukrainetsne-1.png "Figure 9.31: t-SNE map based of Ukraine.")
+html/fig-ukrainetsne-1.png "그림 9.31: 우크라이나의 t-SNE 맵.")
 
-Figure 9.31: t-SNE map based of Ukraine.
+그림 9.31: 우크라이나의 t-SNE 맵.
 
-There are several other nonlinear methods for estimating nonlinear
-trajectories followed by points in the relevant state spaces. Here are a few
-examples.
+관련 상태 공간에서 점들이 따르는 비선형 궤적을 추정하기 위한 다른 여러 비선형 방법들이 있습니다. 여기 몇 가지 예시가 있습니다.
 
-**[RDRToolbox](https://cran.r-project.org/web/packages/RDRToolbox/)** Local
-linear embedding (**LLE**) and **isomap**
+**[RDRToolbox](https://cran.r-project.org/web/packages/RDRToolbox/)** 국소 선형 임베딩(**LLE**) 및 **isomap**
 
-**[diffusionMap](https://cran.r-project.org/web/packages/diffusionMap/)** This
-package models connections between points as a Markovian kernel.
+**[diffusionMap](https://cran.r-project.org/web/packages/diffusionMap/)** 이 패키지는 점들 사이의 연결을 마르코프 커널(Markovian kernel)로 모델링합니다.
 
-**[kernlab](https://cran.r-project.org/web/packages/kernlab/)** Kernel methods
+**[kernlab](https://cran.r-project.org/web/packages/kernlab/)** 커널 방법들
 
-**[LPCM-package](https://cran.r-project.org/web/packages/LPCM-package/)**
-Local principal curves
+**[LPCM-package](https://cran.r-project.org/web/packages/LPCM-package/)** 국소 주성분 곡선(Local principal curves)
 
-## 9.6 Multitable techniques
+## 9.6 다중 표(Multitable) 기법
 
-Current studies often attempt to quantify variation in the microbial, genomic,
-and metabolic measurements across different experimental conditions. As a
-result, it is common to perform multiple assays on the same biological samples
-and ask what features – microbes, genes, or metabolites, for example – are
-associated with different sample conditions. There are many ways to approach
-these questions. Which to apply depends on the study’s focus.
+현재의 연구들은 종종 서로 다른 실험 조건에 따른 미생물, 게놈 및 대사 측정값의 변동을 정량화하려고 시도합니다. 그 결과, 동일한 생물학적 샘플에 대해 여러 어세이(assays)를 수행하고 미생물, 유전자 또는 대사산물 중 어떤 특성이 서로 다른 샘플 조건과 연관되어 있는지 묻는 것이 일반적입니다. 이러한 질문들에 접근하는 방법은 여러 가지가 있습니다. 어떤 것을 적용할지는 연구의 초점에 달려 있습니다.
 
-### 9.6.1 Co-variation, inertia, co-inertia and the RV coefficient
+### 9.6.1 공변동, 관성, 공동 관성 및 RV 계수
 
-As in physics, we define inertia as a sum of distances with ‘weighted’ points.
-This enables us to compute the inertia of counts in a contingency table as the
-weighted sum of the squares of distances between observed and expected
-frequencies (as in the chisquare statistic).
+물리학에서와 마찬가지로, 우리는 관성(inertia)을 '가중치가 부여된' 점들 사이의 거리 합으로 정의합니다. 이를 통해 우리는 분할표의 카운트에 대한 관성을 (카이제곱 통계량에서처럼) 관측 빈도와 예상 빈도 사이의 거리 제곱의 가중 합으로 계산할 수 있습니다.
 
-Another generalization of variance-inertia is the useful Phylogenetic
-diversity index. (computing the sum of distances between a subset of taxa
-through the tree). Other useful generalizations include using variability of
-points on a graph taken from standard spatial statistics.
+분산-관성의 또 다른 일반화는 유용한 계통 발생 다양성 지수(Phylogenetic diversity index)입니다. (트리를 통해 분류군 하위 집합 사이의 거리 합을 계산함). 다른 유용한 일반화에는 표준 공간 통계학에서 가져온 그래프 상의 점들의 가변성을 사용하는 것이 포함됩니다.
 
-If we want to study two standardized variables measured at the same 10
-locations together, we use their **covariance**. If \\(x\\) represents the
-standardized PH, and and \\(y\\) the standardized humidity, we measure their
-covariation using the mean
+만약 우리가 동일한 10개 위치에서 측정된 두 개의 표준화된 변수를 함께 연구하고 싶다면, 그들의 **공분산(covariance)**을 사용합니다. \\(x\\)가 표준화된 pH를 나타내고 \\(y\\)가 표준화된 습도를 나타낸다면, 우리는 다음과 같이 평균을 사용하여 그들의 공변동(covariation)을 측정합니다.
 
 \\[ \text{cov}(x,y) = \text{mean}(x1*y1 + x2*y2 + x3*y3 + \cdots + x10*y10).
 \tag{9.2}\\]
 
-If \\(x\\) and \\(y\\) co-vary in the same direction, this will be big. We saw
-how useful the correlation coefficient we defined in [Chapter 8](08-chap.html)
-was to our multivariate analyses. Multitable generalizations will be just as
-useful.
+만약 \\(x\\)와 \\(y\\)가 같은 방향으로 함께 변한다면, 이 수치는 커질 것입니다. 우리는 [8장](08-chap.html)에서 정의한 상관 계수가 다변량 분석에 얼마나 유용했는지 보았습니다. 다중 표(multitable) 일반화도 그만큼 유용할 것입니다.
 
-### 9.6.2 Mantel coefficient and a test of distance correlation
+### 9.6.2 만텔(Mantel) 계수 및 거리 상관관계 검정
 
-[![There are some precautions to be taken when using the Mantel coefficient,
-see a critical review in Guillot and Rousset
-\(2013\).](imgs/devil.png)](imgs/devil.png "There are some precautions to be
-taken when using the Mantel coefficient, see a critical review in
-@Guillot:2013.")
+[![만텔 계수를 사용할 때는 몇 가지 주의사항이 있습니다. Guillot 및 Rousset (2013)의 비판적 리뷰를 참조하십시오.](imgs/devil.png)](imgs/devil.png "만텔 계수를 사용할 때는 몇 가지 주의사항이 있습니다. Guillot 및 Rousset (2013)의 비판적 리뷰를 참조하십시오.")
 
-There are some precautions to be taken when using the Mantel coefficient, see
-a critical review in Guillot and Rousset ([2013](16-chap.html#ref-
-Guillot:2013)).
+만텔 계수를 사용할 때는 몇 가지 주의사항이 있습니다. Guillot 및 Rousset ([2013](16-chap.html#ref-Guillot:2013))의 비판적 리뷰를 참조하십시오.
 
-The Mantel coefficient, one of the earliest version of association measures,
-is probably also the most popular now, especially in ecology ([Josse and
-Holmes 2016](16-chap.html#ref-Josse:2016)). Given two dissimilarity matrices
-\\(D^X\\) and \\(D^Y\\) associated with \\(X\\) and \\(Y\\), make these
-matrices into vectors the way the R `dist` function does, and compute their
-linear correlation. A prototypical application is, for instance, to compute
-\\(D^X\\) from the soil chemistry at 17 different locations and to use
-\\(D^Y\\) to represent dissimilarities in plant occurences as measured by the
-Jaccard index between the same 17 locations. The Mantel coefficient is defined
-mathematically as:
+연관성 척도의 가장 초기 버전 중 하나인 만텔 계수는 아마도 현재 특히 생태학 분야에서 가장 인기 있는 방법이기도 할 것입니다 ([Josse and Holmes 2016](16-chap.html#ref-Josse:2016)). \\(X\\) 및 \\(Y\\)와 관련된 두 비유사성 행렬 \\(D^X\\)와 \\(D^Y\\)가 주어졌을 때, R의 `dist` 함수가 하는 것처럼 이 행렬들을 벡터로 만들고 그들의 선형 상관관계를 계산합니다. 전형적인 응용 사례는 예를 들어 17개 서로 다른 위치의 토양 화학 성분으로부터 \\(D^X\\)를 계산하고, 동일한 17개 위치 사이에서 자카드 지수로 측정된 식물 발생의 비유사성을 나타내기 위해 \\(D^Y\\)를 사용하는 것입니다. 만텔 계수는 수학적으로 다음과 같이 정의됩니다:
 
 \\[ r_m(X, Y) = \frac{ \sum_{i\neq j} \left(d_{ij}^X − \bar{d}^X \right)
 \left(d_{ij}^Y − \bar{d}^Y \right) } { \sqrt{ \left( \sum_{i\neq j}
 \left(d_{ij}^X − \bar{d}^X \right)^2 \right) \left( \sum_{i\neq j}
 \left(d_{ij}^Y − \bar{d}^Y \right)^2 \right) } }, \\]
 
-with \\(\bar{d}^X\\) (resp. \\(\bar{d}^Y\\)) the mean of the upper diagonal
-elements of the dissimilarity matrix associated to \\(d^X\\) (resp. to
-\\(d^Y\\)). The main difference between the Mantel coefficient and the others
-such as the RV or the dCov is the absence of double centering. Due to the
-dependences within distances matrix, the Mantel correlation’s null
-distribution and its statistical significance cannot be assessed as simply for
-regular correlation ccoefficients. Instead, it is usually assessed via
-permutation testing. See Josse and Holmes ([2016](16-chap.html#ref-
-Josse:2016)) for a review with historical background and modern incarnations.
-The coefficient and associated tests are implemented in several R packages
-such as **[ade4](https://cran.r-project.org/web/packages/ade4/)** ([Chessel,
-Dufour, and Thioulouse 2004](16-chap.html#ref-ade4)),
-**[vegan](https://cran.r-project.org/web/packages/vegan/)** and
-**[ecodist](https://cran.r-project.org/web/packages/ecodist/)** ([Goslee,
-Urban, et al. 2007](16-chap.html#ref-Goslee:2007)).
+여기서 \\(\bar{d}^X\\) (각각 \\(\bar{d}^Y\\))는 \\(d^X\\) (각각 \\(d^Y\\))와 관련된 비유사성 행렬의 상삼각 원소들의 평균입니다. 만텔 계수와 RV 또는 dCov와 같은 다른 계수들의 주요 차이점은 이중 중앙화(double centering)가 없다는 것입니다. 거리 행렬 내부의 의존성 때문에, 만텔 상관관계의 귀무 분포와 통계적 유의성은 일반적인 상관 계수처럼 간단하게 평가될 수 없습니다. 대신, 대개 순열 검정(permutation testing)을 통해 평가됩니다. 역사적 배경과 현대적 구현에 대한 리뷰는 Josse와 Holmes ([2016](16-chap.html#ref-Josse:2016))를 참조하십시오. 이 계수와 관련 검정들은 **[ade4](https://cran.r-project.org/web/packages/ade4/)** ([Chessel, Dufour, and Thioulouse 2004](16-chap.html#ref-ade4)), **[vegan](https://cran.r-project.org/web/packages/vegan/)** 및 **[ecodist](https://cran.r-project.org/web/packages/ecodist/)** ([Goslee, Urban, et al. 2007](16-chap.html#ref-Goslee:2007))와 같은 여러 R 패키지에 구현되어 있습니다.
 
-### 9.6.3 The RV coefficient
+### 9.6.3 RV 계수
 
-The global measure of similarity of two data tables as opposed to two vectors
-can be done by a generalization of covariance provided by an inner product
-between tables that gives the RV coefficient, a number between 0 and 1, like a
-correlation coefficient, but for tables.
+두 벡터가 아닌 두 데이터 표의 유사성에 대한 전역적인 측정은, 표들 사이의 내적(inner product)에 의해 제공되는 공분산의 일반화를 통해 수행될 수 있습니다. 이는 상관 계수와 비슷하지만 표를 위한 수치인 0과 1 사이의 숫자인 RV 계수를 제공합니다.
 
 \\[ RV(A,B)=\frac{Tr(A'BAB')}{\sqrt{Tr(A'A)}\sqrt{Tr(B'B)}} \\]
 
-There are several other measures of matrix correlation available in the
-package
-**[MatrixCorrelation](https://cran.r-project.org/web/packages/MatrixCorrelation/)**.
+**[MatrixCorrelation](https://cran.r-project.org/web/packages/MatrixCorrelation/)** 패키지에서 행렬 상관관계에 대한 다른 여러 척도들을 사용할 수 있습니다.
 
-If we do ascertain a link between two matrices, we then need to find a way to
-understand that link. One such method is explained in the next section.
+만약 두 행렬 사이의 연결을 확인했다면, 우리는 그 연결을 이해하기 위한 방법을 찾아야 합니다. 그러한 방법 중 하나가 다음 섹션에서 설명됩니다.
 
-### 9.6.4 Canonical correlation analysis (CCA)
+### 9.6.4 정전분석(Canonical correlation analysis, CCA)
 
-CCA is a method similar to PCA as it was developed by Hotelling in the 1930s
-to search for associations between two sets of continuous variables \\(X\\)
-and \\(Y\\). Its goal is to find a linear projection of the first set of
-variables that maximally correlates with a linear projection of the second set
-of variables.
+CCA는 1930년대에 Hotelling에 의해 두 개의 연속형 변수 세트 \\(X\\)와 \\(Y\\) 사이의 연관성을 찾기 위해 개발된 PCA와 유사한 방법입니다. 그 목표는 두 번째 변수 세트의 선형 투영과 최대의 상관관계를 갖는 첫 번째 변수 세트의 선형 투영을 찾는 것입니다.
 
-Finding correlated functions (covariates) of the two views of the same
-phenomenon by discarding the representation-specific details (noise) is
-expected to reveal the underlying hidden yet influential factors responsible
-for the correlation.
+표현 특이적인 세부 사항(노이즈)을 버리고 동일한 현상에 대한 두 가지 관점의 상관된 함수(공변량)를 찾음으로써, 상관관계의 원인이 되는 기저의 숨겨져 있지만 영향력 있는 요인들을 밝혀낼 것으로 기대됩니다.
 
-Let us consider two matrices:
+두 개의 행렬을 고려해 봅시다:
 
-  * the \\(n\times p\\) matrix \\(X\\), and
-  * the \\(n\times p\\) matrix \\(Y\\).
+  * \\(n\times p\\) 행렬 \\(X\\), 그리고
+  * \\(n\times q\\) 행렬 \\(Y\\).
 
-The \\(p\\) columns of \\(X\\) and the \\(q\\) columns of \\(Y\\) correspond
-to variables, and the rows correspond to the same \\(n\\) experimental units.
-We denote the \\(j\\)-th column of the matrix \\(X\\) by \\(X_j\\), likewise
-the \\(k\\)-th column of \\(Y\\) by \\(Y_k\\). Without loss of generality it
-will be assumed that the columns of \\(X\\) and \\(Y\\) are standardized (mean
-0 and variance 1).
+\\(X\\)의 \\(p\\)개 열과 \\(Y\\)의 \\(q\\)개 열은 변수들에 대응하며, 행들은 동일한 \\(n\\)개의 실험 단위에 대응합니다. 행렬 \\(X\\)의 \\(j\\)번째 열을 \\(X_j\\), 마찬가지로 행렬 \\(Y\\)의 \\(k\\)번째 열을 \\(Y_k\\)로 표시합니다. 일반성을 잃지 않고 \\(X\\)와 \\(Y\\)의 열들은 표준화(평균 0, 분산 1)되었다고 가정합니다.
 
-Classical CCA assumes that \\(p \leq n\\) and \\(q \leq n\\), and that the
-matrices \\(X\\) and \\(Y\\) are of full column rank \\(p\\) and \\(q\\)
-respectively. In the following, CCA is presented as a problem solved through
-an iterative algorithm. The first stage of CCA consists of finding two vectors
-\\(a =(a_1,...,a_p)^t\\) and \\(b =(b_1,...,b_q)^t\\) that maximize the
-correlation between the linear combinations \\(U\\) and \\(V\\) defined as
+고전적 CCA는 \\(p \leq n\\) 및 \\(q \leq n\\)이고, 행렬 \\(X\\)와 \\(Y\\)가 각각 최대 열 계수(full column rank) \\(p\\)와 \\(q\\)를 갖는다고 가정합니다. 이하에서 CCA는 반복 알고리즘을 통해 해결되는 문제로 제시됩니다. CCA의 첫 번째 단계는 다음과 같이 정의된 선형 결합 \\(U\\)와 \\(V\\) 사이의 상관관계를 최대화하는 두 벡터 \\(a =(a_1,...,a_p)^t\\)와 \\(b =(b_1,...,b_q)^t\\)를 찾는 것으로 구성됩니다.
 
-\\[ \begin{aligned} U=Xa&=&a_1 X_1 +a_2 X_2 +\cdots a_p X_p\\\ V=Yb&=&b_1 Y_1
-+b_2 Y_2 +\cdots a_q Y_q \end{aligned} \\]
+\\[ \begin{aligned} U=Xa&=&a_1 X_1 +a_2 X_2 +\cdots a_p X_p\\\ V=Yb&=&b_1 Y_1 +b_2 Y_2 +\cdots b_q Y_q \end{aligned} \\]
 
-and assuming that the vectors \\(a\\) and \\(b\\) are normalized so that
-\\(\text{var}(U) = \text{var}(V) = 1\\). In other words, the problem consists
-of finding \\(a\\) and \\(b\\) such that
+이때 벡터 \\(a\\)와 \\(b\\)는 \\(\text{var}(U) = \text{var}(V) = 1\\)이 되도록 정규화되었다고 가정합니다. 다시 말해, 문제는 다음을 만족하는 \\(a\\)와 \\(b\\)를 찾는 것입니다.
 
-\\[ \rho_1 = \text{cor}(U, V) = \max_{a,b} \text{cor} (Xa, Yb)\quad
-\text{subject to}\quad \text{var}(Xa)=\text{var}(Yb) = 1. \tag{9.3}\\]
+\\[ \rho_1 = \text{cor}(U, V) = \max_{a,b} \text{cor} (Xa, Yb)\quad \text{조건:}\quad \text{var}(Xa)=\text{var}(Yb) = 1. \tag{9.3}\\]
 
-The resulting variables \\(U\\) and \\(V\\) are called the first canonical
-variates and \\(\rho_1\\) is referred to as the first canonical correlation.
+결과로 나오는 변수 \\(U\\)와 \\(V\\)를 첫 번째 정전 변수(canonical variates)라고 부르며 \\(\rho_1\\)을 첫 번째 정전 상관관계(canonical correlation)라고 부릅니다.
 
-**Note:** Higher order canonical variates and canonical correlations can be
-found as a stepwise problem. For \\(s = 1,...,p\\), we can successively find
-positive correlations \\(\rho_1 \geq \rho_2 \geq ... \geq \rho_p\\) with
-corresponding vectors \\((a^1, b^1), ..., (a^p, b^p)\\), by maximizing
+**참고:** 고차원의 정전 변수와 정전 상관관계는 단계별 문제로 찾아낼 수 있습니다. \\(s = 1,...,p\\)에 대해, 우리는 다음을 최대화함으로써 상응하는 벡터 \\((a^1, b^1), ..., (a^p, b^p)\\)와 함께 양의 상관관계 \\(\rho_1 \geq \rho_2 \geq ... \geq \rho_p\\)를 순차적으로 찾을 수 있습니다.
 
-\\[ \rho_s = \text{cor}(U^s,V^s) = \max_{a^s,b^s} \text{cor} (Xa^s,Yb^s)\quad
-\text{subject to}\quad \text{var}(Xa^s) = \text{var}(Yb^s)=1 \tag{9.4}\\]
+\\[ \rho_s = \text{cor}(U^s,V^s) = \max_{a^s,b^s} \text{cor} (Xa^s,Yb^s)\quad \text{조건:}\quad \text{var}(Xa^s) = \text{var}(Yb^s)=1 \tag{9.4}\\]
 
-under the additional restrictions
+이때 다음과 같은 추가 제약 조건이 따릅니다.
 
-\\[ \text{cor}(U^s,U^t) = \text{cor}(V^s, V^t)=0 \quad\text{for}\quad 1 \leq t
-< s \leq p. \tag{9.5}\\]
+\\[ \text{cor}(U^s,U^t) = \text{cor}(V^s, V^t)=0 \quad\text{단,}\quad 1 \leq t < s \leq p. \tag{9.5}\\]
 
-We can think of CCA as a generalization of PCA where the variance we maximize
-is the ‘covariance’ between the two matrices (see Holmes
-([2006](16-chap.html#ref-frenchway)) for more details).
+우리는 CCA를 우리가 최대화하는 분산이 두 행렬 사이의 '공분산'인 PCA의 일반화로 생각할 수 있습니다 (더 자세한 내용은 Holmes ([2006](16-chap.html#ref-frenchway))를 참조하십시오).
 
-### 9.6.5 Sparse canonical correlation analysis (sCCA)
+### 9.6.5 희소 정전분석(Sparse canonical correlation analysis, sCCA)
 
-When the number of variables in each table is very large finding two very
-correlated vectors can be too easy and unstable: we have too many degrees of
-freedom.
+각 표의 변수 수가 매우 많을 때 상관관계가 매우 높은 두 벡터를 찾는 것은 너무 쉬우며 불안정할 수 있습니다: 자유도가 너무 많기 때문입니다.
 
-[![We will see many examples of regularization and danger of overfitting in
-sec-supervised.](imgs/devil.png)](imgs/devil.png "We will see many examples of
-regularization and danger of overfitting in sec-supervised.")
+[![우리는 12장에서 정규화의 많은 예시와 과적합(overfitting)의 위험을 보게 될 것입니다.](imgs/devil.png)](imgs/devil.png "우리는 12장에서 정규화의 많은 예시와 과적합(overfitting)의 위험을 보게 될 것입니다.")
 
-We will see many examples of regularization and danger of overfitting in
-[Chapter 12](12-chap.html).
+우리는 [12장](12-chap.html)에서 정규화의 많은 예시와 과적합(overfitting)의 위험을 보게 될 것입니다.
 
-Then it is beneficial to add a penalty maintains the number of non-zero
-coefficients to a minimum. This approach is called sparse canonical
-correlation analysis (sparse CCA or sCCA), a method well-suited to both
-exploratory comparisons between samples and the identification of features
-with interesting **co** variation. We will use an implementation from the
-**[PMA](https://cran.r-project.org/web/packages/PMA/)** package.
+그럴 때는 0이 아닌 계수의 수를 최소한으로 유지하는 페널티를 추가하는 것이 유익합니다. 이 접근 방식은 희소 정전분석(sparse CCA 또는 sCCA)이라고 불리며, 샘플 간의 탐색적 비교와 흥미로운 **공**변동(co-variation)을 가진 특성을 식별하는 데 모두 잘 어울리는 방법입니다. 우리는 **[PMA](https://cran.r-project.org/web/packages/PMA/)** 패키지의 구현체를 사용할 것입니다.
 
-Here we study a dataset collected by Kashyap et al. ([2013](16-chap.html#ref-
-Kashyap:2013)) with two tables. One is a contingency table of bacterial
-abundances and another an abundance table of metabolites. There are 12
-samples, so \\(n = 12\\). The metabolite table has measurements on \\(p =
-637\\) feature and the bacterial abundances had a total of $ q = 20,609$ OTUs,
-which we will filter down to around 200. We start by loading the data.
+여기서는 Kashyap 등 ([2013](16-chap.html#ref-Kashyap:2013))에 의해 수집된 두 개의 표가 있는 데이터 세트를 연구합니다. 하나는 박테리아 풍부도의 분할표이고 다른 하나는 대사산물의 풍부도 표입니다. 12개의 샘플이 있으므로 \\(n = 12\\)입니다. 대사산물 표는 \\(p = 637\\)개 특성에 대한 측정값을 가지고 있고 박테리아 풍부도는 총 \\(q = 20,609\\)개의 OTU를 가졌는데, 이를 약 200개로 필터링할 것입니다. 먼저 데이터를 불러오는 것부터 시작합니다.
 
     
     
@@ -2049,9 +1546,7 @@ which we will filter down to around 200. We start by loading the data.
     load("../data/microbe.rda")
     metab = read.csv("../data/metabolites.csv", row.names = 1) |> as.matrix()__
 
-We first filter down to bacteria and metabolites of interest, removing (“by
-hand”) those that are zero across many samples and giving an upper threshold
-of 50 to the large values. We transform the data to weaken the heavy tails.
+우리는 먼저 관심 있는 박테리아와 대사산물로 필터링하여, 많은 샘플에서 0인 것들을 (수동으로) 제거하고 큰 값들에 대해서는 50이라는 상한 임계값을 부여합니다. 꼬리가 긴(heavy tails) 분포를 완화하기 위해 데이터를 변환합니다.
 
     
     
@@ -2062,9 +1557,7 @@ of 50 to the large values. We transform the data to weaken the heavy tails.
     metab   = log(1 + metab, base = 10)
     X       = log(1 + as.matrix(otu_table(microbe)), base = 10)__
 
-A second step in our preliminary analysis is to look if there is any
-association between the two matrices using the `RV.test` from the
-**[ade4](https://cran.r-project.org/web/packages/ade4/)** package:
+예비 분석의 두 번째 단계는 **[ade4](https://cran.r-project.org/web/packages/ade4/)** 패키지의 `RV.test`를 사용하여 두 행렬 사이에 어떤 연관성이 있는지 살펴보는 것입니다:
 
     
     
@@ -2087,19 +1580,9 @@ association between the two matrices using the `RV.test` from the
         Std.Obs Expectation    Variance 
     6.231661953 0.314166070 0.007121318 
 
-We can now apply sparse CCA. This method compares sets of features across
-high-dimensional data tables, where there may be more measured features than
-samples. In the process, it chooses a subset of available features that
-capture the most covariance – these are the features that reflect signals
-present across multiple tables. We then apply PCA to this selected subset of
-features. In this sense, we use sparse CCA as a screening procedure, rather
-than as an ordination method.
+우리는 이제 희소 CCA를 적용할 수 있습니다. 이 방법은 샘플보다 측정된 특성이 더 많을 수 있는 고차원 데이터 표 전반에서 특성 세트들을 비교합니다. 이 과정에서 가장 많은 공분산을 포착하는 가용한 특성들의 하위 집합을 선택합니다 — 이들은 여러 표 전반에 존재하는 신호를 반영하는 특성들입니다. 그런 다음 선택된 특성들의 하위 집합에 PCA를 적용합니다. 이런 의미에서, 우리는 희소 CCA를 서열화 방법이라기보다는 스크리닝 절차로 사용합니다.
 
-The implementation is below. The parameters `penaltyx` and `penaltyz` are
-sparsity penalties. Smaller values of `penaltyx` will result in fewer selected
-microbes, similarly `penaltyz` modulates the number of selected metabolites.
-We tune them manually to facilitate subsequent interpretation – we generally
-prefer more sparsity than the default parameters would provide.
+구현은 아래와 같습니다. `penaltyx`와 `penaltyz` 매개변수는 희소성 페널티입니다. `penaltyx` 값이 작을수록 더 적은 수의 미생물이 선택되며, 마찬가지로 `penaltyz`는 선택되는 대사산물의 수를 조절합니다. 우리는 후속 해석을 용이하게 하기 위해 이를 수동으로 조정합니다 — 우리는 일반적으로 기본 매개변수가 제공하는 것보다 더 높은 희소성을 선호합니다.
 
     
     
@@ -2126,48 +1609,19 @@ prefer more sparsity than the default parameters would provide.
     Penalty for z: L1 bound is  0.15 
     Cor(Xu,Zv):  0.9904707
 
-With these parameters, 5 bacteria and 16 metabolites were selected based on
-their ability to explain covariation between tables. Further, these features
-result in a correlation of 0.99 between the two tables. We interpret this to
-mean that the microbial and metabolomic data reflect similar underlying
-signals, and that these signals can be approximated well by the selected
-features. Be wary of the correlation value, however, since the scores are far
-from the usual bivariate normal cloud. Further, note that it is possible that
-other subsets of features could explain the data just as well – sparse CCA has
-minimized redundancy across features, but makes no guarantee that these are
-the “true” features in any sense.
+이 매개변수들을 사용하면, 표들 사이의 공변동을 설명하는 능력을 바탕으로 5개의 박테리아와 16개의 대사산물이 선택되었습니다. 또한, 이 특성들은 두 표 사이에서 0.99의 상관관계를 나타냅니다. 우리는 이를 미생물 데이터와 대사체 데이터가 유사한 기저 신호를 반영하며, 이러한 신호들이 선택된 특성들에 의해 잘 근사될 수 있음을 의미하는 것으로 해석합니다. 그러나 상관관계 값에 대해서는 주의해야 합니다. 점수들이 일반적인 이변량 정규 분포 구름과는 거리가 멀기 때문입니다. 또한, 다른 특성 하위 집합들도 데이터를 그만큼 잘 설명할 수 있다는 점에 유의하세요 — 희소 CCA는 특성들 간의 중복성을 최소화했지만, 이들이 어떤 의미에서든 "진정한" 특성임을 보장하지는 않습니다.
 
-Nonetheless, we can still use these 21 features to compress information from
-the two tables without much loss. To relate the recovered metabolites and OTUs
-to characteristics of the samples on which they were measured, we use them as
-input to an ordinary PCA. We have omitted the code we used to generate Figure
-9.32, we refer the reader to the online material accompanying the book or the
-workflow published in Callahan et al. ([2016](16-chap.html#ref-
-Callahan2016Bioc)).
+그럼에도 불구하고, 우리는 여전히 이 21개 특성을 사용하여 큰 손실 없이 두 표의 정보를 압축할 수 있습니다. 회복된 대사산물과 OTU를 그것들이 측정된 샘플의 특성과 연관시키기 위해, 우리는 그것들을 일반적인 PCA의 입력으로 사용합니다. 그림 9.32를 생성하는 데 사용한 코드는 생략했습니다. 독자들께서는 책과 함께 제공되는 온라인 자료나 Callahan 등 ([2016](16-chap.html#ref-Callahan2016Bioc))에 발표된 워크플로를 참조하시기 바랍니다.
 
-Figure 9.32 displays the PCA _triplot_ , where we show different types of
-samples and the multidomain features (Metabolites and OTUs). This allows
-comparison across the measured samples – triangles for knockout and circles
-for wild type –and characterizes the influence the different features –
-diamonds with text labels. For example, we see that the main variation in the
-data is across PD and ST samples, which correspond to the different diets.
-Further, large values of 15 of the features are associated with ST status,
-while small values for 5 of them indicate PD status.
+그림 9.32는 PCA _트리플롯(triplot)_을 보여주는데, 여기에는 서로 다른 유형의 샘플들과 다중 도메인 특성(대사산물 및 OTU)이 표시됩니다. 이를 통해 측정된 샘플들 간의 비교 — 결손(knockout)은 삼각형으로, 야생형(wild type)은 원으로 표시 — 가 가능하며, 서로 다른 특성들의 영향 — 텍스트 레이블이 있는 다이아몬드 — 을 특징짓습니다. 예를 들어, 데이터의 주요 변동은 서로 다른 식단에 해당하는 PD 및 ST 샘플들 사이에서 나타나는 것을 볼 수 있습니다. 또한, 특성들 중 15개의 큰 값은 ST 상태와 연관되어 있고, 5개의 작은 값은 PD 상태를 나타냅니다.
 
-[![](09-chap_files/figure-html/fig-
-multitableinterpretpca-1.png)](09-chap_files/figure-html/fig-
-multitableinterpretpca-1.png "Figure 9.32: A PCA triplot produced from the CCA
-selected features from muliple data types \(metabolites and OTUs\).")
+[![](09-chap_files/figure-html/fig-multitableinterpretpca-1.png)](09-chap_files/figure-html/fig-multitableinterpretpca-1.png "그림 9.32: 여러 데이터 유형(대사산물 및 OTU)으로부터 CCA로 선택된 특성들로 생성된 PCA 트리플롯.")
 
-Figure 9.32: A PCA triplot produced from the CCA selected features from
-muliple data types (metabolites and OTUs).
+그림 9.32: 여러 데이터 유형(대사산물 및 OTU)으로부터 CCA로 선택된 특성들로 생성된 PCA 트리플롯.
 
-The advantage of the sparse CCA screening is now clear – we can display most
-of the variation across samples using a relatively simple plot, and can avoid
-plotting the hundreds of additional points that would be needed to display all
-of the features.
+희소 CCA 스크리닝의 장점은 이제 분명합니다 — 우리는 상대적으로 단순한 플롯을 사용하여 샘플들 전반의 변동 대부분을 표시할 수 있으며, 모든 특성을 표시하는 데 필요했을 수백 개의 추가 점들을 플롯하는 것을 피할 수 있습니다.
 
-### 9.6.6 Canonical (or constrained) correspondence analysis (CCpnA)
+### 9.6.6 정전(또는 제약된) 대응 분석(CCpnA)
 
 [![Notational overload for CCA: Originally invented by Braak \(1985\) and
 called Canonical Correspondence analysis, we will call this method Constrained
@@ -2191,34 +1645,15 @@ abbreviate it CCpnA to avoid confusion with Canonical Correlation Analysis
 for their correspondence analyses function.
 
 The term constrained correspondence analysis translates the fact that this
-method is similar to a constrained regression. The method attempts to force
-the latent variables to be correlated with the environmental variables
-provided as `explanatory’.
+이 방법은 제약된 회귀(constrained regression)와 유사합니다. 이 방법은 잠재 변수들이 '설명 변수'로 제공된 환경 변수들과 상관관계를 갖도록 강제합니다.
 
-CCpnA creates biplots where the positions of samples are determined by
-similarity in both species signatures and environmental characteristics. In
-contrast, principal components analysis or correspondence analysis only look
-at species signatures. More formally, it ensures that the resulting CCpnA
-directions lie in the span of the environmental variables. For thorough
-explanations see Braak ([1985](16-chap.html#ref-terBraak:1985); [Greenacre
-2007](16-chap.html#ref-greenacre2007)).
+CCpnA는 샘플의 위치가 종의 시그니처와 환경적 특성 모두의 유사성에 의해 결정되는 바이플롯을 생성합니다. 대조적으로, 주성분 분석이나 대응 분석은 오직 종의 시그니처만을 살펴봅니다. 더 형식적으로 말하자면, 결과로 나오는 CCpnA 방향들이 환경 변수들이 생성하는 공간(span) 내에 놓이도록 보장합니다. 철저한 설명은 Braak ([1985](16-chap.html#ref-terBraak:1985); [Greenacre 2007](16-chap.html#ref-greenacre2007))을 참조하십시오.
 
-This method can be run using the function `ordinate` in
-**[phyloseq](https://bioconductor.org/packages/phyloseq/)**. In order to use
-the covariates from the sample data, we provide an extra argument, specifying
-which of the features to consider.
+이 방법은 **[phyloseq](https://bioconductor.org/packages/phyloseq/)** 패키지의 `ordinate` 함수를 사용하여 실행할 수 있습니다. 샘플 데이터의 공변량을 사용하기 위해, 어떤 특성을 고려할지 지정하는 추가 인수를 제공합니다.
 
-Here, we take the data we denoised using
-**[dada2](https://bioconductor.org/packages/dada2/)** in [Chapter
-4](04-chap.html). We will see more details about creating the _phyloseq_
-object in [Chapter 10](10-chap.html). For the time being, we use the
-`otu_table` component containing a contingency table of counts for different
-taxa. We would like to compute the constrained correspondence analyses that
-explain the taxa abundances by the age and family relationship (both variables
-are contained in the `sample_data` slot of the `ps1` object).
+여기서는 [4장](04-chap.html)에서 **[dada2](https://bioconductor.org/packages/dada2/)**를 사용하여 노이즈를 제거했던 데이터를 사용합니다. _phyloseq_ 객체를 생성하는 자세한 방법은 [10장](10-chap.html)에서 다룰 것입니다. 당분간은 서로 다른 분류군에 대한 카운트의 분할표를 포함하는 `otu_table` 구성 요소를 사용합니다. 우리는 나이와 가족 관계(두 변수 모두 `ps1` 객체의 `sample_data` 슬롯에 포함됨)로 분류군 풍부도를 설명하는 제약된 대응 분석을 수행하고자 합니다.
 
-We would like to make two dimensional plots showing only using the four most
-abundant taxa (making the biplot easier to read):
+우리는 가장 풍부한 상위 4개 분류군만을 사용하여 (바이플롯을 읽기 쉽게 만들기 위해) 2차원 플롯을 만들고자 합니다:
 
     
     
@@ -2227,12 +1662,7 @@ abundant taxa (making the biplot easier to read):
     psCCpnA = ordinate(ps1p, "CCA",
                      formula = ps1p ~ ageBin + family_relationship)__
 
-To access the positions for the biplot, we can use the `scores` function in
-the **[vegan](https://cran.r-project.org/web/packages/vegan/)**. Further, to
-facilitate figure annotation, we also join the site scores with the
-environmental data in the `sample_data` slot. Of the 23 total taxonomic
-orders, we only explicitly annotate the four most abundant – this makes the
-biplot easier to read.
+바이플롯을 위한 위치 정보에 접근하기 위해 **[vegan](https://cran.r-project.org/web/packages/vegan/)** 패키지의 `scores` 함수를 사용할 수 있습니다. 또한 그림 주석을 용이하게 하기 위해 사이트 점수(site scores)를 `sample_data` 슬롯에 있는 환경 데이터와 결합합니다. 총 23개의 목(orders) 중에서 가장 풍부한 4개만 명시적으로 주석을 답니다 — 이는 바이플롯을 읽기 쉽게 만듭니다.
 
     
     
@@ -2250,164 +1680,85 @@ biplot easier to read.
      scale_color_brewer(palette = "Set1") + theme(legend.position="bottom")__
 
 [![](09-chap_files/figure-html/fig-ccpnaplotage-1.png)](09-chap_files/figure-
-html/fig-ccpnaplotage-1.png "Figure 9.33: The mouse and taxa scores generated
-by CCpnA. The sites \(mice samples\) are triangles; species are circles,
-respectively. The separate panels indicate different age groups.")
+html/fig-ccpnaplotage-1.png "그림 9.33: CCpnA에 의해 생성된 생쥐 및 분류군 점수. 사이트(생쥐 샘플)는 삼각형이고, 종은 원으로 각각 표시됩니다. 별도의 패널은 서로 다른 연령 그룹을 나타냅니다.")
 
-Figure 9.33: The mouse and taxa scores generated by CCpnA. The sites (mice
-samples) are triangles; species are circles, respectively. The separate panels
-indicate different age groups.
+그림 9.33: CCpnA에 의해 생성된 생쥐 및 분류군 점수. 사이트(생쥐 샘플)는 삼각형이고, 종은 원으로 각각 표시됩니다. 별도의 패널은 서로 다른 연령 그룹을 나타냅니다.
 
 __
 
-Question 9.19
+질문 9.19
 
-Look up the extra code for creating the `tax` and `species` objects in the
-online resources accompanying the book. Then make the analogue of Figure 9.33
-but using litter as the faceting variable.
+이 책의 온라인 리소스에서 `tax` 및 `species` 객체를 생성하는 추가 코드를 찾아보세요. 그런 다음 나이 대신 집단(litter)을 패싯 변수로 사용하여 그림 9.33의 대응물을 만들어 보세요.
 
 __
 
-Solution
+해결책
 
 __
 
 [![](09-chap_files/figure-html/fig-
 ccpnaplotlitter-1.png)](09-chap_files/figure-html/fig-ccpnaplotlitter-1.png
-"Figure 9.34: The analogue to Figure fig-ccpnaplotage, faceting by litter
-membership rather than age bin.")
+"그림 9.34: 나이가 아닌 집단 멤버십에 따라 패싯을 나눈, 그림 9.33의 대응물입니다.")
 
-Figure 9.34: The analogue to Figure 9.33, faceting by litter membership rather
-than age bin.
+그림 9.34: 나이가 아닌 집단 멤버십에 따라 패싯을 나눈, 그림 9.33의 대응물.
 
-Figures 9.33 and 9.34 show the plots of these annotated scores, splitting
-sites by their age bin and litter membership, respectively. Note that to keep
-the appropriate aspect ratio in the presence of faceting, we have taken the
-vertical axis as our first canonical component. We have labeled individual
-bacteria that are outliers along the second CCpnA direction.
+그림 9.33과 9.34는 각각 나이와 집단 멤버십에 따라 사이트를 나누어 주석을 단 점수들의 플롯을 보여줍니다. 패싯이 있는 상황에서 적절한 종횡비를 유지하기 위해 수직축을 첫 번째 정전 성분(canonical component)으로 잡았습니다. 두 번째 CCpnA 방향을 따라 이상치인 개별 박테리아들에 레이블을 달았습니다.
 
-Evidently, the first CCpnA direction distinguishes between mice in the two
-main age bins. Circles on the left and right of the biplot represent bacteria
-that are characteristic of younger and older mice, respectively. The second
-CCpnA direction splits off the few mice in the oldest age group; it also
-partially distinguishes between the two litters. These samples low in the
-second CCpnA direction have more of the outlier bacteria than the others.
+분명히 첫 번째 CCpnA 방향은 두 주요 연령대의 생쥐를 구분합니다. 바이플롯의 왼쪽과 오른쪽에 있는 원들은 각각 어린 생쥐와 나이 든 생쥐의 특징인 박테리아를 나타냅니다. 두 번째 CCpnA 방향은 가장 나이 많은 그룹의 소수 생쥐들을 분리하며, 또한 두 집단을 부분적으로 구분합니다. 두 번째 CCpnA 방향에서 낮은 값을 가진 이러한 샘플들은 다른 샘플들보다 이상치 박테리아를 더 많이 가지고 있습니다.
 
-This CCpnA analysis supports the conclusion that the main difference between
-the microbiome communities of the different mice lies along the age axis.
-However, in situations where the influence of environmental variables is not
-so strong, CCA can have more power in detecting such associations. In general,
-it can be applied whenever it is desirable to incorporate supplemental data,
-but in a way that (1) is less aggressive than supervised methods, and (2) can
-use several environmental variables at once.
+이 CCpnA 분석은 서로 다른 생쥐 마이크로바이옴 커뮤니티 간의 주요 차이가 나이 축을 따라 존재한다는 결론을 뒷받침합니다. 그러나 환경 변수의 영향이 그렇게 강하지 않은 상황에서는 CCA가 그러한 연관성을 탐지하는 데 더 큰 검정력을 가질 수 있습니다. 일반적으로 보충 데이터를 통합하는 것이 바람직할 때마다 이를 적용할 수 있지만, (1) 지도 방식보다 덜 공격적이고, (2) 여러 환경 변수를 한꺼번에 사용할 수 있는 방식으로 적용됩니다.
 
-## 9.7 Summary of this chapter
+## 9.7 이 장의 요약
 
-**Heterogeneous data** A mixture of many continuous and a few categorical
-variables can be handled by adding the categorical variables as supplementary
-information to the PCA. This is done by projecting the mean of all points in a
-group onto the map.
+**불균질 데이터** 많은 연속형 변수와 소수의 범주형 변수가 섞여 있는 경우, 범주형 변수를 PCA에 보조 정보로 추가하여 처리할 수 있습니다. 이는 그룹 내 모든 점의 평균을 맵에 투영함으로써 수행됩니다.
 
-**Using distances** Relations between data objects can often be summarized as
-interpoint distances (whether distances between trees, images, graphs, or
-other complex objects).
+**거리 사용** 데이터 객체 간의 관계는 종종 점 간 거리(트리, 이미지, 그래프 또는 기타 복잡한 객체 사이의 거리)로 요약될 수 있습니다.
 
-**Ordination** A useful representation of these distances is available through
-a method similar to PCA called multidimensional scaling (MDS), otherwise known
-as PCoA (principal coordinate analysis). It can be helpful to think of the
-outcome of these analyses as uncovering latent variable. In the case of
-clustering the latent variables are categorical, in ordination they are latent
-variables like time or environmental gradients like distance to the water.
-This is why these methods are often called ordination.
+**서열화(Ordination)** 이러한 거리에 대한 유용한 표현은 PCA와 유사한 다차원 척도법(MDS), 즉 PCoA(주좌표 분석)라 불리는 방법을 통해 가능합니다. 이러한 분석의 결과를 잠재 변수를 찾아내는 것으로 생각하면 도움이 될 수 있습니다. 군집화의 경우 잠재 변수가 범주형인 반면, 서열화에서는 시간이나 물까지의 거리와 같은 환경적 그래디언트와 같은 잠재 변수입니다. 이것이 이러한 방법들을 흔히 서열화라고 부르는 이유입니다.
 
-**Robust versions** can be used when interpoint distances are wildly
-different. NMDS (nonmetric multidimensional scaling) aims to produce
-coordinates such that the order of the interpoint distances is respected as
-closely as possible.
+**강건한 버전들**은 점 간 거리가 매우 다를 때 사용될 수 있습니다. NMDS(비계량 다차원 척도법)는 점 간 거리의 순서가 가능한 한 가깝게 유지되도록 하는 좌표를 생성하는 것을 목표로 합니다.
 
-**Correspondence analysis** : a method for computing low dimensional
-projections that explain dependencies in categorical data. It decomposes
-chisquare distance in much the same way that PCA decomposes variance.
-Correspondence analysis is usually the best way to follow up on a significant
-chisquare test. Once we have ascertained there are significant dependencies
-between different levels of categories, we can map them and interpret
-proximities on this map using plots and biplots.
+**대응 분석** : 범주형 데이터의 의존성을 설명하는 낮은 차원의 투영을 계산하는 방법입니다. PCA가 분산을 분해하는 것과 거의 같은 방식으로 카이제곱 거리를 분해합니다. 대응 분석은 대개 유의미한 카이제곱 검정에 대한 후속 조치를 취하는 가장 좋은 방법입니다. 카테고리의 서로 다른 수준들 사이에 유의미한 의존성이 있음을 확인했다면, 이를 매핑하고 플롯과 바이플롯을 사용하여 이 맵 상의 근접성을 해석할 수 있습니다.
 
-**Permutation test for distances** Given two sets of distances between the
-same points, we can measure whether they are related using the Mantel
-permutation test.
+**거리에 대한 순열 검정** 동일한 점들 사이의 두 가지 거리 세트가 주어졌을 때, 만텔(Mantel) 순열 검정을 사용하여 그들이 서로 관련이 있는지 측정할 수 있습니다.
 
-**Generalizations of variance and covariance** When dealing with more than one
-matrix of measurements on the same data, we can generalize the notion of
-covariance and correlations to vectorial measurements of co-inertia.
+**분산과 공분산의 일반화** 동일한 데이터에 대해 두 개 이상의 측정 행렬을 다룰 때, 공분산과 상관관계의 개념을 공동 관성(co-inertia)의 벡터 측정으로 일반화할 수 있습니다.
 
-**Canonical correlation** is a method for finding a few linear combinations of
-variables from each table that are as correlated as possible. When using this
-method on matrices with large numbers of variables, we use a regularized
-version with an L1 penalty that reduces the number of non-zero coefficients.
+**정전 상관(Canonical correlation)**은 각 표에서 가능한 한 상관관계가 높은 소수의 선형 변수 결합을 찾는 방법입니다. 변수 수가 많은 행렬에 이 방법을 사용할 때는 0이 아닌 계수의 수를 줄이는 L1 페널티를 사용하는 정규화된 버전을 사용합니다.
 
-## 9.8 Further reading
+## 9.8 더 읽을거리
 
-Interpretation of PCoA maps and nonlinear embeddings can also be enhanced the
-way we did for PCA using generalizations of the supplementary point method,
-see Trosset and Priebe ([2008](16-chap.html#ref-Trosset2008)) or Bengio et al.
-([2004](16-chap.html#ref-Bengio2004)). We saw in [Chapter 7](07-chap.html) how
-we can project one categorical variable onto a PCA. The correspondence
-analysis framework actually allows us to mix several categorical variables in
-with any number of continuous variables. This is done through an extension
-called multiple correspondence analysis (MCA) whereby we can do the same
-analysis on a large number of binary categorical variables and obtain useful
-maps. The trick here will be to turn the continuous variables into categorical
-variables first. For extensive examples using R see for instance the book by
-Pagès ([2016](16-chap.html#ref-Pages:2016)).
+PCoA 맵과 비선형 임베딩의 해석은 보충 점 방법의 일반화를 사용하여 PCA에서 했던 것과 같은 방식으로 강화될 수 있습니다. Trosset과 Priebe ([2008](16-chap.html#ref-Trosset2008)) 또는 Bengio 등 ([2004](16-chap.html#ref-Bengio2004))을 참조하십시오. 우리는 [7장](07-chap.html)에서 하나의 범주형 변수를 PCA에 투영하는 방법을 보았습니다. 대응 분석 프레임워크는 사실 여러 범주형 변수를 임의의 수의 연속형 변수와 혼합할 수 있게 해줍니다. 이는 다중 대응 분석(MCA)이라는 확장을 통해 수행되는데, 이를 통해 수많은 이진 범주형 변수에 대해 동일한 분석을 수행하고 유용한 맵을 얻을 수 있습니다. 여기서의 비결은 연속형 변수를 먼저 범주형 변수로 바꾸는 것입니다. R을 사용한 광범위한 예제는 예를 들어 Pagès ([2016](16-chap.html#ref-Pages:2016))의 책을 참조하십시오.
 
-A simple extension to PCA that allows for **nonlinear** principal curve
-estimates instead of principal directions defined by eigenvectors was proposed
-in Hastie and Stuetzle ([1989](16-chap.html#ref-Hastie1989)) and is available
-in the package
-**[princurve](https://cran.r-project.org/web/packages/princurve/)**.
+고유벡터에 의해 정의된 주방향 대신 **비선형** 주성분 곡선 추정을 가능하게 하는 PCA의 단순한 확장이 Hastie와 Stuetzle ([1989](16-chap.html#ref-Hastie1989))에 의해 제안되었으며, **[princurve](https://cran.r-project.org/web/packages/princurve/)** 패키지에서 사용할 수 있습니다.
 
-Finding curved subspaces containing a high density data for dimensions higher
-than \\(1\\) is now called manifold embedding and can be done through
-Laplacian eigenmaps ([Belkin and Niyogi 2003](16-chap.html#ref-Belkin2003)),
-local linear embedding as in Roweis and Saul ([2000](16-chap.html#ref-
-Roweis2000)) or using the isomap method ([Tenenbaum, De Silva, and Langford
-2000](16-chap.html#ref-Tenenbaum2000)). For textbooks covering nonlinear
-unsupervised learning methods see Hastie, Tibshirani, and Friedman ([2008,
-chap. 14](16-chap.html#ref-HastieTibshiraniFriedman)) or Izenman
-([2008](16-chap.html#ref-Izenman2008)).
+1보다 높은 차원에서 고밀도 데이터를 포함하는 곡면 하위 공간을 찾는 것은 현재 매니폴드 임베딩(manifold embedding)이라고 불리며, 라플라시안 고유맵(Laplacian eigenmaps, [Belkin and Niyogi 2003](16-chap.html#ref-Belkin2003)), Roweis와 Saul ([2000](16-chap.html#ref-Roweis2000))의 국소 선형 임베딩, 또는 isomap 방법([Tenenbaum, De Silva, and Langford 2000](16-chap.html#ref-Tenenbaum2000))을 통해 수행될 수 있습니다. 비선형 비지도 학습 방법을 다루는 교과서로는 Hastie, Tibshirani, Friedman ([2008, 14장](16-chap.html#ref-HastieTibshiraniFriedman)) 또는 Izenman ([2008](16-chap.html#ref-Izenman2008))을 참조하십시오.
 
-A review of many multitable correlation coefficients, and analysis of
-applications can be found in Josse and Holmes ([2016](16-chap.html#ref-
-Josse:2016)).
+많은 다중 표 상관 계수에 대한 리뷰와 응용 분석은 Josse와 Holmes ([2016](16-chap.html#ref-Josse:2016))에서 찾아볼 수 있습니다.
 
-## 9.9 Exercises
+## 9.9 연습 문제
 
 __
 
-Exercise 9.1
+연습 문제 9.1
 
-We are going to take another look at the Phylochip data, replacing the
-original expression values by presence/absence. We threshold the data to
-retain only those that have a value of at least 8.633 in at least 8 samples7.
+Phylochip 데이터를 다시 한 번 살펴보겠습니다. 원래의 발현 값을 존재/부재(presence/absence)로 대체합니다. 최소 8개 샘플에서 적어도 8.633의 값을 가진 것들만 남기도록 데이터를 임계값 처리합니다7.
 
     
     
     ibd.pres = ifelse(assayIBD[, 1:28] > 8.633, 1, 0)__
 
-Perform a correspondence analysis on these binary data and compare the plot
-you obtain to what we saw in Figure 9.15.
+이 이진 데이터에 대해 대응 분석을 수행하고 그림 9.15에서 보았던 것과 얻은 플롯을 비교해 보세요.
 
-7 These values were chosen to give about retain about 3,000 taxa, similar to
-our previous choice of threshold.
+7 이 값들은 이전의 임계값 선택과 유사하게 약 3,000개의 분류군을 유지하도록 선택되었습니다.
 
 __
 
-Solution
+해결책
 
 __
 
-See Figure 9.35.
+그림 9.35를 참조하세요.
 
     
     
@@ -2421,28 +1772,25 @@ See Figure 9.35.
          repel = TRUE)__
 
 [![](09-chap_files/figure-html/fig-Threesetscoa-1.png)](09-chap_files/figure-
-html/fig-Threesetscoa-1.png "Figure 9.35 \(a\): \\text{}")
+html/fig-Threesetscoa-1.png "그림 9.35 (a): \\text{}")
 
 (a) \\(\text{}\\)
 
 [![](09-chap_files/figure-html/fig-Threesetscoa-2.png)](09-chap_files/figure-
-html/fig-Threesetscoa-2.png "Figure 9.35 \(b\): \\text{}")
+html/fig-Threesetscoa-2.png "그림 9.35 (b): \\text{}")
 
 (b) \\(\text{}\\)
 
-Figure 9.35: Correspondence analysis on binary data.
+그림 9.35: 이진 데이터에 대한 대응 분석.
 
 __
 
-Exercise 9.2
+연습 문제 9.2
 
-Correspondence Analysis on color association tables:  
-Here is an example of data collected by looking at the number of Google hits
-resulting from queries of pairs of words. The numbers in Table 9.4 are to be
-multiplied by 1000. For instance, the combination of the words “quiet” and
-“blue” returned 2,150,000 hits.
+색상 연관성 표에 대한 대응 분석:  
+여기에 단어 쌍의 쿼리로 인한 Google 히트 수를 조사하여 수집된 데이터 예시가 있습니다. 표 9.4의 수치에는 1000을 곱해야 합니다. 예를 들어, "quiet"와 "blue" 단어의 조합은 2,150,000개의 히트를 반환했습니다.
 
-Table 9.4: Contingency table of co-occurring terms from search engine results.
+표 9.4: 검색 엔진 결과로부터 얻은 공동 발생 용어들의 분할표.
 
 | black | blue | green | grey | orange | purple | white  
 ---|---|---|---|---|---|---|---  
@@ -2455,36 +1803,28 @@ lively | 1840 | 1250 | 1350 | 659 | 621 | 488 | 1480
 perplexed | 110 | 71 | 80 | 19 | 23 | 15 | 109  
 virtuous | 179 | 80 | 102 | 20 | 25 | 17 | 165  
   
-Perform a correspondence analysis of these data. What do you notice when you
-look at the two-dimensional biplot?
+이 데이터에 대해 대응 분석을 수행하세요. 2차원 바이플롯을 보았을 때 무엇을 알 수 있나요?
 
 __
 
-Solution
+해결책
 
 __
 
-See Figure 9.36. The code is not rendered here, but is shown in the document’s
-source file.
+그림 9.36을 참조하세요. 코드는 여기에는 렌더링되지 않았지만, 문서의 소스 파일에 나와 있습니다.
 
 [![](09-chap_files/figure-html/fig-ColorBiplot-1-1.png)](09-chap_files/figure-
-html/fig-ColorBiplot-1-1.png "Figure 9.36: Correspondence Analysis allows for
-a symmetrical graphical representation of two categorical variables, in this
-case colors and emotions for a contingency table of co-occurrences such as
-Table tbl-colors.")
+html/fig-ColorBiplot-1-1.png "그림 9.36: 대응 분석은 표 9.4와 같은 공동 발생 분할표에 대해 색상과 감정이라는 두 범주형 변수의 대칭적인 그래픽 표현을 가능하게 합니다.")
 
-Figure 9.36: Correspondence Analysis allows for a symmetrical graphical
-representation of two categorical variables, in this case colors and emotions
-for a contingency table of co-occurrences such as Table 9.4.
+그림 9.36: 대응 분석은 표 9.4와 같은 공동 발생 분할표에 대해 색상과 감정이라는 두 범주형 변수의 대칭적인 그래픽 표현을 가능하게 합니다.
 
-[![](imgs/PlatoTableImage.png)](imgs/PlatoTableImage.png)
+![](imgs/PlatoTableImage.png)
 
 __
 
-Exercise 9.3
+연습 문제 9.3
 
-The dates Plato wrote his various books are not known. We take the sentence
-endings and use those pattern frequencies as the data.
+플라톤이 그의 다양한 책들을 쓴 날짜는 알려져 있지 않습니다. 우리는 문장 끝맺음을 가져와 그 패턴 빈도를 데이터로 사용합니다.
 
     
     
@@ -2561,18 +1901,13 @@ the cumulative sum of the eigenvalues at the value 2:
 
 __
 
-Exercise 9.4
+연습 문제 9.4
 
-We are going to look at two datasets, one is a perturbed version of the other
-and they both present gradients as often seen in ecological data. Read in the
-two species count matrices `lakelike` and `lakelikeh`, which are stored as the
-object `lakes.RData`. Compare the output of correspondence analysis and
-principal component analysis on each of the two data sets; restrict yourself
-two dimensions. In the plots and the eigenvalues, what do you notice?
+우리는 두 개의 데이터 세트를 살펴볼 것인데, 하나는 다른 하나의 섭동된(perturbed) 버전이며 둘 다 생태학적 데이터에서 흔히 볼 수 있는 그래디언트를 보여줍니다. `lakes.RData` 객체로 저장된 두 개의 종 카운트 행렬 `lakelike`와 `lakelikeh`를 읽어 들이세요. 두 데이터 세트 각각에 대해 대응 분석과 주성분 분석의 출력을 비교해 보세요. 두 개 차원으로 제한하세요. 플롯과 고윳값에서 무엇을 발견했나요?
 
 __
 
-Solution
+해결책
 
 __
 
@@ -2602,7 +1937,7 @@ __
     eh_coa = dudi.coa(lakelikeh, scannf = FALSE, nf = 2)
     eh_pca = dudi.pca(lakelikeh, scannf = FALSE, nf = 2)__
 
-Comparison (output not shown):
+비교 (출력은 표시되지 않음):
 
     
     
@@ -2631,15 +1966,13 @@ Comparison (output not shown):
 
 __
 
-Exercise 9.5
+연습 문제 9.5
 
-We analyzed the normalized Moignard data in Section 9.5.1. Now redo the
-analysis with the _raw_ data (in file _nbt.3154-S3-raw.csv_) and compare the
-output with that obtained using the normalized values.
+우리는 9.5.1절에서 정규화된 Moignard 데이터를 분석했습니다. 이제 _원시(raw)_ 데이터(_nbt.3154-S3-raw.csv_ 파일에 있음)로 분석을 다시 수행하고 그 출력을 정규화된 값을 사용했을 때 얻은 것과 비교해 보세요.
 
 __
 
-Solution
+해결책
 
 __
 
@@ -2663,21 +1996,21 @@ __
 
 __
 
-Exercise 9.6
+연습 문제 9.6
 
-We are going to explore the use of kernel methods.
+우리는 커널(kernel) 방법의 사용을 탐구할 것입니다.
 
-  1. Compute kernelized distances using the **[kernlab](https://cran.r-project.org/web/packages/kernlab/)** for the Moignard data using various values for the sigma tuning parameter in the definition of the kernels. Then perform MDS on these kernelized distances. What difference is there in variability explained by the first four components of kernel multidimensional scaling?
+  1. **[kernlab](https://cran.r-project.org/web/packages/kernlab/)**을 사용하여 Moignard 데이터에 대해 커널 정의의 시그마(sigma) 튜닝 매개변수의 다양한 값을 사용하여 커널화된 거리를 계산하세요. 그런 다음 이 커널화된 거리에 대해 MDS를 수행하세요. 커널 다차원 척도법의 처음 네 성분에 의해 설명되는 가변성에는 어떤 차이가 있나요?
 
-  2. Make interactive three dimensional representations of the components: is there a projection where you see a branch for the purple points?
-
-__
-
-Solution
+  2. 성분들의 대화형 3차원 표현을 만드세요: 보라색 점들에 대한 분기(branch)가 보이는 투영이 있나요?
 
 __
 
-  1. kernelized distances
+해결책
+
+__
+
+  1. 커널화된 거리
 
     
     
@@ -2689,8 +2022,7 @@ __
     Klaplace_rawcells = kernelMatrix(laplacedot1, moignard_raw)
     KGauss_rawcells   = kernelMatrix(rbfdot1, moignard_raw)__
 
-Use kernelized distances to protect against outliers and allows discovery of
-non-linear components.
+이상치로부터 보호하고 비선형 성분의 발견을 가능하게 하기 위해 커널화된 거리를 사용합니다.
 
     
     
@@ -2709,7 +2041,7 @@ non-linear components.
     cellsn1.kcmds = cmdscale(dist1kn, k = 20, eig = TRUE) 
     cellsn2.kcmds = cmdscale(dist2kn, k = 20, eig = TRUE)__
 
-  2. using a 3d scatterplot interactively:
+  2. 대화형 3D 산점도 사용:
 
     
     
@@ -2720,34 +2052,28 @@ non-linear components.
     scatterplot3d(cellsn2.kcmds$points[, 1:3], color=colc, pch = 20,
        xlab = "Axis k1", ylab = "Axis k2", zlab = "Axis k3", angle = -70)__
 
-[![](09-chap_files/figure-html/fig-
-KernelMDSplots-1.png)](09-chap_files/figure-html/fig-KernelMDSplots-1.png
-"Figure 9.38 \(a\): \\text{}")
+[![](09-chap_files/figure-html/fig-KernelMDSplots-1.png)](09-chap_files/figure-
+html/fig-KernelMDSplots-1.png "그림 9.38 (a): \\text{}")
 
 (a) \\(\text{}\\)
 
-[![](09-chap_files/figure-html/fig-
-KernelMDSplots-2.png)](09-chap_files/figure-html/fig-KernelMDSplots-2.png
-"Figure 9.38 \(b\): \\text{}")
+[![](09-chap_files/figure-html/fig-KernelMDSplots-2.png)](09-chap_files/figure-
+html/fig-KernelMDSplots-2.png "그림 9.38 (b): \\text{}")
 
 (b) \\(\text{}\\)
 
-Figure 9.38: Kernel multidimensional scaling.
+그림 9.38: 커널 다차원 척도법.
 
 __
 
-Exercise 9.7
+연습 문제 9.7
 
-**Higher resolution study of cell data.**  
-Take the original expression data `blom` we generated in Section 9.5.1. Map
-the intensity of expression of each of the top 10 most variable genes onto the
-3d plot made with the diffusion mapping. Which dimension, or which one of the
-principal coordinates (1,2,3,4) can be seen as the one that clusters the
-**4SG** (red) points the most?
+**세포 데이터의 고해상도 연구.**  
+9.5.1절에서 생성한 원래의 발현 데이터 `blom`을 가져오세요. 상위 10개의 가장 가변적인 유전자 각각의 발현 강도를 확산 매핑(diffusion mapping)으로 만든 3D 플롯 위에 매핑하세요. 어떤 차원, 또는 어떤 주좌표(1,2,3,4)가 **4SG**(빨간색) 점들을 가장 많이 클러스터링하는 것으로 보이나요?
 
 __
 
-Solution
+해결책
 
 __
 
@@ -2758,17 +2084,13 @@ __
            xlab = "Axis1", ylab = "Axis2", zlab = "Axis3")
     plot3d(cellsn2.kcmds$points[, c(1,2,4)], col = colc, size = 3,
            xlab = "Axis1", ylab = "Axis2", zlab = "Axis4")
-    # Using an L1 distance instead.
+    # L1 거리를 대신 사용.
     plot3d(cellsn1.kcmds$points[, 1:3], col = colc, size = 3,
            xlab = "Axis1", ylab = "Axis2", zlab = "Axis3")
     plot3d(cellsn1.kcmds$points[, c(1,2,4)], col = colc, size = 3,
            xlab = "Axis1", ylab = "Axis2", zlab = "Axis4")__
 
-An implementation in the package
-**[LPCM](https://cran.r-project.org/web/packages/LPCM/)** provides the
-function `lpc`, which estimates principal curves. Here we constrain ourselves
-to three dimensions chosen from the output of the diffusion map and create
-smoothed curves.
+**[LPCM](https://cran.r-project.org/web/packages/LPCM/)** 패키지의 구현체는 주성분 곡선을 추정하는 `lpc` 함수를 제공합니다. 여기서는 확산 맵의 출력으로부터 선택된 3개 차원으로 제한하고 평활화된 곡선을 만듭니다.
 
     
     
@@ -2785,9 +2107,7 @@ smoothed curves.
     combs = combn(4, 3)
     lpcplots = apply(combs, 2, function(j) lpc(dmap1$X[, j], scale = FALSE))__
 
-To get a feel for what the smoothed data are showing us, we take a look at the
-interactive graphics using the function `plot3d` from them
-**[rgl](https://cran.r-project.org/web/packages/rgl/)** package.
+평활화된 데이터가 우리에게 무엇을 보여주는지 감을 잡기 위해, **[rgl](https://cran.r-project.org/web/packages/rgl/)** 패키지의 `plot3d` 함수를 사용하여 대화형 그래픽을 살펴봅니다.
 
     
     
@@ -2798,8 +2118,7 @@ interactive graphics using the function `plot3d` from them
       ylab = paste("Axis", combs[2, i]),
       zlab = paste("Axis", combs[3, i]))__
 
-One way of plotting both the smoothed line and the data points is to add the
-line using the `plot3d` function.
+평활화된 선과 데이터 점들을 모두 플롯하는 한 가지 방법은 `plot3d` 함수를 사용하여 선을 추가하는 것입니다.
 
     
     
@@ -2814,48 +2133,31 @@ line using the `plot3d` function.
     plot3d(dmap1$X[,c(1,3,4)], col=colc, 
            xlab="", ylab="", zlab="", add=TRUE)__
 
-[![](imgs/TripleArm.png)](imgs/TripleArm.png "Figure 9.39: Diffusion map
-projection for Axes 1, 3 and 4. The lower figure shows the smoothed path
-followed by the cells in their development.")
+[![](imgs/TripleArm.png)](imgs/TripleArm.png "그림 9.39: 축 1, 3, 4에 대한 확산 맵 투영. 아래 그림은 세포들이 발달 과정에서 따르는 평활화된 경로를 보여줍니다.")
 
-Figure 9.39: Diffusion map projection for Axes 1, 3 and 4. The lower figure
-shows the smoothed path followed by the cells in their development.
+그림 9.39: 축 1, 3, 4에 대한 확산 맵 투영. 아래 그림은 세포들이 발달 과정에서 따르는 평활화된 경로를 보여줍니다.
 
-[![](imgs/SmoothLineP134h7.png)](imgs/SmoothLineP134h7.png "Figure 9.40:
-Diffusion map projection for Axes 1, 3 and 4. The lower figure shows the
-smoothed path followed by the cells in their development.")
+[![](imgs/SmoothLineP134h7.png)](imgs/SmoothLineP134h7.png "그림 9.40: 축 1, 3, 4에 대한 확산 맵 투영. 아래 그림은 세포들이 발달 과정에서 따르는 평활화된 경로를 보여줍니다.")
 
-Figure 9.40: Diffusion map projection for Axes 1, 3 and 4. The lower figure
-shows the smoothed path followed by the cells in their development.
+그림 9.40: 축 1, 3, 4에 대한 확산 맵 투영. 아래 그림은 세포들이 발달 과정에서 따르는 평활화된 경로를 보여줍니다.
 
 __
 
-Exercise 9.8
+연습 문제 9.8
 
-Here we explore more refined distances and diffusion maps that can show cell
-development trajectories as in Figure 9.41.
+여기서는 그림 9.41에서처럼 세포 발달 궤적을 보여줄 수 있는 더 정교한 거리와 확산 맵을 탐구합니다.
 
-The diffusion map method restricts the estimation of distances to local
-points, thus further pursuing the idea that often only local distances should
-be represented precisely and as points become further apart they are not being
-measured with the same ‘reference’. This method also uses the distances as
-input but then creates local probabilistic transitions as indicators of
-similarity, these are combined into an affinity matrix for which the
-eigenvalues and eigenvectors are also computed much like in standard MDS.
+확산 맵 방법은 거리의 추정을 국소적인 점들로 제한하며, 이는 종종 국소적인 거리만이 정확하게 표현되어야 하고 점들이 멀어질수록 동일한 '기준'으로 측정되지 않는다는 아이디어를 더 발전시킨 것입니다. 이 방법 또한 거리를 입력으로 사용하지만, 유사성의 지표로서 국소적인 확률적 전이(transitions)를 생성하고, 이들은 표준 MDS에서와 마찬가지로 고윳값과 고유벡터가 계산되는 인접 행렬(affinity matrix)로 결합됩니다.
 
-Compare the output of the `diffuse` function from the
-**[diffusionMap](https://cran.r-project.org/web/packages/diffusionMap/)**
-package on both the l1 and l2 distances computed between the cells available
-in the `dist2n.euclid` and `dist1n.l1` objects from Section 9.5.1.
+9.5.1절에서 사용 가능한 세포들 사이에서 계산된 `dist2n.euclid` 및 `dist1n.l1` 객체의 l1 및 l2 거리에 대해 **[diffusionMap](https://cran.r-project.org/web/packages/diffusionMap/)** 패키지의 `diffuse` 함수 출력을 비교해 보세요.
 
-[![](imgs/dmap134.png)](imgs/dmap134.png "Figure 9.41: Ouput from a three-
-dimensional diffusion map projection.")
+[![](imgs/dmap134.png)](imgs/dmap134.png "그림 9.41: 3차원 확산 맵 투영 출력.")
 
-Figure 9.41: Ouput from a three-dimensional diffusion map projection.
+그림 9.41: 3차원 확산 맵 투영 출력.
 
 __
 
-Solution
+해결책
 
 __
 
@@ -2880,13 +2182,9 @@ __
     
     plot(dmap2)__
 
-Notice that the vanilla plot for a _dmap_ object does not allow the use of
-colors. As this essential to our understanding of cell development, we add the
-colors by hand. Of course, here we use static 3d plots but these should
-supplemented by the plot3d examples we give in the code.
+`dmap` 객체에 대한 기본 플롯은 색상의 사용을 허용하지 않는다는 점에 유의하세요. 이는 세포 발달을 이해하는 데 필수적이므로, 수동으로 색상을 추가합니다. 물론 여기서는 정적인 3D 플롯을 사용하지만, 코드에서 제공하는 `plot3d` 예제들로 보완되어야 합니다.
 
-We use a tailored wrapper function `scp3d`, so that we can easily insert
-relevant parameters:
+관련 매개변수들을 쉽게 삽입할 수 있도록 맞춤형 래퍼 함수 `scp3d`를 사용합니다:
 
     
     
@@ -2903,12 +2201,11 @@ relevant parameters:
     scp3d(anglea=210)
     scp3d(anglea=150)__
 
-The best way of visualizing the data is to make a rotatable interactive plot
-using the **[rgl](https://cran.r-project.org/web/packages/rgl/)** package.
+데이터를 시각화하는 가장 좋은 방법은 **[rgl](https://cran.r-project.org/web/packages/rgl/)** 패키지를 사용하여 회전 가능한 대화형 플롯을 만드는 것입니다.
 
     
     
-    # interactive plot
+    # 대화형 플롯
     library("rgl")
     plot3d(dmap1$X[,1:3], col=colc, size=3)
     plot3d(dmap1$X[,2:4], col=colc, size=3)__
@@ -3029,5 +2326,5 @@ Trosset, Michael W, and Carey E Priebe. 2008. “The Out-of-Sample Problem for
 Classical Multidimensional Scaling.” _Computational Statistics & Data
 Analysis_ 52 (10): 4635–42.
 
-Page built at 01:33 on 2025-09-01 using R version 4.5.1 (2025-06-13)
+R 버전 4.5.1(2025-06-13)을 사용하여 2025-09-01 01:33에 페이지가 구축되었습니다.
 

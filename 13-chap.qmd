@@ -1,6 +1,6 @@
-[![](imgs/RAFisherSmoking.png)](imgs/RAFisherSmoking.png)
+![](imgs/RAFisherSmoking.png)
 
-[![](imgs/dailies_icon.png)](imgs/dailies_icon.png)
+![](imgs/dailies_icon.png)
 
 In the same way a film director will view daily takes to correct potential
 lighting or shooting issues before they affect too much footage, it is a good
