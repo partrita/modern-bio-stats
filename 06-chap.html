@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.8.27">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>8&nbsp; 6.1 Goals for this Chapter – Modern Statistics for Modern Biology</title>
+<title>8&nbsp; 6.1 이 장의 목표 – Modern Statistics for Modern Biology</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -34,14 +34,15 @@ ul.task-list li input[type="checkbox"] {
 <link href="./05-chap.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-22854ec117201859c8a7ba6f538122c9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-7bf12d62aa84b4fa538b342f1416a45b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -84,7 +85,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -112,7 +113,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-chap.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">6.1 Goals for this Chapter</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-chap.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">6.1 이 장의 목표</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -140,79 +141,79 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Home</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">홈</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./00-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The challenge: heterogeneity</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">주제: 이질성</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">1.1 Goals for this chapter</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">1.1 이 장의 목표</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">2.1 Goals for this chapter</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">2.1 이 장의 목표</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">3.1 Goals for this chapter</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">3.1 이 장의 목표</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">4.1 Goals for this chapter</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">4.1 이 장의 목표</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">5.1 Goals for this chapter</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">5.1 이 장의 목표</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-chap.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">6.1 Goals for this Chapter</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">6.1 이 장의 목표</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">7.1 Goals for this chapter</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">7.1 이 장의 목표</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">8.1 Goals of this chapter</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">8.1 이 장의 목표</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">9.1 Goals for this chapter</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">9.1 이 장의 목표</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">10.1 Goals for this chapter</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">10.1 이 장의 목표</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./11-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">11.1 Goals for this chapter</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">11.1 이 장의 목표</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -255,40 +256,40 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#drinking-from-the-firehose" id="toc-drinking-from-the-firehose" class="nav-link active" data-scroll-target="#drinking-from-the-firehose"><span class="header-section-number">8.0.1</span> 6.1.1 Drinking from the firehose</a></li>
-  <li><a href="#testing-versus-classification" id="toc-testing-versus-classification" class="nav-link" data-scroll-target="#testing-versus-classification"><span class="header-section-number">8.0.2</span> 6.1.2 Testing versus classification</a></li>
-  <li><a href="#false-discovery-rate-or-p-value" id="toc-false-discovery-rate-or-p-value" class="nav-link" data-scroll-target="#false-discovery-rate-or-p-value"><span class="header-section-number">8.0.3</span> 6.1.3 False discovery rate or p-value?</a></li>
-  <li><a href="#the-multiple-testing-opportunity" id="toc-the-multiple-testing-opportunity" class="nav-link" data-scroll-target="#the-multiple-testing-opportunity"><span class="header-section-number">8.0.4</span> 6.1.4 The multiple testing opportunity</a></li>
-  <li><a href="#an-example-coin-tossing" id="toc-an-example-coin-tossing" class="nav-link" data-scroll-target="#an-example-coin-tossing"><span class="header-section-number">8.1</span> 6.2 An example: coin tossing</a></li>
-  <li><a href="#the-five-steps-of-hypothesis-testing" id="toc-the-five-steps-of-hypothesis-testing" class="nav-link" data-scroll-target="#the-five-steps-of-hypothesis-testing"><span class="header-section-number">8.2</span> 6.3 The five steps of hypothesis testing</a>
+  <li><a href="#쏟아지는-데이터-속에서-정보-찾기" id="toc-쏟아지는-데이터-속에서-정보-찾기" class="nav-link active" data-scroll-target="#쏟아지는-데이터-속에서-정보-찾기"><span class="header-section-number">8.0.1</span> 6.1.1 쏟아지는 데이터 속에서 정보 찾기</a></li>
+  <li><a href="#검정-대-분류" id="toc-검정-대-분류" class="nav-link" data-scroll-target="#검정-대-분류"><span class="header-section-number">8.0.2</span> 6.1.2 검정 대 분류</a></li>
+  <li><a href="#허위-발견율인가-p-값인가" id="toc-허위-발견율인가-p-값인가" class="nav-link" data-scroll-target="#허위-발견율인가-p-값인가"><span class="header-section-number">8.0.3</span> 6.1.3 허위 발견율인가, p-값인가?</a></li>
+  <li><a href="#다중-검정의-기회" id="toc-다중-검정의-기회" class="nav-link" data-scroll-target="#다중-검정의-기회"><span class="header-section-number">8.0.4</span> 6.1.4 다중 검정의 기회</a></li>
+  <li><a href="#예시-동전-던지기" id="toc-예시-동전-던지기" class="nav-link" data-scroll-target="#예시-동전-던지기"><span class="header-section-number">8.1</span> 6.2 예시: 동전 던지기</a></li>
+  <li><a href="#가설-검정의-5단계" id="toc-가설-검정의-5단계" class="nav-link" data-scroll-target="#가설-검정의-5단계"><span class="header-section-number">8.2</span> 6.3 가설 검정의 5단계</a>
   <ul class="collapse">
-  <li><a href="#the-rejection-region" id="toc-the-rejection-region" class="nav-link" data-scroll-target="#the-rejection-region"><span class="header-section-number">8.2.1</span> 6.3.1 The rejection region</a></li>
+  <li><a href="#기각역" id="toc-기각역" class="nav-link" data-scroll-target="#기각역"><span class="header-section-number">8.2.1</span> 6.3.1 기각역</a></li>
   </ul></li>
-  <li><a href="#types-of-error" id="toc-types-of-error" class="nav-link" data-scroll-target="#types-of-error"><span class="header-section-number">8.3</span> 6.4 Types of error</a></li>
-  <li><a href="#the-t-test" id="toc-the-t-test" class="nav-link" data-scroll-target="#the-t-test"><span class="header-section-number">8.4</span> 6.5 The t-test</a>
+  <li><a href="#오류의-유형" id="toc-오류의-유형" class="nav-link" data-scroll-target="#오류의-유형"><span class="header-section-number">8.3</span> 6.4 오류의 유형</a></li>
+  <li><a href="#t-검정" id="toc-t-검정" class="nav-link" data-scroll-target="#t-검정"><span class="header-section-number">8.4</span> 6.5 t-검정</a>
   <ul class="collapse">
   <li><a href="#permutation-tests" id="toc-permutation-tests" class="nav-link" data-scroll-target="#permutation-tests"><span class="header-section-number">8.4.1</span> 6.5.1 Permutation tests</a></li>
   </ul></li>
-  <li><a href="#p-value-hacking" id="toc-p-value-hacking" class="nav-link" data-scroll-target="#p-value-hacking"><span class="header-section-number">8.5</span> 6.6 P-value hacking</a></li>
-  <li><a href="#multiple-testing" id="toc-multiple-testing" class="nav-link" data-scroll-target="#multiple-testing"><span class="header-section-number">8.6</span> 6.7 Multiple testing</a></li>
-  <li><a href="#the-family-wise-error-rate" id="toc-the-family-wise-error-rate" class="nav-link" data-scroll-target="#the-family-wise-error-rate"><span class="header-section-number">8.7</span> 6.8 The family wise error rate</a>
+  <li><a href="#p-값-해킹p-value-hacking" id="toc-p-값-해킹p-value-hacking" class="nav-link" data-scroll-target="#p-값-해킹p-value-hacking"><span class="header-section-number">8.5</span> 6.6 P-값 해킹(P-value hacking)</a></li>
+  <li><a href="#다중-검정multiple-testing" id="toc-다중-검정multiple-testing" class="nav-link" data-scroll-target="#다중-검정multiple-testing"><span class="header-section-number">8.6</span> 6.7 다중 검정(Multiple testing)</a></li>
+  <li><a href="#가족오류율family-wise-error-rate" id="toc-가족오류율family-wise-error-rate" class="nav-link" data-scroll-target="#가족오류율family-wise-error-rate"><span class="header-section-number">8.7</span> 6.8 가족오류율(Family wise error rate)</a>
   <ul class="collapse">
-  <li><a href="#bonferroni-method" id="toc-bonferroni-method" class="nav-link" data-scroll-target="#bonferroni-method"><span class="header-section-number">8.7.1</span> 6.8.1 Bonferroni method</a></li>
+  <li><a href="#본페로니-방법bonferroni-method" id="toc-본페로니-방법bonferroni-method" class="nav-link" data-scroll-target="#본페로니-방법bonferroni-method"><span class="header-section-number">8.7.1</span> 6.8.1 본페로니 방법(Bonferroni method)</a></li>
   </ul></li>
-  <li><a href="#the-false-discovery-rate" id="toc-the-false-discovery-rate" class="nav-link" data-scroll-target="#the-false-discovery-rate"><span class="header-section-number">8.8</span> 6.9 The false discovery rate</a>
+  <li><a href="#허위-발견율false-discovery-rate" id="toc-허위-발견율false-discovery-rate" class="nav-link" data-scroll-target="#허위-발견율false-discovery-rate"><span class="header-section-number">8.8</span> 6.9 허위 발견율(False discovery rate)</a>
   <ul class="collapse">
-  <li><a href="#the-p-value-histogram" id="toc-the-p-value-histogram" class="nav-link" data-scroll-target="#the-p-value-histogram"><span class="header-section-number">8.8.1</span> 6.9.1 The p-value histogram</a></li>
+  <li><a href="#p-값-히스토그램" id="toc-p-값-히스토그램" class="nav-link" data-scroll-target="#p-값-히스토그램"><span class="header-section-number">8.8.1</span> 6.9.1 p-값 히스토그램</a></li>
   <li><a href="#the-benjamini-hochberg-algorithm-for-controlling-the-fdr" id="toc-the-benjamini-hochberg-algorithm-for-controlling-the-fdr" class="nav-link" data-scroll-target="#the-benjamini-hochberg-algorithm-for-controlling-the-fdr"><span class="header-section-number">8.8.2</span> 6.9.2 The Benjamini-Hochberg algorithm for controlling the FDR</a></li>
   </ul></li>
-  <li><a href="#the-local-fdr" id="toc-the-local-fdr" class="nav-link" data-scroll-target="#the-local-fdr"><span class="header-section-number">8.9</span> 6.10 The local FDR</a>
+  <li><a href="#국소-fdrlocal-fdr" id="toc-국소-fdrlocal-fdr" class="nav-link" data-scroll-target="#국소-fdrlocal-fdr"><span class="header-section-number">8.9</span> 6.10 국소 FDR(Local FDR)</a>
   <ul class="collapse">
-  <li><a href="#local-versus-total" id="toc-local-versus-total" class="nav-link" data-scroll-target="#local-versus-total"><span class="header-section-number">8.9.1</span> 6.10.1 Local versus total</a></li>
-  <li><a href="#terminology" id="toc-terminology" class="nav-link" data-scroll-target="#terminology"><span class="header-section-number">8.9.2</span> 6.10.2 Terminology</a></li>
+  <li><a href="#국소-대-전체" id="toc-국소-대-전체" class="nav-link" data-scroll-target="#국소-대-전체"><span class="header-section-number">8.9.1</span> 6.10.1 국소 대 전체</a></li>
+  <li><a href="#용어" id="toc-용어" class="nav-link" data-scroll-target="#용어"><span class="header-section-number">8.9.2</span> 6.10.2 용어</a></li>
   </ul></li>
-  <li><a href="#independent-hypothesis-weighting" id="toc-independent-hypothesis-weighting" class="nav-link" data-scroll-target="#independent-hypothesis-weighting"><span class="header-section-number">8.10</span> 6.11 Independent hypothesis weighting</a></li>
-  <li><a href="#summary-of-this-chapter" id="toc-summary-of-this-chapter" class="nav-link" data-scroll-target="#summary-of-this-chapter"><span class="header-section-number">8.11</span> 6.12 Summary of this chapter</a></li>
-  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">8.12</span> 6.13 Further reading</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">8.13</span> 6.14 Exercises</a></li>
+  <li><a href="#독립-가설-가중치-부여independent-hypothesis-weighting" id="toc-독립-가설-가중치-부여independent-hypothesis-weighting" class="nav-link" data-scroll-target="#독립-가설-가중치-부여independent-hypothesis-weighting"><span class="header-section-number">8.10</span> 6.11 독립 가설 가중치 부여(Independent hypothesis weighting)</a></li>
+  <li><a href="#이-장의-요약" id="toc-이-장의-요약" class="nav-link" data-scroll-target="#이-장의-요약"><span class="header-section-number">8.11</span> 6.12 이 장의 요약</a></li>
+  <li><a href="#더-읽을거리" id="toc-더-읽을거리" class="nav-link" data-scroll-target="#더-읽을거리"><span class="header-section-number">8.12</span> 6.13 더 읽을거리</a></li>
+  <li><a href="#연습-문제" id="toc-연습-문제" class="nav-link" data-scroll-target="#연습-문제"><span class="header-section-number">8.13</span> 6.14 연습 문제</a></li>
   </ul>
 </nav>
     </div>
@@ -297,7 +298,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">6.1 Goals for this Chapter</span></h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">6.1 이 장의 목표</span></h1>
 </div>
 
 
@@ -315,66 +316,66 @@ window.Quarto = {
 
 
 <p><a href="imgs/xkcdmulttest- newspapertitle.png"><img src="imgs/xkcdmulttest-newspapertitle.png" class="img-fluid"></a></p>
-<p>Hypothesis testing is one of the workhorses of science. It is how we can draw conclusions or make decisions based on finite samples of data. For instance, new treatments for a disease are usually approved on the basis of clinical trials that aim to decide whether the treatment has better efficacy compared to the other available options, and an acceptable trade-off of side effects. Such trials are expensive and can take a long time. Therefore, the number of patients we can enroll is limited, and we need to base our inference on a limited sample of observed patient responses. The data are noisy, since a patient’s response depends not only on the treatment, but on many other factors outside of our control. The sample size needs to be large enough to enable us to make a reliable conclusion. On the other hand, it also must not be too large, so that we do not waste precious resources or time, e.g., by making drugs more expensive than necessary, or by denying patients that would benefit from the new drug access to it. The machinery of hypothesis testing was developed largely with such applications in mind, although today it is used much more widely.</p>
-<p>In biological data analysis (and in many other fields1) we see hypothesis testing applied to screen thousands or millions of possible hypotheses to find the ones that are worth following up. For instance, researchers screen genetic variants for associations with a phenotype, or gene expression levels for associations with disease. Here, “worthwhile” is often interpreted as “statistically significant”, although the two concepts are clearly not the same. It is probably fair to say that statistical significance is a necessary condition for making a data-driven decision to find something interesting, but it’s clearly not sufficient. In any case, such large-scale association screening is closely related to multiple hypothesis testing.</p>
-<p>1 Detecting credit card fraud, email spam detection, \(…\)</p>
-<p>In this chapter we will:</p>
+<p>가설 검정(Hypothesis testing)은 과학의 핵심적인 도구 중 하나입니다. 이는 유한한 데이터 표본을 바탕으로 결론을 내리거나 결정을 내리는 방법입니다. 예를 들어, 질병에 대한 새로운 치료법은 대개 임상 시험을 바탕으로 승인됩니다. 임상 시험은 해당 치료법이 다른 가용한 선택지에 비해 더 나은 효능을 보이는지, 그리고 부작용과의 상충 관계(trade-off)가 수용 가능한지를 결정하는 것을 목표로 합니다. 이러한 시험은 비용이 많이 들고 오랜 시간이 걸릴 수 있습니다. 따라서 모집할 수 있는 환자 수는 제한적이며, 우리는 관찰된 제한된 환자 반응 표본을 바탕으로 추론을 해야 합니다. 환자의 반응은 치료뿐만 아니라 우리가 통제할 수 없는 많은 다른 요인들에 의존하기 때문에 데이터에는 노이즈가 섞여 있습니다. 신뢰할 수 있는 결론을 내리기 위해서는 표본 크기가 충분히 커야 합니다. 반면, 소중한 자원이나 시간을 낭비하지 않도록 표본 크기가 너무 커서도 안 됩니다. 예를 들어, 약값을 필요 이상으로 비싸게 만들거나 새로운 약의 혜택을 볼 수 있는 환자들에게 접근 기회를 박탈해서는 안 되기 때문입니다. 가설 검정의 메커니즘은 오늘날 훨씬 더 널리 사용되고 있긴 하지만, 주로 이러한 응용 분야를 염두에 두고 개발되었습니다.</p>
+<p>생물학적 데이터 분석(및 다른 많은 분야1)에서 가설 검정은 수천 또는 수백만 개의 가능한 가설들을 스크리닝하여 후속 연구를 진행할 가치가 있는 가설을 찾는 데 적용됩니다. 예를 들어, 연구자들은 유전적 변이와 표현형 간의 연관성이나, 유전자 발현 수준과 질병 간의 연관성을 스크리닝합니다. 여기서 “가치 있는” 것은 종종 “통계적으로 유의미한” 것으로 해석되지만, 이 두 개념이 분명히 같은 것은 아닙니다. 통계적 유의성은 흥미로운 것을 찾기 위한 데이터 기반 의사결정의 필요조건이긴 하지만, 충분조건은 아니라고 말하는 것이 타당할 것입니다. 어쨌든, 이러한 대규모 연관성 스크리닝은 다중 가설 검정(multiple hypothesis testing)과 밀접하게 관련되어 있습니다.</p>
+<p>1 신용카드 사기 탐지, 이메일 스팸 탐지, \(…\)</p>
+<p>이 장에서 우리는 다음을 수행할 것입니다:</p>
 <ul>
-<li><p>Familiarize ourselves with the statistical machinery of hypothesis testing, its vocabulary, its purpose, and its strengths and limitations.</p></li>
-<li><p>Understand what multiple testing means.</p></li>
-<li><p>See that multiple testing is not a problem – but rather, an opportunity, as it overcomes many of the limitations of single testing.</p></li>
-<li><p>Understand the false discovery rate.</p></li>
-<li><p>Learn how to make diagnostic plots.</p></li>
-<li><p>Use hypothesis weighting to increase the power of our analyses.</p></li>
+<li><p>가설 검정의 통계적 메커니즘, 용어, 목적, 그리고 강점과 한계에 익숙해집니다.</p></li>
+<li><p>다중 검정(multiple testing)이 무엇을 의미하는지 이해합니다.</p></li>
+<li><p>다중 검정이 문제가 아니라, 오히려 단일 검정의 많은 한계를 극복할 수 있게 해주는 기회임을 확인합니다.</p></li>
+<li><p>허위 발견율(false discovery rate, FDR)을 이해합니다.</p></li>
+<li><p>진단 플롯(diagnostic plots)을 만드는 방법을 배웁니다.</p></li>
+<li><p>분석의 검정력(power)을 높이기 위해 가설 가중치(hypothesis weighting)를 사용합니다.</p></li>
 </ul>
-<section id="drinking-from-the-firehose" class="level3" data-number="8.0.1">
-<h3 data-number="8.0.1" class="anchored" data-anchor-id="drinking-from-the-firehose"><span class="header-section-number">8.0.1</span> 6.1.1 Drinking from the firehose</h3>
-<p><a href="imgs/active- substance-discovery-robot-screening-robot.jpg" title="Figure 6.1: High-throughput data in modern biology are screened for associations with millions of hypothesis tests. (Source: Bayer)"><img src="imgs/active-substance-discovery-robot-screening-robot.jpg" class="img-fluid"></a></p>
-<p>Figure 6.1: High-throughput data in modern biology are screened for associations with millions of hypothesis tests. (<a href="https://www.research.bayer.com/en/automated-search-for-active-%20ingredients-with-robots.aspx">Source: Bayer</a>)</p>
-<p>If statistical testing—decision making with uncertainty—seems a hard task when making a single decision, then brace yourself: in genomics, or more generally with “big data”, we need to accomplish it not once, but thousands or millions of times. In <a href="02-chap.html">Chapter 2</a>, we saw the example of epitope detection and the challenges from considering not only one, but several positions. Similarly, in whole genome sequencing, we scan every position in the genome for evidence of a difference in the DNA sequencing data at hand and a reference sequence (or, another set of sequencing data): that’s in the order of six billion tests if we are looking at human data! In genetic or chemical compound screening, we test each of the reagents for an effect in the assay, compared to a control: that’s again tens of thousands, if not millions of tests. In <a href="08-chap.html">Chapter 8</a>, we will analyse RNA-Seq data for differential expression by applying a hypothesis test to each of the thousands of genes assayed.</p>
+<section id="쏟아지는-데이터-속에서-정보-찾기" class="level3" data-number="8.0.1">
+<h3 data-number="8.0.1" class="anchored" data-anchor-id="쏟아지는-데이터-속에서-정보-찾기"><span class="header-section-number">8.0.1</span> 6.1.1 쏟아지는 데이터 속에서 정보 찾기</h3>
+<p><a href="imgs/active- substance-discovery-robot-screening-robot.jpg" title="그림 6.1: 현대 생물학의 고처리량 데이터는 수백만 개의 가설 검정을 통해 연관성을 스크리닝합니다. (출처: 바이엘)"><img src="imgs/active-substance-discovery-robot-screening-robot.jpg" class="img-fluid"></a></p>
+<p>그림 6.1: 현대 생물학의 고처리량 데이터는 수백만 개의 가설 검정을 통해 연관성을 스크리닝합니다. (<a href="https://www.research.bayer.com/en/automated-search-for-active-ingredients-with-robots.aspx">출처: 바이엘</a>)</p>
+<p>만약 통계적 검정(불확실성을 동반한 의사결정)이 단 한 번의 결정을 내릴 때도 어려운 과제처럼 느껴진다면, 마음을 단단히 먹으십시오: 유전체학이나 더 일반적으로 “빅데이터” 분야에서는 이를 한 번이 아니라 수천 번 또는 수백만 번 수행해야 합니다. <a href="02-chap.html">2장</a>에서 우리는 에피토프 검출의 예와 단 한 곳이 아닌 여러 위치를 고려할 때의 어려움을 보았습니다. 유사하게, 전유전체 시퀀싱(whole genome sequencing)에서는 손에 든 DNA 시퀀싱 데이터와 참조 서열(또는 다른 시퀀싱 데이터 세트) 간의 차이에 대한 증거를 찾기 위해 게놈의 모든 위치를 스캔합니다. 인간 데이터를 보고 있다면 이는 약 60억 번의 검정에 해당합니다! 유전자 또는 화학 화합물 스크리닝에서는 대조군과 비교하여 각 시약이 어세이(assay)에서 효과를 나타내는지 테스트하는데, 이 역시 수만 번에서 수백만 번의 검정이 이루어집니다. <a href="08-chap.html">8장</a>에서 우리는 측정된 수천 개의 유전자 각각에 대해 가설 검정을 적용하여 RNA-Seq 데이터의 차등 발현을 분석할 것입니다.</p>
 </section>
-<section id="testing-versus-classification" class="level3" data-number="8.0.2">
-<h3 data-number="8.0.2" class="anchored" data-anchor-id="testing-versus-classification"><span class="header-section-number">8.0.2</span> 6.1.2 Testing versus classification</h3>
-<p>Suppose we measured the abundance level of a marker molecule to decide whether some cells we are studying are in cell state A or B. First, let’s consider that we have no prior assumption, and that we just want to use the data to make a more or less symmetric choice between the two outcomes. This is a <em>classification</em> task. We’ll cover classification in <a href="12-chap.html">Chapter 12</a>. In this chapter, we consider the asymmetric case: based on what we already know (we could call this our <em>prior</em> knowledge), cell state A is predominant, the “default”. We’ll only call B if there is strong enough evidence for it. Maybe B is rare, unusual, interesting, and if we find it, we are going to commit resources to study it further. Whereas A is uninteresting and demands no futher follow-up. In such cases, the machinery of hypothesis testing is for us.</p>
-<p>Formally, there are many similarities between hypothesis testing and classification. In both cases, we aim to use data to choose between several possible decisions. The distinction can be a fuzzy, and it is even possible to think of hypothesis testing as a special case of classification. However, these two approaches are geared towards different objectives and underlying assumptions. When you encounter a statistical decision problem, it can be useful to check which approach is more appropriate.</p>
+<section id="검정-대-분류" class="level3" data-number="8.0.2">
+<h3 data-number="8.0.2" class="anchored" data-anchor-id="검정-대-분류"><span class="header-section-number">8.0.2</span> 6.1.2 검정 대 분류</h3>
+<p>우리가 연구하고 있는 세포가 상태 A에 있는지 B에 있는지 결정하기 위해 마커 분자의 농도를 측정했다고 가정해 봅시다. 먼저, 사전 가정이 없으며 데이터를 사용하여 두 결과 중 하나를 다소 대칭적으로 선택하고 싶다고 가정해 보겠습니다. 이것은 <em>분류(classification)</em> 작업입니다. 분류에 대해서는 <a href="12-chap.html">12장</a>에서 다룰 것입니다. 이 장에서는 비대칭적인 경우를 고려합니다: 우리가 이미 알고 있는 것(<em>사전</em> 지식)에 기초하여 세포 상태 A가 지배적이며 “기본(default)” 상태입니다. 충분히 강력한 증거가 있을 때만 B라고 판정할 것입니다. 아마도 B는 드물고, 특이하며, 흥미로운 것이어서 이를 발견하면 더 연구하기 위해 자원을 투입할 것입니다. 반면 A는 흥미롭지 않으며 추가 후속 조치가 필요하지 않습니다. 이러한 경우에 가설 검정의 메커니즘이 우리에게 필요합니다.</p>
+<p>형식적으로 가설 검정과 분류 사이에는 많은 유사점이 있습니다. 두 경우 모두 데이터를 사용하여 여러 가능한 결정 중 하나를 선택하는 것을 목표로 합니다. 그 구분이 모호할 수 있으며, 가설 검정을 분류의 특수한 사례로 생각하는 것도 가능합니다. 그러나 이 두 접근 방식은 서로 다른 목적과 기저의 가정을 지향합니다. 통계적 의사결정 문제에 직면했을 때 어떤 접근 방식이 더 적절한지 확인하는 것이 유용할 수 있습니다.</p>
 </section>
-<section id="false-discovery-rate-or-p-value" class="level3" data-number="8.0.3">
-<h3 data-number="8.0.3" class="anchored" data-anchor-id="false-discovery-rate-or-p-value"><span class="header-section-number">8.0.3</span> 6.1.3 False discovery rate or p-value?</h3>
-<p><a href="06-chap_files/figure-html/fig-testing- FDRvspstatic1-1.png" title="Figure 6.2: Making a binary (yes/no) decision. Here, we call the two possible decisions “positive” and “negative” based on some continuous-valued score x, shown along the x-axis. The curve shaded in blue shows the distribution density of x for one of the classes (the negatives), the curve shaded in red, for the other class (the positives). The distributions are distinctive (the red values are generally lower), but have some overlap. The vertical black bar marks some choice of a decision boundary, which results in four possible outcomes highlighted by the color key."><img src="06-chap_files/figure-html/fig-testing- FDRvspstatic1-1.png" class="img-fluid"></a></p>
-<p>Figure 6.2: Making a binary (yes/no) decision. Here, we call the two possible decisions “positive” and “negative” based on some continuous-valued score \(x\), shown along the \(x\)-axis. The curve shaded in blue shows the distribution density of \(x\) for one of the classes (the negatives), the curve shaded in red, for the other class (the positives). The distributions are distinctive (the red values are generally lower), but have some overlap. The vertical black bar marks some choice of a decision boundary, which results in four possible outcomes highlighted by the color key.</p>
-<p><a href="06-chap_files/figure-html/fig-testing- FDRvspstatic2-1.png" title="Figure 6.3: Analogous to Figure fig-testing- FDRvspstatic1, but now we have transformed x from its original range to the range [0,1] using a non-linear, strictly increasing transformation function p=f(x), which we chose such that the resulting blue distribution is uniform. Such a function always exists: it is the cumulative distribution function of x (we have seen it in sec-graphics-ecdf). We call the result a p-value. The definition of the FDR in Equation eq-testing-simplefdr applies equally well in Figure fig-testing-FDRvspstatic1 and here."><img src="06-chap_files/figure-html/fig-testing- FDRvspstatic2-1.png" class="img-fluid"></a></p>
-<p>Figure 6.3: Analogous to Figure 6.2, but now we have transformed \(x\) from its original range to the range \([0,1]\) using a non-linear, strictly increasing transformation function \(p=f(x)\), which we chose such that the resulting blue distribution is uniform. Such a function always exists: it is the cumulative distribution function of \(x\) (we have seen it in <a href="03-chap.html#sec-graphics-ecdf">Section 3.6.7</a>). We call the result a <strong>p-value</strong>. The definition of the FDR in Equation 6.2 applies equally well in Figure 6.2 and here.</p>
-<p><a href="06-chap_files/figure-html/fig-testing-FDRvspanim-1.gif &quot;Figure 6.4: The animation highlights the analogies between using a generic score x (as in Figure fig-testing-FDRvspstatic1) and a p-value from a formal hypothesis test (as in Figure fig-testing-FDRvspstatic2) for decision making. We will come back to these concepts in terms of the two-group model in sec-testing-localfdr and Figure fig-testing-lfdr.&quot;"><img src="06-chap_files/figure-html/fig-testing- FDRvspanim-1.gif" class="img-fluid"></a></p>
-<p>Figure 6.4: The animation highlights the analogies between using a generic score \(x\) (as in Figure 6.2) and a p-value from a formal hypothesis test (as in Figure 6.3) for decision making. We will come back to these concepts in terms of the two-group model in Section 6.10 and Figure 6.17.</p>
-<p>Hypothesis testing has traditionally been taught with p-values first, introducing them as the primal, basic concept. Multiple testing and false discovery rates were then presented as derived, additional ideas. There are good mathematical and practical reasons for doing so, and the rest of this chapter follows this tradition. However, in this prefacing section we would like to point out that the false discovery rate is in fact the more intuitive concept, and that it also tends to be more useful in practice. A p-value is something more abstract, and it is often not quite clear what to do with it, and thus keeps confusing those who want to use it for decision making. So here is an attempt to be more pedagogical, revert the order, and learn about false discovery rates first. We can then think of p-values as something second-best, which we have to resort to if the false discovery rate is not accessible.</p>
-<p>Consider Figure 6.2, which represents a binary decision problem. Let’s say we call a <em>discovery</em> whenever the summary statistic \(x\) is particularly small, i.e., when it falls to the left of the vertical black bar2. Then the <em>false discovery rate</em> 3 (FDR) is simply the fraction of false discoveries among all discoveries, i.e.:</p>
-<p>2 This is “without loss of generality”: we could also flip the \(x\)-axis and call something with a high score a discovery.</p>
-<p>3 This is a rather informal definition. For more precise definitions, see for instance (<a href="16-chap.html#ref-Storey:AnnStat:2003">Storey 2003</a>; <a href="16-chap.html#ref-Efron2010">Efron 2010</a>) and Section 6.10.</p>
+<section id="허위-발견율인가-p-값인가" class="level3" data-number="8.0.3">
+<h3 data-number="8.0.3" class="anchored" data-anchor-id="허위-발견율인가-p-값인가"><span class="header-section-number">8.0.3</span> 6.1.3 허위 발견율인가, p-값인가?</h3>
+<p><a href="06-chap_files/figure-html/fig-testing- FDRvspstatic1-1.png" title="그림 6.2: 이진(예/아니오) 결정 내리기. 여기서는 x축을 따라 표시된 어떤 연속형 점수 x를 바탕으로 두 가지 가능한 결정을 &quot;양성(positive)&quot;과 &quot;음성(negative)&quot;으로 부릅니다. 파란색으로 음영 처리된 곡선은 클래스 중 하나(음성)에 대한 x의 분포 밀도를 보여주고, 빨간색으로 음영 처리된 곡선은 다른 클래스(양성)에 대한 것을 보여줍니다. 두 분포는 뚜렷이 구분되지만(빨간색 값들이 일반적으로 더 낮음), 일부 중첩되는 영역이 있습니다. 검은색 수직 막대는 결정 경계의 선택을 나타내며, 이는 색상 키로 강조된 네 가지 가능한 결과를 가져옵니다."><img src="06-chap_files/figure-html/fig-testing- FDRvspstatic1-1.png" class="img-fluid"></a></p>
+<p>그림 6.2: 이진(예/아니오) 결정 내리기. 여기서는 (x)축을 따라 표시된 어떤 연속형 점수 \(x\)를 바탕으로 두 가지 가능한 결정을 “양성(positive)”과 “음성(negative)”으로 부릅니다. 파란색으로 음영 처리된 곡선은 클래스 중 하나(음성)에 대한 \(x\)의 분포 밀도를 보여주고, 빨간색으로 음영 처리된 곡선은 다른 클래스(양성)에 대한 것을 보여줍니다. 두 분포는 뚜렷이 구분되지만(빨간색 값들이 일반적으로 더 낮음), 일부 중첩되는 영역이 있습니다. 검은색 수직 막대는 결정 경계의 선택을 나타내며, 이는 색상 키로 강조된 네 가지 가능한 결과를 가져옵니다.</p>
+<p><a href="06-chap_files/figure-html/fig-testing- FDRvspstatic2-1.png" title="그림 6.3: 그림 6.2와 유사하지만, 이제 결과로 나오는 파란색 분포가 균등 분포(uniform distribution)가 되도록 비선형적이고 엄격하게 증가하는 변환 함수 p=f(x)를 사용하여 x를 원래 범위에서 [0,1] 범위로 변환했습니다. 그러한 함수는 항상 존재합니다: 그것은 x의 누적 분포 함수입니다(이는 3.6.7절에서 보았습니다). 우리는 그 결과를 p-값(p-value)이라고 부릅니다. 식 6.2의 FDR 정의는 그림 6.2와 여기 모두에 동일하게 적용됩니다."><img src="06-chap_files/figure-html/fig-testing- FDRvspstatic2-1.png" class="img-fluid"></a></p>
+<p>그림 6.3: 그림 6.2와 유사하지만, 이제 결과로 나오는 파란색 분포가 균등 분포(uniform distribution)가 되도록 비선형적이고 엄격하게 증가하는 변환 함수 \(p=f(x)\)를 사용하여 \(x\)를 원래 범위에서 \([0,1]\) 범위로 변환했습니다. 그러한 함수는 항상 존재합니다: 그것은 \(x\)의 누적 분포 함수입니다(이는 <a href="03-chap.html#sec-graphics-ecdf">3.6.7절</a>에서 보았습니다). 우리는 그 결과를 <strong>p-값(p-value)</strong>이라고 부릅니다. 식 6.2의 FDR 정의는 그림 6.2와 여기 모두에 동일하게 적용됩니다.</p>
+<p><a href="06-chap_files/figure-html/fig-testing-FDRvspanim-1.gif &quot;그림 6.4: 이 애니메이션은 의사 결정을 위해 (그림 6.2에서처럼) 일반적인 점수 x를 사용하는 것과 (그림 6.3에서처럼) 공식적인 가설 검정에서 얻은 p-값을 사용하는 것 사이의 유사성을 강조합니다. 우리는 6.10절과 그림 6.17에서 두 그룹 모델(two-group model)의 관점에서 이러한 개념들로 다시 돌아올 것입니다.&quot;"><img src="06-chap_files/figure-html/fig-testing- FDRvspanim-1.gif" class="img-fluid"></a></p>
+<p>그림 6.4: 이 애니메이션은 의사 결정을 위해 (그림 6.2에서처럼) 일반적인 점수 \(x\)를 사용하는 것과 (그림 6.3에서처럼) 공식적인 가설 검정에서 얻은 p-값을 사용하는 것 사이의 유사성을 강조합니다. 우리는 6.10절과 그림 6.17에서 두 그룹 모델(two-group model)의 관점에서 이러한 개념들로 다시 돌아올 것입니다.</p>
+<p>가설 검정은 전통적으로 p-값을 가장 먼저 가르쳐왔으며, 이를 근원적이고 기본적인 개념으로 소개해 왔습니다. 다중 검정과 허위 발견율은 그 후에 파생된 추가적인 아이디어로 제시되었습니다. 그렇게 하는 데에는 수학적, 실무적으로 타당한 이유가 있으며, 이 장의 나머지 부분도 이러한 전통을 따릅니다. 그러나 이 서론 섹션에서 우리는 허위 발견율이 사실 더 직관적인 개념이며, 실무에서도 더 유용한 경향이 있다는 점을 지적하고 싶습니다. p-값은 좀 더 추상적인 것이며, 종종 그것을 가지고 무엇을 해야 할지 명확하지 않아서 의사결정에 p-값을 사용하려는 사람들을 계속 혼란스럽게 합니다. 그래서 여기서는 교육적인 관점에서 순서를 뒤집어 허위 발견율에 대해 먼저 배워보고자 합니다. 그러면 p-값은 허위 발견율에 접근할 수 없을 때 의지해야 하는 차선책(second-best) 정도로 생각할 수 있습니다.</p>
+<p>이진 결정 문제를 나타내는 그림 6.2를 고려해 봅시다. 요약 통계량 \(x\)가 특히 작을 때, 즉 수직 검은색 막대의 왼쪽에 떨어질 때마다 이를 _발견(discovery)_이라고 부른다고 합시다2. 그러면 _허위 발견율_3(FDR)은 단순히 모든 발견 중 잘못된 발견의 비율입니다. 즉:</p>
+<p>2 이는 “일반성을 잃지 않고” 하는 말입니다: (x)축을 뒤집어서 높은 점수를 가진 것을 발견이라고 부를 수도 있습니다.</p>
+<p>3 이는 다소 비공식적인 정의입니다. 더 정확한 정의는 예를 들어 (<a href="16-chap.html#ref-Storey:AnnStat:2003">Storey 2003</a>; <a href="16-chap.html#ref-Efron2010">Efron 2010</a>) 및 6.10절을 참조하십시오.</p>
 <p>\[ =. \]</p>
-<p>The FDR depends not only on the position of the decision threshold (the vertical bar), but also on the shape and location of the two distributions, and on their relative sizes. In Figures 6.2 and 6.3, the overall blue area is twice as big as the overall red area, reflecting the fact that the blue class is (in this example) twice as prevalent (or: a priori, twice as likely) as the red class.</p>
-<p>Note that this definition does not require the concept or even the calculation of a p-value. It works for any arbitrarily defined score \(x\). However, it requires knowledge of three things:</p>
+<p>FDR은 결정 임계값(수직 막대)의 위치뿐만 아니라 두 분포의 형태와 위치, 그리고 그들의 상대적인 크기에도 의존합니다. 그림 6.2와 6.3에서 전체 파란색 영역은 전체 빨간색 영역보다 두 배 더 큰데, 이는 (이 예제에서) 파란색 클래스가 빨간색 클래스보다 두 배 더 흔하다(또는 사전적으로 두 배 더 가능성이 높다)는 사실을 반영합니다.</p>
+<p>이 정의에는 p-값의 개념이나 계산이 필요하지 않다는 점에 주목하세요. 이는 임의로 정의된 어떤 점수 \(x\)에 대해서도 작동합니다. 그러나 다음 세 가지에 대한 지식이 필요합니다:</p>
 <ol type="1">
-<li><p>the distribution of \(x\) in the blue class (the blue curve),</p></li>
-<li><p>the distribution of \(x\) in the red class (the red curve),</p></li>
-<li><p>the relative sizes of the blue and the red classes.</p></li>
+<li><p>파란색 클래스에서의 \(x\)의 분포(파란색 곡선),</p></li>
+<li><p>빨간색 클래스에서의 \(x\)의 분포(빨간색 곡선),</p></li>
+<li><p>파란색 클래스와 빨간색 클래스의 상대적 크기.</p></li>
 </ol>
-<p>If we know these, then we are basically done at this point; or we can move on to supervised classification in <a href="12-chap.html">Chapter 12</a>, which deals with the extension of Figure 6.2 to multivariate \(x\).</p>
-<p>Very often, however, we do not know all of these, and this is the realm of hypothesis testing. In particular, suppose that one of the two classes (say, the blue one) is easier than the other, and we can figure out its distribution, either from first principles or simulations. We use that fact to transform our score \(x\) to a standardized range between 0 and 1 (see Figures 6.2—6.4), which we call the <em>p-value</em>. We give the class a fancier name: <em>null hypothesis</em>. This addresses Point 1 in the above list. We do not insist on knowing Point 2 (and we give another fancy name, <em>alternative hypothesis</em> , to the red class). As for Point 3, we can use the conservative upper limit that the null hypothesis is far more prevalent (or: likely) than the alternative and do our calculations under the condition that the null hypothesis is true. This is the traditional approach to hypothesis testing.</p>
-<p>Thus, instead of basing our decision-making on the intuitive FDR (Equation 6.2), we base it on the</p>
+<p>만약 이들을 안다면, 기본적으로 이 시점에서 작업은 끝난 것입니다. 또는 그림 6.2를 다변량 \(x\)로 확장하는 문제를 다루는 <a href="12-chap.html">12장</a>의 비지도 분류로 넘어갈 수 있습니다.</p>
+<p>하지만 매우 자주 우리는 이 모든 것을 알지 못하며, 이것이 바로 가설 검정의 영역입니다. 특히, 두 클래스 중 하나(예를 들어 파란색 클래스)가 다른 클래스보다 더 쉽고, 제1원리나 시뮬레이션을 통해 그 분포를 알아낼 수 있다고 가정해 봅시다. 우리는 그 사실을 사용하여 점수 \(x\)를 0과 1 사이의 표준화된 범위(그림 6.2—6.4 참조)로 변환하는데, 이를 _p-값_이라고 부릅니다. 그리고 그 클래스에 _귀무 가설(null hypothesis)_이라는 멋진 이름을 붙입니다. 이것이 위의 목록에서 1번을 해결합니다. 우리는 2번을 아는 데 집착하지 않으며(그리고 빨간색 클래스에 _대립 가설(alternative hypothesis)_이라는 또 다른 멋진 이름을 붙입니다), 3번에 대해서는 귀무 가설이 대립 가설보다 훨씬 더 흔하다(또는 가능성이 높다)는 보수적인 상한선을 사용하고 귀무 가설이 참이라는 조건 하에서 계산을 수행할 수 있습니다. 이것이 가설 검정에 대한 전통적인 접근 방식입니다.</p>
+<p>따라서 직관적인 FDR(식 6.2)에 기초하여 의사결정을 내리는 대신, 우리는 다음 수치에 기초합니다.</p>
 <p>\[ =. \]</p>
-<p>In other words, the p-value is the precise and often relatively easy-to- compute answer to a rather convoluted question (and perhaps the wrong question). The FDR answers the right question, but requires a lot more input, which we often do not have.</p>
+<p>다시 말해, p-값은 다소 복잡한 질문(그리고 어쩌면 잘못된 질문)에 대한 정확하고 종종 상대적으로 계산하기 쉬운 답입니다. FDR은 올바른 질문에 답하지만, 우리가 종종 가지고 있지 않은 훨씬 더 많은 입력을 필요로 합니다.</p>
 </section>
-<section id="the-multiple-testing-opportunity" class="level3" data-number="8.0.4">
-<h3 data-number="8.0.4" class="anchored" data-anchor-id="the-multiple-testing-opportunity"><span class="header-section-number">8.0.4</span> 6.1.4 The multiple testing opportunity</h3>
-<p>Here is the good news about multiple testing: even if we do not know Items 2 and 3 from the bullet list above explicitly for our tests (and perhaps even if we are unsure about Point 1 (<a href="16-chap.html#ref-Efron2010">Efron 2010</a>)), we may be able to infer this information from the multiplicity—and thus convert p-values into estimates of the FDR!</p>
-<p>Thus, multiple testing tends to make our inference better, and our task simpler. Since we have so much data, we do not only have to rely on abstract assumptions. We can check empirically whether the requirements of the tests are actually met by the data. All this can be incredibly helpful, and we get it <em>because</em> of the multiplicity. So we should think about multiple testing not as a “problem” or a “burden”, but as an opportunity!</p>
+<section id="다중-검정의-기회" class="level3" data-number="8.0.4">
+<h3 data-number="8.0.4" class="anchored" data-anchor-id="다중-검정의-기회"><span class="header-section-number">8.0.4</span> 6.1.4 다중 검정의 기회</h3>
+<p>다중 검정에 대한 좋은 소식이 있습니다: 비록 우리가 위 목록의 2번과 3번 항목을 개별 검정에 대해 명시적으로 알지 못하더라도(그리고 어쩌면 1번에 대해서조차 확신이 없더라도 (<a href="16-chap.html#ref-Efron2010">Efron 2010</a>)), 우리는 다중성(multiplicity)으로부터 이 정보를 추론할 수 있고, 따라서 p-값을 FDR 추정치로 변환할 수 있을지 모릅니다!</p>
+<p>따라서 다중 검정은 우리의 추론을 더 좋게 만들고 우리의 과업을 더 단순하게 만드는 경향이 있습니다. 데이터가 아주 많기 때문에 우리는 추상적인 가정에만 의존할 필요가 없습니다. 검정의 요구 사항이 실제로 데이터에 의해 충족되는지 경험적으로 확인할 수 있습니다. 이 모든 것이 믿을 수 없을 정도로 도움이 될 수 있으며, 우리는 이를 다중성 <em>덕분에</em> 얻게 됩니다. 그러므로 우리는 다중 검정을 “문제”나 “부담”이 아니라 기회로 생각해야 합니다!</p>
 </section>
-<section id="an-example-coin-tossing" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="an-example-coin-tossing"><span class="header-section-number">8.1</span> 6.2 An example: coin tossing</h2>
-<p>So now let’s dive into hypothesis testing, starting with single testing. To really understand the mechanics, we use one of the simplest possible examples: suppose we are flipping a coin to see if it is fair4. We flip the coin 100 times and each time record whether it came up heads or tails. So, we have a record that could look something like this:</p>
-<p>4 We don’t look at coin tossing because it’s inherently important, but because it is an easy “model system” (just as we use model systems in biology): everything can be calculated easily, and you do not need a lot of domain knowledge to understand what coin tossing is. All the important concepts come up, and we can apply them, only with more additional details, to other applications.</p>
+<section id="예시-동전-던지기" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="예시-동전-던지기"><span class="header-section-number">8.1</span> 6.2 예시: 동전 던지기</h2>
+<p>이제 단일 검정부터 시작하여 가설 검정에 대해 깊이 파고들어 봅시다. 메커니즘을 제대로 이해하기 위해 가장 간단한 예제 중 하나를 사용합니다: 어떤 동전이 공정한지4 확인하기 위해 동전을 던진다고 가정해 봅시다. 동전을 100번 던지고 매번 앞면이 나왔는지 뒷면이 나왔는지 기록합니다. 그러면 다음과 같은 기록을 갖게 될 것입니다:</p>
+<p>4 동전 던지기가 본질적으로 중요해서가 아니라, (생물학에서 모델 시스템을 사용하는 것처럼) 쉬운 “모델 시스템”이기 때문에 살펴보는 것입니다: 모든 것을 쉽게 계산할 수 있고, 동전 던지기가 무엇인지 이해하는 데 많은 도메인 지식이 필요하지 않습니다. 모든 중요한 개념들이 등장하며, 우리는 이를 더 많은 추가 세부 사항과 함께 다른 응용 분야에 적용할 수 있습니다.</p>
 <p>HHTTHTHTT…</p>
-<p>which we can simulate in R. Let’s assume we are flipping a biased coin, so we set <code>probHead</code> different from 1/2:</p>
+<p>이를 R에서 시뮬레이션할 수 있습니다. 편향된 동전을 던진다고 가정하고, <code>probHead</code>를 1/2이 아닌 값으로 설정해 보겠습니다:</p>
 <pre><code>set.seed(0xdada)
 numFlips = 100
 probHead = 0.6
@@ -384,15 +385,15 @@ head(coinFlips)__
 
 
 [1] "T" "T" "H" "T" "H" "H"</code></pre>
-<p>Now, if the coin were fair, we would expect half of the time to get heads. Let’s see.</p>
+<p>이제 동전이 공정하다면 앞면이 절반 정도 나올 것으로 기대할 것입니다. 확인해 봅시다.</p>
 <pre><code>table(coinFlips)__
 
 
 coinFlips
  H  T 
 59 41 </code></pre>
-<p>So that is different from 50/50. Suppose we showed the data to a friend without telling them whether the coin is fair, and their prior assumption, i.e., their null hypothesis, is that coins are, by and large, fair. Would the data be strong enough to make them conclude that this coin isn’t fair? They know that random sampling differences are to be expected. To decide, let’s look at the sampling distribution of our test statistic – the total number of heads seen in 100 coin tosses – for a fair coin5. As we saw in <a href="01-chap.html">Chapter 1</a>, the number, \(k\), of heads, in \(n\) independent tosses of a coin is</p>
-<p>5 We haven’t really defined what we mean be fair – a reasonable definition would be that head and tail are equally likely, and that the outcome of each coin toss does not depend on the previous ones. For more complex applications, nailing down the most suitable null hypothesis can take some thought.</p>
+<p>결과가 50/50과는 다릅니다. 친구에게 동전이 공정한지 알려주지 않고 이 데이터를 보여주었다고 가정해 봅시다. 그 친구의 사전 가정, 즉 귀무 가설은 동전이 대체로 공정하다는 것입니다. 이 데이터가 동전이 공정하지 않다고 결론 내리기에 충분히 강력할까요? 친구는 무작위 표집에 따른 차이가 발생할 수 있다는 것을 알고 있습니다. 이를 결정하기 위해 공정한 동전에 대한5 우리의 검정 통계량(100번의 동전 던지기에서 나타난 앞면의 총 횟수)의 표집 분포를 살펴봅시다. <a href="01-chap.html">1장</a>에서 보았듯이, 동전을 독립적으로 \(n\)번 던졌을 때 앞면의 횟수 \(k\)는 다음과 같습니다.</p>
+<p>5 공정하다는 것이 무엇을 의미하는지 아직 제대로 정의하지 않았습니다 – 앞면과 뒷면이 나올 확률이 같고, 각 동전 던지기의 결과가 이전 결과에 의존하지 않는다는 것이 합리적인 정의일 것입니다. 더 복잡한 응용 분야의 경우,… nailing down the most suitable null hypothesis can take some thought.</p>
 <p>\[ P(K=k,|,n, p) = (]</p>
 <p>where \(p\) is the probability of heads (0.5 if we assume a fair coin). We read the left hand side of the above equation as “the probability that the observed value for \(K\) is \(k\), given the values of \(n\) and \(p\)”. Statisticians like to make a difference between all the possible values of a statistic and the one that was observed6, and we use the upper case \(K\) for the possible values (so \(K\) can be anything between 0 and 100), and the lower case \(k\) for the observed value.</p>
 <p>6 In other words, \(K\) is the abstract random variable in our probabilistic model, whereas \(k\) is its realization, that is, a specific data point.</p>
@@ -470,95 +471,90 @@ sample estimates:
 probability of success 
                   0.59 </code></pre>
 </section>
-<section id="the-five-steps-of-hypothesis-testing" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="the-five-steps-of-hypothesis-testing"><span class="header-section-number">8.2</span> 6.3 The five steps of hypothesis testing</h2>
-<p>Let’s summarise the general principles of hypothesis testing:</p>
+<section id="가설-검정의-5단계" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="가설-검정의-5단계"><span class="header-section-number">8.2</span> 6.3 가설 검정의 5단계</h2>
+<p>가설 검정의 일반적인 원칙을 요약해 보겠습니다:</p>
 <ol type="1">
-<li><p>Decide on the effect that you are interested in, design a suitable experiment or study, pick a data summary function and <strong>test statistic</strong>.</p></li>
-<li><p>Set up a <strong>null hypothesis</strong> , which is a simple, computationally tractable model of reality that lets you compute the <strong>null distribution</strong> , i.e., the possible outcomes of the test statistic and their probabilities under the assumption that the null hypothesis is true.</p></li>
-<li><p>Decide on the <strong>rejection region</strong> , i.e., a subset of possible outcomes whose total probability is small8.</p></li>
-<li><p>Do the experiment and collect the data9; compute the test statistic.</p></li>
-<li><p>Make a decision: reject the null hypothesis10 if the test statistic is in the rejection region.</p></li>
+<li><p>관심 있는 효과를 결정하고, 적절한 실험이나 연구를 설계하며, 데이터 요약 함수와 <strong>검정 통계량(test statistic)</strong>을 선택합니다.</p></li>
+<li><p><strong>귀무 가설(null hypothesis)</strong>을 설정합니다. 이는 귀무 가설이 참이라는 가정하에 검정 통계량의 가능한 결과와 그 확률인 <strong>귀무 분포(null distribution)</strong>를 계산할 수 있게 해주는, 단순하고 계산 가능한 현실 모델입니다.</p></li>
+<li><p><strong>기각역(rejection region)</strong>을 결정합니다. 즉, 전체 확률이 매우 작은8 가능한 결과들의 하위 집합을 선택합니다.</p></li>
+<li><p>실험을 수행하고 데이터를 수집합니다9. 검정 통계량을 계산합니다.</p></li>
+<li><p>결정을 내립니다: 검정 통계량이 기각역에 있으면 귀무 가설을 기각합니다10.</p></li>
 </ol>
-<p>8 More on this in Section 6.3.1.</p>
-<p>9 Or if someone else has already done it, download their data.</p>
-<p>10 That is, conclude that it is unlikely to be true.</p>
-<p>Note how in this idealized workflow, we make all the important decisions in Steps 1–3 before we have even seen the data. As we already alluded to in the Introduction (Figures <a href="00-chap.html#fig-Fisher">1</a> and <a href="00-chap.html#fig- iterative">2</a>), this is often not realistic. We will also come back to this question in Section 6.6.</p>
-<p>There was also idealization in our null hypothesis that we used in the example above: we postulated that a fair coin should have a probability of exactly 0.5 (not, say, 0.500001) and that there should be absolutely no dependence between tosses. We did not worry about any possible effects of air drag, elasticity of the material on which the coin falls, and so on. This gave us the advantage that the null hypothesis was computationally tractable, namely, with the binomial distribution. Here, these idealizations may not seem very controversial, but in other situations the trade-off between how tractable and how realistic a null hypothesis is can be more substantial. The problem is that if a null hypothesis is too idealized to start with, rejecting it is not all that interesting. The result may be misleading, and certainly we are wasting our time.</p>
-<p>The test statistic in our example was the total number of heads. Suppose we observed 50 tails in a row, and then 50 heads in a row. Our test statistic ignores the order of the outcomes, and we would conclude that this is a perfectly fair coin. However, if we used a different test statistic, say, the number of times we see two tails in a row, we might notice that there is something funny about this coin.</p>
+<p>8 이에 대한 자세한 내용은 6.3.1절을 참조하십시오.</p>
+<p>9 또는 다른 누군가가 이미 수행했다면 그들의 데이터를 다운로드하십시오.</p>
+<p>10 즉, 그것이 참일 가능성이 낮다고 결론 내립니다.</p>
+<p>이 이상적인 워크플로에서 우리는 데이터를 보기 전인 1~3단계에서 모든 중요한 결정을 내린다는 점에 주목하십시오. 서론(그림 <a href="00-chap.html#fig-Fisher">1</a> 및 <a href="00-chap.html#fig-iterative">2</a>)에서 이미 언급했듯이, 이는 종종 현실적이지 않습니다. 우리는 6.6절에서 이 문제로 다시 돌아올 것입니다.</p>
+<p>위의 예에서 사용한 귀무 가설에도 이상화가 있었습니다: 우리는 공정한 동전이 정확히 0.5의 확률을 가져야 하며(예를 들어 0.500001이 아니라), 던지기 사이에 절대적으로 의존성이 없어야 한다고 가정했습니다. 공기 저항, 동전이 떨어지는 재료의 탄성 등 발생 가능한 효과에 대해서는 걱정하지 않았습니다. 이는 귀무 가설이 이항 분포를 통해 계산 가능하다는 이점을 주었습니다. 여기서 이러한 이상화는 그리 논란의 여지가 없어 보일 수 있지만, 다른 상황에서는 귀무 가설이 얼마나 다루기 쉬운가와 얼마나 현실적인가 사이의 상충 관계(trade-off)가 더 클 수 있습니다. 문제는 귀무 가설이 처음부터 너무 이상화되어 있다면, 그것을 기각하는 것이 그리 흥미롭지 않다는 것입니다. 결과가 오도될 수 있으며, 확실히 우리는 시간을 낭비하고 있는 것입니다.</p>
+<p>우리 예에서의 검정 통계량은 앞면의 총 횟수였습니다. 만약 우리가 뒷면이 연속으로 50번 나오고, 그 다음 앞면이 연속으로 50번 나오는 것을 관찰했다고 가정해 봅시다. 우리의 검정 통계량은 결과의 순서를 무시하므로, 우리는 이것이 완벽하게 공정한 동전이라고 결론 내릴 것입니다. 그러나 만약 우리가 뒷면이 두 번 연속으로 나오는 횟수와 같은 다른 검정 통계량을 사용했다면, 이 동전에 뭔가 이상한 점이 있다는 것을 알아챘을지도 모릅니다.</p>
 <p>__</p>
-<p>Question 6.5</p>
-<p>What is the null distribution of this different test statistic?</p>
+<p>질문 6.5</p>
+<p>이 다른 검정 통계량의 귀무 분포는 무엇일까요?</p>
 <p>__</p>
-<p>Question 6.6</p>
-<p>Would a test based on that statistic be generally preferable?</p>
+<p>질문 6.6</p>
+<p>그 통계량에 기반한 검정이 일반적으로 더 선호될까요?</p>
 <p>__</p>
-<p>Solution</p>
+<p>해결책</p>
 <p>__</p>
-<p>No, while it has more power to detect such correlations between coin tosses, it has <em>less</em> power to detect bias in the outcome.</p>
-<p>What we have just done is look at two different classes of <strong>alternative hypotheses</strong>. The first class of alternatives was that subsequent coin tosses are still independent of each other, but that the probability of heads differed from 0.5. The second one was that the overall probability of heads may still be 0.5, but that subsequent coin tosses were correlated.</p>
+<p>아니요, 동전 던지기 사이의 그러한 상관관계를 감지하는 데는 더 큰 검정력을 갖지만, 결과의 편향(bias)을 감지하는 데는 검정력이 더 <em>낮습니다</em>.</p>
+<p>우리가 방금 한 일은 두 가지 서로 다른 종류의 <strong>대립 가설(alternative hypotheses)</strong>을 살펴본 것입니다. 첫 번째 종류의 대립 가설은 연속적인 동전 던지기가 여전히 서로 독립적이지만 앞면의 확률이 0.5가 아니라는 것이었습니다. 두 번째는 앞면의 전체 확률은 여전히 0.5일 수 있지만 연속적인 동전 던지기가 상관관계가 있다는 것이었습니다.</p>
 <p>__</p>
-<p>Question 6.7</p>
-<p>Recall the concept of sufficient statistics from <a href="01-chap.html">Chapter 1</a>. Is the total number of heads a sufficient statistic for the binomial distribution? Why might it be a good test statistic for our first class of alternatives, but not for the second?</p>
-<p>So let’s remember that we typically have multiple possible choices of test statistic (in principle it could be any numerical summary of the data). Making the right choice is important for getting a test with good power11. What the right choice is will depend on what kind of alternatives we expect. This is not always easy to know in advance.</p>
-<p>11 See <a href="01-chap.html#sec-generative-SimulatingForPower">Section 1.4.1</a> and 6.4.</p>
-<p>12 The assumptions don’t need to be <em>exactly</em> true – it is sufficient that the theory’s predictions are an acceptable approximation of the truth.</p>
-<p>Once we have chosen the test statistic we need to compute its null distribution. You can do this either with pencil and paper or by computer simulations. A pencil and paper solution is parametric and leads to a closed form mathematical expression (like Equation 6.3), which has the advantage that it holds for a range of model parameters of the null hypothesis (such as \(n\), \(p\)). It can also be quickly computed for any specific set of parameters. But it is not always as easy as in the coin tossing example. Sometimes a pencil and paper solution is impossibly difficult to compute. At other times, it may require simplifying assumptions. An example is a null distribution for the \(t\)-statistic (which we will see later in this chapter). We can compute this if we assume that the data are independent and normally distributed: the result is called the \(t\)-distribution. Such modelling assumptions may be more or less realistic. Simulating the null distribution offers a potentially more accurate, more realistic and perhaps even more intuitive approach. The drawback of simulating is that it can take a rather long time, and we need extra work to get a systematic understanding of how varying parameters influence the result. Generally, it is more elegant to use the parametric theory when it applies12. When you are in doubt, simulate – or do both.</p>
-<section id="the-rejection-region" class="level3" data-number="8.2.1">
-<h3 data-number="8.2.1" class="anchored" data-anchor-id="the-rejection-region"><span class="header-section-number">8.2.1</span> 6.3.1 The rejection region</h3>
-<p>How to choose the right rejection region for your test? First, what should its size be? That is your choice of the <strong>significance level</strong> or false positive rate \(\), which is the total probability of the test statistic falling into this region even if the null hypothesis is true13.</p>
-<p>13 Some people at some point in time for a particular set of questions colluded on \(\) as being “small”. But there is nothing special about this number, and in any particular case the best choice for a decision threshold may very much depend on context (<a href="16-chap.html#ref-Wasserstein2016:ASA">Wasserstein and Lazar 2016</a>; <a href="16-chap.html#ref-Altman:PoS:2017">Altman and Krzywinski 2017</a>).</p>
-<p>Given the size, the next question is about its shape. For any given size, there are usually multiple possible shapes. It makes sense to require that the probability of the test statistic falling into the rejection region is as large possible if the alternative hypothesis is true. In other words, we want our test to have high <strong>power</strong> , or true positive rate.</p>
-<p>The criterion that we used in the code for computing the rejection region for Figure 6.7 was to make the region contain as many <code>k</code> as possible. That is because in absence of any information about the alternative distribution, one <code>k</code> is as good as any other, and we maximize their total number.</p>
-<p>A consequence of this is that in Figure 6.7 the rejection region is split between the two tails of the distribution. This is because we anticipate that unfair coins could have a bias either towards head or toward tail; we don’t know. If we did know, we would instead concentrate our rejection region all on the appropriate side, e.g., the right tail if we think the bias would be towards head. Such choices are also referred to as <em>two-sided</em> and <em>one-sided</em> tests. More generally, if we have assumptions about the alternative distribution, this can influence our choice of the shape of the rejection region.</p>
+<p>질문 6.7</p>
+<p><a href="01-chap.html">1장</a>의 충분 통계량(sufficient statistics) 개념을 상기해 보세요. 앞면의 총 횟수는 이항 분포에 대한 충분 통계량인가요? 왜 그것이 첫 번째 종류의 대립 가설에 대해서는 좋은 검정 통계량이 될 수 있지만, 두 번째 종류에 대해서는 그렇지 않을까요?</p>
+<p>그러므로 우리는 일반적으로 여러 가지 가능한 검정 통계량 선택지가 있음을 기억합시다 (원칙적으로는 데이터의 어떤 수치적 요약도 될 수 있습니다). 좋은 검정력11을 가진 검정을 얻기 위해서는 올바른 선택을 하는 것이 중요합니다. 올바른 선택이 무엇인지는 우리가 어떤 종류의 대립 가설을 예상하느냐에 달려 있습니다. 이를 미리 아는 것이 항상 쉬운 것은 아닙니다.</p>
+<p>11 <a href="01-chap.html#sec-generative-SimulatingForPower">1.4.1절</a> 및 6.4절을 참조하십시오.</p>
+<p>12 가정이 <em>정확히</em> 참일 필요는 없습니다 – 이론의 예측이 진실에 대한 수용 가능한 근사치라면 충분합니다.</p>
+<p>일단 검정 통계량을 선택했다면 그것의 귀무 분포를 계산해야 합니다. 이는 종이와 연필로 할 수도 있고 컴퓨터 시뮬레이션으로 할 수도 있습니다. 종이와 연필을 이용한 해결책은 모수적(parametric)이며 (식 6.3과 같은) 닫힌 형태의 수학적 표현으로 이어지는데, 이는 귀무 가설의 모델 매개변수(\(n, p\) 등) 범위에 대해 유효하다는 장점이 있습니다. 또한 특정 매개변수 세트에 대해 빠르게 계산될 수 있습니다. 하지만 항상 동전 던지기 예제처럼 쉬운 것은 아닙니다. 때로는 종이와 연필을 이용한 해결책을 계산하는 것이 불가능할 정도로 어려울 때도 있습니다. 다른 경우에는 단순화 가정이 필요할 수 있습니다. 한 예로 (이 장의 뒷부분에서 살펴볼) \(t\)-통계량에 대한 귀무 분포가 있습니다. 데이터가 독립적이고 정규 분포를 따른다고 가정하면 이를 계산할 수 있는데, 그 결과를 \(t\)-분포라고 부릅니다. 이러한 모델링 가정은 현실적일 수도 있고 그렇지 않을 수도 있습니다. 귀무 분포를 시뮬레이션하는 것은 잠재적으로 더 정확하고 현실적이며 아마도 더 직관적인 접근 방식을 제공합니다. 시뮬레이션의 단점은 시간이 꽤 오래 걸릴 수 있고, 매개변수 변화가 결과에 어떤 영향을 미치는지 체계적으로 이해하기 위해 추가적인 작업이 필요하다는 점입니다. 일반적으로 모수적 이론이 적용될 때는 이를 사용하는 것이 더 우아합니다12. 의심스러울 때는 시뮬레이션을 하거나, 둘 다 하십시오.</p>
+<section id="기각역" class="level3" data-number="8.2.1">
+<h3 data-number="8.2.1" class="anchored" data-anchor-id="기각역"><span class="header-section-number">8.2.1</span> 6.3.1 기각역</h3>
+<p>여러분의 검정에 적합한 기각역을 어떻게 선택할까요? 먼저, 그 크기는 얼마여야 할까요? 그것은 여러분이 선택한 <strong>유의 수준(significance level)</strong> 또는 위양성률(false positive rate) \(\)이며, 이는 귀무 가설이 참이더라도 검정 통계량이 이 영역에 떨어질 전체 확률입니다13.</p>
+<p>13 어떤 시점에 어떤 사람들이 특정 질문 세트에 대해 \(\)를 “작다”고 공모했습니다. 하지만 이 숫자에는 특별한 것이 없으며, 어떤 경우에도 결정 임계값에 대한 최선의 선택은 문맥에 따라 크게 달라질 수 있습니다 (<a href="16-chap.html#ref-Wasserstein2016:ASA">Wasserstein and Lazar 2016</a>; <a href="16-chap.html#ref-Altman:PoS:2017">Altman and Krzywinski 2017</a>).</p>
+<p>크기가 주어졌을 때, 다음 질문은 형태에 관한 것입니다. 주어진 크기에 대해 대개 여러 가지 가능한 형태가 존재합니다. 대립 가설이 참일 때 검정 통계량이 기각역에 떨어질 확률이 가능한 한 커야 한다는 요구 조건은 타당합니다. 다시 말해, 우리는 우리의 검정이 높은 <strong>검정력(power)</strong>, 즉 진양성률(true positive rate)을 갖기를 원합니다.</p>
+<p>그림 6.7의 기각역을 계산하는 코드에서 사용한 기준은 그 영역이 가능한 한 많은 <code>k</code>를 포함하도록 하는 것이었습니다. 이는 대립 분포에 대한 정보가 전혀 없는 상황에서는 어떤 <code>k</code>도 다른 <code>k</code>만큼이나 좋기 때문에, 그들의 총 개수를 최대화하는 것입니다.</p>
+<p>이것의 결과로 그림 6.7에서 기각역은 분포의 두 꼬리(tails) 사이로 나뉩니다. 이는 우리가 불공정한 동전이 앞면이나 뒷면 어느 쪽으로든 편향될 수 있다고 예상하기 때문입니다. 만약 우리가 알고 있다면, 예를 들어 편향이 앞면 쪽일 것이라고 생각한다면 기각역을 적절한 쪽(예: 오른쪽 꼬리)에 모두 집중시킬 것입니다. 이러한 선택은 각각 <em>양측(two-sided)</em> 및 <em>단측(one-sided)</em> 검정이라고 불립니다. 보다 일반적으로, 대립 분포에 대한 가정이 있다면 이는 기각역 형태의 선택에 영향을 줄 수 있습니다.</p>
 </section>
 </section>
-<section id="types-of-error" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="types-of-error"><span class="header-section-number">8.3</span> 6.4 Types of error</h2>
-<p>Having set out the mechanics of testing, we can assess how well we are doing. Table 6.1 compares reality (whether or not the null hypothesis is in fact true) with our decision whether or not to reject the null hypothesis after we have seen the data.</p>
+<section id="오류의-유형" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="오류의-유형"><span class="header-section-number">8.3</span> 6.4 오류의 유형</h2>
+<p>검정의 메커니즘을 설정했으므로, 우리가 얼마나 잘하고 있는지 평가할 수 있습니다. 표 6.1은 실제 상황(귀무 가설이 실제로 참인지 여부)과 데이터를 본 후 귀무 가설을 기각할지 여부에 대한 우리의 결정을 비교합니다.</p>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
 <thead>
 <tr class="header">
-<th>Test vs reality</th>
-<th>Null hypothesis is true</th>
-<th>\(…\) is false</th>
+<th>검정 대 실제</th>
+<th>귀무 가설이 참</th>
+<th>\(…\)이 거짓</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>Reject null hypothesis</strong></td>
-<td>Type I error (false positive)</td>
-<td>True positive</td>
+<td><strong>귀무 가설 기각</strong></td>
+<td>제1종 오류 (위양성)</td>
+<td>진양성</td>
 </tr>
 <tr class="even">
-<td><strong>Do not reject</strong></td>
-<td>True negative</td>
-<td>Type II error (false negative)</td>
+<td><strong>기각하지 않음</strong></td>
+<td>진음성</td>
+<td>제2종 오류 (위음성)</td>
 </tr>
 </tbody>
 </table>
-<p>Table 6.1: Types of error in a statistical test.</p>
-<p>It is always possible to reduce one of the two error types at the cost of increasing the other one. The real challenge is to find an acceptable trade- off between both of them. This is exemplified in Figure 6.2. We can always decrease the <strong>false positive rate</strong> (FPR) by shifting the threshold to the right. We can become more “conservative”. But this happens at the price of higher <strong>false negative rate</strong> (FNR). Analogously, we can decrease the FNR by shifting the threshold to the left. But then again, this happens at the price of higher FPR. A bit on terminology: the FPR is the same as the probability \(\) that we mentioned above. \(1 - \) is also called the <strong>specificity</strong> of a test. The FNR is sometimes also called \(\), and \(1 - \) the <strong>power</strong> , <strong>sensitivity</strong> or <strong>true positive rate</strong> of a test.</p>
+<p>표 6.1: 통계적 검정에서의 오류 유형.</p>
+<p>다른 유형의 오류를 증가시키는 대가로 두 가지 오류 유형 중 하나를 줄이는 것은 항상 가능합니다. 진짜 과제는 두 가지 사이에서 수용 가능한 상충 관계를 찾는 것입니다. 이것이 그림 6.2에 예시되어 있습니다. 우리는 임계값을 오른쪽으로 이동시켜 <strong>위양성률(false positive rate, FPR)</strong>을 항상 낮출 수 있습니다. 우리는 더 “보수적”이 될 수 있습니다. 하지만 이는 더 높은 <strong>위음성률(false negative rate, FNR)</strong>이라는 대가를 치러야 합니다. 유사하게, 임계값을 왼쪽으로 이동시켜 FNR을 낮출 수 있습니다. 하지만 이 역시 더 높은 FPR이라는 대가를 치러야 합니다. 용어에 대해 조금 설명하자면: FPR은 앞서 언급한 확률 \(\)와 같습니다. \(1 - \)는 검정의 <strong>특이도(specificity)</strong>라고도 불립니다. FNR은 때때로 \(\)라고도 불리며, \(1 - \)는 검정의 <strong>검정력(power)</strong>, <strong>민감도(sensitivity)</strong> 또는 <strong>진양성률(true positive rate)</strong>이라고 불립니다.</p>
 <p>__</p>
-<p>Question 6.8</p>
-<p>At the end of Section 6.3, we learned about one- and two-sided tests. Why does this distinction exist? Why don’t we always just use the two-sided test, which is sensitive to a larger class of alternatives?</p>
+<p>질문 6.8</p>
+<p>6.3절의 끝에서 단측 및 양측 검정에 대해 배웠습니다. 왜 이러한 구분이 존재할까요? 왜 더 넓은 범위의 대립 가설에 민감한 양측 검정을 항상 사용하지 않을까요?</p>
 </section>
-<section id="the-t-test" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="the-t-test"><span class="header-section-number">8.4</span> 6.5 The t-test</h2>
-<p>Many experimental measurements are reported as rational numbers, and the simplest comparison we can make is between two groups, say, cells treated with a substance compared to cells that are not. The basic test for such situations is the \(t\)-test. The test statistic is defined as</p>
+<section id="t-검정" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="t-검정"><span class="header-section-number">8.4</span> 6.5 t-검정</h2>
+<p>많은 실험 측정값은 유기수(rational numbers)로 보고되며, 우리가 할 수 있는 가장 간단한 비교는 두 그룹 사이의 비교입니다. 예를 들어, 어떤 물질로 처리된 세포와 그렇지 않은 세포를 비교하는 것입니다. 이러한 상황을 위한 기본적인 검정이 \(t\)-검정입니다. 검정 통계량은 다음과 같이 정의됩니다.</p>
 <p>\[ t = c ; , \]</p>
-<p>where \(m_1\) and \(m_2\) are the mean of the values in the two groups, \(s\) is the pooled standard deviation and \(c\) is a constant that depends on the sample sizes, i.e., the numbers of observations \(n_1\) and \(n_2\) in the two groups. In formulas14,</p>
-<p>14 Everyone should try to remember Equation 6.4, whereas many people get by with looking up Equation 6.5 when they need it.</p>
+<p>여기서 \(m_1\)과 \(m_2\)는 두 그룹 값들의 평균이고, \(s\)는 통합 표준 편차(pooled standard deviation)이며, \(c\)는 표본 크기, 즉 두 그룹의 관측치 수 \(n_1\)과 \(n_2\)에 의존하는 상수입니다. 공식으로는14,</p>
+<p>14 모든 사람이 식 6.4는 기억하려고 노력해야 하지만, 많은 사람들은 필요할 때 식 6.5를 찾아보는 것으로 충분합니다.</p>
 <p>\[ <span class="math display">\[\begin{align} m_g &amp;= \frac{1}{n_g} \sum_{i=1}^{n_g} x_{g, i}
 \quad\quad\quad g=1,2\\\ s^2 &amp;= \frac{1}{n_1+n_2-2} \left( \sum_{i=1}^{n_1}
 \left(x_{1,i} - m_1\right)^2 + \sum_{j=1}^{n_2} \left(x_{2,j} - m_2\right)^2
 \right)\\\ c &amp;= \sqrt{\frac{n_1n_2}{n_1+n_2}} \end{align}\]</span> \]</p>
-<p>where \(x_{g, i}\) is the \(i^{}\) data point in the \(g^{}\) group. Let’s try this out with the <code>PlantGrowth</code> data from R’s <strong>datasets</strong> package.</p>
+<p>여기서 \(x_{g, i}\)는 \(g\)번째 그룹의 \(i\)번째 데이터 포인트입니다. R의 <strong>datasets</strong> 패키지에 있는 <code>PlantGrowth</code> 데이터를 사용하여 이를 시도해 봅시다.</p>
 <pre><code>library("ggbeeswarm")
 data("PlantGrowth")
 ggplot(PlantGrowth, aes(y = weight, x = group, col = group)) +
@@ -580,17 +576,17 @@ alternative hypothesis: true difference in means is not equal to 0
 sample estimates:
 mean of x mean of y 
     5.032     5.526 </code></pre>
-<p><a href="06-chap_files/figure-html/fig-testing-plantgrowth-1.png &quot;Figure 6.8: The PlantGrowth data.&quot;"><img src="06-chap_files/figure-html/fig-testing- plantgrowth-1.png" class="img-fluid"></a></p>
-<p>Figure 6.8: The <code>PlantGrowth</code> data.</p>
+<p><a href="06-chap_files/figure-html/fig-testing-plantgrowth-1.png &quot;그림 6.8: PlantGrowth 데이터.&quot;"><img src="06-chap_files/figure-html/fig-testing- plantgrowth-1.png" class="img-fluid"></a></p>
+<p>그림 6.8: <code>PlantGrowth</code> 데이터.</p>
 <p>__</p>
-<p>Question 6.9</p>
-<p>What do you get from the comparison with <code>trt1</code>? What for <code>trt1</code> versus <code>trt2</code>?</p>
-<p>To compute the p-value, the <code>t.test</code> function uses the asymptotic theory for the \(t\)-statistic Equation 6.4; this theory states that under the null hypothesis of equal means in both groups, the statistic follows a known, mathematical distribution, the so-called \(t\)-distribution with \(n_1+n_2-2\) degrees of freedom. The theory uses additional technical assumptions, namely that the data are independent and come from a normal distribution with the same standard deviation. We could be worried about these assumptions. Clearly they do not hold: weights are always positive, while the normal distribution extends over the whole real axis. The question is whether this deviation from the theoretical assumption makes a real difference. We can use a permutation test to figure this out (we will discuss the idea behind permutation tests in a bit more detail in Section 6.5.1).</p>
+<p>질문 6.9</p>
+<p><code>trt1</code>과의 비교에서는 무엇을 얻나요? <code>trt1</code> 대 <code>trt2</code>는요?</p>
+<p>p-값을 계산하기 위해 <code>t.test</code> 함수는 \(t\)-통계량(식 6.4)에 대한 점근적 이론을 사용합니다. 이 이론은 두 그룹의 평균이 같다는 귀무 가설하에서 통계량이 알려진 수학적 분포인 자유도가 \(n_1+n_2-2\)인 \(t\)-분포를 따른다고 명시합니다. 이 이론은 추가적인 기술적 가정, 즉 데이터가 독립적이고 동일한 표준 편차를 가진 정규 분포에서 나온다는 가정을 사용합니다. 우리는 이러한 가정들에 대해 걱정할 수 있습니다. 분명히 이 가정들은 성립하지 않습니다: 무게는 항상 양수이지만, 정규 분포는 전체 실수 축에 걸쳐 있습니다. 문제는 이론적 가정으로부터의 이러한 이탈이 실제로 차이를 만드느냐 하는 것입니다. 우리는 이를 알아내기 위해 순열 검정(permutation test)을 사용할 수 있습니다(6.5.1절에서 순열 검정의 이면에 있는 아이디어를 좀 더 자세히 논의할 것입니다).</p>
 <p>__</p>
-<p>Question 6.10</p>
-<p>Plot the theoretical and simulated null distribution for the above \(t\)-test, in a similar fashion as in Figure 6.5 and Figure 6.6 for the coin flips.</p>
+<p>질문 6.10</p>
+<p>위의 \(t\)-검정에 대해 동전 던지기의 그림 6.5 및 그림 6.6과 유사한 방식으로 이론적 및 시뮬레이션된 귀무 분포를 플롯해 보세요.</p>
 <p>__</p>
-<p>Solution</p>
+<p>해결책</p>
 <p>__</p>
 <pre><code>plgr = dplyr::filter(PlantGrowth, group %in% c("ctrl", "trt2"))
 
@@ -603,7 +599,7 @@ sim_null = tibble(
 )
 sim_thresh = quantile(sim_null$t, c(alpha/2, 1-alpha/2))
 sim_null = mutate(sim_null, 
-  t = deckel(t),        # avoid warnings about out of range data
+  t = deckel(t),        # 범위를 벗어난 데이터에 대한 경고 피하기
   reject = ifelse(t &lt;= sim_thresh[1], "low", ifelse(t &gt; sim_thresh[2], "high", "none"))
 ) 
 
@@ -666,89 +662,83 @@ mean of x mean of y
 <p>16 You can also see this from the way the numbers \(n_1\) and \(n_2\) appear in Equation 6.5.</p>
 <section id="permutation-tests" class="level3" data-number="8.4.1">
 <h3 data-number="8.4.1" class="anchored" data-anchor-id="permutation-tests"><span class="header-section-number">8.4.1</span> 6.5.1 Permutation tests</h3>
-<p>What happened above when we contrasted the outcome of the parametric \(t\)-test with that of the permutation test applied to the \(t\)-statistic? It’s important to realize that these are two different tests, and the similarity of their outcomes is desirable, but coincidental. In the parametric test, the null distribution of the \(t\)-statistic follows from the assumed null distribution of the data, a multivariate normal distribution with unit covariance in the \((n_1+n_2)\)-dimensional space \(^{n_1+n_2}\), and is continuous: the \(t\)-distribution. In contrast, the permutation distribution of our test statistic is discrete, as it is obtained from the finite set of \((n_1+n_2)!\) permutations17 of the observation labels, from a single instance of the data (the \(n_1+n_2\) observations). All we assume here is that under the null hypothesis, the variables \(X_{1,1},…,X_{1,n_1},X_{2,1},…,X_{2,n_2}\) are exchangeable. Logically, this assumption is implied by that of the parametric test, but is weaker. The permutation test employs the \(t\)-statistic, but not the \(t\)-distribution (nor the normal distribution). The fact that the two tests gave us a very similar result is a consequence of the Central Limit Theorem.</p>
-<p>17 Or a random subset, in case we want to save computation time.</p>
+<p>What happened above when we contrasted the outcome of the parametric \(t\)-test with that of the permutation test applied to the \(t\)-statistic? It’s important to realize that these are two different tests, and the similarity of their outcomes is desirable, but coincidental. In 모수적 검정의 경우, \(t\)-통계량의 귀무 분포는 데이터의 가정된 귀무 분포(단위 공분산을 가진 \((n_1+n_2)\)차원 공간 \(^{n_1+n_2}\)에서의 다변량 정규 분포)로부터 도출되며 연속적입니다: 즉, \(t\)-분포입니다. 이와 대조적으로, 우리 검정 통계량의 순열 분포는 단일 데이터 인스턴스(\(n_1+n_2\)개의 관측치)로부터 관측치 레이블의 \((n_1+n_2)!\)개 순열17의 유한 집합으로부터 얻어지므로 이산적입니다. 여기서 우리가 가정하는 전부는 귀무 가설하에서 변수 \(X_{1,1},…,X_{1,n_1},X_{2,1},…,X_{2,n_2}\)가 교환 가능하다(exchangeable)는 것입니다. 논리적으로 이 가정은 모수적 검정의 가정에 의해 함축되지만, 더 약한 가정입니다. 순열 검정은 \(t\)-통계량을 사용하지만, \(t\)-분포(또는 정규 분포)는 사용하지 않습니다. 두 검정이 매우 유사한 결과를 주었다는 사실은 중심 극한 정리(Central Limit Theorem)의 결과입니다.</p>
+<p>17 계산 시간을 절약하고 싶은 경우에는 무작위 하위 집합을 사용합니다.</p>
 </section>
 </section>
-<section id="p-value-hacking" class="level2" data-number="8.5">
-<h2 data-number="8.5" class="anchored" data-anchor-id="p-value-hacking"><span class="header-section-number">8.5</span> 6.6 P-value hacking</h2>
-<p>Let’s go back to the coin tossing example. We did not reject the null hypothesis (that the coin is fair) at a level of 5%—even though we “knew” that it is unfair. After all, <code>probHead</code> was chosen as 0.6 in Section 6.2. Let’s suppose we now start looking at different test statistics. Perhaps the number of consecutive series of 3 or more heads. Or the number of heads in the first 50 coin flips. And so on. At some point we will find a test that happens to result in a small p-value, even if just by chance (after all, the probability for the p-value to be less than 0.05 under the null hypothesis—fair coin—is one in twenty). We just did what is called <strong>p-value hacking</strong> 18 (<a href="16-chap.html#ref-Head:PLoSBiol:2015:pvaluehacking">Head et al.&nbsp;2015</a>). You see what the problem is: in our zeal to prove our point we tortured the data until some statistic did what we wanted. A related tactic is <strong>hypothesis switching</strong> or <strong>HARKing</strong> – hypothesizing after the results are known: we have a dataset, maybe we have invested a lot of time and money into assembling it, so we need results. We come up with lots of different null hypotheses and test statistics, test them, and iterate, until we can report something.</p>
+<section id="p-값-해킹p-value-hacking" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="p-값-해킹p-value-hacking"><span class="header-section-number">8.5</span> 6.6 P-값 해킹(P-value hacking)</h2>
+<p>동전 던지기 예제로 돌아가 봅시다. 우리는 동전이 공정하지 않다는 것을 “알고” 있었음에도 불구하고(6.2절에서 <code>probHead</code>를 0.6으로 선택했으므로), 5% 수준에서 귀무 가설(동전이 공정하다는 가설)을 기각하지 않았습니다. 이제 우리가 서로 다른 검정 통계량들을 살펴보기 시작한다고 가정해 봅시다. 아마도 3번 이상 연속으로 앞면이 나온 횟수라든지, 처음 50번의 던지기에서 앞면의 횟수 등등 말이죠. 그러다 보면 어느 시점에는 단지 우연히라도 작은 p-값이 나오는 검정을 발견하게 될 것입니다(결국 귀무 가설—공정한 동전—하에서 p-값이 0.05보다 작을 확률은 20분의 1입니다). 우리는 방금 <strong>p-값 해킹(p-value hacking)</strong>18이라 불리는 일을 저지른 것입니다 (<a href="16-chap.html#ref-Head:PLoSBiol:2015:pvaluehacking">Head et al.&nbsp;2015</a>). 무엇이 문제인지 아시겠지요: 우리 주장을 증명하려는 열의에 차서 데이터가 우리가 원하는 대로 해줄 때까지 데이터를 고문한 것입니다. 이와 관련된 전술로는 <strong>가설 전환(hypothesis switching)</strong> 또는 <strong>HARKing</strong>(결과가 알려진 후에 가설을 세우는 것)이 있습니다: 데이터 세트가 있고, 아마도 그것을 모으기 위해 많은 시간과 돈을 투자했으므로 결과가 필요합니다. 우리는 수많은 다양한 귀무 가설과 검정 통계량을 생각해 내고, 이를 테스트하고, 무언가 보고할 만한 것이 나올 때까지 반복합니다.</p>
 <p>18 <a href="http://fivethirtyeight.com/features/science-isnt-broken" class="uri">http://fivethirtyeight.com/features/science-isnt-broken</a></p>
-<p>These tactics violate the rules of hypothesis testing, as described in Section 6.3, where we laid out one sequential procedure of choosing the hypothesis and the test, and then collecting the data. But, as we saw in <a href="02-chap.html">Chapter 2</a>, such tactics can be tempting in reality. With biological data, we tend to have so many different choices for “normalising” the data, transforming the data, trying to adjust for batch effects, removing outliers, …. The topic is complex and open-ended. Wasserstein and Lazar (<a href="16-chap.html#ref-Wasserstein2016:ASA">2016</a>) give a readable short summary of the problems with how p-values are used in science, and of some of the misconceptions. They also highlight how p-values can be fruitfully used. The essential message is: be completely transparent about your data, what analyses were tried, and how they were done. Provide the analysis code. Only with such contextual information can a p-value be useful.</p>
-<p><strong>Avoid fallacy</strong>. Keep in mind that our statistical test is never attempting to prove our null hypothesis is true - we are simply saying whether or not there is evidence for it to be false. If a high p-value <em>were</em> indicative of the truth of the null hypothesis, we could formulate a completely crazy null hypothesis, do an utterly irrelevant experiment, collect a small amount of inconclusive data, find a p-value that would just be a random number between 0 and 1 (and so with some high probability above our threshold \(\)) and, whoosh, our hypothesis would be demonstrated!</p>
+<p>이러한 전술들은 6.3절에서 설명한 가설 검정의 규칙을 위반하는 것입니다. 거기서는 가설과 검정 방법을 먼저 선택하고 그 다음에 데이터를 수집하는 순차적인 절차를 제시했습니다. 그러나 <a href="02-chap.html">2장</a>에서 보았듯이, 실제로는 그러한 전술이 유혹적일 수 있습니다. 생물학적 데이터의 경우 데이터를 “정규화”하고, 변환하고, 배치 효과(batch effects)를 보정하고, 이상치를 제거하는 등 너무나 많은 다양한 선택지가 존재합니다. 주제는 복잡하고 정답이 정해져 있지 않습니다. Wasserstein과 Lazar (<a href="16-chap.html#ref-Wasserstein2016:ASA">2016</a>)는 과학계에서 p-값이 어떻게 사용되는지에 대한 문제점들과 몇 가지 오해들에 대해 읽기 쉬운 짧은 요약을 제공했습니다. 그들은 또한 p-값이 어떻게 유익하게 사용될 수 있는지도 강조했습니다. 핵심 메시지는 다음과 같습니다: 여러분의 데이터, 어떤 분석을 시도했는지, 그리고 어떻게 수행했는지에 대해 완전히 투명하게 공개하십시오. 분석 코드를 제공하십시오. 그러한 맥락 정보가 있어야만 p-값은 유용할 수 있습니다.</p>
+<p><strong>착각을 피하십시오</strong>. 우리의 통계적 검정은 결코 귀무 가설이 참임을 증명하려는 시도가 아니라는 점을 명심하십시오 - 우리는 단순히 그것이 거짓이라는 증거가 있는지 없는지를 말하는 것뿐입니다. 만약 높은 p-값이 귀무 가설이 참이라는 것을 <em>나타내는</em> 것이라면, 우리는 완전히 미친 귀무 가설을 세우고, 전혀 무관한 실험을 하고, 결론을 내릴 수 없는 소량의 데이터를 수집하여, 0과 1 사이의 랜덤한 숫자인 (따라서 우리의 임계값 \(\)보다 클 확률이 높은) p-값을 찾음으로써 우리의 가설을 증명해 버릴 수 있을 것입니다!</p>
 </section>
-<section id="multiple-testing" class="level2" data-number="8.6">
-<h2 data-number="8.6" class="anchored" data-anchor-id="multiple-testing"><span class="header-section-number">8.6</span> 6.7 Multiple testing</h2>
+<section id="다중-검정multiple-testing" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="다중-검정multiple-testing"><span class="header-section-number">8.6</span> 6.7 다중 검정(Multiple testing)</h2>
 <p>__</p>
-<p>Question 6.12</p>
-<p>Look up <a href="http://xkcd.com/882">xkcd cartoon 882</a>. Why didn’t the newspaper report the results for the other colors?</p>
-<p>The quandary illustrated in the cartoon occurs with high-throughput data in biology. And with force! You will be dealing not only with 20 colors of jellybeans, but, say, with 20,000 genes that were tested for differential expression between two conditions, or with 6 billion positions in the genome where a DNA mutation might have happened. So how do we deal with this? Let’s look again at our table relating statistical test results with reality (Table 6.1), this time framing everything in terms of many hypotheses.</p>
+<p>질문 6.12</p>
+<p><a href="http://xkcd.com/882">xkcd 만화 882</a>를 찾아보세요. 왜 신문은 다른 색상들에 대한 결과는 보도하지 않았을까요?</p>
+<p>만화에서 묘사된 곤경은 생물학의 고처리량 데이터에서도 발생합니다. 그것도 아주 강력하게 말이죠! 여러분은 단지 20가지 색상의 젤리빈뿐만 아니라, 예를 들어 두 조건 사이의 차등 발현을 위해 테스트된 20,000개의 유전자나, DNA 돌연변이가 일어났을지도 모르는 게놈 상의 60억 개의 위치를 다루게 될 것입니다. 그렇다면 우리는 이를 어떻게 처리해야 할까요? 통계적 검정 결과와 실제 상황을 연관시킨 표(표 6.1)를 다시 살펴봅시다. 이번에는 모든 것을 많은 가설의 관점에서 구성해 보겠습니다.</p>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-</colgroup>
 <thead>
 <tr class="header">
-<th>Test vs reality</th>
-<th>Null hypothesis is true</th>
-<th>\(…\) is false</th>
-<th>Total</th>
+<th>검정 대 실제</th>
+<th>귀무 가설이 참</th>
+<th>\(…\)이 거짓</th>
+<th>합계</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>Rejected</strong></td>
+<td><strong>기각됨</strong></td>
 <td>\(V\)</td>
 <td>\(S\)</td>
 <td>\(R\)</td>
 </tr>
 <tr class="even">
-<td><strong>Not rejected</strong></td>
+<td><strong>기각되지 않음</strong></td>
 <td>\(U\)</td>
 <td>\(T\)</td>
 <td>\(m-R\)</td>
 </tr>
 <tr class="odd">
-<td><strong>Total</strong></td>
+<td><strong>합계</strong></td>
 <td>\(m_0\)</td>
 <td>\(m-m_0\)</td>
 <td>\(m\)</td>
 </tr>
 </tbody>
 </table>
-<p>Table 6.2: Types of error in multiple testing. The letters designate the number of times each type of error occurs.</p>
+<p>표 6.2: 다중 검정에서의 오류 유형. 문자는 각 유형의 오류가 발생한 횟수를 나타냅니다.</p>
 <ul>
-<li><p>\(m\): total number of tests (and null hypotheses)</p></li>
-<li><p>\(m_0\): number of true null hypotheses</p></li>
-<li><p>\(m-m_0\): number of false null hypotheses</p></li>
-<li><p>\(V\): number of false positives (a measure of type I error)</p></li>
-<li><p>\(T\): number of false negatives (a measure of type II error)</p></li>
-<li><p>\(S\), \(U\): number of true positives and true negatives</p></li>
-<li><p>\(R\): number of rejections</p></li>
+<li><p>\(m\): 전체 검정(및 귀무 가설)의 수</p></li>
+<li><p>\(m_0\): 참인 귀무 가설의 수</p></li>
+<li><p>\(m-m_0\): 거짓인 귀무 가설의 수</p></li>
+<li><p>\(V\): 위양성(false positives)의 수 (제1종 오류의 척도)</p></li>
+<li><p>\(T\): 위음성(false negatives)의 수 (제2종 오류의 척도)</p></li>
+<li><p>\(S\), \(U\): 진양성 및 진음성의 수</p></li>
+<li><p>\(R\): 기각 횟수</p></li>
 </ul>
-<p>In the rest of this chapter, we look at different ways of taking care of the type I and II errors.</p>
+<p>이 장의 나머지 부분에서 우리는 제1종 및 제2종 오류를 관리하는 다양한 방법들을 살펴봅니다.</p>
 </section>
-<section id="the-family-wise-error-rate" class="level2" data-number="8.7">
-<h2 data-number="8.7" class="anchored" data-anchor-id="the-family-wise-error-rate"><span class="header-section-number">8.7</span> 6.8 The family wise error rate</h2>
-<p>The <strong>family wise error rate</strong> (FWER) is the probability that \(V&gt;0\), i.e., that we make one or more false positive errors. We can compute it as the complement of making no false positive errors at all19.</p>
-<p>19 Assuming independence.</p>
-<p>\[ <span class="math display">\[\begin{align} P(V&gt;0) &amp;= 1 - P(\text{no rejection of any of $m_0$ nulls})
+<section id="가족오류율family-wise-error-rate" class="level2" data-number="8.7">
+<h2 data-number="8.7" class="anchored" data-anchor-id="가족오류율family-wise-error-rate"><span class="header-section-number">8.7</span> 6.8 가족오류율(Family wise error rate)</h2>
+<p><strong>가족오류율(family wise error rate, FWER)</strong>은 \(V&gt;0\)일 확률, 즉 하나 이상의 위양성 오류를 저지를 확률입니다. 우리는 이를 위양성 오류를 전혀 저지르지 않을 확률의 여사건으로 계산할 수 있습니다19.</p>
+<p>19 독립을 가정함.</p>
+<p>\[ <span class="math display">\[\begin{align} P(V&gt;0) &amp;= 1 - P(\text{$m_0$개의 귀무 가설 중 어느 것도 기각되지 않음})
 \\\ &amp;= 1 - (1 - \alpha)^{m_0} \to 1 \quad\text{as } m_0\to\infty. \end{align}\]</span> \]</p>
-<p>For any fixed \(\), this probability is appreciable as soon as \(m_0\) is in the order of \(1/\), and it tends towards 1 as \(m_0\) becomes larger. This relationship can have serious consequences for experiments like DNA matching, where a large database of potential matches is searched. For example, if there is a one in a million chance that the DNA profiles of two people match by random error, and your DNA is tested against a database of 800000 profiles, then the probability of a random hit with the database (i.e., without you being in it) is:</p>
+<p>어떤 고정된 \(\)에 대해, 이 확률은 \(m_0\)가 \(1/\)의 정도가 되자마자 무시할 수 없을 정도로 커지며, \(m_0\)가 커짐에 따라 1을 향해 갑니다. 이러한 관계는 방대한 잠재적 일치 데이터베이스를 검색하는 DNA 매칭과 같은 실험에서 심각한 결과를 초래할 수 있습니다. 예를 들어, 두 사람의 DNA 프로필이 무작위 오차에 의해 일치할 확률이 100만 분의 1이고, 여러분의 DNA를 80만 개의 프로필이 담긴 데이터베이스와 대조한다면, 데이터베이스 내에서 (즉, 여러분이 그 안에 없더라도) 무작위로 일치할 확률은 다음과 같습니다:</p>
 <pre><code>1 - (1 - 1/1e6)^8e5 __
 
 
 [1] 0.5506712</code></pre>
-<p>That’s pretty high. And once the database contains a few million profiles more, a false hit is virtually unavoidable.</p>
+<p>상당히 높습니다. 그리고 데이터베이스에 몇 백만 개의 프로필이 더 포함된다면, 잘못된 일치는 사실상 피할 수 없습니다.</p>
 <p>__</p>
-<p>Question 6.13</p>
-<p>Prove that the probability Equation 6.6 does indeed become very close to 1 when \(m_0\) is large.</p>
-<section id="bonferroni-method" class="level3" data-number="8.7.1">
-<h3 data-number="8.7.1" class="anchored" data-anchor-id="bonferroni-method"><span class="header-section-number">8.7.1</span> 6.8.1 Bonferroni method</h3>
-<p>How are we to choose the per-hypothesis \(\) if we want FWER control? The above computations suggest that the product of \(\) with \(m_0\) may be a reasonable ballpark estimate. Usually we don’t know \(m_0\), but we know \(m\), which is an upper limit for \(m_0\), since \(m_0m\). The Bonferroni method is simply that if we want FWER control at level \(<em>{}\), we should choose the per hypothesis threshold \(= </em>{}/m\). Let’s check this out on an example.</p>
+<p>질문 6.13</p>
+<p>\(m_0\)가 클 때 식 6.6의 확률이 실제로 1에 매우 가까워진다는 것을 증명해 보세요.</p>
+<section id="본페로니-방법bonferroni-method" class="level3" data-number="8.7.1">
+<h3 data-number="8.7.1" class="anchored" data-anchor-id="본페로니-방법bonferroni-method"><span class="header-section-number">8.7.1</span> 6.8.1 본페로니 방법(Bonferroni method)</h3>
+<p>FWER을 제어하고 싶다면 가설별 \(\)를 어떻게 선택해야 할까요? 위의 계산들은 \(\)와 \(m_0\)의 곱이 합리적인 어림값이 될 수 있음을 시사합니다. 대개 우리는 \(m_0\)를 모르지만, \(m_0 m\)이므로 \(m_0\)의 상한선인 \(m\)은 알고 있습니다. 본페로니 방법은 간단히 말해, 우리가 \(<em>{}\) 수준에서 FWER 제어를 원한다면 가설별 임계값을 \(= </em>{}/m\)으로 선택해야 한다는 것입니다. 예제를 통해 이를 확인해 봅시다.</p>
 <pre><code>m = 10000
 ggplot(tibble(
   alpha = seq(0, 7e-6, length.out = 100),
@@ -757,18 +747,18 @@ ggplot(tibble(
   xlab(expression(alpha)) +
   ylab("Prob( no false rejection )") +
   geom_hline(yintercept = 0.05, col = "red")__</code></pre>
-<p><a href="06-chap_files/figure-html/fig-testing-bonferroni-1.png &quot;Figure 6.11: Bonferroni method. The plot shows the graph of eq-testing- bonferroni for m=10000 as a function of \alpha.&quot;"><img src="06-chap_files/figure-html/fig-testing- bonferroni-1.png" class="img-fluid"></a></p>
-<p>Figure 6.11: Bonferroni method. The plot shows the graph of 6.6 for \(m=10000\) as a function of \(\).</p>
-<p>In Figure 6.11, the black line intersects the red line (which corresponds to a value of 0.05) at \(^{-6}\), which is just a little bit more than the value of \(0.05/m\) implied by the Bonferroni method.</p>
+<p><a href="06-chap_files/figure-html/fig-testing-bonferroni-1.png &quot;그림 6.11: 본페로니 방법. 플롯은 m=10000에 대해 \alpha의 함수로서 식 6.6의 그래프를 보여줍니다.&quot;"><img src="06-chap_files/figure-html/fig-testing- bonferroni-1.png" class="img-fluid"></a></p>
+<p>그림 6.11: 본페로니 방법. 플롯은 \(m=10000\)에 대해 \(\)의 함수로서 식 6.6의 그래프를 보여줍니다.</p>
+<p>그림 6.11에서 검은색 선은 (0.05 값에 해당하는) 빨간색 선과 \(^{-6}\)에서 교차하는데, 이는 본페로니 방법에 의해 함축된 \(0.05/m\) 값보다 아주 약간 큽니다.</p>
 <p>__</p>
-<p>Question 6.14</p>
-<p>Why are the two values not exactly the same?</p>
-<p>A potential drawback of this method, however, is that if \(m_0\) is large, the rejection threshold is very small. This means that the individual tests need to be very powerful if we want to have any chance of detecting something. Often FWER control is too stringent, and would lead to an ineffective use of the time and money that was spent to generate and assemble the data. We will now see that there are more nuanced methods of controlling our type I error.</p>
+<p>질문 6.14</p>
+<p>왜 두 값이 정확히 같지 않을까요?</p>
+<p>하지만 이 방법의 잠재적인 단점은 \(m_0\)가 크면 기각 임계값이 매우 작아진다는 것입니다. 이는 무언가를 감지할 기회를 가지려면 개별 검정의 검정력이 매우 높아야 함을 의미합니다. 종종 FWER 제어는 너무 엄격하여, 데이터를 생성하고 모으는 데 들인 시간과 비용을 비효율적으로 사용하게 만들 수 있습니다. 이제 우리는 제1종 오류를 제어하는 더 미묘한 방법들이 있다는 것을 보게 될 것입니다.</p>
 </section>
 </section>
-<section id="the-false-discovery-rate" class="level2" data-number="8.8">
-<h2 data-number="8.8" class="anchored" data-anchor-id="the-false-discovery-rate"><span class="header-section-number">8.8</span> 6.9 The false discovery rate</h2>
-<p>Let’s look at some data. We load up the RNA-Seq dataset <code>airway</code>, which contains gene expression measurements (gene-level counts) of four primary human airway smooth muscle cell lines with and without treatment with dexamethasone, a synthetic glucocorticoid. We’ll use the <strong><a href="https://bioconductor.org/packages/DESeq2/">DESeq2</a></strong> method that we’ll discuss in more detail in <a href="08-chap.html">Chapter 8</a> For now it suffices to say that it performs a test for differential expression for each gene. Conceptually, the tested null hypothesis is similar to that of the \(t\)-test, although the details are slightly more involved since we are dealing with count data.</p>
+<section id="허위-발견율false-discovery-rate" class="level2" data-number="8.8">
+<h2 data-number="8.8" class="anchored" data-anchor-id="허위-발견율false-discovery-rate"><span class="header-section-number">8.8</span> 6.9 허위 발견율(False discovery rate)</h2>
+<p>데이터를 살펴봅시다. 합성 글루코코르티코이드인 덱사메타손(dexamethasone)을 처리하거나 처리하지 않은 4개의 1차 인간 기도 평활근 세포주의 유전자 발현 측정값(유전자 수준 카운트)이 포함된 RNA-Seq 데이터 세트 <code>airway</code>를 불러옵니다. 우리는 <a href="08-chap.html">8장</a>에서 더 자세히 다룰 <strong><a href="https://bioconductor.org/packages/DESeq2/">DESeq2</a></strong> 방법을 사용할 것입니다. 지금은 이 방법이 각 유전자에 대해 차등 발현 검정을 수행한다고만 말해두면 충분합니다. 개념적으로 검정되는 귀무 가설은 \(t\)-검정의 그것과 유사하지만, 카운트 데이터를 다루기 때문에 세부 사항은 약간 더 복잡합니다.</p>
 <pre><code>library("DESeq2")
 library("airway")
 data("airway")
@@ -776,38 +766,38 @@ aw   = DESeqDataSet(se = airway, design = ~ cell + dex)
 aw   = DESeq(aw)
 awde = as.data.frame(results(aw)) |&gt; dplyr::filter(!is.na(pvalue))__</code></pre>
 <p>__</p>
-<p>Task</p>
-<p>Have a look at the content of <code>awde</code>.</p>
+<p>태스크</p>
+<p><code>awde</code>의 내용을 살펴보세요.</p>
 <p>__</p>
-<p>Task</p>
-<p>(Optional) Consult the <strong><a href="https://bioconductor.org/packages/DESeq2/">DESeq2</a></strong> vignette and/or <a href="08-chap.html">Chapter 8</a> for more information on what the above code chunk does.</p>
-<section id="the-p-value-histogram" class="level3" data-number="8.8.1">
-<h3 data-number="8.8.1" class="anchored" data-anchor-id="the-p-value-histogram"><span class="header-section-number">8.8.1</span> 6.9.1 The p-value histogram</h3>
-<p>The <strong>p-value histogram</strong> is an important sanity check for any analysis that involves multiple tests. It is a mixture composed of two components:</p>
-<p><strong>null:</strong> the p-values resulting from the tests for which the null hypothesis is true.</p>
-<p><strong>alt:</strong> the p-values resulting from the tests for which the null hypothesis is not true. The relative size of these two components depends on the fraction of true nulls and true alternatives (i.e., on \(m_0\) and \(m\)), and it can often be visually estimated from the histogram. If our analysis has high statistical power, then the second component (“alt”) consists of mostly small p-values, i.e., appears as a peak near 0 in the histogram; if the power is not high for some of the alternatives, we expect that this peak extends towards the right, i.e., has a “shoulder”. For the “null” component, we expect (by definition of the p-value for continuous data and test statistics) a uniform distribution in \([0,1]\). Let’s plot the histogram of p-values for the airway data.</p>
+<p>태스크</p>
+<p>(선택 사항) 위의 코드 청크가 무엇을 하는지에 대한 더 많은 정보를 얻으려면 <strong><a href="https://bioconductor.org/packages/DESeq2/">DESeq2</a></strong> 비네트 및/또는 <a href="08-chap.html">8장</a>을 참고하십시오.</p>
+<section id="p-값-히스토그램" class="level3" data-number="8.8.1">
+<h3 data-number="8.8.1" class="anchored" data-anchor-id="p-값-히스토그램"><span class="header-section-number">8.8.1</span> 6.9.1 p-값 히스토그램</h3>
+<p><strong>p-값 히스토그램</strong>은 다중 검정을 포함하는 모든 분석에서 중요한 무결성 검사(sanity check)입니다. 이는 두 가지 성분으로 구성된 혼합물입니다:</p>
+<p><strong>null:</strong> 귀무 가설이 참인 검정에서 얻은 p-값들.</p>
+<p><strong>alt:</strong> 귀무 가설이 거짓인 검정에서 얻은 p-값들. 이 두 성분의 상대적 크기는 참인 귀무 가설과 참인 대립 가설의 비율(즉, \(m_0\)와 \(m\))에 달려 있으며, 종종 히스토그램에서 시각적으로 추정할 수 있습니다. 분석의 통계적 검정력이 높다면 두 번째 성분(“alt”)은 대부분 작은 p-값들로 구성되며, 즉 히스토그램에서 0 근처의 정점으로 나타납니다. 일부 대립 가설에 대해 검정력이 높지 않다면 이 정점이 오른쪽으로 뻗어 나가는, 즉 “어깨(shoulder)” 모양을 가질 것으로 예상합니다. “null” 성분의 경우 (연속형 데이터와 검정 통계량에 대한 p-값의 정의에 따라) \([0,1]\)에서의 균등 분포를 예상합니다. airway 데이터에 대한 p-값 히스토그램을 그려봅시다.</p>
 <pre><code>ggplot(awde, aes(x = pvalue)) +
   geom_histogram(binwidth = 0.025, boundary = 0)__</code></pre>
-<p><a href="06-chap_files/figure-html/fig-testing-awpvhist-1.png &quot;Figure 6.12: p-value histogram of for the airway data.&quot;"><img src="06-chap_files/figure-html/fig-testing- awpvhist-1.png" class="img-fluid"></a></p>
-<p>Figure 6.12: p-value histogram of for the <code>airway</code> data.</p>
-<p>In Figure 6.12 we see the expected mixture. We also see that the null component is not exactly flat (uniform): this is because the data are counts. While these appear quasi-continuous when high, for the tests with low counts the discreteness of the data and the resulting p-values shows up in the spikes towards the right of the histogram.</p>
-<p>Now suppose we reject all tests with a p-value less than \(\). We can visually determine an estimate of the false discovery proportion with a plot such as in Figure 6.13, generated by the following code.</p>
+<p><a href="06-chap_files/figure-html/fig-testing-awpvhist-1.png &quot;그림 6.12: airway 데이터에 대한 p-값 히스토그램.&quot;"><img src="06-chap_files/figure-html/fig-testing- awpvhist-1.png" class="img-fluid"></a></p>
+<p>그림 6.12: <code>airway</code> 데이터에 대한 p-값 히스토그램.</p>
+<p>그림 6.12에서 우리는 예상된 혼합물을 봅니다. 또한 null 성분이 정확히 평평(균등)하지 않음을 볼 수 있는데, 이는 데이터가 카운트(counts)이기 때문입니다. 카운트가 높을 때는 준연속(quasi-continuous)으로 보이지만, 카운트가 낮은 검정의 경우 데이터의 이산성(discreteness)과 그 결과로 나타나는 p-값이 히스토그램 오른쪽의 뾰족한 부분(spikes)으로 나타납니다.</p>
+<p>이제 우리가 p-값이 \(\)보다 작은 모든 검정을 기각한다고 가정해 봅시다. 우리는 다음 코드로 생성된 그림 6.13과 같은 플롯을 통해 허위 발견 비율(false discovery proportion)의 추정치를 시각적으로 결정할 수 있습니다.</p>
 <pre><code>alpha = binw = 0.025
 pi0 = 2 * mean(awde$pvalue &gt; 0.5)
 ggplot(awde,
   aes(x = pvalue)) + geom_histogram(binwidth = binw, boundary = 0) +
   geom_hline(yintercept = pi0 * binw * nrow(awde), col = "blue") +
   geom_vline(xintercept = alpha, col = "red")__</code></pre>
-<p><a href="06-chap_files/figure-html/fig-testing-awpvvisfdr-1.png &quot;Figure 6.13: Visual estimation of the FDR with the p-value histogram.&quot;"><img src="06-chap_files/figure-html/fig-testing- awpvvisfdr-1.png" class="img-fluid"></a></p>
-<p>Figure 6.13: Visual estimation of the FDR with the p-value histogram.</p>
-<p>We see that there are 4772 p-values in the first bin \([0,]\), among which we expect around 945 to be nulls (as indicated by the blue line). Thus we can estimate the fraction of false rejections as</p>
+<p><a href="06-chap_files/figure-html/fig-testing-awpvvisfdr-1.png &quot;그림 6.13: p-값 히스토그램을 통한 FDR의 시각적 추정.&quot;"><img src="06-chap_files/figure-html/fig-testing- awpvvisfdr-1.png" class="img-fluid"></a></p>
+<p>그림 6.13: p-값 히스토그램을 통한 FDR의 시각적 추정.</p>
+<p>우리는 첫 번째 빈 \([0, ]\)에 4772개의 p-값이 있음을 알 수 있는데, 이 중 약 945개는 null일 것으로 예상됩니다(파란색 선으로 표시됨). 따라서 우리는 잘못된 기각의 비율을 다음과 같이 추정할 수 있습니다.</p>
 <pre><code>pi0 * alpha / mean(awde$pvalue &lt;= alpha)__
 
 
 [1] 0.1980092</code></pre>
-<p>The <strong>false discovery rate</strong> (FDR) is defined as</p>
+<p><strong>허위 발견율(False discovery rate, FDR)</strong>은 다음과 같이 정의됩니다.</p>
 <p>\[ = \!, \]</p>
-<p>where \(R\) and \(V\) are as in Table 6.2. The expression in the denominator makes sure that the FDR is well-defined even if \(R=0\) (in that case, \(V=0\) by implication). Note that the FDR becomes identical to the FWER if all null hypotheses are true, i.e., if \(V=R\). \(\) stands for the <strong>expected value</strong>. That means that the FDR is not a quantity associated with a specific outcome of \(V\) and \(R\) for one particular experiment. Rather, given our choice of tests and associated rejection rules for them, it is the average20 proportion of type I errors out of the rejections made, where the average is taken (at least conceptually) over many replicate instances of the experiment.</p>
+<p>여기서 \(R\)과 \(V\)는 표 6.2에서와 같습니다. 분모의 식은 \(R=0\)인 경우에도 FDR이 잘 정의되도록 보장합니다(그 경우 함축적으로 \(V=0\)이 됨). 모든 귀무 가설이 참인 경우, 즉 \(V=R\)인 경우 FDR은 FWER과 동일해진다는 점에 유의하세요. \(\)는 <strong>기대값(expected value)</strong>을 의미합니다. 즉, FDR은 수치가 아니라… associated with a specific outcome of \(V\) and \(R\) for one particular experiment. Rather, given our choice of tests and associated rejection rules for them, it is the average20 proportion of type I errors out of the rejections made, where the average is taken (at least conceptually) over many replicate instances of the experiment.</p>
 <p>20 Since the FDR is an expectation value, it does not provide worst case control: in any single experiment, the so-called false discovery proportion (FDP), that is the realized value \(v/r\) (without the \(\)), could be much higher or lower.</p>
 </section>
 <section id="the-benjamini-hochberg-algorithm-for-controlling-the-fdr" class="level3" data-number="8.8.2">
@@ -850,7 +840,7 @@ kmax __
 <p>\[ ( 1-p_i, N(p_i) ) i , …, m, \]</p>
 <p>where \(N(p)\) is the number of \(p\)-values greater than \(p\). An application of this diagnostic plot to <code>awde$pvalue</code> is shown in Figure 6.15. When all null hypotheses are true, each of the \(p\)-values is uniformly distributed in \([0,1]\), Consequently, the empirical cumulative distribution of the sample \((p_1, …, p_m)\) is expected to be close to the line \(F(t)=t\). By symmetry, the same applies to \((1 - p_1, …, 1 - p_m)\). When (without loss of generality) the first \(m_0\) null hypotheses are true and the other \(m-m_0\) are false, the empirical cumulative distribution of \((1-p_1, …, 1-p_{m_0})\) is again expected to be close to the line \(F_0(t)=t\). The empirical cumulative distribution of \((1-p_{m_0+1}, …, 1-p_{m})\), on the other hand, is expected to be close to a function \(F_1(t)\) which stays below \(F_0\) but shows a steep increase towards 1 as \(t\) approaches \(1\). In practice, we do not know which of the null hypotheses are true, so we only observe a mixture whose empirical cumulative distribution is expected to be close to</p>
 <p>\[ F(t) = F_0(t) + F_1(t). \]</p>
-<p>Such a situation is shown in Figure 6.15. If \(F_1(t)/F_0(t)\) is small for small \(t\) (i.e., the tests have reasonable power), then the mixture fraction \(\) can be estimated by fitting a line to the left- hand portion of the plot, and then noting its height on the right. Such a fit is shown by the red line. Here, we focus on those tests for which the count data are not all very small numbers (<code>baseMean&gt;=1</code>), since for these the p-value null distribution is sufficiently close to uniform (i.e., does not show the discreteness mentioned above), but you could try the making the same plot on all of the genes.</p>
+<p>Such a situation is shown in Figure 6.15. If \(F_1(t)/F_0(t)\) is small for small \(t\) (i.e., the tests have reasonable power), then the mixture fraction \(\) can be estimated by fitting a line to the left- hand portion of the plot, and then noting its height on the right. Such a fit is shown by the red line. Here, we focus on those tests for which the count data are not all very small numbers (<code>baseMean&gt;=1</code>), since for these the p-value null distribution is sufficiently close to uniform (i.e., does not 위의 genes 들에 대해서만 위와 같은 현상이 발생함)을 보여주기 위해 baseMean &gt;= 1인 유전자들만 필터링했습니다. 여러분은 모든 유전자에 대해 동일한 플롯을 만들어 볼 수도 있습니다.</p>
 <pre><code>awdef = awde |&gt;
   dplyr::filter(baseMean &gt;=1) |&gt; 
   arrange(pvalue) |&gt;
@@ -867,66 +857,66 @@ ggplot(awdef) +
   geom_vline(xintercept = 1, linetype = "dotted") +
   geom_text(x = 0, y = slope, label = paste(round(slope)), 
             hjust = -0.1, vjust = -0.25) __</code></pre>
-<p><a href="06-chap_files/figure-html/fig-testing- SchwederSpjotvoll-1.png" title="Figure 6.15: Schweder and Spjtvoll plot, as described in the answer to Question wrn-testing-SchwederSpjotvoll."><img src="06-chap_files/figure-html/fig-testing- SchwederSpjotvoll-1.png" class="img-fluid"></a></p>
-<p>Figure 6.15: Schweder and Spjtvoll plot, as described in the answer to Question 6.17.</p>
-<p>There are 22853 rows in <code>awdef</code>, thus, according to this simple estimate, there are 22853-17302=5551 alternative hypotheses.</p>
+<p><a href="06-chap_files/figure-html/fig-testing- SchwederSpjotvoll-1.png" title="그림 6.15: 질문 6.17의 답변에서 설명된 Schweder와 Spjotvoll 플롯."><img src="06-chap_files/figure-html/fig-testing- SchwederSpjotvoll-1.png" class="img-fluid"></a></p>
+<p>그림 6.15: Schweder와 Spjotvoll 플롯.</p>
+<p><code>awdef</code>에는 22,853개의 행이 있으며, 따라서 이 단순한 추정치에 따르면 22853-17302=5551개의 대립 가설이 존재합니다.</p>
 </section>
 </section>
-<section id="the-local-fdr" class="level2" data-number="8.9">
-<h2 data-number="8.9" class="anchored" data-anchor-id="the-local-fdr"><span class="header-section-number">8.9</span> 6.10 The local FDR</h2>
-<p><a href="imgs/xkcd1132.png" title="Figure 6.16: From http://xkcd.com/1132 – While the frequentist only has the currently available data, the Bayesian can draw on her understanding of the world or on previous experience. As a Bayesian, she would know enough about physics to understand that our sun’s mass is too small to become a nova. Even if she does not know physics, she might be an empirical Bayesian and draw her prior from a myriad previous days where the sun did not go nova."><img src="imgs/xkcd1132.png" class="img-fluid"></a></p>
-<p>Figure 6.16: From <a href="http://xkcd.com/1132" class="uri">http://xkcd.com/1132</a> – While the frequentist only has the currently available data, the Bayesian can draw on her understanding of the world or on previous experience. As a Bayesian, she would know enough about physics to understand that our sun’s mass is too small to become a nova. Even if she does not know physics, she might be an <strong>empirical Bayesian</strong> and draw her prior from a myriad previous days where the sun did not go nova.</p>
-<p>While the xkcd cartoon in the chapter’s opening figure ends with a rather sinister interpretation of the multiple testing problem as a way to accumulate errors, Figure 6.16 highlights the multiple testing opportunity: when we do many tests, we can use the multiplicity to increase our understanding beyond what’s possible with a single test.</p>
-<p><a href="06-chap_files/figure- html/fig-testing-lfdr-1.png" title="Figure 6.17: Local false discovery rate and the two-group model, with some choice of f_{\text{alt}}(p), and \pi_0=0.6; densities (top) and distribution functions (bottom)."><img src="06-chap_files/figure-html/fig-testing-lfdr-1.png" class="img-fluid"></a></p>
-<p>Figure 6.17: Local false discovery rate and the two-group model, with some choice of \(f_{}(p)\), and \(_0=0.6\); densities (top) and distribution functions (bottom).</p>
-<p>Let’s get back to the histogram in Figure 6.13. Conceptually, we can think of it in terms of the so-called two-groups model (<a href="16-chap.html#ref- Efron2010">Efron 2010</a>):</p>
+<section id="국소-fdrlocal-fdr" class="level2" data-number="8.9">
+<h2 data-number="8.9" class="anchored" data-anchor-id="국소-fdrlocal-fdr"><span class="header-section-number">8.9</span> 6.10 국소 FDR(Local FDR)</h2>
+<p><a href="imgs/xkcd1132.png" title="그림 6.16: http://xkcd.com/1132 – 빈도론자는 현재 가용한 데이터만 가질 수 있는 반면, 베이지안은 세계에 대한 이해나 이전 경험을 활용할 수 있습니다. 베이지안으로서 그녀는 우리 태양의 질량이 노바(nova)가 되기에는 너무 작다는 물리학 지식을 충분히 알고 있을 것입니다. 설령 물리학을 모르더라도, 그녀는 경험적 베이지안(empirical Bayesian)이 되어 태양이 폭발하지 않았던 수많은 이전 날들로부터 사전 확률을 가져올 수 있습니다."><img src="imgs/xkcd1132.png" class="img-fluid"></a></p>
+<p>그림 6.16: <a href="http://xkcd.com/1132" class="uri">http://xkcd.com/1132</a> – 빈도론자는 현재 가용한 데이터만 가질 수 있는 반면, 베이지안은 세계에 대한 이해나 이전 경험을 활용할 수 있습니다. 베이지안으로서 그녀는 우리 태양의 질량이 노바(nova)가 되기에는 너무 작다는 물리학 지식을 충분히 알고 있을 것입니다. 설령 물리학을 모르더라도, 그녀는 <strong>경험적 베이지안(empirical Bayesian)</strong>이 되어 태양이 폭발하지 않았던 수많은 이전 날들로부터 사전 확률을 가져올 수 있습니다.</p>
+<p>이 장의 첫머리에 있는 xkcd 만화는 다중 검정 문제를 오차를 축적하는 방식이라는 다소 불길한 해석으로 끝을 맺었지만, 그림 6.16은 다중 검정의 기회를 강조합니다: 우리가 많은 검정을 수행할 때, 우리는 다중성을 사용하여 단일 검정으로 가능한 것 이상의 이해를 높일 수 있습니다.</p>
+<p><a href="06-chap_files/figure- html/fig-testing-lfdr-1.png" title="그림 6.17: 국소 허위 발견율과 f_{alt}(p)의 일부 선택 및 \pi_0=0.6을 사용한 두 그룹 모델; 밀도(상단) 및 분포 함수(하단)."><img src="06-chap_files/figure-html/fig-testing-lfdr-1.png" class="img-fluid"></a></p>
+<p>그림 6.17: 국소 허위 발견율과 두 그룹 모델. \(f_{}(p)\)의 일부 선택 및 \(_0=0.6\)을 사용함; 밀도(상단) 및 분포 함수(하단).</p>
+<p>그림 6.13의 히트맵으로 돌아가 봅시다. 개념적으로 우리는 이를 이른바 두 그룹 모델(two-groups model, <a href="16-chap.html#ref-Efron2010">Efron 2010</a>)의 관점에서 생각할 수 있습니다:</p>
 <p>\[ f(p)= _0 + (1-<em>0) f</em>{}(p), \]</p>
-<p>Here, \(f(p)\) is the density of the distribution (what the histogram would look like with an infinite amount of data and infinitely small bins), \(<em>0\) is a number between 0 and 1 that represents the size of the uniform component, and \(f</em>{}\) is the alternative component. This is a mixture model, as we already saw in <a href="04-chap.html">Chapter 4</a>. The mixture densities and the marginal density \(f(p)\) are visualized in the upper panel of Figure 6.17: the blue areas together correspond to the graph of \(f_{}(p)\), the grey areas to that of \(f_{}(p) = _0\). If we now consider one particular cutoff \(p\) (say, \(p=0.1\) as in Figure 6.17), then we can compute the probability that a hypothesis that we reject at this cutoff is a false positive, as follows. We decompose the value of \(f\) at the cutoff (red line) into the contribution from the nulls (light red, \(_0\)) and from the alternatives (darker red, \((1-<em>0) f</em>{}(p)\)). The <strong>local false discovery rate</strong> is then</p>
+<p>여기서 \(f(p)\)는 분포의 밀도(데이터가 무한하고 빈이 무한히 작을 때 히스토그램의 모습)이고, \(<em>0\)는 균등 성분의 크기를 나타내는 0과 1 사이의 숫자이며, \(f</em>{}\)는 대립 성분입니다. 이는 우리가 이미 <a href="04-chap.html">4장</a>에서 보았던 혼합 모델입니다. 혼합 밀도와 주변 밀도 \(f(p)\)는 그림 6.17의 상단 패널에 시각화되어 있습니다: 파란색 영역들은 함께 \(f_{}(p)\)의 그래프에 해당하고, 회색 영역들은 \(f_{}(p) = _0\)에 해당합니다. 이제 특정 컷오프 \(p\)(예를 들어 그림 6.17에서처럼 \(p=0.1\))를 고려한다면, 이 컷오프에서 기각하는 가설이 위양성일 확률을 다음과 같이 계산할 수 있습니다. 우리는 컷오프에서의 \(f\) 값(빨간색 선)을 귀무 가설의 기여분(연한 빨간색, \(_0\))과 대립 가설의 기여분(더 짙은 빨간색, \((1-<em>0) f</em>{}(p)\))으로 분해합니다. 그러면 <strong>국소 허위 발견율(local false discovery rate)</strong>은 다음과 같습니다.</p>
 <p>\[ (p) = . \]</p>
-<p>By definition this quantity is between 0 and 1. Note how the \(\) in Figure 6.17 is a monotonically increasing function of \(p\), and this goes with our intuition that the fdr should be lowest for the smallest \(p\) and then gradually get larger, until it reaches 1 at the very right end. We can make a similar decomposition not only for the red line, but also for the area under the curve. This is</p>
+<p>정의에 따라 이 수치는 0과 1 사이입니다. 그림 6.17에서 \(\)이 \(p\)의 단조 증가 함수라는 점에 주목하세요. 이는 fdr이 가장 작은 \(p\)에 대해 가장 낮아야 하고, 그 다음 점차 커져서 가장 오른쪽 끝에서 1에 도달해야 한다는 우리의 직관과 일치합니다. 우리는 빨간색 선뿐만 아니라 곡선 아래의 면적에 대해서도 유사한 분해를 할 수 있습니다. 이는 다음과 같습니다.</p>
 <p>\[ F(p) = _0^p f(t),dt, \]</p>
-<p>and the ratio of the dark grey area (that is, \(_0\) times \(p\)) to the overall area \(F(p)\) is the <strong>tail area false discovery rate</strong> (Fdr21),</p>
-<p>21 The convention is to use the lower case abbreviation fdr for the local, and the abbreviation Fdr for the tail-area false discovery rate in the context of the two-groups model Equation 6.10. The abbreviation FDR is used for the original definition Equation 6.7, which is a bit more general, namely, it does not depend on the modelling assumptions of Equation 6.10.</p>
+<p>그리고 전체 면적 \(F(p)\)에 대한 짙은 회색 영역(\(_0\)에 \(p\)를 곱한 값)의 비율은 <strong>꼬리 영역 허위 발견율(tail area false discovery rate)</strong>(Fdr21)입니다.</p>
+<p>21 관습적으로 소문자 약어 fdr은 국소(local)를, 대문자 약어 Fdr은 식 6.10의 두 그룹 모델 문맥에서의 꼬리 영역 허위 발견율을 위해 사용합니다. 약어 FDR은 원래의 정의인 식 6.7을 위해 사용되는데, 이는 좀 더 일반적입니다. 즉, 식 6.10의 모델링 가정에 의존하지 않습니다.</p>
 <p>\[ (p) = . \]</p>
-<p>We’ll use the data version of \(F\) for diagnostics in Figure 6.21.</p>
-<p>The packages <strong><a href="https://bioconductor.org/packages/qvalue/">qvalue</a></strong> and <strong><a href="https://cran.r-project.org/web/packages/fdrtool/">fdrtool</a></strong> offer facilities to fit these models to data.</p>
+<p>우리는 그림 6.21의 진단을 위해 \(F\)의 데이터 버전을 사용할 것입니다.</p>
+<p><strong><a href="https://bioconductor.org/packages/qvalue/">qvalue</a></strong>와 <strong><a href="https://cran.r-project.org/web/packages/fdrtool/">fdrtool</a></strong> 패키지는 이러한 모델을 데이터에 적합시키는 기능을 제공합니다.</p>
 <pre><code>library("fdrtool")
 ft = fdrtool(awde$pvalue, statistic = "pvalue")__</code></pre>
-<p>In <strong><a href="https://cran.r-project.org/web/packages/fdrtool/">fdrtool</a></strong> , what we called \(_0\) above is called <code>eta0</code>:</p>
+<p><strong><a href="https://cran.r-project.org/web/packages/fdrtool/">fdrtool</a></strong>에서는 위에서 우리가 \(_0\)라고 불렀던 것을 <code>eta0</code>라고 부릅니다:</p>
 <pre><code>ft$param[,"eta0"]__
 
 
      eta0 
 0.8822922 </code></pre>
 <p>__</p>
-<p>Question 6.18</p>
-<p>What do the plots that are produced by the above call to <code>fdrtool</code> show?</p>
+<p>질문 6.18</p>
+<p>위의 <code>fdrtool</code> 호출로 생성된 플롯들은 무엇을 보여주나요?</p>
 <p>__</p>
-<p>Task</p>
-<p>Explore the other elements of the <em>list</em> <code>ft</code>.</p>
+<p>태스크</p>
+<p>리스트 <code>ft</code>의 다른 요소들을 탐색해 보세요.</p>
 <p>__</p>
-<p>Question 6.19</p>
-<p>What does the <em>empirical</em> in empirical Bayes methods stand for?</p>
-<section id="local-versus-total" class="level3" data-number="8.9.1">
-<h3 data-number="8.9.1" class="anchored" data-anchor-id="local-versus-total"><span class="header-section-number">8.9.1</span> 6.10.1 Local versus total</h3>
-<p>The FDR (or the Fdr) is a set property. It is a single number that applies to a whole set of rejections made in the course of a multiple testing analysis. In contrast, the fdr is a local property. It applies to an individual hypothesis. Recall Figure 6.17, where the fdr was computed for each point along the \(x\)-axis of the density plot, whereas the Fdr depends on the areas to the left of the red line.</p>
+<p>질문 6.19</p>
+<p>경험적 베이즈(empirical Bayes) 방법에서 “경험적”은 무엇을 의미하나요?</p>
+<section id="국소-대-전체" class="level3" data-number="8.9.1">
+<h3 data-number="8.9.1" class="anchored" data-anchor-id="국소-대-전체"><span class="header-section-number">8.9.1</span> 6.10.1 국소 대 전체</h3>
+<p>FDR(또는 Fdr)은 집합의 속성입니다. 이는 다중 검정 분석 과정에서 이루어진 기각 전체의 집합에 적용되는 단일 숫자입니다. 대조적으로 fdr은 국소적인 속성입니다. 이는 개별 가설에 적용됩니다. fdr이 밀도 플롯의 (x)축을 따른 각 지점에 대해 계산되었던 반면, Fdr은 빨간색 선의 왼쪽 면적들에 의존했던 그림 6.17을 상기해 보십시오.</p>
 <p>__</p>
-<p>Question 6.20</p>
-<p>Check out the concepts of <em>total cost</em> and <em>marginal cost</em> in economics. Can you see an analogy with Fdr and fdr?</p>
+<p>질문 6.20</p>
+<p>경제학에서의 _총비용(total cost)_과 <em>한계비용(marginal cost)</em> 개념을 확인해 보세요. Fdr 및 fdr과의 유사성을 찾을 수 있나요?</p>
 <p>__</p>
-<p>Solution</p>
+<p>해결책</p>
 <p>__</p>
-<p>For a production process that produces a set of \(m\) products, the total cost is the sum of the all costs involved. The average cost of a product is a hypothetical quantity, computed as the total cost divided by \(m\). The marginal cost is the cost of making one additional product, and is often very different from the average cost. For instance, learning to play a single Beethoven sonata on the piano may take an uninitiated person a substantial amount of time, but then playing it once more requires comparatively little additional effort: the marginal costs are much less than the fixed (and thus the total) costs. An example for marginal costs that are higher than the average costs is running: putting on your shoes and going out for a 10km run may be quite tolerable (perhaps even fun) to most people, whereas each additional 10km could add disproportional discomfort.</p>
+<p>\(m\)개의 제품 세트를 생산하는 생산 공정에서 총비용은 관련된 모든 비용의 합입니다. 제품의 평균 비용은 총비용을 \(m\)으로 나눈 가상의 수치입니다. 한계비용은 제품 하나를 추가로 만드는 데 드는 비용이며, 종종 평균 비용과는 매우 다릅니다. 예를 들어, 피아노로 베토벤 소나타 한 곡을 연주하는 법을 배우는 데는 초보자에게 상당한 시간이 걸릴 수 있지만, 그것을 한 번 더 연주하는 데는 비교적 적은 추가 노력이 필요합니다: 즉, 한계비용이 고정비용(따라서 총비용)보다 훨씬 적습니다. 한계비용이 평균 비용보다 높은 경우의 예로는 달리기가 있습니다: 운동화를 신고 나가서 10km를 달리는 것은 대부분의 사람들에게 꽤 견딜 만한(아마도 즐거운) 일이겠지만, 추가로 10km를 더 달릴 때마다 불균형적으로 큰 불쾌감이 더해질 수 있습니다.</p>
 </section>
-<section id="terminology" class="level3" data-number="8.9.2">
-<h3 data-number="8.9.2" class="anchored" data-anchor-id="terminology"><span class="header-section-number">8.9.2</span> 6.10.2 Terminology</h3>
-<p>Historically, the terms <em>multiple testing correction</em> and <em>adjusted p-value</em> have been used for process and output. In the context of false discovery rates, these terms are not helpful, if not confusing. We advocate avoiding them. They imply that we start out with a set of p-values \((p_1,…,p_m)\), apply some canonical procedure, and obtain a set of “corrected” or “adjusted” p-values \((p_1<sup>{},…,p_m</sup>{})\). However, the output of the Benjamini-Hochberg method is not p-values, and neither are the FDR, Fdr or the fdr. Remember that FDR and Fdr are set properties, and associating them with an individual test makes as much sense as confusing average and marginal costs. Fdr and fdr also depend on a substantial amount of modelling assumptions. In the next session, you will also see that the method of Benjamini-Hochberg is not the only game in town, and that there are important and useful extensions, which further displace any putative direct correspondence between the set of hypotheses and p-values that are input into a multiple testing procedure, and its outputs.</p>
+<section id="용어" class="level3" data-number="8.9.2">
+<h3 data-number="8.9.2" class="anchored" data-anchor-id="용어"><span class="header-section-number">8.9.2</span> 6.10.2 용어</h3>
+<p>역사적으로 _다중 검정 보정(multiple testing correction)_과 _조정된 p-값(adjusted p-value)_이라는 용어가 프로세스와 출력물에 사용되어 왔습니다. 허위 발견율의 문맥에서 이러한 용어들은 도움이 되지 않을 뿐만 아니라 혼란을 줄 수 있습니다. 우리는 이 용어들의 사용을 피할 것을 권장합니다. 이 용어들은 우리가 p-값 세트 \((p_1, …, p_m)\)로 시작하여 어떤 전형적인 절차를 적용하고, “보정된” 또는 “조정된” p-값 세트 \((p_1^{}, …, p_m^{})\)를 얻는다는 것을 암시합니다. 그러나 벤자미니-호크버그 방법의 결과물은 p-값이 아니며, FDR, Fdr, fdr 역시 p-값이 아닙니다. FDR과 Fdr은 집합의 속성임을 기억하십시오. 이를 개별 검정과 연관 짓는 것은 평균 비용과 한계 비용을 혼동하는 것만큼이나 말이 되지 않습니다. Fdr과 fdr 역시 상당한 양의 모델링 가정에 의존합니다. 다음 섹션에서 여러분은 벤자미니-호크버그 방법이 유일한 방법이 아니라는 것과, 다중 검정 절차에 입력되는 가설 및 p-값 세트와 그 출력물 사이의 추정되는 직접적인 대응 관계를 더욱 멀어지게 만드는 중요하고 유용한 확장들이 있다는 것을 보게 될 것입니다.</p>
 </section>
 </section>
-<section id="independent-hypothesis-weighting" class="level2" data-number="8.10">
-<h2 data-number="8.10" class="anchored" data-anchor-id="independent-hypothesis-weighting"><span class="header-section-number">8.10</span> 6.11 Independent hypothesis weighting</h2>
-<p>The Benjamini-Hochberg method and the two-groups model, as we have seen them so far, implicitly assume <em>exchangeability</em> of the hypotheses: all we use are the p-values. Beyond these, we do not take into account any additional information. This is not always optimal, and here we’ll study ways of how to improve on this.</p>
-<p>Let’s look at an example. Intuitively, the signal-to-noise ratio for genes with larger numbers of reads mapped to them should be better than for genes with few reads, and that should affect the power of our tests. We look at the mean of normalized counts across observations. In the <strong><a href="https://bioconductor.org/packages/DESeq2/">DESeq2</a></strong> package this quantity is called the <code>baseMean</code>.</p>
+<section id="독립-가설-가중치-부여independent-hypothesis-weighting" class="level2" data-number="8.10">
+<h2 data-number="8.10" class="anchored" data-anchor-id="독립-가설-가중치-부여independent-hypothesis-weighting"><span class="header-section-number">8.10</span> 6.11 독립 가설 가중치 부여(Independent hypothesis weighting)</h2>
+<p>지금까지 살펴본 벤자미니-호크버그 방법과 두 그룹 모델은 가설의 _교환 가능성(exchangeability)_을 암시적으로 가정합니다: 우리가 사용하는 전부는 p-값뿐입니다. 이들 외에 어떠한 추가 정보도 고려하지 않습니다. 이것이 항상 최적인 것은 아니며, 여기서는 이를 개선하는 방법들을 공부할 것입니다.</p>
+<p>예를 들어봅시다. 직관적으로, 더 많은 수의 리드(reads)가 매핑된 유전자의 신호 대 잡음비(signal-to-noise ratio)는 리드가 적은 유전자보다 더 좋을 것이며, 이는 우리 검정의 검정력에 영향을 줄 것입니다. 관측치 전반에 걸친 정규화된 카운트의 평균을 살펴봅시다. <strong><a href="https://bioconductor.org/packages/DESeq2/">DESeq2</a></strong> 패키지에서 이 수치는 <code>baseMean</code>이라 불립니다.</p>
 <pre><code>awde$baseMean[1]__
 
 
@@ -947,26 +937,26 @@ mean(cts)__
 
 
 [1] 708.6022</code></pre>
-<p>Next we produce the histogram of this quantity across genes, and plot it against the p-values (Figures 6.18 and 6.19).</p>
+<p>다음으로 유전자 전체에 대한 이 수치의 히스토그램을 생성하고, p-값에 대해 플롯합니다(그림 6.18 및 6.19).</p>
 <pre><code>ggplot(awde, aes(x = asinh(baseMean))) +
   geom_histogram(bins = 60)__</code></pre>
-<p><a href="06-chap_files/figure-html/fig-testing-basemean-hist-1.png &quot;Figure 6.18: Histogram of baseMean. We see that it covers a large dynamic range, from close to 0 to around 330000.&quot;"><img src="06-chap_files/figure-html/fig-testing-basemean- hist-1.png" class="img-fluid"></a></p>
-<p>Figure 6.18: Histogram of <code>baseMean</code>. We see that it covers a large dynamic range, from close to 0 to around 330000.</p>
+<p><a href="06-chap_files/figure-html/fig-testing-basemean-hist-1.png &quot;그림 6.18: baseMean의 히스토그램. 0에 가까운 값부터 약 330,000까지 넓은 동적 범위를 포괄하고 있음을 알 수 있습니다.&quot;"><img src="06-chap_files/figure-html/fig-testing-basemean- hist-1.png" class="img-fluid"></a></p>
+<p>그림 6.18: <code>baseMean</code>의 히스토그램. 0에 가까운 값부터 약 330,000까지 넓은 동적 범위를 포괄하고 있음을 알 수 있습니다.</p>
 <pre><code>ggplot(awde, aes(x = rank(baseMean), y = -log10(pvalue))) +
   geom_hex(bins = 60) +
   theme(legend.position = "none")__</code></pre>
-<p><a href="06-chap_files/figure-html/fig-testing-basemean-scp-1.png &quot;Figure 6.19: Scatterplot of the rank of baseMean versus the negative logarithm of the p-value. For small values of baseMean, no small p-values occur. Only for genes whose read counts across all observations have a certain size, the test for differential expression has power to come out with a small p-value.&quot;"><img src="06-chap_files/figure-html/fig-testing-basemean- scp-1.png" class="img-fluid"></a></p>
-<p>Figure 6.19: Scatterplot of the rank of <code>baseMean</code> versus the negative logarithm of the p-value. For small values of <code>baseMean</code>, no small p-values occur. Only for genes whose read counts across all observations have a certain size, the test for differential expression has power to come out with a small p-value.</p>
+<p><a href="06-chap_files/figure-html/fig-testing-basemean-scp-1.png &quot;그림 6.19: baseMean의 순위(rank) 대 p-값의 상용로그 역수(negative logarithm)의 산점도. baseMean 값이 작을 때는 작은 p-값이 나타나지 않습니다. 모든 관측치에 걸친 리드 카운트가 일정 크기 이상인 유전자에 대해서만 차등 발현 검정이 작은 p-값을 내놓을 수 있는 검정력을 갖습니다.&quot;"><img src="06-chap_files/figure-html/fig-testing-basemean- scp-1.png" class="img-fluid"></a></p>
+<p>그림 6.19: <code>baseMean</code>의 순위(rank) 대 p-값의 상용로그 역수(negative logarithm)의 산점도. <code>baseMean</code> 값이 작을 때는 작은 p-값이 나타나지 않습니다. 모든 관측치에 걸친 리드 카운트가 일정 크기 이상인 유전자에 대해서만 차등 발현 검정이 작은 p-값을 내놓을 수 있는 검정력을 갖습니다.</p>
 <p>__</p>
-<p>Question 6.21</p>
-<p>Why did we use the \(\) transformation for the histogram? How does it look like with no transformation, the logarithm, the shifted logarithm, i.e., \((x+)\)?</p>
+<p>질문 6.21</p>
+<p>히스토그램에 왜 \(\) 변환을 사용했을까요? 변환을 하지 않았을 때, 로그 변환을 했을 때, 이동된 로그 변환(즉, \((x+)\))을 했을 때는 어떤 모습일까요?</p>
 <p>__</p>
-<p>Question 6.22</p>
-<p>In the scatterplot, why did we use \(-_{10}\) for the p-values? Why the rank transformation for the <code>baseMean</code>?</p>
-<p>For convenience, we discretize <code>baseMean</code> into a factor variable <code>group</code>, which corresponds to six equal-sized groups.</p>
+<p>질문 6.22</p>
+<p>산점도에서 왜 p-값에 \(-_{10}\)을 사용했을까요? <code>baseMean</code>에는 왜 순위 변환을 사용했을까요?</p>
+<p>편의상, 우리는 <code>baseMean</code>을 동일한 크기의 6개 그룹에 해당하는 요인 변수 <code>group</code>으로 이산화(discretize)합니다.</p>
 <pre><code>awde = mutate(awde, stratum = cut(baseMean, include.lowest = TRUE,
   breaks = signif(quantile(baseMean,probs=seq(0,1,length.out=7)),2)))__</code></pre>
-<p>In Figures 6.20 and 6.21 we see the histograms of p-values and the ECDFs stratified by <code>stratum</code>.</p>
+<p>그림 6.20과 6.21에서 우리는 <code>stratum</code>별로 계층화된 p-값의 히스토그램과 ECDF를 봅니다.</p>
 <pre><code>ggplot(awde, aes(x = pvalue)) + facet_wrap( ~ stratum, nrow = 4) +
   geom_histogram(binwidth = 0.025, boundary = 0)__</code></pre>
 <p><a href="06-chap_files/figure-html/fig-testing-awde-stratified-hist-1.png &quot;Figure 6.20: p-value histograms of the airway data, stratified into equally sized groups defined by increasing value of baseMean.&quot;"><img src="06-chap_files/figure-html/fig-testing-awde-stratified- hist-1.png" class="img-fluid"></a></p>
@@ -975,75 +965,75 @@ mean(cts)__
   stat_ecdf(geom = "step") + theme(legend.position = "bottom")__</code></pre>
 <p><a href="06-chap_files/figure-html/fig-testing-awde-stratified-ecdf-1.png &quot;Figure 6.21: Same data as in Figure fig-testing-awde-stratified-hist, shown with ECDFs.&quot;"><img src="06-chap_files/figure-html/fig-testing-awde-stratified- ecdf-1.png" class="img-fluid"></a></p>
 <p>Figure 6.21: Same data as in Figure 6.20, shown with ECDFs.</p>
-<p>If we were to fit the two-group model to these strata separately, we would get quite different estimates for \(<em>0\) and \(f</em>{}\). For the most lowly expressed genes, the power of the <strong><a href="https://bioconductor.org/packages/DESeq2/">DESeq2</a></strong> -test is low, and the p-values essentially all come from the null component. As we go higher in average expression, the height of the small-p-values peak in the histograms increases, reflecting the increasing power of the test.</p>
-<p>Can we use that to improve our handling of the multiple testing? It turns out that this is possible. One approach is <strong>independent hypothesis weighting</strong> (IHW) (<a href="16-chap.html#ref-Ignatiadis:2016">Ignatiadis et al.&nbsp;2016</a>; <a href="16-chap.html#ref-Ignatiadis:JRSSB:2021">Ignatiadis and Huber 2021</a>)22.</p>
-<p>22 There are a number of other approaches, see e.g., a benchmark study by Korthauer et al.&nbsp;(<a href="16-chap.html#ref-Korthauer:GB:2019">2019</a>) or the citations in the paper by Ignatiadis and Huber (<a href="16-chap.html#ref- Ignatiadis:JRSSB:2021">2021</a>).</p>
+<p>이러한 계층(strata)들에 대해 두 그룹 모델을 따로 적합시킨다면, \(<em>0\)와 \(f</em>{}\).에 대해 상당히 다른 추정치를 얻게 될 것입니다. 가장 낮게 발현된 유전자들의 경우 <strong><a href="https://bioconductor.org/packages/DESeq2/">DESeq2</a></strong> 검정의 검정력이 낮으며, p-값들은 본질적으로 모두 귀무(null) 성분에서 나옵니다. 평균 발현량이 높아질수록 히스토그램에서 작은 p-값 정점의 높이가 높아지는데, 이는 검정의 검정력이 증가함을 반영합니다.</p>
+<p>이를 다중 검정 처리를 개선하는 데 사용할 수 있을까요? 그것이 가능하다는 것이 밝혀졌습니다. 한 가지 접근 방식은 <strong>독립 가설 가중치 부여(independent hypothesis weighting, IHW)</strong>입니다 (<a href="16-chap.html#ref-Ignatiadis:2016">Ignatiadis et al.&nbsp;2016</a>; <a href="16-chap.html#ref-Ignatiadis:JRSSB:2021">Ignatiadis and Huber 2021</a>)22.</p>
+<p>22 이 외에도 여러 접근 방식이 있습니다. 예를 들어 Korthauer 등 (<a href="16-chap.html#ref-Korthauer:GB:2019">2019</a>)의 벤치마크 연구나 Ignatiadis와 Huber (<a href="16-chap.html#ref-Ignatiadis:JRSSB:2021">2021</a>) 논문의 인용 문헌들을 참조하십시오.</p>
 <pre><code>library("IHW")
 ihw_res = ihw(awde$pvalue, awde$baseMean, alpha = 0.1)
 rejections(ihw_res)__
 
 
 [1] 4892</code></pre>
-<p>Let’s compare this to what we get from the ordinary (unweighted) Benjamini- Hochberg method:</p>
+<p>이를 일반적인 (가중치를 부여하지 않은) 벤자미니-호크버그 방법과 비교해 봅시다:</p>
 <pre><code>padj_BH = p.adjust(awde$pvalue, method = "BH")
 sum(padj_BH &lt; 0.1)__
 
 
 [1] 4099</code></pre>
-<p>With hypothesis weighting, we get more rejections. For these data, the difference is notable though not spectacular; this is because their signal-to- noise ratio is already quite high. In other situations, where there is less power to begin with (e.g., where there are fewer replicates, the data are more noisy, or the effect of the treatment is less drastic), the difference from using IHW can be more pronounced.</p>
-<p>We can have a look at the weights determined by the <code>ihw</code> function (Figure 6.22).</p>
+<p>가설 가중치를 사용하면 더 많은 기각(rejections)을 얻습니다. 이 데이터의 경우 차이가 두드러지긴 하지만 극적이진 않은데, 이는 이미 신호 대 잡음비가 꽤 높기 때문입니다. 처음부터 검정력이 낮은 다른 상황(예: 반복 수가 적거나, 데이터에 노이즈가 더 많거나, 처리 효과가 덜 급격한 경우)에서는 IHW를 사용하는 효과가 더 뚜렷할 수 있습니다.</p>
+<p><code>ihw</code> 함수에 의해 결정된 가중치들을 살펴볼 수 있습니다(그림 6.22).</p>
 <pre><code>plot(ihw_res)__</code></pre>
-<p><a href="06-chap_files/figure-html/fig-testing-ihwplot-1.png &quot;Figure 6.22: Hypothesis weights determined by the ihw function. Here the function’s default settings chose 22 strata, while in our manual exploration above (Figures fig-testing-awde-stratified-hist, fig-testing-awde-stratified- ecdf) we had used 6; in practice, this is a minor detail.&quot;"><img src="06-chap_files/figure-html/fig-testing- ihwplot-1.png" class="img-fluid"></a></p>
-<p>Figure 6.22: Hypothesis weights determined by the <code>ihw</code> function. Here the function’s default settings chose 22 strata, while in our manual exploration above (Figures 6.20, 6.21) we had used 6; in practice, this is a minor detail.</p>
-<p>Intuitively, what happens here is that IHW chooses to put more weight on the hypothesis strata with higher <code>baseMean</code>, and low weight on those with very low counts. The Benjamini-Hochberg method has a certain type-I error budget, and rather than spreading it equally among all hypotheses, here we take it away from those strata that have little change of small fdr anyway, and “invest” it in strata where many hypotheses can be rejected at small fdr.</p>
+<p><a href="06-chap_files/figure-html/fig-testing-ihwplot-1.png &quot;그림 6.22: ihw 함수에 의해 결정된 가설 가중치. 여기서 함수의 기본 설정은 22개의 계층(strata)을 선택한 반면, 위에서의 수동 탐색(그림 6.20, 6.21)에서는 6개를 사용했습니다. 실제로는 이는 사소한 세부 사항입니다.&quot;"><img src="06-chap_files/figure-html/fig-testing- ihwplot-1.png" class="img-fluid"></a></p>
+<p>그림 6.22: <code>ihw</code> 함수에 의해 결정된 가설 가중치. 여기서 함수의 기본 설정은 22개의 계층(strata)을 선택한 반면, 위에서의 수동 탐색(그림 6.20, 6.21)에서는 6개를 사용했습니다. 실제로는 이는 사소한 세부 사항입니다.</p>
+<p>직관적으로 여기서 일어나는 일은, IHW가 <code>baseMean</code>이 높은 가설 계층에 더 많은 가중치를 부여하고, 카운트가 매우 낮은 계층에는 낮은 가중치를 부여하기로 선택한 것입니다. 벤자미니-호크버그 방법은 특정한 제1종 오류 예산을 가지고 있는데, 이를 모든 가설에 똑같이 분배하는 대신, 여기서는 어차피 작은 fdr을 가질 가능성이 거의 없는 계층에서 예산을 가져와 많은 가설이 작은 fdr에서 기각될 수 있는 계층에 “투자”하는 것입니다.</p>
 <p>__</p>
-<p>Question 6.23</p>
-<p>Why does Figure 6.22 show 5 curves, rather than only one?</p>
-<p>Such possibilities for stratification by an additional summary statistic besides the p-value—in our case, the <code>baseMean</code>—exist in many multiple testing situations. Informally, we need such a so-called <em>covariate</em> to be</p>
+<p>질문 6.23</p>
+<p>왜 그림 6.22는 하나의 곡선이 아니라 5개의 곡선을 보여주나요?</p>
+<p>p-값 외에 추가적인 요약 통계량(우리의 경우 <code>baseMean</code>)에 의한 계층화 가능성은 많은 다중 검정 상황에서 존재합니다. 비공식적으로 말하자면, 우리는 그러한 이른바 _공변량(covariate)_이 다음과 같아야 합니다:</p>
 <ul>
-<li><p>statistically independent from our p-values under the null, but</p></li>
-<li><p>informative of the prior probability \(<em>0\) and/or the power of the test (the shape of the alternative density, \(f</em>{}\)) in the two-groups model.</p></li>
+<li><p>귀무 가설하에서 우리의 p-값과 통계적으로 독립적이어야 하지만,</p></li>
+<li><p>두 그룹 모델에서 사전 확률 \(<em>0\) 및/또는 검정력(대립 가설 밀도 \(f</em>{}\)의 형태)에 대한 정보를 제공해야 합니다.</p></li>
 </ul>
-<p>These requirements can be assessed through diagnostic plots as in Figures 6.18—6.21.</p>
+<p>이러한 요구 사항은 그림 6.18—6.21과 같은 진단 플롯을 통해 평가할 수 있습니다.</p>
 </section>
-<section id="summary-of-this-chapter" class="level2" data-number="8.11">
-<h2 data-number="8.11" class="anchored" data-anchor-id="summary-of-this-chapter"><span class="header-section-number">8.11</span> 6.12 Summary of this chapter</h2>
-<p>We have explored the concepts behind <em>single hypothesis testing</em> and then moved on to <em>multiple testing</em>. We have seen how some of the limitations of interpreting a single p-value from a single test can be overcome once we are able to consider a whole distribution of outcomes from many tests. We have also seen that there are often additional summary statistics of our data, besides the p-values. We called them informative covariates, and we saw how we can use them to weigh the p-values and overall get more (or better) discoveries.</p>
-<p>The usage of hypothesis testing in the <em>multiple testing</em> scenario is quite different from that in the <em>single test</em> case: for the latter, the hypothesis test might literally be the final result, the culmination of a long and expensive data acquisition campaign (ideally, with a prespecified hypothesis and data analysis plan). In the multiple testing case, its outcome will often just be an intermediate step: a subset of most worthwhile hypotheses selected by screening a large initial set. This subset is then followed up by more careful analyses.</p>
-<p>We have seen the concept of the <em>false discovery rate</em> (FDR). It is important to keep in mind that this is an average property, for the subset of hypotheses that were selected. Like other averages, it does not say anything about the individual hypotheses. Then there is the concept of the <em>local false discovery rate</em> (fdr), which indeed does apply to an individual hypothesis. The local false discovery rate is however quite unrelated to the p-value, as the two- group model showed us. Much of the confusion and frustration about p-values seems to come from the fact that people would like to use them for purposes that the fdr is made for. It is perhaps a historical aberration that so much of applied sciences focuses on p-values and not local false discovery rate. On the other hand, there are also practical reasons, since a p-value is readily computed, whereas a fdr is difficult to estimate or control from data without making strong modelling assumptions.</p>
-<p>We saw the importance of diagnostic plots, in particular, to always look at the p-value histograms when encountering a multiple testing analysis.</p>
+<section id="이-장의-요약" class="level2" data-number="8.11">
+<h2 data-number="8.11" class="anchored" data-anchor-id="이-장의-요약"><span class="header-section-number">8.11</span> 6.12 이 장의 요약</h2>
+<p>우리는 <em>단일 가설 검정</em> 이면의 개념들을 탐구한 다음 _다중 검정_으로 넘어갔습니다. 우리는 수많은 검정으로부터 나온 결과의 전체 분포를 고려할 수 있게 되면 단일 검정에서 얻은 단일 p-값을 해석할 때의 몇 가지 한계들을 어떻게 극복할 수 있는지 보았습니다. 또한 p-값 외에도 우리 데이터에 종종 추가적인 요약 통계량이 있다는 것도 보았습니다. 우리는 이를 정보성 공변량(informative covariates)이라 불렀으며, 이를 사용하여 p-값에 가중치를 부여하고 전반적으로 더 많거나 더 나은 발견을 얻는 방법을 살펴보았습니다.</p>
+<p><em>다중 검정</em> 시나리오에서의 가설 검정 사용은 <em>단일 검정</em> 사례와는 상당히 다릅니다: 후자의 경우, 가설 검정은 말 그대로 (이상적으로는 사전에 지정된 가설과 데이터 분석 계획을 가진) 길고 비용이 많이 드는 데이터 획득 캠페인의 최종 결과이자 정점일 수 있습니다. 다중 검정의 경우, 그 결과는 종종 중간 단계일 뿐입니다: 방대한 초기 집합을 스크리닝하여 선택된, 가장 가치 있는 가설들의 하위 집합입니다. 이 하위 집합은 이후 더 세심한 분석을 통해 후속 연구가 진행됩니다.</p>
+<p>우리는 <em>허위 발견율</em>(FDR)의 개념을 보았습니다. 이것이 선택된 가설들의 하위 집합에 대한 평균적인 속성이라는 점을 명심하는 것이 중요합니다. 다른 평균들과 마찬가지로, 개별 가설에 대해서는 아무것도 말해주지 않습니다. 그리고 개별 가설에 실제로 적용되는 <em>국소 허위 발견율</em>(fdr)이라는 개념이 있습니다. 그러나 두 그룹 모델이 보여주었듯이, 국소 허위 발견율은 p-값과는 상당히 무관합니다. p-값에 대한 많은 혼란과 좌절은 사람들이 fdr이 담당하는 목적을 위해 p-값을 사용하고 싶어 한다는 사실에서 비롯되는 것 같습니다. 응용 과학의 아주 많은 부분이 국소 허위 발견율이 아닌 p-값에 집중하고 있다는 것은 아마도 역사적 일탈일지 모릅니다. 반면에 실무적인 이유도 있는데, p-값은 즉시 계산되는 반면, fdr은 강력한 모델링 가정 없이는 데이터로부터 추정하거나 제어하기 어렵기 때문입니다.</p>
+<p>우리는 진단 플롯의 중요성을 확인했습니다. 특히 다중 검정 분석을 마주할 때는 항상 p-값 히스토그램을 살펴보아야 합니다.</p>
 </section>
-<section id="further-reading" class="level2" data-number="8.12">
-<h2 data-number="8.12" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">8.12</span> 6.13 Further reading</h2>
+<section id="더-읽을거리" class="level2" data-number="8.12">
+<h2 data-number="8.12" class="anchored" data-anchor-id="더-읽을거리"><span class="header-section-number">8.12</span> 6.13 더 읽을거리</h2>
 <ul>
-<li><p>A comprehensive text book treatment of multiple testing is given by Efron (<a href="16-chap.html#ref-Efron2010">2010</a>).</p></li>
-<li><p>Outcome switching in clinical trials: <a href="http://compare-trials.org" class="uri">http://compare-trials.org</a></p></li>
-<li><p>For hypothesis weighting, the <strong><a href="https://bioconductor.org/packages/IHW/">IHW</a></strong> vignette, the IHW paper (<a href="16-chap.html#ref-Ignatiadis:2016">Ignatiadis et al.&nbsp;2016</a>) and the references therein.</p></li>
+<li><p>다중 검정에 대한 포괄적인 교과서적 처리는 Efron (<a href="16-chap.html#ref-Efron2010">2010</a>)에 의해 제공됩니다.</p></li>
+<li><p>임상 시험에서의 결과 전환(Outcome switching): <a href="http://compare-trials.org" class="uri">http://compare-trials.org</a></p></li>
+<li><p>가설 가중치에 대해서는 <strong><a href="https://bioconductor.org/packages/IHW/">IHW</a></strong> 비네트, IHW 논문 (<a href="16-chap.html#ref-Ignatiadis:2016">Ignatiadis et al.&nbsp;2016</a>) 및 그 안의 참고 문헌들을 참조하십시오.</p></li>
 </ul>
 </section>
-<section id="exercises" class="level2" data-number="8.13">
-<h2 data-number="8.13" class="anchored" data-anchor-id="exercises"><span class="header-section-number">8.13</span> 6.14 Exercises</h2>
+<section id="연습-문제" class="level2" data-number="8.13">
+<h2 data-number="8.13" class="anchored" data-anchor-id="연습-문제"><span class="header-section-number">8.13</span> 6.14 연습 문제</h2>
 <p>__</p>
-<p>Exercise 6.1</p>
-<p>Identify an application from your scientific field of expertise that relies on multiple testing. Find an exemplary dataset and plot the histogram of p-values. Are the hypotheses all exchangeable, or is there one or more informative covariates? Plot the stratified histograms.</p>
+<p>연습 문제 6.1</p>
+<p>여러분의 과학적 전문 분야에서 다중 검정에 의존하는 응용 사례를 하나 찾아보십시오. 전형적인 데이터 세트를 찾아 p-값 히스토그램을 그려보세요. 가설들이 모두 교환 가능한가요, 아니면 하나 이상의 정보성 공변량이 있나요? 계층화된 히스토그램을 그려보세요.</p>
 <p>__</p>
-<p>Exercise</p>
-<p>Why do mathematical statisticians focus so much on the null hypothesis of a test, compared to the alternative hypothesis?</p>
+<p>연습 문제</p>
+<p>수리 통계학자들은 대립 가설에 비해 왜 검정의 귀무 가설에 그렇게 많이 집중할까요?</p>
 <p>__</p>
-<p>Exercise 6.2</p>
-<p>How can we ever prove that the null hypothesis is true? Or that the alternative is true?</p>
+<p>연습 문제 6.2</p>
+<p>우리는 어떻게 귀무 가설이 참임을 증명할 수 있을까요? 아니면 대립 가설이 참임을요?</p>
 <p>__</p>
-<p>Exercise 6.3</p>
-<p>Make a less extreme example of correlated test statistics than the data duplication at the end of Section 6.5. Simulate data with true null hypotheses only, and let the data morph from having completely independent replicates (columns) to highly correlated as a function of some continuous-valued control parameter. Check type-I error control (e.g., with the p-value histogram) as a function of this control parameter.</p>
+<p>연습 문제 6.3</p>
+<p>6.5절 끝부분의 데이터 복제보다 덜 극단적인 상관된 검정 통계량의 예를 만들어 보세요. 오직 참인 귀무 가설들로만 데이터를 시뮬레이션하고, 어떤 연속형 제어 매개변수의 함수로서 데이터가 완전히 독립적인 반복(열)에서 고도로 상관된 상태로 변하도록 만드십시오. 이 제어 매개변수의 함수로서 (예를 들어 p-값 히스토그램을 통해) 제1종 오류 제어를 확인해 보세요.</p>
 <p>__</p>
-<p>Exercise 6.4</p>
-<p>Find an example in the published literature that looks as if p-value hacking, outcome switching, HARKing played a role.</p>
+<p>연습 문제 6.4</p>
+<p>발표된 문헌 중에서 p-값 해킹, 결과 전환, HARKing이 작용한 것처럼 보이는 사례를 하나 찾아보십시오.</p>
 <p>__</p>
-<p>Exercise 6.5</p>
-<p>The FDR is an expectation value, i.e., it is used if we want to control the average behavior of a procedure. Are there methods for worst case control?</p>
+<p>연습 문제 6.5</p>
+<p>FDR은 기대값(expectation value)입니다. 즉, 절차의 평균적인 거동을 제어하고 싶을 때 사용됩니다. 최악의 경우(worst case)를 제어하기 위한 방법들이 있을까요?</p>
 <p>__</p>
-<p>Exercise 6.6</p>
-<p>What is the memory and time complexity of the Benjamini-Hochberg algorithm? How about the IHW method? Can you fit polynomial functions as a function of the number of tests \(m\)? Hint: Simulate data with increasing numbers of hypothesis tests, measure time and memory consumption with functions such as <code>pryr::object_size</code> or <code>microbenchmark</code> from the eponymous package, and plot these against \(m\) in a double-logarithmic plot.</p>
+<p>연습 문제 6.6</p>
+<p>벤자미니-호크버그 알고리즘의 메모리 및 시간 복잡도는 얼마인가요? IHW 방법은 어떤가요? 검정의 수 \(m\)의 함수로서 다항 함수를 적합시킬 수 있나요? 힌트: 가설 검정의 수를 늘려가며 데이터를 시뮬레이션하고, <code>pryr::object_size</code>나 동명의 패키지에 있는 <code>microbenchmark</code>와 같은 함수를 사용하여 시간 및 메모리 소비를 측정하고, 이들을 이중 로그 플롯(double-logarithmic plot)에서 \(m\)에 대해 플롯해 보세요.</p>
 <p>Altman, Naomi, and Martin Krzywinski. 2017. “Points of Significance: Interpreting p Values.” <em>Nature Methods</em> 14 (3): 213–14. <a href="https://doi.org/10.1038/nmeth.4210" class="uri">https://doi.org/10.1038/nmeth.4210</a>.</p>
 <p>Benjamini, Yoav, and Yosef Hochberg. 1995. “Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing.” <em>Journal of the Royal Statistical Society B</em> 57: 289–300.</p>
 <p>Efron, Bradley. 2010. <em>Large-Scale Inference: Empirical Bayes Methods for Estimation, Testing, and Prediction</em>. Cambridge University Press.</p>
@@ -1111,13 +1101,14 @@ sum(padj_BH &lt; 0.1)__
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -1461,13 +1452,13 @@ sum(padj_BH &lt; 0.1)__
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./05-chap.html" class="pagination-link" aria-label="5.1 Goals for this chapter">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">5.1 Goals for this chapter</span></span>
+      <a href="./05-chap.html" class="pagination-link" aria-label="5.1 이 장의 목표">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">5.1 이 장의 목표</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./07-chap.html" class="pagination-link" aria-label="7.1 Goals for this chapter">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">7.1 Goals for this chapter</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./07-chap.html" class="pagination-link" aria-label="7.1 이 장의 목표">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">7.1 이 장의 목표</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

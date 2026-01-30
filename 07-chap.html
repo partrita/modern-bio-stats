@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.8.27">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>9&nbsp; 7.1 Goals for this chapter – Modern Statistics for Modern Biology</title>
+<title>9&nbsp; 7.1 이 장의 목표 – Modern Statistics for Modern Biology</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -34,14 +34,15 @@ ul.task-list li input[type="checkbox"] {
 <link href="./06-chap.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-22854ec117201859c8a7ba6f538122c9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-7bf12d62aa84b4fa538b342f1416a45b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -84,7 +85,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -112,7 +113,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./07-chap.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">7.1 Goals for this chapter</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./07-chap.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">7.1 이 장의 목표</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -140,79 +141,79 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Home</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">홈</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./00-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">The challenge: heterogeneity</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">주제: 이질성</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">1.1 Goals for this chapter</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">1.1 이 장의 목표</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">2.1 Goals for this chapter</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">2.1 이 장의 목표</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">3.1 Goals for this chapter</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">3.1 이 장의 목표</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">4.1 Goals for this chapter</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">4.1 이 장의 목표</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">5.1 Goals for this chapter</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">5.1 이 장의 목표</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">6.1 Goals for this Chapter</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">6.1 이 장의 목표</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-chap.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">7.1 Goals for this chapter</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">7.1 이 장의 목표</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">8.1 Goals of this chapter</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">8.1 이 장의 목표</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">9.1 Goals for this chapter</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">9.1 이 장의 목표</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">10.1 Goals for this chapter</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">10.1 이 장의 목표</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./11-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">11.1 Goals for this chapter</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">11.1 이 장의 목표</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -255,43 +256,43 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#what-are-the-data-matrices-and-their-motivation" id="toc-what-are-the-data-matrices-and-their-motivation" class="nav-link active" data-scroll-target="#what-are-the-data-matrices-and-their-motivation"><span class="header-section-number">9.1</span> 7.2 What are the data? Matrices and their motivation</a>
+  <li><a href="#데이터란-무엇인가-행렬과-그-동기" id="toc-데이터란-무엇인가-행렬과-그-동기" class="nav-link active" data-scroll-target="#데이터란-무엇인가-행렬과-그-동기"><span class="header-section-number">9.1</span> 7.2 데이터란 무엇인가? 행렬과 그 동기</a>
   <ul class="collapse">
   <li><a href="#low-dimensional-data-summaries-and-preparation" id="toc-low-dimensional-data-summaries-and-preparation" class="nav-link" data-scroll-target="#low-dimensional-data-summaries-and-preparation"><span class="header-section-number">9.1.1</span> 7.2.1 Low-dimensional data summaries and preparation</a></li>
-  <li><a href="#preprocessing-the-data" id="toc-preprocessing-the-data" class="nav-link" data-scroll-target="#preprocessing-the-data"><span class="header-section-number">9.1.2</span> 7.2.2 Preprocessing the data</a></li>
+  <li><a href="#데이터-전처리" id="toc-데이터-전처리" class="nav-link" data-scroll-target="#데이터-전처리"><span class="header-section-number">9.1.2</span> 7.2.2 데이터 전처리</a></li>
   </ul></li>
-  <li><a href="#dimension-reduction" id="toc-dimension-reduction" class="nav-link" data-scroll-target="#dimension-reduction"><span class="header-section-number">9.2</span> 7.3 Dimension reduction</a>
+  <li><a href="#차원-축소dimension-reduction" id="toc-차원-축소dimension-reduction" class="nav-link" data-scroll-target="#차원-축소dimension-reduction"><span class="header-section-number">9.2</span> 7.3 차원 축소(Dimension reduction)</a>
   <ul class="collapse">
-  <li><a href="#lower-dimensional-projections" id="toc-lower-dimensional-projections" class="nav-link" data-scroll-target="#lower-dimensional-projections"><span class="header-section-number">9.2.1</span> 7.3.1 Lower-dimensional projections</a></li>
-  <li><a href="#how-do-we-summarize-two-dimensional-data-by-a-line" id="toc-how-do-we-summarize-two-dimensional-data-by-a-line" class="nav-link" data-scroll-target="#how-do-we-summarize-two-dimensional-data-by-a-line"><span class="header-section-number">9.2.2</span> 7.3.2 How do we summarize two-dimensional data by a line?</a></li>
+  <li><a href="#저차원-투영" id="toc-저차원-투영" class="nav-link" data-scroll-target="#저차원-투영"><span class="header-section-number">9.2.1</span> 7.3.1 저차원 투영</a></li>
+  <li><a href="#차원-데이터를-어떻게-선으로-요약할까요" id="toc-차원-데이터를-어떻게-선으로-요약할까요" class="nav-link" data-scroll-target="#차원-데이터를-어떻게-선으로-요약할까요"><span class="header-section-number">9.2.2</span> 7.3.2 2차원 데이터를 어떻게 선으로 요약할까요?</a></li>
   </ul></li>
-  <li><a href="#the-new-linear-combinations" id="toc-the-new-linear-combinations" class="nav-link" data-scroll-target="#the-new-linear-combinations"><span class="header-section-number">9.3</span> 7.4 The new linear combinations</a>
+  <li><a href="#새로운-선형-결합" id="toc-새로운-선형-결합" class="nav-link" data-scroll-target="#새로운-선형-결합"><span class="header-section-number">9.3</span> 7.4 새로운 선형 결합</a>
   <ul class="collapse">
-  <li><a href="#optimal-lines" id="toc-optimal-lines" class="nav-link" data-scroll-target="#optimal-lines"><span class="header-section-number">9.3.1</span> 7.4.1 Optimal lines</a></li>
+  <li><a href="#최적의-선" id="toc-최적의-선" class="nav-link" data-scroll-target="#최적의-선"><span class="header-section-number">9.3.1</span> 7.4.1 최적의 선</a></li>
   </ul></li>
-  <li><a href="#the-pca-workflow" id="toc-the-pca-workflow" class="nav-link" data-scroll-target="#the-pca-workflow"><span class="header-section-number">9.4</span> 7.5 The PCA workflow</a></li>
-  <li><a href="#the-inner-workings-of-pca-rank-reduction" id="toc-the-inner-workings-of-pca-rank-reduction" class="nav-link" data-scroll-target="#the-inner-workings-of-pca-rank-reduction"><span class="header-section-number">9.5</span> 7.6 The inner workings of PCA: rank reduction</a>
+  <li><a href="#pca-워크플로" id="toc-pca-워크플로" class="nav-link" data-scroll-target="#pca-워크플로"><span class="header-section-number">9.4</span> 7.5 PCA 워크플로</a></li>
+  <li><a href="#pca의-내부-구조-계수-축소rank-reduction" id="toc-pca의-내부-구조-계수-축소rank-reduction" class="nav-link" data-scroll-target="#pca의-내부-구조-계수-축소rank-reduction"><span class="header-section-number">9.5</span> 7.6 PCA의 내부 구조: 계수 축소(Rank reduction)</a>
   <ul class="collapse">
-  <li><a href="#rank-one-matrices" id="toc-rank-one-matrices" class="nav-link" data-scroll-target="#rank-one-matrices"><span class="header-section-number">9.5.1</span> 7.6.1 Rank-one matrices</a></li>
+  <li><a href="#계수-1-행렬rank-one-matrices" id="toc-계수-1-행렬rank-one-matrices" class="nav-link" data-scroll-target="#계수-1-행렬rank-one-matrices"><span class="header-section-number">9.5.1</span> 7.6.1 계수 1 행렬(Rank-one matrices)</a></li>
   <li><a href="#how-do-we-find-such-a-decomposition-in-a-unique-way" id="toc-how-do-we-find-such-a-decomposition-in-a-unique-way" class="nav-link" data-scroll-target="#how-do-we-find-such-a-decomposition-in-a-unique-way"><span class="header-section-number">9.5.2</span> 7.6.2 How do we find such a decomposition in a unique way?</a></li>
-  <li><a href="#singular-value-decomposition" id="toc-singular-value-decomposition" class="nav-link" data-scroll-target="#singular-value-decomposition"><span class="header-section-number">9.5.3</span> 7.6.3 Singular value decomposition</a></li>
-  <li><a href="#principal-components" id="toc-principal-components" class="nav-link" data-scroll-target="#principal-components"><span class="header-section-number">9.5.4</span> 7.6.4 Principal components</a></li>
+  <li><a href="#특잇값-분해singular-value-decomposition" id="toc-특잇값-분해singular-value-decomposition" class="nav-link" data-scroll-target="#특잇값-분해singular-value-decomposition"><span class="header-section-number">9.5.3</span> 7.6.3 특잇값 분해(Singular value decomposition)</a></li>
+  <li><a href="#주성분principal-components" id="toc-주성분principal-components" class="nav-link" data-scroll-target="#주성분principal-components"><span class="header-section-number">9.5.4</span> 7.6.4 주성분(Principal components)</a></li>
   </ul></li>
-  <li><a href="#plotting-the-observations-in-the-principal-plane" id="toc-plotting-the-observations-in-the-principal-plane" class="nav-link" data-scroll-target="#plotting-the-observations-in-the-principal-plane"><span class="header-section-number">9.6</span> 7.7 Plotting the observations in the principal plane</a>
+  <li><a href="#주평면에-관측치-플롯하기" id="toc-주평면에-관측치-플롯하기" class="nav-link" data-scroll-target="#주평면에-관측치-플롯하기"><span class="header-section-number">9.6</span> 7.7 주평면에 관측치 플롯하기</a>
   <ul class="collapse">
   <li><a href="#pca-of-the-turtles-data" id="toc-pca-of-the-turtles-data" class="nav-link" data-scroll-target="#pca-of-the-turtles-data"><span class="header-section-number">9.6.1</span> 7.7.1 PCA of the turtles data</a></li>
   <li><a href="#a-complete-analysis-the-decathlon-athletes" id="toc-a-complete-analysis-the-decathlon-athletes" class="nav-link" data-scroll-target="#a-complete-analysis-the-decathlon-athletes"><span class="header-section-number">9.6.2</span> 7.7.2 A complete analysis: the decathlon athletes</a></li>
-  <li><a href="#how-to-choose-k-the-number-of-dimensions" id="toc-how-to-choose-k-the-number-of-dimensions" class="nav-link" data-scroll-target="#how-to-choose-k-the-number-of-dimensions"><span class="header-section-number">9.6.3</span> 7.7.3 How to choose \(k\), the number of dimensions ?</a></li>
+  <li><a href="#차원-수-k를-어떻게-선택할까요" id="toc-차원-수-k를-어떻게-선택할까요" class="nav-link" data-scroll-target="#차원-수-k를-어떻게-선택할까요"><span class="header-section-number">9.6.3</span> 7.7.3 차원 수 k를 어떻게 선택할까요?</a></li>
   </ul></li>
-  <li><a href="#pca-as-an-exploratory-tool-using-extra-information" id="toc-pca-as-an-exploratory-tool-using-extra-information" class="nav-link" data-scroll-target="#pca-as-an-exploratory-tool-using-extra-information"><span class="header-section-number">9.7</span> 7.8 PCA as an exploratory tool: using extra information</a>
+  <li><a href="#탐색적-도구로서의-pca-추가-정보-사용하기" id="toc-탐색적-도구로서의-pca-추가-정보-사용하기" class="nav-link" data-scroll-target="#탐색적-도구로서의-pca-추가-정보-사용하기"><span class="header-section-number">9.7</span> 7.8 탐색적 도구로서의 PCA: 추가 정보 사용하기</a>
   <ul class="collapse">
-  <li><a href="#mass-spectroscopy-data-analysis" id="toc-mass-spectroscopy-data-analysis" class="nav-link" data-scroll-target="#mass-spectroscopy-data-analysis"><span class="header-section-number">9.7.1</span> 7.8.1 Mass Spectroscopy Data Analysis</a></li>
-  <li><a href="#biplots-and-scaling" id="toc-biplots-and-scaling" class="nav-link" data-scroll-target="#biplots-and-scaling"><span class="header-section-number">9.7.2</span> 7.8.2 Biplots and scaling</a></li>
+  <li><a href="#질량-분석-데이터-분석" id="toc-질량-분석-데이터-분석" class="nav-link" data-scroll-target="#질량-분석-데이터-분석"><span class="header-section-number">9.7.1</span> 7.8.1 질량 분석 데이터 분석</a></li>
+  <li><a href="#바이플롯-및-스케일링" id="toc-바이플롯-및-스케일링" class="nav-link" data-scroll-target="#바이플롯-및-스케일링"><span class="header-section-number">9.7.2</span> 7.8.2 바이플롯 및 스케일링</a></li>
   <li><a href="#an-example-of-weighted-pca" id="toc-an-example-of-weighted-pca" class="nav-link" data-scroll-target="#an-example-of-weighted-pca"><span class="header-section-number">9.7.3</span> 7.8.3 An example of weighted PCA</a></li>
   </ul></li>
-  <li><a href="#summary-of-this-chapter" id="toc-summary-of-this-chapter" class="nav-link" data-scroll-target="#summary-of-this-chapter"><span class="header-section-number">9.8</span> 7.9 Summary of this chapter</a></li>
-  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">9.9</span> 7.10 Further reading</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">9.10</span> 7.11 Exercises</a></li>
+  <li><a href="#이-장의-요약" id="toc-이-장의-요약" class="nav-link" data-scroll-target="#이-장의-요약"><span class="header-section-number">9.8</span> 7.9 이 장의 요약</a></li>
+  <li><a href="#더-읽을거리" id="toc-더-읽을거리" class="nav-link" data-scroll-target="#더-읽을거리"><span class="header-section-number">9.9</span> 7.10 더 읽을거리</a></li>
+  <li><a href="#연습-문제" id="toc-연습-문제" class="nav-link" data-scroll-target="#연습-문제"><span class="header-section-number">9.10</span> 7.11 연습 문제</a></li>
   </ul>
 </nav>
     </div>
@@ -300,7 +301,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">7.1 Goals for this chapter</span></h1>
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">7.1 이 장의 목표</span></h1>
 </div>
 
 
@@ -317,27 +318,27 @@ window.Quarto = {
 </header>
 
 
-<p><a href="imgs/TheMatrix.jpg"><img src="imgs/TheMatrix.jpg" class="img-fluid"></a></p>
-<p>Many datasets consist of several variables measured on the same set of subjects: patients, samples, or organisms. For instance, we may have biometric characteristics such as height, weight, age as well as clinical variables such as blood pressure, blood sugar, heart rate, and genetic data for, say, a thousand patients. The <em>raison d’être</em> for multivariate analysis is the investigation of connections or associations between the different variables measured. Usually the data are reported in a tabular data structure with one row for each subject and one column for each variable. In the following, we will focus on the special case where each of the variables is numeric, so we can represent the data structure as a <em>matrix</em> in R.</p>
-<p>If the columns of the matrix are all independent of each other (unrelated), we can simply study each column separately and do standard “univariate” statistics on them one by one; there would be no benefit in studying them as a matrix.</p>
-<p>More often, there will be patterns and dependencies. For instance, in the biology of cells, we know that the proliferation rate will influence the expression of many genes simultaneously. Studying the expression of 25,000 gene (columns) on many samples (rows) of patient-derived cells, we notice that many of the genes act together, either that they are positively correlated or that they are anti-correlated. We would miss a lot of important information if we were to only study each gene separately. Important connections between genes are detectable only if we consider the data as a whole: each row representing the many measurements made on the same observational unit. However, having 25,000 dimensions of variation to consider at once is daunting; we will show how to reduce our data to a smaller number of most important dimensions1 without losing too much information.</p>
-<p>1 We will elaborate this idea of dimension reduction in much more detail below. For the time being, remember we live in a four-dimensional world.</p>
-<p>This chapter presents many examples of multivariate data matrices that we encounter in high-throughput experiments, as well as some more elementary examples that we hope will enhance your intuition. We will focus in this chapter on <strong>P</strong> rincipal <strong>C</strong> omponent <strong>A</strong> nalysis, abbreviated as <strong>PCA</strong> , a <strong>dimension reduction</strong> method. We will provide geometric explanations of the algorithm as well as visualizations that help interprete the output of PCA analyses.</p>
-<p>In this chapter we will:</p>
+<p><img src="imgs/TheMatrix.jpg" class="img-fluid"></p>
+<p>많은 데이터 세트는 동일한 대상(환자, 샘플 또는 유기체)에 대해 측정된 여러 변수로 구성됩니다. 예를 들어, 우리는 천 명의 환자에 대해 키, 몸무게, 나이와 같은 생체 정보뿐만 아니라 혈압, 혈당, 심박수와 같은 임상 변수 및 유전 데이터를 가질 수 있습니다. 다변량 분석(multivariate analysis)의 존재 이유(<em>raison d’être</em>)는 측정된 서로 다른 변수들 간의 연결 또는 연관성을 조사하는 것입니다. 대개 데이터는 각 대상에 대해 하나의 행, 각 변수가 하나의 열을 가진 표 형식의 데이터 구조로 보고됩니다. 이하에서는 각 변수가 수치형인 특수한 경우에 초점을 맞출 것이며, 따라서 R에서 데이터 구조를 _행렬(matrix)_로 나타낼 수 있습니다.</p>
+<p>행렬의 열들이 모두 서로 독립적(무관)이라면, 우리는 단순히 각 열을 별도로 공부하고 표준 “단변량(univariate)” 통계 처리를 하나씩 수행할 수 있습니다. 이들을 행렬로 공부해서 얻는 이점은 없을 것입니다.</p>
+<p>더 자주, 패턴과 의존성이 존재할 것입니다. 예를 들어 세포 생물학에서 우리는 증식률(proliferation rate)이 많은 유전자의 발현에 동시에 영향을 미친다는 것을 알고 있습니다. 환자 유래 세포의 많은 샘플(행)에 대해 25,000개의 유전자(열) 발현을 공부하면서, 우리는 많은 유전자가 함께 작용하여 양(+)의 상관관계를 갖거나 음(-)의 상관관계를 갖는다는 것을 알아차립니다. 각 유전자를 별도로만 공부한다면 우리는 많은 중요한 정보를 놓칠 것입니다. 유전자들 사이의 중요한 연결은 우리가 데이터를 전체적으로 고려할 때만 감지 가능합니다: 각 행은 동일한 관찰 단위에 대해 이루어진 많은 측정값들을 나타냅니다. 그러나 한꺼번에 고려해야 할 25,000차원의 변동을 갖는 것은 벅찬 일입니다. 우리는 너무 많은 정보를 잃지 않으면서 우리 데이터를 더 적은 수의 가장 중요한 차원1으로 줄이는 방법을 보여줄 것입니다.</p>
+<p>1 우리는 아래에서 이러한 차원 축소(dimension reduction)의 아이디어를 훨씬 더 자세히 설명할 것입니다. 당분간은 우리가 4차원 세계에 살고 있다는 것을 기억합시다.</p>
+<p>이 장에서는 고처리량 실험에서 마주치는 다변량 데이터 행렬의 많은 예시뿐만 아니라, 여러분의 직관을 높여줄 좀 더 기초적인 예시들을 제시합니다. 우리는 이 장에서 <strong>차원 축소</strong> 방법인 <strong>주성분 분석(Principal Component Analysis)</strong>, 약어로 <strong>PCA</strong>에 초점을 맞출 것입니다. 우리는 알고리즘에 대한 기하학적 설명뿐만 아니라 PCA 분석의 출력을 해석하는 데 도움이 되는 시각화 자료들을 제공할 것입니다.</p>
+<p>이 장에서 우리는 다음을 수행할 것입니다:</p>
 <ul>
-<li><p>See examples of matrices that come up in the study of biological data.</p></li>
-<li><p>Perform dimension reduction to understand correlations between variables.</p></li>
-<li><p>Preprocess, rescale and center the data before starting a multivariate analysis.</p></li>
-<li><p>Build new variables, called principal components (PC), that are more useful than the original measurements.</p></li>
-<li><p>See what is “under the hood” of PCA: the singular value decomposition of a matrix.</p></li>
-<li><p>Visualize what this decomposition achieves and learn how to choose the number of principal components.</p></li>
-<li><p>Run through a complete PCA analysis from start to finish.</p></li>
-<li><p>Project factor covariates onto the PCA map to enable a more useful interpretation of the results.</p></li>
+<li><p>생물학적 데이터 연구에서 나타나는 행렬의 예시들을 살펴봅니다.</p></li>
+<li><p>변수 간의 상관관계를 이해하기 위해 차원 축소를 수행합니다.</p></li>
+<li><p>다변량 분석을 시작하기 전에 데이터를 전처리하고, 스케일을 조정하고, 중앙에 맞춥니다(center).</p></li>
+<li><p>원래의 측정값보다 더 유용한, 주성분(principal components, PC)이라 불리는 새로운 변수들을 구축합니다.</p></li>
+<li><p>PCA의 “내부 구조”인 행렬의 특잇값 분해(singular value decomposition, SVD)를 살펴봅니다.</p></li>
+<li><p>이 분해가 무엇을 달성하는지 시각화하고 주성분의 수를 선택하는 방법을 배웁니다.</p></li>
+<li><p>처음부터 끝까지 완전한 PCA 분석을 실행해 봅니다.</p></li>
+<li><p>결과의 더 유용한 해석을 가능하게 하기 위해 요인 공변량(factor covariates)을 PCA 맵에 투영합니다.</p></li>
 </ul>
-<section id="what-are-the-data-matrices-and-their-motivation" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="what-are-the-data-matrices-and-their-motivation"><span class="header-section-number">9.1</span> 7.2 What are the data? Matrices and their motivation</h2>
-<p>First, let’s look at a set of examples of rectangular <strong>matrices</strong> used to represent tables of measurements. In each matrix, the rows and columns represent specific entities.</p>
-<p><strong>Turtles:</strong> A simple data set that will help us understand the basic principles is a matrix of three dimensions of biometric measurements on painted turtles (<a href="16-chap.html#ref- Jolicoeur1960">Jolicoeur and Mosimann 1960</a>).</p>
+<section id="데이터란-무엇인가-행렬과-그-동기" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="데이터란-무엇인가-행렬과-그-동기"><span class="header-section-number">9.1</span> 7.2 데이터란 무엇인가? 행렬과 그 동기</h2>
+<p>먼저, 측정값 표를 나타내는 데 사용되는 직사각형 <strong>행렬(matrices)</strong>의 예시들을 살펴보겠습니다. 각 행렬에서 행과 열은 특정 개체를 나타냅니다.</p>
+<p><strong>거북이(Turtles):</strong> 기본 원리를 이해하는 데 도움이 될 간단한 데이터 세트는 거북이(painted turtles)에 대한 세 가지 차원의 생체 측정값 행렬입니다 (<a href="16-chap.html#ref-Jolicoeur1960">Jolicoeur and Mosimann 1960</a>).</p>
 <pre><code>turtles = read.table("../data/PaintedTurtles.txt", header = TRUE)
 turtles[1:4, ]__
 
@@ -347,11 +348,11 @@ turtles[1:4, ]__
 2   f    103    84     38
 3   f    103    86     42
 4   f    105    86     40</code></pre>
-<p>The last three columns are length measurements (in millimetres), whereas the first column is a factor variable that tells us the sex of each animal.</p>
-<p><strong>Athletes:</strong> This matrix is an interesting example from the sports world. It reports the performances for 33 athletes in the ten disciplines of the decathlon: <code>m100</code>, <code>m400</code> and <code>m1500</code> are times in seconds for the 100 meters, 400 meters, and 1500 meters respectively; <code>m110</code> is the time to finish the 110 meters hurdles; <code>pole</code> is the pole-vault height, and <code>high</code> and <code>long</code> are the results of the high and long jumps, all in meters; <code>weight</code>, <code>disc</code>, and <code>javel</code> are the lengths in meters the athletes were able to throw the weight, discus and javelin. Here are these variables for the first three athletes:</p>
+<p>마지막 세 열은 길이 측정값(밀리미터 단위)인 반면, 첫 번째 열은 각 동물의 성별을 알려주는 요인 변수입니다.</p>
+<p><strong>운동선수(Athletes):</strong> 이 행렬은 스포츠 세계의 흥미로운 예시입니다. 10종 경기(decathlon)의 10개 종목에 대한 33명 선수의 성적을 보고합니다: <code>m100</code>, <code>m400</code> 및 <code>m1500</code>은 각각 100미터, 400미터, 1500미터 달리기 시간(초)입니다. <code>m110</code>은 110미터 허들 완주 시간입니다. <code>pole</code>은 장대높이뛰기 높이, <code>high</code>와 <code>long</code>은 각각 높이뛰기와 멀리뛰기 결과이며 모두 미터 단위입니다. <code>weight</code>, <code>disc</code>, <code>javel</code>은 선수들이 던진 포환, 원반, 창의 거리(미터)입니다. 처음 세 명의 선수에 대한 변수들은 다음과 같습니다:</p>
 <pre><code>data("olympic", package = "ade4")
 athletes = setNames(olympic$tab, 
-  c("m100", "long", "weight", "high", "m400", "m110", "disc", "pole", "javel", "m1500"))
+  c("m100", "long", "weight", "high", "m400", "m110", "disc", pole, "javel", "m1500"))
 athletes[1:3, ]__
 
 
@@ -470,33 +471,32 @@ library("dplyr")
 library("GGally")
 ggpairs(turtles[, -1], axisLabels = "none")__</code></pre>
 <p><a href="07-chap_files/figure- html/fig-turtlespairs-1.png" title="Figure 7.2: All pairs of bivariate scatterplots for the three biometric measurements on painted turtles."><img src="07-chap_files/figure-html/fig-turtlespairs-1.png" class="img-fluid"></a></p>
-<p>Figure 7.2: All pairs of bivariate scatterplots for the three biometric measurements on painted turtles.</p>
-<p>From Figure 7.2, it looks like all three of the variables are highly correlated and mostly reflect the same “underlying” variable, which we might interpret as <em>the size</em> of the turtle.</p>
+<p>Figure 7.2: All pairs of bivariate scatterplots for the three biometric 그림 7.2를 보면, 세 변수 모두 높은 상관관계를 가지고 있으며 대부분 거북이의 _크기_로 해석될 수 있는 동일한 “기저” 변수를 반영하는 것으로 보입니다.</p>
 <p>__</p>
-<p>Question 7.4</p>
-<p>Compute all pairwise correlations of the variables in the <code>athletes</code> data and display the matrix in a heatmap. What do you notice?</p>
+<p>질문 7.4</p>
+<p><code>athletes</code> 데이터의 변수들 사이의 모든 쌍별 상관관계를 계산하고 그 행렬을 히트맵으로 표시해 보세요. 무엇을 알 수 있나요?</p>
 <p>__</p>
-<p>Solution</p>
+<p>해결책</p>
 <p>__</p>
 <pre><code>library("pheatmap")
 pheatmap(cor(athletes), cell.width = 10, cell.height = 10)__</code></pre>
-<p><a href="07-chap_files/figure-html/fig-heatmapathletes-1.png &quot;Figure 7.3: Heatmap of correlations between variables in the athletes data. Higher values are color coded red-orange. The hierarchical clustering shows a grouping of related disciplines.&quot;"><img src="07-chap_files/figure-html/fig- heatmapathletes-1.png" class="img-fluid"></a></p>
-<p>Figure 7.3: Heatmap of correlations between variables in the <code>athletes</code> data. Higher values are color coded red-orange. The hierarchical clustering shows a grouping of related disciplines.</p>
-<p>Figure 7.3 shows how the 10 variables cluster into groups: running, throwing and jumping.</p>
+<p><a href="07-chap_files/figure-html/fig-heatmapathletes-1.png &quot;그림 7.3: athletes 데이터의 변수들 사이의 상관관계 히트맵. 높은 수치는 빨강-주황색으로 색상 코딩되어 있습니다. 계층적 군집화는 서로 관련된 종목들의 그룹화를 보여줍니다.&quot;"><img src="07-chap_files/figure-html/fig- heatmapathletes-1.png" class="img-fluid"></a></p>
+<p>그림 7.3: <code>athletes</code> 데이터의 변수들 사이의 상관관계 히트맵. 높은 수치는 빨강-주황색으로 색상 코딩되어 있습니다. 계층적 군집화는 서로 관련된 종목들의 그룹화를 보여줍니다.</p>
+<p>그림 7.3은 10개의 변수가 달리기, 던지기, 점프라는 그룹으로 어떻게 군집화되는지 보여줍니다.</p>
 </section>
-<section id="preprocessing-the-data" class="level3" data-number="9.1.2">
-<h3 data-number="9.1.2" class="anchored" data-anchor-id="preprocessing-the-data"><span class="header-section-number">9.1.2</span> 7.2.2 Preprocessing the data</h3>
-<p>In many cases, different variables are measured in different units, so they have different baselines and different scales6. These are not directly comparable in their original form.</p>
-<p>6 Common measures of scale are the range and the standard deviation. For instance, the times for the 110 metres vary between 14.18 and 16.2, with a standard deviation of 0.51, whereas the times to complete the 1500 metres vary between 256.64 and 303.17, with a standard deviation of 13.66; more than an order of magnitude larger. Moreover, the <code>athletes</code> data also contain measurements in different units (seconds, metres), whose choice is arbitrary (lengths could also be recorded in centimetres or feet, times in milliseconds).</p>
-<p>For PCA and many other methods, we therefore need to transform the numeric values to some common scale in order to make comparisons meaningful. <strong>Centering</strong> means subtracting the mean, so that the mean of the centered data is at the origin. <strong>Scaling</strong> or <strong>standardizing</strong> then means dividing by the standard deviation, so that the new standard deviation is \(1\). In fact, we have already encountered these operations when computing the correlation coefficient (Equation 7.1): the correlation coefficient is simply the vector product of the centered and scaled variables. To perform these operations, there is the R function <code>scale</code>, whose default behavior when given a matrix or a data frame is to make every column have a mean of zero and a standard deviation of \(1\).</p>
+<section id="데이터-전처리" class="level3" data-number="9.1.2">
+<h3 data-number="9.1.2" class="anchored" data-anchor-id="데이터-전처리"><span class="header-section-number">9.1.2</span> 7.2.2 데이터 전처리</h3>
+<p>많은 경우, 서로 다른 변수들은 서로 다른 단위로 측정되므로, 서로 다른 기준선과 서로 다른 스케일(scales)6을 가집니다. 이들은 원래의 형태로는 직접적으로 비교할 수 없습니다.</p>
+<p>6 스케일의 일반적인 척도는 범위와 표준 편차입니다. 예를 들어, 110미터 허들 시간은 표준 편차 0.51과 함께 14.18에서 16.2 사이인 반면, 1500미터 완주 시간은 표준 편차 13.66과 함께 256.64에서 303.17 사이입니다; 이는 10배 이상 더 큽니다. 더욱이 <code>athletes</code> 데이터는 서로 다른 단위(초, 미터)의 측정값도 포함하고 있는데, 이들의 선택은 임의적입니다(길이는 센티미터나 피트로 기록될 수도 있고, 시간은 밀리초로 기록될 수도 있습니다).</p>
+<p>따라서 PCA 및 다른 많은 방법들의 경우, 비교를 의미 있게 만들기 위해 수치들을 어떤 공통적인 스케일로 변환해야 합니다. <strong>중앙화(Centering)</strong>는 평균을 빼는 것을 의미하며, 중앙화된 데이터의 평균은 원점에 위치하게 됩니다. <strong>스케일링(Scaling)</strong> 또는 <strong>표준화(Standardizing)</strong>는 표준 편차로 나누는 것을 의미하며, 새로운 표준 편차는 \(1\)이 됩니다. 사실 우리는 상관 계수를 계산할 때(식 7.1) 이미 이러한 연산들을 접했습니다: 상관 계수는 단순히 중앙화되고 스케일링된 변수들의 벡터 곱입니다. 이러한 연산을 수행하기 위해 R에는 <code>scale</code> 함수가 있으며, 행렬이나 데이터 프레임이 주어졌을 때의 기본 거동은 모든 열의 평균을 0으로, 표준 편차를 1로 만드는 것입니다.</p>
 <p>__</p>
-<p>Question 7.5</p>
+<p>질문 7.5</p>
 <ol type="1">
-<li><p>Compute the means and standard deviations of the <code>turtle</code> data, then use the <code>scale</code> function to center and standardize the continuous variables. Call this <code>scaledTurtles</code>, then verify the new values for mean and standard deviation of <code>scaledTurtles</code>.</p></li>
-<li><p>Make a scatterplot of the scaled and centered width and height variables of the turtle data and color the points by their sex.</p></li>
+<li><p><code>turtle</code> 데이터의 평균과 표준 편차를 계산한 다음, <code>scale</code> 함수를 사용하여 연속형 변수들을 중앙화하고 표준화하세요. 이를 <code>scaledTurtles</code>라고 부르고, <code>scaledTurtles</code>의 평균과 표준 편차의 새로운 값을 확인해 보세요.</p></li>
+<li><p>거북이 데이터의 스케일링 및 중앙화된 너비(width)와 높이(height) 변수의 산점도를 만들고 점들에 성별에 따른 색상을 입히세요.</p></li>
 </ol>
 <p>__</p>
-<p>Solution</p>
+<p>해결책</p>
 <p>__</p>
 <pre><code>apply(turtles[,-1], 2, sd)__
 
@@ -530,82 +530,82 @@ length  width height
 data.frame(scaledTurtles, sex = turtles[, 1]) %&gt;%
   ggplot(aes(x = width, y = height, group = sex)) +
     geom_point(aes(color = sex)) + coord_fixed()__</code></pre>
-<p><a href="07-chap_files/figure- html/fig-turtlesDim12-1.png" title="Figure 7.4: Turtles data projected onto the plane defined by the width and height variables: each point colored according to sex."><img src="07-chap_files/figure-html/fig-turtlesDim12-1.png" class="img-fluid"></a></p>
-<p>Figure 7.4: Turtles data projected onto the plane defined by the <code>width</code> and <code>height</code> variables: each point colored according to <code>sex</code>.</p>
-<p>We have already encountered other data transformation choices in Chapters <a href="04-chap.html">4</a> and <a href="05-chap.html">5</a>, where we used the <code>log</code> and <code>asinh</code> functions. The aim of these transformations is (usually) variance stabilization, i.e., to make the variances of replicate measurements of <em>one and the same variable</em> in different parts of its dynamic range more similar. In contrast, the standardizing transformation described above aims to make the scale (as measured by mean and standard deviation) of <em>different variables</em> the same.</p>
-<p>Sometimes it is preferable to leave variables at different scales because they are truly of different importance. If their original scale is relevant, then we can (should) leave the data as is. In other cases, the variables have different precisions known a priori. We will see in <a href="09-chap.html">Chapter 9</a> that there are several ways of weighting such variables.</p>
-<p>After preprocessing the data, we are ready to undertake data <em>simplification</em> through <strong>dimension reduction</strong>.</p>
-<p><a href="imgs/book_icon.png"><img src="imgs/book_icon.png" class="img-fluid"></a></p>
-<p>Useful books with relevant chapters are Flury (<a href="16-chap.html#ref-Flury">1997</a>) for an introductory account and Mardia, Kent, and Bibby (<a href="16-chap.html#ref-Mardia">1979</a>) for a detailed mathematical approach.</p>
+<p><a href="07-chap_files/figure- html/fig-turtlesDim12-1.png" title="그림 7.4: 너비와 높이 변수에 의해 정의된 평면에 투영된 거북이 데이터: 각 점은 성별에 따라 색상이 입혀져 있습니다."><img src="07-chap_files/figure-html/fig-turtlesDim12-1.png" class="img-fluid"></a></p>
+<p>그림 7.4: 너비(width)와 높이(height) 변수에 의해 정의된 평면에 투영된 거북이 데이터: 각 점은 성별에 따라 색상이 입혀져 있습니다.</p>
+<p>우리는 이미 <a href="04-chap.html">4장</a>과 <a href="05-chap.html">5장</a>에서 <code>log</code>와 <code>asinh</code> 함수를 사용한 다른 데이터 변환 선택지들을 접했습니다. 이러한 변환의 목적은 (대개) 분산 안정화(variance stabilization)입니다. 즉, 동적 범위의 서로 다른 부분에서 _동일한 변수_의 반복 측정값 분산을 더 비슷하게 만드는 것입니다. 이와 대조적으로 위에서 설명한 표준화 변환은 _서로 다른 변수_의 스케일(평균과 표준 편차로 측정됨)을 동일하게 만드는 것을 목표로 합니다.</p>
+<p>때로는 변수들이 진정으로 중요도가 다르기 때문에 서로 다른 스케일로 남겨두는 것이 더 나을 수도 있습니다. 만약 원래의 스케일이 유의미하다면, 데이터를 있는 그대로 두어야 합니다. 다른 경우에, 변수들은 사전적으로 알려진 서로 다른 정밀도를 가집니다. <a href="09-chap.html">9장</a>에서 우리는 그러한 변수들에 가중치를 부여하는 여러 방법들을 살펴볼 것입니다.</p>
+<p>데이터를 전처리한 후, 우리는 <strong>차원 축소</strong>를 통한 데이터 _단순화_를 수행할 준비가 되었습니다.</p>
+<p><img src="imgs/book_icon.png" class="img-fluid"></p>
+<p>관련 장들이 포함된 유용한 책으로는 입문용 설명이 담긴 Flury (<a href="16-chap.html#ref-Flury">1997</a>)와 상세한 수학적 접근 방식이 담긴 Mardia, Kent, Bibby (<a href="16-chap.html#ref-Mardia">1979</a>)가 있습니다.</p>
 </section>
 </section>
-<section id="dimension-reduction" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="dimension-reduction"><span class="header-section-number">9.2</span> 7.3 Dimension reduction</h2>
-<p>We will explain dimension reduction from several different perspectives. It was invented in 1901 by Karl Pearson (<a href="16-chap.html#ref- Pearson1901">Pearson 1901</a>) as a way to reduce a two-variable scatterplot to a single coordinate. It was used by statisticians in the 1930s to summarize a battery of psychological tests run on the same subjects (<a href="16-chap.html#ref-Hotelling:1933ki">Hotelling 1933</a>); thus providing overall scores that summarize many tested variables at once.</p>
+<section id="차원-축소dimension-reduction" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="차원-축소dimension-reduction"><span class="header-section-number">9.2</span> 7.3 차원 축소(Dimension reduction)</h2>
+<p>우리는 여러 가지 서로 다른 관점에서 차원 축소를 설명할 것입니다. 이는 1901년에 Karl Pearson (<a href="16-chap.html#ref-Pearson1901">Pearson 1901</a>)에 의해 두 변수 산점도를 단일 좌표로 줄이는 방법으로 발명되었습니다. 1930년대에는 통계학자들에 의해 동일한 대상에 대해 수행된 일련의 심리 테스트 결과를 요약하는 데 사용되었습니다 (<a href="16-chap.html#ref-Hotelling:1933ki">Hotelling 1933</a>); 이로써 한꺼번에 테스트된 많은 변수들을 요약하는 종합 점수(overall scores)를 제공하게 되었습니다.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="imgs/devil.png" title="Principal and principle are two different words, which have different meanings. So please do not confuse them. With PCA, it is always principal."><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
-<figcaption>Principal and principle are two different words, which have different meanings. So please do not confuse them. With PCA, it is always principal.</figcaption>
+<p><a href="imgs/devil.png" title="Principal과 principle은 서로 다른 뜻을 가진 두 개의 다른 단어입니다. 따라서 이들을 혼동하지 마세요. PCA의 경우, 그것은 항상 principal입니다."><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
+<figcaption>Principal과 principle은 서로 다른 뜻을 가진 두 개의 다른 단어입니다. 따라서 이들을 혼동하지 마세요. PCA의 경우, 그것은 항상 principal입니다.</figcaption>
 </figure>
 </div>
-<p><em>Principal</em> and <em>principle</em> are two different words, which have different meanings. So please do not confuse them. With PCA, it is always <em>principal</em>.</p>
-<p>This idea of <strong>principal</strong> scores inspired the name Principal Component Analysis (abbreviated PCA). PCA is called an <strong>unsupervised learning</strong> technique because, as in clustering, it treats all variables as having the same <strong>status</strong>. We are not trying to predict or explain one particular variable’s value from the others; rather, we are trying to find a mathematical model for an underlying structure for all the variables. PCA is primarily an exploratory technique that produces maps that show the relations between variables and between observations in a useful way.</p>
-<p>We first provide a flavor of what this multivariate analysis does to the data. There is an elegant mathematical formulation of these methods through linear algebra, although here we will try to minimize its use and focus on visualization and data examples.</p>
-<p>We use geometrical <strong>projections</strong> that take points in higher-dimensional spaces and projects them down onto lower dimensions. Figure 7.5 shows the projection of the point \(A\) onto the line generated by the vector \({v}\).</p>
-<p><a href="07-chap_files/figure- html/fig-projectv-1.png" title="Figure 7.5: Point A is projected onto the red line generated by the vector v. The dashed projection line is perpendicular (or orthogonal) to the red line. The intersection point of the projection line and the red line is called the orthogonal projection of A onto the red line generated by the vector v."><img src="07-chap_files/figure-html/fig-projectv-1.png" class="img-fluid"></a></p>
-<p>Figure 7.5: Point \(A\) is projected onto the red line generated by the vector \(v\). The dashed projection line is perpendicular (or <strong>orthogonal</strong>) to the red line. The intersection point of the projection line and the red line is called the orthogonal projection of A onto the red line generated by the vector \(v\).</p>
-<p>PCA is a <strong>linear</strong> technique, meaning that we look for linear relations between variables and that we will use new variables that are linear functions of the original ones (\(f(ax+by)=af(x)+b(y)\)). The linearity constraints makes computations particularly easy. We will see non-linear techniques in <a href="09-chap.html">Chapter 9</a>.</p>
-<section id="lower-dimensional-projections" class="level3" data-number="9.2.1">
-<h3 data-number="9.2.1" class="anchored" data-anchor-id="lower-dimensional-projections"><span class="header-section-number">9.2.1</span> 7.3.1 Lower-dimensional projections</h3>
-<p>Here we show one way of projecting two-dimensional data onto a line using the <code>athletes</code> data. The code below provides the preprocessing and plotting steps that were used to generate Figure 7.6:</p>
+<p>_Principal_과 _principle_은 서로 다른 뜻을 가진 두 개의 다른 단어입니다. 따라서 이들을 혼동하지 마세요. PCA의 경우, 그것은 항상 _principal_입니다.</p>
+<p>이러한 <strong>주요(principal)</strong> 점수라는 아이디어가 주성분 분석(Principal Component Analysis, 약어로 PCA)이라는 이름에 영감을 주었습니다. PCA는 군집화에서와 마찬가지로 모든 변수를 동일한 <strong>상태(status)</strong>를 가진 것으로 취급하기 때문에 <strong>비지도 학습(unsupervised learning)</strong> 기법이라 불립니다. 우리는 한 특정한 변수의 값을 다른 변수들로부터 예측하거나 설명하려는 것이 아니라, 오히려 모든 변수들에 대한 기저 구조의 수학적 모델을 찾으려는 것입니다. PCA는 기본적으로 변수들 사이의 관계와 관측치들 사이의 관계를 유용한 방식으로 보여주는 맵(maps)을 생성하는 탐색적 기법입니다.</p>
+<p>우리는 먼저 이 다변량 분석이 데이터에 무엇을 하는지에 대한 맛보기를 제공하겠습니다. 선형 대수학을 통한 이러한 방법들의 우아한 수학적 공식화가 존재하지만, 여기서는 그 사용을 최소화하고 시각화와 데이터 예시에 집중할 것입니다.</p>
+<p>우리는 고차원 공간의 점들을 낮은 차원으로 투영하는 기하학적 <strong>투영(projections)</strong>을 사용합니다. 그림 7.5는 벡터 \({v}\)에 의해 생성된 선 위로 점 \(A\)를 투영하는 것을 보여줍니다.</p>
+<p><a href="07-chap_files/figure- html/fig-projectv-1.png" title="그림 7.5: 점 A가 벡터 v에 의해 생성된 빨간색 선 위로 투영됩니다. 점선 투영선은 빨간색 선에 수직(또는 직교)합니다. 투영선과 빨간색 선의 교차점을 점 A의 벡터 v에 의해 생성된 빨간색 선 위로의 직교 투영이라고 부릅니다."><img src="07-chap_files/figure-html/fig-projectv-1.png" class="img-fluid"></a></p>
+<p>그림 7.5: 점 \(A\)가 벡터 \(v\)에 의해 생성된 빨간색 선 위로 투영됩니다. 점선 투영선은 빨간색 선에 수직(또는 <strong>직교(orthogonal)</strong>)합니다. 투영선과 빨간색 선의 교차점을 점 \(A\)의 벡터 \(v\)에 의해 생성된 빨간색 선 위로의 직교 투영이라고 부릅니다.</p>
+<p>PCA는 <strong>선형(linear)</strong> 기법으로, 변수들 사이의 선형 관계를 찾고 원래 변수들의 선형 함수인 새로운 변수들을 사용한다는 것을 의미합니다 (\(f(ax+by)=af(x)+b(y)\)). 선형성 제약 조건은 계산을 특히 쉽게 만듭니다. <a href="09-chap.html">9장</a>에서 우리는 비선형 기법들을 살펴볼 것입니다.</p>
+<section id="저차원-투영" class="level3" data-number="9.2.1">
+<h3 data-number="9.2.1" class="anchored" data-anchor-id="저차원-투영"><span class="header-section-number">9.2.1</span> 7.3.1 저차원 투영</h3>
+<p>여기에 <code>athletes</code> 데이터를 사용하여 2차원 데이터를 선 위로 투영하는 한 가지 방법을 보여줍니다. 아래 코드는 그림 7.6을 생성하는 데 사용된 전처리 및 플로팅 단계를 제공합니다:</p>
 <pre><code>athletes = data.frame(scale(athletes))
 ath_gg = ggplot(athletes, aes(x = weight, y = disc)) +
   geom_point(size = 2, shape = 21)
 ath_gg + geom_point(aes(y = 0), colour = "red") +
   geom_segment(aes(xend = weight, yend = 0), linetype = "dashed")__</code></pre>
-<p><a href="07-chap_files/figure- html/fig-SimpleScatter-1.png" title="Figure 7.6: Scatterplot of two variables showing the projection on the horizontal x axis (defined by y=0) in red and the lines of projection appear as dashed."><img src="07-chap_files/figure-html/fig-SimpleScatter-1.png" class="img-fluid"></a></p>
-<p>Figure 7.6: Scatterplot of two variables showing the projection on the horizontal x axis (defined by \(y=0\)) in red and the lines of projection appear as dashed.</p>
+<p><a href="07-chap_files/figure- html/fig-SimpleScatter-1.png" title="그림 7.6: 가로 x축(y=0으로 정의됨)으로의 투영을 빨간색으로 보여주는 두 변수의 산점도이며 투영선은 점선으로 나타납니다."><img src="07-chap_files/figure-html/fig-SimpleScatter-1.png" class="img-fluid"></a></p>
+<p>그림 7.6: 가로 (x)축((y=0)으로 정의됨)으로의 투영을 빨간색으로 보여주는 두 변수의 산점도이며 투영선은 점선으로 나타납니다.</p>
 <p>__</p>
-<p>Task</p>
+<p>태스크</p>
 <ol type="1">
-<li><p>Calculate the variance of the red points in Figure 7.6.</p></li>
-<li><p>Make a plot showing projection lines onto the \(y\) axis and projected points.</p></li>
-<li><p>Compute the variance of the points projected onto the vertical \(y\) axis.</p></li>
+<li><p>그림 7.6에서 빨간색 점들의 분산을 계산해 보세요.</p></li>
+<li><p>(y)축으로의 투영선과 투영된 점들을 보여주는 플롯을 만들어 보세요.</p></li>
+<li><p>수직 (y)축으로 투영된 점들의 분산을 계산해 보세요.</p></li>
 </ol>
 </section>
-<section id="how-do-we-summarize-two-dimensional-data-by-a-line" class="level3" data-number="9.2.2">
-<h3 data-number="9.2.2" class="anchored" data-anchor-id="how-do-we-summarize-two-dimensional-data-by-a-line"><span class="header-section-number">9.2.2</span> 7.3.2 How do we summarize two-dimensional data by a line?</h3>
-<p>In general, we lose information about the points when we project from two dimensions (a plane) to one (a line). If we do it just by using the original coordinates, as we did on the <code>weight</code> variable in Figure 7.6, we lose all the information about the <code>disc</code> variable. Our goal is to keep as much information as we can about <em>both</em> variables. There are actually many ways of projecting the point cloud onto a line. One is to use what are known as <strong>regression lines</strong>. Let’s look at these lines and how they are constructed in R.</p>
-<section id="regressing-one-variable-on-the-other" class="level4" data-number="9.2.2.1">
-<h4 data-number="9.2.2.1" class="anchored" data-anchor-id="regressing-one-variable-on-the-other"><span class="header-section-number">9.2.2.1</span> Regressing one variable on the other</h4>
-<p>If you have seen linear regression, you already know how to compute lines that summarize scatterplots; <strong>linear regression</strong> is a <strong>supervised</strong> method that gives preference minimizing the residual sum of squares in one direction: that of the response variable.</p>
+<section id="차원-데이터를-어떻게-선으로-요약할까요" class="level3" data-number="9.2.2">
+<h3 data-number="9.2.2" class="anchored" data-anchor-id="차원-데이터를-어떻게-선으로-요약할까요"><span class="header-section-number">9.2.2</span> 7.3.2 2차원 데이터를 어떻게 선으로 요약할까요?</h3>
+<p>일반적으로 우리가 2차원(평면)에서 1차원(선)으로 투영할 때 점들에 대한 정보를 잃게 됩니다. 그림 7.6에서 <code>weight</code> 변수에 대해 했던 것처럼 원래의 좌표만 사용한다면, 우리는 <code>disc</code> 변수에 대한 모든 정보를 잃게 됩니다. 우리의 목표는 <em>두</em> 변수 모두에 대해 가능한 한 많은 정보를 유지하는 것입니다. 사실 점 구름을 선 위로 투영하는 방법은 여러 가지가 있습니다. 하나는 <strong>회귀선(regression lines)</strong>이라 알려진 것을 사용하는 것입니다. R에서 이러한 선들이 어떻게 구축되는지 살펴보겠습니다.</p>
+<section id="한-변수를-다른-변수에-대해-회귀-분석하기" class="level4" data-number="9.2.2.1">
+<h4 data-number="9.2.2.1" class="anchored" data-anchor-id="한-변수를-다른-변수에-대해-회귀-분석하기"><span class="header-section-number">9.2.2.1</span> 한 변수를 다른 변수에 대해 회귀 분석하기</h4>
+<p>선형 회귀(linear regression)를 보셨다면, 산점도를 요약하는 선을 계산하는 방법을 이미 알고 계실 것입니다. <strong>선형 회귀</strong>는 한 방향, 즉 반응 변수 방향의 잔차 제곱합을 최소화하는 것을 우선시하는 <strong>지도(supervised)</strong> 방법입니다.</p>
 </section>
-<section id="regression-of-the-disc-variable-on-weight." class="level4" data-number="9.2.2.2">
-<h4 data-number="9.2.2.2" class="anchored" data-anchor-id="regression-of-the-disc-variable-on-weight."><span class="header-section-number">9.2.2.2</span> Regression of the <code>disc</code> variable on <code>weight</code>.</h4>
-<p>In Figure 7.7, we use the <code>lm</code> (linear model) function to find the regression line. Its slope and intercept are given by the values in the <code>coefficients</code> slot of the resulting object <code>reg1</code>.</p>
+<section id="weight에-대한-disc-변수의-회귀-분석." class="level4" data-number="9.2.2.2">
+<h4 data-number="9.2.2.2" class="anchored" data-anchor-id="weight에-대한-disc-변수의-회귀-분석."><span class="header-section-number">9.2.2.2</span> <code>weight</code>에 대한 <code>disc</code> 변수의 회귀 분석.</h4>
+<p>그림 7.7에서는 회귀선을 찾기 위해 <code>lm</code>(선형 모델) 함수를 사용합니다. 그 기울기와 절편은 결과 객체 <code>reg1</code>의 <code>coefficients</code> 슬롯에 있는 값들에 의해 주어집니다.</p>
 <pre><code>reg1 = lm(disc ~ weight, data = athletes)
-a1 = reg1$coefficients[1] # intercept
-b1 = reg1$coefficients[2] # slope
+a1 = reg1$coefficients[1] # 절편
+b1 = reg1$coefficients[2] # 기울기
 pline1 = ath_gg + geom_abline(intercept = a1, slope = b1,
     col = "blue", linewidth = 1.5)
 pline1 + geom_segment(aes(xend = weight, yend = reg1$fitted),
     colour = "red", arrow = arrow(length = unit(0.15, "cm")))__</code></pre>
-<p><a href="07-chap_files/figure-html/fig- Reg1-1.png" title="Figure 7.7: The blue line minimizes the sum of squares of the vertical residuals (in red)."><img src="07-chap_files/figure-html/fig-Reg1-1.png" class="img-fluid"></a></p>
-<p>Figure 7.7: The blue line minimizes the sum of squares of the vertical residuals (in red).</p>
+<p><a href="07-chap_files/figure-html/fig- Reg1-1.png" title="그림 7.7: 파란색 선은 (빨간색으로 표시된) 수직 잔차의 제곱합을 최소화합니다."><img src="07-chap_files/figure-html/fig-Reg1-1.png" class="img-fluid"></a></p>
+<p>그림 7.7: 파란색 선은 (빨간색으로 표시된) 수직 잔차의 제곱합을 최소화합니다.</p>
 </section>
-<section id="regression-of-weight-on-discus." class="level4" data-number="9.2.2.3">
-<h4 data-number="9.2.2.3" class="anchored" data-anchor-id="regression-of-weight-on-discus."><span class="header-section-number">9.2.2.3</span> Regression of <code>weight</code> on <code>discus</code>.</h4>
-<p>Figure 7.8 shows the line produced when reversing the roles of the two variables; <code>weight</code> becomes the response variable.</p>
+<section id="discus에-대한-weight의-회귀-분석." class="level4" data-number="9.2.2.3">
+<h4 data-number="9.2.2.3" class="anchored" data-anchor-id="discus에-대한-weight의-회귀-분석."><span class="header-section-number">9.2.2.3</span> <code>discus</code>에 대한 <code>weight</code>의 회귀 분석.</h4>
+<p>그림 7.8은 두 변수의 역할을 바꾸었을 때 생성되는 선을 보여줍니다. <code>weight</code>가 반응 변수가 됩니다.</p>
 <pre><code>reg2 = lm(weight ~ disc, data = athletes)
-a2 = reg2$coefficients[1] # intercept
-b2 = reg2$coefficients[2] # slope
+a2 = reg2$coefficients[1] # 절편
+b2 = reg2$coefficients[2] # 기울기
 pline2 = ath_gg + geom_abline(intercept = -a2/b2, slope = 1/b2,
     col = "darkgreen", linewidth = 1.5)
 pline2 + geom_segment(aes(xend=reg2$fitted, yend=disc),
     colour = "orange", arrow = arrow(length = unit(0.15, "cm")))__</code></pre>
-<p><a href="07-chap_files/figure-html/fig- Reg2-1.png" title="Figure 7.8: The green line minimizes the sum of squares of the horizontal residuals (in orange)."><img src="07-chap_files/figure-html/fig-Reg2-1.png" class="img-fluid"></a></p>
-<p>Figure 7.8: The green line minimizes the sum of squares of the horizontal residuals (in orange).</p>
-<p>Each of the regression lines in Figures 7.7 and 7.8 gives us an approximate linear relationship between <code>disc</code> and <code>weight</code>. However, the relationship differs depending on which of the variables we choose to be the predictor and which the response.</p>
+<p><a href="07-chap_files/figure-html/fig- Reg2-1.png" title="그림 7.8: 녹색 선은 (주황색으로 표시된) 수평 잔차의 제곱합을 최소화합니다."><img src="07-chap_files/figure-html/fig-Reg2-1.png" class="img-fluid"></a></p>
+<p>그림 7.8: 녹색 선은 (주황색으로 표시된) 수평 잔차의 제곱합을 최소화합니다.</p>
+<p>그림 7.7과 7.8의 각 회귀선은 <code>disc</code>와 <code>weight</code> 사이의 대략적인 선형 관계를 제공합니다. 그러나 그 관계는 우리가 어느 변수를 예측 변수로 선택하느냐에 따라 달라집니다…. which the response.</p>
 <p>__</p>
 <p>Question 7.6</p>
 <p>How large is the variance of the projected points that lie on the blue regression line of Figure 7.7? Compare this to the variance of the data when projected on the original axes, <code>weight</code> and <code>disc</code>.</p>
@@ -660,72 +660,76 @@ sum(apply(pc, 2, var))__
 
 
 [1] 1.806352</code></pre>
-<p>We see that the variance along this axis is larger than the other variances we calculated in Question 7.6.</p>
-<p>Pythagoras’ theorem tells us two interesting things here:</p>
+<p>우리는 이 축을 따른 분산이 질문 7.6에서 계산한 다른 분산들보다 크다는 것을 알 수 있습니다.</p>
+<p>피타고라스 정리는 여기서 두 가지 흥미로운 사실을 알려줍니다:</p>
 <ul>
-<li><p>If we are minimizing in both horizontal and vertical directions we are in fact minimizing the orthogonal projections onto the line from each point.</p></li>
-<li><p>The total variability of the points is measured by the sum of squares of the projection of the points onto the center of gravity, which is the origin (0,0) if the data are centered. This is called the <em>total variance</em> or the <strong>inertia</strong> of the point cloud. This inertia can be decomposed into the sum of the squares of the projections onto the line plus the variances along that line. For a fixed variance, minimizing the projection distances also maximizes the variance along that line. Often we define the first principal component as the line with maximum variance.</p></li>
+<li><p>수평 및 수직 방향 모두에서 최소화하고 있다면, 사실 우리는 각 점으로부터 선으로의 직교 투영을 최소화하고 있는 것입니다.</p></li>
+<li><p>점들의 전체 가변성은 점들을 무게 중심(데이터가 중앙화되어 있다면 원점(0,0))으로 투영한 제곱합으로 측정됩니다. 이를 점 구름의 <em>전체 분산</em> 또는 <strong>관성(inertia)</strong>이라고 합니다. 이 관성은 선 위로의 투영 제곱합과 그 선을 따른 분산의 합으로 분해될 수 있습니다. 고정된 분산에 대해, 투영 거리를 최소화하는 것은 또한 그 선을 따른 분산을 최대화합니다. 종종 우리는 첫 번째 주성분을 분산이 최대인 선으로 정의합니다.</p></li>
 </ul>
 </section>
 </section>
 </section>
-<section id="the-new-linear-combinations" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="the-new-linear-combinations"><span class="header-section-number">9.3</span> 7.4 The new linear combinations</h2>
-<p><a href="imgs/Vegetables_small.jpg"><img src="imgs/Vegetables_small.jpg" class="img-fluid"></a></p>
-<p>The PC line we found in the previous section could be written</p>
-<p>Image credit: Sara Holmes</p>
+<section id="새로운-선형-결합" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="새로운-선형-결합"><span class="header-section-number">9.3</span> 7.4 새로운 선형 결합</h2>
+<p><img src="imgs/Vegetables_small.jpg" class="img-fluid"></p>
+<p>이전 섹션에서 찾은 PC 선은 다음과 같이 쓸 수 있습니다.</p>
+<p>이미지 출처: Sara Holmes</p>
 <p>\[ PC = + . \]</p>
-<p>Principal components are <em>linear combinations</em> of the variables that were originally measured, they provide a <em>new coordinate system</em>. To understand what a <strong>linear combination</strong> really is, we can take an analogy. When making a healthy juice mix, you will follow a recipe like</p>
+<p>주성분은 원래 측정된 변수들의 _선형 결합(linear combinations)_이며, _새로운 좌표계_를 제공합니다. <strong>선형 결합</strong>이 실제로 무엇인지 이해하기 위해 비유를 들어보겠습니다. 건강한 주스 믹스를 만들 때 다음과 같은 레시피를 따를 것입니다.</p>
 <p>\[ <span class="math display">\[\begin{align} V &amp;= 2 \times \text{Beet} + 1 \times \text{Carrot} \\\ &amp;\+
 \tfrac{1}{2} \text{Gala} + \tfrac{1}{2} \text{GrannySmith} \\\ &amp;\+ 0.02 \times
 \text{Ginger} + 0.25 \times \text{Lemon}. \end{align}\]</span> \]</p>
-<p>This recipe is a linear combination of individual juice types (the original variables). The result is a new variable, \(V\), and the coefficients \((2,1,,,0.02,0.25)\) are called the <strong>loadings</strong>.</p>
+<p>이 레시피는 개별 주스 유형(원래 변수들)의 선형 결합입니다. 결과는 새로운 변수 \(V\)이며, 계수 \((2,1,,,0.02,0.25)\)는 <strong>로딩(loadings)</strong>이라고 불립니다.</p>
 <p>__</p>
-<p>Question 7.9</p>
-<p>How would you compute the calories in a glass of juice?</p>
-<section id="optimal-lines" class="level3" data-number="9.3.1">
-<h3 data-number="9.3.1" class="anchored" data-anchor-id="optimal-lines"><span class="header-section-number">9.3.1</span> 7.4.1 Optimal lines</h3>
-<p>A linear combination of variables defines a line in higher dimensions in the same way we constructed lines in the scatterplot plane of two dimensions. As we saw in that case, there are many ways to choose lines onto which we project the data, there is however a `best’ line for our purpose.</p>
-<p>The total variance of all the points in all the variables can de decomposed. In PCA, we use the fact that the total sums of squares of the distances between the points and any line can be decomposed into the distance to the line and the variance along the line.</p>
-<p>We saw that the principal component minimizes the distance to the line, and it also maximizes the variance of the projections along the line.</p>
-<p>Why is maximizing the variance along a line a good idea? Let’s look at another example of a projection from three dimensions into two. In fact, human vision depends on such dimension reduction:</p>
-<p><a href="imgs/CAM3.png" title="Figure 7.11: A mystery silhouette."><img src="imgs/CAM3.png" class="img-fluid"></a></p>
-<p>Figure 7.11: A mystery silhouette.</p>
+<p>질문 7.9</p>
+<p>주스 한 잔의 칼로리를 어떻게 계산하시겠습니까?</p>
+<section id="최적의-선" class="level3" data-number="9.3.1">
+<h3 data-number="9.3.1" class="anchored" data-anchor-id="최적의-선"><span class="header-section-number">9.3.1</span> 7.4.1 최적의 선</h3>
+<p>변수들의 선형 결합은 우리가 2차원 산점도 평면에서 선을 구축했던 것과 같은 방식으로 고차원에서의 선을 정의합니다. 그 사례에서 보았듯이, 데이터를 투영할 선을 선택하는 방법은 여러 가지가 있지만, 우리의 목적에 부합하는 ‘최선의’ 선이 존재합니다.</p>
+<p>모든 변수에 걸친 모든 점의 전체 분산은 분해될 수 있습니다. PCA에서 우리는 점들과 임의의 선 사이의 거리 제곱합이 선까지의 거리와 선을 따른 분산으로 분해될 수 있다는 사실을 이용합니다.</p>
+<p>우리는 주성분이 선까지의 거리를 최소화하며, 또한 선을 따른 투영의 분산을 최대화한다는 것을 보았습니다.</p>
+<p>왜 선을 따른 분산을 최대화하는 것이 좋은 아이디어일까요? 3차원에서 2차원으로의 투영에 대한 또 다른 예시를 살펴봅시다. 사실, 인간의 시각은 그러한 차원 축소에 의존합니다:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="imgs/CAM3.png" class="img-fluid figure-img"></p>
+<figcaption>그림 7.11: 수수께끼의 실루엣.</figcaption>
+</figure>
+</div>
+<p>그림 7.11: 수수께끼의 실루엣.</p>
 <p>__</p>
-<p>Question 7.10</p>
-<p>In Figure 7.11, there is a two-dimensional projection of a three-dimensional object. What is the object?</p>
+<p>질문 7.10</p>
+<p>그림 7.11에는 3차원 물체의 2차원 투영이 있습니다. 이 물체는 무엇일까요?</p>
 <p>__</p>
-<p>Question 7.11</p>
-<p>Which of the two projections, Figure 7.11 or 7.13, do you find more informative, and why?</p>
+<p>질문 7.11</p>
+<p>그림 7.11과 7.13 중 어느 투영이 더 정보가 많다고 생각하시나요? 그 이유는 무엇인가요?</p>
 <p>__</p>
-<p>Solution</p>
+<p>해결책</p>
 <p>__</p>
-<p>One can argue that the projection that maximizes the area of the shadow shows more `information’.</p>
+<p>그림자의 면적을 최대화하는 투영이 더 많은 ’정보’를 보여준다고 주장할 수 있습니다.</p>
 </section>
 </section>
-<section id="the-pca-workflow" class="level2" data-number="9.4">
-<h2 data-number="9.4" class="anchored" data-anchor-id="the-pca-workflow"><span class="header-section-number">9.4</span> 7.5 The PCA workflow</h2>
-<p><a href="imgs/orgacp1.png" title="Figure 7.12: Many choices have to be made during PCA processing."><img src="imgs/orgacp1.png" class="img-fluid"></a></p>
-<p>Figure 7.12: Many choices have to be made during PCA processing.</p>
-<p>PCA is based on the principle of finding the axis showing the largest inertia/variability, removing the variability in that direction and then iterating to find the next best orthogonal axis, and so on. In fact, we do not have to run iterations, all the axes can be found in one linear algebra operation called the <strong>S</strong> ingular <strong>V</strong> alue <strong>D</strong> ecomposition (we will delve more deeply into the details below).</p>
-<p>In the diagram in Figure 7.12, we see that first the means and variances are computed and the choice of whether to work directly with the covariance matrix or with the correlation matrix has to be made. The next step is the choice of \(k\), the number of components we deem relevant to the data. We say that \(k\) is the rank of the approximation. The best choice of \(k\) is a difficult question, and we discuss on how to approach it below. The choice of \(k\) requires looking at a plot of the variances explained by the successive principal components. Once we have chosen \(k\), we can proceed to the projections of the data in the new \(k\)-dimensional subspace.</p>
-<p>The end results of the PCA workflow are useful maps of both the variables and the samples. Understanding how these maps are constructed will maximize the information we can gather from them.</p>
+<section id="pca-워크플로" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="pca-워크플로"><span class="header-section-number">9.4</span> 7.5 PCA 워크플로</h2>
+<p><a href="imgs/orgacp1.png" title="그림 7.12: PCA 처리 과정 중 많은 선택이 이루어져야 합니다."><img src="imgs/orgacp1.png" class="img-fluid"></a></p>
+<p>그림 7.12: PCA 처리 과정 중 많은 선택이 이루어져야 합니다.</p>
+<p>PCA는 가장 큰 관성/가변성을 보여주는 축을 찾고, 그 방향의 가변성을 제거한 다음, 그 다음으로 좋은 직교 축을 찾는 과정을 반복하는 원리에 기반합니다. 사실 반복해서 실행할 필요 없이, <strong>특잇값 분해(Singular Value Decomposition, SVD)</strong>라고 불리는 하나의 선형 대수 연산으로 모든 축을 찾을 수 있습니다(이에 대한 자세한 내용은 아래에서 다룰 것입니다).</p>
+<p>그림 7.12의 다이어그램에서, 먼저 평균과 분산이 계산되고 공분산 행렬로 직접 작업할지 아니면 상관 행렬로 작업할지 선택해야 함을 알 수 있습니다. 다음 단계는 데이터에 유의미하다고 간주되는 성분의 수인 \(k\)를 선택하는 것입니다. 우리는 \(k\)를 근사(approximation)의 계수(rank)라고 말합니다. 최적의 \(k\)를 선택하는 것은 어려운 문제이며, 아래에서 어떻게 접근해야 할지 논의할 것입니다. \(k\)를 선택하려면 연속적인 주성분들에 의해 설명되는 분산의 플롯을 살펴보아야 합니다. 일단 \(k\)를 선택했다면, 새로운 \(k\)차원 하위 공간으로의 데이터 투영을 진행할 수 있습니다.</p>
+<p>PCA 워크플로의 최종 결과는 변수와 샘플 모두에 대한 유용한 맵(maps)입니다. 이러한 맵들이 어떻게 구축되는지 이해하면 그로부터 얻을 수 있는 정보를 극대화할 수 있을 것입니다.</p>
 </section>
-<section id="the-inner-workings-of-pca-rank-reduction" class="level2" data-number="9.5">
-<h2 data-number="9.5" class="anchored" data-anchor-id="the-inner-workings-of-pca-rank-reduction"><span class="header-section-number">9.5</span> 7.6 The inner workings of PCA: rank reduction</h2>
-<p>This is a small section for those whose background in linear algebra is but a faint memory. It tries to give some intuition to the singular value decomposition method underlying PCA, without too much notation.</p>
-<p><a href="imgs/CAM4.png" title="Figure 7.13: Another two-dimensional projection of the same object shown in Figure fig-cam1. Here, the perspective is more informative. Generally, choosing the perspective such that the spread (in other words, the variance) of the points is maximal generally provides most information. We want to see as much of the variation as possible, that’s what PCA does."><img src="imgs/CAM4.png" class="img-fluid"></a></p>
-<p>Figure 7.13: Another two-dimensional projection of the same object shown in Figure 7.11. Here, the perspective is more informative. Generally, choosing the perspective such that the spread (in other words, the variance) of the points is maximal generally provides most information. We want to see as much of the variation as possible, that’s what PCA does.</p>
-<p>The singular value decomposition of a matrix finds horizontal and vertical vectors (called the singular vectors) and normalizing values (called singular values). As before, we start by giving the forward-generative explanation before doing the actual reverse engineering that is used in creating the decomposition. To calibrate the meaning of each step, we will start with an artificial example before moving to the complexity of real data.</p>
-<section id="rank-one-matrices" class="level3" data-number="9.5.1">
-<h3 data-number="9.5.1" class="anchored" data-anchor-id="rank-one-matrices"><span class="header-section-number">9.5.1</span> 7.6.1 Rank-one matrices</h3>
-A simple generative model demonstrates the meaning of the <strong>rank of a matrix</strong> and explains how we find it in practice. Suppose we have two vectors, \(u\) (a one-column matrix), and \(v^t=t(v)\) (a one-row matrix–the transpose of a one-column matrix \(v\)). For instance, \(u =(
-<span class="math display">\[\begin{smallmatrix}
-1\\\2\\\3\\\4 \end{smallmatrix}\]</span>
-)\) and \(v =(
+<section id="pca의-내부-구조-계수-축소rank-reduction" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="pca의-내부-구조-계수-축소rank-reduction"><span class="header-section-number">9.5</span> 7.6 PCA의 내부 구조: 계수 축소(Rank reduction)</h2>
+<p>이 섹션은 선형 대수학 배경 지식이 희미한 기억으로만 남아 있는 분들을 위한 짧은 섹션입니다. 너무 많은 수식 없이 PCA의 기초가 되는 특잇값 분해 방법에 대한 직관을 제공하고자 합니다.</p>
+<p><a href="imgs/CAM4.png" title="그림 7.13: 그림 7.11에서 보여준 것과 동일한 물체의 또 다른 2차원 투영. 여기서의 관점이 더 정보가 많습니다. 일반적으로 점들의 퍼짐(다시 말해 분산)이 최대가 되도록 관점을 선택하는 것이 가장 많은 정보를 제공합니다. 우리는 가능한 한 많은 변동을 보고 싶어 하며, 그것이 바로 PCA가 하는 일입니다."><img src="imgs/CAM4.png" class="img-fluid"></a></p>
+<p>그림 7.13: 그림 7.11에서 보여준 것과 동일한 물체의 또 다른 2차원 투영. 여기서의 관점이 더 정보가 많습니다. 일반적으로 점들의 퍼짐(다시 말해 분산)이 최대가 되도록 관점을 선택하는 것이 가장 많은 정보를 제공합니다. 우리는 가능한 한 많은 변동을 보고 싶어 하며, 그것이 바로 PCA가 하는 일입니다.</p>
+<p>행렬의 특잇값 분해는 수평 및 수직 벡터(특잇값 벡터라 불림)와 정규화 값(특잇값이라 불림)을 찾습니다. 이전과 마찬가지로, 분해를 생성하는 데 사용되는 실제 역설계(reverse engineering)를 수행하기 전에 순방향 생성(forward-generative) 설명을 먼저 제공하겠습니다. 각 단계의 의미를 보정하기 위해, 실제 데이터의 복잡함으로 넘어가기 전에 인위적인 예시부터 시작하겠습니다.</p>
+<section id="계수-1-행렬rank-one-matrices" class="level3" data-number="9.5.1">
+<h3 data-number="9.5.1" class="anchored" data-anchor-id="계수-1-행렬rank-one-matrices"><span class="header-section-number">9.5.1</span> 7.6.1 계수 1 행렬(Rank-one matrices)</h3>
+간단한 생성 모델은 <strong>행렬의 계수(rank of a matrix)</strong>의 의미를 보여주고 우리가 이를 실제로 어떻게 찾는지 설명해 줍니다. 두 개의 벡터 \(u\)(1열 행렬)와 \(v^t=t(v)\)(1행 행렬 — 1열 행렬 \(v\)의 전치)가 있다고 가정해 봅시다. 예를 들어, \(u =(
+<span class="math display">\[\begin{smallmatrix} 1\\\2\\\3\\\4 \end{smallmatrix}\]</span>
+)\)이고 \(v =(
 <span class="math display">\[\begin{smallmatrix} 2\\\4\\\8 \end{smallmatrix}\]</span>
-<p>)\). The transpose of \(v\) is written \(v^t = t(v) = (2; 4; 8)\). We multiply a copy of \(u\) by each of the elements of \(v^t\) in turn as follows:</p>
-<p>Step 0:</p>
+<p>)\)입니다. \(v\)의 전치는 \(v^t = t(v) = (2; 4; 8)\)로 쓰여집니다. 우리는 다음과 같이 \(u\)의 복사본에 \(v^t\)의 각 원소를 차례로 곱합니다:</p>
+<p>단계 0:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -762,7 +766,7 @@ A simple generative model demonstrates the meaning of the <strong>rank of a matr
 </tr>
 </tbody>
 </table>
-<p>Step 1:</p>
+<p>단계 1:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -799,7 +803,7 @@ A simple generative model demonstrates the meaning of the <strong>rank of a matr
 </tr>
 </tbody>
 </table>
-<p>Step 2:</p>
+<p>단계 2:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -836,7 +840,7 @@ A simple generative model demonstrates the meaning of the <strong>rank of a matr
 </tr>
 </tbody>
 </table>
-<p>Step 3:</p>
+<p>단계 3:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -873,39 +877,39 @@ A simple generative model demonstrates the meaning of the <strong>rank of a matr
 </tr>
 </tbody>
 </table>
-<p>Thus, the \((2,3)\) entry of the matrix \(X\), written \(x_{2,3}\), is obtained by multiplying \(u_2\) by \(v_3\). We can write this</p>
+<p>따라서 행렬 \(X\)의 \((2,3)\) 항목(entry), 즉 \(x_{2,3}\)은 \(u_2\)에 \(v_3\)를 곱하여 얻어집니다. 우리는 이를 다음과 같이 쓸 수 있습니다.</p>
 <p>\[ X=]</p>
-<p>The matrix \(X\) we obtain here is said to be of rank 1, because both \(u\) and \(v\) have one column.</p>
+<p>여기서 우리가 얻은 행렬 \(X\)는 \(u\)와 \(v\) 모두 하나의 열을 가지므로 계수(rank)가 1이라고 합니다.</p>
 <p>__</p>
-<p>Question 7.12</p>
-<p>Why can we say that writing \(X = u*v^t\) is more economical than spelling out the full matrix \(X\)?</p>
+<p>질문 7.12</p>
+<p>왜 \(X = u*v^t\)라고 쓰는 것이 전체 행렬 \(X\)를 모두 적는 것보다 더 경제적이라고 말할 수 있을까요?</p>
 <p>__</p>
-<p>Solution</p>
+<p>해결책</p>
 <p>__</p>
-<p>\(X\) has \(4=12\) elements, while in terms of \(u\) and \(v\) it can be expressed by only \(4+3=7\) numbers. The compression is even more impressive when \(u\) or \(v\) are longer.</p>
-<p>On the other hand, suppose that we want to reverse the process and simplify another matrix \(X\) given below with 3 rows and 4 columns (12 numbers). Can we always express it in a similar way as a product of vectors without loss of information? In the diagrams shown in Figures 7.14 and 7.15, the colored boxes have areas proportional to the numbers in the cells of the matrix (7.4).</p>
-<p><a href="imgs/SVD-mosaicXplot0.png" title="Figure 7.14: Some special matrices have numbers in them that make them easy to decompose. Each colored rectangle in this diagram has an area that corresponds to the number in it."><img src="imgs/SVD-mosaicXplot0.png" class="img-fluid"></a></p>
-<p>Figure 7.14: Some special matrices have numbers in them that make them easy to decompose. Each colored rectangle in this diagram has an area that corresponds to the number in it.</p>
+<p>\(X\)는 \(4=12\)개의 원소를 가지는 반면, \(u\)와 \(v\)를 통해서는 단지 \(4+3=7\)개의 숫자로 표현될 수 있습니다. 이러한 압축은 \(u\)나 \(v\)가 더 길어질수록 더욱 인상적입니다.</p>
+<p>반면에, 아래에 주어진 3행 4열(12개 숫자)의 또 다른 행렬 \(X\)를 단순화하기 위해 그 과정을 거꾸로 수행하고 싶다고 가정해 봅시다. 정보의 손실 없이 항상 이를 벡터들의 곱으로 비슷하게 표현할 수 있을까요? 그림 7.14와 7.15에 표시된 다이어그램에서, 색상이 칠해진 상자들은 행렬 (7.4)의 셀에 있는 숫자들에 비례하는 면적을 가집니다.</p>
+<p><a href="imgs/SVD-mosaicXplot0.png" title="그림 7.14: 일부 특수한 행렬들은 분해하기 쉬운 숫자들을 포함하고 있습니다. 이 다이어그램의 각 색상 사각형은 그 안의 숫자에 해당하는 면적을 가집니다."><img src="imgs/SVD-mosaicXplot0.png" class="img-fluid"></a></p>
+<p>그림 7.14: 일부 특수한 행렬들은 분해하기 쉬운 숫자들을 포함하고 있습니다. 이 다이어그램의 각 색상 사각형은 그 안의 숫자에 해당하는 면적을 가집니다.</p>
 <p>__</p>
-<p>Question 7.13</p>
-<p>Here is a matrix \(X\) we want to decompose.</p>
+<p>질문 7.13</p>
+<p>여기에 우리가 분해하고 싶은 행렬 \(X\)가 있습니다.</p>
 <p>\[ ]</p>
-<p>\(X\) has been redrawn as series of rectangles in Figure 7.14. What numbers could we put in the white \(u\) and \(v\) boxes so that the values of the sides of the rectangle give the numbers as their product?</p>
-<p>A matrix with the special property of being perfectly “rectangular” like \(X\) is said to be of rank 1. We can represent the numbers in \(X\) by the areas of rectangles, where the sides of rectangles are given by the values in the side vectors (\(u\) and \(v\)).</p>
-<p><a href="imgs/SVD-mosaicXplot1.png" title="Figure 7.15 (a):"><img src="imgs/SVD-mosaicXplot1.png" class="img-fluid"></a></p>
+<p>\(X\)는 그림 7.14에서 일련의 사각형들로 다시 그려졌습니다. 사각형의 변의 값들을 곱했을 때 해당 숫자들이 나오도록 하려면 흰색 \(u\)와 \(v\) 상자에 어떤 숫자들을 넣을 수 있을까요?</p>
+<p>\(X\)처럼 완벽하게 “직사각형”인 특수한 성질을 가진 행렬을 계수가 1이라고 합니다. 우리는 \(X\)의 숫자들을 사각형의 면적으로 나타낼 수 있으며, 여기서 사각형의 변들은 측면 벡터(\(u\)와 \(v\))에 있는 값들에 의해 주어집니다.</p>
+<p><img src="imgs/SVD-mosaicXplot1.png" class="img-fluid">: “)</p>
 <ol type="a">
 <li></li>
 </ol>
-<p><a href="imgs/SVD-mosaicXplot2.png" title="Figure 7.15 (b):"><img src="imgs/SVD-mosaicXplot2.png" class="img-fluid"></a></p>
+<p><img src="imgs/SVD-mosaicXplot2.png" class="img-fluid">: “)</p>
 <ol start="2" type="a">
 <li></li>
 </ol>
-<p><a href="imgs/SVD-mosaicXplot3.png" title="Figure 7.15 (c):"><img src="imgs/SVD-mosaicXplot3.png" class="img-fluid"></a></p>
+<p><img src="imgs/SVD-mosaicXplot3.png" class="img-fluid">: “)</p>
 <ol start="3" type="a">
 <li></li>
 </ol>
-<p>Figure 7.15: The numbers in the cells are equal to the product of the corresponding margins in (a), (b) and (c). We could make the cells from products in several ways. In (c), we force the margins to have norm \(1\).</p>
-<p>We see in Figure 7.15 that the decomposition of \(X\) is not unique: there are several candidate choices for the vectors \(u\) and \(v\). We will make the choice unique by requiring that the sum of the squares of each vector’s elements add to 1 (we say the vectors \(v\) and \(u\) have norm 1). Then we have to keep track of one extra number by which to multiply each of the products, and which represents the “overall scale” of \(X\). This is the value we have put in the upper left hand corner. It is called the singular value \(s_1\). In the R code below, we start by supposing we know the values in <code>u</code>, <code>v</code> and <code>s1</code>; later we will see a function that finds them for us. Let’s check the multiplication and norm properties in R:</p>
+<p>그림 7.15: 셀 안의 숫자들은 (a), (b), (c)에서 상응하는 여백(margins)의 곱과 같습니다. 우리는 여러 가지 방식으로 곱을 통해 셀을 만들 수 있습니다. (c)에서는 여백의 노름(norm)이 1이 되도록 강제합니다.</p>
+<p>그림 7.15에서 우리는 \(X\)의 분해가 유일하지 않다는 것을 알 수 있습니다: 벡터 \(u\)와 \(v\)에 대해 여러 가지 후보 선택지가 있습니다. 우리는 각 벡터 원소의 제곱합이 1이 되도록 요구함으로써 선택을 유일하게 만들 것입니다 (벡터 \(v\)와 \(u\)가 노름 1을 갖는다고 말합니다). 그러면 우리는 각 곱에 곱해줄, \(X\)의 “전체적인 스케일”을 나타내는 추가적인 숫자 하나를 추적해야 합니다. 이것이 우리가 왼쪽 상단 모서리에 넣은 값입니다. 이를 첫 번째 특잇값 \(s_1\)이라고 부릅니다. 아래 R 코드에서, 우리는 먼저 <code>u</code>, <code>v</code>, <code>s1</code>의 값을 알고 있다고 가정하고 시작하겠습니다. 나중에 우리를 위해 이들을 찾아주는 함수를 볼 것입니다. R에서 곱셈과 노름 속성을 확인해 봅시다:</p>
 <pre><code>X = matrix(c(780,  75, 540,
              936,  90, 648,
             1300, 125, 900,
@@ -972,29 +976,26 @@ USV = svd(Xtwo)__</code></pre>
 [1] "d" "u" "v"
 
 
-USV$d __
-
-
-[1] 1.350624e+02 2.805191e+01 3.111680e-15 2.290270e-15</code></pre>
-<p>So 135.1 is the first singular value <code>USV$d[1]</code>.</p>
+USV$d __</code></pre>
+<p>따라서 135.1이 첫 번째 특잇값 <code>USV$d[1]</code>입니다.</p>
 <p>__</p>
-<p>Question 7.16</p>
-<p>Check how each successive pair of singular vectors improves our approximation to <code>Xtwo</code>. What do you notice about the third and fourth singular values?</p>
+<p>질문 7.16</p>
+<p>각각의 연속적인 특잇값 벡터 쌍이 <code>Xtwo</code>에 대한 근사를 어떻게 개선하는지 확인해 보세요. 세 번째와 네 번째 특잇값에 대해 무엇을 알 수 있나요?</p>
 <p>__</p>
-<p>Solution</p>
+<p>해결책</p>
 <p>__</p>
 <pre><code>Xtwo - USV$d[1] * USV$u[, 1] %*% t(USV$v[, 1])
 Xtwo - USV$d[1] * USV$u[, 1] %*% t(USV$v[, 1]) -
        USV$d[2] * USV$u[, 2] %*% t(USV$v[, 2])__</code></pre>
-<p>The third and fourth singular values are so small that they do not improve the approximation (within rounding errors), so we can conclude that <code>Xtwo</code> is of rank 2.</p>
-<p>Again, there are many ways to write a rank two matrix such as <code>Xtwo</code> as a sum of rank one matrices: in order to ensure uniqueness, we impose yet another7 condition on the singular vectors. The output vectors of the singular decomposition do not only have their norms equal to 1, each column vector in the \(U\) matrix is orthogonal to all the previous ones. We write \(u_{} u_{}\), this means that the sum of the products of the values in the same positions is \(0\): \(<em>i u</em>{i1} u_{i2} = 0\). Ditto for the \(V\) matrix.</p>
-<p>7 Above, we had chosen the norm of the vectors to be 1.</p>
+<p>세 번째와 네 번째 특잇값은 매우 작아서 (반올림 오차 범위 내에서) 근사를 개선하지 못하므로, 우리는 <code>Xtwo</code>의 계수가 2라고 결론 내릴 수 있습니다.</p>
+<p>다시 말하지만, <code>Xtwo</code>와 같은 계수가 2인 행렬을 계수 1인 행렬들의 합으로 쓰는 방법은 여러 가지가 있습니다: 유일성을 보장하기 위해 우리는 특잇값 벡터에 또 다른7 조건을 부과합니다. 특잇값 분해의 출력 벡터들은 노름이 1일 뿐만 아니라, \(U\) 행렬의 각 열 벡터는 이전의 모든 열 벡터들과 직교(orthogonal)합니다. 우리는 이를 \(u_{} u_{}\)라고 쓰며, 이는 동일한 위치에 있는 값들의 곱의 합이 0임을 의미합니다: \(<em>i u</em>{i1} u_{i2} = 0\). \(V\) 행렬에 대해서도 마찬가지입니다.</p>
+<p>7 위에서 우리는 벡터의 노름을 1로 선택했었습니다.</p>
 <p>__</p>
-<p>Task</p>
-<p>Check the orthonormality by computing the cross product of the \(U\) and \(V\) matrices:</p>
+<p>태스크</p>
+<p>\(U\)와 \(V\) 행렬의 교차 곱(cross product)을 계산하여 정규 직교성(orthonormality)을 확인해 보세요:</p>
 <pre><code>t(USV$u) %*% USV$u
 t(USV$v) %*% USV$v __</code></pre>
-<p>Let’s submit our <code>scaledTurtles</code> matrix to a singular value decomposition.</p>
+<p>우리의 <code>scaledTurtles</code> 행렬을 특잇값 분해해 봅시다.</p>
 <pre><code>turtles.svd = svd(scaledTurtles)
 turtles.svd$d __
 
@@ -1016,12 +1017,12 @@ dim(turtles.svd$u)__
 
 [1] 48  3</code></pre>
 <p>__</p>
-<p>Question 7.17</p>
-<p>What can you conclude about the turtles matrix from the <code>svd</code> output?</p>
+<p>질문 7.17</p>
+<p><code>svd</code> 출력으로부터 거북이 행렬에 대해 무엇을 결론지을 수 있나요?</p>
 <p>__</p>
-<p>Solution</p>
+<p>해결책</p>
 <p>__</p>
-<p>The first column of <code>turtles.svd$v</code> shows that the coefficients for the three variables are practically equal. Other noticeable “coincidences” include:</p>
+<p><code>turtles.svd$v</code>의 첫 번째 열은 세 변수에 대한 계수가 거의 동일함을 보여줍니다. 다른 눈에 띄는 “우연”들은 다음과 같습니다:</p>
 <pre><code>sum(turtles.svd$v[,1]^2)__
 
 
@@ -1032,58 +1033,58 @@ sum(turtles.svd$d^2) / 47 __
 
 
 [1] 3</code></pre>
-<p>We see that the coefficients are in fact \(\) and the sum of squares of the singular values is equal to \((n-1)p\).</p>
+<p>계수들이 실제로는 \(\)이며 특잇값의 제곱합이 \((n-1)p\)와 같음을 알 수 있습니다.</p>
 </section>
-<section id="singular-value-decomposition" class="level3" data-number="9.5.3">
-<h3 data-number="9.5.3" class="anchored" data-anchor-id="singular-value-decomposition"><span class="header-section-number">9.5.3</span> 7.6.3 Singular value decomposition</h3>
-<p><a href="imgs/SumRankOneD.png"><img src="imgs/SumRankOneD.png" class="img-fluid"></a></p>
-<p>\(X\) is decomposed additively into rank-one pieces. Each of the \(u\) vectors is combined into the \(U\) matrix, and each of \(v\) vectors into \(V\). The <em>Singular Value Decomposition</em> is</p>
+<section id="특잇값-분해singular-value-decomposition" class="level3" data-number="9.5.3">
+<h3 data-number="9.5.3" class="anchored" data-anchor-id="특잇값-분해singular-value-decomposition"><span class="header-section-number">9.5.3</span> 7.6.3 특잇값 분해(Singular value decomposition)</h3>
+<p><img src="imgs/SumRankOneD.png" class="img-fluid"></p>
+<p>\(X\)는 계수 1인 조각들로 가산적으로(additively) 분해됩니다. 각 \(u\) 벡터는 \(U\) 행렬로 결합되고, 각 \(v\) 벡터는 \(V\) 행렬로 결합됩니다. <strong>특잇값 분해</strong>는 다음과 같습니다.</p>
 <p>\[ {X} = U S V^t, V^t V={I}, U^t U={I}, \]</p>
-<p>where \(S\) is the diagonal matrix of singular values, \(V^t\) is the transpose of \(V\), and \({I}\) is the Identity matrix. Expression 7.5 can be written elementwise as</p>
+<p>여기서 \(S\)는 특잇값들의 대각 행렬(diagonal matrix)이고, \(V^t\)는 \(V\)의 전치 행렬이며, \({I}\)는 단위 행렬(Identity matrix)입니다. 식 7.5는 원소별로 다음과 같이 쓰여질 수 있습니다.</p>
 <p>\[ X_{ij} = u_{i1}s_1v_{1j} + u_{i2}s_2v_{2j} + u_{i3}s_3v_{3j} +… + u_{ir}s_rv_{rj}, \]</p>
-<p>\(U\) and \(V\) are said to be orthonormal8, because their self- crossproducts are the identity matrix.</p>
-<p>8 Nothing to do with the normal distribution, it stands for orthogonal and having norm 1.</p>
+<p>\(U\)와 \(V\)는 그들 자신의 교차 곱이 단위 행렬이므로 정규 직교(orthonormal)8라고 합니다.</p>
+<p>8 정규 분포(normal distribution)와는 아무런 관련이 없으며, 직교(orthogonal)하면서 노름이 1임을 나타냅니다.</p>
 </section>
-<section id="principal-components" class="level3" data-number="9.5.4">
-<h3 data-number="9.5.4" class="anchored" data-anchor-id="principal-components"><span class="header-section-number">9.5.4</span> 7.6.4 Principal components</h3>
-<p>The singular vectors from the singular value decomposition (provided by the <code>svd</code> function in R) contain the coefficients to put in front of the original variables to make the more informative ones we call the principal components. We write this as:</p>
+<section id="주성분principal-components" class="level3" data-number="9.5.4">
+<h3 data-number="9.5.4" class="anchored" data-anchor-id="주성분principal-components"><span class="header-section-number">9.5.4</span> 7.6.4 주성분(Principal components)</h3>
+<p>특잇값 분해(R의 <code>svd</code> 함수에서 제공)에서 얻은 특잇값 벡터는 원래의 변수 앞에 붙여서 우리가 주성분이라고 부르는 더 정보가 많은 변수들을 만드는 계수들을 포함하고 있습니다. 우리는 이를 다음과 같이 씁니다:</p>
 <p>\[ Z_1=v_{11} X_{} +v_{21} X_{} + v_{31} X_{}+ + v_{p1} X_{p}. \]</p>
-<p>If <code>usv = svd(X)</code>, then \((v_{11},v_{21},v_{31},…)\) are given by the first column of <code>usv$v</code>; similarly for \(Z_2\) with the second column of <code>usv$v</code>, and so son. \(p\) is the number of columns of \(X\) and the number of rows of \(V\). These new variables \(Z_1, Z_2, Z_3, …\) have variances that decrease in size: \(s_1^2 s_2^2 s_3^2 …\).</p>
+<p>만약 <code>usv = svd(X)</code>라면, \((v_{11},v_{21},v_{31},…)\)은 <code>usv$v</code>의 첫 번째 열에 의해 주어집니다; 유사하게 \(Z_2\)는 <code>usv$v</code>의 두 번째 열에 의해 주어지는 식입니다. \(p\)는 \(X\)의 열의 수이자 \(V\)의 행의 수입니다. 이러한 새로운 변수 \(Z_1, Z_2, Z_3, …\)는 크기가 감소하는 분산을 가집니다: \(s_1^2 s_2^2 s_3^2 …\).</p>
 <p>__</p>
-<p>Question 7.18</p>
-<p>Compute the first principal component for the turtles data by multiplying by the first singular value <code>d[1]</code> by <code>u[,1]</code>. What is another way of computing it ?</p>
+<p>질문 7.18</p>
+<p>첫 번째 특잇값 <code>d[1]</code>과 <code>u[,1]</code>을 곱하여 거북이 데이터의 첫 번째 주성분을 계산해 보세요. 이를 계산하는 또 다른 방법은 무엇일까요?</p>
 <p>__</p>
-<p>Solution</p>
+<p>해결책</p>
 <p>__</p>
-<p>We show this using the code:</p>
+<p>다음 코드를 사용하여 이를 보여줍니다:</p>
 <pre><code>US = turtles.svd$u[,1, drop = FALSE] %*% turtles.svd$d[1]
 XV = scaledTurtles %*% turtles.svd$v[, 1, drop = FALSE]
 max(abs(US-XV))__</code></pre>
-<p>We can also see using matrix algebra that \(XV\) and \(US\) are the same. Remember that \(V\) is orthogonal, so \(V^t V={I}\) and \(XV = USV^tV=US,{I}\).</p>
-<p><em>Note:</em> The <code>drop = FALSE</code> argument in the first line of the below code makes sure that the selected matrix column retains <em>matrix</em> / <em>array</em> class attributes and thus is eligible for the matrix multiplication operator. Alternatively, you could use the regular multiplication operator <code>*</code>. In the second line, the <code>drop = FALSE</code> is not strictly necessary, but we have it there for symmetry.</p>
-<p>Here are two useful facts, first in words, then with the mathematical shorthand.</p>
-<p>The number of principal components \(k\) is always chosen to be fewer than the number of original variables or the number of observations. We are “lowering” the dimension of the problem:</p>
+<p>우리는 또한 행렬 대수를 사용하여 \(XV\)와 \(US\)가 같음을 알 수 있습니다. \(V\)가 직교하므로 \(V^t V={I}\)이고 \(XV = USV^tV=US,{I}\)임을 기억하세요.</p>
+<p><em>참고:</em> 아래 코드의 첫 번째 줄에 있는 <code>drop = FALSE</code> 인수는 선택된 행렬 열이 <em>matrix</em> / <em>array</em> 클래스 속성을 유지하도록 하여 행렬 곱셈 연산이 가능하도록 보장합니다. 대안으로 일반 곱셈 연산자 <code>*</code>를 사용할 수도 있습니다. 두 번째 줄에서 <code>drop = FALSE</code>는 엄밀히 말해 필요하지 않지만 대칭을 위해 넣었습니다.</p>
+<p>여기에 두 가지 유용한 사실이 있습니다. 먼저 말로 설명하고, 그 다음 수학적 기호로 나타내겠습니다.</p>
+<p>주성분의 수 \(k\)는 항상 원래 변수의 수나 관측치 수보다 적게 선택됩니다. 우리는 문제의 차원을 “낮추고” 있는 것입니다:</p>
 <p>\[ k(n,p). \]</p>
-<p>The principal component transformation is defined so that the first principal component has the largest possible variance (that is, accounts for as much of the variability in the data as possible), and each successive component in turn has the highest variance possible under the constraint that it be orthogonal to the preceding components:</p>
+<p>주성분 변환은 첫 번째 주성분이 가능한 가장 큰 분산을 갖도록(즉, 데이터의 가변성을 가능한 한 많이 설명하도록) 정의되며, 각 후속 성분은 이전 성분들과 직교해야 한다는 제약 조건 하에서 순차적으로 가장 높은 분산을 갖습니다:</p>
 <p>\[ <em>{aX bX}(</em>{aX} (X)), bX= \]</p>
 </section>
 </section>
-<section id="plotting-the-observations-in-the-principal-plane" class="level2" data-number="9.6">
-<h2 data-number="9.6" class="anchored" data-anchor-id="plotting-the-observations-in-the-principal-plane"><span class="header-section-number">9.6</span> 7.7 Plotting the observations in the principal plane</h2>
-<p>We revisit our two-variable athletes data with the <code>discus</code> and the <code>weight</code> variables. In Section 7.3.2, we computed the first principal component and represented it as the purple line in Figure 7.10. We showed that \(Z_1\) was the linear combination given by the diagonal. As the coefficients have to have their sum of squares add to \(1\), we have that \[Z_1=-0.707<em>- 0.707</em>.\]</p>
-<p>This is the same as if the two coordinates were \(c_1=0.7071\) and \(c_2=0.7071\).</p>
+<section id="주평면에-관측치-플롯하기" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="주평면에-관측치-플롯하기"><span class="header-section-number">9.6</span> 7.7 주평면에 관측치 플롯하기</h2>
+<p>우리는 <code>discus</code>와 <code>weight</code> 변수가 있는 두 변수 athletes 데이터를 다시 살펴봅니다. 7.3.2절에서 우리는 첫 번째 주성분을 계산했고 이를 그림 7.10에서 보라색 선으로 나타냈습니다. 우리는 \(Z_1\)이 대각선에 의해 주어진 선형 결합임을 보여주었습니다. 계수들의 제곱합이 1이 되어야 하므로, 우리는 다음과 같은 식을 얻습니다. \[Z_1=-0.707<em>- 0.707</em>.\]</p>
+<p>이는 두 좌표가 \(c_1=0.7071\) 및 \(c_2=0.7071\)인 것과 같습니다.</p>
 <p>__</p>
-<p>Question 7.19</p>
-<p>What part of the output of the <code>svd</code> functions leads us to the first PC coefficients, also known as the PC <strong>loadings</strong> ?</p>
-<p>Note that we use <code>svda</code> which was the svd applied to the two variables <code>discus</code> and <code>weight</code>.</p>
+<p>질문 7.19</p>
+<p><code>svd</code> 함수의 출력 중 어떤 부분이 PC <strong>로딩(loadings)</strong>이라고도 알려진 첫 번째 PC 계수로 우리를 인도하나요?</p>
+<p>우리가 두 변수 <code>discus</code>와 <code>weight</code>에 적용했던 <code>svda</code>를 사용한다는 점에 유의하세요.</p>
 <p>__</p>
-<p>Solution</p>
+<p>해결책</p>
 <p>__</p>
 <pre><code>svda$v[,1]__
 
 
 [1] -0.7071068 -0.7071068</code></pre>
-<p>If we rotate the <code>(discus, weight)</code> plane by making the purple line the horizontal \(x\) axis, we obtain what is know as the first <strong>principal plane</strong>.</p>
+<p>보라색 선을 가로 \(x\)축으로 만들어 <code>(discus, weight)</code> 평면을 회전시키면, 첫 번째 <strong>주평면(principal plane)</strong>이라고 알려진 것을 얻게 됩니다.</p>
 <pre><code>ppdf = tibble(PC1n = -svda$u[, 1] * svda$d[1],
               PC2n =  svda$u[, 2] * svda$d[2])
 gg = ggplot(ppdf, aes(x = PC1n, y = PC2n)) + 
@@ -1095,27 +1096,27 @@ gg + geom_point(aes(x = PC1n, y = 0), color = "red") +
 gg + geom_point(aes(x = 0, y = PC2n), color = "blue") +
      geom_segment(aes(yend = PC2n, xend = 0), color = "blue") +
      geom_vline(xintercept = 0, color = "skyblue", linewidth = 1.5, alpha = 0.5) __</code></pre>
-<p><a href="07-chap_files/figure- html/fig-pcablue-1.png" title="Figure 7.16 (a):"><img src="07-chap_files/figure-html/fig-pcablue-1.png" class="img-fluid"></a></p>
+<p><a href="07-chap_files/figure- html/fig-pcablue-1.png" title="그림 7.16 (a):"><img src="07-chap_files/figure-html/fig-pcablue-1.png" class="img-fluid"></a></p>
 <ol type="a">
 <li></li>
 </ol>
-<p><a href="07-chap_files/figure- html/fig-pcablue-2.png" title="Figure 7.16 (b):"><img src="07-chap_files/figure-html/fig-pcablue-2.png" class="img-fluid"></a></p>
+<p><a href="07-chap_files/figure- html/fig-pcablue-2.png" title="그림 7.16 (b):"><img src="07-chap_files/figure-html/fig-pcablue-2.png" class="img-fluid"></a></p>
 <ol start="2" type="a">
 <li></li>
 </ol>
-<p>Figure 7.16: In the case where we only have two original variables, the PCA transformation is a simple rotation; the new coordinates are always chosen to be the horizontal and vertical axes.</p>
+<p>그림 7.16: 원래 변수가 두 개뿐인 경우, PCA 변환은 단순한 회전입니다. 새로운 좌표는 항상 가로 및 세로 축으로 선택됩니다.</p>
 <p>__</p>
-<p>Question 7.20</p>
+<p>질문 7.20</p>
 <ol type="1">
-<li><p>What is the mean of the sums of squares of the red segments in Figure 7.16 equal to?</p></li>
-<li><p>How does this compare to the variance of the red points?</p></li>
-<li><p>Compute the ratio of the standard deviation of the blue segments to the red segments in Figure 7.16. Compare this to the ratio of singular values 1 and 2.</p></li>
+<li><p>그림 7.16에서 빨간색 세그먼트의 제곱합의 평균은 무엇과 같습니까?</p></li>
+<li><p>이것이 빨간색 점들의 분산과 비교하여 어떤가요?</p></li>
+<li><p>그림 7.16에서 파란색 세그먼트와 빨간색 세그먼트의 표준 편차 비율을 계산해 보세요. 이를 첫 번째와 두 번째 특잇값의 비율과 비교해 보세요.</p></li>
 </ol>
 <p>__</p>
-<p>Solution</p>
+<p>해결책</p>
 <p>__</p>
 <ol type="1">
-<li>The sum of squares of the red segments corresponds to the square of the second singular value:</li>
+<li>빨간색 세그먼트의 제곱합은 두 번째 특잇값의 제곱에 해당합니다:</li>
 </ol>
 <pre><code>sum(ppdf$PC2n^2) __
 
@@ -1127,7 +1128,7 @@ svda$d[2]^2 __
 
 
 [1] 6.196729</code></pre>
-<p>Since the mean of the red segments is zero, the above quantities are also proportional to the variance:</p>
+<p>빨간색 세그먼트의 평균이 0이므로, 위의 수치들은 또한 분산에 비례합니다:</p>
 <pre><code>mean(ppdf$PC2n) __
 
 
@@ -1173,11 +1174,11 @@ svda$d[1] / svda$d[2]__
 <p>In the following code, we use the function <code>princomp</code>. Its return value is a list of all the important pieces of information needed to plot and interpret a PCA.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="imgs/devil.png" title="In fact, PCA is such a fundamental technique that there are many different implementations of it in various R packages. Unfortunately, the input arguments and the formatting and naming of their output is not standardized, and some even use different conventions for the scaling of their output. We will experiment with several different ones to familiarize ourselves with these choices."><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
-<figcaption>In fact, PCA is such a fundamental technique that there are many different implementations of it in various R packages. Unfortunately, the input arguments and the formatting and naming of their output is not standardized, and some even use different conventions for the scaling of their output. We will experiment with several different ones to familiarize ourselves with these choices.</figcaption>
+<p><a href="imgs/devil.png" title="사실 PCA는 매우 기초적인 기법이라서 다양한 R 패키지에 많은 서로 다른 구현체들이 존재합니다. 불행하게도 입력 인수와 출력의 형식 및 명칭이 표준화되어 있지 않으며, 일부는 출력의 스케일링에 대해 서로 다른 관례를 사용하기도 합니다. 우리는 이러한 선택들에 익숙해지기 위해 몇 가지 서로 다른 것들을 실험해 볼 것입니다."><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
+<figcaption>사실 PCA는 매우 기초적인 기법이라서 다양한 R 패키지에 많은 서로 다른 구현체들이 존재합니다. 불행하게도 입력 인수와 출력의 형식 및 명칭이 표준화되어 있지 않으며, 일부는 출력의 스케일링에 대해 서로 다른 관례를 사용하기도 합니다. 우리는 이러한 선택들에 익숙해지기 위해 몇 가지 서로 다른 것들을 실험해 볼 것입니다.</figcaption>
 </figure>
 </div>
-<p>In fact, PCA is such a fundamental technique that there are many different implementations of it in various R packages. Unfortunately, the input arguments and the formatting and naming of their output is not standardized, and some even use different conventions for the scaling of their output. We will experiment with several different ones to familiarize ourselves with these choices.</p>
+<p>사실 PCA는 매우 기초적인 기법이라서 다양한 R 패키지에 많은 서로 다른 구현체들이 존재합니다. 불행하게도 입력 인수와 출력의 형식 및 명칭이 표준화되어 있지 않으며, 일부는 출력의 스케일링에 대해 서로 다른 관례를 사용하기도 합니다. 우리는 이러한 선택들에 익숙해지기 위해 몇 가지 서로 다른 것들을 실험해 볼 것입니다.</p>
 <pre><code>cor(scaledTurtles)__
 
 
@@ -1203,58 +1204,58 @@ Standard deviations:
 
 library("factoextra")
 fviz_eig(pcaturtles, geom = "bar", bar_width = 0.4) + ggtitle("")__</code></pre>
-<p><a href="07-chap_files/figure- html/fig-PCAturtles-1.png" title="Figure 7.17: The screeplot shows the eigenvalues for the standardized turtles data (scaledTurtles): there is one large value and two small ones. The data are (almost) one-dimensional. We will see why this dimension is called an axis of size, a frequent phenomenon in biometric data [@Jolicoeur1960]."><img src="07-chap_files/figure-html/fig-PCAturtles-1.png" class="img-fluid"></a></p>
-<p>Figure 7.17: The screeplot shows the eigenvalues for the standardized turtles data (<code>scaledTurtles</code>): there is one large value and two small ones. The data are (almost) one-dimensional. We will see why this dimension is called an axis of size, a frequent phenomenon in biometric data (<a href="16-chap.html#ref-Jolicoeur1960">Jolicoeur and Mosimann 1960</a>).</p>
+<p><a href="07-chap_files/figure- html/fig-PCAturtles-1.png" title="그림 7.17: 스크리 플롯(screeplot)은 표준화된 거북이 데이터(scaledTurtles)에 대한 고윳값을 보여줍니다: 하나의 큰 값과 두 개의 작은 값이 있습니다. 데이터는 (거의) 1차원적입니다. 우리는 왜 이 차원을 크기의 축(axis of size)이라고 부르는지 보게 될 것인데, 이는 생체 데이터에서 흔히 나타나는 현상입니다 [@Jolicoeur1960]."><img src="07-chap_files/figure-html/fig-PCAturtles-1.png" class="img-fluid"></a></p>
+<p>그림 7.17: 스크리 플롯(screeplot)은 표준화된 거북이 데이터(<code>scaledTurtles</code>)에 대한 고윳값을 보여줍니다: 하나의 큰 값과 두 개의 작은 값이 있습니다. 데이터는 (거의) 1차원적입니다. 우리는 왜 이 차원을 크기의 축(axis of size)이라고 부르는지 보게 될 것인데, 이는 생체 데이터에서 흔히 나타나는 현상입니다 (<a href="16-chap.html#ref-Jolicoeur1960">Jolicoeur and Mosimann 1960</a>).</p>
 <p>__</p>
-<p>Question 7.21</p>
-<p>Many PCA functions have been created by different teams who worked in different areas at different times. This can lead to confusion, especially because they have different naming conventions. Let’s compare three of them; run the following lines of code and look at the resulting objects:</p>
+<p>질문 7.21</p>
+<p>많은 PCA 함수들이 서로 다른 시기에 서로 다른 분야에서 일했던 다양한 팀들에 의해 만들어졌습니다. 이는 특히 명명 규칙이 다르기 때문에 혼란을 줄 수 있습니다. 세 가지를 비교해 봅시다. 다음 코드 라인들을 실행하고 결과 객체들을 살펴보세요:</p>
 <pre><code>svd(scaledTurtles)$v[, 1]
 prcomp(turtles[, -1])$rotation[, 1]
 princomp(scaledTurtles)$loadings[, 1]
 library("ade4")
 dudi.pca(turtles[, -1], nf = 2, scannf = FALSE)$c1[, 1]__</code></pre>
-<p>What happens when you disable the scaling in the <code>prcomp</code> and <code>princomp</code> functions?</p>
-<p>In what follows, we always suppose that the matrix \(X\) represents the centered and scaled matrix.</p>
+<p><code>prcomp</code>와 <code>princomp</code> 함수에서 스케일링(scaling)을 비활성화하면 어떤 일이 일어나나요?</p>
+<p>이후 내용에서는 항상 행렬 \(X\)가 중앙화되고 스케일링된 행렬을 나타낸다고 가정합니다.</p>
 <p>__</p>
-<p>Question 7.22</p>
-<p>The coordinates of the observations in the new variables from the <code>prcomp</code> function (call it <code>res</code>) are in the <code>scores</code> slot of the result. Take a look at PC1 for the <code>turtles</code> and compare it to <code>res$scores</code>. Compare the standard deviation <code>sd1</code> to that in the <code>res</code> object and to the standard deviation of the scores.</p>
+<p>질문 7.22</p>
+<p><code>prcomp</code> 함수(결과를 <code>res</code>라고 합시다)에서 새로운 변수들에 대한 관측치의 좌표는 결과의 <code>scores</code> 슬롯에 있습니다. 거북이 데이터에 대한 PC1을 살펴보고 이를 <code>res$scores</code>와 비교해 보세요. 표준 편차 <code>sd1</code>을 <code>res</code> 객체에 있는 값 및 점수(scores)들의 표준 편차와 비교해 보세요.</p>
 <p>__</p>
-<p>Solution</p>
+<p>해결책</p>
 <p>__</p>
 <pre><code>res = princomp(scaledTurtles)
 PC1 = scaledTurtles %*% res$loadings[,1]
 sd1 = sqrt(mean(res$scores[, 1]^2))__</code></pre>
 <p>__</p>
-<p>Question 7.23</p>
-<p>Check the orthogonality of the <code>res$scores</code> matrix. Why can’t we say that it is <strong>orthonormal</strong>?</p>
-<p>Now we are going to combine both the PC scores (\(US\)) and the loadings- coefficients (\(V\)). The plots with both the samples and the variables represented are called <strong>biplots</strong>. This can be done in one line using the following <strong><a href="https://cran.r-project.org/web/packages/factoextra/">factoextra</a></strong> package function.</p>
+<p>질문 7.23</p>
+<p><code>res$scores</code> 행렬의 직교성(orthogonality)을 확인해 보세요. 왜 이것이 <strong>정규 직교(orthonormal)</strong>한다고 말할 수 없을까요?</p>
+<p>이제 우리는 PC 점수(\(US\))와 로딩 계수(\(V\))를 결합할 것입니다. 샘플과 변수가 모두 표시된 플롯을 <strong>바이플롯(biplots)</strong>이라고 합니다. 이는 다음 <strong><a href="https://cran.r-project.org/web/packages/factoextra/">factoextra</a></strong> 패키지 함수를 사용하여 한 줄로 수행할 수 있습니다.</p>
 <pre><code>fviz_pca_biplot(pcaturtles, label = "var", habillage = turtles[, 1]) +
   ggtitle("")__</code></pre>
-<p><a href="07-chap_files/figure- html/fig-turtlebiplot-1.png" title="Figure 7.18: A biplot of the first two dimensions showing both variables and observations. The arrows show the variables. The turtles are labeled by sex. The extended horizontal direction is due to the size of the first eigenvalue, which is much larger than the second."><img src="07-chap_files/figure-html/fig-turtlebiplot-1.png" class="img-fluid"></a></p>
-<p>Figure 7.18: A biplot of the first two dimensions showing both variables and observations. The arrows show the variables. The turtles are labeled by sex. The extended horizontal direction is due to the size of the first eigenvalue, which is much larger than the second.</p>
+<p><a href="07-chap_files/figure- html/fig-turtlebiplot-1.png" title="그림 7.18: 변수와 관측치를 모두 보여주는 처음 두 차원의 바이플롯. 화살표는 변수를 나타냅니다. 거북이들은 성별에 따라 레이블이 붙어 있습니다. 가로 방향으로 길게 뻗은 것은 두 번째 고윳값보다 훨씬 큰 첫 번째 고윳값의 크기 때문입니다."><img src="07-chap_files/figure-html/fig-turtlebiplot-1.png" class="img-fluid"></a></p>
+<p>그림 7.18: 변수와 관측치를 모두 보여주는 처음 두 차원의 바이플롯. 화살표는 변수를 나타냅니다. 거북이들은 성별에 따라 레이블이 붙어 있습니다. 가로 방향으로 길게 뻗은 것은 두 번째 고윳값보다 훨씬 큰 첫 번째 고윳값의 크기 때문입니다.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="imgs/devil.png" title="Beware the aspect ratio when plotting a PCA. It is rare to have the two components be of similar norm, so square shaped plots will be the exception. More common are elongated plots, which show that the horizontal (first) principal component is more important than the second. This matters, e.g., for interpreting distances between points in the plots."><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
-<figcaption>Beware the aspect ratio when plotting a PCA. It is rare to have the two components be of similar norm, so square shaped plots will be the exception. More common are elongated plots, which show that the horizontal (first) principal component is more important than the second. This matters, e.g., for interpreting distances between points in the plots.</figcaption>
+<p><a href="imgs/devil.png" title="PCA를 플로팅할 때 종횡비(aspect ratio)에 주의하십시오. 두 성분의 노름이 비슷한 경우는 드물기 때문에, 정사각형 형태의 플롯은 예외적일 것입니다. 가로(첫 번째) 주성분이 두 번째보다 더 중요하다는 것을 보여주는 길쭉한 형태의 플롯이 더 일반적입니다. 이는 예를 들어 플롯에서 점들 사이의 거리를 해석할 때 중요합니다."><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
+<figcaption>PCA를 플로팅할 때 종횡비(aspect ratio)에 주의하십시오. 두 성분의 노름이 비슷한 경우는 드물기 때문에, 정사각형 형태의 플롯은 예외적일 것입니다. 가로(첫 번째) 주성분이 두 번째보다 더 중요하다는 것을 보여주는 길쭉한 형태의 플롯이 더 일반적입니다. 이는 예를 들어 플롯에서 점들 사이의 거리를 해석할 때 중요합니다.</figcaption>
 </figure>
 </div>
-<p>Beware the aspect ratio when plotting a PCA. It is rare to have the two components be of similar norm, so square shaped plots will be the exception. More common are elongated plots, which show that the horizontal (first) principal component is more important than the second. This matters, e.g., for interpreting distances between points in the plots.</p>
+<p>PCA를 플로팅할 때 종횡비(aspect ratio)에 주의하십시오. 두 성분의 노름이 비슷한 경우는 드물기 때문에, 정사각형 형태의 플롯은 예외적일 것입니다. 가로(첫 번째) 주성분이 두 번째보다 더 중요하다는 것을 보여주는 길쭉한 형태의 플롯이 더 일반적입니다. 이는 예를 들어 플롯에서 점들 사이의 거리를 해석할 때 중요합니다.</p>
 <p>__</p>
-<p>Question 7.24</p>
-<p>Is it possible to have a PCA plot with the PC1 as the horizontal axis whose height is longer than its width?</p>
+<p>질문 7.24</p>
+<p>PC1이 가로축인 PCA 플롯에서 너비보다 높이가 더 길게 나타나는 것이 가능할까요?</p>
 <p>__</p>
-<p>Solution</p>
+<p>해결책</p>
 <p>__</p>
-<p>The variance of points in the PC1 direction is \(_1=s_1^2\) which is always larger than \(_2=s_2^2\), so the PCA plot will always be wider than high.</p>
+<p>PC1 방향으로의 점들의 분산은 \(_1=s_1^2\)이며 이는 항상 \(_2=s_2^2\)보다 큽니다. 따라서 PCA 플롯은 항상 높이보다 너비가 더 넓을 것입니다.</p>
 <p>__</p>
-<p>Question 7.25</p>
-<p>Looking at Figure 7.18: a) Did the males or female turtles tend to be larger?<br>
-b) What do the arrows tell us about the correlations?</p>
+<p>질문 7.25</p>
+<p>그림 7.18을 보고 답해 보세요: a) 수컷과 암컷 거북이 중 어느 쪽이 더 큰 경향이 있나요?<br>
+b) 화살표들은 상관관계에 대해 무엇을 말해주나요?</p>
 <p>__</p>
-<p>Question 7.26</p>
-<p>Compare the variance of each new coordinate to the eigenvalues returned by the PCA <code>dudi.pca</code> function.</p>
+<p>질문 7.26</p>
+<p>각 새로운 좌표의 분산을 PCA <code>dudi.pca</code> 함수가 반환하는 고윳값(eigenvalues)과 비교해 보세요.</p>
 <p>__</p>
-<p>Solution</p>
+<p>해결책</p>
 <p>__</p>
 <pre><code>pcadudit = dudi.pca(scaledTurtles, nf = 2, scannf = FALSE)
 apply(pcadudit$li, 2, function(x) sum(x^2)/48)__
@@ -1268,38 +1269,38 @@ pcadudit$eig __
 
 
 [1] 2.93573765 0.04284387 0.02141848</code></pre>
-<p>Now we look at the relationships between the variables, both old and new by drawing what is known as the correlation circle. The aspect ratio is 1 here and the variables are represented by arrows as shown in Figure 7.19. The lengths of the arrows indicate the quality of the projections onto the first principal plane:</p>
+<p>이제 이른바 상관관계 원(correlation circle)을 그려서 기존 변수와 새로운 변수 사이의 관계를 살펴봅니다. 여기서는 종횡비가 1이며 변수들은 그림 7.19에서 보듯이 화살표로 표현됩니다. 화살표의 길이는 첫 번째 주평면으로의 투영 품질을 나타냅니다:</p>
 <pre><code>fviz_pca_var(pcaturtles, col.circle = "black") + ggtitle("") +
   xlim(c(-1.2, 1.2)) + ylim(c(-1.2, 1.2))__</code></pre>
-<p><a href="07-chap_files/figure-html/fig-turtlesCirclef-1.png &quot;Figure 7.19: Part of the “circle of correlations” showing the original variables. Their correlations with each other and with the new principal components are given by the angles between the vectors and between the axes and the vectors.&quot;"><img src="07-chap_files/figure-html/fig- turtlesCirclef-1.png" class="img-fluid"></a></p>
-<p>Figure 7.19: Part of the “circle of correlations” showing the original variables. Their correlations with each other and with the new principal components are given by the angles between the vectors and between the axes and the vectors.</p>
+<p><a href="07-chap_files/figure-html/fig-turtlesCirclef-1.png &quot;그림 7.19: 원래 변수들을 보여주는 &quot;상관관계 원&quot;의 일부. 서로 간의 상관관계 및 새로운 주성분과의 상관관계는 벡터들 사이의 각도와 축과 벡터 사이의 각도로 주어집니다.&quot;"><img src="07-chap_files/figure-html/fig- turtlesCirclef-1.png" class="img-fluid"></a></p>
+<p>그림 7.19: 원래 변수들을 보여주는 “상관관계 원”의 일부. 서로 간의 상관관계 및 새로운 주성분과의 상관관계는 벡터들 사이의 각도와 축과 벡터 사이의 각도로 주어집니다.</p>
 <p>__</p>
-<p>Question 7.27</p>
-<p>Explain the relationships between the number of rows of our turtles data matrix and the following numbers:</p>
+<p>질문 7.27</p>
+<p>우리 거북이 데이터 행렬의 행 수와 다음 숫자들 사이의 관계를 설명해 보세요:</p>
 <pre><code>svd(scaledTurtles)$d/pcaturtles$sdev
 sqrt(47)__</code></pre>
 <p>__</p>
-<p>Solution</p>
+<p>해결책</p>
 <p>__</p>
-<p>When computing the variance covariance matrix, many implementations use \(1/(n-1)\) as the denominator. Here, \(n=48\) so the sum of the variances are off by a factor of 48/47.</p>
-<p>These data are a good example of how sometimes almost all the variation in the data can be captured in a lower-dimensional space: here, three-dimensional data can be essentially replaced by a line. Keep in mind: \(X<sup>tC=VSU</sup>tUS=VS^2.\) The <strong>principal components</strong> are the columns of the matrix \(C=US\). The \(p\) columns of \(U\) (the matrix given as <code>USV$u</code> in the output from the <code>svd</code> function above) are rescaled to have norms \((s_1<sup>2,s_2</sup>2,…,s_p^2)\). Each column has a different variance it is <em>responsible</em> for explaining. Notice that these will be decreasing numbers.</p>
-<p>If we only want the first one then it is just \(c_1=s_1 u_1\). Notice that \(||c_1||<sup>2=s_1</sup>tu_1 u_1^t s_1= s_1^2 u_1<sup>tu_1=s_1</sup>2=_1\)</p>
-<p>If the matrix \(X\) comes from the study of \(n\) different samples or specimens, then the principal components provides new coordinates for these \(n\) points as in Figure 7.16. These are sometimes called the <em>scores</em> in the results of PCA functions.</p>
-<p><a href="imgs/xkcdEigenVectors.jpg" title="Figure 7.20: Another great xkcd take: this time eigenvectors."><img src="imgs/xkcdEigenVectors.jpg" class="img-fluid"></a></p>
-<p>Figure 7.20: Another great xkcd take: this time eigenvectors.</p>
-<p>Before we go into more detailed examples, let’s summarize what SVD and PCA provide:</p>
+<p>분산-공분산 행렬을 계산할 때, 많은 구현체들은 분모로 \(1/(n-1)\)을 사용합니다. 여기서 \(n=48\)이므로 분산의 합은 48/47의 인자만큼 차이가 납니다.</p>
+<p>이 데이터는 때때로 데이터의 거의 모든 변동이 더 낮은 차원의 공간에 캡처될 수 있다는 좋은 예입니다: 여기서는 3차원 데이터가 본질적으로 하나의 선으로 대체될 수 있습니다. 다음을 명심하세요: \(X<sup>tC=VSU</sup>tUS=VS^2.\) <strong>주성분</strong>은 행렬 \(C=US\)의 열들입니다. \(U\)(\(\) 함수의 출력에서 <code>USV$u</code>로 주어지는 행렬)의 \(p\)개 열들은 노름 \((s_1^2, s_2^2, …, s_p^2)\)을 갖도록 스케일이 조정됩니다. 각 열은 자신이 설명해야 할 _책임_이 있는 서로 다른 분산을 가집니다. 이들은 감소하는 숫자들이 될 것임에 주목하세요.</p>
+<p>만약 첫 번째 것만 원한다면 그것은 단지 \(c_1=s_1 u_1\)입니다. \(||c_1||<sup>2=s_1</sup>tu_1 u_1^t s_1= s_1^2 u_1<sup>tu_1=s_1</sup>2=_1\)임을 주목하세요.</p>
+<p>만약 행렬 \(X\)가 \(n\)개의 서로 다른 샘플이나 표본에 대한 연구로부터 나왔다면, 주성분은 그림 7.16에서처럼 이 \(n\)개 점들에 대한 새로운 좌표를 제공합니다. 이들은 때때로 PCA 함수의 결과에서 _점수(scores)_라고 불립니다.</p>
+<p><a href="imgs/xkcdEigenVectors.jpg" title="그림 7.20: 또 다른 훌륭한 xkcd의 시각: 이번에는 고유벡터입니다."><img src="imgs/xkcdEigenVectors.jpg" class="img-fluid"></a></p>
+<p>그림 7.20: 또 다른 훌륭한 xkcd의 시각: 이번에는 고유벡터입니다.</p>
+<p>더 자세한 예제로 들어가기 전에, SVD와 PCA가 제공하는 것을 요약해 봅시다:</p>
 <ul>
-<li><p>Each principal component has a variance measured by the corresponding eigenvalue, the square of the corresponding singular value.</p></li>
-<li><p>The new variables are made to be orthogonal. Since they are also centered, this means they are uncorrelated. In the case of normal distributed data, this also means they are independent.</p></li>
-<li><p>When the variables are have been rescaled, the sum of the variances of all the variables is the number of variables (\(=p\)). The sum of the variances is computed by adding the diagonal of the crossproduct matrix9.</p></li>
-<li><p>The principal components are ordered by the size of their eigenvalues. We always check the screeplot before deciding how many components to retain. It is also best practice to do as we did in Figure 7.18 and annotate each PC axis with the proportion of variance it explains.</p></li>
+<li><p>각 주성분은 해당 고윳값(상응하는 특잇값의 제곱)으로 측정되는 분산을 가집니다.</p></li>
+<li><p>새로운 변수들은 서로 직교하도록 만들어집니다. 이들은 또한 중앙화되어 있으므로, 이는 서로 상관관계가 없음을 의미합니다. 정규 분포 데이터의 경우, 이는 또한 서로 독립임을 의미합니다.</p></li>
+<li><p>변수들이 스케일링되었을 때, 모든 변수의 분산 합은 변수의 수(\( = p\))와 같습니다. 분산의 합은 교차 곱 행렬의 대각선을 더하여 계산됩니다9.</p></li>
+<li><p>주성분들은 고윳값의 크기 순서대로 정렬됩니다. 우리는 몇 개의 성분을 유지할지 결정하기 전에 항상 스크리 플롯을 확인합니다. 또한 그림 7.18에서 했던 것처럼 각 PC 축에 그것이 설명하는 분산의 비율을 주석으로 다는 것이 가장 좋은 관행입니다.</p></li>
 </ul>
-<p><strong>Eigen Decomposition:</strong> The crossproduct of X with itself verifies \[X<sup>tX=VSU</sup>tUSV<sup>t=VS</sup>2V<sup>t=VV</sup>t\] where \(V\) is called the eigenvector matrix of the symmetric matrix \(X^tX\) and \(\) is the diagonal matrix of eigenvalues of \(X^tX\).</p>
-<p>9 This sum of the diagonal elements is called <strong>the trace</strong> of the matrix.</p>
+<p><strong>고유 분해(Eigen Decomposition):</strong> X와 그 자신과의 교차 곱은 \[X<sup>tX=VSU</sup>tUSV<sup>t=VS</sup>2V<sup>t=VV</sup>t\]를 만족하며, 여기서 \(V\)는 대칭 행렬 \(X^tX\)의 고유벡터 행렬이라 불리고 \(\)는 \(X^tX\)의 고윳값들의 대각 행렬입니다.</p>
+<p>9 이 대각 원소들의 합을 행렬의 <strong>대각합(trace)</strong>이라고 부릅니다.</p>
 <p>__</p>
-<p>Task</p>
-<p>Look up eigenvalue in the Wikipedia. Try to find a sentence that defines it without using a formula. Why would eigenvectors come into use in Cinderella (at a stretch)? (See the xkcd cartoon in Figure 7.20.)</p>
-<p><a href="imgs/book_icon.png"><img src="imgs/book_icon.png" class="img-fluid"></a></p>
+<p>태스크</p>
+<p>위키백과에서 고윳값(eigenvalue)을 찾아보세요. 공식을 사용하지 않고 이를 정의하는 문장을 찾아보세요. 왜 고유벡터가 신데렐라에서 사용될 수 있을까요(약간 억지스럽게 말이죠)? (그림 7.20의 xkcd 만화를 참조하세요.)</p>
+<p><img src="imgs/book_icon.png" class="img-fluid"></p>
 <p>For help with the basics of linear algebra, a motivated student pressed for time may consult <a href="https://www.khanacademy.org/math/linear-%20algebra/alternate-bases/eigen-everything/v/linear-algebra-introduction-to-%20eigenvalues-and-eigenvectors">Khan’s Academy</a>. If you have more time and would like in depth coverage, <a href="http://ocw.mit.edu/courses/mathematics/18-06-linear-algebra-%20spring-2010">Gil Strang’s MIT course</a> is a classic, and <a href="http://math.mit.edu/linearalgebra">some of the book is available online</a> (<a href="16-chap.html#ref- Strang:09">Strang 2009</a>).</p>
 </section>
 <section id="a-complete-analysis-the-decathlon-athletes" class="level3" data-number="9.6.2">
@@ -1338,12 +1339,12 @@ fviz_eig(pca.ath, geom = "bar", bar_width = 0.3) + ggtitle("")__</code></pre>
 <p>The correlation circle Figure 7.22 displays the projection of the original variables onto the two first new principal axes. The angles between vectors are interpreted as correlations. On the right side of the plane, we have the track and field events (m110, m100, m400, m1500), and on the left, we have the throwing and jumping events. Maybe there is an opposition of skills as characterized in the correlation matrix. We did see the correlations were negative between variables from these two groups. How can we interpret this?</p>
 <p>It seems that those who throw the best have lower scores in the track competitions. In fact, if we look at the original measurements, we can see what is happening. The athletes who run in short times are the stronger ones, as are the ones who throw or jump longer distances. We should probably change the scores of the track variables and redo the analysis.</p>
 <p>__</p>
-<p>Question 7.28</p>
-<p>What transformations of the variables induce the best athletic performances to vary in the same direction, i.e., be mostly positively correlated?</p>
+<p>질문 7.28</p>
+<p>최고의 운동 성적이 동일한 방향으로 변하도록, 즉 대부분 양(+)의 상관관계를 갖도록 하려면 변수들을 어떻게 변환해야 할까요?</p>
 <p>__</p>
-<p>Solution</p>
+<p>해결책</p>
 <p>__</p>
-<p>If we change the signs on the running performances, almost all the variables will be positively correlated.</p>
+<p>달리기 성적의 부호를 바꾸면 거의 모든 변수가 양의 상관관계를 갖게 됩니다.</p>
 <pre><code>runningvars = grep("^m", colnames(athletes), value = TRUE)
 runningvars __
 
@@ -1374,52 +1375,52 @@ pcan.ath$eig __
 
  [1] 3.4182381 2.6063931 0.9432964 0.8780212 0.5566267 0.4912275 0.4305952
  [8] 0.3067981 0.2669494 0.1018542</code></pre>
-<p>Now all the negative correlations are quite small. The screeplot will show no change, as the eigenvalues of the matrix are unaffected by the above sign flips. The only ouput that changes are the signs of the coefficients of the principal component loadings for the variables whose signs we flipped.</p>
+<p>이제 모든 음의 상관관계는 상당히 작아졌습니다. 행렬의 고윳값은 위의 부호 반전에 의해 영향을 받지 않으므로 스크리 플롯은 변하지 않을 것입니다. 바뀌는 출력값은 부호를 반전시킨 변수들에 대한 주성분 로딩(loadings) 계수의 부호뿐입니다.</p>
 <pre><code>fviz_pca_var(pcan.ath, col.var = "blue", repel = TRUE) + ggtitle("")__</code></pre>
-<p><a href="07-chap_files/figure- html/fig-athletecorrn-1.png" title="Figure 7.23: Correlation circle after changing the signs of the running variables."><img src="07-chap_files/figure-html/fig-athletecorrn-1.png" class="img-fluid"></a></p>
-<p>Figure 7.23: Correlation circle after changing the signs of the running variables.</p>
-<p>Figure 7.23 shows the correlation circle of the transformed variables. We now see we have a broad common overall axis: all the arrows are pointing broadly in the same direction.</p>
-<p>We now plot the athletes projected in the principal plane using:</p>
+<p><a href="07-chap_files/figure- html/fig-athletecorrn-1.png" title="그림 7.23: 달리기 변수들의 부호를 바꾼 후의 상관관계 원."><img src="07-chap_files/figure-html/fig-athletecorrn-1.png" class="img-fluid"></a></p>
+<p>그림 7.23: 달리기 변수들의 부호를 바꾼 후의 상관관계 원.</p>
+<p>그림 7.23은 변환된 변수들의 상관관계 원을 보여줍니다. 이제 우리는 넓은 공통의 전체 축을 가지고 있음을 알 수 있습니다: 모든 화살표가 대략 같은 방향을 가리키고 있습니다.</p>
+<p>이제 다음 코드를 사용하여 주평면에 투영된 운동선수들을 플롯합니다:</p>
 <pre><code>fviz_pca_ind(pcan.ath, repel = TRUE) + ggtitle("") __</code></pre>
-<p><a href="07-chap_files/figure- html/fig-athletepc-1.png" title="Figure 7.24: First principal plane showing the projections of the athletes. Do you notice something about the organization of the numbers?"><img src="07-chap_files/figure-html/fig-athletepc-1.png" class="img-fluid"></a></p>
-<p>Figure 7.24: First principal plane showing the projections of the athletes. Do you notice something about the organization of the numbers?</p>
+<p><a href="07-chap_files/figure- html/fig-athletepc-1.png" title="그림 7.24: 운동선수들의 투영을 보여주는 첫 번째 주평면. 숫자들의 조직 방식에서 무언가 주목할 점이 있나요?"><img src="07-chap_files/figure-html/fig-athletepc-1.png" class="img-fluid"></a></p>
+<p>그림 7.24: 운동선수들의 투영을 보여주는 첫 번째 주평면. 숫자들의 조직 방식에서 무언가 주목할 점이 있나요?</p>
 <p>__</p>
-<p>Question 7.29</p>
-<p>If we look at the athletes themselves as they are shown in Figure 7.24, we notice a slight ordering effect. Do you see a relation between the performance of the athletes and their numbering in Figure 7.24 ?</p>
+<p>질문 7.29</p>
+<p>그림 7.24에 표시된 운동선수들 자체를 살펴보면, 약간의 순서 효과를 알 수 있습니다. 그림 7.24에서 운동선수들의 성적과 그들의 번호 매기기 사이의 관계가 보이나요?</p>
 <p>__</p>
-<p>Solution</p>
+<p>해결책</p>
 <p>__</p>
-<p>If you play join the dots following the order of the numbers, you will probably realize you are spending more time on one side of the plot than you would be if the numbers were randomly assigned.</p>
-<p>It turns out there is complementary information available in the <code>olympic</code> dataset. An extra vector variable called <code>score</code> reports the final scores at the competition, the men’s decathlon at the 1988 Olympics.</p>
+<p>번호 순서대로 점들을 연결해 보면, 번호가 무작위로 매겨졌을 때보다 플롯의 한쪽 면에서 더 많은 시간을 보낸다는 것을 깨닫게 될 것입니다.</p>
+<p><code>olympic</code> 데이터 세트에는 보완적인 정보가 포함되어 있음이 밝혀졌습니다. <code>score</code>라고 불리는 추가 벡터 변수는 1988년 올림픽 남자 10종 경기의 최종 점수를 보고합니다.</p>
 <pre><code>olympic$score __
 
 
  [1] 8488 8399 8328 8306 8286 8272 8216 8189 8180 8167 8143 8114 8093 8083 8036
 [16] 8021 7869 7860 7859 7781 7753 7745 7743 7623 7579 7517 7505 7422 7310 7237
 [31] 7231 7016 6907</code></pre>
-<p>So let us look at the scatterplot comparing the first principal component coordinate of the athletes to this score. This is shown in Figure 7.25. We can see a strong correlation between the two variables. We note that athlete number 1 (who in fact won the Olympic decathlon gold medal) has the highest score, but not the highest value in PC1. Why do you think that is?</p>
+<p>그러면 운동선수들의 첫 번째 주성분 좌표와 이 점수를 비교하는 산점도를 살펴봅시다. 이는 그림 7.25에 나와 있습니다. 두 변수 사이의 강한 상관관계를 볼 수 있습니다. 1번 선수(실제로 올림픽 10종 경기 금메달을 딴 선수)가 가장 높은 점수를 얻었지만, PC1에서 가장 높은 값을 가진 것은 아님을 알 수 있습니다. 왜 그렇다고 생각하시나요?</p>
 <pre><code>ggplot(data = tibble(pc1 = pcan.ath$li[, 1], score = olympic$score, label = rownames(athletes)),
        mapping = aes(y = score, x = pc1)) + 
    geom_text(aes(label = label)) + stat_smooth(method = "lm", se = FALSE)__</code></pre>
-<p><a href="07-chap_files/figure-html/fig-AthleteScorePCA-1.png &quot;Figure 7.25: Scatterplot between olympic$score and the first principal component. The points are labeled by their order in the data set. We can see a strong correlation. Why is it not a perfectly linear fit?&quot;"><img src="07-chap_files/figure-html/fig- AthleteScorePCA-1.png" class="img-fluid"></a></p>
-<p>Figure 7.25: Scatterplot between <code>olympic$score</code> and the first principal component. The points are labeled by their order in the data set. We can see a strong correlation. Why is it not a perfectly linear fit?</p>
+<p><a href="07-chap_files/figure-html/fig-AthleteScorePCA-1.png &quot;그림 7.25: olympic$score와 첫 번째 주성분 사이의 산점도. 점들은 데이터 세트에서의 순서로 레이블이 붙어 있습니다. 강한 상관관계를 볼 수 있습니다. 왜 완벽한 선형 적합이 아닐까요?&quot;"><img src="07-chap_files/figure-html/fig- AthleteScorePCA-1.png" class="img-fluid"></a></p>
+<p>그림 7.25: <code>olympic$score</code>와 첫 번째 주성분 사이의 산점도. 점들은 데이터 세트에서의 순서로 레이블이 붙어 있습니다. 강한 상관관계를 볼 수 있습니다. 왜 완벽한 선형 적합이 아닐까요?</p>
 </section>
-<section id="how-to-choose-k-the-number-of-dimensions" class="level3" data-number="9.6.3">
-<h3 data-number="9.6.3" class="anchored" data-anchor-id="how-to-choose-k-the-number-of-dimensions"><span class="header-section-number">9.6.3</span> 7.7.3 How to choose \(k\), the number of dimensions ?</h3>
-<p><a href="07-chap_files/figure- html/fig-screeploteq-1.png" title="Figure 7.26: A screeplot showing ‘dangerously’ similar variances. Choosing to cutoff at a hard threshold of 80% of the variance would give unstable PC plots. With so such cutoff, the axes corresponding to the 3D subspace of 3 similar eigenvalues are unstable and cannot be individually interpreted."><img src="07-chap_files/figure-html/fig-screeploteq-1.png" class="img-fluid"></a></p>
-<p>Figure 7.26: A screeplot showing ‘dangerously’ similar variances. Choosing to cutoff at a hard threshold of 80% of the variance would give unstable PC plots. With so such cutoff, the axes corresponding to the 3D subspace of 3 similar eigenvalues are unstable and cannot be individually interpreted.</p>
-<p>We have seen in the examples that the first step in PCA is to make the screeplot of the variances of the new variables (equal to the <strong>eigenvalues</strong>). We cannot decide how many dimensions are needed before seeing this plot. The reason is that there are situations when the principal components are ill-defined: when two or three successive PCs have very similar variances, giving a screeplot as in Figure 7.26, the subspace corresponding to a group of similar eigenvalues exists. In this case this would be 3D space generated by \(u_2,u_3,u_4\). The vectors are not meaningful individually and one cannot interpret their loadings. This is because a very slight change in one observations could give a completely different set of three vectors. These would generate the same 3D space, but could have very different loadings. We say the PCs are unstable.</p>
+<section id="차원-수-k를-어떻게-선택할까요" class="level3" data-number="9.6.3">
+<h3 data-number="9.6.3" class="anchored" data-anchor-id="차원-수-k를-어떻게-선택할까요"><span class="header-section-number">9.6.3</span> 7.7.3 차원 수 k를 어떻게 선택할까요?</h3>
+<p><a href="07-chap_files/figure- html/fig-screeploteq-1.png" title="그림 7.26: '위험할 정도로' 비슷한 분산들을 보여주는 스크리 플롯. 80%의 분산을 엄격한 임계값으로 끊기로 선택한다면 불안정한 PC 플롯을 얻게 될 것입니다. 그러한 임계값이 없다면, 3개의 유사한 고윳값을 가진 3D 하위 공간에 대응하는 축들은 불안정하며 개별적으로 해석될 수 없습니다."><img src="07-chap_files/figure-html/fig-screeploteq-1.png" class="img-fluid"></a></p>
+<p>그림 7.26: ‘위험할 정도로’ 비슷한 분산들을 보여주는 스크리 플롯. 80%의 분산을 엄격한 임계값으로 끊기로 선택한다면 불안정한 PC 플롯을 얻게 될 것입니다. 그러한 임계값이 없다면, 3개의 유사한 고윳값을 가진 3D 하위 공간에 대응하는 축들은 불안정하며 개별적으로 해석될 수 없습니다.</p>
+<p>우리는 예제들에서 PCA의 첫 번째 단계가 새로운 변수들의 분산(<strong>고윳값</strong>과 같음)에 대한 스크리 플롯을 만드는 것임을 보았습니다. 이 플롯을 보기 전까지는 얼마나 많은 차원이 필요한지 결정할 수 없습니다. 그 이유는 주성분이 명확하게 정의되지 않는 상황이 있기 때문입니다: 그림 7.26과 같은 스크리 플롯을 주면서 두세 개의 연속된 PC가 매우 유사한 분산을 가질 때, 유사한 고윳값 그룹에 대응하는 하위 공간이 존재합니다. 이 경우 이는 \(u_2, u_3, u_4\)에 의해 생성된 3D 공간이 될 것입니다. 이 벡터들은 개별적으로는 의미가 없으며 그 로딩을 해석할 수 없습니다. 이는 하나의 관측치에서 아주 약간의 변화만 있어도 완전히 다른 세 개의 벡터 세트를 얻을 수 있기 때문입니다. 이들은 동일한 3D 공간을 생성하겠지만, 매우 다른 로딩을 가질 수 있습니다. 우리는 이러한 PC들이 불안정하다고 말합니다.</p>
 </section>
 </section>
-<section id="pca-as-an-exploratory-tool-using-extra-information" class="level2" data-number="9.7">
-<h2 data-number="9.7" class="anchored" data-anchor-id="pca-as-an-exploratory-tool-using-extra-information"><span class="header-section-number">9.7</span> 7.8 PCA as an exploratory tool: using extra information</h2>
-<p>We have seen that unlike regression, PCA treats all variables equally (to the extent that they were preprocessed to have equivalent standard deviations). However, it is still possible to map other continuous variables or categorical factors onto the plots in order to help interpret the results. Often we have complementary information on the samples, for example, diagnostic labels in the diabetes data or the cell types in the T-cell gene expression data.</p>
-<p>Here we see how we can use such extra variables to inform our interpretation. The best place to store such so-called <em>metadata</em> is in appropriate slots of the data object (such as in the Bioconductor <em>SummarizedExperiment</em> class); the second-best, in additional columns of the data frame that also contains the numeric data. In practice, such information is often stored in a more or less cryptic manner in the row names of the matrix. Below, we need to face the latter scenario, and we use <code>substr</code> gymnastics to extract the cell types and show the screeplot in Figure 7.27 and the PCA in Figure 7.28.</p>
+<section id="탐색적-도구로서의-pca-추가-정보-사용하기" class="level2" data-number="9.7">
+<h2 data-number="9.7" class="anchored" data-anchor-id="탐색적-도구로서의-pca-추가-정보-사용하기"><span class="header-section-number">9.7</span> 7.8 탐색적 도구로서의 PCA: 추가 정보 사용하기</h2>
+<p>우리는 회귀 분석과 달리 PCA가 모든 변수를 동일하게 취급한다는 것을 보았습니다(동등한 표준 편차를 갖도록 전처리된 범위 내에서). 그러나 결과를 해석하는 데 도움을 주기 위해 다른 연속형 변수나 범주형 요인을 플롯에 매핑하는 것은 여전히 가능합니다. 종종 우리는 샘플에 대한 보완적인 정보를 가지고 있습니다. 예를 들어 당뇨병 데이터의 진단 레이블이나 T 세포 유전자 발현 데이터의 세포 유형 등이 있습니다.</p>
+<p>여기서는 우리의 해석에 정보를 주기 위해 그러한 추가 변수들을 어떻게 사용할 수 있는지 살펴봅니다. 그러한 이른바 _메타데이터(metadata)_를 저장하기에 가장 좋은 장소는 데이터 객체의 적절한 슬롯(Bioconductor <em>SummarizedExperiment</em> 클래스 등)입니다. 두 번째로 좋은 장소는 수치 데이터도 포함하는 데이터 프레임의 추가 열입니다. 실제로 그러한 정보는 종종 행렬의 행 이름에 어느 정도 암호 같은 방식으로 저장됩니다. 아래에서는 후자의 시나리오에 직면해야 하며, 우리는 <code>substr</code> 기교를 사용하여 세포 유형을 추출하고 그림 7.27의 스크리 플롯과 그림 7.28의 PCA를 보여줍니다.</p>
 <pre><code>pcaMsig3 = dudi.pca(Msig3transp, center = TRUE, scale = TRUE,
                     scannf = FALSE, nf = 4)
 fviz_screeplot(pcaMsig3) + ggtitle("")__</code></pre>
-<p><a href="07-chap_files/figure- html/fig-tcellexpr-1.png" title="Figure 7.27: T-cell expression PCA screeplot."><img src="07-chap_files/figure-html/fig-tcellexpr-1.png" class="img-fluid"></a></p>
-<p>Figure 7.27: T-cell expression PCA screeplot.</p>
+<p><a href="07-chap_files/figure- html/fig-tcellexpr-1.png" title="그림 7.27: T 세포 발현 PCA 스크리 플롯."><img src="07-chap_files/figure-html/fig-tcellexpr-1.png" class="img-fluid"></a></p>
+<p>그림 7.27: T 세포 발현 PCA 스크리 플롯.</p>
 <pre><code>ids = rownames(Msig3transp)
 celltypes = factor(substr(ids, 7, 9))
 status = factor(substr(ids, 1, 3))
@@ -1437,11 +1438,11 @@ ggplot(aes(x = Axis1, y = Axis2)) +
   geom_hline(yintercept = 0, linetype = 2) +
   geom_vline(xintercept = 0, linetype = 2) +
   scale_color_discrete(name = "Cluster") + coord_fixed()__</code></pre>
-<p><a href="07-chap_files/figure- html/fig-tcelltypes-1-1.png" title="Figure 7.28: PCA of gene expression for a subset of 156 genes involved in specificities of each of the three separate T-cell types: effector, naïve and memory. Again, we see that the plot is elongated along the the first axis, as that explains much of the variance. Notice that one of the T-cells seems to be mislabeled."><img src="07-chap_files/figure-html/fig-tcelltypes-1-1.png" class="img-fluid"></a></p>
-<p>Figure 7.28: PCA of gene expression for a subset of 156 genes involved in specificities of each of the three separate T-cell types: effector, naïve and memory. Again, we see that the plot is elongated along the the first axis, as that explains much of the variance. Notice that one of the T-cells seems to be mislabeled.</p>
-<section id="mass-spectroscopy-data-analysis" class="level3" data-number="9.7.1">
-<h3 data-number="9.7.1" class="anchored" data-anchor-id="mass-spectroscopy-data-analysis"><span class="header-section-number">9.7.1</span> 7.8.1 Mass Spectroscopy Data Analysis</h3>
-<p>These data requires delicate preprocessing before we obtain our desired matrix with the relevant features as columns and the samples as rows. Starting with the raw mass spectroscopy readings, the steps involve extracting peaks of relevant features, aligning them across multiple samples and estimating peak heights. We refer the reader to the vignette of the Bioconductor <strong><a href="https://bioconductor.org/packages/xcms/">xcms</a></strong> package for gruesome details. We load a matrix of data generated in such a way from the file <code>mat1xcms.RData</code>. The output of the below code is in Figures 7.29 and 7.30.</p>
+<p><a href="07-chap_files/figure- html/fig-tcelltypes-1-1.png" title="그림 7.28: 세 가지 별도의 T 세포 유형(effector, naïve, memory) 각각의 특이성에 관여하는 156개 유전자 하위 집합에 대한 유전자 발현 PCA. 다시 한 번, 첫 번째 축이 분산의 많은 부분을 설명하므로 플롯이 첫 번째 축을 따라 길게 뻗어 있음을 알 수 있습니다. T 세포 중 하나가 레이블이 잘못 붙은 것으로 보인다는 점에 주목하세요."><img src="07-chap_files/figure-html/fig-tcelltypes-1-1.png" class="img-fluid"></a></p>
+<p>그림 7.28: 세 가지 별도의 T 세포 유형(effector, naïve, memory) 각각의 특이성에 관여하는 156개 유전자 하위 집합에 대한 유전자 발현 PCA. 다시 한 번, 첫 번째 축이 분산의 많은 부분을 설명하므로 플롯이 첫 번째 축을 따라 길게 뻗어 있음을 알 수 있습니다. T 세포 중 하나가 레이블이 잘못 붙은 것으로 보인다는 점에 주목하세요.</p>
+<section id="질량-분석-데이터-분석" class="level3" data-number="9.7.1">
+<h3 data-number="9.7.1" class="anchored" data-anchor-id="질량-분석-데이터-분석"><span class="header-section-number">9.7.1</span> 7.8.1 질량 분석 데이터 분석</h3>
+<p>이러한 데이터는 관련 특성을 열로, 샘플을 행으로 하는 원하는 행렬을 얻기 전에 섬세한 전처리가 필요합니다. 가공되지 않은 질량 분석 측정값에서 시작하여, 단계에는 관련 특성의 피크 추출, 여러 샘플에 걸친 정렬 및 피크 높이 추정이 포함됩니다. 끔찍한 세부 사항에 대해서는 Bioconductor <strong><a href="https://bioconductor.org/packages/xcms/">xcms</a></strong> 패키지의 비네트를 참고하시기 바랍니다. 우리는 그러한 방식으로 생성된 데이터 행렬을 <code>mat1xcms.RData</code> 파일로부터 불러옵니다. 아래 코드의 출력은 그림 7.29와 7.30에 있습니다.</p>
 <pre><code>load("../data/mat1xcms.RData")
 dim(mat1)__
 
@@ -1451,8 +1452,8 @@ dim(mat1)__
 
 pcamat1 = dudi.pca(t(mat1), scannf = FALSE, nf = 3)
 fviz_eig(pcamat1, geom = "bar", bar_width = 0.7) + ggtitle("")__</code></pre>
-<p><a href="07-chap_files/figure- html/fig-xset3scree-1.png" title="Figure 7.29: Screeplot showing the eigenvalues for the mice data."><img src="07-chap_files/figure-html/fig-xset3scree-1.png" class="img-fluid"></a></p>
-<p>Figure 7.29: Screeplot showing the eigenvalues for the mice data.</p>
+<p><a href="07-chap_files/figure- html/fig-xset3scree-1.png" title="그림 7.29: 생쥐 데이터에 대한 고윳값을 보여주는 스크리 플롯."><img src="07-chap_files/figure-html/fig-xset3scree-1.png" class="img-fluid"></a></p>
+<p>그림 7.29: 생쥐 데이터에 대한 고윳값을 보여주는 스크리 플롯.</p>
 <pre><code>dfmat1 = cbind(pcamat1$li, tibble(
     label = rownames(pcamat1$li),
     number = substr(label, 3, 4),
@@ -1462,20 +1463,20 @@ pcsplot = ggplot(dfmat1,
  geom_text(size = 4, vjust = -0.5)+ geom_point(size = 3)+ylim(c(-18,19))
 pcsplot + geom_hline(yintercept = 0, linetype = 2) +
   geom_vline(xintercept = 0, linetype = 2)__</code></pre>
-<p><a href="07-chap_files/figure-html/fig-Stretchedbiplot-1.png%20%22Figure%207.30:%20The%20first%20principal%20plane%20for%20the%20mat1%20data.%20It%20explains%2059%%20of%20the%20variance.%22"><img src="07-chap_files/figure-html/fig- Stretchedbiplot-1.png" class="img-fluid"></a></p>
-<p>Figure 7.30: The first principal plane for the <code>mat1</code> data. It explains 59% of the variance.</p>
+<p><a href="07-chap_files/figure-html/fig-Stretchedbiplot-1.png%20%22그림%207.30:%20mat1%20데이터에%20대한%20첫%20번째%20주평면.%20분산의%2059%를%20설명합니다.%22"><img src="07-chap_files/figure-html/fig- Stretchedbiplot-1.png" class="img-fluid"></a></p>
+<p>그림 7.30: <code>mat1</code> 데이터에 대한 첫 번째 주평면. 분산의 59%를 설명합니다.</p>
 <p>__</p>
-<p>Question 7.30</p>
-<p>Looking at Figure 7.30, do the samples seem to be randomly placed in the plane? Do you notice any structure explained by the labels?</p>
+<p>질문 7.30</p>
+<p>그림 7.30을 보면, 샘플들이 평면에 무작위로 배치된 것처럼 보이나요? 레이블에 의해 설명되는 어떤 구조를 알아차릴 수 있나요?</p>
 <p>__</p>
-<p>Solution</p>
+<p>해결책</p>
 <p>__</p>
-<p>The answer becomes (even more) evident if you make this plot. Knockouts are always below their paired wildtype sample. We will revisit this example when we look at supervised multivariate methods in our next chapter.</p>
+<p>이 플롯을 만들어 보면 답이 (더욱) 명확해집니다. 녹아웃(Knockouts)은 항상 쌍을 이루는 야생형(wildtype) 샘플 아래에 있습니다. 우리는 다음 장에서 지도 방식의 다변량 방법(supervised multivariate methods)을 살펴볼 때 이 예시를 다시 방문할 것입니다.</p>
 <pre><code>pcsplot + geom_line(colour = "red")__</code></pre>
 </section>
-<section id="biplots-and-scaling" class="level3" data-number="9.7.2">
-<h3 data-number="9.7.2" class="anchored" data-anchor-id="biplots-and-scaling"><span class="header-section-number">9.7.2</span> 7.8.2 Biplots and scaling</h3>
-<p>In the previous example, the number of variables measured was too large to enable useful concurrent plotting of both variables and samples. In this example we plot the PCA biplot of a simple data set where chemical measurements were made on different wines for which we also have a categorical <code>wine.class</code> variable. We start the analysis by looking at the two-dimensional correlations and a heatmap of the variables.</p>
+<section id="바이플롯-및-스케일링" class="level3" data-number="9.7.2">
+<h3 data-number="9.7.2" class="anchored" data-anchor-id="바이플롯-및-스케일링"><span class="header-section-number">9.7.2</span> 7.8.2 바이플롯 및 스케일링</h3>
+<p>이전 예제에서는 측정된 변수의 수가 너무 많아서 변수와 샘플을 유용하게 동시에 플로팅할 수 없었습니다. 이 예제에서는 범주형 <code>wine.class</code> 변수도 있는 서로 다른 와인에 대해 화학적 측정이 이루어진 간단한 데이터 세트의 PCA 바이플롯을 그립니다. 우리는 2차원…을 살펴보는 것으로 분석을 시작합니다. correlations and a heatmap of the variables.</p>
 <pre><code>library("pheatmap")
 load("../data/wine.RData")
 load("../data/wineClass.RData")
@@ -1527,63 +1528,63 @@ pcaMouse = dudi.pca(as.data.frame(t(Biobase::exprs(xwt))),
   row.w = xwt$weight,
   center = TRUE, scale = TRUE, nf = 2, scannf = FALSE)
 fviz_eig(pcaMouse) + ggtitle("")__</code></pre>
-<p><a href="07-chap_files/figure- html/fig-resPCADscree-1.png" title="Figure 7.33: Screeplot from the weighted PCA of the Hiiragi data. The drop after the second eigenvalue suggests that a two- dimensional PCA is appropriate."><img src="07-chap_files/figure-html/fig-resPCADscree-1.png" class="img-fluid"></a></p>
-<p>Figure 7.33: Screeplot from the weighted PCA of the Hiiragi data. The drop after the second eigenvalue suggests that a two-dimensional PCA is appropriate.</p>
+<p><a href="07-chap_files/figure- html/fig-resPCADscree-1.png" title="그림 7.33: Hiiragi 데이터의 가중 PCA에서 얻은 스크리 플롯. 두 번째 고윳값 이후의 급격한 하락은 2차원 PCA가 적절함을 시사합니다."><img src="07-chap_files/figure-html/fig-resPCADscree-1.png" class="img-fluid"></a></p>
+<p>그림 7.33: Hiiragi 데이터의 가중 PCA에서 얻은 스크리 플롯. 두 번째 고윳값 이후의 급격한 하락은 2차원 PCA가 적절함을 시사합니다.</p>
 <pre><code>fviz_pca_ind(pcaMouse, geom = "point", col.ind = xwt$sampleGroup) +
   ggtitle("") + coord_fixed()__</code></pre>
-<p>We see from <code>tab</code> that the groups are represented rather unequally. To account for this, we reweigh each sample by the inverse of its group size. The function <code>dudi.pca</code> in the <strong><a href="https://cran.r-project.org/web/packages/ade4/">ade4</a></strong> package has a <code>row.w</code> argument into which we can enter the weights. The output of the code is in Figures 7.33 and 7.34.</p>
-<p><a href="07-chap_files/figure- html/fig-resPCADplot-1.png" title="Figure 7.34: Output from weighted PCA on the Hiiragi data. The samples are colored according to their groups."><img src="07-chap_files/figure-html/fig-resPCADplot-1.png" class="img-fluid"></a></p>
-<p>Figure 7.34: Output from weighted PCA on the Hiiragi data. The samples are colored according to their groups.</p>
+<p>우리는 <code>tab</code>으로부터 그룹들이 다소 불균등하게 대표되어 있음을 알 수 있습니다. 이를 설명하기 위해, 우리는 각 샘플에 해당 그룹 크기의 역수로 가중치를 다시 부여합니다. <strong><a href="https://cran.r-project.org/web/packages/ade4/">ade4</a></strong> 패키지의 <code>dudi.pca</code> 함수에는 가중치를 입력할 수 있는 <code>row.w</code> 인수가 있습니다. 코드의 출력은 그림 7.33 및 7.34에 있습니다.</p>
+<p><a href="07-chap_files/figure- html/fig-resPCADplot-1.png" title="그림 7.34: Hiiragi 데이터에 대한 가중 PCA 출력. 샘플들은 그룹에 따라 색상이 입혀져 있습니다."><img src="07-chap_files/figure-html/fig-resPCADplot-1.png" class="img-fluid"></a></p>
+<p>그림 7.34: Hiiragi 데이터에 대한 가중 PCA 출력. 샘플들은 그룹에 따라 색상이 입혀져 있습니다.</p>
 </section>
 </section>
-<section id="summary-of-this-chapter" class="level2" data-number="9.8">
-<h2 data-number="9.8" class="anchored" data-anchor-id="summary-of-this-chapter"><span class="header-section-number">9.8</span> 7.9 Summary of this chapter</h2>
-<p><strong>Preprocessing matrices</strong> Multivariate data analyses require “conscious” preprocessing. After consulting all the means, variances and one-dimensional histograms we saw how to rescale and recenter the data.</p>
-<p><strong>Projecting onto new variables</strong> We saw how we can make projections into lower dimensions (2D planes and 3D are the most frequently used) of high dimensional data without losing too much information. PCA searches for new “more informative” variables that are linear combinations of the original (old) ones.</p>
-<p><strong>Matrix decomposition</strong> PCA is based on finding decompositions of the matrix \(X\) called SVD. This decomposition provides a lower rank approximation and is equivalent to the eigendecomposition of \(X^tX\). The squares of the singular values are equal to the eigenvalues and to the variances of the new variables. We systematically plotted these values before deciding how many axes are necessary to reproduce the signal in the data.</p>
-<p>Two eigenvalues which are quite close can give rise to scores or PC scores which are highly unstable. It is always necessary to look at the screeplot of the eigenvalues and avoid separating the axes corresponding to the these close eigenvalues. This may require using interactive three or four-dimensional projections, which are available in several R packages.</p>
-<p><strong>Biplot representations</strong> The space of observations is naturally a \(p\)-dimensional space (the \(p\) original variables provide the coordinates). The space of variables is \(n\)-dimensional. Both decompositions we have studied (singular values / eigenvalues and singular vectors / eigenvectors) provide new coordinates for both of these spaces, sometimes we call one the dual of the other. We can plot the projection of both the observations and the variables onto the same eigenvectors. This provides a biplot that can be useful for interpreting the PCA output.</p>
-<p><strong>Projecting other group variables</strong> Interpretation of PCA can also be facilitated by redundant or contiguous data about the observations.</p>
+<section id="이-장의-요약" class="level2" data-number="9.8">
+<h2 data-number="9.8" class="anchored" data-anchor-id="이-장의-요약"><span class="header-section-number">9.8</span> 7.9 이 장의 요약</h2>
+<p><strong>행렬 전처리</strong> 다변량 데이터 분석은 “의식적인” 전처리를 필요로 합니다. 모든 평균, 분산 및 1차원 히스토그램을 확인한 후, 우리는 데이터를 어떻게 재스케일링하고 중앙화하는지 보았습니다.</p>
+<p><strong>새로운 변수로의 투영</strong> 우리는 고차원 데이터를 너무 많은 정보를 잃지 않으면서 낮은 차원(2D 평면과 3D가 가장 자주 사용됨)으로 투영하는 방법을 보았습니다. PCA는 원래의(기존) 변수들의 선형 결합인, 새로운 “더 정보가 많은” 변수들을 찾습니다.</p>
+<p><strong>행렬 분해</strong> PCA는 SVD라 불리는 행렬 \(X\)의 분해를 찾는 것에 기반합니다. 이 분해는 낮은 계수의 근사를 제공하며 \(X^tX\)의 고유 분해와 동일합니다. 특잇값의 제곱은 새로운 변수들의 고윳값 및 분산과 같습니다. 우리는 데이터의 신호를 재현하는 데 얼마나 많은 축이 필요한지 결정하기 전에 이러한 값들을 체계적으로 플롯했습니다.</p>
+<p>매우 가까운 두 고윳값은 매우 불안정한 점수(scores) 또는 PC 점수를 발생시킬 수 있습니다. 고윳값의 스크리 플롯을 살펴보고 이러한 가까운 고윳값에 해당하는 축들을 분리하는 것을 피하는 것이 항상 필요합니다. 이를 위해 여러 R 패키지에서 사용 가능한 대화형 3D 또는 4D 투영을 사용해야 할 수도 있습니다.</p>
+<p><strong>바이플롯(Biplot) 표현</strong> 관측치의 공간은 자연스럽게 \(p\)차원 공간입니다 (\(p\)개의 원래 변수가 좌표를 제공합니다). 변수의 공간은 \(n\)차원입니다. 우리가 공부한 두 분해(특잇값/고윳값 및 특잇값 벡터/고유벡터)는 이 두 공간 모두에 대해 새로운 좌표를 제공하며, 때때로 우리는 하나를 다른 하나의 쌍대(dual)라고 부릅니다. 우리는 동일한 고유벡터 상에 관측치와 변수 모두의 투영을 플롯할 수 있습니다. 이는 PCA 출력을 해석하는 데 유용한 바이플롯을 제공합니다.</p>
+<p><strong>다른 그룹 변수의 투영</strong> PCA의 해석은 관측치에 대한 중복되거나 인접한 데이터를 통해서도 용이해질 수 있습니다.</p>
 </section>
-<section id="further-reading" class="level2" data-number="9.9">
-<h2 data-number="9.9" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">9.9</span> 7.10 Further reading</h2>
-<p>The best way to deepen your understanding of singular value decomposition is to read Chapter 7 of Strang (<a href="16-chap.html#ref-Strang:09">2009</a>). The whole book sets the foundations for the linear algebra necessary to understanding the meaning of the rank of matrix and the duality between row spaces and column spaces (<a href="16-chap.html#ref-frenchway">Holmes 2006</a>).</p>
-<p>Complete textbooks have been written on the subject of PCA and related methods. Mardia, Kent, and Bibby (<a href="16-chap.html#ref-Mardia">1979</a>) is a standard text that covers all multivariate methods in a classical way, with linear algebra and matrices. By making the parametric assumptions that the data come from multivariate normal distributions, Mardia, Kent, and Bibby (<a href="16-chap.html#ref-Mardia">1979</a>) also provide inferential tests for the number of components and limiting properties for principal components. Jolliffe (<a href="16-chap.html#ref-Jolliffe">2002</a>) is a book-long treatment of everything to do with PCA with extensive examples.</p>
-<p>We can incorporate supplementary information into weights for the observations and the variables. This was introduced in the 1970’s by French data scientists, see Holmes (<a href="16-chap.html#ref-frenchway">2006</a>) for a review and <a href="09-chap.html">Chapter 9</a> for further examples.</p>
-<p>Improvements to the interpretation and stability of PCA can be obtained by adding a penalty that minimizes the number of nonzero coefficients that appear in the linear combinations. Zou, Hastie, and Tibshirani (<a href="16-chap.html#ref-Zou2006">2006</a>) and Witten, Tibshirani, and Hastie (<a href="16-chap.html#ref-Witten2009">2009</a>) have developed sparse versions of principal component analysis, and their packages <strong><a href="https://cran.r-project.org/web/packages/elasticnet/">elasticnet</a></strong> and <strong><a href="https://cran.r-project.org/web/packages/PMA/">PMA</a></strong> provide implementations in R.</p>
+<section id="더-읽을거리" class="level2" data-number="9.9">
+<h2 data-number="9.9" class="anchored" data-anchor-id="더-읽을거리"><span class="header-section-number">9.9</span> 7.10 더 읽을거리</h2>
+<p>특잇값 분해에 대한 이해를 깊게 하는 가장 좋은 방법은 Strang (<a href="16-chap.html#ref-Strang:09">2009</a>)의 7장을 읽는 것입니다. 책 전체가 행렬의 계수의 의미와 행 공간과 열 공간 사이의 쌍대성(<a href="16-chap.html#ref-frenchway">Holmes 2006</a>)을 이해하는 데 필요한 선형 대수학의 기초를 다집니다.</p>
+<p>PCA 및 관련 방법들에 대해 완전한 교과서들이 쓰여졌습니다. Mardia, Kent, Bibby (<a href="16-chap.html#ref-Mardia">1979</a>)는 선형 대수와 행렬을 사용하여 고전적인 방식으로 모든 다변량 방법을 다루는 표준 텍스트입니다. 데이터가 다변량 정규 분포에서 나온다는 모수적 가정을 함으로써, Mardia, Kent, Bibby (<a href="16-chap.html#ref-Mardia">1979</a>)는 성분 수에 대한 추론적 검정과 주성분에 대한 한계 속성도 제공합니다. Jolliffe (<a href="16-chap.html#ref-Jolliffe">2002</a>)는 광범위한 예제와 함께 PCA와 관련된 모든 것을 다루는 단행본입니다.</p>
+<p>우리는 관측치와 변수에 대한 가중치에 보충 정보를 통합할 수 있습니다. 이는 1970년대 프랑스 데이터 과학자들에 의해 도입되었습니다. 리뷰는 Holmes (<a href="16-chap.html#ref-frenchway">2006</a>)를, 추가 예제는 <a href="09-chap.html">9장</a>을 참조하십시오.</p>
+<p>PCA의 해석과 안정성에 대한 개선은 선형 결합에 나타나는 0이 아닌 계수의 수를 최소화하는 페널티를 추가함으로써 얻어질 수 있습니다. Zou, Hastie, Tibshirani (<a href="16-chap.html#ref-Zou2006">2006</a>)와 Witten, Tibshirani, Hastie (<a href="16-chap.html#ref-Witten2009">2009</a>)는 희소(sparse) 버전의 주성분 분석을 개발했으며, 그들의 패키지 <strong><a href="https://cran.r-project.org/web/packages/elasticnet/">elasticnet</a></strong> 및 <strong><a href="https://cran.r-project.org/web/packages/PMA/">PMA</a></strong>는 R에서의 구현체를 제공합니다.</p>
 </section>
-<section id="exercises" class="level2" data-number="9.10">
-<h2 data-number="9.10" class="anchored" data-anchor-id="exercises"><span class="header-section-number">9.10</span> 7.11 Exercises</h2>
+<section id="연습-문제" class="level2" data-number="9.10">
+<h2 data-number="9.10" class="anchored" data-anchor-id="연습-문제"><span class="header-section-number">9.10</span> 7.11 연습 문제</h2>
 <p>__</p>
-<p>Exercise 7.1</p>
-<p>Revise the material about svd by reading sections 1, 2, and 3 of the <a href="http://en.wikipedia.org/wiki/Singular_value_decomposition">Wikipedia article about SVD</a>. It will also be beneficial to read about the related eigenvalue decomposition by reading sections 1, 2, and 2.1 of the <a href="http://en.wikipedia.org/wiki/Eigendecomposition_of_a_matrix">Wikipedia article about eigendecomposition of a matrix</a>. We know that we can decompose a \(n\) row by \(p\) column rank 1 matrix \(X\) as:</p>
+<p>연습 문제 7.1</p>
+<p><a href="http://en.wikipedia.org/wiki/Singular_value_decomposition">SVD에 관한 위키백과 문서</a>의 섹션 1, 2, 3을 읽어 svd에 관한 내용을 복습하세요. 또한 <a href="http://en.wikipedia.org/wiki/Eigendecomposition_of_a_matrix">행렬의 고유 분해에 관한 위키백과 문서</a>의 섹션 1, 2, 2.1을 읽어 관련 고유 분해에 대해 읽어보는 것도 유익할 것입니다. 우리는 \(n\)행 \(p\)열의 계수 1인 행렬 \(X\)를 다음과 같이 분해할 수 있음을 알고 있습니다:</p>
 <p>\[ <strong>X</strong> = ]</p>
 <ol type="1">
-<li><p>If \(X\) has no rows and no columns which are all zeros, then is this decomposition unique?</p></li>
-<li><p>Generate a rank-one matrix. Start by taking a vector of length 15 with values from 2 to 30 in increments of 2, and a vector of length 4 with values 3, 6, 9, 12, then take their outer product.</p></li>
+<li><p>\(X\)에 모든 값이 0인 행이나 열이 없다면, 이 분해는 유일할까요?</p></li>
+<li><p>계수가 1인 행렬을 생성해 보세요. 먼저 2부터 30까지 2씩 증가하는 길이 15의 벡터와, 3, 6, 9, 12의 값을 가진 길이 4의 벡터를 만든 다음, 이들의 외적(outer product)을 구하세요.</p></li>
 </ol>
 <pre><code>u = seq(2, 30, by = 2)
 v = seq(3, 12, by = 3)
 X1 = u %*% t(v)__</code></pre>
-<p>Why do we have to take <code>t(v)</code>?</p>
+<p>왜 <code>t(v)</code>를 취해야 할까요?</p>
 <ol start="3" type="1">
-<li>Now we add some noise in the form a matrix we call <code>Materr</code> so we have an “approximately rank-one” matrix.</li>
+<li>이제 <code>Materr</code>라고 부르는 행렬 형태의 노이즈를 추가하여 “거의 계수가 1인” 행렬을 만듭니다.</li>
 </ol>
 <pre><code>Materr = matrix(rnorm(60,1),nrow=15,ncol=4)
 X = X1+Materr __</code></pre>
-<p>Visualize \(X\) using <code>ggplot</code>.</p>
+<p><code>ggplot</code>을 사용하여 \(X\)를 시각화하세요.</p>
 <ol start="4" type="1">
-<li>Redo the same analyses with a rank 2 matrix.</li>
+<li>계수가 2인 행렬에 대해서도 동일한 분석을 수행해 보세요.</li>
 </ol>
 <p>__</p>
-<p>Solution</p>
+<p>해결책</p>
 <p>__</p>
-<p>Note that <code>X1</code> can also be computed as</p>
+<p><code>X1</code>은 다음과 같이 계산될 수도 있음에 주목하세요.</p>
 <pre><code>outer(u, v)__
 
 
 ggplot(data=data.frame(X), aes(x=X1, y=X2, col=X3, size=X4)) + geom_point()__</code></pre>
-<p>Here we see that the data looks linear in all four dimensions. This is what it means to be of rank-one. Now let’s consider a rank 2 matrix.</p>
+<p>여기서 우리는 데이터가 모든 4개 차원에서 선형으로 보임을 알 수 있습니다. 이것이 계수가 1이라는 것이 의미하는 바입니다. 이제 계수가 2인 행렬을 고려해 봅시다.</p>
 <pre><code>n = 100
 p = 4
 Y2 = outer(rnorm(n), rnorm(p)) + outer(rnorm(n), rnorm(p))
@@ -1600,34 +1601,34 @@ head(Y2)__
 
 
 ggplot(data=data.frame(Y2), aes(x=X1, y=X2, col=X3, size=X4)) + geom_point()__</code></pre>
-<p>Now there are obviously at least two dimensions because if we project the data onto the first two coordinates (by default called <code>X1</code> and <code>X2</code> when you convert a matrix into a data frame in R), then the data varies in both dimensions. So the next step is to try to decide if there are more than two dimensions. The top right points are the closest to you (they’re biggest) and as you go down and left in the plot those points are farther away. In the left are the bluest points and they seem to get darker linearly as you move right. As you can probably tell, it is very hard to visually discover a low dimensional space in higher dimensions, even when “high dimensions” only means 4! This is one reason why we rely on the singular value decomposition.</p>
-<pre><code>svd(Y2)$d # two non-zero eigenvalues __
+<p>데이터를 처음 두 좌표(R에서 행렬을 데이터 프레임으로 변환할 때 기본적으로 <code>X1</code> 및 <code>X2</code>라고 불림)로 투영하면 데이터가 두 차원 모두에서 변하므로, 이제 분명히 적어도 두 개의 차원이 존재합니다. 따라서 다음 단계는 두 개 이상의 차원이 있는지 결정하는 것입니다. 오른쪽 상단의 점들이 여러분과 가장 가깝고(가장 큼), 플롯에서 아래쪽과 왼쪽으로 갈수록 그 점들은 더 멀어집니다. 왼쪽에는 가장 파란 점들이 있고 오른쪽으로 갈수록 선형적으로 더 어두워지는 것 같습니다. 아마 짐작하시겠지만, “고차원”이 단지 4차원을 의미할 때조차 고차원에서 저차원 공간을 시각적으로 발견하는 것은 매우 어렵습니다. 이것이 우리가 특잇값 분해에 의존하는 한 이유입니다.</p>
+<pre><code>svd(Y2)$d # 0이 아닌 2개의 고윳값 __
 
 
 [1] 2.637465e+01 1.266346e+01 3.144564e-15 1.023131e-15
 
 
-Y = Y2 + matrix(rnorm(n*p, sd=0.01),n,p) # add some noise to Y2
-svd(Y)$d # four non-zero eigenvalues (but only 2 big ones)__
+Y = Y2 + matrix(rnorm(n*p, sd=0.01),n,p) # Y2에 노이즈 추가
+svd(Y)$d # 4개의 0이 아닌 고윳값 (하지만 큰 것은 2개뿐)__
 
 
 [1] 26.39673712 12.68547439  0.10735103  0.09104741</code></pre>
-<p>Here we have two dimensions which are non-zero and two dimensions which are approximately 0 (for “Y2”, they are within square root of computer tolerance of 0).</p>
+<p>여기서 우리는 0이 아닌 2개의 차원과 거의 0인 2개의 차원(“Y2”의 경우, 컴퓨터 허용 오차의 제곱근 내에서 0임)을 갖습니다.</p>
 <p>__</p>
-<p>Exercise 7.2</p>
+<p>연습 문제 7.2</p>
 <ol type="1">
-<li>create a first a matrix of highly correlated bivariate data such as that shown in Figure 7.35.<br>
-Hint: Use the function <code>mvrnorm</code>.</li>
+<li>먼저 그림 7.35에 표시된 것과 같은 상관관계가 높은 이변량 데이터 행렬을 생성하세요.<br>
+힌트: <code>mvrnorm</code> 함수를 사용하세요.</li>
 </ol>
-<p>Check the rank of the matrix by looking at its singular values.</p>
+<p>특잇값을 살펴보고 행렬의 계수를 확인하세요.</p>
 <ol start="2" type="1">
-<li>perform a PCA and show the rotated principal component axes.</li>
+<li>PCA를 수행하고 회전된 주성분 축을 보여주세요.</li>
 </ol>
 <p>__</p>
-<p>Solution</p>
+<p>해결책</p>
 <p>__</p>
 <ol type="1">
-<li>we generate correlated bivariate normal data using:</li>
+<li>다음을 사용하여 상관관계가 있는 이변량 정규 데이터를 생성합니다:</li>
 </ol>
 <pre><code>library("MASS")
 mu1 = 1; mu2 = 2; s1=2.5; s2=0.8; rho=0.9;
@@ -1644,7 +1645,7 @@ svd(scale(sim2d))$v[,1]__
 
 [1] 0.7071068 0.7071068</code></pre>
 <ol start="2" type="1">
-<li>We use <code>prcomp</code> to perform a PCA and the scores provide the desired rotation.</li>
+<li><code>prcomp</code>를 사용하여 PCA를 수행하고 점수(scores)를 통해 원하는 회전을 제공합니다.</li>
 </ol>
 <pre><code>respc = princomp(sim2d)
 dfpc  = data.frame(pc1=respc$scores[,1], 
@@ -1652,25 +1653,25 @@ dfpc  = data.frame(pc1=respc$scores[,1],
 
 ggplot(data.frame(sim2d), aes(x=X1,y=X2)) + geom_point()
 ggplot(dfpc, aes(x=pc1, y=pc2)) + geom_point() + coord_fixed(2)__</code></pre>
-<p><a href="07-chap_files/figure- html/fig-binormalpc-1.png" title="Figure 7.35 (a): \text{}"><img src="07-chap_files/figure-html/fig-binormalpc-1.png" class="img-fluid"></a></p>
+<p><a href="07-chap_files/figure- html/fig-binormalpc-1.png" title="그림 7.35 (a): \text{}"><img src="07-chap_files/figure-html/fig-binormalpc-1.png" class="img-fluid"></a></p>
 <ol type="a">
 <li>\(\)</li>
 </ol>
-<p><a href="07-chap_files/figure- html/fig-binormalpc-2.png" title="Figure 7.35 (b): \text{}"><img src="07-chap_files/figure-html/fig-binormalpc-2.png" class="img-fluid"></a></p>
+<p><a href="07-chap_files/figure- html/fig-binormalpc-2.png" title="그림 7.35 (b): \text{}"><img src="07-chap_files/figure-html/fig-binormalpc-2.png" class="img-fluid"></a></p>
 <ol start="2" type="a">
 <li>\(\)</li>
 </ol>
-<p>Figure 7.35: The original data shown in scatterplot (A) and the plot obtained using the principal component rotation (B).</p>
+<p>그림 7.35: 산점도 (A)에 표시된 원래 데이터와 주성분 회전 (B)을 사용하여 얻은 플롯.</p>
 <p>__</p>
-<p>Exercise 7.3</p>
-<p>Part (a) in Figure 7.35 shows a very elongated plotting region, why?<br>
-What happens if you do not use the <code>coord_fixed()</code> option and have a square plotting zone? Why can this be misleading?</p>
+<p>연습 문제 7.3</p>
+<p>그림 7.35의 (a) 부분은 매우 길쭉한 플로팅 영역을 보여주는데, 그 이유는 무엇인가요?<br>
+<code>coord_fixed()</code> 옵션을 사용하지 않고 정사각형 플로팅 존을 사용하면 어떤 일이 발생하나요? 왜 이것이 오해를 불러일으킬 수 있을까요?</p>
 <p>__</p>
-<p>Exercise 7.4</p>
-<p>Let’s revisit the Hiiragi data and compare the weighted and unweighted approaches.</p>
+<p>연습 문제 7.4</p>
+<p>Hiiragi 데이터를 다시 살펴보고 가중 및 비가중 접근 방식을 비교해 봅시다.</p>
 <ol type="1">
-<li><p>make a correlation circle for the unweighted Hiiragi data <code>xwt</code>. Which genes have the best projections on the first principal plane (best approximation)?</p></li>
-<li><p>make a biplot showing the labels of the extreme gene-variables that explain most of the variance in the first plane. Add the the sample-points.</p></li>
+<li><p>가중치를 부여하지 않은 Hiiragi 데이터 <code>xwt</code>에 대해 상관관계 원을 만드세요. 어떤 유전자들이 첫 번째 주평면에 가장 잘 투영(가장 좋은 근사)되나요?</p></li>
+<li><p>첫 번째 평면에서 대부분의 분산을 설명하는 극단적인 유전자 변수들의 레이블을 보여주는 바이플롯을 만드세요. 샘플 포인트들도 추가하십시오.</p></li>
 </ol>
 <p>Abbott, Edwin A. 1884. <em>Flatland: A Romance of Many Dimensions</em>. OUP Oxford.</p>
 <p>Flury, Bernard. 1997. <em>A First Course in Multivariate Statistics</em>. Springer.</p>
@@ -1741,13 +1742,14 @@ What happens if you do not use the <code>coord_fixed()</code> option and have a 
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -2091,13 +2093,13 @@ What happens if you do not use the <code>coord_fixed()</code> option and have a 
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./06-chap.html" class="pagination-link" aria-label="6.1 Goals for this Chapter">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">6.1 Goals for this Chapter</span></span>
+      <a href="./06-chap.html" class="pagination-link" aria-label="6.1 이 장의 목표">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">6.1 이 장의 목표</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./08-chap.html" class="pagination-link" aria-label="8.1 Goals of this chapter">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">8.1 Goals of this chapter</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./08-chap.html" class="pagination-link" aria-label="8.1 이 장의 목표">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">8.1 이 장의 목표</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
