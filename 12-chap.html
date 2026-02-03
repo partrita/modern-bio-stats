@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>14&nbsp; 12.1 Goals for this chapter – Modern Statistics for Modern Biology</title>
+<title>14&nbsp; 지도 학습 (Supervised Learning) – Modern Statistics for Modern Biology</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-7bf12d62aa84b4fa538b342f1416a45b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-e1e3f43fb246ec3c8b6ce777d50d2ce9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -84,7 +84,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./12-chap.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">12.1 Goals for this chapter</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./12-chap.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">지도 학습 (Supervised Learning)</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -118,67 +118,67 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./00-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">주제: 이질성</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">이 책에는 무엇이 들어있나요?</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">1.1 이 장의 목표</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">1.2 실제 예제</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">2.1 이 장의 목표</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">매개변수가 핵심입니다.</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">3.1 이 장의 목표</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">3.2 기본 R 플로팅</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">4.1 이 장의 목표</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">4.2 유한 혼합물</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">5.1 이 장의 목표</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">5.2 데이터란 무엇이며 왜 군집화하는가?</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">6.1 이 장의 목표</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">6.1.1 쏟아지는 데이터 속에서 정보 찾기</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">7.1 이 장의 목표</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">7.2 데이터란 무엇인가? 행렬과 그 동기</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">8.1 이 장의 목표</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">8.2 몇 가지 핵심 개념</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">9.1 이 장의 목표</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">9.2 다차원 척도법과 서열화 (Ordination)</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">10.1 이 장의 목표</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">10.2 그래프(Graphs)</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -190,13 +190,13 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./12-chap.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">12.1 Goals for this chapter</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">지도 학습 (Supervised Learning)</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">13.1 Goals for this chapter</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">13.1 이 장의 목표</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -227,34 +227,15 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#what-are-the-data" id="toc-what-are-the-data" class="nav-link active" data-scroll-target="#what-are-the-data"><span class="header-section-number">14.1</span> 12.2 What are the data?</a>
+  <li><a href="#이-장의-목표" id="toc-이-장의-목표" class="nav-link active" data-scroll-target="#이-장의-목표"><span class="header-section-number">14.1</span> 12.1 이 장의 목표</a></li>
+  <li><a href="#데이터란-무엇인가" id="toc-데이터란-무엇인가" class="nav-link" data-scroll-target="#데이터란-무엇인가"><span class="header-section-number">14.2</span> 12.2 데이터란 무엇인가?</a>
   <ul class="collapse">
-  <li><a href="#motivating-examples" id="toc-motivating-examples" class="nav-link" data-scroll-target="#motivating-examples"><span class="header-section-number">14.1.1</span> 12.2.1 Motivating examples</a></li>
+  <li><a href="#동기-부여-예시" id="toc-동기-부여-예시" class="nav-link" data-scroll-target="#동기-부여-예시"><span class="header-section-number">14.2.1</span> 12.2.1 동기 부여 예시</a></li>
   </ul></li>
-  <li><a href="#linear-discrimination" id="toc-linear-discrimination" class="nav-link" data-scroll-target="#linear-discrimination"><span class="header-section-number">14.2</span> 12.3 Linear discrimination</a>
+  <li><a href="#선형-판별-linear-discrimination" id="toc-선형-판별-linear-discrimination" class="nav-link" data-scroll-target="#선형-판별-linear-discrimination"><span class="header-section-number">14.3</span> 12.3 선형 판별 (Linear discrimination)</a>
   <ul class="collapse">
-  <li><a href="#diabetes-data" id="toc-diabetes-data" class="nav-link" data-scroll-target="#diabetes-data"><span class="header-section-number">14.2.1</span> 12.3.1 Diabetes data</a></li>
-  <li><a href="#predicting-embryonic-cell-state-from-gene-expression" id="toc-predicting-embryonic-cell-state-from-gene-expression" class="nav-link" data-scroll-target="#predicting-embryonic-cell-state-from-gene-expression"><span class="header-section-number">14.2.2</span> 12.3.2 Predicting embryonic cell state from gene expression</a></li>
+  <li><a href="#당뇨병-데이터" id="toc-당뇨병-데이터" class="nav-link" data-scroll-target="#당뇨병-데이터"><span class="header-section-number">14.3.1</span> 12.3.1 당뇨병 데이터</a></li>
   </ul></li>
-  <li><a href="#machine-learning-vs-rote-learning" id="toc-machine-learning-vs-rote-learning" class="nav-link" data-scroll-target="#machine-learning-vs-rote-learning"><span class="header-section-number">14.3</span> 12.4 Machine learning vs rote learning</a>
-  <ul class="collapse">
-  <li><a href="#cross-validation" id="toc-cross-validation" class="nav-link" data-scroll-target="#cross-validation"><span class="header-section-number">14.3.1</span> 12.4.1 Cross-validation</a></li>
-  <li><a href="#the-curse-of-dimensionality" id="toc-the-curse-of-dimensionality" class="nav-link" data-scroll-target="#the-curse-of-dimensionality"><span class="header-section-number">14.3.2</span> 12.4.2 The curse of dimensionality</a></li>
-  </ul></li>
-  <li><a href="#objective-functions" id="toc-objective-functions" class="nav-link" data-scroll-target="#objective-functions"><span class="header-section-number">14.4</span> 12.5 Objective functions</a></li>
-  <li><a href="#variancebias-trade-off" id="toc-variancebias-trade-off" class="nav-link" data-scroll-target="#variancebias-trade-off"><span class="header-section-number">14.5</span> 12.6 Variance–bias trade-off</a>
-  <ul class="collapse">
-  <li><a href="#penalization" id="toc-penalization" class="nav-link" data-scroll-target="#penalization"><span class="header-section-number">14.5.1</span> 12.6.1 Penalization</a></li>
-  <li><a href="#example-predicting-colon-cancer-from-stool-microbiome-composition" id="toc-example-predicting-colon-cancer-from-stool-microbiome-composition" class="nav-link" data-scroll-target="#example-predicting-colon-cancer-from-stool-microbiome-composition"><span class="header-section-number">14.5.2</span> 12.6.2 Example: predicting colon cancer from stool microbiome composition</a></li>
-  <li><a href="#example-classifying-mouse-cells-from-their-expression-profiles" id="toc-example-classifying-mouse-cells-from-their-expression-profiles" class="nav-link" data-scroll-target="#example-classifying-mouse-cells-from-their-expression-profiles"><span class="header-section-number">14.5.3</span> 12.6.3 Example: classifying mouse cells from their expression profiles</a></li>
-  </ul></li>
-  <li><a href="#a-large-choice-of-methods" id="toc-a-large-choice-of-methods" class="nav-link" data-scroll-target="#a-large-choice-of-methods"><span class="header-section-number">14.6</span> 12.7 A large choice of methods</a>
-  <ul class="collapse">
-  <li><a href="#method-hacking" id="toc-method-hacking" class="nav-link" data-scroll-target="#method-hacking"><span class="header-section-number">14.6.1</span> 12.7.1 Method hacking</a></li>
-  </ul></li>
-  <li><a href="#summary-of-this-chapter" id="toc-summary-of-this-chapter" class="nav-link" data-scroll-target="#summary-of-this-chapter"><span class="header-section-number">14.7</span> 12.8 Summary of this chapter</a></li>
-  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">14.8</span> 12.9 Further reading</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">14.9</span> 12.10 Exercises</a></li>
   </ul>
 </nav>
     </div>
@@ -263,7 +244,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">12.1 Goals for this chapter</span></h1>
+<h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">지도 학습 (Supervised Learning)</span></h1>
 </div>
 
 
@@ -282,40 +263,43 @@ ul.task-list li input[type="checkbox"] {
 
 <p><img src="imgs/BuildWall.png" class="img-fluid"></p>
 <p><img src="imgs/EWall.png" class="img-fluid"></p>
-<p>In a supervised learning setting, we have a yardstick or plumbline to judge how well we are doing: the response itself.</p>
-<p>A frequent question in biological and biomedical applications is whether a property of interest (say, disease type, cell type, the prognosis of a patient) can be “predicted”, given one or more other properties, called the <strong>predictors</strong>. Often we are motivated by a situation in which the property to be predicted is unknown (it lies in the future, or is hard to measure), while the predictors are known. The crucial point is that we <em>learn</em> the prediction rule from a set of <em>training data</em> in which the property of interest is also known. Once we have the rule, we can either apply it to new data, and make actual predictions of unknown outcomes; or we can dissect the rule with the aim of better understanding the underlying biology.</p>
-<p>Compared to unsupervised learning and what we have seen in Chapters <a href="05-chap.html">5</a>, <a href="07-chap.html">7</a> and <a href="09-chap.html">9</a>, where we do not know what we are looking for or how to decide whether our result is “right”, we are on much more solid ground with supervised learning: the objective is clearly stated, and there are straightforward criteria to measure how well we are doing.</p>
-<p>The central issues in <strong>supervised learning</strong> 1 are <strong>overfitting</strong> and <strong>generalizability</strong> : did we just learn the training data “by heart” by constructing a rule that has 100% accuracy on the training data, but would perform poorly on any new data? Or did our rule indeed pick up some of the pertinent patterns in the system being studied, which will also apply to yet unseen new data? (Figure 12.1)</p>
-<p>1 Sometimes the term <strong>statistical learning</strong> is used, more or less exchangeably.</p>
-<p><a href="12-chap_files/figure- html/fig-overfitting-1-1.png" title="Figure 12.1: An example for overfitting: two regression lines are fit to data in the (x, y)-plane (black points). We can think of such a line as a rule that predicts the y-value, given an x-value. Both lines are smooth, but the fits differ in what is called their bandwidth, which intuitively can be interpreted their stiffness. The blue line seems overly keen to follow minor wiggles in the data, while the orange line captures the general trend but is less detailed. The effective number of parameters needed to describe the blue line is much higher than for the orange line. Also, if we were to obtain additional data, it is likely that the blue line would do a worse job than the orange line in modeling the new data. We’ll formalize these concepts –training error and test set error– later in this chapter. Although exemplified here with line fitting, the concept applies more generally to prediction models."><img src="12-chap_files/figure-html/fig-overfitting-1-1.png" class="img-fluid"></a></p>
-<p>Figure 12.1: An example for <strong>overfitting</strong> : two regression lines are fit to data in the \((x, y)\)-plane (black points). We can think of such a line as a rule that predicts the \(y\)-value, given an \(x\)-value. Both lines are smooth, but the fits differ in what is called their <strong>bandwidth</strong> , which intuitively can be interpreted their stiffness. The blue line seems overly keen to follow minor wiggles in the data, while the orange line captures the general trend but is less detailed. The effective number of parameters needed to describe the blue line is much higher than for the orange line. Also, if we were to obtain additional data, it is likely that the blue line would do a <strong>worse</strong> job than the orange line in modeling the new data. We’ll formalize these concepts –training error and test set error– later in this chapter. Although exemplified here with line fitting, the concept applies more generally to prediction models.</p>
-<p>In this chapter we will:</p>
+<p>지도 학습(Supervised Learning) 환경에서는 우리가 얼마나 잘하고 있는지를 판단할 수 있는 잣대, 바로 반응 변수(response) 그 자체가 존재합니다.</p>
+<p>생물학 및 생물의학 응용 분야에서 자주 묻는 질문은 관심 있는 속성(예: 질병 유형, 세포 유형, 환자의 예후)을 다른 하나 이상의 속성, 즉 <strong>예측 변수(predictors)</strong>를 통해 “예측”할 수 있는지 여부입니다. 종종 우리는 예측해야 할 속성은 알 수 없지만(미래에 있거나 측정하기 어려운 경우), 예측 변수는 알고 있는 상황에 직면합니다. 중요한 점은 관심 있는 속성 또한 알고 있는 <strong>학습 데이터(training data)</strong> 집합으로부터 예측 규칙을 <em>학습</em> 한다는 것입니다. 규칙을 확보하고 나면, 이를 새로운 데이터에 적용하여 알 수 없는 결과를 실제로 예측하거나, 기저에 있는 생물학적 원리를 더 잘 이해하기 위해 규칙 자체를 분석할 수 있습니다.</p>
+<p>우리가 무엇을 찾고 있는지, 또는 결과가 “맞는지” 어떻게 결정해야 할지 모르는 비지도 학습(Unsupervised Learning)이나 <a href="05-chap.html">5장</a>, <a href="07-chap.html">7장</a>, <a href="09-chap.html">9장</a>에서 본 내용과 비교할 때, 지도 학습은 훨씬 더 확고한 기반 위에 있습니다. 목표가 명확하게 명시되어 있고, 우리가 얼마나 잘하고 있는지 측정할 수 있는 간단한 기준이 있기 때문입니다.</p>
+<p><strong>지도 학습</strong> 1의 핵심 이슈는 <strong>과적합(overfitting)</strong>과 <strong>일반화 가능성(generalizability)</strong>입니다. 훈련 데이터에 대해 100% 정확도를 가지지만 새로운 데이터에 대해서는 형편없는 성능을 보이는 규칙을 만들어 훈련 데이터를 단순히 “암기”한 것일까요? 아니면 우리의 규칙이 연구 중인 시스템의 적절한 패턴을 실제로 포착하여 아직 보지 못한 새로운 데이터에도 적용될 수 있을까요? (그림 12.1)</p>
+<p>1 때때로 <strong>통계적 학습(statistical learning)</strong>이라는 용어가 거의 같은 의미로 사용됩니다.</p>
+<p><a href="12-chap_files/figure-html/fig-overfitting-1-1.png" title="그림 12.1: 과적합의 예: 두 회귀선이 (x, y)-평면의 데이터(검은 점)에 적합되었습니다. 우리는 이러한 선을 (x) 값이 주어졌을 때 (y) 값을 예측하는 규칙으로 생각할 수 있습니다. 두 선 모두 부드럽지만, 적합(fit)은 대역폭(bandwidth)이라고 불리는 것에서 차이가 나며, 이는 직관적으로 경직성(stiffness)으로 해석될 수 있습니다. 파란색 선은 데이터의 사소한 움직임까지 지나치게 따라가려는 것처럼 보이는 반면, 주황색 선은 전반적인 추세는 포착하지만 세부적인 것은 덜합니다. 파란색 선을 설명하는 데 필요한 유효 매개변수(effective parameters)의 수는 주황색 선보다 훨씬 높습니다. 또한, 추가 데이터를 얻게 된다면 파란색 선은 주황색 선보다 새로운 데이터를 모델링하는 데 더 나쁜 성능을 보일 가능성이 높습니다. 이 장의 뒷부분에서 이러한 개념들 – 훈련 오차(training error)와 테스트 세트 오차(test set error) – 을 공식화할 것입니다. 여기서는 선 적합(line fitting)으로 예시를 들었지만, 이 개념은 예측 모델에 더 일반적으로 적용됩니다."><img src="12-chap_files/figure-html/fig-overfitting-1-1.png" class="img-fluid"></a></p>
+<p>그림 12.1: <strong>과적합(overfitting)</strong>의 예: 두 회귀선이 ((x, y))-평면의 데이터(검은 점)에 적합되었습니다. 우리는 이러한 선을 (x) 값이 주어졌을 때 (y) 값을 예측하는 규칙으로 생각할 수 있습니다. 두 선 모두 부드럽지만, 적합(fit)은 <strong>대역폭(bandwidth)</strong>이라고 불리는 것에서 차이가 나며, 이는 직관적으로 경직성(stiffness)으로 해석될 수 있습니다. 파란색 선은 데이터의 사소한 움직임까지 지나치게 따라가려는 것처럼 보이는 반면, 주황색 선은 전반적인 추세는 포착하지만 세부적인 것은 덜합니다. 파란색 선을 설명하는 데 필요한 유효 매개변수(effective parameters)의 수는 주황색 선보다 훨씬 높습니다. 또한, 추가 데이터를 얻게 된다면 파란색 선은 주황색 선보다 새로운 데이터를 모델링하는 데 더 <strong>나쁜</strong> 성능을 보일 가능성이 높습니다. 이 장의 뒷부분에서 이러한 개념들 – 훈련 오차(training error)와 테스트 세트 오차(test set error) – 을 공식화할 것입니다. 여기서는 선 적합(line fitting)으로 예시를 들었지만, 이 개념은 예측 모델에 더 일반적으로 적용됩니다.</p>
+<section id="이-장의-목표" class="level2" data-number="14.1">
+<h2 data-number="14.1" class="anchored" data-anchor-id="이-장의-목표"><span class="header-section-number">14.1</span> 12.1 이 장의 목표</h2>
+<p>이 장에서는 다음을 수행합니다:</p>
 <ul>
-<li><p>See exemplary applications that motivate the use of supervised learning methods.</p></li>
-<li><p>Learn what discriminant analysis does.</p></li>
-<li><p>Define measures of performance.</p></li>
-<li><p>Encounter the curse of dimensionality and see what overfitting is.</p></li>
-<li><p>Find out about regularization – in particular, penalization – and understand the concepts of generalizability and model complexity.</p></li>
-<li><p>See how to use cross-validation to tune parameters of algorithms.</p></li>
-<li><p>Discuss method hacking.</p></li>
+<li><p>지도 학습 방법의 사용 동기가 되는 예시적인 응용 사례를 살펴봅니다.</p></li>
+<li><p>판별 분석(discriminant analysis)이 무엇을 하는지 배웁니다.</p></li>
+<li><p>성능 척도(measures of performance)를 정의합니다.</p></li>
+<li><p>차원의 저주(curse of dimensionality)를 접하고 과적합(overfitting)이 무엇인지 알아봅니다.</p></li>
+<li><p>정규화(regularization) – 특히 벌점화(penalization) – 에 대해 알아보고 일반화 가능성(generalizability)과 모델 복잡성(model complexity)의 개념을 이해합니다.</p></li>
+<li><p>교차 검증(cross-validation)을 사용하여 알고리즘의 매개변수를 조정하는 방법을 살펴봅니다.</p></li>
+<li><p>방법론 해킹(method hacking)에 대해 논의합니다.</p></li>
 </ul>
-<section id="what-are-the-data" class="level2" data-number="14.1">
-<h2 data-number="14.1" class="anchored" data-anchor-id="what-are-the-data"><span class="header-section-number">14.1</span> 12.2 What are the data?</h2>
-<p>The basic data structure for both supervised and unsupervised learning is (at least conceptually) a dataframe, where each row corresponds to an object and the columns are different features (usually numerical values) of the objects2. While in unsupervised learning we aim to find (dis)similarity relationships between the objects based on their feature values (e.g., by clustering or ordination), in supervised learning we aim to find a mathematical function (or a computational algorithm) that predicts the value of one of the features from the other features. Many implementations require that there are no missing values, whereas other methods can be made to work with some amount of missing data.</p>
-<p>2 This is a simplified description. Machine learning is a huge field, and lots of generalizations of this simple conceptual picture have been made. Already the construction of relevant features is an art by itself — we have seen examples with images of cells in <a href="11-chap.html">Chapter 11</a>, and more generally there are lots of possibilities to extract features from images, sounds, movies, free text, \(…\) Moreover, there is a variant of machine learning methods called <strong>kernel methods</strong> that do not need features at all; instead, kernel methods use distances or measures of similarity between objects. It may be easier, for instance, to define a measure of similarity between two natural language text objects than to find relevant numerical features to represent them. Kernel methods are beyond the scope of this book.</p>
-<p>The feature that we select over all the others with the aim of predicting is called the <strong>objective</strong> or the <strong>response</strong>. Sometimes the choice is natural, but sometimes it is also instructive to reverse the roles, especially if we are interested in dissecting the prediction function for the purpose of biological understanding, or in disentangling correlations from causation.</p>
-<p>The framework for supervised learning covers both continuous and categorical response variables. In the continuous case we also call it <strong>regression</strong> , in the categorical case, <strong>classification</strong>. It turns out that this distinction is not a detail, as it has quite far-reaching consequences for the choice of loss function (Section 12.5) and thus the choice of algorithm (<a href="16-chap.html#ref-friedmanbiasvariance01">Friedman 1997</a>).</p>
-<p>The first question to consider in any supervised learning task is how the number of objects compares to the number of predictors. The more objects, the better, and much of the hard work in supervised learning has to do with overcoming the limitations of having a finite (and typically, too small) training set.</p>
-<p><a href="imgs/fourquad.png" title="Figure 12.2: In supervised learning, we assign two different roles to our variables. We have labeled the explanatory variables X and the response variable(s) Y. There are also two different sets of observations: the training set X_\ell and Y_\ell and the test set X_v and Y_v. (The subscripts refer to alternative names for the two sets: “learning” and “validation”.)"><img src="imgs/fourquad.png" class="img-fluid"></a></p>
-<p>Figure 12.2: In supervised learning, we assign two different roles to our variables. We have labeled the explanatory variables \(X\) and the response variable(s) \(Y\). There are also two different sets of observations: the training set \(X_\) and \(Y_\) and the test set \(X_v\) and \(Y_v\). (The subscripts refer to alternative names for the two sets: “learning” and “validation”.)</p>
+</section>
+<section id="데이터란-무엇인가" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="데이터란-무엇인가"><span class="header-section-number">14.2</span> 12.2 데이터란 무엇인가?</h2>
+<p>지도 학습과 비지도 학습 모두에 대한 기본적인 데이터 구조는 (적어도 개념적으로는) 데이터프레임입니다. 여기서 각 행은 객체(object)에 해당하고 열은 객체의 다른 특징(feature, 주로 숫자 값)입니다2. 비지도 학습에서는 특징 값을 기반으로 객체 간의 (비)유사성 관계를 찾는 것(예: 군집화 또는 정렬)을 목표로 하는 반면, 지도 학습에서는 다른 특징들로부터 특징 중 하나의 값을 예측하는 수학적 함수(또는 계산 알고리즘)를 찾는 것을 목표로 합니다. 많은 구현체들은 결측치(missing values)가 없어야 작동하지만, 일부 방법은 약간의 결측 데이터가 있어도 작동하도록 만들 수 있습니다.</p>
+<p>2 이것은 단순화된 설명입니다. 기계 학습(Machine Learning)은 거대한 분야이며, 이 단순한 개념적 그림에 대한 많은 일반화가 이루어졌습니다. 이미 관련 특징을 구축하는 것 자체가 하나의 예술입니다. <a href="11-chap.html">11장</a>에서 세포 이미지의 예를 보았고, 더 일반적으로 이미지, 소리, 영화, 자유 텍스트 등에서 특징을 추출할 수 있는 많은 가능성이 있습니다 … 또한, 특징이 전혀 필요 없는 <strong>커널 방법(kernel methods)</strong>이라는 기계 학습 방법의 변형도 있습니다. 대신 커널 방법은 객체 간의 거리 또는 유사성 척도를 사용합니다. 예를 들어, 두 자연어텍스트 객체를 나타낼 관련 수치 특징을 찾는 것보다 두 객체 간의 유사성 척도를 정의하는 것이 더 쉬울 수 있습니다. 커널 방법은 이 책의 범위를 벗어납니다.</p>
+<p>예측을 목표로 다른 모든 특징들 중에서 선택한 특징을 <strong>목표(objective)</strong> 또는 <strong>반응(response)</strong>이라고 합니다. 때로는 선택이 자연스럽지만, 때로는 역할을 뒤집는 것이 유익할 수 있습니다. 특히 생물학적 이해를 위해 예측 함수를 분석하거나 상관관계와 인과관계를 구분하는 데 관심이 있다면 더욱 그렇습니다.</p>
+<p>지도 학습의 프레임워크는 연속형 및 범주형 반응 변수를 모두 포괄합니다. 연속형인 경우 <strong>회귀(regression)</strong>라고 하고, 범주형인 경우 <strong>분류(classification)</strong>라고 합니다. 이 구분은 사소한 것이 아닙니다. 손실 함수 (12.5절) 선택과 그에 따른 알고리즘 선택에 꽤 광범위한 영향을 미치기 때문입니다 (<a href="16-chap.html#ref-friedmanbiasvariance01">Friedman 1997</a>).</p>
+<p>모든 지도 학습 작업에서 고려해야 할 첫 번째 질문은 객체의 수가 예측 변수의 수와 어떻게 비교되는지입니다. 객체가 많을수록 좋으며, 지도 학습에서의 많은 힘든 작업은 유한한(그리고 일반적으로 너무 작은) 훈련 세트가 가진 한계를 극복하는 것과 관련이 있습니다.</p>
+<p><a href="imgs/fourquad.png" title="그림 12.2: 지도 학습에서 우리는 변수에 두 가지 다른 역할을 부여합니다. 설명 변수를 X, 반응 변수(들)를 Y라고 라벨링했습니다. 또한 두 가지 다른 관측값 세트가 있습니다: 훈련 세트 X_\ell과 Y_\ell, 그리고 테스트 세트 X_v와 Y_v.(아래첨자는 두 세트의 다른 이름인 “learning”과 “validation”을 나타냅니다.)"><img src="imgs/fourquad.png" class="img-fluid"></a></p>
+<p>그림 12.2: 지도 학습에서 우리는 변수에 두 가지 다른 역할을 부여합니다. 설명 변수를 (X), 반응 변수(들)를 (Y)라고 라벨링했습니다. 또한 두 가지 다른 관측값 세트가 있습니다: 훈련 세트 (X_)과 (Y_), 그리고 테스트 세트 (X_v)와 (Y_v). (아래첨자는 두 세트의 다른 이름인 “learning”과 “validation”을 나타냅니다.)</p>
 <p>__</p>
-<p>Task</p>
-<p>Give examples where we have encountered instances of supervised learning with a categorical response in this book.</p>
-<section id="motivating-examples" class="level3" data-number="14.1.1">
-<h3 data-number="14.1.1" class="anchored" data-anchor-id="motivating-examples"><span class="header-section-number">14.1.1</span> 12.2.1 Motivating examples</h3>
-<section id="predicting-diabetes-type" class="level4" data-number="14.1.1.1">
-<h4 data-number="14.1.1.1" class="anchored" data-anchor-id="predicting-diabetes-type"><span class="header-section-number">14.1.1.1</span> Predicting diabetes type</h4>
-<p>The <code>diabetes</code> dataset (<a href="16-chap.html#ref-diabetes">Reaven and Miller 1979</a>) presents three different groups of diabetes patients and five clinical variables measured on them.</p>
+<p>일</p>
+<p>이 책에서 범주형 반응 변수를 가진 지도 학습 사례를 접한 예시를 드시오.</p>
+<section id="동기-부여-예시" class="level3" data-number="14.2.1">
+<h3 data-number="14.2.1" class="anchored" data-anchor-id="동기-부여-예시"><span class="header-section-number">14.2.1</span> 12.2.1 동기 부여 예시</h3>
+<section id="당뇨병-유형-예측" class="level4" data-number="14.2.1.1">
+<h4 data-number="14.2.1.1" class="anchored" data-anchor-id="당뇨병-유형-예측"><span class="header-section-number">14.2.1.1</span> 당뇨병 유형 예측</h4>
+<p><code>diabetes</code> 데이터셋(<a href="16-chap.html#ref-diabetes">Reaven and Miller 1979</a>)은 세 가지 다른 당뇨병 환자 그룹과 그들에게서 측정된 5가지 임상 변수를 제공합니다.</p>
 <pre><code>data("diabetes", package = "rrcov")
 head(diabetes)__
 
@@ -327,48 +311,48 @@ head(diabetes)__
 4 1.04  90     356     199  108 normal
 5 1.00  90     323     240  143 normal
 6 0.76  86     381     157  165 normal</code></pre>
-<p>The univariate distributions (more precisely, some density estimates of them) are shown in Figure 12.3.</p>
+<p>일변량 분포(더 정확하게는 그것들의 밀도 추정치)는 그림 12.3에 나와 있습니다.</p>
 <pre><code>library("reshape2")
 ggplot(melt(diabetes, id.vars = "group"), aes(x = value, col = group)) +
  geom_density() + facet_wrap( ~variable, ncol = 1, scales = "free") +
  theme(legend.position = "bottom")__</code></pre>
-<p><a href="12-chap_files/figure- html/fig-ldagroups-1-1.png" title="Figure 12.3: We see already from the one- dimensional distributions that some of the individual variables could potentially predict which group a patient is more likely to belong to. Our goal is to combine variables to improve over such one-dimensional prediction models."><img src="12-chap_files/figure-html/fig-ldagroups-1-1.png" class="img-fluid"></a></p>
-<p>Figure 12.3: We see already from the one-dimensional distributions that some of the individual variables could potentially predict which group a patient is more likely to belong to. Our goal is to combine variables to improve over such one-dimensional prediction models.</p>
-<p>The variables are explained in the manual page of the dataset, and in the paper (<a href="16-chap.html#ref-diabetes">Reaven and Miller 1979</a>):</p>
+<p><a href="12-chap_files/figure-html/fig-ldagroups-1-1.png" title="그림 12.3: 1차원 분포에서 이미 개별 변수 중 일부가 환자가 어떤 그룹에 속할 가능성이 높은지 잠재적으로 예측할 수 있음을 알 수 있습니다. 우리의 목표는 변수들을 결합하여 이러한 1차원 예측 모델보다 개선하는 것입니다."><img src="12-chap_files/figure-html/fig-ldagroups-1-1.png" class="img-fluid"></a></p>
+<p>그림 12.3: 1차원 분포에서 이미 개별 변수 중 일부가 환자가 어떤 그룹에 속할 가능성이 높은지 잠재적으로 예측할 수 있음을 알 수 있습니다. 우리의 목표는 변수들을 결합하여 이러한 1차원 예측 모델보다 개선하는 것입니다.</p>
+<p>변수들은 데이터셋의 매뉴얼 페이지와 논문(<a href="16-chap.html#ref-diabetes">Reaven and Miller 1979</a>)에 설명되어 있습니다:</p>
 <ul>
-<li><p>rw: relative weight</p></li>
-<li><p>fpg: fasting plasma glucose</p></li>
-<li><p>glucose: area under the plasma glucose curve for the three hour oral glucose tolerance test (OGTT)</p></li>
-<li><p>insulin: area under the plasma insulin curve for the OGTT</p></li>
-<li><p>sspg: steady state plasma glucose response</p></li>
-<li><p>group: normal, chemical diabetes and overt diabetes</p></li>
+<li><p>rw: 상대 체중 (relative weight)</p></li>
+<li><p>fpg: 공복 혈장 포도당 (fasting plasma glucose)</p></li>
+<li><p>glucose: 3시간 경구 포도당 내성 검사(OGTT)에 대한 혈장 포도당 곡선 아래 면적</p></li>
+<li><p>insulin: OGTT에 대한 혈장 인슐린 곡선 아래 면적</p></li>
+<li><p>sspg: 정상 상태 혈장 포도당 반응 (steady state plasma glucose response)</p></li>
+<li><p>group: 정상(normal), 화학적 당뇨병(chemical diabetes), 명백한 당뇨병(overt diabetes)</p></li>
 </ul>
 </section>
-<section id="predicting-cellular-phenotypes" class="level4" data-number="14.1.1.2">
-<h4 data-number="14.1.1.2" class="anchored" data-anchor-id="predicting-cellular-phenotypes"><span class="header-section-number">14.1.1.2</span> Predicting cellular phenotypes</h4>
-<p>Neumann et al.&nbsp;(<a href="16-chap.html#ref-Neumann:2010">2010</a>) observed human cancer cells using live-cell imaging. The cells were genetically engineered so that their histones were tagged with a green fluorescent protein (GFP). A genome- wide RNAi library was applied to the cells, and for each siRNA perturbation, movies of a few hundred cells were recorded for about two days, to see what effect the depletion of each gene had on cell cycle, nuclear morphology and cell proliferation. Their paper reports the use of an automated image classification algorithm that quantified the visual appearance of each cell’s nucleus and enabled the prediction of normal mitosis states or aberrant nuclei. The algorithm was trained on the data from around 3000 cells that were annotated by a human expert. It was then applied to almost 2 billions images of nuclei (Figure 12.4). Using automated image classification provided scalability (annotating 2 billion images manually would take a long time) and objectivity.</p>
-<p><a href="imgs/Neumann2010Fig1b_web.jpg &quot;Figure 12.4: The data were images of 2\times10^9 nuclei from movies. The images were segmented to identify the nuclei, and numeric features were computed for each nucleus, corresponding to size, shape, brightness and lots of other more or less abstract quantitative summaries of the joint distribution of pixel intensities. From the features, the cells were classified into 16 different nuclei morphology classes, represented by the rows of the barplot. Representative images for each class are shown in black and white in the center column. The class frequencies, which are very unbalanced, are shown by the lengths of the bars.&quot;"><img src="imgs/Neumann2010Fig1b_web.jpg" class="img-fluid"></a></p>
-<p>Figure 12.4: The data were images of \(2^9\) nuclei from movies. The images were segmented to identify the nuclei, and numeric features were computed for each nucleus, corresponding to size, shape, brightness and lots of other more or less abstract quantitative summaries of the joint distribution of pixel intensities. From the features, the cells were classified into 16 different nuclei morphology classes, represented by the rows of the barplot. Representative images for each class are shown in black and white in the center column. The class frequencies, which are very unbalanced, are shown by the lengths of the bars.</p>
+<section id="세포-표현형-예측" class="level4" data-number="14.2.1.2">
+<h4 data-number="14.2.1.2" class="anchored" data-anchor-id="세포-표현형-예측"><span class="header-section-number">14.2.1.2</span> 세포 표현형 예측</h4>
+<p>Neumann 등(<a href="16-chap.html#ref-Neumann:2010">2010</a>)은 라이브 셀 이미징(live-cell imaging)을 사용하여 인간 암세포를 관찰했습니다. 세포의 히스톤이 녹색 형광 단백질(GFP)로 태그되도록 유전적으로 조작되었습니다. 게놈 전체 RNAi 라이브러리를 세포에 적용했고, 각 siRNA 교란에 대해 며칠 동안 수백 개의 세포 영상을 기록하여 각 유전자의 고갈이 세포 주기, 핵 형태 및 세포 증식에 어떤 영향을 미치는지 확인했습니다. 그들의 논문은 각 세포 핵의 시각적 외관을 정량화하고 정상적인 유사 분열 상태 또는 비정상적인 핵을 예측할 수 있게 해주는 자동화된 이미지 분류 알고리즘의 사용을 보고합니다. 이 알고리즘은 인간 전문가가 주석을 단 약 3000개의 세포 데이터로 훈련되었습니다. 그런 다음 거의 20억 개의 핵 이미지에 적용되었습니다(그림 12.4). 자동화된 이미지 분류를 사용하여 확장성(20억 개의 이미지를 수동으로 주석 처리하는 데는 오랜 시간이 걸릴 것입니다)과 객관성을 제공했습니다.</p>
+<p><a href="imgs/Neumann2010Fig1b_web.jpg" title="그림 12.4: 데이터는 영상에서 나온 2\times10^9핵의 이미지였습니다. 이미지는 핵을 식별하기 위해 분할되었고, 각 핵에 대해 크기, 모양, 밝기 및 픽셀 강도의 결합 분포에 대한 다소 추상적인 정량적 요약에 해당하는 수치 특징이 계산되었습니다. 특징으로부터 세포는 16가지 다른 핵 형태 클래스로 분류되었으며, 막대 그래프의 행으로 표시됩니다. 각 클래스에 대한 대표 이미지는 가운데 열에 흑백으로 표시됩니다. 클래스 빈도는 막대의 길이로 표시되며 매우 불균형합니다."><img src="imgs/Neumann2010Fig1b_web.jpg" class="img-fluid"></a></p>
+<p>그림 12.4: 데이터는 영상에서 나온 (2^9)개 핵의 이미지였습니다. 이미지는 핵을 식별하기 위해 분할되었고, 각 핵에 대해 크기, 모양, 밝기 및 픽셀 강도의 결합 분포에 대한 다소 추상적인 정량적 요약에 해당하는 수치 특징이 계산되었습니다. 특징으로부터 세포는 16가지 다른 핵 형태 클래스로 분류되었으며, 막대 그래프의 행으로 표시됩니다. 각 클래스에 대한 대표 이미지는 가운데 열에 흑백으로 표시됩니다. 클래스 빈도는 막대의 길이로 표시되며 매우 불균형합니다.</p>
 </section>
-<section id="predicting-embryonic-cell-states" class="level4" data-number="14.1.1.3">
-<h4 data-number="14.1.1.3" class="anchored" data-anchor-id="predicting-embryonic-cell-states"><span class="header-section-number">14.1.1.3</span> Predicting embryonic cell states</h4>
-<p>We will revisit the mouse embryo data (<a href="16-chap.html#ref- Ohnishi2014">Ohnishi et al.&nbsp;2014</a>), which we have already seen in Chapters <a href="03-chap.html">3</a>, <a href="05-chap.html">5</a> and <a href="07-chap.html">7</a>. We’ll try to predict cell state and genotype from the gene expression measurements in Sections 12.3.2 and 12.6.3.</p>
+<section id="배아-세포-상태-예측" class="level4" data-number="14.2.1.3">
+<h4 data-number="14.2.1.3" class="anchored" data-anchor-id="배아-세포-상태-예측"><span class="header-section-number">14.2.1.3</span> 배아 세포 상태 예측</h4>
+<p>우리는 <a href="03-chap.html">3장</a>, <a href="05-chap.html">5장</a>, <a href="07-chap.html">7장</a>에서 이미 본 마우스 배아 데이터(<a href="16-chap.html#ref-Ohnishi2014">Ohnishi et al.&nbsp;2014</a>)를 다시 살펴볼 것입니다. 12.3.2절과 12.6.3절에서 유전자 발현 측정값으로부터 세포 상태와 유전자형을 예측해 보겠습니다.</p>
 </section>
 </section>
 </section>
-<section id="linear-discrimination" class="level2" data-number="14.2">
-<h2 data-number="14.2" class="anchored" data-anchor-id="linear-discrimination"><span class="header-section-number">14.2</span> 12.3 Linear discrimination</h2>
-<p>We start with one of the simplest possible discrimination problems3: we have objects described by two continuous features (so the objects can be thought of as points in the 2D plane) and falling into three groups. Our aim is to define class boundaries, which are lines in the 2D space.</p>
-<p>3 Arguably the simplest possible problem is a single continuous feature, two classes, and the task of finding a single threshold to discriminate between the two groups – as in <a href="06-chap.html#fig-testing-FDRvspstatic1">Figure 6.2</a>.</p>
-<section id="diabetes-data" class="level3" data-number="14.2.1">
-<h3 data-number="14.2.1" class="anchored" data-anchor-id="diabetes-data"><span class="header-section-number">14.2.1</span> 12.3.1 Diabetes data</h3>
-<p>Let’s see whether we can predict the <code>group</code> from the <code>sspg</code> and <code>glucose</code> variables in the <code>diabetes</code> data. It’s always a good idea to first visualise the data (Figure 12.5).</p>
+<section id="선형-판별-linear-discrimination" class="level2" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="선형-판별-linear-discrimination"><span class="header-section-number">14.3</span> 12.3 선형 판별 (Linear discrimination)</h2>
+<p>가장 간단한 판별 문제 중 하나부터 시작해 보겠습니다3. 두 개의 연속형 특징으로 설명되는(따라서 객체는 2D 평면의 점으로 생각할 수 있는) 객체가 있고, 이들은 세 그룹으로 나뉩니다. 우리의 목표는 2D 공간의 선인 클래스 경계를 정의하는 것입니다.</p>
+<p>3 틀림없이 가장 간단한 문제는 단일 연속형 특징, 두 개의 클래스, 그리고 두 그룹을 구별하기 위한 단일 임계값을 찾는 작업입니다 – <a href="06-chap.html#fig-testing-FDRvspstatic1">그림 6.2</a>와 같이.</p>
+<section id="당뇨병-데이터" class="level3" data-number="14.3.1">
+<h3 data-number="14.3.1" class="anchored" data-anchor-id="당뇨병-데이터"><span class="header-section-number">14.3.1</span> 12.3.1 당뇨병 데이터</h3>
+<p><code>diabetes</code> 데이터의 <code>sspg</code>와 <code>glucose</code> 변수로부터 <code>group</code>을 예측할 수 있는지 알아봅시다. 먼저 데이터를 시각화하는 것이 항상 좋은 아이디어입니다(그림 12.5).</p>
 <pre><code>ggdb = ggplot(mapping = aes(x = sspg, y = glucose)) +
   geom_point(aes(colour = group), data = diabetes)
 ggdb __</code></pre>
-<p><a href="12-chap_files/figure-html/fig- scatterdiabetes-1-1.png" title="Figure 12.5: Scatterplot of two of the variables in the diabetes data. Each point is a sample, and the color indicates the diabetes type as encoded in the group variable."><img src="12-chap_files/figure-html/fig- scatterdiabetes-1-1.png" class="img-fluid"></a></p>
-<p>Figure 12.5: Scatterplot of two of the variables in the <code>diabetes</code> data. Each point is a sample, and the color indicates the diabetes type as encoded in the <code>group</code> variable.</p>
-<p>We’ll start with a method called <strong>linear discriminant analysis</strong> (<strong>LDA</strong>). This method is a foundation stone of classification, many of the more complicated (and sometimes more powerful) algorithms are really just generalizations of LDA.</p>
+<p><a href="12-chap_files/figure-html/fig-scatterdiabetes-1-1.png" title="그림 12.5: 당뇨병 데이터의 두 변수에 대한 산점도. 각 점은 샘플이며, 색상은 group 변수에 인코딩된 당뇨병 유형을 나타냅니다."><img src="12-chap_files/figure-html/fig-scatterdiabetes-1-1.png" class="img-fluid"></a></p>
+<p>그림 12.5: <code>diabetes</code> 데이터의 두 변수에 대한 산점도. 각 점은 샘플이며, 색상은 <code>group</code> 변수에 인코딩된 당뇨병 유형을 나타냅니다.</p>
+<p><strong>선형 판별 분석(Linear Discriminant Analysis, LDA)</strong>이라는 방법으로 시작하겠습니다. 이 방법은 분류의 초석이며, 더 복잡한(그리고 때로는 더 강력한) 알고리즘 중 많은 것들이 실제로는 LDA의 일반화일 뿐입니다.</p>
 <pre><code>library("MASS")
 diabetes_lda = lda(group ~ sspg + glucose, data = diabetes)
 diabetes_lda __
@@ -413,64 +397,64 @@ mean(ghat != diabetes$group)__
 
 [1] 0.1793103</code></pre>
 <p>__</p>
-<p>Question 12.1</p>
-<p>What do the different parts of the above output mean?</p>
-<p>Now, let’s visualise the LDA result. We are going to plot the prediction regions for each of the three groups. We do this by creating a grid of points and using our prediction rule on each of them. We’ll then also dig a bit deeper into the mechanics of LDA and plot the class centers (<code>diabetes_lda$means</code>) and ellipses that correspond to the fitted covariance matrix (<code>diabetes_lda$scaling</code>). Assembling this visualization requires us to write a bit of code.</p>
+<p>질문 12.1</p>
+<p>위 출력의 다른 부분들은 무엇을 의미합니까?</p>
+<p>이제 LDA 결과를 시각화해 보겠습니다. 각 세 그룹에 대한 예측 영역을 그릴 것입니다. 이를 위해 점 그리드를 만들고 각각에 대해 예측 규칙을 사용합니다. 그런 다음 LDA의 메커니즘을 좀 더 깊이 파고들어 클래스 중심(<code>diabetes_lda$means</code>)과 적합된 공분산 행렬(<code>diabetes_lda$scaling</code>)에 해당하는 타원을 그릴 것입니다. 이 시각화를 조립하려면 약간의 코드를 작성해야 합니다.</p>
 <pre><code>make1Dgrid = function(x) {
   rg = grDevices::extendrange(x)
   seq(from = rg[1], to = rg[2], length.out = 100)
 }__</code></pre>
-<p>Set up the points for prediction, a \(100 \) grid that covers the data range.</p>
+<p>데이터 범위를 커버하는 (100 ) 그리드인 예측용 점들을 설정합니다.</p>
 <pre><code>diabetes_grid = with(diabetes,
   expand.grid(sspg = make1Dgrid(sspg),
-              glucose = make1Dgrid(glucose)))__</code></pre>
-<p>Do the predictions.</p>
+              glucose = make1Dgrid(glucose)))</code></pre>
+<p>예측을 수행합니다.</p>
 <pre><code>diabetes_grid$ghat =
   predict(diabetes_lda, newdata = diabetes_grid)$class __</code></pre>
-<p>The group centers.</p>
+<p>그룹 중심입니다.</p>
 <pre><code>centers = diabetes_lda$means __</code></pre>
-<p>Compute the ellipse. We start from a unit circle (approximated by a polygon with 360 sides) and apply the corresponding affine transformation from the LDA output.</p>
+<p>타원을 계산합니다. 단위원(360개의 변을 가진 다각형으로 근사)에서 시작하여 LDA 출력의 해당 아핀 변환(affine transformation)을 적용합니다.</p>
 <pre><code>unitcircle = exp(1i * seq(0, 2*pi, length.out = 360)) |&gt;
           (\(z) cbind(Re(z), Im(z)))() 
 ellipse = unitcircle %*% solve(diabetes_lda$scaling) |&gt; as_tibble()__</code></pre>
-<p>All three ellipses, one for each group center.</p>
+<p>세 개의 타원 모두, 각 그룹 중심에 하나씩입니다.</p>
 <pre><code>library("dplyr")
 ellipses = lapply(rownames(centers), function(gr) {
-  mutate(ellipse,
+  mutate(ellipse, 
      sspg    = sspg    + centers[gr, "sspg"],
      glucose = glucose + centers[gr, "glucose"],
      group   = gr)
 }) |&gt; bind_rows()__</code></pre>
-<p>Now we are ready to plot (Figure 12.6).</p>
+<p>이제 그릴 준비가 되었습니다 (그림 12.6).</p>
 <pre><code>ggdb + geom_raster(aes(fill = ghat),
             data = diabetes_grid, alpha = 0.25, interpolate = TRUE) +
     geom_point(data = as_tibble(centers), pch = "+", size = 8) +
     geom_path(aes(colour = group), data = ellipses) +
     scale_x_continuous(expand = c(0, 0)) +
     scale_y_continuous(expand = c(0, 0))__</code></pre>
-<p><a href="12-chap_files/figure-html/fig-modeldiabetes-1-1.png &quot;Figure 12.6: As Figure fig-scatterdiabetes-1, with the classification regions from the LDA model shown. The three ellipses represent the class centers and the covariance matrix of the LDA model; note that there is only one covariance matrix, which is the same for all three classes. Therefore also the sizes and orientations of the ellipses are the same for the three classes, only their centers differ. They represent contours of equal class membership probability.&quot;"><img src="12-chap_files/figure-html/fig- modeldiabetes-1-1.png" class="img-fluid"></a></p>
-<p>Figure 12.6: As Figure 12.5, with the classification regions from the LDA model shown. The three ellipses represent the class centers and the covariance matrix of the LDA model; note that there is only one covariance matrix, which is the same for all three classes. Therefore also the sizes and orientations of the ellipses are the same for the three classes, only their centers differ. They represent contours of equal class membership probability.</p>
+<p><a href="12-chap_files/figure-html/fig-modeldiabetes-1-1.png" title="그림 12.6: 그림 12.5와 동일하지만, LDA 모델의 분류 영역이 표시되어 있습니다. 세 개의 타원은 클래스 중심과 LDA 모델의 공분산 행렬을 나타냅니다. 공분산 행렬은 단 하나뿐이며 세 클래스 모두에 대해 동일하다는 점에 유의하십시오. 따라서 타원의 크기와 방향도 세 클래스 모두에 대해 동일하며 중심만 다릅니다. 이들은 동일한 클래스 멤버십 확률의 등고선을 나타냅니다."><img src="12-chap_files/figure-html/fig-modeldiabetes-1-1.png" class="img-fluid"></a></p>
+<p>그림 12.6: 그림 12.5와 동일하지만, LDA 모델의 분류 영역이 표시되어 있습니다. 세 개의 타원은 클래스 중심과 LDA 모델의 공분산 행렬을 나타냅니다. 공분산 행렬은 단 하나뿐이며 세 클래스 모두에 대해 동일하다는 점에 유의하십시오. 따라서 타원의 크기와 방향도 세 클래스 모두에 대해 동일하며 중심만 다릅니다. 이들은 동일한 클래스 멤버십 확률의 등고선을 나타냅니다.</p>
 <p>__</p>
-<p>Question 12.2</p>
-<p>Why is the boundary between the prediction regions for <em>chemical</em> and <em>overt</em> not perpendicular to the line between the group centers?</p>
+<p>질문 12.2</p>
+<p><em>chemical</em> 과 <em>overt</em> 사이의 예측 영역 경계가 그룹 중심 사이의 선과 수직이 아닌 이유는 무엇입니까?</p>
 <p>__</p>
-<p>Solution</p>
+<p>해결책</p>
 <p>__</p>
-<p>The boundaries would be perpendicular if the ellipses were circles. In general, a boundary is tangential to the contours of equal class probabilities, and due the elliptic shape of the contours, a boundary is in general not perpendicular to the line between centers.</p>
+<p>타원이 원이라면 경계는 수직일 것입니다. 일반적으로 경계는 동일 클래스 확률의 등고선에 접하며, 등고선의 타원 형태로 인해 경계는 일반적으로 중심 사이의 선과 수직이 아닙니다.</p>
 <p>__</p>
-<p>Question 12.3</p>
-<p>How confident would you be about the predictions in those areas of the 2D plane that are far from all of the cluster centers?</p>
+<p>질문 12.3</p>
+<p>모든 군집 중심에서 멀리 떨어진 2D 평면 영역에서의 예측에 대해 얼마나 확신할 수 있습니까?</p>
 <p>__</p>
-<p>Solution</p>
+<p>해결책</p>
 <p>__</p>
-<p>Predictions that are far from any cluster center should be assessed critically, as this amounts to an extrapolation into regions where the LDA model may not be very good and/or there may be no training data nearby to support the prediction. We could use the distance to the nearest center as a measure of confidence in the prediction for any particular point; although we will see that resampling and cross-validation based methods offer more generic and usually more reliable measures.</p>
+<p>어떤 군집 중심에서도 멀리 떨어진 예측은 비판적으로 평가해야 합니다. 이는 LDA 모델이 좋지 않을 수 있거나 예측을 뒷받침할 훈련 데이터가 근처에 없을 수 있는 영역으로의 외삽(extrapolation)에 해당하기 때문입니다. 가장 가까운 중심까지의 거리를 특정 지점에 대한 예측 신뢰도의 척도로 사용할 수 있습니다. 그러나 리샘플링 및 교차 검증 기반 방법이 더 일반적이고 보통 더 신뢰할 수 있는 척도를 제공한다는 것을 보게 될 것입니다.</p>
 <p>__</p>
-<p>Question 12.4</p>
-<p>Why is the boundary between the prediction regions for <em>normal</em> and <em>chemical</em> not half-way between the centers, but shifted in favor of <em>normal</em>? Hint: have a look at the <code>prior</code> argument of <code>lda</code>. Try again with uniform prior.</p>
+<p>질문 12.4</p>
+<p><em>normal</em> 과 <em>chemical</em> 사이의 예측 영역 경계가 중심 사이의 중간이 아니라 <em>normal</em> 에 유리하게 이동된 이유는 무엇입니까? 힌트: <code>lda</code>의 <code>prior</code> 인수를 살펴보세요. 균일 사전 확률(uniform prior)로 다시 시도해 보세요.</p>
 <p>__</p>
-<p>Solution</p>
+<p>해결책</p>
 <p>__</p>
-<p>The result of the following code chunk is shown in Figure 12.7. The suffix <code>_up</code> is short for “uniform prior”.</p>
+<p>다음 코드 청크의 결과는 그림 12.7에 나와 있습니다. 접미사 <code>_up</code>은 “uniform prior”의 줄임말입니다.</p>
 <pre><code>diabetes_up = lda(group ~ sspg + glucose, data = diabetes,
   prior = (\(n) rep(1/n, n)) (nlevels(diabetes$group)))
 
@@ -481,7 +465,7 @@ stopifnot(all.equal(diabetes_up$means, diabetes_lda$means))
 
 ellipse_up  = unitcircle %*% solve(diabetes_up$scaling) |&gt; as_tibble()
 ellipses_up = lapply(rownames(centers), function(gr) {
-  mutate(ellipse_up,
+  mutate(ellipse_up, 
      sspg    = sspg    + centers[gr, "sspg"],
      glucose = glucose + centers[gr, "glucose"],
      group   = gr)
@@ -493,21 +477,21 @@ ggdb + geom_raster(aes(fill = ghat_up),
     geom_path(aes(colour = group), data = ellipses_up) +
     scale_x_continuous(expand = c(0, 0)) +
     scale_y_continuous(expand = c(0, 0))__</code></pre>
-<p><a href="12-chap_files/figure-html/fig-diabetes-lda-uniform- prior-1-1.png" title="Figure 12.7: As Figure fig-modeldiabetes-1, but with uniform class priors."><img src="12-chap_files/figure-html/fig-diabetes-lda-uniform- prior-1-1.png" class="img-fluid"></a></p>
-<p>Figure 12.7: As Figure 12.6, but with uniform class priors.</p>
-<p>The <code>stopifnot</code> line confirms that the class centers are the same, as they are independent of the prior. The joint covariance is not.</p>
+<p><a href="12-chap_files/figure-html/fig-diabetes-lda-uniform-prior-1-1.png" title="그림 12.7: 그림 12.6과 동일하지만, 균일 클래스 사전 확률을 사용했습니다."><img src="12-chap_files/figure-html/fig-diabetes-lda-uniform-prior-1-1.png" class="img-fluid"></a></p>
+<p>그림 12.7: 그림 12.6과 동일하지만, 균일 클래스 사전 확률을 사용했습니다.</p>
+<p><code>stopifnot</code> 라인은 클래스 중심이 사전 확률과 독립적이기 때문에 동일함을 확인해 줍니다. 결합 공분산은 그렇지 않습니다.</p>
 <p>__</p>
-<p>Question 12.5</p>
-<p>Figures 12.6 and 12.7 show both the fitted LDA model, through the ellipses, and the prediction regions, through the area coloring. What part of this visualization is generic for all sorts of classification methods, what part is method-specific?</p>
+<p>질문 12.5</p>
+<p>그림 12.6과 12.7은 타원을 통한 적합된 LDA 모델과 영역 색칠을 통한 예측 영역을 모두 보여줍니다. 이 시각화의 어떤 부분이 모든 종류의 분류 방법에 대해 일반적이며, 어떤 부분이 방법 특정적입니까?</p>
 <p>__</p>
-<p>Solution</p>
+<p>해결책</p>
 <p>__</p>
-<p>The prediction regions can be shown for any classification method, including a “black box” method. The cluster centers and ellipses in Figures 12.6 and 12.7 are method-specific.</p>
+<p>예측 영역은 “블랙박스” 방법을 포함한 모든 분류 방법에 대해 표시될 수 있습니다. 그림 12.6과 12.7의 군집 중심과 타원은 방법 특정적입니다.</p>
 <p>__</p>
-<p>Question 12.6</p>
-<p>What is the difference in the prediction accuracy if we use all 5 variables instead of just <code>glucose</code> and <code>sspg</code>?</p>
+<p>질문 12.6</p>
+<p><code>glucose</code>와 <code>sspg</code>만 사용하는 대신 5개의 변수를 모두 사용하면 예측 정확도에 어떤 차이가 있습니까?</p>
 <p>__</p>
-<p>Solution</p>
+<p>해결책</p>
 <p>__</p>
 <pre><code>diabetes_lda5 = lda(group ~ rw + fpg + glucose + sspg + insulin, data = diabetes)
 diabetes_lda5 __
@@ -556,780 +540,14 @@ mean(ghat5 != diabetes$group)__
 [1] 0.09655172</code></pre>
 <p>__</p>
 <p>Question 12.7</p>
-<p>Instead of approximating the prediction regions by classification from a grid of points, compute the separating lines explicitly from the linear determinant coefficients.</p>
+<p>점 그리드로부터 분류하여 예측 영역을 근사하는 대신, 선형 판별 계수로부터 구분선을 명시적으로 계산하세요.</p>
 <p>__</p>
 <p>Solution</p>
 <p>__</p>
-<p>See Section 4.3, Equation (4.10) in (<a href="16-chap.html#ref-HastieTibshiraniFriedman">Hastie, Tibshirani, and Friedman 2008</a>).</p>
+<p>(<a href="16-chap.html#ref-HastieTibshiraniFriedman">Hastie, Tibshirani, and Friedman 2008</a>)의 4.3절, 식 (4.10)을 참조하십시오.</p>
+
+
 </section>
-<section id="predicting-embryonic-cell-state-from-gene-expression" class="level3" data-number="14.2.2">
-<h3 data-number="14.2.2" class="anchored" data-anchor-id="predicting-embryonic-cell-state-from-gene-expression"><span class="header-section-number">14.2.2</span> 12.3.2 Predicting embryonic cell state from gene expression</h3>
-<p>Assume that we already know that the four genes <em>FN1</em> , <em>TIMD2</em> , <em>GATA4</em> and <em>SOX7</em> are relevant to the classification task4. We want to build a classifier that predicts the developmental time (embryonic days: E3.25, E3.5, E4.5). We load the data and select four corresponding probes.</p>
-<p>4 Later in this chapter we will see methods that can drop this assumption and screen all available features.</p>
-<pre><code>library("Hiiragi2013")__
-
-
-In chunk 'loadHiiragi2': Warning: replacing previous import 'boot::logit' by 'gtools::logit' whenloading 'Hiiragi2013'
-
-
-In chunk 'loadHiiragi2': Warning: replacing previous import 'boot::inv.logit' by 'gtools::inv.logit'when loading 'Hiiragi2013'
-
-
-data("x")
-probes = c("1426642_at", "1418765_at", "1418864_at", "1416564_at")
-embryoCells = t(Biobase::exprs(x)[probes, ]) |&gt; as_tibble() |&gt;
-  mutate(Embryonic.day = x$Embryonic.day) |&gt;
-  dplyr::filter(x$genotype == "WT")__</code></pre>
-<p>We can use the Bioconductor annotation package associated with the microarray to verify that the probes correspond to the intended genes.</p>
-<pre><code>annotation(x)__
-
-
-[1] "mouse4302"
-
-
-library("mouse4302.db")
-anno = AnnotationDbi::select(mouse4302.db, keys = probes,
-                             columns = c("SYMBOL", "GENENAME"))
-anno __
-
-
-     PROBEID SYMBOL                                            GENENAME
-1 1426642_at    Fn1                                       fibronectin 1
-2 1418765_at  Timd2 T cell immunoglobulin and mucin domain containing 2
-3 1418864_at  Gata4                              GATA binding protein 4
-4 1416564_at   Sox7                SRY (sex determining region Y)-box 7
-
-
-mt = match(anno$PROBEID, colnames(embryoCells))
-colnames(embryoCells)[mt] = anno$SYMBOL __</code></pre>
-<p>Now we are ready to visualize the data in a pairs plot (Figure 12.8).</p>
-<pre><code>library("GGally")
-ggpairs(embryoCells, mapping = aes(col = Embryonic.day),
-  columns = anno$SYMBOL, upper = list(continuous = "points"))__</code></pre>
-<p><a href="12-chap_files/figure-html/fig- HiiragiFourGenesPairs-1-1.png" title="Figure 12.8: Expression values of the discriminating genes, with the prediction target Embryonic.day shown by color."><img src="12-chap_files/figure-html/fig- HiiragiFourGenesPairs-1-1.png" class="img-fluid"></a></p>
-<p>Figure 12.8: Expression values of the discriminating genes, with the prediction target Embryonic.day shown by color.</p>
-<p>We can now call <code>lda</code> on these data. The linear combinations <code>LD1</code> and <code>LD2</code> that serve as discriminating variables are given in the slot <code>ed_lda$scaling</code> of the output from <code>lda</code>.</p>
-<pre><code>ec_lda = lda(Embryonic.day ~ Fn1 + Timd2 + Gata4 + Sox7,
-             data = embryoCells)
-round(ec_lda$scaling, 1)__
-
-
-       LD1  LD2
-Fn1   -0.2  0.4
-Timd2  0.5  0.0
-Gata4 -0.1  0.6
-Sox7  -0.7 -0.5</code></pre>
-<p>For the visualization of the learned model in Figure 12.9, we need to build the prediction regions and their boundaries by expanding the grid in the space of the two new coordinates LD1 and LD2.</p>
-<pre><code>ec_rot = predict(ec_lda)$x |&gt; as_tibble() |&gt;
-           mutate(ed = embryoCells$Embryonic.day)
-ec_lda2 = lda(ec_rot[, 1:2], predict(ec_lda)$class)
-ec_grid = with(ec_rot, expand.grid(
-  LD1 = make1Dgrid(LD1),
-  LD2 = make1Dgrid(LD2)))
-ec_grid$edhat = predict(ec_lda2, newdata = ec_grid)$class
-ggplot() +
-  geom_point(aes(x = LD1, y = LD2, colour = ed), data = ec_rot) +
-  geom_raster(aes(x = LD1, y = LD2, fill = edhat),
-            data = ec_grid, alpha = 0.4, interpolate = TRUE) +
-  scale_x_continuous(expand = c(0, 0)) +
-  scale_y_continuous(expand = c(0, 0)) +
-  coord_fixed()__</code></pre>
-<p><a href="12-chap_files/figure- html/fig-edcontour-1-1.png" title="Figure 12.9: LDA classification regions for Embryonic.day."><img src="12-chap_files/figure-html/fig-edcontour-1-1.png" class="img-fluid"></a></p>
-<p>Figure 12.9: LDA classification regions for Embryonic.day.</p>
-<p>__</p>
-<p>Question 12.8</p>
-<p>Repeat these analyses using quadratic discriminant analysis (<code>qda</code>). What difference do you see in the shape of the boundaries?</p>
-<p>__</p>
-<p>Solution</p>
-<p>__</p>
-<p>See code below and Figure 12.10.</p>
-<pre><code>library("gridExtra")
-
-ec_qda = qda(Embryonic.day ~ Fn1 + Timd2 + Gata4 + Sox7,
-             data = embryoCells)
-
-variables = colnames(ec_qda$means)
-pairs = combn(variables, 2)
-lapply(seq_len(ncol(pairs)), function(i) {
-  grid = with(embryoCells,
-    expand.grid(x = make1Dgrid(get(pairs[1, i])),
-                y = make1Dgrid(get(pairs[2, i])))) |&gt;
-    `colnames&lt;-`(pairs[, i])
-
-  for (v in setdiff(variables, pairs[, i]))
-    grid[[v]] = median(embryoCells[[v]])
-
-  grid$edhat = predict(ec_qda, newdata = grid)$class
-
-  x &lt;- pairs[1,i]
-  y &lt;- pairs[2,i]
-  ggplot() + 
-    geom_point(
-      data = embryoCells,
-      aes(x = .data[[x]], y = .data[[y]], colour = Embryonic.day)
-    ) +
-    geom_raster(
-      aes(x = .data[[x]], y = .data[[y]], fill = edhat),
-      data = grid, alpha = 0.4, interpolate = TRUE
-    ) +
-    scale_x_continuous(expand = c(0, 0)) +
-    scale_y_continuous(expand = c(0, 0)) +
-    coord_fixed() +
-    if (i != ncol(pairs)) theme(legend.position = "none")
-}) |&gt; (\(g) grid.arrange(grobs = g, ncol = 2))()__</code></pre>
-<p><a href="12-chap_files/figure- html/fig-qdamouse-1-1.png" title="Figure 12.10: QDA for the mouse cell data. Shown are all pairwise plots of the four features. In each plot, the other two features are set to the median."><img src="12-chap_files/figure-html/fig-qdamouse-1-1.png" class="img-fluid"></a></p>
-<p>Figure 12.10: QDA for the mouse cell data. Shown are all pairwise plots of the four features. In each plot, the other two features are set to the median.</p>
-<p>__</p>
-<p>Question 12.9</p>
-<p>What happens if you call <code>lda</code> or <code>qda</code> with a lot more genes, say the first 1000, in the Hiiragi dataset?</p>
-<p>__</p>
-<p>Solution</p>
-<p>__</p>
-<pre><code>lda(t(Biobase::exprs(x))[, 1:1000], x$Embryonic.day)__
-
-
- warnings()
-qda(t(Biobase::exprs(x))[, 1:1000], x$Embryonic.day)__
-
-
-Error in qda.default(x, grouping, ...): some group is too small for 'qda'</code></pre>
-<p>The <code>lda</code> function manages to fit a model, but complains (with the warning) about the fact that there are more variables than replicates, which means that the variables are not linearly independent, and thus are redundant of each other. The <code>qda</code> function aborts with an error, since the QDA model with so many parameters cannot be fitted from the available data (at least, without making further assumptions, such as some sort of regularization, which it is not equipped for).</p>
-</section>
-</section>
-<section id="machine-learning-vs-rote-learning" class="level2" data-number="14.3">
-<h2 data-number="14.3" class="anchored" data-anchor-id="machine-learning-vs-rote-learning"><span class="header-section-number">14.3</span> 12.4 Machine learning vs rote learning</h2>
-<p>Computers are really good at memorizing facts. In the worst case, a machine learning algorithm is a roundabout way of doing this5. The central goal in statistical learning, however, is <em>generalizability</em>. We want an algorithm that is able to generalize, i.e., interpolate and extrapolate from given data to make good predictions about future data.</p>
-<p>5 The not-so roundabout way is database technologies.</p>
-<p>Let’s look at the following example. We generate random data (<code>rnorm</code>) for <code>n</code> objects, with different numbers of features (given by <code>p</code>). We train a LDA on these data and compute the <strong>misclassification rate</strong> , i.e., the fraction of times the prediction is wrong (<code>pred != resp</code>).</p>
-<pre><code>p = 2:21
-n = 20
-
-mcl = lapply(p, function(pp) {
-  replicate(100, {
-    xmat = matrix(rnorm(n * pp), nrow = n)
-    resp = sample(c("apple", "orange"), n, replace = TRUE)
-    fit  = lda(xmat, resp)
-    pred = predict(fit)$class
-    mean(pred != resp)
-  }) |&gt; mean() |&gt; (\(x) tibble(mcl = x, p = pp))()
-}) |&gt; bind_rows()__
-
-
- ggplot(mcl, aes(x = p, y = mcl)) + 
-  geom_line() + geom_point() +
-  ylab("Misclassification rate")__</code></pre>
-<p><a href="12-chap_files/figure-html/fig-learnbyheart-1-1.png &quot;Figure 12.11: Misclassification rate of LDA applied to random data. While the number of observations n is held constant (at 20), we are increasing the number of features p starting from 2 up to 21. The misclassification rate becomes almost zero as p approaches 20. The LDA model becomes so elaborate and over-parameterized that it manages to learn the random labels “by heart”. (As p becomes even larger, the “performance” degrades again somewhat, apparently due to numerical properties of the lda implementation used here.)&quot;"><img src="12-chap_files/figure-html/fig- learnbyheart-1-1.png" class="img-fluid"></a></p>
-<p>Figure 12.11: Misclassification rate of LDA applied to random data. While the number of observations <code>n</code> is held constant (at 20), we are increasing the number of features <code>p</code> starting from 2 up to 21. The misclassification rate becomes almost zero as <code>p</code> approaches 20. The LDA model becomes so elaborate and over-parameterized that it manages to learn the random labels “by heart”. (As <code>p</code> becomes even larger, the “performance” degrades again somewhat, apparently due to numerical properties of the <code>lda</code> implementation used here.)</p>
-<p>__</p>
-<p>Question 12.10</p>
-<p>What is the purpose of the <code>replicate</code> loop in the above code? What happens if you omit it (or replace the 100 by 1)?</p>
-<p>__</p>
-<p>Solution</p>
-<p>__</p>
-<p>For each single replicate, the curve is a noisier version of Figure 12.11. Averaging the measured misclassifications rate over 100 replicates makes the estimate more stable. We can do this since we are working with simulated data.</p>
-<p>Figure 12.11 seems to imply that we can perfectly predict random labels from random data, if we only fit a complex enough model, i.e., one with many parameters. How can we overcome such an absurd conclusion? The problem with the above code is that the model performance is evaluated on the same data on which it was trained. This generally leads to positive bias, as you see in this crass example. How can we overcome this problem? The key idea is to assess model performance on different data than those on which the model was trained.</p>
-<section id="cross-validation" class="level3" data-number="14.3.1">
-<h3 data-number="14.3.1" class="anchored" data-anchor-id="cross-validation"><span class="header-section-number">14.3.1</span> 12.4.1 Cross-validation</h3>
-<p>A naive approach might be to split the data in two halves, and use the first half for learning (“training”) and the second half for assessment (“testing”). It turns out that this is needlessly variable and needlessly inefficient. It is needlessly variable, since by splitting the data only once, our results can be quite affected by how the split happens to fall. It seems better to do the splitting many times, and average. This will give us more stable results. It is needlessly inefficient, since the performance of machine learning algorithms depends on the number of observations, and the performance measured on half the data is likely6 to be worse than what it is with all the data. For this reason, it is better to use unequal sizes of training and test data. In the extreme case, we’ll use as much as \(n-1\) observations for training, and the remaining one for testing. After we’ve done this likewise for all observations, we can average our performance metric. This is called <strong>leave- one-out cross-validation</strong>.</p>
-<p>6 Unless we have such an excess of data that it doesn’t matter.</p>
-<p><img src="imgs/book_icon.png" class="img-fluid"></p>
-<p>See Chapter <em>Model Assessment and Selection</em> in the book by Hastie, Tibshirani, and Friedman (<a href="16-chap.html#ref-HastieTibshiraniFriedman">2008</a>) for further discussion on these trade-offs.</p>
-<p>An alternative is <strong>\(k\) -fold cross-validation</strong>, where the observations are repeatedly split into a training set of size of around \(n(k-1)/k\) and a test set of size of around \(n/k\). Both alternatives have pros and contras, and there is not a universally best choice. An advantage of leave- one-out is that the amount of data used for training is close to the maximally available data; this is especially important if the sample size is limiting and “every little matters” for the algorithm. A drawback of leave-one-out is that the training sets are all very similar, so they may not model sufficiently well the kind of sampling changes to be expected if a new dataset came along. For large \(n\), leave-one-out cross-validation can be needlessly time-consuming.</p>
-<pre><code>estimate_mcl_loocv = function(x, resp) {
-  vapply(seq_len(nrow(x)), function(i) {
-    fit  = lda(x[-i, ], resp[-i])
-    ptrn = predict(fit, newdata = x[-i,, drop = FALSE])$class
-    ptst = predict(fit, newdata = x[ i,, drop = FALSE])$class
-    c(train = mean(ptrn != resp[-i]), test = (ptst != resp[i]))
-  }, FUN.VALUE = numeric(2)) |&gt; rowMeans() |&gt; t() |&gt; as_tibble()
-}
-
-xmat = matrix(rnorm(n * last(p)), nrow = n)
-resp = sample(c("apple", "orange"), n, replace = TRUE)
-
-mcl = lapply(p, function(k) {
-  estimate_mcl_loocv(xmat[, 1:k], resp)
-}) |&gt; bind_rows() |&gt; data.frame(p) |&gt; melt(id.var = "p")__
-
-
- ggplot(mcl, aes(x = p, y = value, col = variable)) + geom_line() +
-  geom_point() + ylab("Misclassification rate")__</code></pre>
-<p><a href="12-chap_files/figure- html/fig-mclcv-1-1.png" title="Figure 12.12: Cross-validation: the misclassification rate of LDA applied to random data, when evaluated on test data that were not used for learning, hovers around 0.5 independent of p. The misclassification rate on the training data is also shown. It behaves similar to what we already saw in Figure fig-learnbyheart-1."><img src="12-chap_files/figure-html/fig-mclcv-1-1.png" class="img-fluid"></a></p>
-<p>Figure 12.12: Cross-validation: the misclassification rate of LDA applied to random data, when evaluated on test data that were not used for learning, hovers around 0.5 independent of <code>p</code>. The misclassification rate on the training data is also shown. It behaves similar to what we already saw in Figure 12.11.</p>
-<p>The result is show in Figure 12.12.</p>
-<p>__</p>
-<p>Question 12.11</p>
-<p>Why are the curves in Figure 12.12 more variable (“wiggly”) than in Figure 12.11? How can you overcome this?</p>
-<p>__</p>
-<p>Solution</p>
-<p>__</p>
-<p>Only one dataset (<code>xmat</code>, <code>resp</code>) was used to calculate Figure 12.12, whereas for Figure 12.11, we had the data generated within a <code>replicate</code> loop. You could similarly extend the above code to average the misclassification rate curves over many replicate simulated datasets.</p>
-</section>
-<section id="the-curse-of-dimensionality" class="level3" data-number="14.3.2">
-<h3 data-number="14.3.2" class="anchored" data-anchor-id="the-curse-of-dimensionality"><span class="header-section-number">14.3.2</span> 12.4.2 The curse of dimensionality</h3>
-<p>In Section 12.4.1 we have seen overfitting and cross-validation on random data, but how does it look if there is in fact a relevant class separation?</p>
-<pre><code>p   = 2:20
-mcl = replicate(100, {
-  xmat = matrix(rnorm(n * last(p)), nrow = n)
-  resp = sample(c("apple", "orange"), n, replace = TRUE)
-  xmat[, 1:6] = xmat[, 1:6] + as.integer(factor(resp))
-
-  lapply(p, function(k) {
-    estimate_mcl_loocv(xmat[, 1:k], resp)
-  }) |&gt; bind_rows() |&gt; cbind(p = p) |&gt; melt(id.var = "p")
-}, simplify = FALSE) |&gt; bind_rows()__
-
-
-mcl = group_by(mcl, p, variable) |&gt; summarise(value = mean(value))
-
-ggplot(mcl, aes(x = p, y = value, col = variable)) + geom_line() +
-   geom_point() + ylab("Misclassification rate")__</code></pre>
-<p><a href="12-chap_files/figure- html/fig-curseofdim-1.png" title="Figure 12.13: As we increase the number of features included in the model, the misclassification rate initially improves; as we start including more and more irrelevant features, it increases again, as we are fitting noise."><img src="12-chap_files/figure-html/fig-curseofdim-1.png" class="img-fluid"></a></p>
-<p>Figure 12.13: As we increase the number of features included in the model, the misclassification rate initially improves; as we start including more and more irrelevant features, it increases again, as we are fitting noise.</p>
-<p><a href="imgs/BiasVarianceTradeoff.png &quot;Figure 12.14: Idealized version of Figure fig-curseofdim, from @HastieTibshiraniFriedman. A recurrent goal in machine learning is finding the sweet spot in the variance <- bias trade-off.&quot;"><img src="imgs/BiasVarianceTradeoff.png" class="img-fluid"></a></p>
-<p>Figure 12.14: Idealized version of Figure 12.13, from Hastie, Tibshirani, and Friedman (<a href="16-chap.html#ref-HastieTibshiraniFriedman">2008</a>). A recurrent goal in machine learning is finding the sweet spot in the variance &lt;- bias trade- off.</p>
-<p>The result is shown in Figure 12.13. The group centers are the vectors (in \(^{20}\)) given by the coordinates \((1, 1, 1, 1, 1, 1, 0, 0, 0, …)\) (apples) and \((2, 2, 2, 2, 2, 2, 0, 0, 0, …)\) (oranges), and the optimal decision boundary is the hyperplane orthogonal to the line between them. For \(p\) smaller than \(6\), the decision rule cannot reach this hyperplane – it is biased. As a result, the misclassification rate is suboptimal, and it decreases with \(p\). But what happens for \(p\) larger than \(6\)? The algorithm is, in principle, able to model the optimal hyperplane, and it should not be distracted by the additional features. The problem is that it is. The more additional features enter the dataset, the higher the probability that one or more of them happen to fall in a way that they <em>look like</em> good, discriminating features in the training data – only to mislead the classifier and degrade its performance in the test data. Shortly we’ll see how to use penalization to (try to) control this problem.</p>
-<p>The term <strong>curse of dimensionality</strong> was coined by Bellman (<a href="16-chap.html#ref-Bellman:1961">1961</a>). It refers to the fact that high- dimensional spaces are very hard, if not impossible, to sample thoroughly: for instance, to cover a 2-dimensional square of side length 1 with grid points that are 0.1 apart, we need \(10^2=100\) points. In 100 dimensions, we need \(10^{100}\) – which is more than <a href="https://en.wikipedia.org/wiki/Eddington_number">the number of protons in the universe</a>. In genomics, we often aim to fit models to data with thousands of features. Also our intuitions about distances between points or about the relationship between a volume and its surface break down in a high-dimensional settings. We’ll explore some of the weirdnesses of high-dimensional spaces in the next few questions.</p>
-<p>__</p>
-<p>Question 12.12</p>
-<p>Assume you have a dataset with 1 000 000 data points in \(p\) dimensions. The data are uniformly distributed in the unit hybercube (i.e., all features lie in the interval \([0,1]\)). What’s the side length of a hybercube that can be expected to contain just 10 of the points, as a function of \(p\)?</p>
-<p>__</p>
-<p>Solution</p>
-<p>__</p>
-<p>See Figure 12.15.</p>
-<pre><code>sideLength = function(p, pointDensity = 1e6, pointsNeeded = 10)
-  (pointsNeeded / pointDensity) ^ (1 / p)
-ggplot(tibble(p = 1:400, sideLength = sideLength(p)),
-       aes(x = p, y = sideLength)) + geom_line(col = "red") +
-  geom_hline(aes(yintercept = 1), linetype = 2)__</code></pre>
-<p><a href="12-chap_files/figure-html/fig-cursedimans1-1-1.png &quot;Figure 12.15: Side length of a p-dimensional hybercube expected to contain 10 points out of 1 million uniformly distributed ones, as a function of the p. While for p=1, this length is conveniently small, namely 10/10^6=10^{-5}, for larger p it approaches 1, i.,e., becomes the same as the range of each the features. This means that a “local neighborhood” of 10 points encompasses almost the same data range as the whole dataset.&quot;"><img src="12-chap_files/figure-html/fig- cursedimans1-1-1.png" class="img-fluid"></a></p>
-<p>Figure 12.15: Side length of a \(p\)-dimensional hybercube expected to contain 10 points out of 1 million uniformly distributed ones, as a function of the \(p\). While for \(p=1\), this length is conveniently small, namely \(10/10<sup>6=10</sup>{-5}\), for larger \(p\) it approaches 1, i.,e., becomes the same as the range of each the features. This means that a “local neighborhood” of 10 points encompasses almost the same data range as the whole dataset.</p>
-<p>Next, let’s look at the relation between inner regions of the feature space versus its boundary regions. Generally speaking, prediction at the boundaries of feature space is more difficult than in its interior, as it tends to involve extrapolation, rather than interpolation. In the next question you’ll see how this difficulty explodes with feature space dimension.</p>
-<p>__</p>
-<p>Question 12.13</p>
-<p>What fraction of a unit cube’s total volume is closer than 0.01 to any of its surfaces, as a function of the dimension?</p>
-<p>__</p>
-<p>Solution</p>
-<p>__</p>
-<p>See code below and Figure 12.16.</p>
-<pre><code>tibble(
-  p = 1:400,
-  volOuterCube = 1 ^ p,
-  volInnerCube = 0.98 ^ p,  # 0.98 = 1 - 2 * 0.01
-  `V(shell)` = volOuterCube - volInnerCube) |&gt;
-ggplot(aes(x = p, y =`V(shell)`)) + geom_line(col = "blue")__</code></pre>
-<p><a href="12-chap_files/figure-html/fig-cursedimans2-1-1.png &quot;Figure 12.16: Fraction of a unit cube’s total volume that is in its “shell” (here operationalised as those points that are closer than 0.01 to its surface) as a function of the dimension p.&quot;"><img src="12-chap_files/figure-html/fig- cursedimans2-1-1.png" class="img-fluid"></a></p>
-<p>Figure 12.16: Fraction of a unit cube’s total volume that is in its “shell” (here operationalised as those points that are closer than 0.01 to its surface) as a function of the dimension \(p\).</p>
-<p>__</p>
-<p>Question 12.14</p>
-<p>What is the coefficient of variation (ratio of standard deviation over average) of the distance between two randomly picked points in the unit hypercube, as a function of the dimension?</p>
-<p>__</p>
-<p>Solution</p>
-<p>__</p>
-<p>We solve this one by simulation. We generate <code>n</code> pairs of random points in the hypercube (<code>x1</code>, <code>x2</code>) and compute their Euclidean distances. See Figure 12.17. This result can also be predicted from the central limit theorem.</p>
-<pre><code>n = 1000
-df = tibble(
-  p = round(10 ^ seq(0, 4, by = 0.25)),
-  cv = vapply(p, function(k) {
-    x1 = matrix(runif(k * n), nrow = n)
-    x2 = matrix(runif(k * n), nrow = n)
-    d = sqrt(rowSums((x1 - x2)^2))
-    sd(d) / mean(d)
-  }, FUN.VALUE = numeric(1)))
-ggplot(df, aes(x = log10(p), y = cv)) + geom_line(col = "orange") +
-  geom_point()__</code></pre>
-<p><a href="12-chap_files/figure-html/fig-cursedimans3-1-1.png &quot;Figure 12.17: Coefficient of variation (CV) of the distance between randomly picked points in the unit hypercube, as a function of the dimension. As the dimension increases, everybody is equally far away from everyone else: there is almost no variation in the distances any more.&quot;"><img src="12-chap_files/figure-html/fig- cursedimans3-1-1.png" class="img-fluid"></a></p>
-<p>Figure 12.17: Coefficient of variation (CV) of the distance between randomly picked points in the unit hypercube, as a function of the dimension. As the dimension increases, everybody is equally far away from everyone else: there is almost no variation in the distances any more.</p>
-</section>
-</section>
-<section id="objective-functions" class="level2" data-number="14.4">
-<h2 data-number="14.4" class="anchored" data-anchor-id="objective-functions"><span class="header-section-number">14.4</span> 12.5 Objective functions</h2>
-<p>We’ve already seen the <strong>misclassification rate</strong> (MCR) used to assess our classification performance in Figures 12.11–12.13. Its population version is defined as</p>
-<p>\[ = , = , \]</p>
-<p>and for a finite sample</p>
-<p>\[ = <em>{i=1}^n 𝟙</em>{ y_i}. \]</p>
-<p>This is not the only choice we could make. Perhaps we care more about the misclassification of apples as oranges than vice versa, and we can reflect this by introducing weights that depend on the type of error made into the sum of Equation 12.2 (or the integral of Equation 12.1). This can get even more elaborate if we have more than two classes. Often we want to see the whole <strong>confusion table</strong> , which we can get via</p>
-<pre><code>table(truth, response)__</code></pre>
-<p>An important special case is binary classification with asymmetric costs – think about, say, a medical test. Here, the <strong>sensitivity</strong> (a.k.a. <strong>true positive rate</strong> or <strong>recall</strong>) is related to the misclassification of healthy as ill, and the <strong>specificity</strong> (or <strong>true negative rate</strong>) depends on the probability of misclassification of ill as healthy. Often, there is a single parameter (e.g., a threshold) that can be moved up and down, allowing a trade- off between sensitivity and specificity (and thus, equivalently, between the two types of misclassification). In those cases, we usually are not content to know the classifier performance at one single choice of threshold, but at many (or all) of them. This leads to <strong>receiver operating characteristic</strong> (<strong>ROC</strong>) or <strong>precision-recall</strong> curves.</p>
-<p>__</p>
-<p>Question 12.15</p>
-<p>What are the exact relationships between the per-class misclassification rates and sensitivity and specificity?</p>
-<p>__</p>
-<p>Solution</p>
-<p>__</p>
-<p>The sensitivity or true positive rate is</p>
-<p>\[ = , \]</p>
-<p>where \(\) is the number of true positives and \(\) the number of all positives. The specificity or true negative rate is</p>
-<p>\[ = , \]</p>
-<p>where \(\) is the number of true negatives and \(\) the number of all negatives. See also <a href="https://en.wikipedia.org/wiki/Sensitivity_and_specificity" class="uri">https://en.wikipedia.org/wiki/Sensitivity_and_specificity</a></p>
-<p>Another cost function can be computed from the <strong>Jaccard index</strong> , which we already saw in <a href="05-chap.html">Chapter 5</a>.</p>
-<p>\[ J(A,B) = , \]</p>
-<p>where \(A\) is the set of observations for which the true class is 1 (\(A=\{i,|,y_i=1\}\)) and \(B\) is the set of observations for which the predicted class is 1. The number \(J\) is between 0 and 1, and when \(J\) is large, it indicates high overlap of the two sets. Note that \(J\) does not depend on the number of observations for which both true and predicted class is 0 – so it is particularly suitable for measuring the performance of methods that try to find rare events.</p>
-<p>We can also consider probabilistic class predictions, which come in the form \((Y,|,X)\). In this case, a possible risk function would be obtained by looking at distances between the true probability distribution and the estimated probability distributions. For two classes, the finite sample version of the \(\) is</p>
-<p>\[ = -_{i=1}^n y_i(_i) + (1 - y_i)(1 - _i), \]</p>
-<p>where \(_i \) is the prediction, and \(y_i\{0,1\}\) is the truth.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="imgs/devil.png" title="Note that the \log\text{loss} will be infinite if a prediction is totally confident (\hat{p}_i is exactly 0 or 1) but wrong."><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
-<figcaption>Note that the \log\text{loss} will be infinite if a prediction is totally confident (\hat{p}_i is exactly 0 or 1) but wrong.</figcaption>
-</figure>
-</div>
-<p>Note that the \(\) will be infinite if a prediction is totally confident (\(_i\) is exactly \(0\) or \(1\)) but wrong.</p>
-<p>For continuous continuous response variables (regression), a natural choice is the <strong>mean squared error</strong> (<strong>MSE</strong>). It is the average squared error,</p>
-<p>\[ = _{i=1}^n ( _i - Y_i )^2. \]</p>
-<p>The population version is defined analogously, by turning the summation into an integral as in Equations 12.1 and 12.2.</p>
-<p>Statisticians call functions like Equations 12.1—12.5 variously (and depending on context and predisposition) <strong>risk function</strong> , <strong>cost function</strong> , <strong>objective function</strong> 7.</p>
-<p>7 There is even an R package dedicated to evaluation of statistical learners called <strong><a href="https://cran.r-project.org/web/packages/metrics/">metrics</a></strong>.</p>
-</section>
-<section id="variancebias-trade-off" class="level2" data-number="14.5">
-<h2 data-number="14.5" class="anchored" data-anchor-id="variancebias-trade-off"><span class="header-section-number">14.5</span> 12.6 Variance–bias trade-off</h2>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="imgs/TargetBias.png" class="img-fluid figure-img"></p>
-<figcaption>Figure&nbsp;12.18&nbsp;(a):</figcaption>
-</figure>
-</div>
-<ol type="a">
-<li></li>
-</ol>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="imgs/TargetVariance.png" class="img-fluid figure-img"></p>
-<figcaption>Figure&nbsp;12.18&nbsp;(b):</figcaption>
-</figure>
-</div>
-<ol start="2" type="a">
-<li></li>
-</ol>
-<p>Figure 12.18: In bull’s eye (a), the estimates are systematically off target, but in a quite reproducible manner. The green segment represents the bias. In bull’s eye (b), the estimates are not biased, as they are centered in the right place, however they have high variance. We can distinguish the two scenarios since we see the result from many shots. If we only had one shot and missed the bull’s eye, we could not easily know whether that’s because of bias or variance.</p>
-<p>An important fact that helps us understand the tradeoffs when picking a statistical learning model is that the MSE is the sum of two terms, and often the choices we can make are such that one of those terms goes down while the other one goes up. The bias measures how different the average of all the different estimates is from the truth, and variance, how much an individual one might scatter from the average value (Figure 12.18). In applications, we often only get one shot, therefore being reliably almost on target can beat being right on the long term average but really off today. The decomposition</p>
-<p>\[ = <em>{} + </em>{} \]</p>
-<p>follows by straightforward algebra.</p>
-<p>When trying to minimize the MSE, it is important to realize that sometimes we can pay the price of a small bias to greatly reduce variance, and thus overall improve MSE. We already encountered shrinkage estimation in <a href="08-chap.html">Chapter 8</a>. In classification (i.e., when we have categorical response variables), different objective functions than the MSE are used, and there is usually no such straightforward decomposition as in Equation 12.6. The good news is that we can usually go even much further than in the case of continuous responses with our trading biases for variance. This is because the discreteness of the response absorbs certain biases (<a href="16-chap.html#ref-friedmanbiasvariance01">Friedman 1997</a>), so that the cost of higher bias is almost zero, while we still get the benefit of better (smaller) variance.</p>
-<section id="penalization" class="level3" data-number="14.5.1">
-<h3 data-number="14.5.1" class="anchored" data-anchor-id="penalization"><span class="header-section-number">14.5.1</span> 12.6.1 Penalization</h3>
-<p>In high-dimensional statistics, we are constantly plagued by variance: there is just not enough data to fit all the possible parameters. One of the most fruitful ideas in high-dimensional statistics is <strong>penalization</strong> : a tool to actively control and exploit the variance-bias tradeoff. Penalization is part of a larger class of regularization methods that are used to ensure stable estimates.</p>
-<p>Although generalization of LDA to high-dimensional settings is possible (<a href="16-chap.html#ref-clemmensen2012sparse">Clemmensen et al.&nbsp;2011</a>; <a href="16-chap.html#ref-witten2011penalized">Witten and Tibshirani 2011</a>), it turns out that logistic regression is a more general approach8, and therefore we’ll now switch to that, using the <strong><a href="https://cran.r-project.org/web/packages/glmnet/">glmnet</a></strong> package.</p>
-<p>8 It fits into the framework of generalized linear models, which we encountered in <a href="08-chap.html">Chapter 8</a>.</p>
-<p>For multinomial—or, for the special case of two classes, binomial—logistic regression models, the posterior log-odds between \(k\) classes and can be written in the form (see the section on <em>Logistic Regression</em> in the book by Hastie, Tibshirani, and Friedman (<a href="16-chap.html#ref- HastieTibshiraniFriedman">2008</a>) for a more complete presentation):</p>
-<p>\[ = ^0_i + _i x, \]</p>
-<p>where \(i=1,…,k-1\) enumerates the different classes and the \(k\)-th class is chosen as a reference. The data matrix \(x\) has dimensions \(np\), where \(n\) is number of observations and \(p\) the number of features. The \(p\)-dimensional vector \(_i\) determines how the classification odds for class \(i\) versus class \(k\) depend on \(x\). The numbers \(^0_i\) are intercepts and depend, among other things, on the classes’ prior probabilities. Instead of the log odds 12.7 (i.e., ratios of class probabilities), we can also write down an equivalent model for the class probabilities themselves, and the fact that we here used the \(k\)-th class as a reference is an arbitrary choice, as the model estimates are equivariant under this choice (<a href="16-chap.html#ref-HastieTibshiraniFriedman">Hastie, Tibshirani, and Friedman 2008</a>). The model is fit by maximising the log-likelihood \((, ^0; x)\), where \(=(<em>1,…,</em>{k-1})\) and analogously for \(^0\).</p>
-<p>So far, so good. But as \(p\) gets larger, there is an increasing chance that some of the estimates go wildly off the mark, due to random sampling happenstances in the data (remember Figure 12.1). This is true even if for each individual coordinate of the vector \(_i\), the error distribution is bounded: the probabilty of there being one coordinate that is in the far tails increases the more coordiates there are, i.e., the larger \(p\) is.</p>
-<p>A related problem can also occur, not in 12.7, but in other, non-linear models, as the model dimension \(p\) increases while the sample size \(n\) remains the same: the likelihood landscape around its maximum becomes increasingly flat, and the maximum-likelihood estimate of the model parameters becomes more and more variable. Eventually, the maximum is no longer a point, but a submanifold, and the maximum likelihood estimate is unidentifiable. Both of these limitations can be overcome with a modification of the objective: instead of maximising the bare log-likelihood, we maximise a penalized version of it,</p>
-<p>\[ = _(, ^0; x) + (), \]</p>
-<p>where \(\) is a real number, and \(\) is a convex function, called the <strong>penalty function</strong>. Popular choices are \(()=||^2\) (<strong>ridge regression</strong>) and \(()=||^1\) (<strong>lasso</strong>).</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="imgs/devil.png" title="Here, |\beta|^\nu=\sum_i\beta_i^\nu is the L_\nu-norm of the vector \beta. Variations are possible, for instead we could include in this summation only some but not all of the elements of \beta; or we could scale different elements differently, for instance based on some prior belief of their scale and importance."><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
-<figcaption>Here, |\beta|<sup>\nu=\sum_i\beta_i</sup>\nu is the L_\nu-norm of the vector \beta. Variations are possible, for instead we could include in this summation only some but not all of the elements of \beta; or we could scale different elements differently, for instance based on some prior belief of their scale and importance.</figcaption>
-</figure>
-</div>
-<p>Here, \(||^=_i<em>i^\) is the \(L</em>\)-norm of the vector \(\). Variations are possible, for instead we could include in this summation only some but not all of the elements of \(\); or we could scale different elements differently, for instance based on some prior belief of their scale and importance.</p>
-<p>In the <strong>elastic net</strong> , ridge and lasso are hybridized by using the penalty function \(()=(1-)||<sup>1+||</sup>2\) with some further parameter \(\). The crux is, of course, how to choose the right \(\), and we will discuss that in the following.</p>
-</section>
-<section id="example-predicting-colon-cancer-from-stool-microbiome-composition" class="level3" data-number="14.5.2">
-<h3 data-number="14.5.2" class="anchored" data-anchor-id="example-predicting-colon-cancer-from-stool-microbiome-composition"><span class="header-section-number">14.5.2</span> 12.6.2 Example: predicting colon cancer from stool microbiome composition</h3>
-<p>Zeller et al.&nbsp;(<a href="16-chap.html#ref-Zeller:MSB:2014">2014</a>) studied metagenome sequencing data from fecal samples of 156 humans that included colorectal cancer patients and tumor-free controls. Their aim was to see whether they could identify biomarkers (presence or abundance of certain taxa) that could help with early tumor detection. The data are available from <a href="https://www.bioconductor.org">Bioconductor</a> through its <strong>ExperimentHub</strong> service under the identifier EH361.</p>
-<pre><code>library("ExperimentHub")
-eh = ExperimentHub()
-zeller = eh[["EH361"]]__
-
-
-table(zeller$disease)__
-
-
-       cancer large_adenoma             n small_adenoma 
-           53            15            61            27 </code></pre>
-<p>__</p>
-<p>Question 12.16</p>
-<p>Explore the <code>eh</code> object to see what other datasets there are.</p>
-<p>__</p>
-<p>Solution</p>
-<p>__</p>
-<p>Type <code>eh</code> into the R prompt and study the output.</p>
-<p>For the following, let’s focus on the normal and cancer samples and set the adenomas aside.</p>
-<pre><code>zellerNC = zeller[, zeller$disease %in% c("n", "cancer")]__</code></pre>
-<p>Before jumping into model fitting, as always it’s a good idea to do some exploration of the data. First, let’s look at the sample annotations. The following code prints the data from three randomly picked samples. (Only looking at the first ones, say with the R function <code>head</code>, is also an option, but may not be representative of the whole dataset).</p>
-<pre><code>pData(zellerNC)[ sample(ncol(zellerNC), 3), ]__
-
-
-                   subjectID age gender bmi country disease tnm_stage
-CCIS50148151ST-4-0    FR-503  87 female  15  france  cancer    t2n1m0
-CCIS16383318ST-4-0    FR-139  61 female  24  france       n      &lt;NA&gt;
-CCIS95097901ST-4-0    FR-696  52   male  24  france       n      &lt;NA&gt;
-                   ajcc_stage localization     fobt wif-1_gene_methylation_test
-CCIS50148151ST-4-0        iii           rc negative                    negative
-CCIS16383318ST-4-0       &lt;NA&gt;         &lt;NA&gt; negative                    negative
-CCIS95097901ST-4-0       &lt;NA&gt;         &lt;NA&gt; negative                    negative
-                     group bodysite ethnicity number_reads
-CCIS50148151ST-4-0     crc    stool     white     54709150
-CCIS16383318ST-4-0 control    stool     white     78085760
-CCIS95097901ST-4-0 control    stool     white     51567166</code></pre>
-<p>Next, let’s explore the feature names:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="imgs/devil.png" title="We define the helper function formatfn to line wrap these long character strings for the available space here."><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
-<figcaption>We define the helper function formatfn to line wrap these long character strings for the available space here.</figcaption>
-</figure>
-</div>
-<p>We define the helper function <code>formatfn</code> to line wrap these long character strings for the available space here.</p>
-<pre><code>formatfn = function(x)
-   gsub("|", "| ", x, fixed = TRUE) |&gt; lapply(strwrap)
-
-rownames(zellerNC)[1:4]__
-
-
-[1] "k__Bacteria"                  "k__Viruses"                  
-[3] "k__Bacteria|p__Firmicutes"    "k__Bacteria|p__Bacteroidetes"
-
-
-rownames(zellerNC)[nrow(zellerNC) + (-2:0)] |&gt; formatfn()__
-
-
-[[1]]
-[1] "k__Bacteria| p__Proteobacteria| c__Deltaproteobacteria|"         
-[2] "o__Desulfovibrionales| f__Desulfovibrionaceae| g__Desulfovibrio|"
-[3] "s__Desulfovibrio_termitidis"                                     
-
-[[2]]
-[1] "k__Viruses| p__Viruses_noname| c__Viruses_noname| o__Viruses_noname|"
-[2] "f__Baculoviridae| g__Alphabaculovirus|"                              
-[3] "s__Bombyx_mori_nucleopolyhedrovirus|"                                
-[4] "t__Bombyx_mori_nucleopolyhedrovirus_unclassified"                    
-
-[[3]]
-[1] "k__Bacteria| p__Proteobacteria| c__Deltaproteobacteria|"         
-[2] "o__Desulfovibrionales| f__Desulfovibrionaceae| g__Desulfovibrio|"
-[3] "s__Desulfovibrio_termitidis| t__GCF_000504305"                   </code></pre>
-<p>As you can see, the features are a mixture of abundance quantifications at different taxonomic levels, from <em>k</em> ingdom over <em>p</em> hylum to <em>s</em> pecies. We could select only some of these, but here we continue with all of them. Next, let’s look at the distribution of some of the features. Here, we show an arbitrary choice of two, number 510 and 527; in practice, it is helpful to scroll through many such plots quickly to get an impression (Figure 12.19).</p>
-<pre><code>ggplot(melt(Biobase::exprs(zellerNC)[c(510, 527), ]), aes(x = value)) +
-    geom_histogram(bins = 25) +
-    facet_wrap( ~ Var1, ncol = 1, scales = "free")__</code></pre>
-<p><a href="12-chap_files/figure- html/fig-zellerHist-1-1.png" title="Figure 12.19: Histograms of the distributions for two randomly selected features. The distributions are highly skewed, with many zero values and a thin, long tail of non-zero values."><img src="12-chap_files/figure-html/fig-zellerHist-1-1.png" class="img-fluid"></a></p>
-<p>Figure 12.19: Histograms of the distributions for two randomly selected features. The distributions are highly skewed, with many zero values and a thin, long tail of non-zero values.</p>
-<p>In the simplest case, we fit model 12.7 as follows.</p>
-<pre><code>library("glmnet")
-glmfit = glmnet(x = t(Biobase::exprs(zellerNC)),
-                y = factor(zellerNC$disease),
-                family = "binomial")__</code></pre>
-<p>A remarkable feature of the <code>glmnet</code> function is that it fits 12.7 not only for one choice of \(\), but for all possible \(\)s at once. For now, let’s look at the prediction performance for, say, \(\). The name of the function parameter is <code>s</code>:</p>
-<pre><code>predTrsf = predict(glmfit, newx = t(Biobase::exprs(zellerNC)),
-                   type = "class", s = 0.04)
-table(predTrsf, zellerNC$disease)__
-
-
-        
-predTrsf cancer  n
-  cancer     51  0
-  n           2 61</code></pre>
-<p>Not bad – but remember that this is on the training data, without cross- validation. Let’s have a closer look at <code>glmfit</code>. The <strong><a href="https://cran.r-project.org/web/packages/glmnet/">glmnet</a></strong> package offers a a diagnostic plot that is worth looking at (Figure 12.20).</p>
-<pre><code>plot(glmfit, col = RColorBrewer::brewer.pal(8, "Dark2"), lwd = sqrt(3), ylab = "")__</code></pre>
-<p><a href="12-chap_files/figure- html/fig-plotglmfit-1-1.png" title="Figure 12.20: Regularization paths for glmfit."><img src="12-chap_files/figure-html/fig-plotglmfit-1-1.png" class="img-fluid"></a></p>
-<p>Figure 12.20: Regularization paths for <code>glmfit</code>.</p>
-<p>__</p>
-<p>Question 12.17</p>
-<p>What are the \(x\)- and \(y\)-axes in Figure 12.20? What are the different lines?</p>
-<p>__</p>
-<p>Solution</p>
-<p>__</p>
-<p>Consult the manual page of the function <code>plot.glmnet</code> in the <strong><a href="https://cran.r-project.org/web/packages/glmnet/">glmnet</a></strong> package.</p>
-<p>Let’s get back to the question of how to choose the parameter \(\). We could try many different choices –and indeed, all possible choices– of \(\), assess classification performance in each case using cross- validation, and then choose the best \(\).</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="imgs/devil.png" title="You’ll already realize from the description of this strategy that if we optimize \lambda in this way, the resulting apparent classification performance will likely be exaggerated. We need a truly independent dataset, or at least another, outer cross-validation loop to get a more realistic impression of the generalizability. We will get back to this question at the end of the chapter."><img src="imgs/devil.png" class="img-fluid figure-img"></a></p>
-<figcaption>You’ll already realize from the description of this strategy that if we optimize \lambda in this way, the resulting apparent classification performance will likely be exaggerated. We need a truly independent dataset, or at least another, outer cross-validation loop to get a more realistic impression of the generalizability. We will get back to this question at the end of the chapter.</figcaption>
-</figure>
-</div>
-<p>You’ll already realize from the description of this strategy that if we optimize \(\) in this way, the resulting apparent classification performance will likely be exaggerated. We need a truly independent dataset, or at least another, outer cross-validation loop to get a more realistic impression of the generalizability. We will get back to this question at the end of the chapter.</p>
-<p>We could do so by writing a loop as we did in the <code>estimate_mcl_loocv</code> function in Section 12.4.1. It turns out that the <strong><a href="https://cran.r-project.org/web/packages/glmnet/">glmnet</a></strong> package already has built-in functionality for that, with the function <code>cv.glmnet</code>, which we can use instead.</p>
-<pre><code>cvglmfit = cv.glmnet(x = t(Biobase::exprs(zellerNC)),
-                     y = factor(zellerNC$disease),
-                     family = "binomial")
-plot(cvglmfit)__</code></pre>
-<p><a href="12-chap_files/figure- html/fig-colonCV-1-1.png" title="Figure 12.21: Diagnostic plot for cv.glmnet: shown is a measure of cross-validated prediction performance, the deviance, as a function of \lambda. The dashed vertical lines show lambda.min and lambda.1se."><img src="12-chap_files/figure-html/fig-colonCV-1-1.png" class="img-fluid"></a></p>
-<p>Figure 12.21: Diagnostic plot for <code>cv.glmnet</code>: shown is a measure of cross- validated prediction performance, the deviance, as a function of \(\). The dashed vertical lines show <code>lambda.min</code> and <code>lambda.1se</code>.</p>
-<p>The diagnostic plot is shown in Figure 12.21. We can access the optimal value with</p>
-<pre><code>cvglmfit$lambda.min __
-
-
-[1] 0.0529391</code></pre>
-<p>As this value results from finding a minimum in an estimated curve, it turns out that it is often too small, i.e., that the implied penalization is too weak. A heuristic recommended by the authors of the <strong><a href="https://cran.r-project.org/web/packages/glmnet/">glmnet</a></strong> package is to use a somewhat larger value instead, namely the largest value of \(\) such that the performance measure is within 1 standard error of the minimum.</p>
-<pre><code>cvglmfit$lambda.1se __
-
-
-[1] 0.08830775</code></pre>
-<p>__</p>
-<p>Question 12.18</p>
-<p>How does the confusion table look like for \(=;\)<code>lambda.1se</code>?</p>
-<p>__</p>
-<p>Solution</p>
-<p>__</p>
-<pre><code>s0 = cvglmfit$lambda.1se
-predict(glmfit, newx = t(Biobase::exprs(zellerNC)),type = "class", s = s0) |&gt;
-    table(zellerNC$disease)__
-
-
-        
-         cancer  n
-  cancer     38  5
-  n          15 56</code></pre>
-<p>__</p>
-<p>Question 12.19</p>
-<p>What features drive the classification?</p>
-<p>__</p>
-<p>Solution</p>
-<p>__</p>
-<pre><code>coefs = coef(glmfit)[, which.min(abs(glmfit$lambda - s0))]
-topthree = order(abs(coefs), decreasing = TRUE)[1:3]
-as.vector(coefs[topthree])__
-
-
-[1] -71.471393  -8.770704  -1.465249
-
-
-formatfn(names(coefs)[topthree])__
-
-
-[[1]]
-[1] "k__Bacteria| p__Candidatus_Saccharibacteria|"      
-[2] "c__Candidatus_Saccharibacteria_noname|"            
-[3] "o__Candidatus_Saccharibacteria_noname|"            
-[4] "f__Candidatus_Saccharibacteria_noname|"            
-[5] "g__Candidatus_Saccharibacteria_noname|"            
-[6] "s__candidate_division_TM7_single_cell_isolate_TM7b"
-
-[[2]]
-[1] "k__Bacteria| p__Firmicutes| c__Clostridia| o__Clostridiales|"        
-[2] "f__Ruminococcaceae| g__Subdoligranulum| s__Subdoligranulum_variabile"
-
-[[3]]
-[1] "k__Bacteria| p__Firmicutes| c__Clostridia| o__Clostridiales|"
-[2] "f__Lachnospiraceae| g__Lachnospiraceae_noname|"              
-[3] "s__Lachnospiraceae_bacterium_7_1_58FAA"                      </code></pre>
-<p>__</p>
-<p>Question 12.20</p>
-<p>How do the results change if we transform the data, say, with the <code>asinh</code> transformation as we saw in <a href="05-chap.html">Chapter 5</a>?</p>
-<p>__</p>
-<p>Solution</p>
-<p>__</p>
-<p>See Figure 12.22.</p>
-<pre><code>cv.glmnet(x = t(asinh(Biobase::exprs(zellerNC))),
-          y = factor(zellerNC$disease),
-          family = "binomial") |&gt; plot()__</code></pre>
-<p><a href="12-chap_files/figure- html/fig-colonCVTrsf-1-1.png" title="Figure 12.22: like Figure fig-colonCV-1, but using an \text{asinh} transformation of the data."><img src="12-chap_files/figure-html/fig-colonCVTrsf-1-1.png" class="img-fluid"></a></p>
-<p>Figure 12.22: like Figure 12.21, but using an \(\) transformation of the data.</p>
-<p>__</p>
-<p>Question 12.21</p>
-<p>Would a good classification performance on these data mean that this assay is ready for screening and early cancer detection?</p>
-<p>__</p>
-<p>Solution</p>
-<p>__</p>
-<p>No.&nbsp;The performance here is measured on a set of samples in which the cases have similar prevalence as the controls. This serves well enough to explore the biology. However, in a real-life application, the cases will be much less frequent. To be practically useful, the assay must have a much higher specificity, i.e., rarely diagnose disease where there is none. To establish specificity, a much larger set of normal samples need to be tested.</p>
-</section>
-<section id="example-classifying-mouse-cells-from-their-expression-profiles" class="level3" data-number="14.5.3">
-<h3 data-number="14.5.3" class="anchored" data-anchor-id="example-classifying-mouse-cells-from-their-expression-profiles"><span class="header-section-number">14.5.3</span> 12.6.3 Example: classifying mouse cells from their expression profiles</h3>
-<p>Figures 12.21 and 12.22 are textbook examples of how we expect the dependence of (cross-validated) classification performance versus model complexity (\(\)) to look. Now let’s get back to the mouse embryo cells data. We’ll try to classify the cells from embryonic day <code>E3.25</code> with respect to their genotype.</p>
-<pre><code>sx = x[, x$Embryonic.day == "E3.25"]
-embryoCellsClassifier = cv.glmnet(t(Biobase::exprs(sx)), sx$genotype,
-                family = "binomial", type.measure = "class")
-plot(embryoCellsClassifier)__</code></pre>
-<p><a href="12-chap_files/figure-html/fig-mousecvglmfit-1-1.png &quot;Figure 12.23: Cross-validated misclassification error versus penalty parameter for the mouse cells data.&quot;"><img src="12-chap_files/figure-html/fig- mousecvglmfit-1-1.png" class="img-fluid"></a></p>
-<p>Figure 12.23: Cross-validated misclassification error versus penalty parameter for the mouse cells data.</p>
-<p>In Figure 12.23 we see that the misclassification error is (essentially) monotonously increasing with \(\), and is smallest for \(\), i.e., if we apply no penalization at all.</p>
-<p>__</p>
-<p>Question 12.22</p>
-<p>What is going on with these data?</p>
-<p>__</p>
-<p>Solution</p>
-<p>__</p>
-<p>It looks that inclusion of more, and even of all features, does not harm the classification performance. In a way, these data are “too easy”. Let’s do a \(t\)-test for all features:</p>
-<pre><code>mouse_de = rowttests(sx, "genotype")
-ggplot(mouse_de, aes(x = p.value)) +
-  geom_histogram(boundary = 0, breaks = seq(0, 1, by = 0.01))__</code></pre>
-<p><a href="12-chap_files/figure-html/fig- mousecellsrowttst-1-1.png" title="Figure 12.24: Histogram of p-values for the per- feature t-tests between genotypes in the E3.25 cells."><img src="12-chap_files/figure-html/fig- mousecellsrowttst-1-1.png" class="img-fluid"></a></p>
-<p>Figure 12.24: Histogram of p-values for the per-feature \(t\)-tests between genotypes in the E3.25 cells.</p>
-<p>The result, shown in Figure 12.24, shows that large number of genes are differentially expressed, and thus informative for the class distinction. We can also compute the pairwise distances between all cells, using all features.</p>
-<pre><code>dists = as.matrix(dist(scale(t(Biobase::exprs(x)))))
-diag(dists) = +Inf __</code></pre>
-<p>and then for each cell determine the class of its nearest neighbor</p>
-<pre><code>nn = sapply(seq_len(ncol(dists)), function(i) which.min(dists[, i]))
-table(x$sampleGroup, x$sampleGroup[nn]) |&gt; `colnames&lt;-`(NULL)__
-
-
-                 
-                  [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8]
-  E3.25             33    0    0    0    3    0    0    0
-  E3.25 (FGF4-KO)    1   15    0    1    0    0    0    0
-  E3.5 (EPI)         2    0    3    0    6    0    0    0
-  E3.5 (FGF4-KO)     0    0    0    8    0    0    0    0
-  E3.5 (PE)          0    0    0    0   11    0    0    0
-  E4.5 (EPI)         0    0    0    0    2    2    0    0
-  E4.5 (FGF4-KO)     1    0    0    0    0    0    9    0
-  E4.5 (PE)          0    0    0    0    2    0    0    2</code></pre>
-<p>Using all features, the 1 nearest-neighbor classifier is correct in almost all cases, including for the E3.25 wildtype vs FGF4-KO distinction. This means that for these data, there is no apparent benefit in regularization or feature selection. Limitations of using all features might become apparent with truly new data, but that is out of reach for cross-validation.</p>
-</section>
-</section>
-<section id="a-large-choice-of-methods" class="level2" data-number="14.6">
-<h2 data-number="14.6" class="anchored" data-anchor-id="a-large-choice-of-methods"><span class="header-section-number">14.6</span> 12.7 A large choice of methods</h2>
-<p>We have now seen three classification methods: linear discriminant analysis (<code>lda</code>), quadratic discriminant analysis (<code>qda</code>) and logistic regression using elastic net penalization (<code>glmnet</code>). In fact, there are hundreds of different learning algorithms9 available in R and its add-on packages. You can get an overview in the CRAN task view <a href="https://cran.r-project.org/web/views/MachineLearning.html">Machine Learning &amp; Statistical Learning</a>. Some examples are:</p>
-<p>9 For an introduction to the subject that uses R and provides many examples and exercises, we recommend (<a href="16-chap.html#ref- James:2013">James et al.&nbsp;2013</a>).</p>
-<ul>
-<li><p>Support vector machines: the function <code>svm</code> in the package <strong><a href="https://cran.r-project.org/web/packages/e1071/">e1071</a></strong> ; <code>ksvm</code> in <strong><a href="https://cran.r-project.org/web/packages/kernlab/">kernlab</a></strong></p></li>
-<li><p>Tree based methods in the packages <strong><a href="https://cran.r-project.org/web/packages/rpart/">rpart</a></strong> , <strong><a href="https://cran.r-project.org/web/packages/tree/">tree</a></strong> , <strong><a href="https://cran.r-project.org/web/packages/randomForest/">randomForest</a></strong></p></li>
-<li><p>Boosting methods: the functions <code>glmboost</code> and <code>gamboost</code> in package <strong><a href="https://cran.r-project.org/web/packages/mboost/">mboost</a></strong></p></li>
-<li><p><code>PenalizedLDA</code> in the package <strong><a href="https://cran.r-project.org/web/packages/PenalizedLDA/">PenalizedLDA</a></strong> , <code>dudi.discr</code> and <code>dist.pcaiv</code> in <strong><a href="https://cran.r-project.org/web/packages/ade4/">ade4</a></strong>).</p></li>
-</ul>
-<p>The complexity and heterogeneity of choices of learning strategies, tuning parameters and evaluation criteria in each of these packages can be confusing. You will already have noted differences in the interfaces of the <code>lda</code>, <code>qda</code> and <code>glmnet</code> functions, i.e., in how they expect their input data to presented and what they return. There is even greater diversity across all the other packages and functions. At the same time, there are common tasks such as cross-validation, parameter tuning and performance assessment that are more or less the same no matter what specific method is used. As you have seen, e.g., in our <code>estimate_mcl_loocv</code> function, the looping and data shuffling involved led to rather verbose code.</p>
-<p>So what to do if you want to try out and explore different learning algorithms? Fortunately, there are several projects that provide unified interfaces to the large number of different machine learning interfaces in R, and also try to provide “best practice” implementations of the common tasks such as parameter tuning and performance assessment. The two most well-known ones are the packages <strong><a href="https://cran.r-project.org/web/packages/caret/">caret</a></strong> and <strong><a href="https://cran.r-project.org/web/packages/mlr/">mlr</a></strong>. Here were have a look at <strong><a href="https://cran.r-project.org/web/packages/caret/">caret</a></strong>. You can get a list of supported methods through its <code>getModelInfo</code> function. There are quite a few, here we just show the first 8.</p>
-<pre><code>library("caret")
-caretMethods = names(getModelInfo())
-head(caretMethods, 8)__
-
-
-[1] "ada"         "AdaBag"      "AdaBoost.M1" "adaboost"    "amdai"      
-[6] "ANFIS"       "avNNet"      "awnb"       
-
-
-length(caretMethods)__
-
-
-[1] 239</code></pre>
-<p>We will check out a neural network method, the <code>nnet</code> function from the eponymous package. The <code>parameter</code> slot informs us on the the available tuning parameters10.</p>
-<p>10 They are described in the manual of the <code>nnet</code> function.</p>
-<pre><code>getModelInfo("nnet", regex = FALSE)[[1]]$parameter __
-
-
-  parameter   class         label
-1      size numeric #Hidden Units
-2     decay numeric  Weight Decay</code></pre>
-<p>Let’s try it out.</p>
-<pre><code>trnCtrl = trainControl(
-  method = "repeatedcv",
-  repeats = 3,
-  classProbs = TRUE)
-tuneGrid = expand.grid(
-  size = c(2, 4, 8),
-  decay = c(0, 1e-2, 1e-1))
-nnfit = train(
-  Embryonic.day ~ Fn1 + Timd2 + Gata4 + Sox7,
-  data = embryoCells,
-  method = "nnet",
-  tuneGrid  = tuneGrid,
-  trControl = trnCtrl,
-  metric = "Accuracy")__</code></pre>
-<p>That’s quite a mouthful, but the nice thing is that this syntax is standardized and applies across many different methods. All you need to do specify the name of the method and the grid of tuning parameters that should be explored via the <code>tuneGrid</code> argument.</p>
-<p>Now we can have a look at the output (Figure 12.25).</p>
-<pre><code>nnfit __
-
-
-Neural Network 
-
-66 samples
- 4 predictor
- 3 classes: 'E3.25', 'E3.5', 'E4.5' 
-
-No pre-processing
-Resampling: Cross-Validated (10 fold, repeated 3 times) 
-Summary of sample sizes: 60, 59, 60, 60, 59, 59, ... 
-Resampling results across tuning parameters:
-
-  size  decay  Accuracy   Kappa    
-  2     0.00   0.7083333  0.4279755
-  2     0.01   0.7676587  0.5858922
-  2     0.10   0.7681349  0.5767463
-  4     0.00   0.7515476  0.5638426
-  4     0.01   0.8004762  0.6486256
-  4     0.10   0.7638889  0.5676798
-  8     0.00   0.7385714  0.5393148
-  8     0.01   0.7348016  0.5281220
-  8     0.10   0.7532540  0.5525435
-
-Accuracy was used to select the optimal model using the largest value.
-The final values used for the model were size = 4 and decay = 0.01.
-
-
-plot(nnfit)
-predict(nnfit) |&gt; head(10)__
-
-
- [1] E3.25 E3.25 E3.25 E3.25 E3.25 E3.25 E3.25 E3.25 E3.25 E3.25
-Levels: E3.25 E3.5 E4.5</code></pre>
-<p><a href="12-chap_files/figure- html/fig-ML-nnfit-1.png" title="Figure 12.25: Parameter tuning of the neural net by cross-validation."><img src="12-chap_files/figure-html/fig-ML-nnfit-1.png" class="img-fluid"></a></p>
-<p>Figure 12.25: Parameter tuning of the neural net by cross-validation.</p>
-<p>__</p>
-<p>Question 12.23</p>
-<p>Will the accuracy that we obtained above for the optimal tuning parameters generalize to a new dataset? What could you do to address that?</p>
-<p>__</p>
-<p>Solution</p>
-<p>__</p>
-<p>No, it is likely to be too optimistic, as we have picked the optimum. To get a somewhat more realistic estimate of prediction performance when generalized, we could formalize (into computer code) all our data preprocessing choices and the above parameter tuning procedure, and embed this in another, outer cross- validation loop (<a href="16-chap.html#ref- ambroise2002selection">Ambroise and McLachlan 2002</a>). However, this is likely still not enough, as we discuss in the next section.</p>
-<section id="method-hacking" class="level3" data-number="14.6.1">
-<h3 data-number="14.6.1" class="anchored" data-anchor-id="method-hacking"><span class="header-section-number">14.6.1</span> 12.7.1 Method hacking</h3>
-<p>In <a href="06-chap.html">Chapter 6</a> we encountered <em>p-value hacking</em>. A similar phenomenon exists in statistical learning: given a dataset, we explore various different methods of preprocessing (such as normalization, outlier detection, transformation, feature selection), try out different machine learning algorithms and tune their parameters until we are content with the result. The measured accuracy is likely to be too optimistic, i.e., will not generalize to a new dataset. Embedding as many of our methodical choices into a computational formalism and having an outer cross-validation loop (not to be confused with the inner loop that does the parameter tuning) will ameliorate the problem. But is unlikely to address it completely, since not all our choices can be formalized.</p>
-<p>The gold standard remains validation on truly unseen data. In addition, it is never a bad thing if the classifier is not a black box but can be interpreted in terms of domain knowledge. Finally, report not just summary statistics, such as misclassification rates, but lay open the complete computational workflow, so that anyone (including your future self) can convince themselves of the robustness of the result or of the influence of the preprocessing, model selection and tuning choices (<a href="16-chap.html#ref- Holmes2017">Holmes 2018</a>).</p>
-</section>
-</section>
-<section id="summary-of-this-chapter" class="level2" data-number="14.7">
-<h2 data-number="14.7" class="anchored" data-anchor-id="summary-of-this-chapter"><span class="header-section-number">14.7</span> 12.8 Summary of this chapter</h2>
-<p>We have seen examples of machine learning applications; we have focused on predicting categorical variables (like diabetes type or cell class). Predicting continuous outcomes is also part of machine learning, although we have not considered it here. There are many parallels and overlaps between <em>machine learning</em> and <em>statistical regression</em> (which we studied in <a href="08-chap.html">Chapter 8</a>). One can consider them two different names for pretty much the same activity, although each has its own flavors: in machine learning, the emphasis is on the prediction of the outcome variables, whereas in regression we often care at least as much about the role of the covariates – which of them have an effect on the outcome, and what is the nature of these effects? In other words, we do not only want predictions, we also want to understand them.</p>
-<p>We saw linear and quadratic discriminant analysis, two intuitive methods for partitioning a two-dimensional data plane (or a \(p\)-dimensional space) into regions using either linear or quadratic separation lines (or hypersurfaces). We also saw logistic regression, which takes a slightly different approach but is more amenable to operating in higher dimensions and to regularization.</p>
-<p>We encountered the main challenge of machine learning: how to avoid overfitting? We explored why overfitting happens in the context of the so- called curse of dimensionality, and we learned how it may be overcome using regularization.</p>
-<p>In other words, machine learning would be easy if we had infinite amounts of data representatively covering the whole space of possible inputs and outputs11. The challenge is to make the best out of a finite amount of training data, and to generalize these to new, unseen inputs. There is a vigorous trade-off between the amount, resolution and coverage of training data and the complexity of the model. Many models have continuous parameters that enable us to “tune” their complexity or the strength of their regularization. Cross-validation can help us with such tuning, although it is not a panacea, and caveats apply, as we saw in Section 12.6.3.</p>
-<p>11 It would “just” be a formidable database / data management problem.</p>
-</section>
-<section id="further-reading" class="level2" data-number="14.8">
-<h2 data-number="14.8" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">14.8</span> 12.9 Further reading</h2>
-<ul>
-<li><p>An introduction to statistical learning that employs many concrete data examples and uses little mathematical formalism is given by James et al.&nbsp;(<a href="16-chap.html#ref-James:2013">2013</a>). An extension, with more mathematical background, is the textbook by Hastie, Tibshirani, and Friedman (<a href="16-chap.html#ref-HastieTibshiraniFriedman">2008</a>).</p></li>
-<li><p>The <a href="https://cran.r-project.org/web/views/MachineLearning.html">CRAN task view on machine learning</a> gives an overview over machine learning software in R.</p></li>
-<li><p><a href="https://tensorflow.rstudio.com/keras">RStudio’s API for the “deep learning” platforms Keras and TensorFlow</a> and the associated teaching materials and demos are a good place to try out some of the recent developments in this field.</p></li>
-</ul>
-</section>
-<section id="exercises" class="level2" data-number="14.9">
-<h2 data-number="14.9" class="anchored" data-anchor-id="exercises"><span class="header-section-number">14.9</span> 12.10 Exercises</h2>
-<p>__</p>
-<p>Exercise 12.1</p>
-<p>Apply a <em>kernel support vector machine</em> , available in the <strong><a href="https://cran.r-project.org/web/packages/kernlab/">kernlab</a></strong> package, to the <code>zeller</code> microbiome data. What kernel function works well?</p>
-<p>__</p>
-<p>Exercise 12.2</p>
-<p>Use <code>glmnet</code> for a <em>prediction of a continuous variable</em> , i.e., for regression. Use the prostate cancer data from Chapter 3 of (<a href="16-chap.html#ref-HastieTibshiraniFriedman">Hastie, Tibshirani, and Friedman 2008</a>). The data are available in the CRAN package <strong><a href="https://cran.r-project.org/web/packages/ElemStatLearn/">ElemStatLearn</a></strong>. Explore the effects of using ridge versus lasso penalty.</p>
-<p>__</p>
-<p>Exercise 12.3</p>
-<p>Consider <em>smoothing as a regression and model selection problem</em> (remember Figure 12.1). What is the equivalent quantity to the penalization parameter \(\) in Equation 12.8? How do you choose it?</p>
-<p>__</p>
-<p>Solution</p>
-<p>__</p>
-<p>We refer to Chapter 5 of (<a href="16-chap.html#ref-HastieTibshiraniFriedman">Hastie, Tibshirani, and Friedman 2008</a>)</p>
-<p>__</p>
-<p>Exercise 12.4</p>
-<p><em>Scale invariance</em>. Consider a rescaling of one of the features in the (generalized) linear model 12.7. For instance, denote the \(\)-th column of \(x\) by \(x_{}\), and suppose that \(p\) and that we rescale \(x_{} s, x_{}\) with some number \(s\). What will happen to the estimate \(\) from Equation 12.8 in (a) the unpenalized case (\(\)) and (b) the penalized case (\(&gt;0\))?</p>
-<p>__</p>
-<p>Solution</p>
-<p>__</p>
-<p>In the unpenalized case, the estimates will be scaled by \(1/s\), so that the resulting model is, in effect, the same. In the penalized case, the penalty from the \(\)-th component of \(\) will be different. If \(|s|&gt;1\), the amplitude of the feature is increased, smaller \(\)-components are required for it to have the same effect in the prediction, and therefore the feature is more likely to receive a non-zero and/or larger estimate, possibly on the cost of the other features; conversely for \(|s|&lt;1\). Regular linear regression is scale-invariant, whereas penalized regression is scale-dependent. It’s important to remember this when interpreting penalized model fits.</p>
-<p>__</p>
-<p>Exercise 12.5</p>
-<p>It has been quipped that all classification methods are just refinements of <em>two archetypal ideas</em> : discriminant analysis and \(k\) nearest neighbors. In what sense might that be a useful classification?</p>
-<p>__</p>
-<p>Solution</p>
-<p>__</p>
-<p>In linear discriminant analysis, we consider our objects as elements of \(^p\), and the learning task is to define regions in this space, or boundary hyperplanes between them, which we use to predict the class membership of new objects. This is archetypal for <em>classification by partition</em>. Generalizations of linear discriminant analysis permit more general spaces and more general boundary shapes.</p>
-<p>In \(k\) nearest neighbors, no embedding into a coordinate space is needed, but instead we require a distance (or dissimilarity) measure that can be computed between each pair of objects, and the classification decision for a new object depends on its distances to the training objects and their classes. This is archetypal for <em>kernel-based</em> methods.</p>
-<p>Ambroise, Christophe, and Geoffrey J. McLachlan. 2002. “Selection Bias in Gene Extraction on the Basis of Microarray Gene-Expression Data.” <em>PNAS</em> 99 (10): 6562–66.</p>
-<p>Bellman, Richard Ernest. 1961. <em>Adaptive Control Processes: A Guided Tour</em>. Princeton University Press.</p>
-<p>Clemmensen, Line, Trevor Hastie, Daniela Witten, and Bjarne Ersbøll. 2011. “Sparse Discriminant Analysis.” <em>Technometrics</em> 53: 406–13.</p>
-<p>Friedman, Jerome H. 1997. “On Bias, Variance, 0/1—Loss, and the Curse-of- Dimensionality.” <em>Data Mining and Knowledge Discovery</em> 1: 55–77.</p>
-<p>Hastie, Trevor, Robert Tibshirani, and Jerome Friedman. 2008. <em>The Elements of Statistical Learning</em>. 2^{} ed.&nbsp;Springer.</p>
-<p>Holmes, Susan. 2018. “Statistical Proof? The Problem of Irreproducibility.” <em>Bulletin of the AMS</em> 55 (1): 31–55.</p>
-<p>James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2013. <em>An Introduction to Statistical Learning</em>. Springer.</p>
-<p>Neumann, B., T. Walter, J. K. Heriche, J. Bulkescher, H. Erfle, C. Conrad, P. Rogers, et al.&nbsp;2010. “Phenotypic profiling of the human genome by time-lapse microscopy reveals cell division genes.” <em>Nature</em> 464 (7289): 721–27.</p>
-<p>Ohnishi, Y., W. Huber, A. Tsumura, M. Kang, P. Xenopoulos, K. Kurimoto, A. K. Oles, et al.&nbsp;2014. “Cell-to-Cell Expression Variability Followed by Signal Reinforcement Progressively Segregates Early Mouse Lineages.” <em>Nature Cell Biology</em> 16 (1): 27–37.</p>
-<p>Reaven, GM, and RG Miller. 1979. “An Attempt to Define the Nature of Chemical Diabetes Using a Multidimensional Analysis.” <em>Diabetologia</em> 16 (1): 17–24.</p>
-<p>Witten, Daniela M, and Robert Tibshirani. 2011. “Penalized Classification Using Fisher’s Linear Discriminant.” <em>JRSSB</em> 73 (5): 753–72.</p>
-<p>Zeller, Georg, Julien Tap, Anita Y Voigt, Shinichi Sunagawa, Jens Roat Kultima, Paul I Costea, Aurélien Amiot, et al.&nbsp;2014. “Potential of Fecal Microbiota for Early-Stage Detection of Colorectal Cancer.” <em>Molecular Systems Biology</em> 10 (11): 766. <a href="https://doi.org/10.15252/msb.20145645" class="uri">https://doi.org/10.15252/msb.20145645</a>.</p>
-<p>Page built at 01:33 on 2025-09-01 using R version 4.5.1 (2025-06-13)</p>
-
-
 </section>
 
 </main> <!-- /main -->
@@ -1740,8 +958,8 @@ Levels: E3.25 E3.5 E4.5</code></pre>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./13-chap.html" class="pagination-link" aria-label="13.1 Goals for this chapter">
-        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">13.1 Goals for this chapter</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./13-chap.html" class="pagination-link" aria-label="13.1 이 장의 목표">
+        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">13.1 이 장의 목표</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
