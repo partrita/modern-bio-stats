@@ -1,0 +1,1723 @@
+![](imgs/starlings_copyrightfree.jpg)
+
+세포, 질병, 유기체의 범주를 찾고 그 이름을 짓는 것은 자연 과학의 핵심 활동입니다. [4장](04-chap.html)에서 우리는 일부 데이터가 명확한 모수적 생성 모델을 가진 서로 다른 그룹이나 모집단으로부터의 혼합물로 모델링될 수 있음을 보았습니다. 우리는 그러한 예제들에서 성분들을 분리해 내기 위해 EM 알고리즘을 어떻게 사용할 수 있는지 보았습니다. 이제 우리는 **클러스터(clusters)** 가 반드시 예쁜 타원형1 모양을 가질 필요는 없는 경우로 그룹들을 풀어내는 아이디어를 확장해 보려 합니다.
+
+1 다변량 정규 분포를 이용한 혼합 모델링은 타원형 클러스터 경계를 함축합니다.
+
+군집화(Clustering)는 데이터(연속형 또는 준연속형)를 가져와서 새로운 범주형 **그룹(group)** 변수를 추가하며, 이는 때때로 **중간(intermediate)** 상태를 무시하는 대가를 치르더라도 의사 결정을 단순화할 수 있습니다. 예를 들어, 공복 혈당, 당화혈색소 및 섭취 2시간 후 혈장 포도당 수치와 연관된 복잡한 고차원 진단 측정값들을 단순히 환자를 당뇨병 "그룹"에 할당함으로써 의료 결정을 단순화합니다.
+
+이 장에서 우리는 저차원 및 고차원 **비모수적(nonparametric)** 환경 모두에서 의미 있는 클러스터나 그룹을 찾는 방법을 공부할 것입니다. 하지만 주의할 점이 있습니다: 군집화 알고리즘은 클러스터를 찾도록 설계되었으므로, 클러스터가 없는 곳에서도 클러스터를 찾아낼 것입니다2. 따라서 클러스터의 존재를 뒷받침하는 사전 도메인 지식이 없는 경우, 클러스터 **검증(validation)** 은 우리 프로세스의 필수적인 구성 요소입니다.
+
+2 이는 인간을 연상시킵니다: 우리는 무작위성 속에서도 패턴을 보기를 좋아합니다.
+
+
+이 장에서 우리는 다음을 수행할 것입니다:
+
+  * 유익하게 군집화될 수 있는 다양한 유형의 데이터를 공부합니다.
+
+  * 클러스터를 정의하는 데 도움이 되는 (비)유사성 척도와 **거리(distances)** 를 살펴봅니다.
+
+  * 데이터를 더 **조밀한(tighter)** 세트로 분할하여 숨겨진 또는 잠재된 군집을 찾아냅니다.
+
+  * 수십만 개의 세포 각각에 대한 바이오마커가 주어졌을 때 군집화를 사용해 봅니다. 예를 들어 면역 세포가 어떻게 자연스럽게 조밀한 하위 집단으로 그룹화될 수 있는지 보게 될 것입니다.
+
+  * 실제 단일 세포 데이터에 **\(k\)-평균(\(k\)-means)** , **\(k\)-메도이드(\(k\)-medoids)** 와 같은 비모수적 알고리즘을 실행합니다.
+
+  * 관측치와 그룹을 세트의 계층 구조로 결합하는 군집화에 대한 재귀적 접근 방식을 실험합니다; 이러한 방법은 **계층적 군집화(hierarchical clustering)** 로 알려져 있습니다.
+
+  * 재표본 추출 기반의 붓스트랩(bootstrap) 접근 방식을 통해 클러스터를 검증하는 방법을 공부하며, 이를 단일 세포 데이터 세트에서 시연할 것입니다.
+
+[![](imgs/SnowMapSmallest_web.png)](imgs/SnowMapSmallest_web.png "그림 5.1: 존 스노우의 콜레라 사례 지도: 각 집의 작은 막대 그래프는 진단된 사례들의 군집을 나타냅니다.")
+
+그림 5.1: 존 스노우의 콜레라 사례 지도: 각 집의 작은 막대 그래프는 진단된 사례들의 군집을 나타냅니다.
+
+[![David Freedman은 이 발견으로 이어진 모든 단계에 대해 훌륭하고 상세한 설명을 남겼습니다 (Freedman 1991).](imgs/book_icon.png)](imgs/book_icon.png "David Freedman은 이 발견으로 이어진 모든 단계에 대해 훌륭하고 상세한 설명을 남겼습니다 \(\[@freedman1991\]\).")
+
+David Freedman은 이 발견으로 이어진 모든 단계에 대해 훌륭하고 상세한 설명을 남겼습니다 ([Freedman 1991](16-chap.html#ref-freedman1991)).
+
+## 5.2 데이터란 무엇이며 왜 군집화하는가?
+
+### 5.2.1 군집화는 때때로 발견으로 이어질 수 있습니다.
+
+존 스노우(John Snow)는 콜레라 사례 지도를 만들고 사례들의 _클러스터_ 를 식별했습니다. 그는 그 후 펌프들의 위치에 대한 추가 정보를 수집했습니다. 조밀한 사례 클러스터들이 브로드 스트리트(Broadstreet) 펌프와 가깝다는 사실은 물이 범인일 가능성을 지목했습니다. 그는 콜레라 발생의 원인을 추론할 수 있게 해주는 별도의 정보원들을 수집했습니다.
+
+이제 그림 5.2에 표시된 또 다른 런던 지도를 살펴봅시다. 빨간색 점들은 제2차 세계대전 중 폭격을 받은 위치들을 나타냅니다. 전쟁 중에 분석 팀들에 의해 많은 이론이 내놓아졌습니다. 그들은 폭격 패턴(유틸리티 공장, 병기창과의 근접성, \(...\))에 대한 합리적인 설명을 찾으려 노력했습니다. 사실, 전쟁 후에 폭격은 특정 목표물을 타격하려는 시도 없이 무작위로 분포되었다는 것이 밝혀졌습니다.
+
+[![](imgs/RedBombsLondon_web.png)](imgs/RedBombsLondon_web.png "그림 5.2: 여기에 1940년 9월 7일 런던에 떨어진 폭탄의 위치 지도가 있으며, 이는 영국 국립 보존 기록관 웹사이트 http://bombsight.org에서 묘사한 것입니다.")
+
+그림 5.2: 1940년 9월 7일 런던에 떨어진 폭탄의 위치 지도. 영국 국립 보존 기록관 웹사이트 <http://bombsight.org>에서 가져온 것입니다.
+
+군집화는 복잡한 다변량 데이터를 이해하는 데 유용한 기법이며, 이는 **비지도(unsupervised)** 3 학습입니다. 탐색적 기법은 데이터를 해석하는 데 중요할 수 있는 그룹화된 모습을 보여줍니다.
+
+3 모든 변수가 동일한 상태를 가지며, 설명 변수의 정보를 바탕으로 한 변수(감독 반응)의 값을 예측하거나 학습하려고 하지 않기 때문에 이렇게 불립니다.
+
+예를 들어, 군집화는 연구자들이 암 생물학에 대한 이해를 높일 수 있게 해주었습니다. 해부학적 위치와 조직 병리학적 소견으로는 동일해 보였던 종양들이 유전자 발현 데이터와 같은 분자적 시그니처에 따라 여러 클러스터로 나뉘었습니다 ([Hallett et al. 2012](16-chap.html#ref-Hallett2012)). 결국 그러한 군집화는 새롭고 더 적절한 질병 유형의 정의로 이어질 수 있습니다. 적절성은 예를 들어 서로 다른 환자 결과(예후)와 연관되어 있다는 사실로 입증됩니다. 이 장에서 우리가 하고자 하는 것은 그림 5.3과 같은 그림들이 어떻게 구성되는지, 그리고 어떻게 해석해야 하는지를 이해하는 것입니다.
+
+[![](imgs/BreastCancerSubType_Biomed.png)](imgs/BreastCancerSubType_Biomed.png "그림 5.3: 유방암 샘플들(The Cancer Genome Atlas (TCGA) 및 Molecular Taxonomy of Breast Cancer International Consortium (METABRIC)에서 가져옴)은 그들의 miRNA 발현을 사용하여 그룹으로 나뉠 수 있습니다 \(@Aure2017\). 저자들은 하단 플롯에서 서로 다른 그룹들의 생존 기간이 다르다는 것을 보여줍니다. 따라서 이러한 클러스터들은 생물학적 및 임상적으로 의미가 있었습니다. 이러한 분석의 약속은 그룹들을 사용하여 더 구체적이고 최적화된 치료를 제공할 수 있다는 것입니다.")
+
+그림 5.3: 유방암 샘플들(The Cancer Genome Atlas (TCGA) 및 Molecular Taxonomy of Breast Cancer International Consortium (METABRIC)에서 가져옴)은 그들의 miRNA 발현을 사용하여 그룹으로 나뉠 수 있습니다 ([Aure et al. 2017](16-chap.html#ref-Aure2017)). 저자들은 하단 플롯에서 서로 다른 그룹들의 생존 기간이 다르다는 것을 보여줍니다. 따라서 이러한 클러스터들은 생물학적 및 임상적으로 의미가 있었습니다. 이러한 분석의 약속은 그룹들을 사용하여 더 구체적이고 최적화된 치료를 제공할 수 있다는 것입니다.
+
+[4장](04-chap.html)에서 우리는 이미 그룹을 찾아내기 위한 한 가지 기법인 EM 알고리즘을 공부했습니다. 이 장에서 우리가 탐구하는 기법들은 더 일반적이며 더 복잡한 데이터에 적용될 수 있습니다. 이들 중 상당수는 관측치 쌍 사이의 거리에 기초하며(이는 전체 대 전체일 수도 있고, 때로는 전체 대 일부일 수도 있음), 정규 분포, 감마-포아송 등과 같은 특정 분포군을 포함하는 데이터의 생성 메커니즘에 대해 명시적인 가정을 하지 않습니다. 문헌과 과학 소프트웨어 분야에는 군집화 알고리즘이 넘쳐나며, 이는 위협적으로 느껴질 수 있습니다. 사실 이는 데이터 유형의 다양성과 각 분야에서 추구하는 목표의 다양성과 연결되어 있습니다.
+
+__
+
+태스크
+
+[BiocViews 군집화](http://www.bioconductor.org/packages/release/BiocViews.html) 또는 [CRAN의 군집 뷰](https://cran.r-project.org/web/views/Cluster.html)를 찾아보고 군집화 도구를 제공하는 패키지 수를 세어 보세요.
+
+[![](imgs/ClusteringA.png)](imgs/ClusteringA.png "그림 5.4: 우리는 군집화 알고리즘에서 이루어지는 선택들을 취해진 단계에 따라 분해합니다: 관측치-특성 직사각형 테이블 X에서 시작하여, 관측치 간 거리 척도를 선택하고 거리 행렬을 계산합니다(여기서는 삼각형으로 도식화됨). 거리는 클러스터를 구성하는 데 사용됩니다. 왼쪽에는 계층적 군집 트리를 구축하는 응집형(agglomerative) 방법을 도식화했습니다. 오른쪽에는 데이터를 하위 집합으로 분리하는 분할형(partitioning) 방법을 도식화했습니다. 두 유형의 방법 모두 클러스터 수 k의 선택을 필요로 합니다. k-평균과 같은 분할 접근법의 경우 이 선택은 처음에 이루어져야 합니다. 계층적 군집화의 경우 분석이 끝날 때까지 이를 미룰 수 있습니다.")
+
+그림 5.4: 우리는 군집화 알고리즘에서 이루어지는 선택들을 취해진 단계에 따라 분해합니다: 관측치-특성 직사각형 테이블 \(X\)에서 시작하여, 관측치 간 거리 척도를 선택하고 거리 행렬을 계산합니다(여기서는 삼각형으로 도식화됨). 거리는 클러스터를 구성하는 데 사용됩니다. 왼쪽에는 계층적 군집 트리를 구축하는 응집형(agglomerative) 방법을 도식화했습니다. 오른쪽에는 데이터를 하위 집합으로 분리하는 분할형(partitioning) 방법을 도식화했습니다. 두 유형의 방법 모두 클러스터 수 \(k\)의 선택을 필요로 합니다. \(k\)-평균과 같은 분할 접근법의 경우 이 선택은 처음에 이루어져야 합니다. 계층적 군집화의 경우 분석이 끝날 때까지 이를 미룰 수 있습니다.
+
+## 5.3 유사성을 어떻게 측정하는가?
+
+[![유유상종: 거리가 어떻게 측정되고 관측치 사이의 유사성이 어떻게 정의되느냐는 군집화 결과에 강력한 영향을 미칩니다.](imgs/devil.png)](imgs/devil.png "유유상종: 거리가 어떻게 측정되고 관측치 사이의 유사성이 어떻게 정의되느냐는 군집화 결과에 강력한 영향을 미칩니다.")
+
+**유유상종** : 거리가 어떻게 측정되고 관측치 사이의 유사성이 어떻게 정의되느냐는 군집화 결과에 강력한 영향을 미칩니다.
+
+우리의 첫 번째 단계는 _유사함_ 이 무엇을 의미하는지 결정하는 것입니다. 새들을 비교하는 방법은 여러 가지가 있습니다: 예를 들어 크기와 무게를 사용한 거리는 식단이나 서식지를 사용한 거리와는 다른 군집화 결과를 줄 것입니다. 관련 특징(features)을 선택하고 나면, 여러 특징 간의 차이를 어떻게 하나의 숫자로 결합할지 결정해야 합니다. 여기에 몇 가지 선택지들이 있으며, 그 중 일부가 그림 5.5에 예시되어 있습니다.
+
+![그림 5.5 (a):](imgs/FourDistances_a.png)
+
+(a)
+
+![그림 5.5 (b):](imgs/FourDistances_b.png)
+
+(b)
+
+![그림 5.5 (c):](imgs/FourDistances_c.png)
+
+(c)
+
+![그림 5.5 (d):](imgs/FourDistances_d.png)
+
+(d)
+
+그림 5.5: 네 가지 서로 다른 거리에 따른 등거리 등고선 플롯: 임의의 한 곡선 상의 점들은 모두 중심점으로부터 동일한 거리에 있습니다.
+
+**유클리드(Euclidean)** 점 \(A=(a_1,...,a_p)\)와 \(B= (b_1,...,b_p)\) 사이의 유클리드 거리는 모든 \(p\)개 좌표 방향에서의 차이의 제곱합의 제곱근입니다:
+
+\[ d(A,B)=\sqrt{(a_1-b_1)^2+(a_2-b_2)^2+... +(a_p-b_p)^2}. \]
+
+**맨해튼(Manhattan)** 맨해튼, 시가(City Block), 택시 또는 \(L_1\) 거리는 모든 좌표에서의 절대 차이의 합을 취합니다.
+
+\[ d(A,B)=|a_1-b_1|+|a_2-b_2|+... +|a_p-b_p|. \]
+
+**최댓값(Maximum)** 좌표 간의 절대 차이의 최댓값은 \(L_\infty\) 거리라고도 불립니다:
+
+\[ d_\infty(A,B)= \max_{i}|a_i-b_i|. \]
+
+**가중 유클리드 거리(Weighted Euclidean distance)** 는 특징 공간의 서로 다른 방향에 서로 다른 가중치를 부여함으로써 일반적인 유클리드 거리를 일반화한 것입니다. 우리는 이미 [2장](02-chap.html)에서 가중 유클리드 거리의 한 예인 \(\chi^2\) 거리를 접했습니다. 이는 분할표의 행들을 비교하는 데 사용되며, 각 특징의 가중치는 기대값의 역수입니다. _마할라노비스(Mahalanobis)_ 거리는 서로 다른 특징들이 서로 다른 동적 범위를 가질 수 있고, 일부 특징들이 서로 양(+) 또는 음(-)의 상관관계를 가질 수 있다는 사실을 고려하는 또 다른 가중 유클리드 거리입니다. 이 경우 가중치는 특징들의 공분산 행렬로부터 유도됩니다. 질문 5.1도 참조하세요.
+
+**민코프스키(Minkowski)** 유클리드 거리에서처럼 지수를 2가 아닌 \(m\)으로 허용하면 다음과 같은 민코프스키 거리를 얻습니다.
+
+\[ d(A,B) = \left( (a_1-b_1)^m+(a_2-b_2)^m+... +(a_p-b_p)^m \right)^\frac{1}{m}. \tag{5.1}\]
+
+**편집(Edit), 해밍(Hamming)** 이 거리는 문자 시퀀스를 비교하는 가장 간단한 방법입니다. 단순히 두 문자열 사이의 차이점의 개수를 셉니다. 이는 뉴클레오타이드나 아미노산 서열에 적용될 수 있습니다 – 비록 그 경우, 서로 다른 문자 치환은 물리적 또는 진화적 유사성을 고려하여 대개 서로 다른 거리 기여도와 연관되며, 삭제와 삽입도 허용될 수 있습니다.
+
+**이진(Binary)** 두 벡터가 좌표로 이진 비트를 가질 때, 우리는 0이 아닌 원소를 'on'으로, 0인 원소를 'off'로 생각할 수 있습니다. 이진 거리는 적어도 하나의 비트가 켜진 특징들 중에서 오직 하나의 비트만 켜진 특징들의 비율입니다.
+
+**자카드 거리(Jaccard Distance)** 생태학적 또는 돌연변이 데이터에서 특성이나 특징의 발생은 존재와 부재로 번역되어 1과 0으로 인코딩될 수 있습니다. 그러한 상황에서, 공동 발생(co-occurrence)은 종종 공동 부재(co-absence)보다 더 정보가 많습니다. 예를 들어, HIV의 돌연변이 패턴을 비교할 때, 두 서로 다른 균주에서의 돌연변이 공존은 그들의 공동 부재보다 더 중요한 관찰인 경향이 있습니다. 이러한 이유로 생물학자들은 **자카드 지수(Jaccard index)** 를 사용합니다. 우리의 두 관측 벡터를 \(S\)와 \(T\)라고 하고, \(f_{11}\)을 특징이 \(S\)와 \(T\) 모두에서 공동 발생하는 횟수, \(f_{10}\) (및 \(f_{01}\))을 특징이 \(S\)에는 나타나지만 \(T\)에는 나타나지 않는(또는 그 반대) 횟수, 그리고 \(f_{00}\)을 특징이 공동으로 부재하는 횟수라고 합시다. 자카드 지수는 다음과 같습니다.
+
+\[ J(S,T) = \frac{f_{11}}{f_{01}+f_{10}+f_{11}}, \tag{5.2}\]
+
+(즉, \(f_{00}\)을 무시합니다), 그리고 **자카드 비유사성(Jaccard dissimilarity)** 은 다음과 같습니다.
+
+\[ d_J(S,T) = 1-J(S,T) = \frac{f_{01}+f_{10}}{f_{01}+f_{10}+f_{11}}. \tag{5.3}\]
+
+**상관관계 기반 거리**
+
+\[ d(A,B)=\sqrt{2(1-\text{cor}(A,B))}. \]
+
+[![](05-chap_files/figure-html/fig-Mahalanobis-1.png)](05-chap_files/figure-html/fig-Mahalanobis-1.png "그림 5.6: 두 클러스터 중심으로부터 새로운 데이터 점(빨간색)의 거리를 측정하기 위한 마할라노비스 거리 사용 예시.")
+
+그림 5.6: 두 클러스터 중심으로부터 새로운 데이터 점(빨간색)의 거리를 측정하기 위한 마할라노비스 거리 사용 예시.
+
+__
+
+질문 5.1
+
+그림 5.6의 두 클러스터 중심 중 빨간색 점은 어느 쪽에 더 가깝나요?
+
+__
+
+해결책
+
+__
+
+나이브한 대답은 유클리드 메트릭을 사용하여 그 점이 왼쪽 클러스터에 더 가깝다고 결정할 것입니다. 하지만 특징들이 서로 다른 범위와 상관관계를 가지고 있으며, 이들이 두 클러스터 사이에서조차 다르다는 것을 알 수 있으므로, 클러스터 특이적인 마할라노비스 거리를 사용하는 것이 타당합니다. 그림은 두 클러스터에 대한 등고선을 보여줍니다. 이들은 밀도 추정으로부터 얻어졌습니다. 마할라노비스 거리는 이러한 등고선들을 타원으로 근사합니다. 빨간색 점과 각 클러스터 중심 사이의 거리는 가로지르는 등고선의 수에 해당합니다. 오른쪽 그룹이 더 넓게 퍼져 있기 때문에, 빨간색 점은 사실 그 쪽에 더 가깝다는 것을 알 수 있습니다.
+
+[![](imgs/DistanceTriangle.png)](imgs/DistanceTriangle.png "그림 5.7: 거리의 하삼각 행렬은 다양한 R 패키지의 수백 가지 함수들에 의해 계산될 수 있습니다 (vegan의 vegdist, cluster의 daisy, gstudio의 genetic_distance, ape의 dist.dna, amap의 Dist, ecodist의 distance, distory의 dist.multiPhylo, gdistance의 shortestPath, % ade4의 dudi.dist 및 dist.genet).")
+
+그림 5.7: 거리의 하삼각 행렬은 다양한 R 패키지의 수백 가지 함수들에 의해 계산될 수 있습니다 (**[vegan](https://cran.r-project.org/web/packages/vegan/)** 의 `vegdist`, **[cluster](https://cran.r-project.org/web/packages/cluster/)** 의 `daisy`, **[gstudio](https://cran.r-project.org/web/packages/gstudio/)** 의 `genetic_distance`, **[ape](https://cran.r-project.org/web/packages/ape/)** 의 `dist.dna`, **[amap](https://cran.r-project.org/web/packages/amap/)** 의 `Dist`, **[ecodist](https://cran.r-project.org/web/packages/ecodist/)** 의 `distance`, **[distory](https://cran.r-project.org/web/packages/distory/)** 의 `dist.multiPhylo`, **[gdistance](https://cran.r-project.org/web/packages/gdistance/)** 의 `shortestPath`, % **[ade4](https://cran.r-project.org/web/packages/ade4/)** 의 `dudi.dist` 및 `dist.genet`).
+
+### 5.3.1 R에서의 거리 관련 계산
+
+R의 `dist` 함수는 \(n\)개 객체 사이의 완전한 \(n 	imes n\) 거리 행렬이 필요로 할 \(n^2\)개 위치보다 적은 공간을 사용하도록 설계되었습니다. 이 함수는 6가지 거리 선택지(`euclidean`, `maximum`, `manhattan`, `canberra`, `binary`, `minkowski`) 중 하나를 계산하고 완전한 거리 행렬을 재구성하기에 충분한 값들의 벡터를 출력합니다. 함수는 \(n	imes(n-1)/2\) 크기의 관련 벡터를 인코딩하는 `dist` 클래스의 특수 객체를 반환합니다. 다음은 \(3 	imes 3\) 행렬에 대한 출력입니다:
+
+    
+    
+    mx  = c(0, 0, 0, 1, 1, 1)
+    my  = c(1, 0, 1, 1, 0, 1)
+    mz  = c(1, 1, 1, 0, 1, 1)
+    mat = rbind(mx, my, mz)
+    dist(mat)__
+    
+    
+             mx       my
+    my 1.732051         
+    mz 2.000000 1.732051
+    
+    
+    dist(mat, method = "binary")__
+    
+    
+              mx        my
+    my 0.6000000          
+    mz 0.6666667 0.5000000
+
+특정 거리(예를 들어 관측치 1과 2 사이의 거리)에 접근하려면, `dist` 클래스 객체를 다시 행렬로 변환해야 합니다.
+
+    
+    
+    load("../data/Morder.RData")
+    sqrt(sum((Morder[1, ] - Morder[2, ])^2))__
+    
+    
+    [1] 5.593667
+    
+    
+    as.matrix(dist(Morder))[2, 1]__
+    
+    
+    [1] 5.593667
+
+HIV 균주들 사이에 위에서 정의한 자카드 거리를 어떻게 계산하는지 살펴봅시다.
+
+    
+    
+    mut = read.csv("../data/HIVmutations.csv")
+    mut[1:3, 10:16]__
+    
+    
+      p32I p33F p34Q p35G p43T p46I p46L
+    1    0    1    0    0    0    0    0
+    2    0    1    0    0    0    1    0
+    3    0    1    0    0    0    0    0
+
+__
+
+질문 5.2
+
+HIV 데이터 `mut`의 돌연변이들 사이의 자카드 거리(R 패키지 **[vegan](https://cran.r-project.org/web/packages/vegan/)** 의 `vegdist` 함수로 사용 가능)와 상관관계 기반 거리를 비교해 보세요.
+
+__
+
+해결책
+
+__
+
+    
+    
+    library("vegan")
+    mutJ = vegdist(mut, "jaccard")
+    mutC = sqrt(2 * (1 - cor(t(mut))))
+    mutJ __
+    
+    
+          1     2     3     4
+    2 0.800                  
+    3 0.750 0.889            
+    4 0.900 0.778 0.846      
+    5 1.000 0.800 0.889 0.900
+    
+    
+    as.dist(mutC)__
+    
+    
+         1    2    3    4
+    2 1.19               
+    3 1.10 1.30          
+    4 1.32 1.13 1.30     
+    5 1.45 1.19 1.30 1.32
+
+[![](imgs/birds_and_dinosaurs.png)](imgs/birds_and_dinosaurs.png "그림 5.8: 코페네틱 거리(cophenetic distance) 계산 예시 (xkcd).")
+
+그림 5.8: 코페네틱 거리(cophenetic distance) 계산 예시 (xkcd).
+
+전통적인 벡터나 실수가 아닌 복잡한 객체들을 비유사성이나 거리를 사용하여 비교하는 것도 흥미로울 수 있습니다. 혼합 모달리티 데이터(범주형 요인과 연속형 변수 모두)에 대한 고워(Gower) 거리는 `daisy` 함수로 계산할 수 있습니다. 사실 거리는 단순히 \({\mathbb R}^p\) 상의 점들이나 문자 시퀀스뿐만 아니라 임의의 객체 쌍 사이에서도 정의될 수 있습니다. 예를 들어, [10장](10-chap.html)에서 보게 될 **[igraph](https://cran.r-project.org/web/packages/igraph/)** 패키지의 `shortest.paths` 함수는 그래프 상의 정점들 사이의 거리를 계산하고, `cophenetic` 함수는 그림 5.8에 예시된 것처럼 트리의 잎들 사이의 거리를 계산합니다. 우리는 **[distory](https://cran.r-project.org/web/packages/distory/)** 패키지의 `dist.multiPhylo`를 사용하여 트리들 사이의 거리를 계산할 수 있습니다.
+
+그래프 간의 자카드 지수는 동일한 노드 위에 구축된 두 그래프를 살펴보고 공동 발생하는 에지의 수를 셈으로써 계산될 수 있습니다. 이는 **[igraph](https://cran.r-project.org/web/packages/igraph/)** 패키지의 `similarity` 함수에 구현되어 있습니다. 거리와 비유사성은 이미지, 소리, 지도 및 문서를 비교하는 데에도 사용됩니다. 거리는 도메인 지식을 유용하게 아우를 수 있으며, 신중하게 선택된다면 불균질한 데이터를 포함하는 많은 어려운 문제들에 대한 해결책으로 이어질 수 있습니다. 여러분의 데이터에 적합한 "가까움" 또는 유사성의 개념이 무엇인지 스스로에게 묻는 것은, [9장](09-chap.html)에서 탐구할 것처럼 데이터를 표현하는 유용한 방법들을 제공할 수 있습니다.
+
+## 5.4 비모수적 혼합 탐지
+
+### 5.4.1 \(k\)-방법: \(k\)-평균, \(k\)-메도이드 및 PAM
+
+[![그룹의 중심을 때때로 메도이드(medoids)라고 부르며, 따라서 PAM(partitioning around medoids)이라는 이름이 붙었습니다.](imgs/devil.png)](imgs/devil.png "그룹의 중심을 때때로 메도이드(medoids)라고 부르며, 따라서 PAM(partitioning around medoids)이라는 이름이 붙었습니다.")
+
+그룹의 중심을 때때로 메도이드(medoids)라고 부르며, 따라서 PAM(partitioning around medoids)이라는 이름이 붙었습니다.
+
+분할(Partitioning) 또는 반복 재배치(iterative relocation) 방법들은 고차원 설정에서 잘 작동하는데, 거기서는 [4장](04-chap.html)에서 했던 것과 같은 방식으로 확률 밀도, EM 알고리즘 및 모수적 혼합 모델링을 쉽게 사용할 수 없기 4 때문입니다. 거리 측정 외에 이루어져야 할 주요 선택은 클러스터의 수인 \(k\)입니다. PAM(partitioning around medoids, Kaufman and Rousseeuw ([2009](16-chap.html#ref-Kaufman2009))) 방법은 다음과 같습니다:
+
+4 이는 소위 차원의 저주(curse of dimensionality) 때문입니다. 우리는 이에 대해 [12장](12-chap.html)에서 더 자세히 논의할 것입니다.
+
+  1. 일련의 \(n\)개 관측치에 대해 측정된 \(p\)개 특징들의 행렬에서 시작합니다.
+
+  2. \(n\)개 관측치 중에서 \(k\)개의 뚜렷한 **클러스터 중심** ("시드(seeds)")을 무작위로 뽑습니다.
+
+  3. 나머지 각 관측치를 그것과 가장 가까운 중심을 가진 그룹에 할당합니다.
+
+  4. 각 그룹에 대해, 그룹 구성원들과의 거리 합이 최소가 되도록 그룹 내 관측치들 중에서 새로운 중심을 선택합니다; 이를 **메도이드(medoid)** 라고 부릅니다.
+
+  5. 그룹들이 안정화될 때까지 3단계와 4단계를 반복합니다.
+
+알고리즘이 실행될 때마다 2단계에서 서로 다른 초기 시드들이 뽑힐 것이며, 일반적으로 이는 서로 다른 최종 결과로 이어질 수 있습니다. 널리 쓰이는 구현체는 **[cluster](https://cran.r-project.org/web/packages/cluster/)** 패키지의 `pam` 함수입니다.
+
+방법의 약간의 변형으로 메도이드를 클러스터의 산술 평균(질량 중심)으로 대체하는 것을 \(k\)-평균(\((k\)-means)이라고 합니다. PAM에서는 중심이 관측치인 반면, \(k\)-평균에서는 일반적으로 그렇지 않습니다. `kmeans` 함수는 모든 R 설치 시 **[stats](https://cran.r-project.org/web/packages/stats/)** 패키지와 함께 제공됩니다; 예시 실행 결과가 그림 5.9에 나와 있습니다.
+
+[![](05-chap_files/figure-html/fig-clust-
+kmeansastep1-1.png)](05-chap_files/figure-html/fig-clust-kmeansastep1-1.png
+"그림 5.9 (a): ")
+
+(a)
+
+[![](05-chap_files/figure-html/fig-clust-
+kmeansastep1-2.png)](05-chap_files/figure-html/fig-clust-kmeansastep1-2.png
+"그림 5.9 (b): ")
+
+(b)
+
+[![](05-chap_files/figure-html/fig-clust-
+kmeansastep1-3.png)](05-chap_files/figure-html/fig-clust-kmeansastep1-3.png
+"그림 5.9 (c): ")
+
+(c)
+
+그림 5.9: \(k\)-평균 알고리즘의 예시 실행. 무작위로 선택된 초기 중심(검은 원)과 그룹(색상)이 (a)에 표시되어 있습니다. 그룹 멤버십은 중심까지의 거리에 따라 할당됩니다. 각 반복 (b)와 (c)에서, 그룹 중심이 재정의되고 점들이 클러스터 중심에 재할당됩니다.
+
+이른바 \(k\)-방법들은 군집화를 위한 가장 일반적인 오프더쉘프(off-the-shelf) 방법들입니다; 이들은 클러스터들의 크기가 비슷하고 볼록한(blob 모양) 경우에 특히 잘 작동합니다. 반면에, 실제 클러스터들의 크기가 매우 다르다면 큰 클러스터들이 쪼개지는 경향이 있으며, 비구형(non-spherical)이나 비타원형 모양을 가진 그룹들의 경우에도 마찬가지입니다.
+
+__
+
+질문 5.3
+
+\(k\)-평균 알고리즘은 평균 지점을 계산하는 것과 점들을 클러스터에 할당하는 것을 번갈아 가며 수행합니다. 이 교대하는 반복적인 방법이 EM 알고리즘과는 어떻게 다른가요?
+
+__
+
+해결책
+
+__
+
+EM 알고리즘에서는 각 점이 자신에게 할당된 확률적 가중치를 통해 모든 그룹의 평균 계산에 참여합니다. \(k\)-평균 방법에서는 점들이 클러스터에 속하거나 속하지 않거나 둘 중 하나이므로, 각 점은 오직 하나의 클러스터 중심 계산에만 전적으로 참여합니다.
+
+### 5.4.2 재표본 추출을 통한 타이트한 클러스터
+
+서로 다른 초기 중심이나 재표본 추출된 데이터 세트를 사용하여 과정을 여러 번 반복하는 영리한 체계들이 있습니다. 동일한 데이터에 대해 군집화 절차를 여러 번 반복하되 시작 지점을 다르게 하는 것은 Diday와 Brito ([1989](16-chap.html#ref-Diday1989))에 따르면 **강한 형태(strong forms)** 를 생성합니다. 데이터 세트를 반복적으로 하위 샘플링(subsampling)하고 군집화 방법을 적용하면 "거의 항상" 함께 묶이는 관측치 그룹들이 나타날 것입니다; 이들을 **타이트한 클러스터(tight clusters)** 라고 부릅니다 ([Tseng and Wong 2005](16-chap.html#ref-Tseng:2005)). 강한 형태나 타이트한 클러스터에 대한 연구는 클러스터 수의 선택을 용이하게 합니다. 최근에 개발된 **[clusterExperiment](https://bioconductor.org/packages/clusterExperiment/)** 패키지는 많은 서로 다른 군집화 결과들을 결합하고 비교하기 위해 만들어졌습니다. 여기서는 비네트에 나온 예시를 하나 들어보겠습니다. 단일 세포 RNA-Seq 실험은 개별 세포로부터 유전자 전사체를 나타내는 리드 카운트를 제공합니다. 단일 세포 해상도는 연구자로 하여금 무엇보다도 세포 계통(lineage)의 역학을 추적할 수 있게 해줍니다. 군집화는 그러한 데이터를 분석하는 데 매우 유용한 것으로 입증되었습니다.
+
+__
+
+질문 5.4
+
+**[clusterExperiment](https://bioconductor.org/packages/clusterExperiment/)** 패키지의 비네트를 따라가 보세요. 앙상블 군집화 함수인 `clusterMany`를 호출하되, 개별 군집화 노력에는 `pam`을 사용하세요. 포함할 유전자 선택은 가변성이 가장 높은 60개, 100개 또는 150개 유전자로 설정하세요. \(k\)를 4에서 9까지 변화시키며 군집화 결과들을 플롯해 보세요. 무엇을 알 수 있나요?
+
+__
+
+해결책
+
+__
+
+다음 코드는 그림 5.10을 생성합니다.
+
+    
+    
+    library("clusterExperiment")
+    fluidigm = scRNAseq::ReprocessedFluidigmData()
+    se = fluidigm[, fluidigm$Coverage_Type == "High"]
+    assays(se) = list(normalized_counts = as.matrix(limma::normalizeQuantiles(assay(se))))
+    ce = clusterMany(se, clusterFunction = "pam", ks = c(5, 7, 9), run = TRUE,
+                     isCount = TRUE, reduceMethod = "var", nFilterDims = c(60, 100, 150))__
+    
+    
+    9 parameter combinations, 0 use sequential method, 0 use subsampling method
+    Running Clustering on Parameter Combinations...
+    done.
+    
+    
+    clusterLabels(ce) = sub("FilterDims", "", clusterLabels(ce))
+    plotClusters(ce, whichClusters = "workflow", axisLine = -1)__
+
+[![](05-chap_files/figure-html/fig-quiltclust-1-1.png)](05-chap_files/figure-
+html/fig-quiltclust-1-1.png "그림 5.10: 포함된 유전자 수와 클러스터 수 k의 변화에 따른 군집화 결과(행)의 비교. 히트맵의 각 열은 세포에 대응하며, 색상은 할당된 클러스터를 나타냅니다.")
+
+그림 5.10: 포함된 유전자 수와 클러스터 수 \(k\)의 변화에 따른 군집화 결과(행)의 비교. 히트맵의 각 열은 세포에 대응하며, 색상은 할당된 클러스터를 나타냅니다.
+
+## 5.5 군집화 예시: 유세포 분석 및 질량 분석
+
+[![유세포 분석을 위한 생물정보학적 방법들에 대한 리뷰는 (O’Neill et al. 2013)와 잘 관리된 위키백과 문서에서 찾을 수 있습니다.](imgs/book_icon.png)](imgs/book_icon.png "유세포 분석을 위한 생물정보학적 방법들에 대한 리뷰는 \(\[@oneill2013flow\]\)와 잘 관리된 위키백과 문서에서 찾을 수 있습니다.")
+
+유세포 분석을 위한 생물정보학적 방법들에 대한 리뷰는 ([O’Neill et al. 2013](16-chap.html#ref-oneill2013flow))와 [잘 관리된 위키백과 문서](https://en.wikipedia.org/wiki/Flow_cytometry_bioinformatics)에서 찾을 수 있습니다.
+
+단일 세포에 대한 측정값을 연구하면 세포 유형과 역학을 분석할 수 있는 초점과 해상도가 모두 향상됩니다. 유세포 분석(flow cytometry)은 약 10가지의 서로 다른 세포 마커를 동시에 측정할 수 있게 해줍니다. 질량 분석(mass cytometry)은 측정 컬렉션을 세포당 최대 80개의 단백질로 확장합니다. 이 기술의 특히 유망한 응용 분야는 면역 세포 역학 연구입니다.
+
+### 5.5.1 유세포 분석 및 질량 분석
+
+발달의 서로 다른 단계에서 면역 세포는 표면에 고유한 단백질 조합을 발현합니다. 이러한 단백질 마커는 **CD** (**clusters of differentiation**, 분화 클러스터)라고 불리며 유세포 분석(형광 사용, Hulett et al. ([1969](16-chap.html#ref-flowsort))) 또는 질량 분석(중원소 리포터의 단일 세포 원자 질량 분석법 사용, Bendall et al. ([2012](16-chap.html#ref-BendallCell))))에 의해 수집됩니다. 흔히 사용되는 CD의 예로 CD4가 있는데, 이 단백질은 "CD4+"라고 불리는 보조 T 세포(helper T cells)에 의해 발현됩니다. 하지만 일부 세포는 CD4를 발현하지만(따라서 CD4+임), 실제로는 보조 T 세포가 아니라는 점에 유의하세요. 먼저 세포 분석(cytometry) 데이터를 위한 유용한 바이오컨덕터 패키지인 **[flowCore](https://bioconductor.org/packages/flowCore/)** 와 **[flowViz](https://bioconductor.org/packages/flowViz/)** 를 불러오고, 다음과 같이 예시 데이터 객체 `fcsB`를 읽어들입니다:
+
+    
+    
+    library("flowCore")
+    library("flowViz")
+    fcsB = read.FCS("../data/Bendall_2011.fcs", truncate_max_range = FALSE)
+    slotNames(fcsB)__
+    
+    
+    [1] "exprs"       "parameters"  "description"
+
+그림 5.11은 `fcsB` 데이터에서 사용 가능한 두 변수의 산점도를 보여줍니다. (이러한 플롯을 만드는 방법은 아래에서 살펴보겠습니다.) 이 두 차원에서 명확한 이봉성과 군집화를 볼 수 있습니다.
+
+__
+
+질문 5.5
+
+  1. `fcsB` 객체의 구조를 살펴보세요(힌트: `colnames` 함수). 얼마나 많은 변수가 측정되었나요?  
+
+  2. 처음 몇 행을 보기 위해 데이터를 하위 집합화해 보세요(힌트: `Biobase::exprs(fcsB)` 사용). 얼마나 많은 세포가 측정되었나요?
+
+### 5.5.2 데이터 전처리
+
+먼저 동위원소(isotopes)와 마커(항체) 사이의 매핑을 보고하는 테이블 데이터를 불러온 다음, `fcsB`의 열 이름에 있는 동위원소 이름을 마커 이름으로 바꿉니다. 이렇게 하면 후속 분석 및 플로팅 코드가 더 읽기 쉬워집니다:
+
+    
+    
+    markersB = readr::read_csv("../data/Bendall_2011_markers.csv")
+    mt = match(markersB$isotope, colnames(fcsB))
+    stopifnot(!any(is.na(mt)))
+    colnames(fcsB)[mt] = markersB$marker __
+
+이제 그림 5.11을 생성할 준비가 되었습니다.
+
+    
+    
+    flowPlot(fcsB, plotParameters = colnames(fcsB)[2:3], logy = TRUE)__
+
+[![](05-chap_files/figure-html/fig-ObviousClusters-1.png)](05-chap_files/figure-
+html/fig-ObviousClusters-1.png "그림 5.11: 2차원에서 명확한 군집화를 보여주는 세포 측정값.")
+
+그림 5.11: 2차원에서 명확한 군집화를 보여주는 세포 측정값.
+
+그림 5.11에서처럼 데이터를 2차원으로 플롯하는 것만으로도 세포들이 하위 모집단으로 그룹화될 수 있음을 이미 보여줍니다. 때때로 단 하나의 마커만이 모집단을 정의하는 데 사용될 수 있는데, 그 경우 모집단을 분리하기 위해 단순한 **직사각형 게이팅(rectangular gating)** 이 사용됩니다. 예를 들어, CD4+ 세포는 CD4 마커에 대해 높은 값을 가진 하위 모집단을 취함으로써 게이팅될 수 있습니다. 세포 군집화는 데이터 변환을 신중하게 선택함으로써 개선될 수 있습니다. 그림 5.12의 왼쪽 부분은 변환 전의 단순한 1차원 히스토그램을 보여주며, 그림 5.12의 오른쪽에서는 변환 후의 분포를 봅니다. 이는 이봉성(bimodality)과 두 세포 모집단의 존재를 드러냅니다.
+
+**데이터 변환: 하이퍼볼릭 아크사인(asinh).** 유세포 분석과 질량 분석 데이터 모두를 여러 특수 함수 중 하나를 사용하여 변환하는 것이 표준입니다. 우리는 역 하이퍼볼릭 사인(asinh)의 예시를 취합니다: \(\operatorname{asinh}(x) = \log{(x + \sqrt{x^2 + 1})}\). 이로부터 우리는 큰 \(x\) 값에 대해 \(\operatorname{asinh}(x)\)가 로그 함수처럼 행동하며 실제로는 \(\log(x)+\log(2)\)와 거의 같음을 알 수 있습니다. 작은 \(x\)에 대해 이 함수는 \(x\)에 대해 거의 선형적입니다.
+
+__
+
+태스크
+
+변환의 두 가지 주요 영역인 작은 값과 큰 값을 확인하기 위해 다음 코드를 실행해 보세요.
+
+    
+    
+    v1 = seq(0, 1, length.out = 100)
+    plot(v1, asinh(v1), type = 'l')__
+    
+    
+     plot(log(v1), asinh(v1), type = 'l')__
+    
+    
+    v3 = seq(30, 3000, length = 100)
+    plot(log(v3), asinh(v3), type= 'l')__
+
+이것은 [4장](04-chap.html)과 [8장](08-chap.html)에서도 언급된 분산 안정화 변환의 또 다른 예입니다. 그림 5.12는 **[flowCore](https://bioconductor.org/packages/flowCore/)** 패키지의 `arcsinhTransform` 함수를 사용하는 다음 코드로 생성되었습니다.
+
+    
+    
+    asinhtrsf = arcsinhTransform(a = 0.1, b = 1)
+    fcsBT = transform(fcsB, transformList(colnames(fcsB)[-c(1, 2, 41)], asinhtrsf))
+    densityplot(~`CD3all`, fcsB)
+    densityplot(~`CD3all`, fcsBT)__
+
+[![](05-chap_files/figure-html/fig-
+plotTransformations-1.png)](05-chap_files/figure-
+html/fig-plotTransformations-1.png "그림 5.12 (a): ")
+
+(a)
+
+[![](05-chap_files/figure-html/fig-
+plotTransformations-2.png)](05-chap_files/figure-
+html/fig-plotTransformations-2.png "그림 5.12 (b): ")
+
+(b)
+
+그림 5.12: 패널 (a)는 CD3all 변수의 히스토그램을 보여줍니다: 세포들이 0 근처에 군집해 있고 몇 개의 큰 값들이 있습니다. (b)에서는 asinh 변환 후 세포들이 군집을 이루어 두 그룹 또는 유형으로 나뉘는 것을 볼 수 있습니다.
+
+__
+
+질문 5.6
+
+다음 코드는 \(k\)-평균을 사용하여 데이터를 2개의 그룹으로 나누기 위해 몇 개의 차원을 사용하나요?
+
+    
+    
+    kf = kmeansFilter("CD3all" = c("Pop1","Pop2"), filterId="myKmFilter")
+    fres = flowCore::filter(fcsBT, kf)
+    summary(fres)__
+    
+    
+    Pop1: 33434 of 91392 events (36.58%)
+    Pop2: 57958 of 91392 events (63.42%)
+    
+    
+    fcsBT1 = flowCore::split(fcsBT, fres, population = "Pop1")
+    fcsBT2 = flowCore::split(fcsBT, fres, population = "Pop2")__
+
+다음 코드로 생성된 그림 5.13은 CD3와 CD56 마커에 의해 확장된 두 차원으로 데이터를 단순 투영한 것을 보여줍니다:
+
+    
+    
+    library("flowPeaks")
+    fp = flowPeaks(Biobase::exprs(fcsBT)[, c("CD3all", "CD56")])
+    plot(fp)__
+
+[![](05-chap_files/figure-html/fig-flowCD3CD56-1-1.png)](05-chap_files/figure-
+html/fig-flowCD3CD56-1-1.png "그림 5.13: 변환 후 이 세포들은 kmeans를 사용하여 군집화되었습니다.")
+
+그림 5.13: 변환 후 이 세포들은 `kmeans`를 사용하여 군집화되었습니다.
+
+어느 영역에 밀집된 점들을 플롯할 때는 겹쳐그리기(overplotting)를 피해야 합니다. [3장](03-chap.html)에서 선호되는 기법들 중 일부를 보았습니다. 여기서는 등고선(contours)과 음영(shading)을 사용합니다. 다음과 같이 수행합니다:
+
+    
+    
+    flowPlot(fcsBT, plotParameters = c("CD3all", "CD56"), logy = FALSE)
+    contour(fcsBT[, c(40, 19)], add = TRUE)__
+
+[![](05-chap_files/figure-html/fig-
+groupcontourCD3CD56-1.png)](05-chap_files/figure-
+html/fig-groupcontourCD3CD56-1.png "그림 5.14: 그림 5.13과 유사하지만 등고선을 사용했습니다.")
+
+그림 5.14: 그림 5.13과 유사하지만 등고선을 사용했습니다.
+
+__
+
+태스크
+
+바이오컨덕터 패키지 **[ggcyto](https://bioconductor.org/packages/ggcyto/)** 는 `ggplot`을 사용하여 각 환자의 데이터를 서로 다른 패싯(facet)에 그릴 수 있게 해줍니다. 다음과 같은 방식으로 이 접근법을 사용한 출력과 위에서 수행한 작업을 비교해 보세요:
+
+    
+    
+    library("ggcyto")
+    library("labeling")
+    
+    p1 = ggcyto(fcsB, aes(x = CD4)) + geom_histogram(bins = 60)
+    p2 = ggcyto(fcsB, aes(x = CD8)) + geom_histogram(bins = 60)
+    p3 = ggcyto(fcsB, aes(x = CD4, y = CD8)) + geom_density2d(colour = "black")
+    
+    fcsBT = transform(fcsB, transformList(colnames(fcsB)[-c(1, 2, 41)], 
+                                          arcsinhTransform(a = 0, b = 1)))
+                                          
+    p1t = ggcyto(fcsBT, aes(x = CD4))            + geom_histogram(bins = 90)
+    p2t = ggcyto(fcsBT, aes(x = CD4,y = CD8))    + geom_density2d(colour = "black")
+    p3t = ggcyto(fcsBT, aes(x = CD45RA,y = CD20))+ geom_density2d(colour = "black")__
+
+### 5.5.3 밀도 기반 군집화(Density-based clustering)
+
+마커 수가 적고 세포 수가 많은 유세포 분석과 같은 데이터 세트는 밀도 기반 군집화에 적합합니다. 이 방법은 희소한 영역에 의해 분리된 고밀도 영역을 찾습니다. 이 방법은 클러스터가 반드시 볼록할 필요가 없는 경우에도 대처할 수 있다는 장점이 있습니다. 이러한 방법의 한 구현체로 dbscan이 있습니다. 다음 코드를 실행하여 예시를 살펴보겠습니다.
+
+    
+    
+    library("dbscan")
+    mc5 = Biobase::exprs(fcsBT)[, c(15,16,19,40,33)]
+    res5 = dbscan::dbscan(mc5, eps = 0.65, minPts = 30)
+    mc5df = data.frame(mc5, cluster = as.factor(res5$cluster))
+    table(mc5df$cluster)__
+    
+    
+        0     1     2     3     4     5     6     7     8 
+    76053  4031  5450  5310   257   160    63    25    43 
+    
+    
+    ggplot(mc5df, aes(x=CD4,    y=CD8,  col=cluster))+geom_density2d()
+    ggplot(mc5df, aes(x=CD3all, y=CD20, col=cluster))+geom_density2d()__
+
+[![](05-chap_files/figure-html/fig-dbscanfcs5-1.png)](05-chap_files/figure-
+html/fig-dbscanfcs5-1.png "그림 5.15 (a): ")
+
+(a)
+
+[![](05-chap_files/figure-html/fig-dbscanfcs5-2.png)](05-chap_files/figure-
+html/fig-dbscanfcs5-2.png "그림 5.15 (b): ")
+
+(b)
+
+그림 5.15: 이 두 플롯은 5개의 마커를 사용하여 `dbscan`으로 군집화한 결과를 보여줍니다. 여기서는 데이터를 CD4-CD8 및 C3all-CD20 평면에 투영한 것만 보여줍니다.
+
+출력 결과는 그림 5.15에 나와 있습니다. 2D 투영에서의 클러스터 중첩을 통해 군집화의 다차원적 특성을 이해할 수 있습니다.
+
+__
+
+질문 5.7
+
+입력 데이터에서 CD 마커 변수 하나를 추가하여 차원을 6으로 늘려보세요.  
+그런 다음 `eps`를 변화시키면서, 적어도 두 개가 100개 이상의 점을 가진 4개의 클러스터를 찾아보세요.  
+7개의 CD 마커 변수로 이 작업을 반복해 보세요. 무엇을 알 수 있나요?
+
+__
+
+해결책
+
+__
+
+다음 6개 마커를 사용한 예시입니다.
+
+    
+    
+    mc6 = Biobase::exprs(fcsBT)[, c(15, 16, 19, 33, 25, 40)]
+    res = dbscan::dbscan(mc6, eps = 0.65, minPts = 20)
+    mc6df = data.frame(mc6, cluster = as.factor(res$cluster))
+    table(mc6df$cluster)__
+    
+    
+        0     1     2     3     4     5     6 
+    91068    34    61    20    67   121    21 
+
+우리는 eps=0.75일 때 eps=0.65일 때보다 충분히 큰 클러스터를 찾기가 더 쉽다는 것을 알 수 있으며, eps=0.55일 때는 불가능합니다. 차원수를 7로 늘리면 eps를 훨씬 더 크게 만들어야 합니다.
+
+    
+    
+    mc7 = Biobase::exprs(fcsBT)[, c(11, 15, 16, 19, 25, 33, 40)]
+    res = dbscan::dbscan(mc7, eps = 0.95, minPts = 20)
+    mc7df = data.frame(mc7, cluster = as.factor(res$cluster))
+    table(mc7df$cluster)__
+    
+    
+        0     1     2     3     4     5     6     7     8     9    10 
+    90249    21   102   445   158   119    19   224    17    20    18 
+
+이는 소위 **차원의 저주(curse of dimensionality)** 가 실제로 작동하는 것을 보여주며, 이에 대해서는 [12장](12-chap.html)에서 더 자세히 다룹니다.
+
+#### 밀도 기반 군집화(dbscan)는 어떻게 작동하나요 ?
+
+dbscan 방법은 **밀도 연결성(density-connectedness)** 기준에 따라 고밀도 영역의 점들을 군집화합니다. 이 방법은 점들이 연결되어 있는지 확인하기 위해 반지름 \(\epsilon\)인 작은 이웃 구(neighborhood spheres)를 살펴봅니다.
+
+dbscan의 기본 구성 요소는 밀도 도달 가능성(density-reachability) 개념입니다: 점 \(q\)가 점 \(p\)로부터 주어진 임계값 \(\epsilon\)보다 멀리 있지 않고, \(p\)가 충분히 많은 점들에 둘러싸여 있어 \(p\)(및 \(q\))를 밀집 영역의 일부로 간주할 수 있다면, 점 \(q\)는 점 \(p\)로부터 직접 **밀도 도달 가능(density-reachable)**합니다. \(p_1 = p\)이고 \(p_n = q\)인 일련의 점 \(p_1, ..., p_n\)이 있어서 각 \(p_{i+1}\)이 \(p_i\)로부터 직접 밀도 도달 가능하다면, \(q\)는 \(p\)로부터 **밀도 도달 가능** 하다고 합니다.
+
+[![방법이 이웃에서 높은 점 밀도를 찾는 것이 중요합니다. 클러스터 사이의 공백(void) 또는 "누락된 점"에 의해 클러스터를 정의하려는 다른 방법들이 존재합니다. 그러나 이러한 방법들은 차원의 저주에 취약하며, 가짜 "공백"을 만들어낼 수 있습니다.](imgs/devil.png)](imgs/devil.png "방법이 이웃에서 높은 점 밀도를 찾는 것이 중요합니다. 클러스터 사이의 공백(void) 또는 \"누락된 점\"에 의해 클러스터를 정의하려는 다른 방법들이 존재합니다. 그러나 이러한 방법들은 차원의 저주에 취약하며, 가짜 \"공백\"을 만들어낼 수 있습니다.")
+
+방법이 이웃에서 높은 점 밀도를 찾는 것이 중요합니다. 클러스터 사이의 공백(void) 또는 "누락된 점"에 의해 클러스터를 정의하려는 다른 방법들이 존재합니다. 그러나 이러한 방법들은 차원의 저주에 취약하며, 가짜 "공백"을 만들어낼 수 있습니다.
+
+그러면 **클러스터** 는 다음 속성들을 만족하는 점들의 하위 집합입니다:
+
+  1. 클러스터 내의 모든 점은 서로 밀도 연결되어 있습니다.
+
+  2. 어떤 점이 클러스터의 임의의 점에 밀도 연결되어 있다면, 그 점 역시 클러스터의 일부입니다.
+
+  3. 점들의 그룹이 클러스터로 간주되려면 적어도 `MinPts`개의 점을 가져야 합니다.
+
+## 5.6 계층적 군집화(Hierarchical clustering)
+
+[![](imgs/LinnaeusClass-01.png)](imgs/LinnaeusClass-01.png "그림 5.16: 특성 유사성에 따라 유기체들을 군집화한 린네의 분류 체계의 일부입니다.")
+
+그림 5.16: 특성 유사성에 따라 유기체들을 군집화한 린네의 분류 체계의 일부.
+
+계층적 군집화는 유사한 관측치와 하위 클래스를 반복적으로 조립하는 상향식(bottom-up) 접근 방식입니다. 그림 5.16은 린네가 특정 특성에 따라 유기체들의 중첩된 클러스터를 어떻게 만들었는지 보여줍니다. 이러한 계층적 조직은 많은 분야에서 유용하게 사용되어 왔으며, **자연의 사다리(ladder of nature)** 를 상정한 아리스토텔레스까지 거슬러 올라갑니다.
+
+**덴드로그램 순서(Dendrogram ordering)**. 그림 5.17의 예에서 볼 수 있듯이, 레이블의 순서는 형제 쌍(sibling pairs) 내에서는 중요하지 않습니다. 수평 거리는 대개 무의미한 반면, 수직 거리는 어떤 정보를 인코딩합니다. 이러한 속성들은 계통발생학적(monophyletic)이지 않지만(즉, 동일한 서브트리나 클레이드(clade)에 속하지 않음) 플롯에서는 이웃으로 나타나는 대상(예를 들어 오른쪽 나무의 B와 D)에 대해 해석을 내릴 때 기억해야 할 중요한 사항입니다.
+
+[![](imgs/SameTree-01.png)](imgs/SameTree-01.png "그림 5.17: 동일한 계층적 군집 트리의 세 가지 표현 방식.")
+
+그림 5.17: **동일한** 계층적 군집 트리의 세 가지 표현 방식.
+
+**하향식 계층 구조(Top-down hierarchies)**. 대안적인 하향식 접근 방식은 모든 객체를 가져와서 선택된 기준에 따라 순차적으로 분할합니다. 이러한 소위 **재귀적 분할(recursive partitioning)** 방법은 종종 의사 결정 나무(decision trees)를 만드는 데 사용됩니다. 이들은 예측(예를 들어 의료 진단이 주어졌을 때의 생존 기간)에 유용할 수 있습니다: 우리는 그러한 사례들에서 분할을 통해 불균질한 모집단을 더 균질한 하위 그룹으로 나누기를 희망합니다. 이 장에서 우리는 상향식 접근 방식에 집중합니다. [12장](12-chap.html)에서 비지도 학습과 분류에 대해 이야기할 때 분할 방식으로 다시 돌아올 것입니다.
+
+### 5.6.1 집계된 클러스터 간의 (비)유사성을 어떻게 계산하는가?
+
+[![](imgs/ClusterStepChoiceSingle1b.png)](imgs/ClusterStepChoiceSingle1b.png
+"그림 5.18: 단일 연결법(single linkage method)에서, 그룹 C_1과 C_2 사이의 거리는 두 그룹의 점들 사이의 가장 짧은 거리로 정의됩니다.")
+
+그림 5.18: 단일 연결법(single linkage method)에서, 그룹 \(C_1\)과 \(C_2\) 사이의 거리는 두 그룹의 점들 사이의 가장 짧은 거리로 정의됩니다.
+
+상향식으로 작동하는 계층적 군집화 알고리즘은 가장 유사한 관측치들을 함께 그룹화함으로써 쉽게 시작할 수 있습니다. 하지만 우리에게는 단순히 모든 개별 객체 쌍 사이의 거리 그 이상의 것이 필요할 것입니다. 일단 합쳐지고 나면, 새로 형성된 클러스터와 다른 모든 점(또는 기존 클러스터) 사이의 거리가 어떻게 계산되는지 명시해야 합니다. 개별 객체 간 거리에 기반한 여러 선택지가 있으며, 각 선택은 서로 다른 유형의 계층적 군집화를 결과로 냅니다.
+
+**최소 도약(minimal jump)** 방법은 **단일 연결법(single linkage)** 또는 최근접 이웃(nearest neighbor) 방법이라고도 불리며, 클러스터 사이의 거리를 두 클러스터에 있는 임의의 두 점 사이의 가장 작은 거리로 계산합니다 (그림 5.18 참조):
+
+\[ d_{12} = \min_{i \in C_1, j \in C_2 } d_{ij}. \]
+
+이 방법은 점들의 연속적인 줄(strings)처럼 보이는 클러스터를 만드는 경향이 있습니다. 클러스터 트리는 종종 빗(comb) 모양을 띱니다.
+
+[![](imgs/ClusterStepChoiceComplete1b.png)](imgs/ClusterStepChoiceComplete1b.png
+"그림 5.19: 완전 연결법(complete linkage method)에서, 그룹 C_1과 C_2 사이의 거리는 두 그룹의 점 쌍 사이의 최대 거리로 정의됩니다.")
+
+그림 5.19: 완전 연결법(complete linkage method)에서, 그룹 \(C_1\)과 \(C_2\) 사이의 거리는 두 그룹의 점 쌍 사이의 최대 거리로 정의됩니다.
+
+**최대 도약(maximum jump)** (또는 **완전 연결법(complete linkage)**) 방법은 클러스터 사이의 거리를 두 클러스터에 있는 임의의 두 객체 사이의 가장 큰 거리로 정의합니다 (그림 5.19 참조):
+
+\[ d_{12} = \max_{i \in C_1, j \in C_2 } d_{ij}. \]
+
+**평균 연결법(average linkage)** 방법은 위 두 방법의 중간 정도입니다 (여기서 \(|C_k|\)는 클러스터 \(k\)의 원소 수입니다):
+
+\[ d_{12} = \frac{1}{|C_1| |C_2|}\sum_{i \in C_1, j \in C_2 } d_{ij} \]
+
+[![](imgs/BetweenWithinb.png)](imgs/BetweenWithinb.png "그림 5.20: 와드 방법(Ward method)은 그룹 내 제곱합(검은색 에지)을 최소화하면서 그룹 간 제곱합(빨간색 에지)을 최대화합니다.")
+
+그림 5.20: 와드 방법(Ward method)은 그룹 내 제곱합(검은색 에지)을 최소화하면서 그룹 간 제곱합(빨간색 에지)을 최대화합니다.
+
+**와드 방법(Ward’s method)** 은 분산 분석 접근 방식을 취하며, 목표는 클러스터 내의 분산을 최소화하는 것입니다. 이 방법은 매우 효율적이지만, 클러스터의 크기가 작아지는 경향이 있습니다.
+
+집계된 클러스터 간 거리를 정의하는 다양한 선택지의 장단점 ([Chakerian and Holmes 2012](16-chap.html#ref-distory-paper)). 방법 | 장점 | 단점  
+---|---|---
+단일 연결법 | 클러스터 수 | 빗 모양 트리  
+완전 연결법 | 콤팩트한 클래스 | 하나의 관측치가 그룹을 바꿀 수 있음  
+평균 연결법 | 유사한 크기와 분산 | 강건하지 않음  
+중심(Centroid) | 이상치에 강건함 | 클러스터 수가 적어짐  
+와드(Ward) | 관성(inertia) 최소화 | 클래스가 작아짐 (높은 가변성)  
+  
+[![](imgs/CalderHand.png)](imgs/CalderHand.png "그림 5.21: 계층적 군집화 출력은 모빌(mobile)과 유사한 속성을 가집니다: 브랜치들은 그들의 매달린 지점을 중심으로 자유롭게 회전할 수 있습니다.")
+
+그림 5.21: 계층적 군집화 출력은 모빌(mobile)과 유사한 속성을 가집니다: 브랜치들은 그들의 매달린 지점을 중심으로 자유롭게 회전할 수 있습니다.
+
+이것들이 계층적 군집 트리를 구축할 때 우리가 해야 할 선택들입니다. 분할 방법들과 비교할 때 계층적 군집화의 장점은 그룹화의 강도를 그래픽으로 진단할 수 있다는 것입니다: 트리의 내부 에지(inner edges)의 길이입니다.
+
+클러스터들의 크기가 거의 같다는 사전 지식이 있다면, 그룹 내 분산을 최소화하는 평균 연결법(average linkage)이나 와드 방법(Ward’s method)을 사용하는 것이 가장 좋은 전술입니다.
+
+__
+
+질문 5.8
+
+**세포군에 대한 계층적 군집화** `Morder` 데이터는 10명의 환자로부터 얻은 3가지 유형(naïve, effector, memory)의 T 세포에 대한 156개 유전자의 발현 측정값입니다([Holmes et al. 2005](16-chap.html#ref-holmes2005memory)). **[pheatmap](https://cran.r-project.org/web/packages/pheatmap/)** 패키지를 사용하여, 이 데이터의 유클리드 거리와 맨해튼 거리에 대해 덴드로그램이나 재정렬 없이 두 개의 단순한 히트맵을 만드세요.
+
+__
+
+질문 5.9
+
+이제 이 두 거리를 사용한 계층적 군집 트리에서의 순서 차이를 살펴보세요. 어떤 차이점이 눈에 띄나요?
+
+__
+
+해결책
+
+__
+
+다음과 같이 코드를 실행합니다 (출력은 그림 5.22 참조):
+
+    
+    
+    load("../data/Morder.RData")
+    pheatmap(Morder, clustering_method = "single")
+    pheatmap(Morder, clustering_method = "average")
+    pheatmap(Morder, clustering_method = "complete")__
+
+[![](imgs/single14heatmap.png)](imgs/single14heatmap.png "그림 5.22 (a): ")
+
+(a)
+
+[![](imgs/average14heatmap.png)](imgs/average14heatmap.png "그림 5.22 (b): ")
+
+(b)
+
+[![](imgs/complete14heatmap.png)](imgs/complete14heatmap.png "그림 5.22 (c): ")
+
+(c)
+
+그림 5.22: 서로 다른 응집(agglomeration) 선택으로 만들어진 세 개의 계층적 군집 플롯. (a)의 단일 연결법(single linkage)에 대한 빗 모양 구조에 주목하세요. 평균 연결법 (b)와 완전 연결법 (c) 트리는 내부 분기의 길이에 의해서만 다릅니다.
+
+[![](imgs/apeclust14.png)](imgs/apeclust14.png "그림 5.23: 이 트리는 여러 가지 다른 방식으로 그려질 수 있습니다. 여기에 나타난 잎들의 순서는 (8,11,9,10,7,5,6,1,4,2,3)입니다.")
+
+그림 5.23: 이 트리는 여러 가지 다른 방식으로 그려질 수 있습니다. 여기에 나타난 잎들의 순서는 \((8,11,9,10,7,5,6,1,4,2,3)\)입니다.
+
+__
+
+질문 5.10
+
+계층적 군집 트리는 그림 5.21의 콜더 모빌(Calder mobile)과 같아서 많은 내부 피벗 점들을 중심으로 회전할 수 있으며, 주어진 트리와 일관성을 유지하면서 팁(tips) 순서를 제공하는 방법이 많습니다. 그림 5.23의 트리를 보세요. 이 트리와 일관성을 유지하면서 팁 레이블을 정렬할 수 있는 방법은 몇 가지가 있을까요?
+
+행 및/또는 열이 계층적 군집 트리에 기반하여 정렬된 히트맵을 흔히 볼 수 있습니다. 때때로 이것은 일부 클러스터를 매우 강력해 보이게 만듭니다 – 트리가 실제로 암시하는 것보다 더 강력하게 말이죠. 히트맵에서 행과 열을 정렬하는 대안적인 방법들이 있는데, 예를 들어 서열화 방법(ordination methods)5을 사용하여 순서를 찾는 **[NeatMap](https://cran.r-project.org/web/packages/NeatMap/)** 패키지가 있습니다.
+
+5 이들은 [9장](09-chap.html)에서 설명될 것입니다.
+
+## 5.7 클러스터 수 검증 및 선택
+
+우리가 설명한 군집화 방법들은 다양한 제약 조건 하에서 데이터의 좋은 그룹화를 제공하도록 맞춤화되어 있습니다. 그러나 군집화 방법은 클러스터가 없더라도 항상 그룹을 제공한다는 점을 명심하세요. 만약 데이터에 실제 클러스터가 없다면, 계층적 군집 트리는 상대적으로 짧은 내부 분기를 보여줄 수 있지만, 이를 정량화하기는 어렵습니다. 일반적으로 보다 객관적인 기준으로 클러스터 선택을 검증하는 것이 중요합니다.
+
+군집화 결과의 품질을 평가하는 한 가지 기준은 그룹 내 거리를 작게 유지하면서 그룹 간 차이를 어느 정도까지 최대화하느냐 하는 것입니다 (그림 5.20에서 빨간색 선의 길이를 최대화하고 검은색 선의 길이를 최소화하는 것). 우리는 이를 그룹 내 제곱 거리 합 (within-groups sum of squared distances, WSS)으로 공식화합니다:
+
+\[ \text{WSS}_k=\sum_{\ell=1}^k \sum_{x_i \in C_\ell} d^2(x_i, \bar{x}_{\ell}) \tag{5.4}\]
+
+여기서 \(k\)는 클러스터의 수, \(C_\ell\)은 \(\ell\)번째 클러스터에 있는 객체들의 집합, 그리고 \(\bar{x}_\ell\)은 \(\ell\)번째 클러스터의 질량 중심(평균점)입니다. 우리는 동일한 클러스터 알고리즘에 대해 서로 다른 \(k\) 값에 걸쳐 이 수치를 비교하는 데 관심이 있으므로 식 5.4에서 WSS의 \(k\)에 대한 의존성을 명시합니다. 하지만 WSS 그 자체로는 충분한 기준이 되지 못합니다: WSS의 최솟값은 단순히 각 점을 개별 클러스터로 만듦으로써 얻어질 수 있기 때문입니다. WSS는 유용한 구성 요소이지만, 이 숫자만 보는 것보다 더 정교한 아이디어가 필요합니다.
+
+한 가지 아이디어는 \(k\)의 함수로서 \(\text{WSS}_k\)를 살펴보는 것입니다. 이는 항상 감소 함수이겠지만, 급격히 감소하다가 완만해지는 뚜렷한 영역이 있다면, 우리는 이를 **엘보우(elbow)** 라고 부르며 이를 클러스터 수의 잠재적인 최적 지점으로 간주할 수 있습니다.
+
+__
+
+질문 5.11
+
+**\(\text{WSS}_k\)에 대한 대안적 표현.** R을 사용하여 클러스터 내의 모든 점 쌍 사이의 거리 합을 계산하고 이를 \(\text{WSS}_k\)와 비교해 보세요. \(\text{WSS}_k\)가 다음과 같이 쓰여질 수 있음을 알 수 있나요?
+
+\[ \text{WSS}_k=\sum_{\ell=1}^k \frac{1}{2 n_\ell} \sum_{x_i \in C_\ell} \sum_{x_j \in C_\ell} d^2(x_i,x_j), \tag{5.5}\]
+
+여기서 \(n_\ell\)은 \(\ell\)번째 클러스터의 크기입니다.
+
+질문 5.11은 클러스터 내 제곱합 \(\text{WSS}_k\)가 클러스터 내의 모든 점과 중심 사이의 거리뿐만 아니라, 클러스터 내의 모든 점 쌍 사이의 평균 거리도 측정한다는 것을 보여줍니다.
+
+데이터에 적합한 클러스터 수를 결정하는 데 도움이 되는 다양한 지수와 통계량의 거동을 살펴볼 때, 정답을 실제로 알고 있는 경우를 살펴보는 것이 유용할 수 있습니다.
+
+시작하기 위해, 네 개의 그룹에서 나오는 데이터를 시뮬레이션합니다. 우리는 파이프(`%>%`) 연산자와 **[dplyr](https://cran.r-project.org/web/packages/dplyr/)** 의 `bind_rows` 함수를 사용하여 각 클러스터에 해당하는 네 개의 _tibble_ 을 하나의 큰 _tibble_ 로 연결합니다.6
+
+6 파이프 연산자는 왼쪽에 있는 값을 오른쪽 함수로 전달합니다. 이는 코드에서 데이터의 흐름을 더 쉽게 따라갈 수 있게 해줍니다: `f(x) %>% g(y)`는 `g(f(x), y)`와 동일합니다.
+
+    
+    
+    library("dplyr")
+    simdat = lapply(c(0, 8), function(mx) {
+      lapply(c(0,8), function(my) {
+        tibble(x = rnorm(100, mean = mx, sd = 2),
+               y = rnorm(100, mean = my, sd = 2),
+               class = paste(mx, my, sep = ":"))
+       }) %>% bind_rows
+    }) %>% bind_rows
+    simdat __
+    
+    
+    # A tibble: 400 × 3
+            x      y class
+        <dbl>  <dbl> <chr>  
+     1 -2.42  -4.59  0:0    
+     2  1.89  -1.56  0:0    
+     3  0.558  2.17  0:0    
+     4  2.51  -0.873 0:0    
+     5 -2.52  -0.766 0:0    
+     6  3.62   0.953 0:0    
+     7  0.774  2.43  0:0    
+     8 -1.71  -2.63  0:0    
+     9  2.01   1.28  0:0    
+    10  2.03  -1.25  0:0    
+    # ℹ 390 more rows
+    
+    
+    simdatxy = simdat[, c("x", "y")] # class 레이블 제외 __
+    
+    
+    ggplot(simdat, aes(x = x, y = y, col = class)) + geom_point() +
+      coord_fixed()__
+
+[![](05-chap_files/figure-html/fig-simdat-1-1.png)](05-chap_files/figure-
+html/fig-simdat-1-1.png "그림 5.24: 클래스 레이블로 색상이 입혀진 simdat 데이터. 여기서는 우리가 데이터를 생성했으므로 레이블을 알고 있습니다 – 보통은 이를 알지 못합니다.")
+
+그림 5.24: 클래스 레이블로 색상이 입혀진 `simdat` 데이터. 여기서는 우리가 데이터를 생성했으므로 레이블을 알고 있습니다 – 보통은 이를 알지 못합니다.
+
+우리는 \(k\)-평균 방법으로 얻은 클러스터들에 대해 그룹 내 제곱합을 계산합니다:
+
+    
+    
+    wss = tibble(k = 1:8, value = NA_real_)
+    wss$value[1] = sum(scale(simdatxy, scale = FALSE)^2)
+    for (i in 2:nrow(wss)) {
+      km  = kmeans(simdatxy, centers = wss$k[i])
+      wss$value[i] = sum(km$withinss)
+    }
+    ggplot(wss, aes(x = k, y = value)) + geom_col()__
+
+[![](05-chap_files/figure-html/fig-WSS-1.png)](05-chap_files/figure-
+html/fig-WSS-1.png "그림 5.25: k의 함수로서 WSS 통계량의 막대 그래프는 마지막 실질적인 도약이 k=4 직전에 있음을 보여줍니다. 이는 이 데이터에 대한 최선의 선택이 k=4임을 나타냅니다.")
+
+그림 5.25: \(k\)의 함수로서 WSS 통계량의 막대 그래프는 마지막 실질적인 도약이 \(k=4\) 직전에 있음을 보여줍니다. 이는 이 데이터에 대한 최선의 선택이 \(k=4\)임을 나타냅니다.
+
+__
+
+질문 5.12
+
+  1. 위의 코드를 여러 번 실행하고 서로 다른 실행에서의 `wss` 값을 비교해 보세요. 왜 이들은 서로 다를까요?  
+
+  2. `simdat`와 동일한 범위와 차원을 가진, 정규 분포 대신 균등 분포(uniform distributions)로부터 오는 데이터 세트를 만드세요. 이 데이터에 대해 WSS 값을 계산해 보세요. 무엇을 결론지을 수 있나요?
+
+__
+
+질문 5.13
+
+이른바 **칼린스키-하라바츠(Calinski-Harabasz)** 지수는 WSS와 BSS (between group sums of squares, 그룹 간 제곱합)를 사용합니다. 이는 분산 분석에서 사용되는 \(F\) 통계량 — 인자에 의해 설명되는 평균 제곱합 대 평균 잔차 제곱합의 비율 — 에서 영감을 받았습니다:
+
+\[ \text{CH}(k)=\frac{\text{BSS}_k}{\text{WSS}_k}\times\frac{N-k}{N-1} \qquad \text{where} \quad \text{BSS}_k = \sum_{\ell=1}^k n_\ell(\bar{x}_{\ell}-\bar{x})^2, \]
+
+여기서 \(\bar{x}\)는 전체 질량 중심(평균점)입니다. `simdat` 데이터에 대한 칼린스키-하라바츠 지수를 플롯해 보세요.
+
+__
+
+해결책
+
+__
+
+그림 5.26을 생성하는 코드는 다음과 같습니다.
+
+    
+    
+    library("fpc")
+    library("cluster")
+    CH = tibble(
+      k = 2:8,
+      value = sapply(k, function(i) {
+        p = pam(simdatxy, i)
+        calinhara(simdatxy, p$cluster)
+      })
+    )
+    ggplot(CH, aes(x = k, y = value)) + geom_line() + geom_point() +
+      ylab("CH index")__
+
+[![](05-chap_files/figure-html/fig-CHIndex-1-1.png)](05-chap_files/figure-
+html/fig-CHIndex-1-1.png "그림 5.26: simdat 데이터에 대해 계산된, 서로 다른 k 선택에 대한 그룹 간 분산과 그룹 내 분산의 비율인 칼린스키-하라바츠 지수.")
+
+그림 5.26: `simdat` 데이터에 대해 계산된, 서로 다른 \(k\) 선택에 대한 그룹 간 분산과 그룹 내 분산의 비율인 칼린스키-하라바츠 지수.
+
+### 5.7.1 갭 통계량 (gap statistic) 사용하기
+
+그룹 내 제곱합의 로그(\(\log(\text{WSS}_k)\))를 취하고 이를 구조가 덜한 시뮬레이션 데이터의 평균과 비교하는 것은 \(k\)를 선택하는 좋은 방법이 될 수 있습니다. 이것이 Tibshirani, Walther, Hastie ([2001](16-chap.html#ref-gap2001))에 의해 도입된 **갭 통계량(gap statistic)** 의 기본 아이디어입니다. 우리는 클러스터 수인 여러 \(k\) 값에 대해 \(\log(\text{WSS}_k)\)를 계산하고, 이를 다양한 가능한 '군집되지 않은' 분포를 가진 유사한 차원의 참조 데이터에서 얻은 것과 비교합니다. 위에서 했던 것처럼 균등하게 분포된 데이터를 사용하거나, 원래 데이터와 동일한 공분산 구조를 가진 시뮬레이션 데이터를 사용할 수 있습니다.
+
+![](imgs/roulette.png)
+
+이 알고리즘은 관측된 데이터에 대한 갭 통계량을 유사한 구조를 가진 시뮬레이션 데이터의 평균과 비교하는 몬테카를로 방법입니다.
+
+**갭 통계량 계산 알고리즘 ([Tibshirani, Walther, and Hastie 2001](16-chap.html#ref-gap2001)):**
+
+  1. 데이터를 \(k\)개의 클러스터로 군집화하고 다양한 \(k\) 선택에 대해 \(\text{WSS}_k\)를 계산합니다.
+
+  2. 균질한 분포로부터 몬테카를로 샘플링을 사용하여 \(B\)개의 그럴듯한 참조 데이터 세트를 생성하고, 이 새로운 시뮬레이션 데이터에 대해 위의 1단계를 다시 수행합니다. 그 결과 시뮬레이션 데이터에 대한 \(B\)개의 새로운 그룹 내 제곱합 \(W_{kb}^*\)(\(b=1,...,B\))을 얻습니다.
+
+  3. \(\text{gap}(k)\)-통계량을 계산합니다:
+
+\[ \text{gap}(k) = \overline{l}_k - \log \text{WSS}_k \quad\text{with}\quad \overline{l}_k =\frac{1}{B}\sum_{b=1}^B \log W^*_{kb} \]
+
+군집화가 잘 되었다면 (즉, WSS가 더 작다면) 첫 번째 항이 두 번째 항보다 클 것으로 예상됩니다. 따라서 갭 통계량은 대부분 양수일 것이며 우리는 그 최댓값을 찾습니다.
+
+  4. 표준 편차
+
+\[ \text{sd}_k^2 = \frac{1}{B-1}\sum_{b=1}^B\left(\log(W^*_{kb})-\overline{l}_k\right)^2 \]
+
+를 사용하여 최적의 \(k\)를 선택하는 데 도움을 줄 수 있습니다. 여러 선택지가 있는데, 예를 들어 다음과 같은 최소의 \(k\)를 선택하는 것입니다.
+
+\[ \text{gap}(k) \geq \text{gap}(k+1) - s'_{k+1}\qquad \text{where } s'_{k+1}=\text{sd}_{k+1}\sqrt{1+1/B}. \]
+
+The packages **[cluster](https://cran.r-project.org/web/packages/cluster/)** and **[clusterCrit](https://cran.r-project.org/web/packages/clusterCrit/)** provide implementations.
+
+__
+
+질문 5.14
+
+Make a function that plots the gap statistic as in Figure 5.27. Show the output for the `simdat` example dataset clustered with the `pam` function.
+
+__
+
+해결책
+
+__
+
+    
+    
+    library("cluster")
+    library("ggplot2")
+    pamfun = function(x, k)
+      list(cluster = pam(x, k, cluster.only = TRUE))
+    
+    gss = clusGap(simdatxy, FUN = pamfun, K.max = 8, B = 50,
+                  verbose = FALSE)
+    plot_gap = function(x) {
+      gstab = data.frame(x$Tab, k = seq_len(nrow(x$Tab)))
+      ggplot(gstab, aes(k, gap)) + geom_line() +
+        geom_errorbar(aes(ymax = gap + SE.sim,
+                          ymin = gap - SE.sim), width=0.1) +
+        geom_point(size = 3, col=  "red")
+    }
+    plot_gap(gss)__
+
+[![](05-chap_files/figure-html/fig-GapStat-1-1.png)](05-chap_files/figure-
+html/fig-GapStat-1-1.png "그림 5.27: 갭 통계량, 질문 5.14를 참조하세요.")
+
+그림 5.27: 갭 통계량, 질문 5.14를 참조하세요.
+
+Let’s now use the method on a real example. We load the **[Hiiragi](https://bioconductor.org/packages/Hiiragi/)** data that we already explored in [Chapter 3](03-chap.html) and will see how the cells cluster.
+
+    
+    
+    library("Hiiragi2013")__
+    
+    
+    In chunk 'Hiiragi': Warning: replacing previous import 'boot::logit' by 'gtools::logit' whenloading 'Hiiragi2013'
+    
+    
+    In chunk 'Hiiragi': Warning: replacing previous import 'boot::inv.logit' by 'gtools::inv.logit'when loading 'Hiiragi2013'
+    
+    
+    data("x")__
+
+We start by choosing the 50 most variable genes (features)7.
+
+7 The intention behind this step is to reduce the influence of technical (or batch) effects. Although individually small, when accumulated over all the 45101 features in `x`, many of which match genes that are weakly or not expressed, without this feature selection step, such effects are prone to suppress the biological signal.
+
+    
+    
+    selFeats = order(rowVars(Biobase::exprs(x)), decreasing = TRUE)[1:50]
+    embmat = t(Biobase::exprs(x)[selFeats, ])
+    embgap = clusGap(embmat, FUN = pamfun, K.max = 24, verbose = FALSE)
+    k1 = maxSE(embgap$Tab[, "gap"], embgap$Tab[, "SE.sim"])
+    k2 = maxSE(embgap$Tab[, "gap"], embgap$Tab[, "SE.sim"],
+               method = "Tibs2001SEmax")
+    c(k1, k2)__
+    
+    
+    [1] 9 7
+
+The default choice for the number of clusters, `k1`, is the first value of \(k\) for which the gap is not larger than the first local maximum minus a standard error \(s\) (see the manual page of the `clusGap` function). This gives a number of clusters \(k = 9\), whereas the choice recommended by Tibshirani, Walther, and Hastie ([2001](16-chap.html#ref-gap2001)) is the smallest \(k\) such that \(\text{gap}(k) \geq \text{gap}(k+1) - s'_{k+1}\), this gives \(k = 7\). Let’s plot the gap statistic (Figure 5.28).
+
+    
+    
+    plot(embgap, main = "")
+    cl = pamfun(embmat, k = k1)$cluster
+    table(pData(x)[names(cl), "sampleGroup"], cl)__
+    
+    
+                     cl
+                       1  2  3  4  5  6  7  8  9
+      E3.25           23 11  1  1  0  0  0  0  0
+      E3.25 (FGF4-KO)  0  0  1 16  0  0  0  0  0
+      E3.5 (EPI)       2  1  0  0  0  8  0  0  0
+      E3.5 (FGF4-KO)   0  0  8  0  0  0  0  0  0
+      E3.5 (PE)        0  0  0  0  9  2  0  0  0
+      E4.5 (EPI)       0  0  0  0  0  0  0  4  0
+      E4.5 (FGF4-KO)   0  0  0  0  0  0  0  0 10
+      E4.5 (PE)        0  0  0  0  0  0  4  0  0
+
+[![](05-chap_files/figure-html/fig-gapHiiragi-1-1.png)](05-chap_files/figure-
+html/fig-gapHiiragi-1-1.png "그림 5.28: Hiiragi2013 데이터에 대한 갭 통계량.")
+
+그림 5.28: **[Hiiragi2013](https://bioconductor.org/packages/Hiiragi2013/)** 데이터에 대한 갭 통계량.
+
+위에서 우리는 `pamfun`으로부터 얻은 군집화 결과와 데이터의 어노테이션에 포함된 샘플 레이블을 비교한 것을 볼 수 있습니다.
+
+__
+
+질문 5.15
+
+가장 가변적인 상위 50개 유전자만 사용하는 대신 `x`의 모든 특성을 사용하면 결과가 어떻게 달라질까요?
+
+### 5.7.2 붓스트랩을 이용한 클러스터 검증
+
+[![](imgs/BootstrapClusterNew.png)](imgs/BootstrapClusterNew.png "그림 5.29 (a): ")
+
+(a)
+
+[![](imgs/BootstrapCluster2New.png)](imgs/BootstrapCluster2New.png "그림 5.29 (b): ")
+
+(b)
+
+그림 5.29: 동일한 분포 \(F\)로부터 얻은 서로 다른 표본들은 서로 다른 군집화 결과로 이어집니다. (a)에서 우리는 실제 표집 가변성을 봅니다. 붓스트랩은 (b)에서 보듯이 경험적 분포 함수 \(\hat{F}_n\)을 사용하여 하위 표본(subsamples)을 추출함으로써 이러한 표집 가변성을 시뮬레이션합니다.
+
+우리는 [4장](04-chap.html)에서 붓스트랩 원리를 보았습니다: 이상적으로는 기저의 데이터 생성 프로세스로부터 많은 새로운 표본(데이터 세트)을 얻어 각각에 군집화 방법을 적용한 다음, 군집화를 비교하기 위해 위에서 사용했던 것과 같은 지수를 사용하여 클러스터가 얼마나 안정적인지 또는 얼마나 변하는지 보고 싶을 것입니다. 물론 우리에게는 이러한 추가 표본이 없습니다. 따라서 우리는 단순히 데이터의 서로 다른 무작위 하위 표본을 취하여 매번 얻는 서로 다른 군집화 결과를 비교함으로써 새로운 데이터 세트를 만들 것입니다. Tibshirani, Walther, Hastie ([2001](16-chap.html#ref-gap2001))는 갭 통계량을 사용하여 클러스터 수를 추론할 때 붓스트랩 재표본 추출을 사용할 것을 권장합니다.
+
+우리는 계속해서 **[Hiiragi2013](https://bioconductor.org/packages/Hiiragi2013/)** 데이터를 사용하겠습니다. 여기서는 생쥐 배아의 배아기 3.5일(E3.5) 배반포의 내세포집단(ICM)이 다분화능 에피블라스트(EPI)와 원시 내배엽(PE)에 해당하는 두 개의 클러스터로 "자연스럽게" 나뉘는 반면, 배아기 3.25일(E3.25)의 데이터는 아직 이러한 대칭성 붕괴(symmetry breaking)를 보여주지 않는다는 가설에 대한 조사를 따라갑니다.
+
+우리는 군집화 과정에서 실제 그룹 레이블을 사용하지 않고, 결과의 최종 해석에서만 이를 사용할 것입니다. 우리는 (E3.5)와 (E3.25)라는 두 가지 서로 다른 데이터 세트에 각각 붓스트랩을 적용할 것입니다. 붓스트랩의 각 단계는 데이터의 무작위 하위 집합에 대한 군집화 결과를 생성할 것이며, 우리는 이를 클러스터 앙상블의 합의(consensus)를 통해 비교해야 할 것입니다. **[clue](https://cran.r-project.org/web/packages/clue/)** 패키지([Hornik 2005](16-chap.html#ref-Hornik2005))에 이를 위한 유용한 프레임워크가 있습니다. Ohnishi 등 ([2014](16-chap.html#ref-Ohnishi2014))의 부록에서 가져온 `clusterResampling` 함수가 이 접근 방식을 구현합니다:
+
+    
+    
+    clusterResampling = function(x, ngenes = 50, k = 2, B = 250,
+                                 prob = 0.67) {
+      mat = Biobase::exprs(x)
+      ce = cl_ensemble(list = lapply(seq_len(B), function(b) {
+        selSamps = sample(ncol(mat), size = round(prob * ncol(mat)),
+                          replace = FALSE)
+        submat = mat[, selSamps, drop = FALSE]
+        sel = order(rowVars(submat), decreasing = TRUE)[seq_len(ngenes)]
+        submat = submat[sel,, drop = FALSE]
+        pamres = pam(t(submat), k = k)
+        pred = cl_predict(pamres, t(mat[sel, ]), "memberships")
+        as.cl_partition(pred)
+      }))
+      cons = cl_consensus(ce)
+      ag = sapply(ce, cl_agreement, y = cons)
+      list(agreements = ag, consensus = cons)
+    }__
+
+`clusterResampling` 함수는 다음 단계들을 수행합니다:
+
+  1. 복원 추출 없이 샘플의 67%를 선택하여 데이터(모든 E3.25 샘플 또는 모든 E3.5 샘플)의 무작위 하위 집합을 추출합니다.
+
+  2. (하위 집합에서) 전체 분산 기준 상위 `ngenes`개의 특징을 선택합니다.
+
+  3. \(k\)-평균 군집화를 적용하고, **[clue](https://cran.r-project.org/web/packages/clue/)** 패키지의 `cl_predict` 메서드를 사용하여 하위 집합에 포함되지 않았던 샘플들이 어느 클러스터 중심과 가장 가까운지에 따라 그들의 클러스터 멤버십을 예측합니다.
+
+  4. 1-3단계를 `B`번 반복합니다.
+
+  5. 합의 군집화(consensus clustering, `cl_consensus`)를 적용합니다.
+
+  6. `B`개의 군집화 결과 각각에 대해 `cl_agreement` 함수를 통해 합의 결과와의 일치도를 측정합니다. 여기서 일치도가 높으면 1에 가까운 값을, 낮으면 더 작은 값을 갖습니다. 일치도가 전반적으로 높다면 \(k\)개 클래스로의 군집화는 안정적이고 재현 가능한 것으로 간주될 수 있습니다. 반대로 낮다면 샘플들을 \(k\)개 클러스터로 나누는 안정적인 분할이 뚜렷하지 않음을 의미합니다.
+
+합의 군집화를 위한 클러스터 간 거리 척도로 멤버십의 **유클리드** 비유사성이 사용됩니다. 즉, \(\mathbf{u}\)와 \(\mathbf{v}\)의 모든 열 순열 사이의 최소 제곱 차이합의 제곱근입니다(여기서 \(\mathbf{u}\)와 \(\mathbf{v}\)는 클러스터 멤버십 행렬임). 일치도 측정값으로는 \(1 - d/m\) 수치가 사용되는데, 여기서 \(d\)는 유클리드 비유사성이고 \(m\)은 최대 유클리드 비유사성의 상한선입니다.
+
+    
+    
+    iswt = (x$genotype == "WT")
+    cr1 = clusterResampling(x[, x$Embryonic.day == "E3.25" & iswt])
+    cr2 = clusterResampling(x[, x$Embryonic.day == "E3.5"  & iswt])__
+
+결과는 그림 5.30에 나와 있습니다. 이들은 E3.5 데이터가 두 개의 클러스터로 나뉜다는 가설을 확인해 줍니다.
+
+    
+    
+    ag1 = tibble(agreements = cr1$agreements, day = "E3.25")
+    ag2 = tibble(agreements = cr2$agreements, day = "E3.5")
+    p1 <- ggplot(bind_rows(ag1, ag2), aes(x = day, y = agreements)) +
+      geom_boxplot() +
+      ggbeeswarm::geom_beeswarm(cex = 1.5, col = "#0000ff40")
+    mem1 = tibble(y = sort(cl_membership(cr1$consensus)[, 1]),
+                  x = seq(along = y), day = "E3.25")
+    mem2 = tibble(y = sort(cl_membership(cr2$consensus)[, 1]),
+                  x = seq(along = y), day = "E3.5")
+    p2 <- ggplot(bind_rows(mem1, mem2), aes(x = x, y = y, col = day)) +
+      geom_point() + facet_grid(~ day, scales = "free_x")
+    gridExtra::grid.arrange(p1, p2, widths = c(2.4,4.0))__
+
+[![](05-chap_files/figure-html/fig-figClue1-1.png)](05-chap_files/figure-
+html/fig-figClue1-1.png "그림 5.30: E3.25 및 E3.5 샘플을 이용한 클러스터 안정성 분석. 왼쪽: B개의 군집화 결과와 합의 결과 사이의 일치도에 대한 beeswarm 플롯; 1은 완벽한 일치를 나타내며, 낮은 값은 낮은 일치도를 나타냅니다. 오른쪽: 합의 군집화의 멤버십 확률. E3.25의 경우 확률이 분산되어 있어 개별 군집화 결과들이 자주 일치하지 않음을 나타내는 반면, E3.5의 경우 분포가 이봉형(bimodal)이며 모호한 샘플은 하나뿐입니다.")
+
+그림 5.30: E3.25 및 E3.5 샘플을 이용한 클러스터 안정성 분석. 왼쪽: `B`개의 군집화 결과와 합의 결과 사이의 일치도에 대한 beeswarm 플롯; \(1\)은 완벽한 일치를 나타내며, 낮은 값은 낮은 일치도를 나타냅니다. 오른쪽: 합의 군집화의 멤버십 확률. E3.25의 경우 확률이 분산되어 있어 개별 군집화 결과들이 자주 일치하지 않음을 나타내는 반면, E3.5의 경우 분포가 이봉형(bimodal)이며 모호한 샘플은 하나뿐입니다.
+
+#### 계산 및 메모리 문제
+
+[![계산 복잡도. 어떤 알고리즘이 O(n^k)라고 불리는 것은, n이 커짐에 따라 자원 소비(CPU 시간 또는 메모리)가 n^k에 비례하여 증가함을 의미합니다. 다른(때로는 상당한) 기본 비용이나 n의 더 낮은 거듭제곱에 비례하여 증가하는 비용이 있을 수 있지만, n이 무한대로 감에 따라 이들은 항상 지배적인 항에 비해 무시할 수 있는 수준이 됩니다.](imgs/devil.png)](imgs/devil.png "계산 복잡도. 어떤 알고리즘이 O(n^k)라고 불리는 것은, n이 커짐에 따라 자원 소비(CPU 시간 또는 메모리)가 n^k에 비례하여 증가함을 의미합니다. 다른(때로는 상당한) 기본 비용이나 n의 더 낮은 거듭제곱에 비례하여 증가하는 비용이 있을 수 있지만, n이 무한대로 감에 따라 이들은 항상 지배적인 항에 비해 무시할 수 있는 수준이 됩니다.")
+
+**계산 복잡도(Computational complexity)**. 어떤 알고리즘이 \(O(n^k)\)라고 불리는 것은, \(n\)이 커짐에 따라 자원 소비(CPU 시간 또는 메모리)가 \(n^k\)에 비례하여 증가함을 의미합니다. 다른(때로는 상당한) 기본 비용이나 \(n\)의 더 낮은 거듭제곱에 비례하여 증가하는 비용이 있을 수 있지만, \(n\to\infty\)임에 따라 이들은 항상 지배적인 항에 비해 무시할 수 있는 수준이 됩니다.
+
+\(n\)개 객체의 전체 대 전체 거리 계산이 (시간과 메모리 측면에서) \(O(n^2)\) 작업임을 기억하는 것이 중요합니다. 전통적인 계층적 군집화 접근 방식(**[stats](https://cran.r-project.org/web/packages/stats/)** 패키지의 `hclust` 등)은 시간 측면에서 심지어 \(O(n^3)\)입니다. \(n\)이 크다면 이는 비실용적일 수 있습니다8. 우리는 전체 대 전체 거리 행렬의 완전한 계산을 피할 수 있습니다. 예를 들어, \(k\)-평균은 각 객체와 클러스터 중심 사이의 거리만 추적하면 되므로 \(O(n)\)의 계산만 필요하다는 장점이 있으며, 클러스터 중심의 수는 \(n\)이 증가하더라도 일정하게 유지됩니다.
+
+8 예를 들어 백만 개 객체에 대한 거리 행렬을 8바이트 부동 소수점으로 저장하면 약 4테라바이트를 차지하며, `hclust`와 같은 알고리즘은 각 반복이 1나노초만 걸린다는 낙관적인 가정 하에서도 30년 동안 실행될 것입니다.
+
+**[fastclust](https://cran.r-project.org/web/packages/fastclust/)** ([Müllner 2013](16-chap.html#ref-Mullner:2013)) 및 **[dbscan](https://cran.r-project.org/web/packages/dbscan/)** 과 같은 빠른 구현체들은 많은 수의 관측치를 처리하기 위해 신중하게 최적화되었습니다.
+
+## 5.8 노이즈 제거 수단으로서의 군집화
+
+어떤 기저의 실제 값(예를 들어 게놈의 DNA 서열로 표현되는 종)을 반영하지만 기술적 노이즈에 의해 변질된 측정값 세트를 생각해 봅시다. 군집화는 이러한 노이즈를 제거하는 데 사용될 수 있습니다.
+
+### 5.8.1 서로 다른 베이스라인 빈도를 가진 노이즈 섞인 관측치
+
+동일한 오차 분산으로 만들어진 관측치들의 이변량 분포(bivariate distribution)가 있다고 가정해 봅시다. 그러나 샘플링은 베이스라인 빈도가 매우 다른 두 그룹으로부터 이루어집니다. 더 나아가, 오차는 연속적이고 독립적인 이변량 정규 분포를 따른다고 가정합시다. 다음 코드에서 생성된 것처럼 우리는 `seq1`을 \(10^{3}\)개, `seq2`를 \(10^{5}\)개 가지고 있습니다:
+
+    
+    
+    library("mixtools")
+    seq1 = rmvnorm(n = 1e3, mu = -c(1, 1), sigma = 0.5 * diag(c(1, 1)))
+    seq2 = rmvnorm(n = 1e5, mu =  c(1, 1), sigma = 0.5 * diag(c(1, 1)))
+    twogr = data.frame(
+      rbind(seq1, seq2),
+      seq = factor(c(rep(1, nrow(seq1)),
+                     rep(2, nrow(seq2))))
+    )
+    colnames(twogr)[1:2] = c("x", "y")
+    library("ggplot2")
+    ggplot(twogr, aes(x = x, y = y, colour = seq,fill = seq)) +
+      geom_hex(alpha = 0.5, bins = 50) + coord_fixed()__
+
+[![](05-chap_files/figure-html/fig-seqradius-1.png)](05-chap_files/figure-
+html/fig-seqradius-1.png "그림 5.31: 두 그룹 모두 동일한 분산의 노이즈 분포를 가지고 있음에도 불구하고, 그룹의 겉보기 반지름은 매우 다릅니다. seq2의 10^{5}개 인스턴스는 10^{3}개뿐인 seq1보다 오차가 발생할 기회가 훨씬 더 많습니다. 따라서 우리는 데이터를 군집화할 때 빈도가 중요하다는 것을 알 수 있습니다.")
+
+그림 5.31: 두 그룹 모두 동일한 분산의 노이즈 분포를 가지고 있음에도 불구하고, 그룹의 겉보기 반지름은 매우 다릅니다. `seq2`의 \(10^{5}\)개 인스턴스는 \(10^{3}\)개뿐인 `seq1`보다 오차가 발생할 기회가 훨씬 더 많습니다. 따라서 우리는 데이터를 군집화할 때 빈도가 중요하다는 것을 알 수 있습니다.
+
+관측된 값들은 그림 5.31과 같이 보일 것입니다.
+
+__
+
+질문 5.16
+
+데이터 `seq1`과 `seq2`를 가져와서 그룹 중심으로부터의 거리에 따라 두 그룹으로 군집화해 보세요. 결과가 두 서열 유형 각각의 빈도에 의존해야 한다고 생각하시나요?
+
+__
+
+해결책
+
+__
+
+분류학적 군집화(taxonomic clustering), 즉 OTU(operational taxonomic unit) 군집화([Caporaso et al. 2010](16-chap.html#ref-caporaso2010qiime); [P. D. Schloss et al. 2009](16-chap.html#ref-mothur)) 방법들에서 종종 사용되는 이러한 접근 방식은 최적이 아닙니다.
+
+오직 유사성에만 기반한 방법들은 **대표성(representativeness)** 휴리스틱에 내재된 편향으로 인해 고통받습니다. 군집화 및 분류학적 할당에서 대표성과 거리 기반 휴리스틱만을 사용하려는 우리의 자연스러운 경향이 어떻게 편향된 결과로 이어질 수 있는지 설명하는 데 도움이 되는 인지 심리학의 세계로 잠시 외도해 봅시다.
+
+1970년대에 Tversky와 Kahneman ([1975](16-chap.html#ref-tversky1975judgment))은 우리가 일반적으로 가장 유사한 **대표자(representatives)** 를 살펴봄으로써 그룹을 할당한다고 지적했습니다. 군집화와 그룹 할당에서 이는 새로운 서열을 그 중심까지의 거리에 따라 그룹에 할당하는 것을 의미할 것입니다. 사실 이는 서로 다른 그룹의 보급률(prevalence) 차이를 무시하고 동일한 반지름을 가진 공을 취하는 것과 같습니다. 이러한 심리학적 오류는 많은 다양한 휴리스틱과 편향을 다루는 중요한 Science 논문([Tversky and Kahneman 1974](16-chap.html#ref-tversky1974heuristics))에서 처음 논의되었습니다.
+
+[![우리의 자연스러운 휴리스틱과 우리가 확률 계산을 할 때 그것들이 우리를 오도할 수 있는 방식에 대한 단행본 규모의 논의는 Kahneman (2011)을 참조하십시오(특히 14장과 15장을 추천합니다).](imgs/book_icon.png)](imgs/book_icon.png "우리의 자연스러운 휴리스틱과 우리가 확률 계산을 할 때 그것들이 우리를 오도할 수 있는 방식에 대한 단행본 규모의 논의는 @kahneman2011을 참조하십시오(특히 14장과 15장을 추천합니다).")
+
+우리의 자연스러운 휴리스틱과 우리가 확률 계산을 할 때 그것들이 우리를 오도할 수 있는 방식에 대한 단행본 규모의 논의는 Kahneman ([2011](16-chap.html#ref-kahneman2011))을 참조하십시오 (특히 14장과 15장을 추천합니다).
+
+__
+
+태스크
+
+서열 길이 `len=200`인 `n=2000`개의 이진 변수를 시뮬레이션하여, `n`개 시퀀싱 리드들의 품질을 나타내도록 합니다. 단순함을 위해, 시퀀싱 오차가 확률 `perr=0.001`로 독립적이고 균일하게 발생한다고 가정합시다. 즉, 우리는 오직 베이스 콜링이 올바르게 되었는지(`TRUE`) 아니면 아닌지(`FALSE`)에만 관심이 있습니다.
+
+    
+    
+    n    = 2000
+    len  = 200
+    perr = 0.001
+    seqs = matrix(runif(n * len) >= perr, nrow = n, ncol = len)__
+
+이제, 리드들 사이의 모든 쌍별 거리를 계산합니다.
+
+    
+    
+    dists = as.matrix(dist(seqs, method = "manhattan"))__
+
+서열 수 `k` (2부터 `n`까지)의 다양한 값들에 대해, 이 서열 세트의 최대 거리가 아래 코드에 의해 계산되어 그림 5.32에 표시됩니다.
+
+    
+    
+    library("tibble")
+    dfseqs = tibble(
+      k = 10 ^ seq(log10(2), log10(n), length.out = 20),
+      diameter = vapply(k, function(i) {
+        s = sample(n, i)
+        max(dists[s, s])
+        }, numeric(1)))
+    ggplot(dfseqs, aes(x = k, y = diameter)) + geom_point()+geom_smooth()__
+
+[![](05-chap_files/figure-html/fig-diameter-1.png)](05-chap_files/figure-
+html/fig-diameter-1.png "그림 5.32: 서열 수의 함수로서의 서열 세트의 지름.")
+
+그림 5.32: 서열 수의 함수로서의 서열 세트의 지름.
+
+우리는 이제 오차 확률을 통합하는 노이즈 제거 메커니즘을 사용하여 16S rRNA 리드 군집화를 개선할 것입니다.
+
+### 5.8.2 16S rRNA 서열 노이즈 제거
+
+**데이터란 무엇인가?** 박테리아의 16S rRNA 유전자에는 분류군 특이적인 소위 **가변 영역(variable regions)** 이 있습니다. 이들은 분류군(taxon) 9 식별을 가능하게 하는 지문을 제공합니다. 원시 데이터는 PCR로 증폭된 DNA 영역들의 품질 점수가 매겨진 서열들이 들어있는 FASTQ 파일입니다10. 우리는 데이터로부터 확률적 노이즈 모델을 구축하기 위해 반복적으로 교대하는 접근 방식11을 사용합니다. 우리는 이를 **데 노보(de novo)** 방법이라고 부르는데, 왜냐하면 군집화를 사용하고 클러스터 중심을 노이즈가 제거된 서열 변이(Amplicon Sequence Variants, ASVs, ([Benjamin J. Callahan, McMurdie, and Holmes 2017](16-chap.html#ref-Callahan:2017)) 참조)로 사용하기 때문입니다. 모든 노이즈가 제거된 변이들을 찾은 후, 우리는 서로 다른 샘플들에 걸친 그들의 카운트에 대한 분할표를 만듭니다. 우리는 [10장](10-chap.html)에서 이러한 표들이 어떻게 네트워크와 그래프를 사용하여 기저의 박테리아 커뮤니티의 속성을 추론하는 데 사용될 수 있는지 보여줄 것입니다.
+
+9 calling different groups of bacteria _taxa_ rather than _species_ highlights the approximate nature of the concept, as the notion of species is more fluid in bacteria than, say, in animals.
+
+10 [FASTQ 형식은 여기서 설명됩니다](https://en.wikipedia.org/wiki/FASTQ_format).
+
+11 [4장](04-chap.html)에서 보았던 EM 알고리즘과 유사합니다.
+
+데이터 품질을 개선하기 위해, 종종 원시 데이터로부터 시작하여 모든 변동 원인들을 세심하게 모델링해야 합니다. 우리는 이를 **처음부터 요리하기(cooking from scratch)** 의 한 예로 생각할 수 있습니다 (Ben J. Callahan et al. ([2016](16-chap.html#ref-Callahan2016Bioc))의 자세한 내용과 연습 문제 5.5 참조).
+
+__
+
+질문 5.17
+
+우리 샘플에 매우 다른 풍부도로 존재하는 길이 200인 두 서열(`seq1`과 `seq2`)이 있다고 가정해 봅시다. 기술적 시퀀싱 오차는 각 뉴클레오타이드에 대해 독립적인 Bernoulli(0.0005) 무작위 사건으로 발생한다고 들었습니다.
+서열당 오차 수의 분포는 무엇일까요?
+
+__
+
+해결책
+
+__
+
+확률 이론은 200개의 독립적인 Poisson(0.0005)의 합이 Poisson(0.1)이 될 것임을 알려줍니다.
+
+우리는 또한 몬테카를로 시뮬레이션으로 이를 확인할 수 있습니다:
+
+    
+    
+    simseq10K = replicate(1e5, sum(rpois(200, 0.0005)))
+    mean(simseq10K)__
+    
+    
+    [1] 0.10143
+    
+    
+    vcd::distplot(simseq10K, "poisson")__
+
+[![](05-chap_files/figure-html/fig-seqradiusex-1.png)](05-chap_files/figure-
+html/fig-seqradiusex-1.png "그림 5.33: simseq10K 데이터에 대한 distplot.")
+
+그림 5.33: `simseq10K` 데이터에 대한 `distplot`.
+
+그림 5.33은 분포가 푸아송 분포에 얼마나 가까운지 보여줍니다.
+
+### 5.8.3 서열 변이 추론
+
+DADA 방법(Divisive Amplicon Denoising Algorithm, Rosen et al. ([2012](16-chap.html#ref-Rosen:2012)))은 시퀀싱 오차와 실제 생물학적 변이를 구분하는 치환 오차의 매개변수화된 모델을 사용합니다. 이 모델은 \({	t C}\) 대신 \({	t A}\)를 보게 될 확률과 같은 염기 치환 확률을 계산합니다. 이 확률들이 서열을 따른 위치와 독립적이라고 가정합니다. 오차율은 시퀀싱 실행(runs)과 PCR 프로토콜에 따라 상당히 다르기 때문에, 모델 매개변수들은 EM 유형의 접근 방식을 사용하여 데이터 자체로부터 추정됩니다. 리드는 현재 매개변수가 주어졌을 때 노이즈가 있거나 정확한 것으로 분류되며, 그에 따라 노이즈 모델 매개변수들이 업데이트됩니다12.
+
+12 대규모 데이터 세트의 경우, 노이즈 모델 추정 단계가 전체 세트에 대해 수행될 필요는 없습니다. 대규모 데이터 세트를 다룰 때의 팁과 도구에 대해서는 <https://benjjneb.github.io/dada2/bigdata.html>을 참조하세요.
+
+13 F는 순방향 가닥(forward strand), R은 역방향 가닥(reverse strand)을 나타냅니다.
+
+역중복(dereplicated) 서열들13 이 읽혀지고, 그 다음 다음 코드에서와 같이 `dada` 함수를 사용하여 분할형 노이즈 제거 및 추정이 실행됩니다:
+
+    
+    
+    derepFs = readRDS(file="../data/derepFs.rds")
+    derepRs = readRDS(file="../data/derepRs.rds")
+    library("dada2")
+    ddF = dada(derepFs, err = NULL, selfConsist = TRUE)
+    ddR = dada(derepRs, err = NULL, selfConsist = TRUE)__
+
+In order to verify that the error transition rates have been reasonably well estimated, we inspect the fit between the observed error rates (black points) and the fitted error rates (black lines) (Figure 5.34).
+
+    
+    
+    plotErrors(ddF)__
+    
+    
+    In chunk 'fig-rerrorprofile1': Warning: Removed 82 rows containing missing values or values outside the scale range(`geom_line()`).
+
+[![](05-chap_files/figure-html/fig-
+rerrorprofile1-1.png)](05-chap_files/figure-html/fig-rerrorprofile1-1.png
+"그림 5.34: plotErrors(ddF)에 의해 제공된 순방향 전이 오차율. 이는 품질(quality)의 함수로서 각 유형의 뉴클레오타이드 전이 빈도를 보여줍니다.")
+
+그림 5.34: `plotErrors(ddF)`에 의해 제공된 순방향 전이 오차율. 이는 품질(quality)의 함수로서 각 유형의 뉴클레오타이드 전이 빈도를 보여줍니다.
+
+오차가 추정되고 나면, 서열 변이들을 찾기 위해 데이터에 대해 알고리즘이 다시 실행됩니다:
+
+    
+    
+    dadaFs = dada(derepFs, err=ddF[[1]]$err_out, pool = TRUE)
+    dadaRs = dada(derepRs, err=ddR[[1]]$err_out, pool = TRUE)__
+
+**참고:** 서열 추론 함수는 두 가지 다른 모드로 실행될 수 있습니다: 샘플별 독립적 추론(`pool = FALSE`)과, 모든 샘플로부터 결합된 시퀀싱 리드들로부터의 풀링된 추론입니다. 독립적 추론은 두 가지 장점이 있습니다: 샘플 수의 함수로서 계산 시간이 선형적이며 메모리 요구 사항이 일정합니다. 풀링된 추론은 계산적으로 더 부담스럽지만, 개별 샘플에서는 한두 번만 발생하지만 모든 샘플 전체에서는 더 자주 발생하는 희귀 변이의 탐지를 개선할 수 있습니다. 이 데이터 세트는 특별히 크지 않으므로, 우리는 풀링된 추론을 수행했습니다.
+
+서열 추론은 데이터로부터 거의 모든 치환 및 **인델(indel)** 14 오차를 제거합니다. 우리는 추론된 순방향 및 역방향 서열들을 병합하며, 잔류 오차에 대한 최종 제어로서 완벽하게 겹치지 않는 쌍체 서열들을 제거합니다.
+
+14 인델(indel)이라는 용어는 삽입-삭제(insertion-deletion)를 나타냅니다; 짧은 문자열만큼 차이가 나는 두 서열을 비교할 때, 이것이 삽입인지 삭제인지는 관점의 문제이므로 이러한 이름이 붙었습니다.
+
+    
+    
+    mergers = mergePairs(dadaFs, derepFs, dadaRs, derepRs)__
+
+우리는 ASV 카운트의 분할표를 생성합니다. 이것은 "OTU 15 표"의 고해상도 아날로그입니다. 즉, 각 샘플에서 각 서열 변이가 관찰된 횟수를 셀에 포함하는 샘플별 특징 표입니다.
+
+15 운영상 분류 단위 (operational taxonomic units)
+
+    
+    
+    seqtab.all = makeSequenceTable(mergers[!grepl("Mock",names(mergers))])__
+
+__
+
+질문 5.18
+
+`dadaRs`와 `mergers` 객체의 구성 요소들을 살펴보세요.
+
+__
+
+해결책
+
+__
+
+`dadaRs`는 길이가 20인 리스트입니다. 그 요소들은 노이즈가 제거된 리드들을 포함하는 _dada_ 클래스의 객체들입니다. 우리는 [10장](10-chap.html)에서 서열을 정렬하고, 그들의 분류학적 정보를 할당하며, 하류 분석을 위해 샘플 정보와 결합하는 방법을 보게 될 것입니다.
+
+    
+    
+    [1] 20
+    
+    
+    [1] 20
+    
+    
+    [1] "list"
+    
+    
+     [1] "F3D0"   "F3D1"   "F3D141" "F3D142" "F3D143" "F3D144" "F3D145" "F3D146"
+     [9] "F3D147" "F3D148" "F3D149" "F3D150" "F3D2"   "F3D3"   "F3D5"   "F3D6"  
+    [17] "F3D7"   "F3D8"   "F3D9"   "Mock"  
+    
+    
+    [1] "list"
+    
+    
+    [1] 20
+
+키메라(Chimera)는 PCR 증폭 과정에서 두 개(드문 경우 그 이상)의 원래 서열이 융합되어 인위적으로 생성된 서열입니다. 노이즈 제거 워크플로를 완료하기 위해, 우리는 `removeBimeraDenovo` 함수를 호출하여 이들을 제거하고, 나중에 사용할 깨끗한 분할표를 남깁니다.
+
+    
+    
+    seqtab = removeBimeraDenovo(seqtab.all)__
+
+__
+
+질문 5.19
+
+키메라가 왜 비교적 식별하기 쉽다고 생각하시나요?  
+`seqtab.all` 데이터에서 리드들 중 키메라의 비율은 얼마였나요?  
+고유한 서열 변이들 중 키메라의 비율은 얼마인가요?
+
+__
+
+해결책
+
+__
+
+여기서 우리는 일부 서열 변이들이 키메라인 것을 관찰했지만, 이들은 전체 리드의 7%만을 차지합니다.
+
+## 5.9 이 장의 요약
+
+**유유상종: 관측치를 비교하는 방법** 우리는 장의 시작 부분에서 **올바른 거리** 를 찾는 것이 군집 분석의 필수적인 첫 단계임을 보았습니다; 이는 '쓰레기를 넣으면 쓰레기가 나온다(garbage in, garbage out)'는 격언이 완전히 적용되는 사례입니다. 항상 과학적으로 의미 있는 거리를 선택하고 가능한 한 많은 거리로부터 얻은 출력들을 비교하세요; 때로는 동일한 데이터라도 서로 다른 과학적 목표가 추구될 때는 서로 다른 거리가 필요할 수 있습니다.
+
+**군집화의 두 가지 방법** 우리는 군집화에 두 가지 접근 방식이 있음을 보았습니다:
+
+  * 클러스터 중심을 추정하고 점들을 그에 할당하는 것을 번갈아 가며 수행하는 \(k\)-평균 및 \(k\)-메도이드(PAM)와 같은 반복적 분할 접근 방식;
+
+  * 먼저 점들을 응집시키고, 이어서 커지는 클러스터들을 계층적 군집 **트리** 로 표현될 수 있는 중첩된 세트 시퀀스로 응집시키는 계층적 군집화 접근 방식.
+
+**생물학적 예시** 군집화는 특히 면역학 및 단일 세포 데이터 분석에서 단일 세포 측정값의 잠재 클래스를 찾는 데 중요한 도구입니다. 우리는 희소성(sparsity)이 문제가 되지 않는 저차원 데이터에 대해 밀도 기반 군집화가 어떻게 유용한지 보았습니다.
+
+**검증** 군집화 알고리즘은 **항상** 클러스터를 내놓으므로, 우리는 그 품질을 평가하고 클러스터 수를 신중하게 선택해야 합니다. 그러한 검증 단계는 시각화 도구를 사용하고 데이터의 많은 재표본에 대해 군집화를 반복함으로써 수행됩니다. 우리는 WSS/BSS나 \(\log(\text{WSS})\)와 같은 통계량들이 그룹 구조를 이해하고 있는 데이터에 대한 시뮬레이션에서 어떻게 보정될 수 있는지, 그리고 새로운 데이터에 대해 클러스터 수를 선택하기 위한 유용한 벤치마크를 어떻게 제공할 수 있는지 보았습니다. 물론, 클러스터의 의미를 알리고 확인하기 위해 생물학적으로 관련 있는 정보를 사용하는 것이 항상 최선의 검증 접근 방식입니다.
+
+일반적으로 군집화 결과를 비교할 실측 자료(ground truth)는 거의 없습니다. "모든 모델은 틀렸지만, 일부는 유용하다"는 오래된 격언이 여기에도 적용됩니다. 좋은 군집화란 유용한 것으로 판명되는 군집화입니다.
+
+**거리와 확률** 마지막으로: 거리가 전부는 아닙니다. 우리는 군집화할 때 베이스라인 빈도와 국소 밀도를 고려하는 것이 얼마나 중요한지 보여주었습니다. 이는 실제 클래스나 분류군 그룹이 매우 다른 빈도로 발생하는 16S rRNA 서열 리드의 노이즈 제거를 위한 군집화와 같은 사례에서 필수적입니다.
+
+## 5.10 더 읽을거리
+
+_Finding groups in data_ 에 관한 완전한 교재로는 Kaufman과 Rousseeuw ([2009](16-chap.html#ref-Kaufman2009))를 참조하십시오. **[clusterExperiment](https://bioconductor.org/packages/clusterExperiment/)** 패키지의 비네트는 [7장](07-chap.html)에서 다룰 예비 차원 축소(PCA)를 포함하여, 여러 다양한 기법들을 사용하여 클러스터를 생성하는 전체 워크플로를 담고 있습니다. 인접한 생물학적 정보가 없는 상태에서 필요한 클러스터 수를 결정하는 방법에 대해서는 일치된 의견이 없습니다. 하지만 **강한 형태(strong forms)** 의 계층적 클러스터를 만드는 것은 사용자로 하여금 계층적 트리를 어디까지 자를지 결정하게 하고 이러한 내부 분기가 짧은 곳에서 자르지 않도록 주의하게 해준다는 장점이 있는 방법입니다. 단일 세포 RNA 실험 데이터에의 적용 사례는 **[clusterExperiment](https://bioconductor.org/packages/clusterExperiment/)** 의 비네트를 참조하십시오.
+
+Hiiragi 데이터를 분석하면서 우리는 클러스터 확률을 사용했는데, 이는 이미 [4장](04-chap.html)에서 언급된 개념으로, EM 알고리즘이 이를 기댓값 통계량을 계산하기 위한 가중치로 사용했습니다. 확률적 군집화 개념은 베이지안 비모수적 혼합물 프레임워크에서 잘 발달되어 있으며, 이는 [4장](04-chap.html)에서 다룬 혼합 모델을 더 일반적인 설정으로 풍부하게 만듭니다. 유세포 분석을 위해 이 프레임워크를 사용한 실제 사례는 Dundar 등 ([2014](16-chap.html#ref-Dundar2014))을 참조하십시오. 고처리량 시퀀싱 리드의 노이즈 제거 및 특정 박테리아나 바이러스 균주로의 할당에 있어 군집화는 필수적입니다. 노이즈가 존재하는 상황에서, 크기가 매우 불균등한 **실제** 균주 그룹으로 군집화하는 것은 도전적인 일일 수 있습니다. 데이터를 사용하여 노이즈 모델을 만드는 것은 노이즈 제거와 클러스터 할당을 동시에 가능하게 합니다. Rosen 등 ([2012](16-chap.html#ref-Rosen:2012))이나 Benjamin J. Callahan 등 ([2016](16-chap.html#ref-dada2))에 의한 것과 같은 노이즈 제거 알고리즘들은 EM 방법으로부터 영감을 얻은 반복적 워크플로를 사용합니다 ([McLachlan and Krishnan 2007](16-chap.html#ref-mclachlan2007algorithm)).
+
+## 5.11 연습 문제
+
+__
+
+연습 문제 5.1
+
+We can define the average dissimilarity of a point \(x_i\) to a cluster
+\(C_k\) as the average of the distances from \(x_i\) to all points in
+\(C_k\). Let \(A(i)\) be the average dissimilarity of all points in the
+cluster that \(x_i\) belongs to. Let \(B(i)\) be the lowest average
+dissimilarity of \(x_i\) to any other cluster of which \(x_i\) is not a
+member. The cluster with this lowest average dissimilarity is said to be the
+**neighboring cluster** of \(x_i\), because it is the next best fit cluster
+for point \(x_i\). The **silhouette index** is
+
+\[ S(i)=\frac{B(i)-A(i)}{\max_i(A(i),B(i))}. \]
+
+Compute the silhouette index for the `simdat` data we simulated in Section
+5.7.
+
+    
+    
+    library("cluster")
+    pam4 = pam(simdatxy, 4)
+    sil = silhouette(pam4, 4)
+    plot(sil, col=c("red","green","blue","purple"), main="Silhouette")__
+
+Change the number of clusters \(k\) and assess which \(k\) gives the best
+silhouette index.
+
+Now, repeat this for groups that have uniform (unclustered) data distributions
+over a whole range of values.
+
+__
+
+연습 문제 5.2
+
+Make a “character” representation of the distance between the 20 locations in
+the `dune` data from the
+**[vegan](https://cran.r-project.org/web/packages/vegan/)** package using the
+function `symnum`.
+
+Make a heatmap plot of these distances.
+
+__
+
+연습 문제 5.3
+
+Load the `spirals` data from the
+**[kernlab](https://cran.r-project.org/web/packages/kernlab/)** package. Plot
+the results of using \(k\)-means on the data. This should give you something
+similar to Figure 5.35.
+
+[![](05-chap_files/figure-html/fig-kmeanspital1-1.png)](05-chap_files/figure-
+html/fig-kmeanspital1-1.png "Figure 5.35 (a): ")
+
+(a)
+
+[![](05-chap_files/figure-html/fig-kmeanspital1-2.png)](05-chap_files/figure-
+html/fig-kmeanspital1-2.png "Figure 5.35 (b): ")
+
+(b)
+
+Figure 5.35: An example of non-convex clusters. In (a), we show the result of
+\(k\)-means clustering with \(k=2\). In (b), we have the output from
+`dbscan`. The colors represent the three clusters found by the algorithm for
+the settings .
+
+You’ll notice that the clustering in Figure 5.35 seems unsatisfactory. Show
+how a different method, such as `specc` or `dbscan`, could cluster `spirals`
+data in a more useful manner.
+
+Repeat the `dbscan` clustering with different parameters. How robust is the
+number of groups?
+
+__
+
+연습 문제 5.4
+
+Looking at graphical representations in simple two-dimensional maps can often
+reveal important clumping patterns. We saw an example for this with the map
+that enabled Snow to discover the source of the London cholera outbreak. Such
+clusterings can often indicate important information about hidden variables
+acting on the observations. Look at a map for breast cancer incidence in the
+US at:
+<http://www.huffingtonpost.com/bill-davenhall/post_1663_b_817254.html>
+([Mandal et al. 2009](16-chap.html#ref-mandal2009)); the areas of high
+incidence seem spatially clustered. Can you guess the reason(s) for this
+clustering and high incidence rates on the West and East coasts and around
+Chicago?
+
+__
+
+연습 문제 5.5
+
+**Amplicon bioinformatics: from raw reads to dereplicated sequences**. As a
+supplementary exercise, we provide the intermediate steps necessary to a full
+data preprocessing workflow for denoising 16S rRNA sequences. We start by
+setting the directories and loading the downloaded data:
+
+    
+    
+    base_dir = "../data"
+    miseq_path = file.path(base_dir, "MiSeq_SOP")
+    filt_path = file.path(miseq_path, "filtered")
+    fnFs = sort(list.files(miseq_path, pattern="_R1_001.fastq"))
+    fnRs = sort(list.files(miseq_path, pattern="_R2_001.fastq"))
+    sampleNames = sapply(strsplit(fnFs, "_"), `[`, 1)
+    if (!file_test("-d", filt_path)) dir.create(filt_path)
+    filtFs = file.path(filt_path, paste0(sampleNames, "_F_filt.fastq.gz"))
+    filtRs = file.path(filt_path, paste0(sampleNames, "_R_filt.fastq.gz")
+    fnFs = file.path(miseq_path, fnFs)
+    fnRs = file.path(miseq_path, fnRs)
+    print(length(fnFs))__
+    
+    
+    [1] 20
+
+The data are highly-overlapping Illumina Miseq \(2\times 250\) amplicon
+sequences from the V4 region of the 16S rRNA gene ([Kozich et al.
+2013](16-chap.html#ref-Kozich2013)). There were originally 360 fecal samples
+collected longitudinally from 12 mice over the first year of life. These were
+collected by P. D. Schloss et al. ([2012](16-chap.html#ref-
+schloss2012stabilization)) to investigate the development and stabilization of
+the murine microbiome. We have selected 20 samples to illustrate how to
+preprocess the data.
+
+We will need to filter out low-quality reads and trim them to a consistent
+length. While generally recommended filtering and trimming parameters serve as
+a starting point, no two datasets are identical and therefore it is always
+worth inspecting the quality of the data before proceeding. We show the
+sequence quality plots for the two first samples in Figure 5.36. They are
+generated by:
+
+    
+    
+    plotQualityProfile(fnFs[1:2]) + ggtitle("Forward")
+    plotQualityProfile(fnRs[1:2]) + ggtitle("Reverse")__
+
+[![](05-chap_files/figure-html/fig-profile-1-1.png)](05-chap_files/figure-
+html/fig-profile-1-1.png "Figure 5.36 (a): ")
+
+(a)
+
+[![](05-chap_files/figure-html/fig-profile-1-2.png)](05-chap_files/figure-
+html/fig-profile-1-2.png "Figure 5.36 (b): ")
+
+(b)
+
+Figure 5.36: Quality scores. The lines show positional summary statistics: green is the mean, orange is the median, and the dashed orange lines are the 25th and 75th quantiles.
+
+Note that we also see the background distribution of quality scores at each position in Figure 5.36 as a grey-scale heat map. The dark colors correspond to higher frequency.
+
+__
+
+연습 문제 5.6
+
+Generate similar plots for four randomly selected sets of forward and reverse
+reads. Compare forward and reverse read qualities; what do you notice?
+
+__
+
+해결책
+
+__
+
+    
+    
+    ii = sample(length(fnFs), 4)
+    plotQualityProfile(fnFs[ii]) + ggtitle("Forward")__
+    
+    
+     plotQualityProfile(fnRs[ii]) + ggtitle("Reverse")__
+
+__
+
+연습 문제 5.7
+
+Here, the forward reads maintain high quality throughout, while the quality of
+the reverse reads drops significantly at about position 160. Therefore, we
+truncate the forward reads at position 240, and trimm the first 10 nucleotides
+as these positions are of lower quality. The reverse reads are trimmed at
+position 160. Combine these trimming parameters with standard filtering
+parameters remember to enforce a maximum of 2 expected errors per-read. (Hint: Trim and filter on paired reads jointly, i.e., both reads must pass the filter for the pair to pass. The input arguments should be chosen following the **[dada2](https://bioconductor.org/packages/dada2/)** vignette carefully. We recommend filtering out all reads with any ambiguous nucleotides.)
+
+__
+
+해결책
+
+__
+
+Most Illumina sequencing data show a trend of decreasing quality towards the end of the reads.
+
+    
+    
+    out = filterAndTrim(fnFs, filtFs, fnRs, filtRs, truncLen=c(240,160),
+            maxN=0, maxEE=2, truncQ=2, rm.phix=TRUE,  trimLeft=10,
+            compress=TRUE, multithread=TRUE) # On Windows set multithread=FALSE
+    head(out)__
+    
+    
+                                  reads.in reads.out
+    F3D0_S188_L001_R1_001.fastq       7793      7139
+    F3D1_S189_L001_R1_001.fastq       5869      5314
+    F3D141_S207_L001_R1_001.fastq     5958      5478
+    F3D142_S208_L001_R1_001.fastq     3183      2926
+    F3D143_S209_L001_R1_001.fastq     3178      2955
+    F3D144_S210_L001_R1_001.fastq     4827      4323
+
+The `maxN` parameter omits all reads with more than `maxN = 0` ambiguous nucleotides and `maxEE` at 2 excludes reads with more than 2 expected errors.
+
+The sequence data was imported into R from demultiplexed _fastq_ files (i.e. one _fastq_ for each sample) and simultaneously dereplicated to remove redundancy. Name the resulting objects by their sample provenance; they will have _derep_ as their class.
+
+    
+    
+    derepFs = derepFastq(filtFs, verbose = FALSE)
+    derepRs = derepFastq(filtRs, verbose = FALSE)
+    names(derepFs) = sampleNames
+    names(derepRs) = sampleNames __
+
+__
+
+연습 문제 5.8
+
+Use R to create a map like the one shown in Figure 5.2. Hint: go to the
+[website of the British National Archives](http://bombsight.org) and download
+street addresses of hits, use an address resolution service to convert these
+into geographic coordinates, and display these as points on a map of London.
+
+__
+
+해결책
+
+__
+
+See the Gist
+<https://gist.github.com/wolfganghuber/523622aff6a156d26e77a87ccbe7bd0d> by
+Andrzej Oles.
+
+Aure, Miriam Ragle, Valeria Vitelli, Sandra Jernström, Surendra Kumar, Marit
+Krohn, Eldri U Due, Tonje Husby Haukaas, et al. 2017. “Integrative Clustering
+Reveals a Novel Split in the Luminal A Subtype of Breast Cancer with Impact on
+Outcome.” _Breast Cancer Research_ 19 (1): 44.
+
+Bendall, Sean C, Garry P Nolan, Mario Roederer, and Pratip K Chattopadhyay.
+2012. “A Deep Profiler’s Guide to Cytometry.” _Trends in Immunology_ 33 (7):
+323–32.
+
+Callahan, Ben J, Kris Sankaran, Julia A Fukuyama, Paul J McMurdie, and Susan P
+Holmes. 2016. “Bioconductor Workflow for Microbiome Data Analysis: From Raw
+Reads to Community Analyses.” _F1000Research_ 5.
+
+Callahan, Benjamin J, Paul J McMurdie, and Susan P Holmes. 2017. “Exact
+Sequence Variants Should Replace Operational Taxonomic Units in Marker Gene
+Data Analysis.” _ISME Journal_ , 1–5.
+
+Callahan, Benjamin J, Paul J McMurdie, Michael J Rosen, Andrew W Han, Amy J
+Johnson, and Susan P Holmes. 2016. “DADA2: High Resolution Sample Inference
+from Amplicon Data.” _Nature Methods_ , 1–4.
+
+Caporaso, J. G., J. Kuczynski, J. Stombaugh, K. Bittinger, F. D. Bushman, E.
+K. Costello, N. Fierer, et al. 2010. “QIIME Allows Analysis of High-Throughput
+Community Sequencing Data.” _Nature Methods_ 7 (5): 335–36.
+
+Chakerian, John, and Susan Holmes. 2012. “Computational Tools for Evaluating
+Phylogenetic and Hierarchical Clustering Trees.” _Journal of Computational and
+Graphical Statistics_ 21 (3): 581–99.
+
+Diday, Edwin, and M Paula Brito. 1989. “Symbolic Cluster Analysis.” In
+_Conceptual and Numerical Analysis of Data_ , 45–84. Springer.
+
+Dundar, Murat, Ferit Akova, Halid Z. Yerebakan, and Bartek Rajwa. 2014. “A
+Non-Parametric Bayesian Model for Joint Cell Clustering and Cluster Matching:
+Identification of Anomalous Sample Phenotypes with Random Effects.” _BMC
+Bioinformatics_ 15 (1): 1–15. <https://doi.org/10.1186/1471-2105-15-314>.
+
+Freedman, David A. 1991. “Statistical Models and Shoe Leather.” _Sociological
+Methodology_ 21 (2): 291–313.
+
+Hallett, Robin M, Anna Dvorkin-Gheva, Anita Bane, and John A Hassell. 2012. “A
+Gene Signature for Predicting Outcome in Patients with Basal-Like Breast
+Cancer.” _Scientific Reports_ 2.
+
+Holmes, Susan, Michael He, Tong Xu, and Peter P Lee. 2005. “Memory t Cells
+Have Gene Expression Patterns Intermediate Between Naive and Effector.” _PNAS_
+102 (15): 5519–23.
+
+Hornik, Kurt. 2005. “A CLUE for CLUster Ensembles.” _Journal of Statistical
+Software_ 14 (12).
+
+Hulett, Henry R, William A Bonner, Janet Barrett, and Leonard A Herzenberg.
+1969. “Cell Sorting: Automated Separation of Mammalian Cells as a Function of
+Intracellular Fluorescence.” _Science_ 166 (3906): 747–49.
+
+Kahneman, Daniel. 2011. _Thinking, Fast and Slow_. Macmillan.
+
+Kaufman, Leonard, and Peter J Rousseeuw. 2009. _Finding Groups in Data: An
+Introduction to Cluster Analysis_. Vol. 344. John Wiley & Sons.
+
+Kozich, James J, Sarah L Westcott, Nielson T Baxter, Sarah K Highlander, and
+Patrick D Schloss. 2013. “Development of a Dual-Index Sequencing Strategy and
+Curation Pipeline for Analyzing Amplicon Sequence Data on the MiSeq Illumina
+Sequencing Platform.” _Applied and Environmental Microbiology_ 79 (17):
+5112–20.
+
+Mandal, Rakesh, Sophie St-Hilaire, John G Kie, and DeWayne Derryberry. 2009.
+“Spatial Trends of Breast and Prostate Cancers in the United States Between
+2000 and 2005.” _International Journal of Health Geographics_ 8 (1): 53.
+
+McLachlan, Geoffrey, and Thriyambakam Krishnan. 2007. _The EM Algorithm and
+Extensions_. Vol. 382. John Wiley & Sons.
+
+Müllner, Daniel. 2013. “Fastcluster: Fast Hierarchical, Agglomerative
+Clustering Routines for r and Python.” _Journal of Statistical Software_ 53
+(9): 1–18.
+
+O’Neill, Kieran, Nima Aghaeepour, Josef Špidlen, and Ryan Brinkman. 2013.
+“Flow Cytometry Bioinformatics.” _PLoS Computational Biology_ 9 (12):
+e1003365.
+
+Ohnishi, Y., W. Huber, A. Tsumura, M. Kang, P. Xenopoulos, K. Kurimoto, A. K.
+Oles, et al. 2014. “Cell-to-Cell Expression Variability Followed by Signal
+Reinforcement Progressively Segregates Early Mouse Lineages.” _Nature Cell
+Biology_ 16 (1): 27–37.
+
+Rosen, Michael J, Benjamin J Callahan, Daniel S Fisher, and Susan P Holmes.
+2012. “Denoising PCR-Amplified Metagenome Data.” _BMC Bioinformatics_ 13 (1):
+283.
+
+Schloss, P D, S L Westcott, T Ryabin, J R Hall, M Hartmann, E B Hollister, R A
+Lesniewski, et al. 2009. “Introducing mothur: Open-Source, Platform-
+Independent, Community-Supported Software for Describing and Comparing
+Microbial Communities.” _Applied and Environmental Microbiology_ 75 (23):
+7537–41.
+
+Schloss, P. D., A. M. Schuber, J. P. Zackular, K. D. Iverson, Young V. B., and
+Petrosino J. F. 2012. “Stabilization of the Murine Gut Microbiome Following
+Weaning.” _Gut Microbes_ 3 (4): 383–93.
+
+Tibshirani, Robert, Guenther Walther, and Trevor Hastie. 2001. “Estimating the
+Number of Clusters in a Data Set via the Gap Statistic.” _JRSSB_ 63 (2):
+411–23.
+
+Tseng, George C, and Wing H Wong. 2005. “Tight Clustering: A Resampling-Based
+Approach for Identifying Stable and Tight Patterns in Data.” _Biometrics_ 61
+(1): 10–16.
+
+Tversky, Amos, and Daniel Kahneman. 1974. “Heuristics and Biases: Judgement
+Under Uncertainty.” _Science_ 185: 1124–30.
+
+———. 1975. “Judgment Under Uncertainty: Heuristics and Biases.” In _Utility,
+Probability, and Human Decision Making_ , 141–62. Springer.
+
+페이지의 R 버전 4.5.1 (2025-06-13)을 사용하여 2025-09-01 01:33에 빌드되었습니다.

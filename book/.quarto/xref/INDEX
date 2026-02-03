@@ -1,0 +1,56 @@
+{
+  "index.qmd": {
+    "index.html": "48543d54"
+  },
+  "00-chap.qmd": {
+    "00-chap.html": "c3321249"
+  },
+  "01-chap.qmd": {
+    "01-chap.html": "25df08cd"
+  },
+  "02-chap.qmd": {
+    "02-chap.html": "2297f879"
+  },
+  "03-chap.qmd": {
+    "03-chap.html": "c2d63987"
+  },
+  "04-chap.qmd": {
+    "04-chap.html": "f11537ce"
+  },
+  "05-chap.qmd": {
+    "05-chap.html": "44e42ac2"
+  },
+  "06-chap.qmd": {
+    "06-chap.html": "5cbdc19e"
+  },
+  "07-chap.qmd": {
+    "07-chap.html": "e72dad66"
+  },
+  "08-chap.qmd": {
+    "08-chap.html": "078bb3db"
+  },
+  "09-chap.qmd": {
+    "09-chap.html": "055ae9be"
+  },
+  "10-chap.qmd": {
+    "10-chap.html": "7f47dacc"
+  },
+  "11-chap.qmd": {
+    "11-chap.html": "696b270b"
+  },
+  "12-chap.qmd": {
+    "12-chap.html": "903c8a66"
+  },
+  "13-chap.qmd": {
+    "13-chap.html": "15224d73"
+  },
+  "14-chap.qmd": {
+    "14-chap.html": "38ba40a1"
+  },
+  "15-chap.qmd": {
+    "15-chap.html": "3f14099f"
+  },
+  "16-chap.qmd": {
+    "16-chap.html": "42f0fe2d"
+  }
+}

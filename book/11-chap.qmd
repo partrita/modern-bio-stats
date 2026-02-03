@@ -1,0 +1,1563 @@
+![](imgs/chap13-colorLabelscellbodies.png)
+
+이미지는 풍부한 데이터 소스입니다. 이 장에서 우리는 이미지에서 어떻게 정량적 정보를 추출할 수 있는지, 그리고 데이터를 요약하고 이해하기 위해 통계적 방법을 어떻게 사용할 수 있는지 살펴볼 것입니다. 이 장의 목표는 이미지 데이터로 작업을 시작하는 것이 쉽다는 것을 보여주는 것입니다. 기본적인 R 환경을 다룰 수 있다면 이미지 작업을 시작할 준비가 된 것입니다. 그렇긴 하지만, 이 장이 이미지 분석에 대한 일반적인 입문서는 아닙니다. 이 분야는 광범위하며 신호 처리, 정보 이론, 수학, 공학 및 컴퓨터 과학의 많은 영역을 다루고 있으며, 체계적인 개요를 제시하는 훌륭한 책들이 많이 있습니다.
+
+우리는 주로 일련의 2차원 이미지, 특히 세포 이미지를 공부할 것입니다. 세포의 위치와 모양을 식별하는 방법과 식별된 모양 및 패턴의 특성(예: 크기, 강도, 색상 분포 및 상대적 위치)을 정량적으로 측정하는 방법을 배울 것입니다. 이러한 정보는 후속 분석에 사용될 수 있습니다. 예를 들어 서로 다른 조건(예: 서로 다른 약물의 효과 하에 있거나 분화 및 성장 단계가 다른 경우) 사이의 세포를 비교할 수 있습니다. 또는 이미지의 객체들이 서로 어떻게 연관되어 있는지 측정할 수 있습니다. 예를 들어 객체들이 함께 모이거나 서로 밀어내는 것을 선호하는지, 아니면 이웃한 객체들 사이에 특정 특성이 공유되는 경향이 있는지(세포 간 통신을 나타냄) 등을 측정할 수 있습니다. 유전학의 언어로 말하자면, 이미지를 복잡한 표현형이나 다변량 양적 형질로 사용할 수 있다는 뜻입니다.
+
+여기서 우리는 2차원 이상의 이미지 분석은 다루지 않을 것입니다. 3D 분할(segmentation) 및 등록(registration)이나 시간적 추적(temporal tracking)은 고려하지 않을 것입니다. 이것들은 정교한 작업이며, 이 장의 범위 내에서 우리가 조립할 수 있는 것보다 전문화된 소프트웨어가 아마도 더 나은 성능을 보일 것입니다.
+
+고처리량 이미징 데이터와 유전체학의 다른 고처리량 데이터 사이에는 유사점이 있습니다. 예를 들어 염색 효율의 변화, 조명 또는 기타 여러 요인으로 인해 배치 효과(batch effects)가 작용하는 경향이 있습니다. 실험 설계와 분석 선택에서 적절한 예방 조치를 취해야 합니다. 원칙적으로 이미지의 강도 값은 물리적 단위(예: 복사 에너지 또는 형광체 농도)로 보정될 수 있습니다. 하지만 생물학적 이미징 실무에서 이것이 항상 수행되는 것은 아니며, 아마도 필요하지 않을 수도 있습니다. 다소 달성하기 쉽고 분명히 가치 있는 것은 이미지의 공간적 차원에 대한 보정, 즉 픽셀 단위와 미터법 거리 사이의 변환 계수입니다.
+
+## 11.1 이 장의 목표
+
+이 장에서 우리는 다음을 수행할 것입니다:
+
+  * R에서 이미지를 읽고, 쓰고, 조작하는 방법을 배웁니다.
+
+  * 이미지에 필터와 변환을 적용하는 방법을 이해합니다.
+
+  * 이러한 기술을 결합하여 분할(segmentation) 및 특징 추출(feature extraction)을 수행합니다. 세포 분할을 예로 사용할 것입니다.
+
+  * 공간 분포와 의존성을 분석하기 위해 통계적 방법을 사용하는 방법을 배웁니다.
+
+  * 공간 점 과정(spatial point process)에 대한 가장 기본적인 분포인 균질 포아송 과정(homogeneous Poisson process)에 대해 알아봅니다.
+
+  * 여러분의 데이터가 그 기본 가정에 부합하는지, 아니면 덩어리짐(clumping)이나 배제(exclusion)의 증거를 보이는지 인식합니다.
+
+## 11.2 이미지 로드
+
+R에서 이미지를 처리하는 데 유용한 툴킷은 바이오컨덕터 패키지인 **[EBImage](https://bioconductor.org/packages/EBImage/)** ([Pau et al. 2010](16-chap.html#ref-EBImage))입니다. 기본 기능을 시연하기 위해 간단한 사진을 읽어 들이는 것으로 시작합니다.
+
+    
+    
+    library("EBImage")
+    imagefile = system.file("images", "mosquito.png", package = "MSMB")
+    mosq = readImage(imagefile)__
+
+**[EBImage](https://bioconductor.org/packages/EBImage/)**는 현재 세 가지 이미지 파일 형식인 `jpeg`, `png`, `tiff`를 지원합니다. 위에서 우리는 **[MSMB](https://bioconductor.org/packages/MSMB/)** 패키지의 샘플 이미지를 로드했습니다. 자신의 데이터로 작업할 때는 그 패키지가 필요하지 않으며, `readImage` 함수에 파일 이름을 제공하기만 하면 됩니다. 이 장의 뒷부분에서 보게 되겠지만, `readImage`는 한 번에 여러 이미지를 읽을 수 있으며, 이들은 모두 단일 이미지 데이터 객체로 조립됩니다. 이것이 작동하려면 이미지들이 동일한 차원과 색상 모드를 가져야 합니다.
+
+__
+
+질문 11.1
+
+**RBioFormats** 패키지(GitHub에서 사용 가능: <https://github.com/aoles/RBioFormats>)는 더 많은 이미지 파일 형식을 읽고 쓰는 기능을 제공합니다. 얼마나 많은 서로 다른 파일 형식이 지원되나요?
+
+__
+
+해결책
+
+__
+
+**RBioFormats** 패키지의 `read.image` 함수 매뉴얼 페이지(이는 `EBImage::readImage`와는 다름에 유의)와 The Open Microscopy Environment 웹사이트의 Bio-Formats 프로젝트 온라인 문서(<http://www.openmicroscopy.org/site/support/bio-formats5.5/supported-formats.html>)를 참조하세요.
+
+## 11.3 이미지 표시
+
+방금 읽어 들인 이미지를 시각화해 봅시다. 기본 함수는 `EBImage::display`입니다.
+
+    
+    
+    EBImage::display(mosq)__
+
+위의 명령은 웹 브라우저 창(`getOption("browser")`에 의해 설정됨)에서 이미지를 엽니다. 마우스나 키보드 단축키를 사용하여 이미지를 확대하거나 축소하고, 팬(pan) 이동을 하거나 여러 이미지 프레임을 순환하며 볼 수 있습니다.
+
+또는 `method = "raster"` 인수를 사용하여 `display`를 호출함으로써 R의 내장 플로팅 기능을 사용하여 이미지를 표시할 수도 있습니다. 그러면 이미지는 현재 장치로 출력됩니다. 이런 방식으로 이미지 데이터를 다른 플로팅 기능과 결합하여 예를 들어 텍스트 레이블을 추가할 수 있습니다.
+
+    
+    
+    EBImage::display(mosq)
+    text(x = 85, y = 800, label = "A mosquito", adj = 0, col = "orange", cex = 1.5)__
+
+[![](11-chap_files/figure-html/fig-mosquito-1.jpeg)](11-chap_files/figure-
+html/fig-mosquito-1.jpeg "그림 11.1: 조지아주 디케이터 교외에서 사체로 발견된 모기 (출처: CDC / Janice Haney Carr).")
+
+그림 11.1: 조지아주 디케이터 교외에서 사체로 발견된 모기 (출처: CDC / Janice Haney Carr).
+
+결과 플롯은 그림 11.1에 나와 있습니다. 평소와 같이 R 장치에 표시된 그래픽은 **[base](https://cran.r-project.org/web/packages/base/)** R 함수인 `dev.print`나 `dev.copy`를 사용하여 저장할 수 있습니다.
+
+컬러 이미지를 읽고 볼 수도 있습니다(그림 11.2 참조).
+
+    
+    
+    imagefile = system.file("images", "hiv.png", package = "MSMB")
+    hivc = readImage(imagefile)__
+    
+    
+    EBImage::display(hivc, method = "raster")__
+
+[![](11-chap_files/figure-html/fig-hiv-1.jpeg)](11-chap_files/figure-html/fig-
+hiv-1.jpeg "그림 11.2: 배양된 림프구에서 싹이 트고 있는 HIV-1 비리온의 주사 전자 현미경 사진 (출처: CDC / C. Goldsmith, P. Feorino, E.L. Palmer, W.R. McManus).")
+
+그림 11.2: 배양된 림프구에서 싹이 트고 있는 HIV-1 비리온의 주사 전자 현미경 사진 (출처: CDC / C. Goldsmith, P. Feorino, E.L. Palmer, W.R. McManus).
+
+또한 이미지에 여러 프레임이 있는 경우, `all = TRUE` 인수를 지정하여 그리드 배열로 한 번에 모두 표시할 수 있습니다(그림 11.3).
+
+    
+    
+    nuc = readImage(system.file("images", "nuclei.tif", package = "EBImage"))
+    EBImage::display(1 - nuc, all = TRUE)__
+
+[![](11-chap_files/figure-html/fig-image-
+oneminus-1.png)](11-chap_files/figure-html/fig-image-oneminus-1.png
+"그림 11.3: EBImage 패키지에 포함된 세포 핵 이미지 4개를 타일 형식으로 표시한 모습.")
+
+그림 11.3: **[EBImage](https://bioconductor.org/packages/EBImage/)** 패키지에 포함된 세포 핵 이미지 4개를 타일 형식으로 표시한 모습.
+
+또는 예를 들어 두 번째 프레임과 같이 단일 프레임만 볼 수도 있습니다.
+
+    
+    
+    EBImage::display(1 - nuc, frame = 2)__
+
+## 11.4 R에서 이미지는 어떻게 저장되나요?
+
+먼저 이미지 객체의 클래스를 식별하여 무슨 일이 일어나고 있는지 살펴봅시다.
+
+    
+    
+    class(mosq)__
+    
+    
+    [1] "Image"
+    attr(,"package")
+    [1] "EBImage"
+
+이 객체가 _Image_ 클래스를 가지고 있음을 알 수 있습니다. 이것은 기본 R 클래스 중 하나가 아니라 **[EBImage](https://bioconductor.org/packages/EBImage/)** 패키지에 의해 정의된 것입니다. 도움말 브라우저를 통하거나 `class?Image`를 입력하여 이 클래스에 대해 더 자세히 알아볼 수 있습니다. 이 클래스는 기본 R 클래스인 _array_ 에서 파생되었으므로, R 배열로 할 수 있는 모든 작업을 _Image_ 객체로도 할 수 있습니다. 게다가 몇 가지 추가적인 기능과 동작들을 가지고 있습니다1.
+
+1 R의 용어로 추가적인 기능은 **슬롯(slots)**이라고 불리고 동작들은 메서드(methods)라고 불립니다. 메서드는 함수의 일종입니다.
+
+__
+
+질문 11.3
+
+_Image_ 객체의 슬롯이 무엇인지, 그리고 어떤 메서드를 적용할 수 있는지 어떻게 알 수 있나요?
+
+__
+
+해결책
+
+__
+
+클래스 정의는 간단합니다. `showClass("Image")`로 접근할 수 있습니다. R 함수 호출을 통해 _Image_ 클래스에 적용 가능한 모든 메서드를 찾는 것은 번거로운 일입니다. 가장 좋은 방법은 클래스의 매뉴얼 페이지를 참조하여 저자가 언급하기로 선택한 메서드를 확인하는 것입니다.
+
+이미지의 차원은 일반적인 배열과 마찬가지로 `dim` 메서드를 사용하여 추출할 수 있습니다.
+
+    
+    
+    dim(mosq)__
+    
+    
+    [1] 1400  952
+
+`hist` 메서드는 배열에 대한 일반적인 `hist` 함수에 비해 재정의되었습니다2. 이는 서로 다르며 아마도 더 유용한 기본값을 사용합니다(그림 11.4).
+
+2 객체 지향 용어로는 오버로드(overloaded)라고 합니다.
+
+    
+    
+    hist(mosq)__
+
+[![](11-chap_files/figure-html/fig-mosqhist-1.png)](11-chap_files/figure-
+html/fig-mosqhist-1.png "그림 11.4: mosq의 픽셀 강도 히스토그램. 범위가 0과 1 사이임에 주목하세요.")
+
+그림 11.4: `mosq`의 픽셀 강도 히스토그램. 범위가 0과 1 사이임에 주목하세요.
+
+데이터 행렬에 R _array_ 로 직접 접근하고 싶다면, 접근자 함수 `imageData`를 사용할 수 있습니다.
+
+    
+    
+    imageData(mosq)[1:3, 1:6]__
+    
+    
+              [,1]      [,2]      [,3]      [,4]      [,5]      [,6]
+    [1,] 0.1960784 0.1960784 0.1960784 0.1960784 0.1960784 0.1960784
+    [2,] 0.1960784 0.1960784 0.1960784 0.1960784 0.1960784 0.1960784
+    [3,] 0.1960784 0.1960784 0.2000000 0.2039216 0.2000000 0.1960784
+
+단순히 객체의 이름을 입력하면 _Image_ 객체에 대한 유용한 요약 정보가 출력됩니다.
+
+    
+    
+    mosq __
+    
+    
+    Image 
+      colorMode    : Grayscale 
+      storage.mode : double 
+      dim          : 1400 952 
+      frames.total : 1 
+      frames.render: 1 
+    
+    imageData(object)[1:5,1:6]
+              [,1]      [,2]      [,3]      [,4]      [,5]      [,6]
+    [1,] 0.1960784 0.1960784 0.1960784 0.1960784 0.1960784 0.1960784
+    [2,] 0.1960784 0.1960784 0.1960784 0.1960784 0.1960784 0.1960784
+    [3,] 0.1960784 0.1960784 0.2000000 0.2039216 0.2000000 0.1960784
+    [4,] 0.1960784 0.1960784 0.2039216 0.2078431 0.2000000 0.1960784
+    [5,] 0.1960784 0.2000000 0.2117647 0.2156863 0.2000000 0.1921569
+
+이제 컬러 이미지를 살펴봅시다.
+
+    
+    
+    hivc __
+    
+    
+    Image 
+      colorMode    : Color 
+      storage.mode : double 
+      dim          : 1400 930 3 
+      frames.total : 3 
+      frames.render: 1 
+    
+    imageData(object)[1:5,1:6,1]
+         [,1] [,2] [,3] [,4] [,5] [,6]
+    [1,]    0    0    0    0    0    0
+    [2,]    0    0    0    0    0    0
+    [3,]    0    0    0    0    0    0
+    [4,]    0    0    0    0    0    0
+    [5,]    0    0    0    0    0    0
+
+두 이미지는 `colorMode` 속성에서 차이가 납니다. `mosq`는 `Grayscale`이고 `hivc`는 `Color`입니다. 이 속성의 요점은 무엇일까요? 이미지 스택(stacks)을 다룰 때 편리하다는 것이 밝혀졌습니다. 만약 `colorMode`가 `Grayscale`이라면, 배열의 세 번째 이상의 모든 차원은 예를 들어 서로 다른 \(z\)-위치, 시점, 반복 실험 등에 해당하는 별개의 이미지 프레임으로 간주됩니다. 반면에 `colorMode`가 `Color`라면, 세 번째 차원은 서로 다른 색상 채널을 갖는 것으로 간주되며, 네 번째 이상의 차원만이 –존재한다면– 여러 이미지 프레임을 위해 사용됩니다. `hivc`에는 사진의 빨간색, 녹색, 파란색 강도에 해당하는 세 개의 색상 채널이 있습니다. 하지만 이것이 반드시 그럴 필요는 없으며, 색상 채널의 수는 얼마든지 될 수 있습니다.
+
+__
+
+질문 11.4
+
+R이 데이터 `nuc`를 어떻게 저장하는지 설명하세요.
+
+__
+
+해결책
+
+__
+
+    
+    
+    nuc __
+    
+    
+    Image 
+      colorMode    : Grayscale 
+      storage.mode : double 
+      dim          : 510 510 4 
+      frames.total : 4 
+      frames.render: 4 
+    
+    imageData(object)[1:5,1:6,1]
+               [,1]       [,2]       [,3]       [,4]       [,5]       [,6]
+    [1,] 0.06274510 0.07450980 0.07058824 0.08235294 0.10588235 0.09803922
+    [2,] 0.06274510 0.05882353 0.07843137 0.09019608 0.09019608 0.10588235
+    [3,] 0.06666667 0.06666667 0.08235294 0.07843137 0.09411765 0.09411765
+    [4,] 0.06666667 0.06666667 0.07058824 0.08627451 0.08627451 0.09803922
+    [5,] 0.05882353 0.06666667 0.07058824 0.08235294 0.09411765 0.10588235
+    
+    
+    dim(imageData(nuc))__
+    
+    
+    [1] 510 510   4
+
+우리는 총 4개의 프레임을 가지고 있음을 알 수 있으며, 이는 4개의 개별 이미지(`frames.render`)에 해당합니다.
+
+## 11.5 이미지 파일 쓰기
+
+이전 섹션에서 보았던 배열 표현 그대로 이미지를 디스크에 저장하는 것은 불필요하게 큰 파일 크기를 초래할 수 있습니다. 저장 공간 소비를 줄이기 위해 압축 알고리즘을 사용하는 것이 일반적입니다. 이미지 압축 3에는 크게 두 가지 유형이 있습니다:
+
+3 유추하자면 영화와 음악도 마찬가지입니다.
+
+  * 무손실 압축(Lossless compression): 압축된 파일로부터 원래의 이미지 데이터를 정확하게 재구성할 수 있습니다. 무손실 압축의 간단한 원리는 다음과 같습니다: (1) 픽셀을 표현하는 데 필요한 것보다 많은 비트를 소비하지 않습니다(예: `mosq` 이미지의 픽셀은 256단계의 회색조 범위를 가지며 이는 8비트로 표현될 수 있지만, `mosq`는 이를 64비트 수치 형식으로 저장합니다 4). (2) 패턴을 식별하고(앞서 출력된 `mosq`와 `hivc`의 픽셀 값에서 본 것과 같은), 이를 훨씬 짧은 규칙으로 대신 표현합니다.
+
+  * 손실 압축(Lossy compression): 어차피 인간 관찰자가 알아채지 못할 것 같은 세부 사항들을 버림으로써 무손실 압축에 비해 추가적인 절감을 이뤄냅니다.
+
+4 비록 이것이 메모리 측면에서는 어느 정도 낭비일 수 있지만, R의 나머지 작동 방식과 더 호환되며 현대 컴퓨터 하드웨어에서 제한 요인이 되는 경우는 드뭅니다.
+
+무손실 압축을 사용하는 저장 형식의 예로는 PNG 5가 있고, 손실 압축의 예로는 JPEG 6 형식이 있습니다. JPEG는 여러분의 휴가 사진에는 좋지만, 과학적 이미지는 무손실 형식으로 저장하는 것이 좋은 습관입니다.
+
+우리는 PNG 형식의 파일에서 이미지 `hivc`를 읽었으므로, 이제 이를 JPEG 파일로 써봅시다. 손실 정도는 1(최악)에서 100(최선) 사이의 값을 갖는 _quality_ 매개변수로 지정됩니다.
+
+    
+    
+    output_file = file.path(tempdir(), "hivc.jpeg")
+    writeImage(hivc, output_file, quality = 85)__
+
+유사하게, 우리는 이미지를 `TIFF` 파일로 쓸 수도 있었고 여러 압축 알고리즘 중에서 선택할 수 있었습니다(`writeImage`와 `writeTiff` 함수의 매뉴얼 페이지 참조). **RBioFormats** 패키지를 사용하면 더 많은 이미지 파일 형식으로 쓸 수 있습니다.
+
+__
+
+질문 11.5
+
+R의 메모리에서 `hivc` 객체의 크기는 얼마인가요? JPEG 파일의 크기는요? 3가지 색상의 1600만 화소(Megapixel) 이미지가 차지할 것으로 예상되는 RAM 용량은 얼마인가요?
+
+__
+
+해결책
+
+__
+
+    
+    
+    object.size(hivc) |> format(units = "Mb")__
+    
+    
+    [1] "29.8 Mb"
+    
+    
+    (object.size(hivc) / prod(dim(hivc))) |> format() |> paste("per pixel")__
+    
+    
+    [1] "8 bytes per pixel"
+    
+    
+    file.info( output_file )$size __
+    
+    
+    [1] 294904
+    
+    
+    16 * 3 * 8 __
+    
+    
+    [1] 384
+
+5 https://en.wikipedia.org/wiki/Portable_Network_Graphics
+6 https://en.wikipedia.org/wiki/JPEG
+
+## 11.6 이미지 조작
+
+이제 이미지가 R에서 숫자 배열로 저장된다는 것을 알았으므로, 이미지를 조작하는 방법이 명확해졌습니다 – 간단한 대수학입니다! 예를 들어, 그림 11.5a에 다시 표시된 원래 이미지를 가져와서 이미지에 -1을 곱함으로써 밝은 영역을 어둡게, 어두운 영역을 밝게 뒤집을 수 있습니다 (그림 11.5b).
+
+    
+    
+    mosqinv = normalize(-mosq)__
+
+__
+
+질문 11.6
+
+`normalize` 함수는 무엇을 하나요?
+
+우리는 또한 곱셈을 통해 대비를 조정할 수 있고 (그림 11.5c), 거듭제곱 변환을 통해 감마 인자를 조정할 수 있습니다 (그림 11.5d).
+
+    
+    
+    mosqcont = mosq * 3
+    mosqexp = mosq ^ (1/3)__
+
+[![](11-chap_files/figure-html/fig-manip1-1.jpeg)](11-chap_files/figure-
+html/fig-manip1-1.jpeg "그림 11.5 (a): ")
+
+(a)
+
+[![](11-chap_files/figure-html/fig-manip1-2.jpeg)](11-chap_files/figure-
+html/fig-manip1-2.jpeg "그림 11.5 (b): ")
+
+(b)
+
+[![](11-chap_files/figure-html/fig-manip1-3.jpeg)](11-chap_files/figure-
+html/fig-manip1-3.jpeg "그림 11.5 (c): ")
+
+(c)
+
+[![](11-chap_files/figure-html/fig-manip1-4.jpeg)](11-chap_files/figure-
+html/fig-manip1-4.jpeg "그림 11.5 (d): ")
+
+(d)
+
+그림 11.5: 원래의 모기 이미지 (a)와 세 가지 서로 다른 이미지 변환: (b) 뺄셈, (c) 곱셈, (d) 거듭제곱 변환.
+
+더 나아가, 우리는 행렬 연산을 통해 이미지를 자르고(crop), 임계값 처리(threshold)하고, 전치(transpose)할 수 있습니다 (그림 11.6).
+
+    
+    
+    mosqcrop   = mosq[100:438, 112:550]
+    mosqthresh = mosq > 0.5
+    mosqtransp = transpose(mosq)__
+
+[![](11-chap_files/figure-html/fig-manip5-1.png)](11-chap_files/figure-
+html/fig-manip5-1.png "그림 11.6 (a): ")
+
+(a)
+
+[![](11-chap_files/figure-html/fig-manip5-2.png)](11-chap_files/figure-
+html/fig-manip5-2.png "그림 11.6 (b): ")
+
+(b)
+
+[![](11-chap_files/figure-html/fig-manip5-3.png)](11-chap_files/figure-
+html/fig-manip5-3.png "그림 11.6 (c): ")
+
+(c)
+
+그림 11.6: 세 가지 추가 이미지 변환: (a) 자르기, (b) 임계값 처리, (c) 전치.
+
+__
+
+질문 11.7
+
+임계값 처리의 결과인 `mosqthresh`는 어떤 데이터 유형인가요?
+
+__
+
+해결책
+
+__
+
+픽셀이 R의 _logical_ 유형 배열로 표현된 이진 값을 가지는 _Image_ 객체입니다. 콘솔에 객체 이름을 입력하여 확인할 수 있습니다.
+
+    
+    
+    mosqthresh __
+    
+    
+    Image 
+      colorMode    : Grayscale 
+      storage.mode : logical 
+      dim          : 1400 952 
+      frames.total : 1 
+      frames.render: 1 
+    
+    imageData(object)[1:5,1:6]
+          [,1]  [,2]  [,3]  [,4]  [,5]  [,6]
+    [1,] FALSE FALSE FALSE FALSE FALSE FALSE
+    [2,] FALSE FALSE FALSE FALSE FALSE FALSE
+    [3,] FALSE FALSE FALSE FALSE FALSE FALSE
+    [4,] FALSE FALSE FALSE FALSE FALSE FALSE
+    [5,] FALSE FALSE FALSE FALSE FALSE FALSE
+
+__
+
+질문 11.8
+
+위와 같이 `transpose` 함수를 사용하는 대신, R의 **[base](https://cran.r-project.org/web/packages/base/)** 함수 `t`를 사용할 수도 있을까요?
+
+__
+
+해결책
+
+__
+
+이 경우 `t(mosq)`와 `transpose(mosq)`의 값은 동일하지만, `transpose`는 컬러 및 다중 프레임 이미지에서도 작동하므로 더 선호됩니다.
+
+## 11.7 공간 변환
+
+우리는 방금 공간 변환의 한 유형인 전치를 보았지만, 그 외에도 많은 변환이 있습니다. 여기에 몇 가지 예시가 있습니다:
+
+    
+    
+    mosqrot   = EBImage::rotate(mosq, angle = 30)
+    mosqshift = EBImage::translate(mosq, v = c(100, 170))
+    mosqflip  = flip(mosq)
+    mosqflop  = flop(mosq)__
+
+[![](11-chap_files/figure-html/fig-flipflop-1.jpeg)](11-chap_files/figure-
+html/fig-flipflop-1.jpeg "그림 11.7 (a): ")
+
+(a)
+
+[![](11-chap_files/figure-html/fig-flipflop-2.jpeg)](11-chap_files/figure-
+html/fig-flipflop-2.jpeg "그림 11.7 (b): ")
+
+(b)
+
+[![](11-chap_files/figure-html/fig-flipflop-3.jpeg)](11-chap_files/figure-
+html/fig-flipflop-3.jpeg "그림 11.7 (c): ")
+
+(c)
+
+[![](11-chap_files/figure-html/fig-flipflop-4.jpeg)](11-chap_files/figure-
+html/fig-flipflop-4.jpeg "그림 11.7 (d): ")
+
+(d)
+
+그림 11.7: 공간 변환: (a) 회전, (b) 이동, (c) 중앙 수평축에 대한 반전(`flip`), (d) 중앙 수직축에 대한 반전(`flop`).
+
+위 코드에서 `rotate` 7 함수는 주어진 각도만큼 이미지를 시계 방향으로 회전시키고, `translate`는 지정된 2차원 벡터만큼 이미지를 이동시킵니다(이미지 영역 밖으로 나가는 픽셀은 잘려나가고, 이미지 영역으로 들어오는 픽셀은 0으로 설정됩니다). `flip`과 `flop` 함수는 각각 이미지를 중앙 수평축과 수직축을 기준으로 반사시킵니다. 이러한 연산들의 결과가 그림 11.7에 나와 있습니다.
+
+7 나중에 첨부할 **[spatstat](https://cran.r-project.org/web/packages/spatstat/)** 패키지의 동일한 이름의 함수와 혼동을 피하기 위해 여기서는 네임스페이스 수식어 `EBImage::`를 붙여 호출합니다.
+
+## 11.8 선형 필터
+
+이제 세포 생물학 분야의 응용으로 넘어가 봅시다. Laufer, Fischer 및 동료들에 의해 연구된 인간 암세포 이미지를 로드합니다 ([Laufer et al. 2013](16-chap.html#ref-Laufer:NatMeth:2013)). 이들은 그림 11.8에 나와 있습니다.
+
+    
+    
+    imagefiles = system.file("images", c("image-DAPI.tif", "image-FITC.tif", "image-Cy3.tif"), package = "MSMB")
+    cells = readImage(imagefiles)__
+
+[![](11-chap_files/figure-html/fig-LauferCells-1.png)](11-chap_files/figure-
+html/fig-LauferCells-1.png "그림 11.8: 인간 대장암 세포(HCT116). 네 개의 이미지는 동일한 세포들을 보여줍니다: 가장 왼쪽 이미지는 세포 DNA의 DAPI 염색에 대응하고, 두 번째는 알파-튜불린에 대한 면역 염색, 세 번째는 액틴에 대응합니다. 이들은 회색조 이미지로 표시됩니다. 가장 오른쪽 이미지는 세 이미지를 RGB 이미지의 색상 채널(빨강: 액틴, 초록: 알파-튜불린, 파랑: DNA)로 겹쳐서 얻은 것입니다.")
+
+그림 11.8: 인간 대장암 세포(HCT116). 네 개의 이미지는 동일한 세포들을 보여줍니다: 가장 왼쪽 이미지는 세포 DNA의 DAPI 염색에 대응하고, 두 번째는 알파-튜불린에 대한 면역 염색, 세 번째는 액틴에 대응합니다. 이들은 회색조 이미지로 표시됩니다. 가장 오른쪽 이미지는 세 이미지를 RGB 이미지의 색상 채널(빨강: 액틴, 초록: 알파-튜불린, 파랑: DNA)로 겹쳐서 얻은 것입니다.
+
+_Image_ 객체 `cells`는 340 \(\times\) 490 \(\times\) 3 크기의 3차원 배열이며, 마지막 차원은 3개의 개별 회색조 프레임이 있음을 나타냅니다. 우리의 목표는 이제 이 이미지들에서 개별 세포들을 계산적으로 식별하고 정량적으로 특성화하는 것입니다. 그 자체로는 소박한 목표일 수 있지만, Laufer 등은 2,048 \(\times\) 2,048 픽셀 크기의 이미지를 690,000개 이상 보유하고 있었습니다. 우리는 그중 작은 영역이 잘려진 3개를 보고 있는 것입니다. 일단 우리가 명시된 목표를 달성하는 방법을 알게 된다면, 우리는 이러한 방대한 이미지 컬렉션에 우리의 능력을 적용할 수 있으며, 그것은 더 이상 소박한 목표가 아닙니다!
+
+### 11.8.1 막간: 이미지의 강도 스케일
+
+하지만 실제 작업을 시작하기 전에, 약간 지루한 데이터 변환 문제를 다루어야 합니다. 물론 이는 흔한 일입니다. 이미지의 동적 범위(최솟값과 최댓값)를 조사해 봅시다.
+
+    
+    
+    apply(cells, 3, range)__
+    
+    
+          image-DAPI  image-FITC   image-Cy3
+    [1,] 0.001586938 0.002899214 0.001663233
+    [2,] 0.031204700 0.062485695 0.055710689
+
+최댓값들이 1보다 훨씬 작은 숫자임을 알 수 있습니다. 그 이유는 `readImage` 함수가 `TIFF` 이미지가 각 픽셀을 표현하기 위해 16비트 정수를 사용함을 인식하고, 데이터를 –R의 수치형 변수에서 흔히 그렇듯이– 배정밀도 부동 소수점 수 배열로 반환하기 때문입니다. 이때 정수 값(이론적 범위는 0에서 \(2^{16}-1=65535\)까지)은 부동 소수점 표현의 가수(mantissa)에 저장되고 지수는 이론적 범위가 구간 \([0,1]\)에 매핑되도록 선택됩니다. 하지만 이 이미지들을 생성하는 데 사용된 스캐너는 하위 11비트 또는 12비트만을 사용했으며, 이것이 이미지의 최댓값이 작은 이유입니다. 우리는 이 데이터를 다음과 같이 대략 \([0,1]\) 범위를 덮도록 재조정할 수 있습니다 8.
+
+8 `normalize` 함수는 이미지의 스케일 조정에 대해 더 유연한 인터페이스를 제공합니다.
+
+    
+    
+    cells[,,1]   = 32 * cells[,,1]
+    cells[,,2:3] = 16 * cells[,,2:3]
+    apply(cells, 3, range)__
+    
+    
+         image-DAPI image-FITC  image-Cy3
+    [1,] 0.05078202 0.04638743 0.02661173
+    [2,] 0.99855039 0.99977111 0.89137102
+
+이러한 2의 배수 곱셈은 저장된 데이터의 기저 정밀도에는 아무런 영향을 주지 않는다는 점을 기억합시다.
+
+### 11.8.2 평활화를 통한 노이즈 감소
+
+이제 이미지를 분석할 준비가 되었습니다. 우리의 첫 번째 목표는 개별 세포를 식별하기 위해 이미지를 분할하는 것이므로, 평활화(smoothing)를 통해 이미지에서 국소적인 아티팩트나 노이즈를 제거하는 것으로 시작할 수 있습니다. 직관적인 접근 방식은 각 픽셀 주변에 선택된 크기의 창(window)을 정의하고 그 창 안의 값들을 평균 내는 것입니다. 이 절차를 모든 픽셀에 적용한 후, 새로운 평활화된 이미지가 얻어집니다. 수학적으로 우리는 이를 다음과 같이 표현할 수 있습니다.
+
+\[ f^*(x,y) = \frac{1}{N} \sum_{s=-a}^{a}\sum_{t=-a}^{a} f(x+s, y+t),
+\tag{11.1}\]
+
+여기서 \(f(x,y)\)는 좌표 \(x\), \(y\)에서의 픽셀 값이고, \(a\)는 각 방향으로 \(2a+1\)인 창의 크기를 결정합니다. \(N=(2a+1)^2\)은 평균을 낸 픽셀의 수이며, \(f^*\)는 새로운 평활화된 이미지입니다.
+
+더 일반적으로, 이동 평균을 가중 평균으로 대체할 수 있으며, 가중치 함수 \(w\)를 사용합니다. \(w\)는 대개 창의 중간 지점(\(s=t=0\))에서 가장 높은 가중치를 갖고 가장자리로 갈수록 감소합니다.
+
+\[ (w * f)(x,y) = \sum_{s=-\infty}^{+\infty} \sum_{t=-\infty}^{+\infty}
+ w(s,t)\, f(x+s, y+s) \tag{11.2}\]
+
+표기상의 편의를 위해 합산 범위를 \(-\infty\)에서 \(\infty\)까지로 두었지만, 실제로는 \(w\)가 유한한 수의 0이 아닌 값만을 가지므로 합은 유한합니다. 사실 우리는 가중치 함수 \(w\)를 또 다른 이미지로 생각할 수 있으며, 이 연산을 두 이미지 \(f\)와 \(w\)의 **컨벌루션(convolution)**이라고도 부르며 기호 \(*\)로 나타냅니다. **[EBImage](https://bioconductor.org/packages/EBImage/)**에서 2차원 컨벌루션은 `filter2` 함수에 의해 구현되며, 보조 함수 `makeBrush`를 사용하여 가중치 함수 \(w\)를 생성할 수 있습니다.
+
+    
+    
+    w = makeBrush(size = 51, shape = "gaussian", sigma = 7)
+    nucSmooth = filter2(getFrame(cells, 1), w)__
+
+[![](11-chap_files/figure-html/fig-nucSmooth-1.png)](11-chap_files/figure-
+html/fig-nucSmooth-1.png "그림 11.9: nucSmooth, 이미지 객체 cells의 DNA 채널을 평활화한 버전(원래 버전은 그림 11.8의 가장 왼쪽 패널에 나와 있습니다).")
+
+그림 11.9: `nucSmooth`, 이미지 객체 `cells`의 DNA 채널을 평활화한 버전(원래 버전은 그림 11.8의 가장 왼쪽 패널에 나와 있습니다).
+
+__
+
+질문 11.9
+
+가중치 행렬 `w`는 어떻게 생겼나요?
+
+__
+
+해결책
+
+__
+
+그림 11.10을 참조하세요.
+
+    
+    
+    library("tibble")
+    library("ggplot2")
+    tibble(w = w[(nrow(w)+1)/2, ]) |>
+      ggplot(aes(y = w, x = seq(along = w))) + geom_point()__
+
+[![](11-chap_files/figure-html/fig-image-filter2-1.png)](11-chap_files/figure-
+html/fig-image-filter2-1.png "그림 11.10: 가중치 행렬 w의 중간 행, w[26, ].")
+
+그림 11.10: 가중치 행렬 `w`의 중간 행, `w[`26`, ]`.
+
+사실 `filter2` 함수는 식 11.2에 명시된 합산을 직접 수행하지 않습니다. 대신, 수학적으로 동일하면서도 계산적으로 더 효율적인 방식인 고속 푸리에 변환(Fast Fourier Transformation)을 사용합니다.
+
+식 11.2의 컨벌루션은 임의의 두 이미지 \(f_1, f_2\)와 숫자 \(c_1, c_2\)에 대해 \(w*(c_1f_1+c_2f_2)= c_1w*f_1 + c_2w*f_2\)가 성립한다는 의미에서 **선형(linear)** 연산입니다. 선형 필터의 근간이 되는 아름답고 강력한 이론이 있습니다 ([Vetterli, Kovačević, and Goyal 2014](16-chap.html#ref-FoundationSignalProcessing)).
+
+계속 진행하기 위해, 이제 그림 11.9에서 시연을 위해 보여주었던 것보다 작은 평활화 대역폭을 사용합니다. DNA 채널에는 1픽셀, 액틴과 튜불린에는 3픽셀의 `sigma`를 사용합시다.
+
+    
+    
+    cellsSmooth = Image(dim = dim(cells))
+    sigma = c(1, 3, 3)
+    for(i in seq_along(sigma))
+      cellsSmooth[,,i] = filter2( cells[,,i],
+             filter = makeBrush(size = 51, shape = "gaussian",
+                                sigma = sigma[i]) )__
+
+평활화된 이미지는 픽셀 노이즈가 감소하면서도 여전히 필요한 해상도를 유지합니다.
+
+## 11.9 적응형 임계값 처리
+
+적응형 임계값 처리(adaptive thresholding)의 아이디어는, 그림 11.6b에서 했던 것과 같은 단순한 임계값 처리와 비교할 때, 이미지의 서로 다른 영역에서 임계값이 달라질 수 있도록 허용하는 것입니다. 이런 방식으로, 예를 들어 불균일한 조명이나 근처의 밝은 물체에서 새어 나오는 신호로 인해 발생하는 기저 배경 신호의 공간적 의존성을 예상할 수 있습니다. 사실 우리는 이미 그림 11.3의 오른쪽 하단 이미지에서 불균일한 배경의 예시를 보았습니다.
+
+우리의 대장암 이미지(그림 11.8)에는 그러한 아티팩트가 없지만, 시연을 위해 중간이 가장 높고 측면으로 갈수록 떨어지는 2차원 벨 함수 `illuminationGradient`를 이미지에 곱하여 불균일한 조명을 시뮬레이션해 봅시다 (그림 11.11).
+
+    
+    
+    py = seq(-1, +1, length.out = dim(cellsSmooth)[1])
+    px = seq(-1, +1, length.out = dim(cellsSmooth)[2])
+    illuminationGradient = Image(outer(py, px, function(x, y) exp(-(x^2 + y^2))))
+    nucBadlyIlluminated = cellsSmooth[,,1] * illuminationGradient __
+
+우리는 이제 우리가 탐지하고자 하는 핵보다는 크지만 조명 아티팩트의 길이 스케일보다는 작은 21픽셀 크기의 평활화 창 `disc`를 정의합니다. 이를 사용하여 `localBackground` 이미지(그림 11.11 (c))와 임계값 처리된 이미지 `nucBadThresh`를 계산합니다.
+
+    
+    
+    disc = makeBrush(21, "disc")
+    disc = disc / sum(disc)
+    localBackground = filter2(nucBadlyIlluminated, disc)
+    offset = 0.02
+    nucBadThresh = (nucBadlyIlluminated - localBackground > offset)__
+
+[![](11-chap_files/figure-html/fig-illumination-1.png)](11-chap_files/figure-
+html/fig-illumination-1.png "그림 11.11 (a): ")
+
+(a)
+
+[![](11-chap_files/figure-html/fig-illumination-2.png)](11-chap_files/figure-
+html/fig-illumination-2.png "그림 11.11 (b): ")
+
+(b)
+
+[![](11-chap_files/figure-html/fig-illumination-3.png)](11-chap_files/figure-
+html/fig-illumination-3.png "그림 11.11 (c): ")
+
+(c)
+
+[![](11-chap_files/figure-html/fig-illumination-4.png)](11-chap_files/figure-
+html/fig-illumination-4.png "그림 11.11 (d): ")
+
+(d)
+
+그림 11.11: a: `illuminationGradient`, 중앙에서 최댓값을 갖고 측면으로 갈수록 떨어지는 함수이며, 이미지에서 때때로 보이는 불균일한 조명을 시뮬레이션합니다. (b) `nucBadlyIlluminated`, `cellsSmooth`의 DNA 채널에 `illuminationGradient`를 곱한 결과 이미지. (c) `localBackground`, 탐지할 객체보다 큰 대역폭을 가진 선형 필터를 적용한 결과. (d) `nucBadThresh`, 적응형 임계값 처리 결과. 신호 강도의 감소에도 불구하고 이미지 주변부의 핵들이 상당히 잘 식별되었습니다.
+
+이것이 효과가 있을 수 있음을 확인했으므로, 다음 단계들을 위해 실제(인위적으로 성능이 저하되지 않은) 이미지에 대해 동일한 작업을 다시 수행해 봅시다.
+
+    
+    
+    nucThresh = (cellsSmooth[,,1] - filter2(cellsSmooth[,,1], disc) > offset)__
+
+각 픽셀의 강도를 국소 이웃에서 결정된 배경과 비교함으로써, 우리는 객체들이 이미지에 상대적으로 드문드문 분포되어 있어 이웃의 신호 분포가 배경에 의해 지배된다고 가정합니다. 우리 이미지의 핵들에 대해서는 이 가정이 타당하지만, 다른 상황에서는 다른 가정을 세워야 할 수도 있습니다. 우리가 여기서 수행한 적응형 임계값 처리는 선형 필터인 `filter2`를 사용하므로 (가중) 국소 평균화에 해당합니다. 비록 계산 비용은 더 많이 들지만, 중앙값(median)이나 낮은 분위수와 같은 다른 분포 요약 수치들이 더 선호되는 경향이 있습니다. 국소 중앙값 필터링을 위해 **[EBimage](https://bioconductor.org/packages/EBimage/)**는 `medianFilter` 함수를 제공합니다.
+
+## 11.10 이진 이미지에 대한 형태학적 연산
+
+임계값 처리된 이미지 `nucThresh`(그림 11.12a에 표시됨)는 아직 만족스럽지 않습니다. 핵의 경계가 약간 울퉁불퉁하고 단일 픽셀 수준의 노이즈가 있습니다. 이러한 방해 요소들을 제거하는 효과적이고 간단한 방법이 일련의 형태학적 연산(morphological operations)에 의해 제공됩니다 ([Serra 1983](16-chap.html#ref-MathematicalMorphology)).
+
+이진 이미지(예를 들어 배경과 전경 픽셀을 나타내는 0과 1의 값을 가짐)와 이른바 구조화 요소(structuring element)라고도 불리는 이진 마스크(mask) 9가 주어졌을 때, 이러한 연산들은 다음과 같이 작동합니다.
+
+9 마스크의 예로는 주어진 반지름을 가진 원, 또는 더 정확하게는 중심 픽셀로부터 특정 거리 내에 있는 픽셀들의 집합이 있습니다.
+
+  * `erode`(침식): 모든 전경 픽셀에 대해 그 주변에 마스크를 놓고, 만약 마스크 아래의 픽셀 중 하나라도 배경에 해당하면 해당 전경 픽셀들을 모두 배경으로 설정합니다.
+
+  * `dilate`(팽창): 모든 배경 픽셀에 대해 그 주변에 마스크를 놓고, 만약 마스크 아래의 픽셀 중 하나라도 전경에 해당하면 해당 배경 픽셀들을 모두 전경으로 설정합니다.
+
+  * `open`(열기): `erode`를 수행한 후 이어서 `dilate`를 수행합니다.
+
+우리는 이러한 연산들을 필터로 생각할 수도 있지만, 11.8절의 선형 필터와 대조적으로 이들은 이진 이미지에서만 작동하며 선형성이 없습니다.
+
+우리의 이미지에 형태학적 열기 연산을 적용해 봅시다.
+
+    
+    
+    nucOpened = EBImage::opening(nucThresh, kern = makeBrush(5, shape = "disc"))__
+
+이 결과는 미묘하며, 그림 11.12에서 차이점을 찾으려면 이미지를 확대해 보아야 할 것입니다. 하지만 이 연산은 이진 이미지에서 우리 응용 목적상 바람직하지 않은 일부 픽셀 수준의 특징들을 평활화하는 데 성공합니다.
+
+## 11.11 이진 이미지를 객체로 분할
+
+이진 이미지 `nucOpened`는 이미지를 전경과 배경 픽셀로 분할한 것이지, 개별 핵으로 분할한 것은 아닙니다. 우리는 한 단계 더 나아가 연결된 픽셀 세트로 정의된 개별 객체들을 추출할 수 있습니다. **[EBImage](https://bioconductor.org/packages/EBImage/)**에는 이 목적을 위한 편리한 함수인 `bwlabel`이 있습니다.
+
+    
+    
+    nucSeed = bwlabel(nucOpened)
+    table(nucSeed)__
+    
+    
+    nucSeed
+         0      1      2      3      4      5      6      7      8      9     10 
+    155408    511    330    120    468    222    121    125    159    116    520 
+        11     12     13     14     15     16     17     18     19     20     21 
+       115    184    179    116    183    187    303    226    164    309    194 
+        22     23     24     25     26     27     28     29     30     31     32 
+       148    345    287    203    379    371    208    222    320    443    409 
+        33     34     35     36     37     38     39     40     41     42     43 
+       493    256    169    225    376    214    228    341    269    119    315 
+
+이 함수는 0이 배경을 나타내고 1부터 43까지의 숫자가 식별된 서로 다른 객체들을 인덱싱하는 정수 값 이미지 `nucSeed`를 반환합니다.
+
+__
+
+질문 11.10
+
+위 테이블의 숫자들은 무엇을 의미하나요?
+
+__
+
+해결책
+
+__
+
+이들은 각 객체의 면적(픽셀 단위)에 해당합니다. 우리는 우리가 예상하는 것과 비교하여 너무 크거나 작은 객체들을 제거하는 데 이 정보를 사용할 수 있습니다.
+
+그러한 이미지들을 시각화하기 위해, (회색조) 정수 이미지를 각 객체마다 임의로 선택된 서로 다른 색상을 사용하여 컬러 이미지로 변환해 주는 `colorLabels` 함수가 편리합니다.
+
+    
+    
+    EBImage::display(colorLabels(nucSeed))__
+
+이것은 그림 11.12의 중간 패널에 나와 있습니다. 결과는 이미 고무적이지만, 두 가지 유형의 오류를 발견할 수 있습니다:
+
+  * 일부 인접한 객체들이 제대로 분리되지 않았습니다.
+
+  * 일부 객체들이 구멍을 포함하고 있습니다.
+
+사실 우리는 11.9절에서 평활화 창 크기와 `offset` 매개변수를 조절하여 이러한 오류의 발생 빈도를 바꿀 수 있습니다: 오프셋을 높이면 두 인접한 객체가 닿아서 `bwlabel`에 의해 하나의 객체로 간주될 확률이 줄어들지만, 반면에 구멍이 더 많이 그리고 더 크게 생기게 됩니다. 반대로 낮추는 것도 마찬가지입니다.
+
+분할(Segmentation)은 광범위한 문헌, 소프트웨어 도구 ([Schindelin et al. 2012](16-chap.html#ref-schindelin2012fiji); [Chaumont et al. 2012](16-chap.html#ref-chaumont2012icy); [Carpenter et al. 2006](16-chap.html#ref-carpenter2006cellprofiler); [Held et al. 2010](16-chap.html#ref-held2010cellcognition)), 그리고 이미지 분석 및 기계 학습 커뮤니티의 실무 경험이 축적된 풍부하고 다양한 연구 및 공학 분야입니다. 주어진 작업에 적합한 접근 방식이 무엇인지는 데이터와 기저의 질문에 크게 좌우되며, 모든 경우에 최선인 유일한 방법은 없습니다. 일반적으로 분석을 평가하기 위한 "실측 자료(ground truth)"나 "표준(gold standards)"을 얻는 것조차 어려우며 – 적은 수의 선택된 이미지에 대한 수동 주석 처리에 의존하는 것도 드문 일이 아닙니다. 비록 당혹스러울 정도로 많은 선택지들이 있지만, 시작하는 것은 쉽습니다. 우리는 단순한 해결책으로 시작하는 것을 두려워할 필요가 없으며, 이를 점진적으로 개선해 나갈 수 있습니다. 식별될 객체들의 예상되는 모양, 크기 및 객체 간의 관계에 대한 사전 지식을 더 많이 포함할 수 있는 방법들을 통해 대개 개선을 얻을 수 있습니다.
+
+고처리량 이미지의 통계 분석을 위해, 우리는 너무 많은 매개변수나 가정에 의존하지 않으면서 아마도 최적은 아닐지라도 신속하고 충분히 좋은 결과를 내는 단순한 방법에 만족하기로 선택할 수도 있습니다 ([Rajaram et al. 2012](16-chap.html#ref-PhenoRipper)). 이러한 정신으로 우리가 가진 것을 가지고 계속 진행해 봅시다. 우리는 모든 핵 염색 영역을 확실히 커버하되 핵 사이의 일부 영역도 커버하는 관대한 전경 마스크를 생성합니다. 이를 위해 단순히 덜 엄격한 두 번째 적 적응형 임계값 처리를 적용합니다.
+
+    
+    
+    nucMask = cellsSmooth[,,1] - filter2(cellsSmooth[,,1], disc) > 0 __
+
+그리고 전경 픽셀로 둘러싸인 구멍들을 채워주는 또 다른 형태학적 연산인 `fillHull`을 적용합니다.
+
+    
+    
+    nucMask = fillHull(nucMask)__
+
+`nucSeed`를 개선하기 위해, 이제 우리는 `nucMask`에 의해 정의된 마스크를 채울 때까지 식별된 객체들을 _전파(propagate)_시킬 수 있습니다. 마스크가 연결된 부분에서의 핵 사이의 경계는 다음 섹션에서 설명할 보로노이 테셀레이션(Voronoi tessellation)에 의해 그려질 수 있으며, 이는 `propagate` 함수에 구현되어 있습니다.
+
+    
+    
+    nuclei = propagate(cellsSmooth[,,1], nucSeed, mask = nucMask)__
+
+그 결과는 그림 11.12의 가장 오른쪽 패널에 표시되어 있습니다.
+
+[![](11-chap_files/figure-html/fig-morphop-1.png)](11-chap_files/figure-
+html/fig-morphop-1.png "그림 11.12 (a): ")
+
+(a)
+
+[![](11-chap_files/figure-html/fig-morphop-2.png)](11-chap_files/figure-
+html/fig-morphop-2.png "그림 11.12 (b): ")
+
+(b)
+
+[![](11-chap_files/figure-html/fig-morphop-3.png)](11-chap_files/figure-
+html/fig-morphop-3.png "그림 11.12 (c): ")
+
+(c)
+
+[![](11-chap_files/figure-html/fig-morphop-4.png)](11-chap_files/figure-
+html/fig-morphop-4.png "그림 11.12 (d): ")
+
+(d)
+
+[![](11-chap_files/figure-html/fig-morphop-5.png)](11-chap_files/figure-
+html/fig-morphop-5.png "그림 11.12 (e): ")
+
+(e)
+
+그림 11.12: 핵 분할의 서로 다른 단계들. (a-e): `nucThresh`, `nucOpened`, `nucSeed`, `nucMask`, `nuclei`.
+
+## 11.12 보로노이 테셀레이션
+
+보로노이 테셀레이션(Voronoi tessellation)은 일련의 시드(seed) 점들(또는 영역들)이 있고 시드들 사이에 놓인 공간을 각 공간 상의 점이 가장 가까운 시드에 할당되도록 분할하고 싶을 때 유용합니다. 이것은 직관적이고 강력한 아이디어이므로, 이 섹션에서 이에 대해 잠시 곁가지로 다뤄보겠습니다. 기본적인 예시를 고려해 봅시다. 우리는 `nuclei` 이미지를 시드로 사용합니다. `propagate` 함수를 호출하려면 다른 이미지도 지정해야 합니다: 지금은 단순히 모든 값이 0인 이미지(`zeros`)를 제공하고, `lambda` 매개변수를 큰 양수값으로 설정합니다(이 선택들에 대해서는 나중에 다시 다룰 것입니다).
+
+    
+    
+    zeros        = Image(dim = dim(nuclei))
+    voronoiExamp = propagate(seeds = nuclei, x = zeros, lambda = 100)
+    voronoiPaint = paintObjects(voronoiExamp, 1 - nucOpened)__
+
+[![](11-chap_files/figure-html/fig-voronoiPaint-1.png)](11-chap_files/figure-
+html/fig-voronoiPaint-1.png "그림 11.13: 핵(검은색 영역으로 표시됨)을 시드로 사용한 보로노이 분할 예시이며 회색 선으로 표시됩니다.")
+
+그림 11.13: 핵(검은색 영역으로 표시됨)을 시드로 사용한 보로노이 분할 예시이며 회색 선으로 표시됩니다.
+
+__
+
+질문 11.11
+
+테셀레이션에서 분할 요소를 어떻게 선택하나요?
+
+__
+
+해결책
+
+__
+
+위의 `propagate` 호출 결과인 `voronoiExamp`는 단순히 값이 서로 다른 분할들을 나타내는 정수 이미지입니다.
+
+    
+    
+    head(table(voronoiExamp))__
+    
+    
+    voronoiExamp
+       1    2    3    4    5    6 
+    5645 4735  370 5964 3333 1377 
+    
+    
+    ind = which(voronoiExamp == 13, arr.ind = TRUE)
+    head(ind, 3)__
+    
+    
+         row col
+    [1,] 112 100
+    [2,] 113 100
+    [3,] 114 100
+
+그 결과는 그림 11.13에 나와 있습니다. 이것은 흥미로워 보이지만, 아마도 그림 11.12의 `nuclei` 이미지만큼 유용하지는 않을 것입니다. 우리는 보로노이 테셀레이션의 기본 정의에서 두 가지 일반화가 가능하다는 점에 주목합니다:
+
+  * 기본적으로 우리가 분할하는 공간은 전체 직사각형 이미지 영역이지만 – 사실 우리는 어떤 임의의 하위 공간으로도 자신을 제한할 수 있습니다. 이는 각 점으로부터 다음 시드까지의 최단 거리를 단순한 평면이 아니라, (가로지를 수 없는) 호수와 강이 산재한 지형에서 모든 경로가 육지 위에 남아 있어야 하는 조건 하에서 찾는 것과 비슷합니다. `propagate`는 `mask` 매개변수를 통해 이러한 일반화를 가능하게 합니다.
+
+  * 기본적으로 우리는 공간을 평평하다고 생각하지만 – 사실 공간은 언덕과 협곡을 가질 수 있으며, 따라서 지형 상의 두 점 사이의 거리는 그들의 \(x\)- 및 \(y\)-위치뿐만 아니라 그 사이에 놓인 \(z\)-방향의 오르막과 내리막인 "고도"에도 의존합니다. 여러분은 `propagate`의 `x` 인수를 통해 그러한 지형을 지정할 수 있습니다.
+
+수학적으로 말하자면, 우리는 단순한 기본 사례(위에 유클리드 메트릭이 있는 평평한 직사각형 또는 이미지) 대신, 특수한 형태와 메트릭을 가진 리만 다양체(Riemann manifold) 위에서 보로노이 분할을 수행하는 것입니다. 이미지의 열과 행 좌표에 대해 \(x\)와 \(y\) 표기법을 사용하고 고도에 대해 \(z\)를 사용합시다. 좌표 \((x, y, z)\)와 \((x+\text{d}x, y+\text{d}y, z+\text{d}z)\)로 정의되는 인접한 두 점 사이의 거리 \(\text{d}s\)는 일반적인 2D 이미지 상의 유클리드 메트릭인
+
+\[ \text{d}s^2 = \text{d}x^2 + \text{d}y^2 \tag{11.3}\]
+
+이 아니라 대신 다음과 같이 얻어집니다.
+
+\[ \text{d}s^2 = \frac{2}{\lambda+1} \left[ \lambda \left( \text{d}x^2 + \text{d}y^2 \right) + \text{d}z^2 \right], \tag{11.4}\]
+
+여기서 매개변수 \(\lambda\)는 \(\ge0\)인 실수입니다. 이를 이해하기 위해 몇 가지 중요한 경우를 살펴봅시다:
+
+\[ \begin{aligned} \lambda=1:&	\quad \text{d}s^2 = \text{d}x^2 + \text{d}y^2 + \text{d}z^2\
+\lambda=0:&	\quad \text{d}s^2 = 2\, \text{d}z^2\
+\lambda\to\infty:&	\quad \text{d}s^2 = 2 \left( \text{d}x^2 + \text{d}y^2 \right)\
+\end{aligned} \tag{11.5}\]
+
+\(\lambda=1\)인 경우 메트릭은 등방성 유클리드 메트릭이 됩니다. 즉, \(z\)-방향의 이동이 \(x\)- 또는 \(y\)-방향과 똑같이 "비싸거나" "멀게" 느껴집니다. 극한의 경우인 \(\lambda=0\)에서는 오직 \(z\)-이동만이 중요하며, 옆으로의 이동(\(x\)- 또는 \(y\)-방향)은 거리에 기여하지 않습니다. 다른 극한의 경우인 \(\lambda\to\infty\)에서는 오직 옆으로의 이동만이 중요하며, \(z\)-방향의 이동은 "공짜"입니다. 더 멀리 떨어진 점들 사이의 거리는 그들 사이의 최단 경로를 따라 \(\text{d}s\)를 합산하여 얻어집니다. 매개변수 \(\lambda\)는 옆으로의 이동(\(x\)와 \(y\)축을 따라)과 수직 이동 사이의 상대적 가중치를 제어하는 편리한 수단 역할을 합니다. 직관적으로 여러분이 그러한 지형의 등산객이라고 상상한다면, \(\lambda\)를 선택함으로써 여러분은 산을 돌아가는 대신 산을 넘기 위해 얼마나 많은 오르내림을 감수할지 지정할 수 있습니다. 우리가 이 섹션의 시작 부분에서 `propagate`를 호출할 때 `lambda = 100`을 사용했을 때, 이 값은 사실상 무한대였으므로 식 11.5의 세 번째 경계 사례에 해당했습니다.
+
+세포 분할을 목적으로 이러한 아이디어들은 Thouis Jones 등 ([Jones, Carpenter, and Golland 2005](16-chap.html#ref-jones2005voronoi); [Carpenter et al. 2006](16-chap.html#ref-carpenter2006cellprofiler))에 의해 제시되었으며, 그들은 또한 `propagate`에서 사용되는 효율적인 알고리즘을 작성했습니다.
+
+__
+
+태스크
+
+서로 다른 \(\lambda\)들을 사용했을 때의 효과를 시험해 보세요.
+
+## 11.13 세포체 분할
+
+[![](11-chap_files/figure-html/fig-
+histcellbody-1-1.png)](11-chap_files/figure-html/fig-histcellbody-1-1.png
+"그림 11.14: 로그를 취한 후 cellsSmooth의 액틴 채널 히스토그램.")
+
+그림 11.14: 로그를 취한 후 `cellsSmooth`의 액틴 채널 히스토그램.
+
+[![](11-chap_files/figure-html/fig-
+histcellbody-2-1.png)](11-chap_files/figure-html/fig-histcellbody-2-1.png
+"그림 11.15: 그림 11.14를 확대한 모습.")
+
+그림 11.15: 그림 11.14를 확대한 모습.
+
+이미지에서 세포질 영역의 마스크를 결정하기 위해, 이번에는 데이터에 혼합 모델을 적합시켜서 찾은 전역 임계값을 사용하는 다른 방식의 임계값 처리를 살펴봅시다. 히스토그램은 액틴 이미지의 픽셀 강도 분포를 보여줍니다. 우리는 로그 스케일에서 데이터를 살펴보며, 그림 11.15에서는 데이터의 대부분이 놓인 영역을 확대합니다.
+
+    
+    
+hist(log(cellsSmooth[,,3]) )
+    hist(log(cellsSmooth[,,3]), xlim = -c(3.6, 3.1), breaks = 300)__
+
+수많은 이미지에 대한 이러한 히스토그램들을 살펴보면서, 우리는 분할 목적으로 다음과 같은 모델을 세울 수 있습니다: _Image_ `cells`의 세포질 채널 신호는 두 분포의 혼합물이며, 로그-정규(log-Normal) 배경과, 명시되지는 않았지만 다소 평평하고 대부분 겹치지 않는 또 다른 분포를 가진 전경으로 구성됩니다 10. 더욱이 픽셀의 대다수는 배경에서 옵니다. 그러면 우리는 (패키지 **[genefilter](https://bioconductor.org/packages/genefilter/)**에 구현된) half range mode와, 모드(mode)의 왼쪽에 놓인 값들의 제곱평균제곱근(root mean square)으로부터 로그-정규 성분의 위치와 너비 매개변수에 대한 강건한 추정치를 찾을 수 있습니다.
+
+10 이것은 우리가 [4장](04-chap.html)에서 보았던 혼합 모델 아이디어의 응용입니다.
+
+    
+    
+    library("genefilter")
+    bgPars = function(x) {
+      x    = log(x)
+      loc  = half.range.mode( x )
+      left = (x - loc)[ x < loc ]
+      wid  = sqrt( mean(left^2) )
+      c(loc = loc, wid = wid, thr = loc + 6*wid)
+    }
+    cellBg = apply(cellsSmooth, MARGIN = 3, FUN = bgPars)
+    cellBg __
+    
+    
+               [,1]        [,2]        [,3]
+    loc -2.90176965 -2.94427499 -3.52191681
+    wid  0.00635322  0.01121337  0.01528207
+    thr -2.86365033 -2.87699477 -3.43022437
+
+이 함수는 위치 `loc`에 6배의 너비 `wid`를 더한 값을 임계값으로 정의합니다 11.
+
+11 여기서 숫자 6의 선택은 임의적입니다(ad hoc). 우리는 두 혼합 성분의 가중치를 추정하고 혼합 모델에 따른 사후 확률에 기초하여 각 픽셀을 전경 또는 배경으로 할당함으로써 임계값 선택을 더 객관적으로 만들 수 있습니다. 더 고급 분할 방법들은 이것이 실제로는 분류 문제라는 사실을 사용하며, 전경과 배경 영역을 분리하기 위해 추가적인 특징들과 더 복잡한 분류기들을 포함합니다 (예: ([Berg et al. 2019](16-chap.html#ref-ilastik:NatMeth:2019))). 
+
+    
+    
+hist(log(cellsSmooth[,,3]), xlim = -c(3.6, 3.1), breaks = 300)
+abline(v = cellBg[c("loc", "thr"), 3], col = c("brown", "red"))__
+
+[![](11-chap_files/figure-html/fig-
+histcellbody-3-1.png)](11-chap_files/figure-html/fig-histcellbody-3-1.png
+"그림 11.16: 그림 11.15와 같지만, loc와 thr이 수직선으로 표시되었습니다.")
+
+그림 11.16: 그림 11.15와 같지만, `loc`와 `thr`이 수직선으로 표시되었습니다.
+
+우리는 이제 액틴 또는 튜불린 이미지에서 임계값 위에 있거나, 이미 이미지 `nuclei`에서 핵으로 분류된 모든 픽셀들의 합집합으로 `cytoplasmMask`를 정의할 수 있습니다.
+
+    
+    
+cytoplasmMask = (cellsSmooth[,,2] > exp(cellBg["thr", 2])) |
+           nuclei | (cellsSmooth[,,3] > exp(cellBg["thr", 3]))__
+
+그 결과는 그림 11.17의 왼쪽 패널에 나와 있습니다. 세포체(cellular bodies)를 정의하기 위해, 이제 우리는 11.12절의 보로노이 테셀레이션 기반 전파 알고리즘을 사용하여 이 마스크 내에서 핵 분할을 간단히 확장할 수 있습니다. 이 방법은 각 핵마다 정확히 하나의 세포체가 있도록 보장하며, 세포의 모양이 콤팩트하게 유지되는 것과 이미지의 액틴 및 \(\alpha\)-튜불린 강도 신호를 따르는 것 사이에서 타협이 이루어지도록 세포체의 윤곽을 그립니다. `propagate` 알고리즘의 용어로 말하자면, 세포 모양은 거리 메트릭 11.4의 \(x\)와 \(y\) 성분에 의해 콤팩트하게 유지되고, 액틴 신호는 \(z\) 성분을 위해 사용됩니다. \(\lambda\)가 이들 사이의 상충 관계를 제어합니다.
+
+    
+    
+    cellbodies = propagate(x = cellsSmooth[,,3], seeds = nuclei,
+                           lambda = 1.0e-2, mask = cytoplasmMask)__
+
+`colorLabel` 플롯에 대한 대안적인 표현으로서, 우리는 또한 `paintObjects` 함수를 사용하여 원래 이미지 위에 핵과 세포체의 분할을 표시할 수 있습니다. 아래에서 계산된 이미지 `nucSegOnNuc`, `nucSegOnAll`, `cellSegOnAll`은 그림 11.17의 중간부터 오른쪽 패널에 나와 있습니다.
+
+    
+    
+    cellsColor = EBImage::rgbImage(red   = cells[,,3],
+                                   green = cells[,,2],
+                                   blue  = cells[,,1])
+    nucSegOnNuc  = paintObjects(nuclei, tgt = EBImage::toRGB(cells[,,1]), col = "#ffff00")
+    nucSegOnAll  = paintObjects(nuclei,     tgt = cellsColor,    col = "#ffff00")
+    cellSegOnAll = paintObjects(cellbodies, tgt = nucSegOnNuc,   col = "#ff0080")__
+
+[![](11-chap_files/figure-html/fig-cellbodies-1.png)](11-chap_files/figure-
+html/fig-cellbodies-1.png "그림 11.17 (a): ")
+
+(a)
+
+[![](11-chap_files/figure-html/fig-cellbodies-2.png)](11-chap_files/figure-
+html/fig-cellbodies-2.png "그림 11.17 (b): ")
+
+(b)
+
+[![](11-chap_files/figure-html/fig-cellbodies-3.png)](11-chap_files/figure-
+html/fig-cellbodies-3.png "그림 11.17 (c): ")
+
+(c)
+
+[![](11-chap_files/figure-html/fig-cellbodies-4.png)](11-chap_files/figure-
+html/fig-cellbodies-4.png "그림 11.17 (d): ")
+
+(d)
+
+[![](11-chap_files/figure-html/fig-cellbodies-5.png)](11-chap_files/figure-
+html/fig-cellbodies-5.png "그림 11.17 (e): ")
+
+(e)
+
+그림 11.17: 세포체 분할 단계들. (a-d): `cytoplasmMask`, `cellbodies` (파랑: DAPI, 빨강: 액틴, 초록: 알파-튜불린), `nucSegOnNuc`, `nucSegOnAll`, `cellSegOnAll`.
+
+## 11.14 특징 추출
+
+이제 원래의 이미지 데이터 `cells`와 함께 분할 결과인 `nuclei` 및 `cellbodies`를 확보했으므로, 각 세포에 대해 다양한 서술자(descriptors) 또는 특징(features)을 계산할 수 있습니다. 우리는 이미 11.11절의 시작 부분에서 기본 R 함수 `table`을 사용하여 객체의 총 수와 크기를 결정하는 방법을 보았습니다. 이제 이를 더 발전시켜서, 분할된 핵에서의 DAPI 신호(`cells[,,1]`)의 평균 강도, 분할된 핵에서의 평균 액틴 강도(`cells[,,3]`), 그리고 세포체에서의 평균 액틴 강도를 계산해 봅시다.
+
+    
+    
+    meanNucInt       = tapply(cells[,,1], nuclei, mean)
+    meanActIntInNuc  = tapply(cells[,,3], nuclei, mean)
+    meanActIntInCell = tapply(cells[,,3], cellbodies, mean)__
+
+우리는 특징들을 쌍별 산점도로 시각화할 수 있습니다 (그림 11.18). 각 특징이 독립적인 정보를 담고 있긴 하지만, 서로 상관관계가 있음을 볼 수 있습니다.
+
+    
+    
+    library("GGally")
+    ggpairs(tibble(meanNucInt, meanActIntInNuc, meanActIntInCell))__
+
+[![](11-chap_files/figure-html/fig-pairsint-1.png)](11-chap_files/figure-
+html/fig-pairsint-1.png "그림 11.18: 세포별 강도 서술자의 쌍별 산점도.")
+
+그림 11.18: 세포별 강도 서술자의 쌍별 산점도.
+
+조금만 더 노력하면, 우리는 더 정교한 요약 통계량들도 계산할 수 있습니다 – 예를 들어, 세포체 면적에 대한 핵 면적의 비율, 또는 세포 구조의 다소 추상적인 척도로서 각 세포체에서의 서로 다른 형광 신호들의 엔트로피, 상호 정보량(mutual information) 및 상관관계 등입니다. 그러한 척도들은 예를 들어 약물에 의해 유도된 미묘한 세포 구조의 변화를 탐지하는 데 사용될 수 있습니다.
+
+위의 `tapply` 표현식처럼 기본 R 관용구를 사용하여 이러한 계산들을 수행하는 것은 쉽고 직관적이지만, **[EBImage](https://bioconductor.org/packages/EBImage/)** 패키지는 문헌에서 흔히 사용되어 온 방대한 특징 컬렉션을 효율적으로 계산해 주는 `computeFeatures` 함수도 제공합니다 (선구적인 참고 문헌은 Boland와 Murphy. ([2001](16-chap.html#ref-BolandMurphy))입니다). 이 함수에 대한 자세한 내용은 매뉴얼 페이지에 설명되어 있으며, 예시 응용 사례는 **[HD2013SGI](https://bioconductor.org/packages/HD2013SGI/)** 비네트에 정리되어 있습니다. 아래에서는 핵 분할(`nuclei`)을 사용하여 DAPI 채널로부터, 그리고 세포체 분할(`cytoplasmRegions`)을 사용하여 액틴과 튜불린 채널로부터 각 세포의 강도, 모양 및 텍스처에 대한 특징들을 계산합니다.
+
+    
+    
+    F1 = computeFeatures(nuclei,     cells[,,1], xname = "nuc",  refnames = "nuc")
+    F2 = computeFeatures(cellbodies, cells[,,2], xname = "cell", refnames = "tub")
+    F3 = computeFeatures(cellbodies, cells[,,3], xname = "cell", refnames = "act")
+    dim(F1)__
+    
+    
+    [1] 43 89
+
+`F1`은 43개 행(각 세포마다 하나씩)과 89개 열(계산된 특징마다 하나씩)을 가진 행렬입니다.
+
+    
+    
+    F1[1:3, 1:5]__
+    
+    
+      nuc.0.m.cx nuc.0.m.cy nuc.0.m.majoraxis nuc.0.m.eccentricity nuc.0.m.theta
+    1   119.5523   17.46895          44.86819            0.8372059     -1.314789
+    2   143.4511   15.83709          26.15009            0.6627672     -1.213444
+    3   336.5401   11.48175          18.97424            0.8564444      1.470913
+
+열 이름은 특징의 유형뿐만 아니라, 그것이 계산된 색상 채널과 분할 마스크를 인코딩합니다. 우리는 이제 [5장](05-chap.html), [7장](07-chap.html), [9장](09-chap.html)에서 보았던 다변량 분석 방법들을 다음과 같은 수많은 작업에 사용할 수 있습니다.
+
+  * 세포 하위 모집단 탐지 (군집화)
+
+  * 세포를 사전 정의된 세포 유형이나 표현형으로 분류 (분류)
+
+  * 서로 다른 생물학적 조건에 해당하는 이미지들 사이에서 하위 모집단이나 세포 유형의 절대적 또는 상대적 빈도가 다른지 확인
+
+이러한 "일반적인" 기계 학습 작업 외에도, 우리는 세포의 공간적 위치도 알고 있으며, 이하에서는 우리의 분석에서 이를 활용하는 몇 가지 방법들을 탐구해 볼 것입니다.
+
+__
+
+태스크
+
+탐색적 다변량 방법인 PCA, 히트맵을 사용하여 행렬 `F1`, `F2`, `F3`를 시각화하세요. "이상치" 세포들의 특별한 점은 무엇인가요?
+
+## 11.15 공간 통계: 점 과정
+
+이전 섹션들에서 우리는 이미지로부터 세포의 위치와 다양한 모양 및 형태학적 특징들을 추출하는 방법들을 보았습니다. 이제는 위치의 공간적 분포를 탐구해 볼 것입니다. 흥미로운 작업 데이터를 확보하기 위해, 데이터셋을 바꾸어 유방암 림프절 생검 데이터를 살펴보겠습니다.
+
+### 11.15.1 사례 연구: 면역 세포와 암세포의 상호작용
+
+림프절은 림프(lymph)라 불리는 체액을 위한 면역학적 필터 역할을 합니다. 항원은 혈액 순환계로 돌아가기 전에 림프절에서 림프로부터 걸러집니다. 림프절은 몸 전체에서 발견되며, 주로 T 세포, B 세포, 수지상 세포(dendritic cells) 및 대식세포(macrophages)로 구성됩니다. 림프절은 우리 조직 대부분의 액체를 배출합니다. 유방의 림프관은 보통 겨드랑이 밑의 나머지 림프절을 거치기 전에 하나의 림프절로 먼저 배출됩니다. 그 첫 번째 림프절을 **감시(sentinel)** 림프절이라고 부릅니다. 비장과 유사한 방식으로, 항원을 포획하는 대식세포와 수지상 세포는 이러한 이물질들을 T 세포와 B 세포에 제시함으로써 면역 반응을 개시합니다.
+
+T 림프구는 대개 기능적 및 표현형적으로 다른 두 가지 주요 하위 집합으로 나뉩니다.
+
+  * CD4+ T 세포, 또는 보조 T 세포(T helper cells): 이들은 면역 조절의 적절한 조정자입니다. 보조 T 세포의 주요 기능은 감염과 싸우기 위해 다른 백혈구들을 활성화하는 특수 인자들을 분비함으로써 면역 반응을 증강하거나 강화하는 것입니다.
+
+  * CD8+ T 세포, 또는 독성/억제 T 세포(T killer/suppressor cells): 이 세포들은 특정 종양 세포, 바이러스에 감염된 세포, 그리고 때때로 기생충을 직접 죽이는 데 중요합니다. CD8+ T 세포는 면역 반응의 하향 조절(down-regulation)에도 중요합니다.
+
+두 유형의 T 세포 모두 몸 전체에서 발견될 수 있습니다. 이들은 종종 활성화가 일어나는 장소로서 이차 림프 기관(림프절과 비장)에 의존합니다.
+
+수지상 세포 또는 CD1a 세포는 항원을 처리하여 펩타이드를 T 세포에 제시하는 항원 제시 세포입니다.
+
+[![](imgs/SixPanelsLymphsmall.jpg)](imgs/SixPanelsLymphsmall.jpg
+"그림 11.19: 비대해진 림프절의 생검 결과, 캡슐은 온전하고 정맥동(sinuses)은 폐쇄된 것이 밝혀졌습니다 (왼쪽 상단 패널, 헤마톡실린 및 에오신 염색, 원래 배율 \(\times\) 100). 침윤물은 소림프구, 대식세포 및 형질세포의 혼합물로 구성되었습니다 (오른쪽 상단 패널, 헤마톡실린 및 에오신, 원래 배율 \(\times\) 400). 침윤물은 CD3 양성 T 세포(CD4 및 CD8 양성 세포 모두 포함)와 CD20 양성 B 세포의 혼합물이었습니다. 수많은 대식세포 또한 CD4 양성임이 확인되었습니다. (출처: Hurley et al., Diagnostic Pathology (2008) 3:13)")
+
+그림 11.19: 비대해진 림프절의 생검 결과, 캡슐은 온전하고 정맥동(sinuses)은 폐쇄된 것이 밝혀졌습니다 (왼쪽 상단 패널, 헤마톡실린 및 에오신 염색, 원래 배율 \(\times\) 100). 침윤물은 소림프구, 대식세포 및 형질세포의 혼합물로 구성되었습니다 (오른쪽 상단 패널, 헤마톡실린 및 에오신, 원래 배율 \(\times\) 400). 침윤물은 CD3 양성 T 세포(CD4 및 CD8 양성 세포 모두 포함)와 CD20 양성 B 세포의 혼합물이었습니다. 수많은 대식세포 또한 CD4 양성임이 확인되었습니다. (출처: Hurley et al., Diagnostic Pathology (2008) 3:13)
+
+[![](imgs/testscan_1_2_RGB99-4525D.jpg)](imgs/testscan_1_2_RGB99-4525D.jpg
+"그림 11.20: 염색된 림프절; 이 이미지는 brcalymphnode의 공간 데이터의 기초가 됩니다.")
+
+그림 11.20: 염색된 림프절; 이 이미지는 `brcalymphnode`의 공간 데이터의 기초가 됩니다.
+
+우리는 Setiadi 등 ([2010](16-chap.html#ref-Setiadi2010))의 데이터를 살펴볼 것입니다. 그림 11.20에 표시된 이미지를 분할 방법인 _GemIdent_ ([Holmes, Kapelner, and Lee 2009](16-chap.html#ref-Holmes2009))를 사용하여 분할한 후, 저자들은 이미지 내의 모든 세포의 좌표와 유형을 얻었습니다. 우리는 이러한 유형의 데이터를 **마크된 점 과정(marked point process)**이라고 부르며, 이는 3개의 열을 가진 단순한 표로 간주될 수 있습니다.
+
+    
+    
+    library("readr")
+    library("dplyr")
+    cellclasses = c("T_cells", "Tumor", "DCs", "other_cells")
+    brcalymphnode = lapply(cellclasses, function(k) {
+        read_csv(file.path("..", "data", sprintf("99_4525D-%s.txt", k)))
+        |> transmute(x = globalX, y = globalY, class = k)
+    }) |> bind_rows() |> mutate(class = factor(class))
+    
+    brcalymphnode __
+    
+    
+    # A tibble: 209,462 × 3
+           x     y class  
+       <dbl> <dbl> <fct>  
+     1  6355 10382 T_cells
+     2  6356 10850 T_cells
+     3  6357 11070 T_cells
+     4  6357 11082 T_cells
+     5  6358 10600 T_cells
+     6  6361 10301 T_cells
+     7  6369 10309 T_cells
+     8  6374 10395 T_cells
+     9  6377 10448 T_cells
+    10  6379 10279 T_cells
+    # ℹ 209,452 more rows
+    
+    
+    table(brcalymphnode$class)__
+    
+    
+            DCs other_cells     T_cells       Tumor 
+            878       77081      103681       27822 
+
+우리는 10만 개 이상의 T 세포, 약 2만 8천 개의 종양 세포, 그리고 수백 개의 수지상 세포가 있음을 알 수 있습니다. 세포들의 \(x\)- 및 \(y\)-위치를 플롯해 봅시다 (그림 11.21).
+
+    
+    
+    ggplot(filter(brcalymphnode, class %in% c("T_cells", "Tumor")),
+       aes(x = x, y = y, col = class)) + geom_point(shape = ".") +
+       facet_grid( . ~ class) + guides(col = "none")__
+
+[![](11-chap_files/figure-html/fig-brcalntcells-1.png)](11-chap_files/figure-
+html/fig-brcalntcells-1.png "그림 11.21: brcalymphnode의 T 세포와 종양 세포의 x 및 y 위치 산점도. 위치는 그림 11.20의 고해상도 버전으로부터 분할 알고리즘에 의해 얻어졌습니다. T 세포 플롯의 일부 직사각형 영역들이 의심스러울 정도로 비어 있는데, 이는 전체 합성 이미지 내의 해당 이미지 타일들이 유실되었거나 분석되지 않았기 때문일 수 있습니다.")
+
+그림 11.21: `brcalymphnode`의 T 세포와 종양 세포의 \(x\) 및 \(y\) 위치 산점도. 위치는 그림 11.20의 고해상도 버전으로부터 분할 알고리즘에 의해 얻어졌습니다. T 세포 플롯의 일부 직사각형 영역들이 의심스러울 정도로 비어 있는데, 이는 전체 합성 이미지 내의 해당 이미지 타일들이 유실되었거나 분석되지 않았기 때문일 수 있습니다.
+
+__
+
+질문 11.12
+
+그림 11.20과 11.21을 비교해 보세요. 왜 \(y\)축이 서로 반전되어 있나요?
+
+__
+
+해결책
+
+__
+
+그림 11.20은 이미지 데이터의 관례를 따라 이미지의 왼쪽 상단 모서리를 원점으로 하는 반면, 그림 11.21은 하단 왼쪽을 원점으로 하는 데카르트 좌표계의 관례를 따릅니다.
+
+**[spatstat](https://cran.r-project.org/web/packages/spatstat/)** 패키지의 기능을 사용하려면, `brcalymphnode`의 데이터를 _ppp_ 클래스의 객체로 변환하는 것이 편리합니다. 우리는 동명의 함수를 호출하여 이 작업을 수행합니다.
+
+    
+    
+    library("spatstat")__
+    
+    
+    ln = with(brcalymphnode, ppp(x = x, y = y, marks = class, 
+                                 xrange = range(x), yrange = range(y)))
+    ln __
+    
+    
+    Marked planar point pattern: 209462 points
+    Multitype, with levels = DCs, other_cells, T_cells, Tumor 
+    window: rectangle = [3839, 17276] x [6713, 23006] units
+
+_ppp_ 객체들은 **공간 점 과정(spatial point process)** 의 실현물들을 캡처하도록 설계되었습니다. 즉, 수학적 공간 내에 위치한 일련의 고립된 점들의 집합입니다. 우리의 경우 위에서 보듯이, 공간은 \(x\)- 및 \(y\)-좌표의 범위를 포함하는 2차원 직사각형입니다. 또한 점들은 특정 속성들로 **마크(marked)**될 수 있습니다. `ln`에서 마크는 단순히 _factor_ 변수인 `class`입니다. 더 일반적으로 마크는 여러 속성, 시간 또는 정량적 데이터가 될 수도 있습니다. 마크된 점 과정과 이미지 사이에는 유사점이 있지만, 점 과정의 경우 점들이 공간 내 어디에나 놓일 수 있는 반면, 이미지에서는 픽셀들이 규칙적이고 직사각형인 방식으로 공간을 덮는다는 점이 다릅니다.
+
+### 11.15.2 볼록 껍질 (Convex hull)
+
+위에서 우리는 (암묵적으로) 점 과정이 직사각형 내에 놓이도록 제한했습니다. 사실, 데이터 생성 과정은 조직 절편의 모양에 의해 더 제한됩니다. 우리는 점들의 볼록 껍질(convex hull)로부터 더 타이트한 영역을 계산하고 이를 근사할 수 있습니다 12.
+
+12 `str(cvxhull)`을 사용하여 이 S3 객체의 내부 구조를 살펴볼 수 있습니다.
+
+    
+    
+cvxhull = convexhull.xy(cbind(ln$x, ln$y))
+    ggplot(as_tibble(cvxhull$bdry[[1]]), aes(x = x, y = y)) +
+      geom_polygon(fill = NA, col = "black") + geom_point() + coord_fixed()__
+
+[![](11-chap_files/figure-html/fig-convhull-1.png)](11-chap_files/figure-
+html/fig-convhull-1.png "그림 11.22: ln의 점들의 볼록 껍질을 설명하는 다각형.")
+
+그림 11.22: `ln`의 점들의 볼록 껍질을 설명하는 다각형.
+
+그림 11.22에서 다각형을 볼 수 있으며, 이제 이 다각형과 함께 `ppp`를 다시 호출합니다.
+
+    
+    
+    ln = with(brcalymphnode, ppp(x = x, y = y, marks = class, 
+                                 poly = cvxhull$bdry[[1]]))
+    ln __
+    
+    
+    Marked planar point pattern: 209462 points
+    Multitype, with levels = DCs, other_cells, T_cells, Tumor 
+    window: polygonal boundary
+    enclosing rectangle: [3839, 17276] x [6713, 23006] units
+
+### 11.15.3 점 과정의 공간을 정의하는 다른 방법들
+
+점 과정이 고려되는 공간을 정의하기 위해 반드시 볼록 껍질을 사용할 필요는 없습니다. 대안으로, 이전 지식에 기초하여 공간을 정의하는 이미지 마스크를 `ppp`에 제공할 수 있습니다. 또는 샘플링된 점들에 대해 밀도 추정을 사용하여, 산발적인 이상치들을 무시하고 충분히 높은 점 밀도를 가진 영역만을 식별할 수도 있습니다. 이러한 선택들은 공간 점 과정을 고려할 때 분석가의 몫입니다.
+
+## 11.16 1차 효과: 강도
+
+공간 통계의 가장 기본적인 질문 중 하나는 인접한 점들이 "군집(clustering)"을 이루고 있는지, 즉 점들이 "우연히" 예상되는 것보다 서로 더 가까운지, 아니면 반대로 서로를 밀어내는 것처럼 보이는지 하는 것입니다. 이러한 유형의 질문을 던질 수 있는 많은 예시가 있습니다. 예를 들어:
+
+  * 도시 내의 범죄 패턴,
+
+  * 국가 내의 질병 패턴,
+
+  * 한 지역의 토양 측정값.
+
+대개 그러한 패턴이 존재하는 이유를 찾는 것은 어렵지 않습니다: 좋은 동네와 나쁜 동네, 생활 방식이나 환경적 노출의 국소적 변동, 토양의 공통된 지질학적 역사 등이 있습니다. 때로는 관찰된 사건들이 서로를 끌어당기거나 밀어내는 메커니즘이 존재할 수도 있습니다 – 동네의 소위 "깨진 유리창"이나, 많은 세포 유형들이 다른 세포들 근처에 붙어 있으려는 경향 등이 있습니다.
+
+세포 예시는 공간적 군집화(또는 안티-군집화)가 객체의 속성(또는 공간 점 과정의 용어로 마크)에 따라 달라질 수 있음을 강조합니다. 또한 답변이 고려되는 길이 스케일에 따라 달라질 수 있다는 점도 강조합니다. 비록 세포들이 서로를 끌어당기더라도, 세포는 유한한 크기를 가지며 동일한 공간을 차지할 수 없습니다. 따라서 세포들 사이에는 최소한의 거리가 존재할 것이며, 그 스케일에서 세포들은 본질적으로 서로를 밀어내지만, 더 먼 거리에서는 서로를 끌어당깁니다.
+
+이러한 질문들을 더 정량적으로 다루기 위해, 우리는 "우연히" 무엇을 기대할지에 대한 확률 모델을 정의해야 합니다. 어떤 점 \(p=(x,y)\) 주변의 면적이 \(a\)인 원 안에 놓인 점들의 수를 세어 봅시다. 이를 \(N(p, a)\)라고 부릅시다 13. \(N\)의 평균과 공분산은 1차 및 2차 속성을 제공합니다. 1차 속성은 과정의 **강도(intensity)**입니다.
+
+13 평소와 같이, 우리는 무작위 변수에 대해 대문자 \(N(p, a)\) 표기법을 사용하고, 그 실현물 또는 샘플에 대해 소문자 \(n(p, a)\)를 사용합니다.
+
+\[ \lambda(p) = \lim_{a\rightarrow 0} \frac{E[ N(p, a)]}{a}. \tag{11.6}\]
+
+여기서 우리는 국소적 강도 \(\lambda(p)\)를 정의하기 위해 무한소 미적분학을 사용했습니다. 시계열에서와 마찬가지로, 정상 과정(stationary process)이란 영역 전체에서 균일성을 갖는 과정입니다. 즉, \(\lambda(p) = \text{const.}\)입니다. 그러면 영역 \(A\)에서의 강도는 면적에 비례합니다: \(E[N(\cdot, A)] = \lambda A\). 나중에 우리는 공간적 공분산과 같은 더 높은 차수의 통계량들도 살펴볼 것입니다.
+
+\[ \gamma(p_1, p_2) = \lim_{a \rightarrow 0} \frac{E \left[ \left(N(p_1, a) - E[ N(p_1, a)] \right) \left(N(p_2, a) - E[ N(p_2, a)] \right) \right]}{a^2}. \tag{11.7}\]
+
+만약 과정이 정상적이라면, 이것은 오직 두 점의 상대적 위치(두 점 사이의 벡터)에만 의존할 것입니다. 만약 이것이 오직 거리에만 의존한다면, 즉 벡터의 방향이 아니라 길이에만 의존한다면, 이를 2차 등방성(second order isotropic)이라고 부릅니다.
+
+[![](imgs/Rain-Drops-small.jpg)](imgs/Rain-Drops-small.jpg "그림 11.23: 바닥에 떨어지는 빗방울은 포아송 과정으로 모델링됩니다. 특정 지점에 떨어지는 빗방울의 수는 오직 비율 \(\lambda\)(와 그 지점의 크기)에만 의존하며, 다른 지점에서 일어나는 일에는 의존하지 않습니다.")
+
+그림 11.23: 바닥에 떨어지는 빗방울은 포아송 과정으로 모델링됩니다. 특정 지점에 떨어지는 빗방울의 수는 오직 비율 \(\lambda\)(와 그 지점의 크기)에만 의존하며, 다른 지점에서 일어나는 일에는 의존하지 않습니다.
+
+### 11.16.1 포아송 과정 (Poisson Process)
+
+가장 단순한 공간 과정은 포아송 과정입니다. 우리는 이를 우리의 데이터와 비교하기 위한 귀무 모델로 사용할 것입니다. 이는 강도 \(\lambda\)를 가진 정상 과정이며, 겹치지 않는 공간 영역에서의 사건 발생들 사이에는 더 이상의 의존성이 없습니다. 더욱이, 면적 \(A\)인 영역 내의 점들의 수는 비율 \(\lambda A\)를 가진 포아송 분포를 따릅니다.
+
+### 11.16.2 강도 추정하기
+
+강도를 추정하려면, 영역을 \(\lambda(p)\)의 잠재적인 국소적 변동을 볼 수 있을 만큼 작으면서도 충분한 수의 점들을 포함할 수 있을 만큼 큰 하위 영역들로 나눕니다. 이는 2D 밀도 추정과 유사하며, 딱딱한 영역 경계 대신 매끄러운 커널 함수 \(K\)를 사용할 수 있습니다.
+
+\[ \hat{\lambda}(p) = \sum_i e(p_i) K(p-p_i). \tag{11.8}\]
+
+커널 함수는 평활화 매개변수인 \(\sigma\)에 의존합니다. \(\sigma\)가 클수록 각 \(p\)에 대한 국소적 추정치를 계산하는 영역이 커집니다. \(e(p)\)는 에지 보정 인자(edge correction factor)로, 커널의 서포트("평활화 창")가 점 과정이 정의된 공간 밖으로 나갈 때 발생하는 추정 편향을 고려합니다. **[spatstat](https://cran.r-project.org/web/packages/spatstat/)** 패키지의 _ppp_ 객체에 대해 정의된 `density` 함수는 식 11.8을 구현합니다.
+
+    
+    
+d = density(subset(ln, marks == "Tumor"), edge=TRUE, diggle=TRUE)
+    plot(d)__
+
+[![](11-chap_files/figure-html/fig-densityppp1-1.png)](11-chap_files/figure-
+html/fig-densityppp1-1.png "그림 11.24: ppp에서 Tumor로 마크된 세포들에 대한 강도 추정. 추정치의 서포트는 우리가 이전에 지정했던 다각형(그림 11.22)입니다.")
+
+그림 11.24: `ppp`에서 `Tumor`로 마크된 세포들에 대한 강도 추정. 추정치의 서포트는 우리가 이전에 지정했던 다각형(그림 11.22)입니다.
+
+플롯은 그림 11.24에 나와 있습니다.
+
+__
+
+질문 11.13
+
+에지 보정 없이 추정하면 어떻게 보이나요?
+
+__
+
+해결책
+
+__
+
+    
+    
+d0 = density(subset(ln, marks == "Tumor"), edge = FALSE)
+    plot(d0)__
+
+[![](11-chap_files/figure-html/fig-densityppp0-1.png)](11-chap_files/figure-
+html/fig-densityppp0-1.png "그림 11.25: 그림 11.24와 같지만 에지 보정이 없는 모습.")
+
+그림 11.25: 그림 11.24와 같지만 에지 보정이 없는 모습.
+
+이제 추정된 강도는 공간의 가장자리로 갈수록 작아지는데, 이는 에지 편향을 반영합니다 (그림 11.25).
+
+`density`는 우리에게 점 과정의 _강도_ 에 대한 추정치를 제공합니다. 이와 관련이 있지만 다른 작업은 특정 세포 클래스에 속할 (조건부) _확률_ 을 추정하는 것입니다. `relrisk` 함수는 특정 사건 유형의 공간적으로 변화하는 위험에 대한 비모수적 추정치를 계산합니다. 우리는 특정 공간적 위치에 존재하는 세포가 종양 세포일 확률에 관심이 있습니다 (그림 11.26).
+
+    
+    
+    rr = relrisk(ln, sigma = 250)__
+    
+    
+    plot(rr)__
+
+[![](11-chap_files/figure-html/fig-relrisk-1.png)](11-chap_files/figure-
+html/fig-relrisk-1.png "그림 11.26: 세포가 존재한다는 조건 하에 각 세포 클래스의 공간적으로 변화하는 확률 추정치.")
+
+그림 11.26: 세포가 존재한다는 조건 하에 각 세포 클래스의 공간적으로 변화하는 확률 추정치.
+
+## 11.17 2차 효과: 공간적 의존성
+
+우리의 공간 과정에서 무작위로 한 점을 골랐을 때, 가장 가까운 이웃까지의 거리 \(W\)는 얼마일까요? 균질 포아송 과정의 경우, 이 거리의 누적 분포 함수는 다음과 같습니다.
+
+\[ G(w) = P(W\leq w) = 1-e^{-\lambda \pi w^2}. \tag{11.9}\]
+
+\(G\)를 플롯하는 것은 균질 포아송 과정으로부터의 이탈을 알아차리는 한 가지 방법을 제공합니다. 에지 효과도 고려하는 \(G\)의 추정량 ([A. J. Baddeley 1998](16-chap.html#ref-Baddeley1998); [Ripley 1988](16-chap.html#ref-RipleySISS1988))은 **[spatstat](https://cran.r-project.org/web/packages/spatstat/)** 패키지의 `Gest` 함수에 의해 제공됩니다.
+
+    
+    
+gln = Gest(ln)
+    gln __
+    
+    
+    Function value object (class 'fv')
+    for the function r -> G(r)
+    .....................................................................
+            Math.label      Description                                  
+    r       r               distance argument r                          
+    theo    G[pois](r)      theoretical Poisson G(r)                     
+    han     hat(G)[han](r)  Hanisch estimate of G(r)                     
+    rs      hat(G)[bord](r) border corrected estimate of G(r)            
+    km      hat(G)[km](r)   Kaplan-Meier estimate of G(r)                
+    hazard  hat(h)[km](r)   Kaplan-Meier estimate of hazard function h(r)
+    theohaz h[pois](r)      theoretical Poisson hazard function h(r)     
+    .....................................................................
+    Default plot formula:  .~r
+    where "." stands for 'km', 'rs', 'han', 'theo'
+    Recommended range of argument r: [0, 20.998]
+    Available range of argument r: [0, 52.443]
+    
+    
+    library("RColorBrewer")
+    plot(gln, xlim = c(0, 10), lty = 1, col = brewer.pal(4, "Set1"))__
+
+[![](11-chap_files/figure-html/fig-Gest-1.png)](11-chap_files/figure-
+html/fig-Gest-1.png "그림 11.27: 세 가지 서로 다른 에지 효과 보정을 사용한 G의 추정치들(여기서는 본질적으로 서로 겹쳐져 있음)과 균질 포아송 과정에 대한 이론적 분포.")
+
+그림 11.27: 세 가지 서로 다른 에지 효과 보정을 사용한 \(G\)의 추정치들(여기서는 본질적으로 서로 겹쳐져 있음)과 균질 포아송 과정에 대한 이론적 분포.
+
+객체 `gln`에 대해 출력된 요약 정보는 계산된 추정치들에 대한 개요를 제공하며, 추가 설명은 `Gest` 매뉴얼 페이지에 있습니다. 그림 11.27에서 우리는 경험적 분포 함수와 우리가 적절히 선택한 강도를 가진 균질 포아송 과정인 귀무 모델의 분포 함수가 약 4.5 단위 지점에서 교차하는 것을 볼 수 있습니다. 이 값보다 짧은 세포 간 거리는 귀무 모델에서보다 덜 발생할 가능성이 높으며, 특히 약 2 이하의 거리는 거의 존재하지 않습니다. 이는 물론 우리의 세포들이 유한한 크기를 가지고 있어 동일한 공간을 겹쳐서 차지할 수 없다는 사실을 반영합니다. 포아송 과정과 비교했을 때 매우 큰 거리를 피하려는 경향이 있는 것으로 보이는데, 이는 아마도 세포들이 군집을 이루려는 경향을 나타내는 것으로 보입니다.
+
+### 11.17.1 Ripley의 \(K\) 함수
+
+균질 공간 포아송 과정에서, 우리가 임의의 점을 무작위로 고르고 거리 \(r\) 이내에 있는 점들의 수를 센다면, 이 숫자가 원의 면적인 \(\pi r^2\)에 따라 증가할 것으로 기대합니다. 주어진 데이터 세트에 대해, 우리는 모든 점들에 대해 평균을 낸 관측된 이웃의 수를 이 기대값과 비교할 수 있습니다.
+
+정상 점 과정(stationary point process)의 \(K\) 함수(Ripley의 \(K\)-함수 또는 축소된 2차 모멘트 함수라고도 함)는 \(\lambda K(r)\)이 주어진 임의의 점으로부터 거리 \(r\) 이내에 있는 (추가적인) 점들의 기대값이 되도록 정의됩니다. \(\lambda\)는 과정의 강도, 즉 단위 면적당 기대되는 점의 수임을 기억합시다. \(K\) 함수는 과정의 2차 모멘트 속성입니다.
+
+\(K\)의 정의는 비균질 점 과정으로 일반화될 수 있으며 ([A. Baddeley, Moller, and Waagepetersen 2000](16-chap.html#ref-Baddeley2000)), 다음과 같이 쓰여집니다.
+
+\[ K_{\scriptsize \mbox{inhom}}(r)= \sum_{i,j} \𝟙_{d(p_i, p_j) \le r} \times
+\frac{e(p_i, p_j, r)} { \lambda(x_i) \lambda(x_j) }, \tag{11.10}\]
+
+여기서 \(d(p_i, p_j)\)는 점 \(p_i\)와 \(p_j\) 사이의 거리이며, \(e(p_i, p_j, r)\)은 에지 보정 인자입니다 14. 추정과 시각화를 위해 \(K\)(그리고 유사하게 \(K_{\scriptsize \mbox{inhom}}\))의 변환인 소위 \(L\) 함수를 고려하는 것이 유용합니다.
+
+14 자세한 내용은 `Kinhom` 매뉴얼 페이지를 참조하세요.
+
+\[ L(r)=\sqrt{\frac{K(r)}{\pi}}. \tag{11.11}\]
+
+균질 공간 포아송 과정의 경우, 이론적 값은 \(L(r) = r\)입니다. 이를 데이터 세트에 대한 \(L\) 추정치와 비교함으로써, 점 간 의존성과 공간적 군집화에 대해 배울 수 있습니다. 식 11.11의 제곱근은 추정량의 분산을 안정화하는 효과가 있어, \(K\)와 비교할 때 \(L\)은 데이터 분석과 시뮬레이션에 더 적합합니다. **[spatstat](https://cran.r-project.org/web/packages/spatstat/)** 패키지의 `Linhom` 함수를 사용한 계산은 우리 데이터에 대해 몇 분 정도 걸립니다 (그림 11.28).
+
+    
+    
+    Lln = Linhom(subset(ln, marks == "T_cells"))__
+    
+    
+    Lln __
+    
+    
+    Function value object (class 'fv')
+    
+    
+    for the function r -> L[inhom](r)
+    
+    
+    ................................................................................
+               Math.label                
+    r          r                         
+    theo       L[pois](r)                
+    border     {hat(L)[inhom]^{bord}}(r) 
+    bord.modif {hat(L)[inhom]^{bordm}}(r)
+               Description                                      
+    r          distance argument r                              
+    theo       theoretical Poisson L[inhom](r)                  
+    border     border-corrected estimate of L[inhom](r)         
+    bord.modif modified border-corrected estimate of L[inhom](r)
+    ................................................................................
+    Default plot formula:  .~.x
+    where "." stands for 'bord.modif', 'border', 'theo'
+    Recommended range of argument r: [0, 694.7]
+    Available range of argument r: [0, 694.7]
+    
+    
+    plot(Lln, lty = 1, col = brewer.pal(3, "Set1"))__
+
+[![](11-chap_files/figure-html/fig-images-Lln-1.png)](11-chap_files/figure-
+html/fig-images-Lln-1.png "그림 11.28: T 세포 패턴의 L_{inhom}(식 11.10 및 11.11) 추정치.")
+
+그림 11.28: T 세포 패턴의 \(L_{\scriptsize \mbox{inhom}}\)(식 11.10 및 11.11) 추정치.
+
+우리는 이제 다른 세포 유형들에 대해서도, 그리고 다른 종양들과 건강한 림프절들에 대해서도 \(L\) 함수를 살펴보는 작업을 계속할 수 있습니다. 이것이 Setiadi와 동료들이 그들의 보고서에서 수행한 작업이며 ([Setiadi et al. 2010](16-chap.html#ref-Setiadi2010)), 건강한 림프절과 유방암 림프절 사이의 T 세포 및 B 세포 공간적 그룹화 패턴을 비교함으로써, B 세포가 일부 종양에서 림프절의 소포 외(extrafollicular) 영역에서의 정상적인 위치를 잃는 것처럼 보인다는 것을 확인했습니다.
+
+#### 쌍 상관 함수 (The pair correlation function)
+
+는 기준 점으로부터의 거리의 함수로서 점 밀도가 어떻게 변하는지 설명합니다. 이는 공간적 군집화를 살펴보는 데 있어 물리학에서 영감을 얻은 관점을 제공합니다. 정상 점 과정의 경우, 다음과 같이 정의됩니다.
+
+\[ g(r)=\frac{1}{2\pi r}\frac{dK}{dr}(r). \tag{11.12}\]
+
+정상 포아송 과정의 경우, 쌍 상관 함수는 항상 1과 같습니다. \(g(r) < 1\)인 값은 점들 사이의 억제(inhibition)를 시사하고, 1보다 큰 값은 군집화를 시사합니다.
+
+**[spatstat](https://cran.r-project.org/web/packages/spatstat/)** 패키지는 비균질 과정에 대해서도 \(g\)의 추정치 계산을 가능하게 하며, 아래와 같이 `pcf`를 호출하면 식 11.12의 정의가 \(K_{\scriptsize \mbox{inhom}}\). 추정치에 적용됩니다.
+
+    
+    
+pcfln = pcf(Kinhom(subset(ln, marks == "T_cells")))__
+    
+    
+    plot(pcfln, lty = 1)
+    plot(pcfln, lty = 1, xlim = c(0, 10))__
+
+[![](11-chap_files/figure-html/fig-images-pcf-1.png)](11-chap_files/figure-
+html/fig-images-pcf-1.png "그림 11.29 (a): ")
+
+(a)
+
+[![](11-chap_files/figure-html/fig-images-pcf-2.png)](11-chap_files/figure-
+html/fig-images-pcf-2.png "그림 11.29 (b): ")
+
+(b)
+
+그림 11.29: T 세포 패턴의 쌍 상관 함수(식 11.12) 추정치.
+
+그림 11.29에서 보듯이, T 세포들은 군집을 이루고 있지만, 아주 짧은 거리에서는 기피(avoidance)의 증거도 보입니다.
+
+__
+
+질문 11.14
+
+그림 11.29의 하단 패널에 있는 쌍 상관 함수 플롯의 샘플링 해상도가 낮습니다. 어떻게 이를 높일 수 있을까요?
+
+__
+
+해결책
+
+__
+
+답은 `Kinhom` 함수의 `r` 인수에 있습니다. 그림 11.30을 참조하세요.
+
+    
+    
+pcfln2 = pcf(Kinhom(subset(ln, marks == "T_cells"),
+                        r = seq(0, 10, by = 0.2)))
+    plot(pcfln2, lty = 1)__
+
+[![](11-chap_files/figure-html/fig-samplingpcf-1.png)](11-chap_files/figure-
+html/fig-samplingpcf-1.png "그림 11.30: 질문 11.14에 대한 답변: 그림 11.29의 하단 패널과 같지만, 더 조밀한 샘플링을 사용한 모습.")
+
+그림 11.30: 질문 11.14에 대한 답변: 그림 11.29의 하단 패널과 같지만, 더 조밀한 샘플링을 사용한 모습.
+
+## 11.18 이 장의 요약
+
+우리는 R에서 이미지 데이터로 작업하는 법을 배웠습니다. 이미지는 기본적으로 배열일 뿐이며, 우리는 이를 조작하기 위해 익숙한 관용구들을 사용할 수 있습니다. 우리는 이미지로부터 정량적 특징들을 추출할 수 있으며, 그 후의 많은 분석적 질문들은 다른 고처리량 데이터의 경우와 다르지 않습니다: 특징들을 평균이나 분산과 같은 통계량으로 요약하고, 조건들 사이의 차이에 대해 가설 검정을 수행하고, 분산 분석을 수행하며, 차원 축소, 군집화 및 분류를 적용합니다.
+
+종종 우리는 전체 이미지가 아니라 이미지에 표시된 개별 객체들에 대해 그러한 정량적 특징들을 계산하고 싶어 하며, 그때 우리는 관심 있는 객체들의 경계를 획정하기 위해 먼저 이미지를 분할해야 합니다. 우리는 핵과 세포 이미지에 대해 이를 수행하는 방법을 보았습니다.
+
+객체들의 위치와 이러한 위치들이 서로 어떻게 연관되어 있는지에 관심이 있을 때, 우리는 _공간 통계_ 영역으로 들어갑니다. 우리는 **[spatstat](https://cran.r-project.org/web/packages/spatstat/)** 패키지의 일부 기능들을 탐구했고, 점 과정 클래스를 접했으며, Ripley의 \(K\) 함수와 같이 점 패턴을 위해 사용되는 몇 가지 특수한 진단 통계량들을 배웠습니다.
+
+## 11.19 더 읽을거리
+
+  * 이미지 분석에 관한 방대한 문헌이 있습니다. 이를 탐색할 때, 이 분야가 두 가지 힘에 의해 주도된다는 점을 깨닫는 것이 도움이 됩니다: 구체적인 응용 도메인(우리는 고처리량 세포 기반 어세이 분석을 보았습니다)과 가용한 컴퓨터 하드웨어입니다. 1970년대에 개발된 일부 알고리즘과 개념들은 여전히 유효하며, 다른 것들은 더 체계적이고 아마도 계산 집약적인 방법들에 의해 대체되었습니다. 많은 알고리즘은 데이터의 성격과 제기된 과학적 질문에 대해 특정한 가정들을 내포하고 있는데, 이는 한 응용 분야에서는 괜찮을 수 있지만 다른 분야에서는 새롭게 검토되어야 할 필요가 있습니다. 고전적인 입문서는 _The Image Processing Handbook_ ([Russ and Neal 2015](16-chap.html#ref-RussImageProcessingHandbook))이며, 현재 7판까지 나와 있습니다.
+
+  * 공간 점 패턴 분석에 대해서는, Diggle ([2013](16-chap.html#ref-DiggleSPP); [Ripley 1988](16-chap.html#ref-RipleySISS1988); [Cressie 1991](16-chap.html#ref-CressieSSD1991); [Chiu et al. 2013](16-chap.html#ref-MeckeSG2013))을 참조하십시오.
+
+## 11.20 연습 문제
+
+__
+
+연습 문제 11.1
+
+여러분의 개인 사진 보관함에서 몇 가지 이미지를 R로 로드하고 11.6절의 조작법들을 적용해 보세요.
+
+__
+
+연습 문제 11.2
+
+그림 11.17에서처럼 `cellbodies` 이미지를 표시하되, 사용자가 `propagate` 함수의 `lambda` 매개변수(11.12, 11.13절)의 효과를 탐색할 수 있는 대화형 요소를 포함한 **[shiny](https://cran.r-project.org/web/packages/shiny)** 앱을 작성해 보세요.
+
+__
+
+연습 문제 11.3
+
+다음과 같은 2차원 경험적 자기 상관 함수(autocorrelation function)를 고려해 보세요.
+
+\[ a(v_x, v_y) = \frac{1}{|I|} \sum_{(x,y)\in I} B(x, y)\,B(x+v_x, \, y+v_y),
+\tag{11.13}\]
+
+여기서 \(B\)는 이미지, 즉 픽셀 세트 \(I\) 위의 함수이고, 튜플 \((x,y)\)는 모든 픽셀 좌표를 순회하며, \(v=(v_x, v_y)\)는 오프셋 벡터입니다. [위너-킨친 정리(Wiener–Khinchin theorem)](https://mathworld.wolfram.com/Wiener-KhinchinTheorem.html)를 사용하면, 고속 푸리에 변환을 통해 이 함수를 효율적으로 계산할 수 있습니다.
+
+    
+    
+    autocorr2d = function(x) {
+      y = fft(x/sum(x))
+      abs(gsignal::fftshift(fft(y * Conj(y), inverse = TRUE), MARGIN = 1:2))
+    }__
+
+아래에서 우리는 행렬을 **[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)**를 사용하여 (기본 R의 `image`와 유사하게) 히트맵으로 보여주는 작은 헬퍼 함수를 사용할 것입니다.
+
+    
+    
+    matrix_as_heatmap = function(m)
+      ggplot(reshape2::melt(m), aes(x = Var1, y = Var2, fill = value)) +
+        geom_tile() + coord_fixed() +
+        scale_fill_continuous(type = "viridis") +
+        scale_x_continuous(expand = c(0, 0)) + scale_y_continuous(expand = c(0, 0))__
+
+이제 `autocorr2d`를 세 가지 색상 채널 각각에 별도로 적용해 봅시다. 그 결과는 그림 11.31에 나와 있습니다.
+
+    
+    
+nm = dimnames(cells)[[3]]
+ac = lapply(nm, function(i) autocorr2d(cells[,, i])) |> setNames(sub("^image-", "", nm))
+    
+    for (w in names(ac))
+      print(matrix_as_heatmap(ac[[w]]) + ggtitle(w))
+    
+    cy = dim(cells)[1] / 2
+    cx = dim(cells)[2] / 2
+    r  = round(sqrt((col(cells[,,1]) - cx)^2 + (row(cells[,,1]) - cy)^2))
+    
+    matrix_as_heatmap(r) + ggtitle("radius r")__
+
+[![](11-chap_files/figure-html/fig-autocorr2d-1.png)](11-chap_files/figure-
+html/fig-autocorr2d-1.png "그림 11.31 (a): ")
+
+(a)
+
+[![](11-chap_files/figure-html/fig-autocorr2d-2.png)](11-chap_files/figure-
+html/fig-autocorr2d-2.png "그림 11.31 (b): ")
+
+(b)
+
+[![](11-chap_files/figure-html/fig-autocorr2d-3.png)](11-chap_files/figure-
+html/fig-autocorr2d-3.png "그림 11.31 (c): ")
+
+(c)
+
+[![](11-chap_files/figure-html/fig-autocorr2d-4.png)](11-chap_files/figure-
+html/fig-autocorr2d-4.png "그림 11.31 (d): ")
+
+(d)
+
+그림 11.31: 히트맵으로 표시된 `cells` 이미지의 세 색상 채널의 자기 상관 함수. 중앙의 피크들은 짧은 거리에서의 신호 상관관계에 해당합니다. 또한 방사 좌표 `r`도 표시되어 있습니다.
+
+이미지들은 등방성(isotropic)이어야 하므로(즉, 선호되는 방향이 없어야 하므로), 우리는 각도 좌표에 대해 평균을 낼 수 있습니다. 그 결과는 그림 11.32에 나와 있습니다. 우리는 서로 다른 색상 채널의 신호들이 서로 다른 길이 스케일을 가짐을 알 수 있습니다.
+
+    
+    
+    aggregate_by_radius = function(x, r)
+      tibble(x = as.vector(x),
+             r = as.vector(r)) |>
+      group_by(r) |>
+      summarize(value = mean(x))
+    
+    lapply(names(ac), function(w) 
+      cbind(channel = w, 
+            aggregate_by_radius(ac[[w]], r))
+      ) |> 
+      bind_rows() |> 
+      dplyr::filter(r <= 50) |> 
+      ggplot(aes(x = r, y = value, col = channel)) + geom_line() + 
+        scale_color_manual(values = c(`Cy3` = "red", `FITC` = "green", `DAPI` = "blue"))__
+
+서로 다른 채널들 사이의 상호 상관관계(cross-correlation)도 계산할 수 있도록 `autocorr2d` 함수를 확장해 보세요.
+
+  * 위에서 구현한 `autocorr2d`에서 `sum` 정규화의 동기는 무엇인가요?
+  * 다른 계산을 수행하기 전에 `x`의 평균을 빼는 것이 타당할까요?
+  * 이 함수와 기본 R의 `var` 및 `sd` 함수를 통해 계산된 일반적인 경험적 분산 또는 상관관계 사이의 관계는 무엇인가요?
+  * 그림 11.32와 같은 플롯들이 고처리량 스크리닝 환경(즉, 수천 또는 수백만 개의 이미지를 분석해야 할 때)에서 품질 지표를 구축하는 데 어떻게 사용될 수 있을까요?
+  * `autocorr2d`의 3차원 또는 \(n\)차원 확장은 어떤 모습일까요? 그것이 어디에 유용할까요?
+
+[![](11-chap_files/figure-html/fig-autocorr1d-1.png)](11-chap_files/figure-
+html/fig-autocorr1d-1.png "그림 11.32: 반지름별로 집계된 cells 이미지의 세 색상 채널의 자기 상관 함수.")
+
+그림 11.32: 반지름별로 집계된 `cells` 이미지의 세 색상 채널의 자기 상관 함수.
+
+__
+
+연습 문제 11.4
+
+"이미지 데이터 작업(Working with Image Data)" 워크숍(<https://github.com/wolfganghuber/WorkingWithImageData>)을 살펴보세요. 이 워크숍은 이 장과 동일한 내용 중 일부를 다른 이미지들로 다루고 있으며, 분할과 광학 흐름(optical flow)에 대한 추가적인 예시들도 포함하고 있습니다.
+
+__
+
+연습 문제 11.5
+
+[9장](09-chap.html)의 우크라이나 도시들에 대해 보로노이 테셀레이션을 계산하고 표시해 보세요. 2D 평면에서 유클리드 거리를 사용한 MDS 좌표를 사용하거나, 대권 거리(great circle distance, 하버사인 공식)를 사용한 위도와 경도를 사용하세요.
+
+__
+
+연습 문제 11.6
+
+광시트 현미경(light sheet microscopy) 15으로부터 3D 이미지 데이터를 다운로드하고, 이를 **[EBImage](https://bioconductor.org/packages/EBImage/)** _Image_ 객체로 로드하여 데이터를 탐색해 보세요.
+
+15 예: <http://www.digital-embryo.org>

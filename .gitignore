@@ -262,7 +262,7 @@ Temporary Items
 *.icloud
 
 ### MdBook ###
-book
+book/_site/
 
 
 ### Python ###
