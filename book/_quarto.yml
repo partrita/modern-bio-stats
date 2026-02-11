@@ -29,6 +29,6 @@ book:
 
 format:
   html:
-    theme: default
+    theme: flatly
     css: msmb.css
     toc: true
