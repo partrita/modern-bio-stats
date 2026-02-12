@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>8&nbsp; 6.1.1 쏟아지는 데이터 속에서 정보 찾기 – Modern Statistics for Modern Biology</title>
+<title>8&nbsp; 가설 검정 (Hypothesis Testing) – Modern Statistics for Modern Biology</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -113,7 +113,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-chap.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">6.1.1 쏟아지는 데이터 속에서 정보 찾기</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-chap.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">가설 검정 (Hypothesis Testing)</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -147,13 +147,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./00-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">이 책에는 무엇이 들어있나요?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">서문 (Preface)</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">1.2 실제 예제</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">이산 데이터를 위한 생성 모델</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -165,55 +165,55 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">3.2 기본 R 플로팅</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">고품질 그래픽 (High-Quality Graphics)</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">4.2 유한 혼합물</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">유한 혼합 모델 (Finite Mixture Models)</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">5.2 데이터란 무엇이며 왜 군집화하는가?</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">군집화 (Clustering)</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-chap.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">6.1.1 쏟아지는 데이터 속에서 정보 찾기</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">가설 검정 (Hypothesis Testing)</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">7.2 데이터란 무엇인가? 행렬과 그 동기</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">다변량 분석 (Multivariate Analysis)</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">8.2 몇 가지 핵심 개념</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">고처리량 카운트 데이터 (High-Throughput Count Data)</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">9.2 다차원 척도법과 서열화 (Ordination)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">이질적 데이터의 다변량 분석 (Multivariate Analysis for Heterogeneous Data)</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">10.2 그래프(Graphs)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">네트워크와 트리 (Networks and Trees)</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./11-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">11.1 이 장의 목표</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">이미지 분석 (Image Analysis)</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -225,25 +225,25 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">13.1 이 장의 목표</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">실험 설계 (Design of Experiments)</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./14-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">14-chap.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">부록: 통계 개념 및 방법 목록 (Appendix: Statistical Concepts and Methods)</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./15-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">15-chap.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">헌사 (Dedication)</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./16-chap.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">16-chap.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">참고문헌 (References)</span></span></a>
   </div>
 </li>
     </ul>
@@ -256,9 +256,10 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#검정-대-분류" id="toc-검정-대-분류" class="nav-link active" data-scroll-target="#검정-대-분류"><span class="header-section-number">8.0.1</span> 6.1.2 검정 대 분류</a></li>
-  <li><a href="#허위-발견율인가-p-값인가" id="toc-허위-발견율인가-p-값인가" class="nav-link" data-scroll-target="#허위-발견율인가-p-값인가"><span class="header-section-number">8.0.2</span> 6.1.3 허위 발견율인가, p-값인가?</a></li>
-  <li><a href="#다중-검정의-기회" id="toc-다중-검정의-기회" class="nav-link" data-scroll-target="#다중-검정의-기회"><span class="header-section-number">8.0.3</span> 6.1.4 다중 검정의 기회</a></li>
+  <li><a href="#쏟아지는-데이터-속에서-정보-찾기" id="toc-쏟아지는-데이터-속에서-정보-찾기" class="nav-link active" data-scroll-target="#쏟아지는-데이터-속에서-정보-찾기"><span class="header-section-number">8.0.1</span> 6.1.1 쏟아지는 데이터 속에서 정보 찾기</a></li>
+  <li><a href="#검정-대-분류" id="toc-검정-대-분류" class="nav-link" data-scroll-target="#검정-대-분류"><span class="header-section-number">8.0.2</span> 6.1.2 검정 대 분류</a></li>
+  <li><a href="#허위-발견율인가-p-값인가" id="toc-허위-발견율인가-p-값인가" class="nav-link" data-scroll-target="#허위-발견율인가-p-값인가"><span class="header-section-number">8.0.3</span> 6.1.3 허위 발견율인가, p-값인가?</a></li>
+  <li><a href="#다중-검정의-기회" id="toc-다중-검정의-기회" class="nav-link" data-scroll-target="#다중-검정의-기회"><span class="header-section-number">8.0.4</span> 6.1.4 다중 검정의 기회</a></li>
   <li><a href="#예시-동전-던지기" id="toc-예시-동전-던지기" class="nav-link" data-scroll-target="#예시-동전-던지기"><span class="header-section-number">8.1</span> 6.2 예시: 동전 던지기</a></li>
   <li><a href="#가설-검정의-5단계" id="toc-가설-검정의-5단계" class="nav-link" data-scroll-target="#가설-검정의-5단계"><span class="header-section-number">8.2</span> 6.3 가설 검정의 5단계</a>
   <ul class="collapse">
@@ -297,7 +298,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">6.1.1 쏟아지는 데이터 속에서 정보 찾기</span></h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">가설 검정 (Hypothesis Testing)</span></h1>
 </div>
 
 
@@ -327,16 +328,19 @@ window.Quarto = {
 <li><p>진단 플롯(diagnostic plots)을 만드는 방법을 배웁니다.</p></li>
 <li><p>분석의 검정력(power)을 높이기 위해 가설 가중치(hypothesis weighting)를 사용합니다.</p></li>
 </ul>
+<section id="쏟아지는-데이터-속에서-정보-찾기" class="level3" data-number="8.0.1">
+<h3 data-number="8.0.1" class="anchored" data-anchor-id="쏟아지는-데이터-속에서-정보-찾기"><span class="header-section-number">8.0.1</span> 6.1.1 쏟아지는 데이터 속에서 정보 찾기</h3>
 <p><a href="imgs/active- substance-discovery-robot-screening-robot.jpg" title="그림 6.1: 현대 생물학의 고처리량 데이터는 수백만 개의 가설 검정을 통해 연관성을 스크리닝합니다. (출처: 바이엘)"><img src="imgs/active-substance-discovery-robot-screening-robot.jpg" class="img-fluid"></a></p>
 <p>그림 6.1: 현대 생물학의 고처리량 데이터는 수백만 개의 가설 검정을 통해 연관성을 스크리닝합니다. (<a href="https://www.research.bayer.com/en/automated-search-for-active-ingredients-with-robots.aspx">출처: 바이엘</a>)</p>
 <p>만약 통계적 검정(불확실성을 동반한 의사결정)이 단 한 번의 결정을 내릴 때도 어려운 과제처럼 느껴진다면, 마음을 단단히 먹으십시오: 유전체학이나 더 일반적으로 “빅데이터” 분야에서는 이를 한 번이 아니라 수천 번 또는 수백만 번 수행해야 합니다. <a href="02-chap.html">2장</a>에서 우리는 에피토프 검출의 예와 단 한 곳이 아닌 여러 위치를 고려할 때의 어려움을 보았습니다. 유사하게, 전유전체 시퀀싱(whole genome sequencing)에서는 손에 든 DNA 시퀀싱 데이터와 참조 서열(또는 다른 시퀀싱 데이터 세트) 간의 차이에 대한 증거를 찾기 위해 게놈의 모든 위치를 스캔합니다. 인간 데이터를 보고 있다면 이는 약 60억 번의 검정에 해당합니다! 유전자 또는 화학 화합물 스크리닝에서는 대조군과 비교하여 각 시약이 어세이(assay)에서 효과를 나타내는지 테스트하는데, 이 역시 수만 번에서 수백만 번의 검정이 이루어집니다. <a href="08-chap.html">8장</a>에서 우리는 측정된 수천 개의 유전자 각각에 대해 가설 검정을 적용하여 RNA-Seq 데이터의 차등 발현을 분석할 것입니다.</p>
-<section id="검정-대-분류" class="level3" data-number="8.0.1">
-<h3 data-number="8.0.1" class="anchored" data-anchor-id="검정-대-분류"><span class="header-section-number">8.0.1</span> 6.1.2 검정 대 분류</h3>
+</section>
+<section id="검정-대-분류" class="level3" data-number="8.0.2">
+<h3 data-number="8.0.2" class="anchored" data-anchor-id="검정-대-분류"><span class="header-section-number">8.0.2</span> 6.1.2 검정 대 분류</h3>
 <p>우리가 연구하고 있는 세포가 상태 A에 있는지 B에 있는지 결정하기 위해 마커 분자의 농도를 측정했다고 가정해 봅시다. 먼저, 사전 가정이 없으며 데이터를 사용하여 두 결과 중 하나를 다소 대칭적으로 선택하고 싶다고 가정해 보겠습니다. 이것은 <strong>분류(classification)</strong> 작업입니다. 분류에 대해서는 <a href="12-chap.html">12장</a>에서 다룰 것입니다. 이 장에서는 비대칭적인 경우를 고려합니다: 우리가 이미 알고 있는 것(<strong>사전</strong> 지식)에 기초하여 세포 상태 A가 지배적이며 “기본(default)” 상태입니다. 충분히 강력한 증거가 때만 B라고 판정할 것입니다. 아마도 B는 드물고, 특이하며, 흥미로운 것이어서 이를 발견하면 더 연구하기 위해 자원을 투입할 것입니다. 반면 A는 흥미롭지 않으며 추가 후속 조치가 필요하지 않습니다. 이러한 경우에 가설 검정의 메커니즘이 우리에게 필요합니다.</p>
 <p>형식적으로 가설 검정과 분류 사이에는 많은 유사점이 있습니다. 두 경우 모두 데이터를 사용하여 여러 가능한 결정 중 하나를 선택하는 것을 목표로 합니다. 그 구분이 모호할 수 있으며, 가설 검정을 분류의 특수한 사례로 생각하는 것도 가능합니다. 그러나 이 두 접근 방식은 서로 다른 목적과 기저의 가정을 지향합니다. 통계적 의사결정 문제에 직면했을 때 어떤 접근 방식이 더 적절한지 확인하는 것이 유용할 수 있습니다.</p>
 </section>
-<section id="허위-발견율인가-p-값인가" class="level3" data-number="8.0.2">
-<h3 data-number="8.0.2" class="anchored" data-anchor-id="허위-발견율인가-p-값인가"><span class="header-section-number">8.0.2</span> 6.1.3 허위 발견율인가, p-값인가?</h3>
+<section id="허위-발견율인가-p-값인가" class="level3" data-number="8.0.3">
+<h3 data-number="8.0.3" class="anchored" data-anchor-id="허위-발견율인가-p-값인가"><span class="header-section-number">8.0.3</span> 6.1.3 허위 발견율인가, p-값인가?</h3>
 <p><a href="06-chap_files/figure-html/fig-testing- FDRvspstatic1-1.png" title="그림 6.2: 이진(예/아니오) 결정 내리기. 여기서는 x축을 따라 표시된 어떤 연속형 점수 x를 바탕으로 두 가지 가능한 결정을 &quot;양성(positive)&quot;과 &quot;음성(negative)&quot;으로 부릅니다. 파란색으로 음영 처리된 곡선은 클래스 중 하나(음성)에 대한 x의 분포 밀도를 보여주고, 빨간색으로 음영 처리된 곡선은 다른 클래스(양성)에 대한 것을 보여줍니다. 두 분포는 뚜렷이 구분되지만(빨간색 값들이 일반적으로 더 낮음), 일부 중첩되는 영역이 있습니다. 검은색 수직 막대는 결정 경계의 선택을 나타내며, 이는 색상 키로 강조된 네 가지 가능한 결과를 가져옵니다."><img src="06-chap_files/figure-html/fig-testing- FDRvspstatic1-1.png" class="img-fluid"></a></p>
 <p>그림 6.2: 이진(예/아니오) 결정 내리기. 여기서는 (x)축을 따라 표시된 어떤 연속형 점수 (x)를 바탕으로 두 가지 가능한 결정을 “양성(positive)”과 “음성(negative)”으로 부릅니다. 파란색으로 음영 처리된 곡선은 클래스 중 하나(음성)에 대한 (x)의 분포 밀도를 보여주고, 빨간색으로 음영 처리된 곡선은 다른 클래스(양성)에 대한 것을 보여줍니다. 두 분포는 뚜렷이 구분되지만(빨간색 값들이 일반적으로 더 낮음), 일부 중첩되는 영역이 있습니다. 검은색 수직 막대는 결정 경계의 선택을 나타내며, 이는 색상 키로 강조된 네 가지 가능한 결과를 가져옵니다.</p>
 <p><a href="06-chap_files/figure-html/fig-testing- FDRvspstatic2-1.png" title="그림 6.3: 그림 6.2와 유사하지만, 이제 결과로 나오는 파란색 분포가 균등 분포(uniform distribution)가 되도록 비선형적이고 엄격하게 증가하는 변환 함수 p=f(x)를 사용하여 x를 원래 범위에서 [0,1] 범위로 변환했습니다. 그러한 함수는 항상 존재합니다: 그것은 x의 누적 분포 함수입니다(이는 3.6.7절에서 보았습니다). 우리는 그 결과를 p-값(p-value)이라고 부릅니다. 식 6.2의 FDR 정의는 그림 6.2와 여기 모두에 동일하게 적용됩니다."><img src="06-chap_files/figure-html/fig-testing- FDRvspstatic2-1.png" class="img-fluid"></a></p>
@@ -361,8 +365,8 @@ window.Quarto = {
 <p>[ =. ]</p>
 <p>다시 말해, p-값은 다소 복잡한 질문(그리고 어쩌면 잘못된 질문)에 대한 정확하고 종종 상대적으로 계산하기 쉬운 답입니다. FDR은 올바른 질문에 답하지만, 우리가 종종 가지고 있지 않은 훨씬 더 많은 입력을 필요로 합니다.</p>
 </section>
-<section id="다중-검정의-기회" class="level3" data-number="8.0.3">
-<h3 data-number="8.0.3" class="anchored" data-anchor-id="다중-검정의-기회"><span class="header-section-number">8.0.3</span> 6.1.4 다중 검정의 기회</h3>
+<section id="다중-검정의-기회" class="level3" data-number="8.0.4">
+<h3 data-number="8.0.4" class="anchored" data-anchor-id="다중-검정의-기회"><span class="header-section-number">8.0.4</span> 6.1.4 다중 검정의 기회</h3>
 <p>다중 검정에 대한 좋은 소식이 있습니다: 비록 우리가 위 목록의 2번과 3번 항목을 개별 검정에 대해 명시적으로 알지 못하더라도(그리고 어쩌면 1번에 대해서조차 확신이 없더라도 (<a href="16-chap.html#ref-Efron2010">Efron 2010</a>)), 우리는 다중성(multiplicity)으로부터 이 정보를 추론할 수 있고, 따라서 p-값을 FDR 추정치로 변환할 수 있을지 모릅니다!</p>
 <p>따라서 다중 검정은 우리의 추론을 더 좋게 만들고 우리의 과업을 더 단순하게 만드는 경향이 있습니다. 데이터가 아주 많기 때문에 우리는 추상적인 가정에만 의존할 필요가 없습니다. 검정의 요구 사항이 실제로 데이터에 의해 충족되는지 경험적으로 확인할 수 있습니다. 이 모든 것이 믿을 수 없을 정도로 도움이 될 수 있으며, 우리는 이를 다중성 <strong>덕분에</strong> 얻게 됩니다. 그러므로 우리는 다중 검정을 “문제”나 “부담”이 아니라 기회로 생각해야 합니다!</p>
 </section>
@@ -376,12 +380,12 @@ numFlips = 100
 probHead = 0.6
 coinFlips = sample(c("H", "T"), size = numFlips,
   replace = TRUE, prob = c(probHead, 1 - probHead))
-head(coinFlips)__
+head(coinFlips)
 
 
 [1] "T" "T" "H" "T" "H" "H"</code></pre>
 <p>이제 동전이 공정하다면 앞면이 절반 정도 나올 것으로 기대할 것입니다. 확인해 봅시다.</p>
-<pre><code>table(coinFlips)__
+<pre><code>table(coinFlips)
 
 
 coinFlips
@@ -399,13 +403,13 @@ coinFlips
 k = 0:numFlips
 numHeads = sum(coinFlips == "H")
 binomDensity = tibble(k = k,
-     p = dbinom(k, size = numFlips, prob = 0.5))__
+     p = dbinom(k, size = numFlips, prob = 0.5))
 
 
 library("ggplot2")
 ggplot(binomDensity) +
   geom_bar(aes(x = k, y = p), stat = "identity") +
-  geom_vline(xintercept = numHeads, col = "blue")__</code></pre>
+  geom_vline(xintercept = numHeads, col = "blue")</code></pre>
 <p><a href="06-chap_files/figure-html/fig-testing- dbinom-1.png" title="그림 6.5: 식 6.3에 따른 n=100 및 p=0.5 매개변수의 이항 분포."><img src="06-chap_files/figure-html/fig-testing- dbinom-1.png" class="img-fluid"></a></p>
 <p>그림 6.5: 식 6.3에 따른 (n=100) 및 (p=0.5) 매개변수의 이항 분포.</p>
 <p>만약 우리가 식 6.3을 몰랐다고 가정해 봅시다. 우리는 여전히 비교를 위해 몬테카를로 시뮬레이션을 사용할 수 있습니다:</p>
@@ -417,7 +421,7 @@ outcome = replicate(numSimulations, {
 })
 ggplot(tibble(outcome)) + xlim(-0.5, 100.5) +
   geom_histogram(aes(x = outcome), binwidth = 1, center = 50) +
-  geom_vline(xintercept = numHeads, col = "blue")__</code></pre>
+  geom_vline(xintercept = numHeads, col = "blue")</code></pre>
 <p><a href="06-chap_files/figure- html/fig-rbinom-1.png" title="그림 6.6: 10,000번의 시뮬레이션을 통한 이항 분포의 근사 (그림 6.5와 동일한 매개변수)."><img src="06-chap_files/figure-html/fig-rbinom-1.png" class="img-fluid"></a></p>
 <p>그림 6.6: 10,000번의 시뮬레이션을 통한 이항 분포의 근사 (그림 6.5와 동일한 매개변수).</p>
 <p>예상대로, 앞면의 가장 발생 가능성이 높은 횟수는 동전 던지기 횟수의 절반인 50입니다. 하지만 우리는 50 근처의 다른 숫자들 또한 꽤 발생 가능하다는 것을 볼 수 있습니다. 관측된 값 59가 공정한 동전에서 볼 수 있는 법한 값들 중 하나인지, 아니면 그 편차가 우리가 이 동전이 편향되었다고 충분히 자신 있게 결론 내릴 만큼 큰지 어떻게 정량화할까요? 우리는 모든 가능한 (k) 값의 집합(0에서 100)을 두 개의 상보적인 부분 집합인 <strong>기각역(rejection region)</strong> 과 비기각역으로 나눕니다. 우리의 선택7은 기각역을 가능한 한 많은 (k)로 채우되, 귀무 가설을 가정했을 때 그들의 전체 확률을 어떤 임계값 ()(예를 들어 0.05) 미만으로 유지하는 것입니다.</p>
@@ -433,28 +437,23 @@ ggplot(binomDensity) +
   scale_colour_manual(
     values = c(`TRUE` = "red", `FALSE" = "darkgrey")) +
   geom_vline(xintercept = numHeads, col = "blue") +
-  theme(legend.position = "none")__</code></pre>
+  theme(legend.position = "none")</code></pre>
 <p><a href="06-chap_files/figure-html/fig-testing- findrej-1.png &quot;그림 6.7: 그림 6.5와 같지만, 전체 면적이 최대 (\alpha=0.05)가 되도록 가장 많은 수의 빈(bins)을 포함하도록 선택된 기각역(빨간색)이 표시된 모습.&quot;"><img src="06-chap_files/figure-html/fig-testing- findrej-1.png" class="img-fluid"></a></p>
 <p>그림 6.7: 그림 6.5와 같지만, 전체 면적이 최대 ()가 되도록 가장 많은 수의 빈(bins)을 포함하도록 선택된 기각역(빨간색)이 표시된 모습.</p>
 <p>확률들에 대해 명시적으로 합계를 구하는 것은 번거로운 일이며, 여기서는 교육적인 가치를 위해 그렇게 했습니다. 1차원 분포의 경우, R은 밀도 함수(<code>dbinom</code> 등)뿐만 아니라 누적 분포 함수(<code>pbinom</code>)도 제공하며, 이들은 확률들에 대해 <code>cumsum</code>을 수행하는 것보다 더 정확하고 빠릅니다. 실제로는 이들을 사용해야 합니다.</p>
-<p>__</p>
 <p>태스크</p>
 <p><code>dbinom</code>과 <code>cumsum</code>을 사용하지 않고, 대신 <code>pbinom</code>을 사용하여 기각역을 계산하고 그림 6.7과 같은 플롯을 생성해 보세요.</p>
 <p>그림 6.7에서 관측된 값 59가 회색으로 칠해진 영역에 있음을 알 수 있으며, 따라서 우리는 ()의 유의 수준에서 이 데이터로부터 공정한 동전이라는 귀무 가설을 기각하지 <strong>않을</strong> 것입니다.</p>
-<p>__</p>
 <p>질문 6.1</p>
 <p>귀무 가설을 기각하지 않는다는 사실이 그 동전이 공정하다는 것을 의미하나요?</p>
-<p>__</p>
 <p>질문 6.2</p>
 <p>만약 우리가 더 많은 동전 던지기를 했다면 동전이 공정하지 않다는 것을 발견할 가능성이 더 높았을까요? 얼마나 더 해야 했을까요?</p>
-<p>__</p>
 <p>질문 6.3</p>
 <p>만약 우리가 전체 절차를 반복하여 다시 동전을 100번 던진다면, 그때는 귀무 가설을 기각하게 될 수도 있을까요?</p>
-<p>__</p>
 <p>질문 6.4</p>
 <p>그림 6.7의 기각역은 비대칭적입니다 – 왼쪽 부분은 (k=40)에서 끝나고, 오른쪽 부분은 (k=61)에서 시작합니다. 왜 그럴까요? 기각역을 정의하는 다른 유용한 방식들에는 어떤 것들이 있을까요?</p>
 <p>우리는 방금 이항 검정(binomial test)의 단계들을 거쳤습니다. 사실 이는 R에서 매우 빈번한 작업이므로 단일 함수인 <code>binom.test</code>로 캡슐화되어 있으며, 우리는 그 출력과 우리 결과를 비교할 수 있습니다.</p>
-<pre><code>binom.test(x = numHeads, n = numFlips, p = 0.5)__
+<pre><code>binom.test(x = numHeads, n = numFlips, p = 0.5)
 
 
     Exact binomial test
@@ -484,18 +483,13 @@ probability of success
 <p>이 이상적인 워크플로에서 우리는 데이터를 보기 전인 1~3단계에서 모든 중요한 결정을 내린다는 점에 주목하십시오. 서론(그림 <a href="00-chap.html#fig-Fisher">1</a> 및 <a href="00-chap.html#fig-iterative">2</a>)에서 이미 언급했듯이, 이는 종종 현실적이지 않습니다. 우리는 6.6절에서 이 문제로 다시 돌아올 것입니다.</p>
 <p>우리가 위의 예에서 사용한 귀무 가설에도 이상화가 있었습니다: 우리는 공정한 동전이 정확히 0.5의 확률을 가져야 하며(예를 들어 0.500001이 아니라), 던지기 사이에 절대적으로 의존성이 없어야 한다고 가정했습니다. 공기 저항, 동전이 떨어지는 재료의 탄성 등 발생 가능한 효과들에 대해서는 걱정하지 않았습니다. 이는 귀무 가설이 이항 분포를 통해 계산 가능하다는 이점을 주었습니다. 여기서 이러한 이상화는 그리 논란의 여지가 없어 보일 수 있지만, 다른 상황에서는 귀무 가설이 얼마나 다루기 쉬운가와 얼마나 현실적인가 사이의 상충 관계(trade-off)가 더 클 수 있습니다. 문제는 귀무 가설이 처음부터 너무 이상화되어 있다면, 그것을 기각하는 것이 그리 흥미롭지 않다는 것입니다. 결과가 오도될 수 있으며, 확실히 우리는 시간을 낭비하고 있는 것입니다.</p>
 <p>우리 예에서의 검정 통계량은 앞면의 총 횟수였습니다. 만약 우리가 뒷면이 연속으로 50번 나오고, 그 다음 앞면이 연속으로 50번 나오는 것을 관찰했다고 가정해 봅시다. 우리의 검정 통계량은 결과의 순서를 무시하므로, 우리는 이것이 완벽하게 공정한 동전이라고 결론 내릴 것입니다. 하지만 만약 우리가 뒷면이 두 번 연속으로 나오는 횟수와 같은 다른 검정 통계량을 사용했다면, 이 동전에 뭔가 이상한 점이 있다는 것을 알아챘을지도 모릅니다.</p>
-<p>__</p>
 <p>질문 6.5</p>
 <p>이 다른 검정 통계량의 귀무 분포는 무엇일까요?</p>
-<p>__</p>
 <p>질문 6.6</p>
 <p>그 통계량에 기반한 검정이 일반적으로 더 선호될까요?</p>
-<p>__</p>
 <p>해결책</p>
-<p>__</p>
 <p>아니요, 동전 던지기 사이의 그러한 상관관계를 감지하는 데는 더 큰 검정력을 갖지만, 결과의 편향(bias)을 감지하는 데는 검정력이 더 <strong>낮습니다</strong>.</p>
 <p>우리가 방금 한 일은 두 가지 서로 다른 종류의 <strong>대립 가설(alternative hypotheses)</strong> 을 살펴본 것입니다. 첫 번째 종류의 대립 가설은 연속적인 동전 던지기가 여전히 서로 독립적이지만 앞면의 확률이 0.5가 아니라는 것이었습니다. 두 번째는 앞면의 전체 확률은 여전히 0.5일 수 있지만 연속적인 동전 던지기가 상관관계가 있다는 것이었습니다.</p>
-<p>__</p>
 <p>질문 6.7</p>
 <p><a href="01-chap.html">1장</a>의 충분 통계량(sufficient statistics) 개념을 상기해 보세요. 앞면의 총 횟수는 이항 분포에 대한 충분 통계량인가요? 왜 그것이 첫 번째 종류의 대립 가설에 대해서는 좋은 검정 통계량이 될 수 있지만, 두 번째 종류에 대해서는 그렇지 않을까요?</p>
 <p>그러므로 우리는 일반적으로 여러 가지 가능한 검정 통계량 선택지가 있음을 기억합시다 (원칙적으로는 데이터의 어떤 수치적 요약도 될 수 있습니다). 좋은 검정력11을 가진 검정을 얻기 위해서는 올바른 선택을 하는 것이 중요합니다. 올바른 선택이 무엇인지는 우리가 어떤 종류의 대립 가설을 예상하느냐에 달려 있습니다. 이를 미리 아는 것이 항상 쉬운 것은 아닙니다.</p>
@@ -537,7 +531,6 @@ probability of success
 </table>
 <p>표 6.1: 통계적 검정에서의 오류 유형.</p>
 <p>다른 유형의 오류를 증가시키는 대가로 두 가지 오류 유형 중 하나를 줄이는 것은 항상 가능합니다. 진짜 과제는 두 가지 사이에서 수용 가능한 상충 관계를 찾는 것입니다. 이것이 그림 6.2에 예시되어 있습니다. 우리는 임계값을 오른쪽으로 이동시켜 <strong>위양성률(false positive rate, FPR)</strong> 을 항상 낮출 수 있습니다. 우리는 더 “보수적”이 될 수 있습니다. 하지만 이는 더 높은 <strong>위음성률(false negative rate, FNR)</strong> 이라는 대가를 치러야 합니다. 유사하게, 임계값을 왼쪽으로 이동시켜 FNR을 낮출 수 있습니다. 하지만 이 역시 더 높은 FPR이라는 대가를 치러야 합니다. 용어에 대해 조금 설명하자면: FPR은 앞서 언급한 확률 ()와 같습니다. (1 - )는 검정의 <strong>특이도(specificity)</strong> 라고도 불립니다. FNR은 때때로 ()라고도 불리며, (1 - )는 검정의 <strong>검정력(power)</strong> , <strong>민감도(sensitivity)</strong> 또는 <strong>진양성률(true positive rate)</strong> 이라고 불립니다.</p>
-<p>__</p>
 <p>질문 6.8</p>
 <p>6.3절의 끝에서 단측 및 양측 검정에 대해 배웠습니다. 왜 이러한 구분이 존재할까요? 왜 더 넓은 범위의 대립 가설에 민감한 양측 검정을 항상 사용하지 않을까요?</p>
 </section>
@@ -558,7 +551,7 @@ tt = with(PlantGrowth,
        t.test(weight[group =="ctrl"],
               weight[group =="trt2"],
               var.equal = TRUE))
-tt __
+tt
 
 
     Two Sample t-test
@@ -573,16 +566,12 @@ mean of x mean of y
     5.032     5.526 </code></pre>
 <p><a href="06-chap_files/figure-html/fig-testing- plantgrowth-1.png &quot;그림 6.8: PlantGrowth 데이터.&quot;"><img src="06-chap_files/figure-html/fig-testing- plantgrowth-1.png" class="img-fluid"></a></p>
 <p>그림 6.8: <code>PlantGrowth</code> 데이터.</p>
-<p>__</p>
 <p>질문 6.9</p>
 <p><code>trt1</code>과의 비교에서는 무엇을 얻나요? <code>trt1</code> 대 <code>trt2</code>는요?</p>
 <p>p-값을 계산하기 위해 <code>t.test</code> 함수는 (t)-통계량(식 6.4)에 대한 점근적 이론을 사용합니다; 이 이론은 두 그룹의 평균이 같다는 귀무 가설하에서 통계량이 알려진 수학적 분포인 자유도가 (n_1+n_2-2)인 (t)-분포를 따른다고 명시합니다. 이 이론은 추가적인 기술적 가정, 즉 데이터가 독립적이고 동일한 표준 편차를 가진 정규 분포에서 나온다는 가정을 사용합니다. 우리는 이러한 가정들에 대해 걱정할 수 있습니다. 분명히 이 가정들은 성립하지 않습니다: 무게는 항상 양수이지만, 정규 분포는 전체 실수 축에 걸쳐 있습니다. 문제는 이론적 가정으로부터의 이러한 이탈이 실제로 차이를 만드느냐 하는 것입니다. 우리는 이를 알아내기 위해 순열 검정(permutation test)을 사용할 수 있습니다 (순열 검정의 이면에 있는 아이디어를 6.5.1절에서 좀 더 자세히 논의할 것입니다).</p>
-<p>__</p>
 <p>질문 6.10</p>
 <p>위의 (t)-검정에 대해 동전 던지기의 그림 6.5 및 그림 6.6과 유사한 방식으로 이론적 및 시뮬레이션된 귀무 분포를 플롯해 보세요.</p>
-<p>__</p>
 <p>해결책</p>
-<p>__</p>
 <pre><code>plgr = dplyr::filter(PlantGrowth, group %in% c("ctrl", "trt2"))
 
 alpha  = 0.05
@@ -615,17 +604,14 @@ for (p in list(p1, p2))
         geom_vline(xintercept = tt$statistic, col = "#101010") +
         scale_colour_manual(values = c(low = "blue", high = "red", none = "darkgrey")) +
         scale_fill_manual(values = c(low = "blue", high = "red", none = "darkgrey")) + 
-        xlim(xrange) + theme(legend.position = "none"))__</code></pre>
+        xlim(xrange) + theme(legend.position = "none"))</code></pre>
 <p><a href="06-chap_files/figure- html/fig-testing-tnull-1.png" title="그림 6.9:"><img src="06-chap_files/figure-html/fig-testing-tnull-1.png" class="img-fluid"></a></p>
 <p>그림 6.9</p>
 <p><a href="06-chap_files/figure- html/fig-testing-tnull-2.png" title="그림 6.10:"><img src="06-chap_files/figure-html/fig-testing-tnull-2.png" class="img-fluid"></a></p>
 <p>그림 6.10</p>
-<p>__</p>
 <p>질문 6.11</p>
 <p>만약 우리가 (t) 대신 (t)의 절댓값을 고려했다면 앞선 질문의 해결책이 더 간단해졌을까요?</p>
-<p>__</p>
 <p>해결책</p>
-<p>__</p>
 <p>네, 만약 우리가 차이의 부호에 관심이 없다면, 우리는 직접적으로 ((t))에 대해 작업할 수 있으며, 아래쪽과 위쪽의 기각역 대신 단 하나의 기각역만을 가질 것입니다.</p>
 <p>(t)-검정은 여러 가지 변체로 제공되며, 이들은 모두 <code>t.test</code> 함수의 매개변수들을 통해 선택될 수 있습니다. 우리가 위에서 수행한 것은 <strong>양측(two-sided) 2표본 비쌍체(unpaired) 등분산(equal variance) 검정</strong> 이라고 불립니다. <strong>양측</strong> 은 처리된 식물들의 무게가 처리되지 않은 것들보다 크거나 작을 때 모두 귀무 가설을 기각할 준비가 되어 있었다는 사실을 의미합니다.</p>
 <p><strong>2표본(Two-sample)</strong> 15 은 우리가 두 그룹의 평균을 서로 비교했다는 것을 나타냅니다; 또 다른 옵션은 한 그룹의 평균을 주어진 고정된 숫자와 비교하는 것입니다.</p>
@@ -636,7 +622,7 @@ for (p in list(p1, p2))
 <pre><code>with(rbind(PlantGrowth, PlantGrowth), 
        t.test(weight[group == "ctrl"],
               weight[group == "trt2"],
-              var.equal = TRUE))__
+              var.equal = TRUE))
 
 
     Two Sample t-test
@@ -670,7 +656,6 @@ mean of x mean of y
 </section>
 <section id="다중-검정-multiple-testing" class="level2" data-number="8.6">
 <h2 data-number="8.6" class="anchored" data-anchor-id="다중-검정-multiple-testing"><span class="header-section-number">8.6</span> 6.7 다중 검정 (Multiple testing)</h2>
-<p>__</p>
 <p>질문 6.12</p>
 <p><a href="http://xkcd.com/882">xkcd 만화 882</a>를 찾아보세요. 왜 신문은 다른 색상들에 대한 결과는 보도하지 않았을까요?</p>
 <p>만화에서 묘사된 곤경은 생물학의 고처리량 데이터에서도 발생합니다. 그것도 아주 강력하게 말이죠! 여러분은 단지 20가지 색상의 젤리빈뿐만 아니라, 예를 들어 두 조건 사이의 차등 발현을 위해 테스트된 20,000개의 유전자나, DNA 돌연변이가 일어났을지도 모르는 게놈 상의 60억 개의 위치를 다루게 될 것입니다. 그렇다면 우리는 이를 어떻게 처리해야 할까요? 통계적 검정 결과와 실제 상황을 연관시킨 표(표 6.1)를 다시 살펴봅시다. 이번에는 모든 것을 많은 가설의 관점에서 구성해 보겠습니다.</p>
@@ -722,12 +707,11 @@ mean of x mean of y
 <p>19 독립을 가정함.</p>
 <p>[ <span class="math display">\[\begin{align} P(V&gt;0) &amp;= 1 - P(\text{$m_0$개의 귀무 가설 중 어느 것도 기각되지 않음}) \\ &amp;= 1 - (1 - \alpha)^{m_0} \to 1 \quad\text{as } m_0\to\infty. \end{align}\]</span> ]</p>
 <p>어떤 고정된 ()에 대해, 이 확률은 (m_0)가 (1/)의 규모가 되자마자 무시할 수 없을 정도로 커지며, (m_0)가 커짐에 따라 1을 향해 갑니다. 이러한 관계는 방대한 잠재적 일치 데이터베이스를 검색하는 DNA 매칭과 같은 실험에서 심각한 결과를 초래할 수 있습니다. 예를 들어, 두 사람의 DNA 프로필이 무작위 오차에 의해 일치할 확률이 100만 분의 1이고, 여러분의 DNA를 80만 개의 프로필이 담긴 데이터베이스와 대조한다면, 데이터베이스 내에서 (즉, 여러분이 그 안에 없더라도) 무작위로 일치할 확률은 다음과 같습니다:</p>
-<pre><code>1 - (1 - 1/1e6)^8e5 __
+<pre><code>1 - (1 - 1/1e6)^8e5
 
 
 [1] 0.5506712</code></pre>
 <p>상당히 높습니다. 그리고 데이터베이스에 몇 백만 개의 프로필이 더 포함된다면, 잘못된 일치는 사실상 피할 수 없습니다.</p>
-<p>__</p>
 <p>질문 6.13</p>
 <p>(m_0)가 클 때 식 6.6의 확률이 실제로 1에 매우 가까워진다는 것을 증명해 보세요.</p>
 <section id="본페로니-방법-bonferroni-method" class="level3" data-number="8.7.1">
@@ -740,11 +724,10 @@ ggplot(tibble(
   aes(x = alpha, y = p)) +  geom_line() +
   xlab(expression(alpha)) +
   ylab("Prob( no false rejection )") +
-  geom_hline(yintercept = 0.05, col = "red")__</code></pre>
+  geom_hline(yintercept = 0.05, col = "red")</code></pre>
 <p><a href="06-chap_files/figure-html/fig-testing- bonferroni-1.png &quot;그림 6.11: 본페로니 방법. 플롯은 m=10000에 대해 (\alpha)의 함수로서 식 6.6의 그래프를 보여줍니다.&quot;"><img src="06-chap_files/figure-html/fig-testing- bonferroni-1.png" class="img-fluid"></a></p>
 <p>그림 6.11: 본페로니 방법. 플롯은 (m=10000)에 대해 ()의 함수로서 식 6.6의 그래프를 보여줍니다.</p>
 <p>그림 6.11에서 검은색 선은 (0.05 값에 해당하는) 빨간색 선과 (^{-6})에서 교차하는데, 이는 본페로니 방법에 의해 함축된 (0.05/m) 값보다 아주 약간 큽니다.</p>
-<p>__</p>
 <p>질문 6.14</p>
 <p>왜 두 값이 정확히 같지 않을까요?</p>
 <p>하지만 이 방법의 잠재적인 단점은 (m_0)가 크면 기각 임계값이 매우 작아진다는 것입니다. 이는 무언가를 감지할 기회를 가지려면 개별 검정의 검정력이 매우 높아야 함을 의미합니다. 종종 FWER 제어는 너무 엄격하여, 데이터를 생성하고 모으는 데 들인 시간과 비용을 비효율적으로 사용하게 만들 수 있습니다. 이제 우리는 제1종 오류를 제어하는 더 미묘한 방법들이 있다는 것을 보게 될 것입니다.</p>
@@ -758,11 +741,9 @@ library("airway")
 data("airway")
 aw   = DESeqDataSet(se = airway, design = ~ cell + dex)
 aw   = DESeq(aw)
-awde = as.data.frame(results(aw)) |&gt; dplyr::filter(!is.na(pvalue))__</code></pre>
-<p>__</p>
+awde = as.data.frame(results(aw)) |&gt; dplyr::filter(!is.na(pvalue))</code></pre>
 <p>태스크</p>
 <p><code>awde</code>의 내용을 살펴보세요.</p>
-<p>__</p>
 <p>태스크</p>
 <p>(선택 사항) 위의 코드 청크가 무엇을 하는지에 대한 더 많은 정보를 얻으려면 <strong><a href="https://bioconductor.org/packages/DESeq2/">DESeq2</a></strong> 비네트 및/또는 <a href="08-chap.html">8장</a>을 참고하십시오.</p>
 <section id="p-값-히스토그램" class="level3" data-number="8.8.1">
@@ -771,7 +752,7 @@ awde = as.data.frame(results(aw)) |&gt; dplyr::filter(!is.na(pvalue))__</code></
 <p><strong>null:</strong> 귀무 가설이 참인 검정에서 얻은 p-값들.</p>
 <p><strong>alt:</strong> 귀무 가설이 거짓인 검정에서 얻은 p-값들. 이 두 성분의 상대적 크기는 참인 귀무 가설과 참인 대립 가설의 비율(즉, (m_0)와 (m))에 달려 있으며, 종종 히스토그램에서 시각적으로 추정할 수 있습니다. 분석의 통계적 검정력이 높다면 두 번째 성분(“alt”)은 대부분 작은 p-값들로 구성되며, 즉 히스토그램에서 0 근처의 정점으로 나타납니다. 일부 대립 가설에 대해 검정력이 높지 않다면 이 정점이 오른쪽으로 뻗어 나가는, 즉 “어깨(shoulder)” 모양을 가질 것으로 예상합니다. “null” 성분의 경우 (연속형 데이터와 검정 통계량에 대한 p-값의 정의에 따라) ([0,1])에서의 균등 분포를 예상합니다. airway 데이터에 대한 p-값 히스토그램을 그려봅시다.</p>
 <pre><code>ggplot(awde, aes(x = pvalue)) +
-  geom_histogram(binwidth = 0.025, boundary = 0)__</code></pre>
+  geom_histogram(binwidth = 0.025, boundary = 0)</code></pre>
 <p><a href="06-chap_files/figure-html/fig-testing- awpvhist-1.png &quot;그림 6.12: airway 데이터에 대한 p-값 히스토그램.&quot;"><img src="06-chap_files/figure-html/fig-testing- awpvhist-1.png" class="img-fluid"></a></p>
 <p>그림 6.12: <code>airway</code> 데이터에 대한 p-값 히스토그램.</p>
 <p>그림 6.12에서 우리는 예상된 혼합물을 봅니다. 또한 null 성분이 정확히 평평(균등)하지 않음을 볼 수 있는데, 이는 데이터가 카운트(counts)이기 때문입니다. 카운트가 높을 때는 준연속(quasi-continuous)으로 보이지만, 카운트가 낮은 검정의 경우 데이터의 이산성(discreteness)과 그 결과로 나타나는 p-값이 히스토그램 오른쪽의 뾰족한 부분(spikes)으로 나타납니다.</p>
@@ -781,11 +762,11 @@ pi0 = 2 * mean(awde$pvalue &gt; 0.5)
 ggplot(awde,
   aes(x = pvalue)) + geom_histogram(binwidth = binw, boundary = 0) +
   geom_hline(yintercept = pi0 * binw * nrow(awde), col = "blue") +
-  geom_vline(xintercept = alpha, col = "red")__</code></pre>
+  geom_vline(xintercept = alpha, col = "red")</code></pre>
 <p><a href="06-chap_files/figure-html/fig-testing- awpvvisfdr-1.png &quot;그림 6.13: p-값 히스토그램을 통한 FDR의 시각적 추정.&quot;"><img src="06-chap_files/figure-html/fig-testing- awpvvisfdr-1.png" class="img-fluid"></a></p>
 <p>그림 6.13: p-값 히스토그램을 통한 FDR의 시각적 추정.</p>
 <p>우리는 첫 번째 빈 ([0, ])에 4772개의 p-값이 있음을 알 수 있는데, 이 중 약 945개는 null일 것으로 예상됩니다(파란색 선으로 표시됨). 따라서 우리는 잘못된 기각의 비율을 다음과 같이 추정할 수 있습니다.</p>
-<pre><code>pi0 * alpha / mean(awde$pvalue &lt;= alpha)__
+<pre><code>pi0 * alpha / mean(awde$pvalue &lt;= alpha)
 
 
 [1] 0.1980092</code></pre>
@@ -808,28 +789,23 @@ awde = mutate(awde, rank = rank(pvalue))
 m    = nrow(awde)
 
 ggplot(dplyr::filter(awde, rank &lt;= 7000), aes(x = rank, y = pvalue)) +
-  geom_line() + geom_abline(slope = phi / m, col = "red")__</code></pre>
+  geom_line() + geom_abline(slope = phi / m, col = "red")</code></pre>
 <p><a href="06-chap_files/figure- html/fig-testing-BH-1.png &quot;그림 6.14: 벤자미니-호크버그 절차의 시각화. 하위 7000개 p-값들을 확대한 모습입니다.&quot;"><img src="06-chap_files/figure-html/fig-testing-BH-1.png" class="img-fluid"></a></p>
 <p>그림 6.14: 벤자미니-호크버그 절차의 시각화. 하위 7000개 p-값들을 확대한 모습입니다.</p>
 <p>이 방법은 검은색 선(우리 p-값들)과 빨간색 선(기울기 (/ m))이 교차하는 가장 오른쪽 지점을 찾습니다. 그런 다음 그 왼쪽의 모든 검정들을 기각합니다.</p>
 <pre><code>kmax = with(arrange(awde, rank),
          last(which(pvalue &lt;= phi * rank / m)))
-kmax __
+kmax
 
 
 [1] 4099</code></pre>
-<p>__</p>
 <p>질문 6.15</p>
 <p><code>kmax</code>의 값을 위에서의 4772라는 숫자(그림 6.13)와 비교해 보세요. 왜 이들이 다를까요?</p>
-<p>__</p>
 <p>질문 6.16</p>
 <p>R과 함께 제공되는 <code>p.adjust</code> 함수의 <code>method="BH"</code> 옵션과 연관된 코드를 살펴보세요. 그것이 위에서 우리가 수행한 것과 어떻게 비교되나요?</p>
-<p>__</p>
 <p>질문 6.17</p>
 <p><strong>Schweder와 Spjøtvoll 플롯:</strong> Schweder와 Spjøtvoll (<a href="16-chap.html#ref-SchwederSpjotvoll1982">1982</a>)의 그림 1-3을 확인해 보세요. <code>awde</code> 데이터에 대해 유사한 플롯을 만들어 보세요. 그것이 그림 6.14 및 6.13과 어떤 관련이 있나요?</p>
-<p>__</p>
 <p>해결책</p>
-<p>__</p>
 <p>벤자미니와 호크버그 (<a href="16-chap.html#ref-BH:1995">1995</a>)보다 13년 앞서, Schweder와 Spjøtvoll (<a href="16-chap.html#ref-SchwederSpjotvoll1982">1982</a>)은 참인 귀무 가설의 분율을 추정할 수 있게 해주는 관측된 (p)-값들의 진단 플롯을 제안했습니다. (p)-값 (p_i)를 가진 일련의 가설 검정 (H_1, …, H_m)에 대해, 그들은 다음을 플롯할 것을 제안했습니다.</p>
 <p>[ ( 1-p_i, N(p_i) ) i , …, m, ]</p>
 <p>여기서 (N(p))는 (p)보다 큰 (p)-값들의 개수입니다. <code>awde$pvalue</code>에 이 진단 플롯을 적용한 결과가 그림 6.15에 나와 있습니다. 모든 귀무 가설이 참일 때, 각 (p)-값은 ([0,1])에서 균등하게 분포하며, 결과적으로 표본 ((p_1, …, p_m))의 경험적 누적 분포는 선 (F(t)=t)에 가까울 것으로 기대됩니다. 대칭성에 의해, 이는 ((1 - p_1, …, 1 - p_m))에도 똑같이 적용됩니다. (일반성을 잃지 않고) 처음 (m_0)개의 귀무 가설이 참이고 나머지 (m-m_0)개가 거짓일 때, ((1-p_1, …, 1-p_{m_0}))의 경험적 누적 분포는 다시 선 (F_0(t)=t)에 가까울 것으로 기대됩니다. 반면에 ((1-p_{m_0+1}, …, 1-p_{m}))의 경험적 누적 분포는 (F_0) 아래에 머물다가 (t)가 1에 가까워짐에 따라 가파르게 증가하는 함수 (F_1(t))에 가까울 것으로 기대됩니다. 실제로는 어떤 귀무 가설이 참인지 모르기 때문에, 우리는 다음과 같은 식에 가까울 것으로 기대되는 경험적 누적 분포를 가진 혼합물만을 관찰하게 됩니다.</p>
@@ -840,7 +816,7 @@ kmax __
   arrange(pvalue) |
   mutate(oneminusp = 1 - pvalue,
          N = n() - row_number())</code></pre>
-<p>alpha = 0.05 jj = round(nrow(awdef) * c(1, 0.5)) slope = with(awdef, diff(N[jj]) / diff(oneminusp[jj])) ggplot(awdef) + geom_point(aes(x = oneminusp, y = N), size = 0.15) + xlab(expression(1-p[i])) + ylab(expression(N(p[i]))) + geom_abline(intercept = 0, slope = slope, col = “red3”) + geom_hline(yintercept = slope, linetype = “dotted”) + geom_vline(xintercept = 1, linetype = “dotted”) + geom_text(x = 0, y = slope, label = paste(round(slope)), hjust = -0.1, vjust = -0.25) __</p>
+<p>alpha = 0.05 jj = round(nrow(awdef) * c(1, 0.5)) slope = with(awdef, diff(N[jj]) / diff(oneminusp[jj])) ggplot(awdef) + geom_point(aes(x = oneminusp, y = N), size = 0.15) + xlab(expression(1-p[i])) + ylab(expression(N(p[i]))) + geom_abline(intercept = 0, slope = slope, col = “red3”) + geom_hline(yintercept = slope, linetype = “dotted”) + geom_vline(xintercept = 1, linetype = “dotted”) + geom_text(x = 0, y = slope, label = paste(round(slope)), hjust = -0.1, vjust = -0.25)</p>
 <p><a href="06-chap_files/figure-html/fig-testing- SchwederSpjotvoll-1.png &quot;그림 6.15: 질문 6.17의 답변에서 설명된 Schweder와 Spjøtvoll 플롯.&quot;"><img src="06-chap_files/figure-html/fig-testing- SchwederSpjotvoll-1.png" class="img-fluid"></a></p>
 <p>그림 6.15: Schweder와 Spjøtvoll 플롯.</p>
 <p><code>awdef</code>에는 22,853개의 행이 있으며, 따라서 이 단순한 추정치에 따르면 22853-17302=5551개의 대립 가설이 존재합니다.</p>
@@ -865,31 +841,25 @@ kmax __
 <p>우리는 그림 6.21의 진단을 위해 (F)의 데이터 버전을 사용할 것입니다.</p>
 <p><strong><a href="https://bioconductor.org/packages/qvalue/">qvalue</a></strong> 와 <strong><a href="https://cran.r-project.org/web/packages/fdrtool/">fdrtool</a></strong> 패키지는 이러한 모델을 데이터에 적합시키는 기능을 제공합니다.</p>
 <pre><code>library("fdrtool")
-ft = fdrtool(awde$pvalue, statistic = "pvalue")__</code></pre>
+ft = fdrtool(awde$pvalue, statistic = "pvalue")</code></pre>
 <p><strong><a href="https://cran.r-project.org/web/packages/fdrtool/">fdrtool</a></strong> 에서는 위에서 우리가 (_0)라고 불렀던 것을 <code>eta0</code>라고 부릅니다:</p>
 <pre><code>ft$param[,"eta0"]
 
 
      eta0 
 0.8822922 </code></pre>
-<p>__</p>
 <p>질문 6.18</p>
 <p>위의 <code>fdrtool</code> 호출로 생성된 플롯들은 무엇을 보여주나요?</p>
-<p>__</p>
 <p>태스크</p>
 <p>리스트 <code>ft</code>의 다른 요소들을 탐색해 보세요.</p>
-<p>__</p>
 <p>질문 6.19</p>
 <p>경험적 베이즈(empirical Bayes) 방법에서 <strong>경험적(empirical)</strong> 은 무엇을 의미하나요?</p>
 <section id="국소-대-전체" class="level3" data-number="8.9.1">
 <h3 data-number="8.9.1" class="anchored" data-anchor-id="국소-대-전체"><span class="header-section-number">8.9.1</span> 6.10.1 국소 대 전체</h3>
 <p>FDR(또는 Fdr)은 집합의 속성입니다. 이는 다중 검정 분석 과정에서 이루어진 기각 전체의 집합에 적용되는 단일 숫자입니다. 대조적으로 fdr은 국소적인 속성입니다. 이는 개별 가설에 적용됩니다. fdr이 밀도 플롯의 (x)축을 따른 각 지점에 대해 계산되었던 반면, Fdr은 빨간색 선의 왼쪽 면적들에 의존했던 그림 6.17을 상기해 보십시오.</p>
-<p>__</p>
 <p>질문 6.20</p>
 <p>경제학에서의 <strong>총비용(total cost)</strong> 과 <strong>한계비용(marginal cost)</strong> 개념을 확인해 보세요. Fdr 및 fdr과의 유사성을 찾을 수 있나요?</p>
-<p>__</p>
 <p>해결책</p>
-<p>__</p>
 <p>(m)개의 제품 세트를 생산하는 생산 공정에서 총비용은 관련된 모든 비용의 합입니다. 제품의 평균 비용은 가상의 수치로, 총비용을 (m)으로 나눈 것입니다. 한계비용은 제품 하나를 추가로 만드는 데 드는 비용이며, 종종 평균 비용과는 매우 다릅니다. 예를 들어, 피아노로 베토벤 소나타 한 곡을 연주하는 법을 배우는 데는 초보자에게 상당한 시간이 걸릴 수 있지만, 그것을 한 번 더 연주하는 데는 비교적 적은 추가 노력이 필요합니다: 즉, 한계비용이 고정비용(따라서 총비용)보다 훨씬 적습니다. 한계비용이 평균 비용보다 높은 경우의 예로는 달리기가 있습니다: 운동화를 신고 나가서 10km를 달리는 것은 대부분의 사람들에게 꽤 견딜 만한(아마도 즐거운) 일이겠지만, 추가로 10km를 더 달릴 때마다 불균형적으로 큰 불쾌감이 더해질 수 있습니다.</p>
 </section>
 <section id="용어" class="level3" data-number="8.9.2">
@@ -901,14 +871,14 @@ ft = fdrtool(awde$pvalue, statistic = "pvalue")__</code></pre>
 <h2 data-number="8.10" class="anchored" data-anchor-id="독립-가설-가중치-부여-independent-hypothesis-weighting"><span class="header-section-number">8.10</span> 6.11 독립 가설 가중치 부여 (Independent hypothesis weighting)</h2>
 <p>지금까지 살펴본 벤자미니-호크버그 방법과 두 그룹 모델은 가설의 <strong>교환 가능성(exchangeability)</strong> 을 암시적으로 가정합니다: 우리가 사용하는 전부는 p-값뿐입니다. 이들 외에 어떠한 추가 정보도 고려하지 않습니다. 이것이 항상 최적인 것은 아니며, 여기서는 이를 개선하는 방법들을 공부할 것입니다.</p>
 <p>예를 들어봅시다. 직관적으로, 더 많은 수의 리드(reads)가 매핑된 유전자의 신호 대 잡음비(signal-to-noise ratio)는 리드가 적은 유전자보다 더 좋을 것이며, 이는 우리 검정의 검정력에 영향을 줄 것입니다. 관측치 전반에 걸친 정규화된 카운트의 평균을 살펴봅시다. <strong><a href="https://bioconductor.org/packages/DESeq2/">DESeq2</a></strong> 패키지에서 이 수치는 <code>baseMean</code>이라 불립니다.</p>
-<pre><code>awde$baseMean[1]__
+<pre><code>awde$baseMean[1]
 
 
 [1] 708.6022
 
 
 cts = counts(aw, normalized = TRUE)[1, ]
-cts __
+cts
 
 
 SRR1039508 SRR1039509 SRR1039512 SRR1039513 SRR1039516 SRR1039517 SRR1039520 
@@ -917,36 +887,34 @@ SRR1039521
   605.6024 
 
 
-mean(cts)__
+mean(cts)
 
 
 [1] 708.6022</code></pre>
 <p>다음으로 유전자 전체에 대한 이 수치의 히스토그램을 생성하고, p-값에 대해 플롯합니다(그림 6.18 및 6.19).</p>
 <pre><code>ggplot(awde, aes(x = asinh(baseMean))) +
-  geom_histogram(bins = 60)__</code></pre>
+  geom_histogram(bins = 60)</code></pre>
 <p><a href="06-chap_files/figure-html/fig-testing-basemean- hist-1.png &quot;그림 6.18: baseMean의 히스토그램. 0에 가까운 값부터 약 330,000까지 넓은 동적 범위를 포괄하고 있음을 알 수 있습니다.&quot;"><img src="06-chap_files/figure-html/fig-testing-basemean- hist-1.png" class="img-fluid"></a></p>
 <p>그림 6.18: <code>baseMean</code>의 히스토그램. 0에 가까운 값부터 약 330,000까지 넓은 동적 범위를 포괄하고 있음을 알 수 있습니다.</p>
 <pre><code>ggplot(awde, aes(x = rank(baseMean), y = -log10(pvalue))) +
   geom_hex(bins = 60) +
-  theme(legend.position = "none")__</code></pre>
+  theme(legend.position = "none")</code></pre>
 <p><a href="06-chap_files/figure-html/fig-testing-basemean- scp-1.png &quot;그림 6.19: baseMean의 순위(rank) 대 p-값의 상용로그 역수(negative logarithm)의 산점도. baseMean 값이 작을 때는 작은 p-값이 나타나지 않습니다. 모든 관측치에 걸친 리드 카운트가 일정 크기 이상인 유전자에 대해서만 차등 발현 검정이 작은 p-값을 내놓을 수 있는 검정력을 갖습니다.&quot;"><img src="06-chap_files/figure-html/fig-testing-basemean- scp-1.png" class="img-fluid"></a></p>
 <p>그림 6.19: <code>baseMean</code>의 순위(rank) 대 p-값의 상용로그 역수(negative logarithm)의 산점도. <code>baseMean</code> 값이 작을 때는 작은 p-값이 나타나지 않습니다. 모든 관측치에 걸친 리드 카운트가 일정 크기 이상인 유전자에 대해서만 차등 발현 검정이 작은 p-값을 내놓을 수 있는 검정력을 갖습니다.</p>
-<p>__</p>
 <p>질문 6.21</p>
 <p>히스토그램에 왜 () 변환을 사용했을까요? 변환을 하지 않았을 때, 로그 변환을 했을 때, 이동된 로그 변환(즉, ((x+)))을 했을 때는 어떤 모습일까요?</p>
-<p>__</p>
 <p>질문 6.22</p>
 <p>산점도에서 왜 p-값에 (-_{10})을 사용했을까요? <code>baseMean</code>에는 왜 순위 변환을 사용했을까요?</p>
 <p>편의상, 우리는 <code>baseMean</code>을 동일한 크기의 6개 그룹에 해당하는 요인 변수 <code>group</code>으로 이산화(discretize)합니다.</p>
 <pre><code>awde = mutate(awde, stratum = cut(baseMean, include.lowest = TRUE,
-  breaks = signif(quantile(baseMean,probs=seq(0,1,length.out=7)),2)))__</code></pre>
+  breaks = signif(quantile(baseMean,probs=seq(0,1,length.out=7)),2)))</code></pre>
 <p>그림 6.20과 6.21에서 우리는 <code>stratum</code>별로 계층화된 p-값의 히스토그램과 ECDF를 봅니다.</p>
 <pre><code>ggplot(awde, aes(x = pvalue)) + facet_wrap( ~ stratum, nrow = 4) +
-  geom_histogram(binwidth = 0.025, boundary = 0)__</code></pre>
+  geom_histogram(binwidth = 0.025, boundary = 0)</code></pre>
 <p><a href="06-chap_files/figure-html/fig-testing-awde-stratified- hist-1.png &quot;그림 6.20: airway 데이터의 p-값 히스토그램. baseMean 값이 증가함에 따라 정의된 동일한 크기의 그룹들로 계층화된 모습.&quot;"><img src="06-chap_files/figure-html/fig-testing-awde-stratified- hist-1.png" class="img-fluid"></a></p>
 <p>그림 6.20: <code>airway</code> 데이터의 p-값 히스토그램. <code>baseMean</code> 값이 증가함에 따라 정의된 동일한 크기의 그룹들로 계층화된 모습.</p>
 <pre><code>ggplot(awde, aes(x = pvalue, col = stratum)) +
-  stat_ecdf(geom = "step") + theme(legend.position = "bottom")__</code></pre>
+  stat_ecdf(geom = "step") + theme(legend.position = "bottom")</code></pre>
 <p><a href="06-chap_files/figure-html/fig-testing-awde-stratified- ecdf-1.png &quot;그림 6.21: 그림 6.20과 동일한 데이터를 ECDF로 표시한 모습.&quot;"><img src="06-chap_files/figure-html/fig-testing-awde-stratified- ecdf-1.png" class="img-fluid"></a></p>
 <p>그림 6.21: 그림 6.20과 동일한 데이터를 ECDF로 표시한 모습.</p>
 <p>이러한 계층(strata)들에 대해 두 그룹 모델을 따로 적합시킨다면, (<em>0)와 (f</em>{})에 대해 상당히 다른 추정치를 얻게 될 것입니다. 가장 낮게 발현된 유전자들의 경우 <strong><a href="https://bioconductor.org/packages/DESeq2/">DESeq2</a></strong> 검정의 검정력이 낮으며, p-값들은 본질적으로 모두 귀무(null) 성분에서 나옵니다. 평균 발현량이 높아질수록 히스토그램에서 작은 p-값 정점의 높이가 높아지는데, 이는 검정의 검정력이 증가함을 반영합니다.</p>
@@ -954,23 +922,22 @@ mean(cts)__
 <p>22 이 외에도 여러 접근 방식이 있습니다. 예를 들어 Korthauer 등 (<a href="16-chap.html#ref-Korthauer:GB:2019">2019</a>)의 벤치마크 연구나 Ignatiadis와 Huber (<a href="16-chap.html#ref-Ignatiadis:JRSSB:2021">2021</a>) 논문의 인용 문헌들을 참조하십시오.</p>
 <pre><code>library("IHW")
 ihw_res = ihw(awde$pvalue, awde$baseMean, alpha = 0.1)
-rejections(ihw_res)__
+rejections(ihw_res)
 
 
 [1] 4892</code></pre>
 <p>이를 일반적인 (가중치를 부여하지 않은) 벤자미니-호크버그 방법과 비교해 봅시다:</p>
 <pre><code>padj_BH = p.adjust(awde$pvalue, method = "BH")
-sum(padj_BH &lt; 0.1)__
+sum(padj_BH &lt; 0.1)
 
 
 [1] 4099</code></pre>
 <p>가설 가중치를 사용하면 더 많은 기각(rejections)을 얻습니다. 이 데이터의 경우 차이가 두드러지긴 하지만 극적이진 않은데, 이는 이미 신호 대 잡음비가 꽤 높기 때문입니다. 처음부터 검정력이 낮은 다른 상황(예: 반복 수가 적거나, 데이터에 노이즈가 더 많거나, 처리 효과가 덜 급격한 경우)에서는 IHW를 사용하는 효과가 더 뚜렷할 수 있습니다.</p>
 <p><code>ihw</code> 함수에 의해 결정된 가중치들을 살펴볼 수 있습니다(그림 6.22).</p>
-<pre><code>plot(ihw_res)__</code></pre>
+<pre><code>plot(ihw_res)</code></pre>
 <p><a href="06-chap_files/figure-html/fig-testing- ihwplot-1.png &quot;그림 6.22: ihw 함수에 의해 결정된 가설 가중치. 여기서 함수의 기본 설정은 22개의 계층(strata)을 선택한 반면, 위에서의 수동 탐색(그림 6.20, 6.21)에서는 6개를 사용했습니다. 실제로는 이는 사소한 세부 사항입니다.&quot;"><img src="06-chap_files/figure-html/fig-testing- ihwplot-1.png" class="img-fluid"></a></p>
 <p>그림 6.22: <code>ihw</code> 함수에 의해 결정된 가설 가중치. 여기서 함수의 기본 설정은 22개의 계층(strata)을 선택한 반면, 위에서의 수동 탐색(그림 6.20, 6.21)에서는 6개를 사용했습니다. 실제로는 이는 사소한 세부 사항입니다.</p>
 <p>직관적으로 여기서 일어나는 일은, IHW가 <code>baseMean</code>이 높은 가설 계층에 더 많은 가중치를 부여하고, 카운트가 매우 낮은 계층에는 낮은 가중치를 부여하기로 선택한 것입니다. 벤자미니-호크버그 방법은 특정한 제1종 오류 예산을 가지고 있는데, 이를 모든 가설에 똑같이 분배하는 대신, 여기서는 어차피 작은 fdr을 가질 가능성이 거의 없는 계층에서 예산을 가져와 많은 가설이 작은 fdr에서 기각될 수 있는 계층에 “투자”하는 것입니다.</p>
-<p>__</p>
 <p>질문 6.23</p>
 <p>왜 그림 6.22는 하나의 곡선이 아니라 5개의 곡선을 보여주나요?</p>
 <p>p-값 외에 추가적인 요약 통계량(우리의 경우 <code>baseMean</code>)에 의한 계층화 가능성은 많은 다중 검정 상황에서 존재합니다. 비공식적으로 말하자면, 우리는 그러한 이른바 <strong>공변량(covariate)</strong> 이 다음과 같아야 합니다:</p>
@@ -997,25 +964,18 @@ sum(padj_BH &lt; 0.1)__
 </section>
 <section id="연습-문제" class="level2" data-number="8.13">
 <h2 data-number="8.13" class="anchored" data-anchor-id="연습-문제"><span class="header-section-number">8.13</span> 6.14 연습 문제</h2>
-<p>__</p>
 <p>연습 문제 6.1</p>
 <p>여러분의 과학적 전문 분야에서 다중 검정에 의존하는 응용 사례를 하나 찾아보십시오. 전형적인 데이터 세트를 찾아 p-값 히스토그램을 그려보세요. 가설들이 모두 교환 가능한가요, 아니면 하나 이상의 정보성 공변량이 있나요? 계층화된 히스토그램을 그려보세요.</p>
-<p>__</p>
 <p>연습 문제</p>
 <p>수리 통계학자들은 대립 가설에 비해 왜 검정의 귀무 가설에 그렇게 많이 집중할까요?</p>
-<p>__</p>
 <p>연습 문제 6.2</p>
 <p>우리는 어떻게 귀무 가설이 참임을 증명할 수 있을까요? 아니면 대립 가설이 참임을요?</p>
-<p>__</p>
 <p>연습 문제 6.3</p>
 <p>6.5절 끝부분의 데이터 복제보다 덜 극단적인 상관된 검정 통계량의 예를 만들어 보세요. 오직 참인 귀무 가설들로만 데이터를 시뮬레이션하고, 어떤 연속형 제어 매개변수의 함수로서 데이터가 완전히 독립적인 반복(열)에서 고도로 상관된 상태로 변하도록 만드십시오. 이 제어 매개변수의 함수로서 (예를 들어 p-값 히스토그램을 통해) 제1종 오류 제어를 확인해 보세요.</p>
-<p>__</p>
 <p>연습 문제 6.4</p>
 <p>발표된 문헌 중에서 p-값 해킹, 결과 전환, HARKing이 작용한 것처럼 보이는 사례를 하나 찾아보십시오.</p>
-<p>__</p>
 <p>연습 문제 6.5</p>
 <p>FDR은 기댓값(expectation value)입니다. 즉, 절차의 평균적인 거동을 제어하고 싶을 때 사용됩니다. 최악의 경우(worst case)를 제어하기 위한 방법들이 있을까요?</p>
-<p>__</p>
 <p>연습 문제 6.6</p>
 <p>벤자미니-호크버그 알고리즘의 메모리 및 시간 복잡도는 얼마인가요? IHW 방법은 어떤가요? 검정의 수 (m)의 함수로서 다항 함수를 적합시킬 수 있나요? 힌트: 가설 검정의 수를 늘려가며 데이터를 시뮬레이션하고, <code>pryr::object_size</code>나 동명의 패키지에 있는 <code>microbenchmark</code>와 같은 함수를 사용하여 시간 및 메모리 소비를 측정하고, 이들을 이중 로그 플롯(double-logarithmic plot)에서 (m)에 대해 플롯해 보세요.</p>
 <p>Altman, Naomi, and Martin Krzywinski. 2017. “Points of Significance: Interpreting p Values.” <em>Nature Methods</em> 14 (3): 213–14. <a href="https://doi.org/10.1038/nmeth.4210" class="uri">https://doi.org/10.1038/nmeth.4210</a>.</p>
@@ -1436,13 +1396,13 @@ sum(padj_BH &lt; 0.1)__
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./05-chap.html" class="pagination-link" aria-label="5.2 데이터란 무엇이며 왜 군집화하는가?">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">5.2 데이터란 무엇이며 왜 군집화하는가?</span></span>
+      <a href="./05-chap.html" class="pagination-link" aria-label="군집화 (Clustering)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">군집화 (Clustering)</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./07-chap.html" class="pagination-link" aria-label="7.2 데이터란 무엇인가? 행렬과 그 동기">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">7.2 데이터란 무엇인가? 행렬과 그 동기</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./07-chap.html" class="pagination-link" aria-label="다변량 분석 (Multivariate Analysis)">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">다변량 분석 (Multivariate Analysis)</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
