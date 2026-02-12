@@ -52,7 +52,7 @@
 
 그림 12.2: 지도 학습에서 우리는 변수에 두 가지 다른 역할을 부여합니다. 설명 변수를 \(X\), 반응 변수(들)를 \(Y\)라고 라벨링했습니다. 또한 두 가지 다른 관측값 세트가 있습니다: 훈련 세트 \(X_\ell\)과 \(Y_\ell\), 그리고 테스트 세트 \(X_v\)와 \(Y_v\). (아래첨자는 두 세트의 다른 이름인 “learning”과 “validation”을 나타냅니다.)
 
-__
+
 
 일
 
@@ -67,7 +67,7 @@ __
     
     
     data("diabetes", package = "rrcov")
-    head(diabetes)__
+    head(diabetes)
     
     
         rw fpg glucose insulin sspg  group
@@ -85,7 +85,7 @@ __
     library("reshape2")
     ggplot(melt(diabetes, id.vars = "group"), aes(x = value, col = group)) +
      geom_density() + facet_wrap( ~variable, ncol = 1, scales = "free") +
-     theme(legend.position = "bottom")__
+     theme(legend.position = "bottom")
 
 [![](12-chap_files/figure-html/fig-ldagroups-1-1.png)](12-chap_files/figure-html/fig-ldagroups-1-1.png "그림 12.3: 1차원 분포에서 이미 개별 변수 중 일부가 환자가 어떤 그룹에 속할 가능성이 높은지 잠재적으로 예측할 수 있음을 알 수 있습니다. 우리의 목표는 변수들을 결합하여 이러한 1차원 예측 모델보다 개선하는 것입니다.")
 
@@ -109,7 +109,7 @@ __
 
 Neumann 등([2010](16-chap.html#ref-Neumann:2010))은 라이브 셀 이미징(live-cell imaging)을 사용하여 인간 암세포를 관찰했습니다. 세포의 히스톤이 녹색 형광 단백질(GFP)로 태그되도록 유전적으로 조작되었습니다. 게놈 전체 RNAi 라이브러리를 세포에 적용했고, 각 siRNA 교란에 대해 며칠 동안 수백 개의 세포 영상을 기록하여 각 유전자의 고갈이 세포 주기, 핵 형태 및 세포 증식에 어떤 영향을 미치는지 확인했습니다. 그들의 논문은 각 세포 핵의 시각적 외관을 정량화하고 정상적인 유사 분열 상태 또는 비정상적인 핵을 예측할 수 있게 해주는 자동화된 이미지 분류 알고리즘의 사용을 보고합니다. 이 알고리즘은 인간 전문가가 주석을 단 약 3000개의 세포 데이터로 훈련되었습니다. 그런 다음 거의 20억 개의 핵 이미지에 적용되었습니다(그림 12.4). 자동화된 이미지 분류를 사용하여 확장성(20억 개의 이미지를 수동으로 주석 처리하는 데는 오랜 시간이 걸릴 것입니다)과 객관성을 제공했습니다.
 
-[![](imgs/Neumann2010Fig1b_web.jpg)](imgs/Neumann2010Fig1b_web.jpg "그림 12.4: 데이터는 영상에서 나온 2\times10^9핵의 이미지였습니다. 이미지는 핵을 식별하기 위해 분할되었고, 각 핵에 대해 크기, 모양, 밝기 및 픽셀 강도의 결합 분포에 대한 다소 추상적인 정량적 요약에 해당하는 수치 특징이 계산되었습니다. 특징으로부터 세포는 16가지 다른 핵 형태 클래스로 분류되었으며, 막대 그래프의 행으로 표시됩니다. 각 클래스에 대한 대표 이미지는 가운데 열에 흑백으로 표시됩니다. 클래스 빈도는 막대의 길이로 표시되며 매우 불균형합니다.")
+[![](imgs/Neumann2010Fig1b_web.jpg)](imgs/Neumann2010Fig1b_web.jpg "그림 12.4: 데이터는 영상에서 나온 \(2\times10^9\)개 핵의 이미지였습니다. 이미지는 핵을 식별하기 위해 분할되었고, 각 핵에 대해 크기, 모양, 밝기 및 픽셀 강도의 결합 분포에 대한 다소 추상적인 정량적 요약에 해당하는 수치 특징이 계산되었습니다. 특징으로부터 세포는 16가지 다른 핵 형태 클래스로 분류되었으며, 막대 그래프의 행으로 표시됩니다. 각 클래스에 대한 대표 이미지는 가운데 열에 흑백으로 표시됩니다. 클래스 빈도는 막대의 길이로 표시되며 매우 불균형합니다.")
 
 그림 12.4: 데이터는 영상에서 나온 \(2\times10^9\)개 핵의 이미지였습니다. 이미지는 핵을 식별하기 위해 분할되었고, 각 핵에 대해 크기, 모양, 밝기 및 픽셀 강도의 결합 분포에 대한 다소 추상적인 정량적 요약에 해당하는 수치 특징이 계산되었습니다. 특징으로부터 세포는 16가지 다른 핵 형태 클래스로 분류되었으며, 막대 그래프의 행으로 표시됩니다. 각 클래스에 대한 대표 이미지는 가운데 열에 흑백으로 표시됩니다. 클래스 빈도는 막대의 길이로 표시되며 매우 불균형합니다.
 
@@ -131,7 +131,7 @@ Neumann 등([2010](16-chap.html#ref-Neumann:2010))은 라이브 셀 이미징(li
     
     ggdb = ggplot(mapping = aes(x = sspg, y = glucose)) +
       geom_point(aes(colour = group), data = diabetes)
-    ggdb __
+    ggdb
 
 [![](12-chap_files/figure-html/fig-scatterdiabetes-1-1.png)](12-chap_files/figure-html/fig-scatterdiabetes-1-1.png "그림 12.5: 당뇨병 데이터의 두 변수에 대한 산점도. 각 점은 샘플이며, 색상은 group 변수에 인코딩된 당뇨병 유형을 나타냅니다.")
 
@@ -143,7 +143,7 @@ Neumann 등([2010](16-chap.html#ref-Neumann:2010))은 라이브 셀 이미징(li
     
     library("MASS")
     diabetes_lda = lda(group ~ sspg + glucose, data = diabetes)
-    diabetes_lda __
+    diabetes_lda
     
     
     Call:
@@ -170,7 +170,7 @@ Neumann 등([2010](16-chap.html#ref-Neumann:2010))은 라이브 셀 이미징(li
     
     
     ghat = predict(diabetes_lda)$class
-    table(ghat, diabetes$group)__
+    table(ghat, diabetes$group)
     
     
               
@@ -180,12 +180,12 @@ Neumann 등([2010](16-chap.html#ref-Neumann:2010))은 라이브 셀 이미징(li
       overt         0        0    26
     
     
-    mean(ghat != diabetes$group)__
+    mean(ghat != diabetes$group)
     
     
     [1] 0.1793103
 
-__
+
 
 질문 12.1
 
@@ -198,7 +198,7 @@ __
     make1Dgrid = function(x) {
       rg = grDevices::extendrange(x)
       seq(from = rg[1], to = rg[2], length.out = 100)
-    }__
+    }
 
 데이터 범위를 커버하는 \(100 \times 100\) 그리드인 예측용 점들을 설정합니다.
 
@@ -213,13 +213,13 @@ __
     
     
     diabetes_grid$ghat =
-      predict(diabetes_lda, newdata = diabetes_grid)$class __
+      predict(diabetes_lda, newdata = diabetes_grid)$class
 
 그룹 중심입니다.
 
     
     
-    centers = diabetes_lda$means __
+    centers = diabetes_lda$means
 
 타원을 계산합니다. 단위원(360개의 변을 가진 다각형으로 근사)에서 시작하여 LDA 출력의 해당 아핀 변환(affine transformation)을 적용합니다.
 
@@ -227,7 +227,7 @@ __
     
     unitcircle = exp(1i * seq(0, 2*pi, length.out = 360)) |>
               (\(z) cbind(Re(z), Im(z)))() 
-    ellipse = unitcircle %*% solve(diabetes_lda$scaling) |> as_tibble()__
+    ellipse = unitcircle %*% solve(diabetes_lda$scaling) |> as_tibble()
 
 세 개의 타원 모두, 각 그룹 중심에 하나씩입니다.
 
@@ -239,7 +239,7 @@ __
          sspg    = sspg    + centers[gr, "sspg"],
          glucose = glucose + centers[gr, "glucose"],
          group   = gr)
-    }) |> bind_rows()__
+    }) |> bind_rows()
 
 이제 그릴 준비가 되었습니다 (그림 12.6).
 
@@ -250,51 +250,51 @@ __
         geom_point(data = as_tibble(centers), pch = "+", size = 8) +
         geom_path(aes(colour = group), data = ellipses) +
         scale_x_continuous(expand = c(0, 0)) +
-        scale_y_continuous(expand = c(0, 0))__
+        scale_y_continuous(expand = c(0, 0))
 
 [![](12-chap_files/figure-html/fig-modeldiabetes-1-1.png)](12-chap_files/figure-html/fig-modeldiabetes-1-1.png "그림 12.6: 그림 12.5와 동일하지만, LDA 모델의 분류 영역이 표시되어 있습니다. 세 개의 타원은 클래스 중심과 LDA 모델의 공분산 행렬을 나타냅니다. 공분산 행렬은 단 하나뿐이며 세 클래스 모두에 대해 동일하다는 점에 유의하십시오. 따라서 타원의 크기와 방향도 세 클래스 모두에 대해 동일하며 중심만 다릅니다. 이들은 동일한 클래스 멤버십 확률의 등고선을 나타냅니다.")
 
 그림 12.6: 그림 12.5와 동일하지만, LDA 모델의 분류 영역이 표시되어 있습니다. 세 개의 타원은 클래스 중심과 LDA 모델의 공분산 행렬을 나타냅니다. 공분산 행렬은 단 하나뿐이며 세 클래스 모두에 대해 동일하다는 점에 유의하십시오. 따라서 타원의 크기와 방향도 세 클래스 모두에 대해 동일하며 중심만 다릅니다. 이들은 동일한 클래스 멤버십 확률의 등고선을 나타냅니다.
 
-__
+
 
 질문 12.2
 
 _chemical_ 과 _overt_ 사이의 예측 영역 경계가 그룹 중심 사이의 선과 수직이 아닌 이유는 무엇입니까?
 
-__
+
 
 해결책
 
-__
+
 
 타원이 원이라면 경계는 수직일 것입니다. 일반적으로 경계는 동일 클래스 확률의 등고선에 접하며, 등고선의 타원 형태로 인해 경계는 일반적으로 중심 사이의 선과 수직이 아닙니다.
 
-__
+
 
 질문 12.3
 
 모든 군집 중심에서 멀리 떨어진 2D 평면 영역에서의 예측에 대해 얼마나 확신할 수 있습니까?
 
-__
+
 
 해결책
 
-__
+
 
 어떤 군집 중심에서도 멀리 떨어진 예측은 비판적으로 평가해야 합니다. 이는 LDA 모델이 좋지 않을 수 있거나 예측을 뒷받침할 훈련 데이터가 근처에 없을 수 있는 영역으로의 외삽(extrapolation)에 해당하기 때문입니다. 가장 가까운 중심까지의 거리를 특정 지점에 대한 예측 신뢰도의 척도로 사용할 수 있습니다. 그러나 리샘플링 및 교차 검증 기반 방법이 더 일반적이고 보통 더 신뢰할 수 있는 척도를 제공한다는 것을 보게 될 것입니다.
 
-__
+
 
 질문 12.4
 
 _normal_ 과 _chemical_ 사이의 예측 영역 경계가 중심 사이의 중간이 아니라 _normal_ 에 유리하게 이동된 이유는 무엇입니까? 힌트: `lda`의 `prior` 인수를 살펴보세요. 균일 사전 확률(uniform prior)로 다시 시도해 보세요.
 
-__
+
 
 해결책
 
-__
+
 
 다음 코드 청크의 결과는 그림 12.7에 나와 있습니다. 접미사 `_up`은 "uniform prior"의 줄임말입니다.
 
@@ -321,7 +321,7 @@ __
         geom_point(data = data.frame(centers), pch = "+", size = 8) +
         geom_path(aes(colour = group), data = ellipses_up) +
         scale_x_continuous(expand = c(0, 0)) +
-        scale_y_continuous(expand = c(0, 0))__
+        scale_y_continuous(expand = c(0, 0))
 
 [![](12-chap_files/figure-html/fig-diabetes-lda-uniform-prior-1-1.png)](12-chap_files/figure-html/fig-diabetes-lda-uniform-prior-1-1.png "그림 12.7: 그림 12.6과 동일하지만, 균일 클래스 사전 확률을 사용했습니다.")
 
@@ -329,36 +329,36 @@ __
 
 `stopifnot` 라인은 클래스 중심이 사전 확률과 독립적이기 때문에 동일함을 확인해 줍니다. 결합 공분산은 그렇지 않습니다.
 
-__
+
 
 질문 12.5
 
 그림 12.6과 12.7은 타원을 통한 적합된 LDA 모델과 영역 색칠을 통한 예측 영역을 모두 보여줍니다. 이 시각화의 어떤 부분이 모든 종류의 분류 방법에 대해 일반적이며, 어떤 부분이 방법 특정적입니까?
 
-__
+
 
 해결책
 
-__
+
 
 예측 영역은 "블랙박스" 방법을 포함한 모든 분류 방법에 대해 표시될 수 있습니다. 그림 12.6과 12.7의 군집 중심과 타원은 방법 특정적입니다.
 
-__
+
 
 질문 12.6
 
 `glucose`와 `sspg`만 사용하는 대신 5개의 변수를 모두 사용하면 예측 정확도에 어떤 차이가 있습니까?
 
-__
+
 
 해결책
 
-__
+
 
     
     
     diabetes_lda5 = lda(group ~ rw + fpg + glucose + sspg + insulin, data = diabetes)
-    diabetes_lda5 __
+    diabetes_lda5
     
     
     Call:
@@ -388,7 +388,7 @@ __
     
     
     ghat5 = predict(diabetes_lda5)$class
-    table(ghat5, diabetes$group)__
+    table(ghat5, diabetes$group)
     
     
               
@@ -398,21 +398,21 @@ __
       overt         0        0    27
     
     
-    mean(ghat5 != diabetes$group)__
+    mean(ghat5 != diabetes$group)
     
     
     [1] 0.09655172
 
-__
+
 
 Question 12.7
 
 점 그리드로부터 분류하여 예측 영역을 근사하는 대신, 선형 판별 계수로부터 구분선을 명시적으로 계산하세요.
 
-__
+
 
 Solution
 
-__
+
 
 ([Hastie, Tibshirani, and Friedman 2008](16-chap.html#ref-HastieTibshiraniFriedman))의 4.3절, 식 (4.10)을 참조하십시오.

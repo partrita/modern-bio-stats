@@ -59,7 +59,7 @@
     
     
     load("../data/e100.RData")
-    e99 = e100[-which.max(e100)]__
+    e99 = e100[-which.max(e100)]
 
 #### 적합도(Goodness-of-fit) : 시각적 평가
 
@@ -67,7 +67,7 @@
 
     
     
-    barplot(table(e99), space = 0.8, col = "chartreuse4")__
+    barplot(table(e99), space = 0.8, col = "chartreuse4")
 
 [![](02-chap_files/figure-html/fig-twopoisson-1.png)](02-chap_files/figure-
 html/fig-twopoisson-1.png "그림 2.2: 이상치를 제외한 에피토프 데이터의 관찰된 분포.")
@@ -80,30 +80,30 @@ html/fig-twopoisson-1.png "그림 2.2: 이상치를 제외한 에피토프 데�
     
     library("vcd")
     gf1 = goodfit( e99, "poisson")
-    rootogram(gf1, xlab = "", rect_gp = gpar(fill = "chartreuse4"))__
+    rootogram(gf1, xlab = "", rect_gp = gpar(fill = "chartreuse4"))
 
 [![](02-chap_files/figure-html/fig-stat-rooto-1.png)](02-chap_files/figure-
 html/fig-stat-rooto-1.png "그림 2.3: 이론적 값의 제곱근을 빨간색 점으로 표시하고 관측 빈도의 제곱근을 아래로 내려온 직사각형으로 표시한 루토그램. (아래에서 goodfit 함수가 어떤 \(\lambda\)를 사용하기로 결정했는지 살펴보겠습니다.)")
 
 그림 2.3: 이론적 값의 제곱근을 빨간색 점으로 표시하고 관측 빈도의 제곱근을 아래로 내려온 직사각형으로 표시한 루토그램. (`goodfit` 함수가 어떤 \(\lambda\)를 사용하기로 결정했는지 아래에서 좀 더 살펴보겠습니다.)
 
-__
+
 
 질문 2.1
 
 알려진 푸아송 변수를 사용하여 그러한 플롯이 어떻게 보이는지 확인하기 위해, \(\lambda\) = 0.05인 `rpois`를 사용하여 100개의 푸아송 분포 숫자를 생성하고 그 루토그램을 그려보세요.
 
-__
+
 
 해결책
 
-__
+
 
     
     
     simp = rpois(100, lambda = 0.05)
     gf2 = goodfit(simp, "poisson")
-    rootogram(gf2, xlab = "")__
+    rootogram(gf2, xlab = "")
 
 우리는 `e99`에 대한 루토그램이 푸아송 모델에 상당히 잘 맞는 것으로 보임을 알 수 있습니다. 하지만 이를 위해 우리가 이상치를 제거했다는 점을 기억하세요. 푸아송 분포는 흔히 푸아송 평균이라 불리는 하나의 매개변수 \(\lambda\)에 의해 완전히 결정됩니다. 데이터가 푸아송 분포를 따른다고 추측할 수 있는 대부분의 경우, 우리는 데이터로부터 푸아송 매개변수를 추정해야 할 것입니다.
 
@@ -121,7 +121,7 @@ __
 
     
     
-    table(e100)__
+    table(e100)
     
     
     e100
@@ -132,7 +132,7 @@ __
 
     
     
-    table(rpois(100, 3))__
+    table(rpois(100, 3))
     
     
      0  1  2  3  4  5  6  7 
@@ -140,7 +140,7 @@ __
 
 이는 우리 데이터에서 보는 것보다 훨씬 더 많은 2와 3을 포함하고 있습니다. 따라서 카운트가 잘 일치하지 않으므로 \(\lambda=3\)이 우리 데이터를 생성했을 가능성은 낮다는 것을 알 수 있습니다.
 
-__
+
 
 질문 2.2
 
@@ -148,8 +148,7 @@ __
 
 그래서 우리는 많은 가능한 값들을 시도해 보고 무차별 대입(brute force)으로 진행할 수 있습니다. 하지만 우리는 좀 더 우아한 작업을 수행하여, 어떤 값이 우리 데이터를 관찰할 확률을 최대화하는지 확인하기 위해 약간의 수학을 사용할 것입니다. 푸아송 매개변수의 값이 \(m\)일 때 데이터를 볼 확률을 계산해 봅시다. 데이터가 독립적인 추출로부터 유도되었다고 가정하므로, 이 확률은 단순히 개별 확률들의 곱입니다:
 
-\[\begin{equation*}\begin{aligned}
-P(58 \times 0, 34 \times 1, 7 \times 2, \text{one }7 \;|\; \text{데이터가 푸아송}(m)\text{임}) = P(0)^{58}\times P(1)^{34}\times P(2)^{7}\times P(7)^{1}.\end{aligned} \end{equation*}\]
+\[ P(58 \times 0, 34 \times 1, 7 \times 2, \text{one }7 \;|\; \text{데이터가 푸아송}(m)\text{임}) = P(0)^{58}\times P(1)^{34}\times P(2)^{7}\times P(7)^{1}. \]
 
 \(m=3\)에 대해 이를 계산할 수 있습니다2.
 
@@ -157,26 +156,26 @@ P(58 \times 0, 34 \times 1, 7 \times 2, \text{one }7 \;|\; \text{데이터가 �
 
     
     
-    prod(dpois(c(0, 1, 2, 7), lambda = 3) ^ (c(58, 34, 7, 1)))__
+    prod(dpois(c(0, 1, 2, 7), lambda = 3) ^ (c(58, 34, 7, 1)))
     
     
     [1] 1.392143e-110
 
-__
+
 
 질문 2.3
 
 위와 같이 \(m=0, 1, 2\)에 대해 확률을 계산하세요. \(m\)은 반드시 정수여야 하나요? 예를 들어 \(m=0.4\)에 대한 확률을 계산해 보세요.
 
-__
+
 
 해결책
 
-__
+
 
     
     
-    prod(dpois(c(0, 1, 2, 7), lambda = 0.4) ^ (c(58, 34, 7, 1)))__
+    prod(dpois(c(0, 1, 2, 7), lambda = 0.4) ^ (c(58, 34, 7, 1)))
     
     
     [1] 8.5483e-46
@@ -199,7 +198,7 @@ __
     
     loglikelihood  =  function(lambda, data = e100) {
       sum(log(dpois(data, lambda)))
-    }__
+    }
 
 이제 0.05부터 0.95까지 일련의 `lambda` 값들에 대해 우도를 계산할 수 있습니다 (그림 2.4).
 
@@ -212,7 +211,7 @@ __
     m0 = mean(e100)
     abline(v = m0, col = "blue", lwd = 2)
     abline(h = loglikelihood(m0), col = "purple", lwd = 2)
-    m0 __
+    m0
     
     
     [1] 0.55
@@ -222,17 +221,17 @@ html/fig-poislikel-1-1.png "그림 2.4: 빨간색 곡선은 로그 우도 함수
 
 그림 2.4: 빨간색 곡선은 로그 우도 함수입니다. 수직선은 `m`(평균) 값을 보여주고 가로선은 `m`의 로그 우도를 보여줍니다. `m`이 우도를 최대화하는 것으로 보입니다.
 
-__
+
 
 질문 2.4
 
 위의 코드에서 `vapply` 함수는 무엇을 하나요? 힌트: 매뉴얼 페이지를 확인하세요.
 
-__
+
 
 해결책
 
-__
+
 
 `vapply`는 첫 번째 인수(이 경우 벡터 `lambdas`)를 가져와서, 각 벡터 요소에 대해 반복적으로 `loglikelihood` 함수(두 번째 인수)를 적용합니다. 결과적으로 결과값들의 벡터를 반환합니다. 이 함수는 또한 `loglikelihood`에 대한 각 개별 호출이 어떤 유형의 값을 반환할 것으로 기대되는지를 지정하는 세 번째 인수(이 경우 `numeric(1)`)를 필요로 합니다: 즉, 단일 숫자입니다. (일반적으로 함수가 때때로 문자열이나 두 개의 숫자와 같은 다른 것을 반환할 수도 있는데, 그럴 경우 전체 결과들을 일관된 하나의 벡터로 조립할 수 없으며 `vapply`가 오류를 발생시킵니다.)
 
@@ -241,13 +240,13 @@ __
     
     
     gf  =  goodfit(e100, "poisson")
-    names(gf)__
+    names(gf)
     
     
     [1] "observed" "count"    "fitted"   "type"     "method"   "df"       "par"     
     
     
-    gf$par __
+    gf$par
     
     
     $lambda
@@ -255,13 +254,13 @@ __
 
 `goodfit`의 출력은 리스트(list)라 불리는 복합 객체입니다. 그 구성 요소 중 하나는 `par`라고 불리며, 연구된 분포에 대해 적합된 매개변수(들)의 값을 포함합니다. 이 경우에는 \(\lambda\)에 대한 추정치인 단 하나의 숫자뿐입니다.
 
-__
+
 
 질문 2.5
 
 `goodfit` 함수의 출력에 있는 다른 구성 요소들은 무엇인가요?
 
-__
+
 
 태스크
 
@@ -281,17 +280,17 @@ __
 
 전통적인 **통계적 검정(statistical testing)** 프레임워크에서, 우리는 데이터에 대해 **귀무 모델(null model)**이라 불리는 단 하나의 모델을 고려합니다. 귀무 모델은 어떤 그룹이나 처리에 관계없이 모든 관측치가 동일한 무작위 분포로부터 온다는 것과 같은 "흥미롭지 않은" 기준선을 공식화합니다. 그런 다음 데이터가 그 모델과 호환될 확률을 계산함으로써 좀 더 흥미로운 일이 일어나고 있는지 테스트합니다. 종종 이것이 우리가 할 수 있는 최선인데, 왜냐하면 우리는 "흥미로운" 비귀무(non-null) 또는 대립 모델이 무엇인지 충분히 자세히 알지 못하기 때문입니다. 다른 상황에서는 나중에 보게 되겠지만 우리가 서로 비교할 수 있는 두 개의 경쟁 모델을 가집니다.
 
-__
+
 
 질문 2.6
 
 알려진 분포를 사용하여 모델링하는 것의 가치는 무엇인가요? 예를 들어, 어떤 변수가 푸아송 분포를 가진다는 것을 아는 것이 왜 흥미로울까요?
 
-__
+
 
 해결책
 
-__
+
 
 모델은 데이터 생성 과정을 간결하면서도 표현력 있게 나타낸 것입니다. 예를 들어 푸아송 분포의 경우, 숫자 하나만 알면 우리가 앞서 보았듯이 극단적이거나 희귀한 사건의 확률을 포함하여 그 분포에 대한 모든 것을 알 수 있습니다.
 
@@ -309,30 +308,30 @@ __
 
     
     
-    table(cb)__
+    table(cb)
     
     
     cb
       0   1 
     110  10 
 
-__
+
 
 질문 2.7
 
 이 데이터가 주어졌을 때 가장 발생 가능성이 높은 \(p\) 값은 무엇인가요?
 
-__
+
 
 해결책
 
-__
+
 
 \(\hat{p}=\frac{1}{12}\)입니다.
 
     
     
-    mean(cb)__
+    mean(cb)
     
     
     [1] 0.08333333
@@ -351,7 +350,7 @@ __
     likelihood = dbinom(sum(cb), prob = probs, size = length(cb))
     plot(probs, likelihood, pch = 16, xlab = "성공 확률",
            ylab = "우도", cex=0.6)
-    probs[which.max(likelihood)]__
+    probs[which.max(likelihood)]
     
     
     [1] 0.085
@@ -385,14 +384,14 @@ html/fig-likely1-1-1.png "그림 2.5: 확률의 함수로서의 우도 플롯. �
     
     loglikelihood = function(p, n = 300, y = 40) {
       log(choose(n, y)) + y * log(p) + (n - y) * log(1 - p)
-    }__
+    }
 
 0부터 1까지의 \(p\) 범위에 대해 이를 플롯해 봅니다 (그림 2.6).
 
     
     
     p_seq = seq(0, 1, by = 0.001)
-    plot(p_seq, loglikelihood(p_seq), xlab = "p", ylab = "log f(p|y)", type = "l")__
+    plot(p_seq, loglikelihood(p_seq), xlab = "p", ylab = "log f(p|y)", type = "l")
 
 [![](02-chap_files/figure-html/fig-
 loglikelihood-1-1.png)](02-chap_files/figure-html/fig-loglikelihood-1-1.png
@@ -415,13 +414,13 @@ DNA에는 아데닌(A), 시토신(C), 구아닌(G), 티민(T)의 네 가지 기�
     
     
     library("Biostrings")
-    staph = readDNAStringSet("../data/staphsequence.ffn.txt", "fasta")__
+    staph = readDNAStringSet("../data/staphsequence.ffn.txt", "fasta")
 
 첫 번째 유전자를 살펴봅시다:
 
     
     
-    staph[1]__
+    staph[1]
     
     
     DNAStringSet object of length 1:
@@ -429,27 +428,27 @@ DNA에는 아데닌(A), 시토신(C), 구아닌(G), 티민(T)의 네 가지 기�
     [1]  1362 ATGTCGGAAAAAGAAATTTGGGA...AAAAAGAAATAAGAAATGTATAA lcl|NC_002952.2_c...
     
     
-    letterFrequency(staph[[1]], letters = "ACGT", OR = 0)__
+    letterFrequency(staph[[1]], letters = "ACGT", OR = 0)
     
     
       A   C   G   T 
     522 219 229 392 
 
-__
+
 
 질문 2.8
 
 왜 두 번째 줄에서 이중 대괄호를 사용했나요?
 
-__
+
 
 해결책
 
-__
+
 
 이중 대괄호 `[[i]]`는 `i`번째 유전자의 서열을 단일 _DNAString_ 으로 추출하는 반면, 한 쌍의 단일 대괄호 `[i]`는 그 안에 단일 _DNAString_ 이 들어있는 _DNAStringSet_ 을 반환합니다. 만약 `staph[1]`의 길이를 보면 1인 반면, `staph[[1]]`의 길이는 1362입니다.
 
-__
+
 
 질문 2.9
 
@@ -465,7 +464,7 @@ __
     tab10 = letterFrq[, 1:10]
     computeProportions = function(x) { x/sum(x) }
     prop10 = apply(tab10, 2, computeProportions)
-    round(prop10, digits = 2)__
+    round(prop10, digits = 2)
     
     
       gene1 gene2 gene3 gene4 gene5 gene6 gene7 gene8 gene9 gene10
@@ -476,7 +475,7 @@ __
     
     
     p0 = rowMeans(prop10)
-    p0 __
+    p0
     
     
             A         C         G         T 
@@ -489,7 +488,7 @@ __
     
     
     cs = colSums(tab10)
-    cs __
+    cs
     
     
      gene1  gene2  gene3  gene4  gene5  gene6  gene7  gene8  gene9 gene10 
@@ -497,7 +496,7 @@ __
     
     
     expectedtab10 = outer(p0, cs, FUN = "*")
-    round(expectedtab10)__
+    round(expectedtab10)
     
     
       gene1 gene2 gene3 gene4 gene5 gene6 gene7 gene8 gene9 gene10
@@ -511,7 +510,7 @@ __
     
     
     randomtab10 = sapply(cs, function(s) { rmultinom(1, s, p0) } )
-    all(colSums(randomtab10) == cs)__
+    all(colSums(randomtab10) == cs)
     
     
     [1] TRUE
@@ -529,7 +528,7 @@ __
       stat(randomtab10, expectedtab10)
     })
     S1 = stat(tab10, expectedtab10)
-    sum(simulstat >= S1)__
+    sum(simulstat >= S1)
     
     
     [1] 0
@@ -538,7 +537,7 @@ __
     hist(simulstat, col = "lavender", breaks = seq(0, 75, length.out=50))
     abline(v = S1, col = "red")
     abline(v = quantile(simulstat, probs = c(0.95, 0.99)),
-           col = c("darkgreen", "blue"), lty = 2)__
+           col = c("darkgreen", "blue"), lty = 2)
 
 [![](02-chap_files/figure-html/fig-quant12-1-1.png)](02-chap_files/figure-
 html/fig-quant12-1-1.png "그림 2.7: simulstat의 히스토그램. S1의 값은 수직 빨간색 선으로 표시되었으며, 0.95 및 0.99 분위수(다음 섹션 참조)는 점선으로 표시되었습니다.")
@@ -561,7 +560,7 @@ html/fig-quant12-1-1.png "그림 2.7: simulstat의 히스토그램. S1의 값은
 
 [3.6.7절](03-chap.html#sec-graphics-ecdf)에서 우리는 **경험적 누적 분포(empirical cumulative distribution)** 함수(**ECDF**) \(\hat{F}\)를 소개할 것이며, 우리 분위수 \(c_{0.22}\)의 정의가 \(\hat{F}_n(c_{0.22}) = 0.22\)로 쓰여질 수도 있음을 보게 될 것입니다. 그림 2.7의 `simulstat` 분포 히스토그램에는 분위수 \(c_{0.95}\)와 \(c_{0.99}\)도 표시되어 있습니다.
 
-__
+
 
 질문 2.10
 
@@ -573,37 +572,37 @@ __
     
     qs = ppoints(100)
     quantile(simulstat, qs)
-    quantile(qchisq(qs, df = 30), qs)__
+    quantile(qchisq(qs, df = 30), qs)
 
 [![여기서 명칭의 충돌이 발생합니다. 통계학자들은 방금 우리가 계산한 요약 통계량인 simulstat(가중 제곱 차이의 합)을 카이제곱 또는 \(\chi^2\) 통계량이라고 부릅니다. 이론적 분포 \(\chi^2_\nu\)는 자유도라고 불리는 매개변수 \(\nu\)를 가진 그 자체의 분포입니다. 카이제곱 또는 \(\chi^2\)에 대해 읽을 때, 어떤 의미가 적절한지 파악하기 위해 문맥에 주의를 기울여야 합니다.](imgs/devil.png)](imgs/devil.png "여기서 명칭의 충돌이 발생합니다. 통계학자들은 방금 우리가 계산한 요약 통계량인 simulstat(가중 제곱 차이의 합)을 카이제곱 또는 \(\chi^2\) 통계량이라고 부릅니다. 이론적 분포 \(\chi^2_\nu\)는 자유도라고 불리는 매개변수 \(\nu\)를 가진 그 자체의 분포입니다. 카이제곱 또는 \(\chi^2\)에 대해 읽을 때, 어떤 의미가 적절한지 파악하기 위해 문맥에 주의를 기울여야 합니다.")
 
 여기서 명칭의 충돌이 발생합니다. 통계학자들은 방금 우리가 계산한 요약 통계량인 `simulstat`(가중 제곱 차이의 합)을 **카이제곱** 또는 \(\chi^2\) _통계량_ 이라고 부릅니다. 이론적 _분포_ \(\chi^2_\nu\)는 자유도라고 불리는 매개변수 \(\nu\)를 가진 그 자체의 분포입니다. 카이제곱 또는 \(\chi^2\)에 대해 읽을 때, 어떤 의미가 적절한지 파악하기 위해 문맥에 주의를 기울여야 합니다.
 
-__
+
 
 질문 2.11
 
 0.5 분위수의 또 다른 이름을 알고 있나요?
 
-__
+
 
 해결책
 
-__
+
 
 중앙값(median).
 
-__
+
 
 질문 2.12
 
 위의 정의에서, 우리는 분위수가 단지 0.22뿐만 아니라 일반적으로 어떻게 정의되는지에 대해 약간 모호하게 설명했습니다. \(1/n\)의 배수가 아닌 숫자를 포함하여 0과 1 사이의 임의의 숫자에 대한 분위수는 어떻게 계산되나요?
 
-__
+
 
 해결책
 
-__
+
 
 `quantile` 함수의 매뉴얼 페이지와 `type`이라는 인수를 확인해 보세요.
 
@@ -613,7 +612,7 @@ __
     
     qqplot(qchisq(ppoints(B), df = 30), simulstat, main = "",
       xlab = expression(\chi[nu==30]^2), asp = 1, cex = 0.5, pch = 16)
-    abline(a = 0, b = 1, col = "red")__
+    abline(a = 0, b = 1, col = "red")
 
 [![](02-chap_files/figure-html/fig-qqplot3-1-1.png)](02-chap_files/figure-
 html/fig-qqplot3-1-1.png "그림 2.8: 우리 시뮬레이션 통계량의 분포를 \(\chi_{30}^2\)와 비교한 분위수-분위수(QQ) 플롯. 가로축에는 \(\chi^2_{30}\) 분포의 이론적 분위수를, 세로축에는 샘플링된 분위수를 나타냅니다.")
@@ -624,7 +623,7 @@ html/fig-qqplot3-1-1.png "그림 2.8: 우리 시뮬레이션 통계량의 분포
 
     
     
-    1 - pchisq(S1, df = 30)__
+    1 - pchisq(S1, df = 30)
     
     
     [1] 4.74342e-05
@@ -637,14 +636,14 @@ p-값이 이렇게 작으므로 귀무 가설은 일어날 법하지 않아 보�
 
 ![](imgs/ChargaffColdSpring_web.jpg)
 
-DNA 시퀀싱이 가용해지기 훨씬 전, 분자들의 무게를 사용하여 그는 뉴클레오타이드들이 동일한 빈도로 나타나는지 물었습니다. 그는 이를 테트라뉴클레오타이드 가설(tetranucleotide hypothesis)이라고 불렀습니다. 우리는 이를 \(p_{\text{A}} = p_{\text{C}} = p_{\text{G}} = p_{\text{T}}\){인지} 묻는 것으로 해석할 것입니다.
+DNA 시퀀싱이 가용해지기 훨씬 전, 분자들의 무게를 사용하여 그는 뉴클레오타이드들이 동일한 빈도로 나타나는지 물었습니다. 그는 이를 테트라뉴클레오타이드 가설(tetranucleotide hypothesis)이라고 불렀습니다. 우리는 이를 \(p_{\text{A}} = p_{\text{C}} = p_{\text{G}} = p_{\text{T}}\) 인지 묻는 것으로 해석할 것입니다.
 
 불행하게도, Chargaff는 측정값 그 자체가 아니라 서로 다른 유기체에 존재하는 각 뉴클레오타이드 질량의 _백분율_ 만을 발표했습니다.
 
     
     
     load("../data/ChargaffTable.RData")
-    ChargaffTable __
+    ChargaffTable
     
     
                       A    T    C    G
@@ -662,7 +661,7 @@ html/fig-ChargaffBars-1.png "그림 2.9: ChargaffTable의 서로 다른 행들�
 
 그림 2.9: `ChargaffTable`의 서로 다른 행들에 대한 막대 그래프. 패턴을 찾을 수 있나요?
 
-__
+
 
 질문 2.13
 
@@ -672,11 +671,11 @@ __
 
   * 위의 시뮬레이션에서 영감을 얻어, 해당 패턴에 대한 정량적 분석을 수행할 수 있나요?
 
-__
+
 
 해결책
 
-__
+
 
 샤가프는 이 질문에 대한 답을 _보고_ , 유기체의 DNA에서 아데닌(A)의 양과 티민(T)의 양이 완벽하게 일치하도록 보장하는 _염기쌍(base pairing)_ 이라는 패턴을 가정했습니다. 유사하게, 구아닌(G)의 양이 얼마든 시토신(C)의 양은 그와 같을 것입니다. 이것이 현재 샤가프의 법칙이라 불리는 것입니다. 반면에, 한 유기체 내에서의 C/G 양은 A/T 양과 상당히 다를 수 있으며 유기체들 전반에 걸쳐 뚜렷한 패턴은 없습니다. 샤가프의 법칙에 기초하여, 우리는 다음과 같은 통계량을 정의할 수 있습니다.
 
@@ -696,23 +695,23 @@ __
          statChf(permuted)
     })
     pChf = mean(permstat <= chfstat)
-    pChf __
+    pChf
     
     
     [1] 0.00014
     
     
     hist(permstat, breaks = 100, main = "", col = "lavender")
-    abline(v = chfstat, lwd = 2, col = "red")__
+    abline(v = chfstat, lwd = 2, col = "red")
 
 [![](02-chap_files/figure-html/fig-permstatChf-1-1.png)](02-chap_files/figure-
 html/fig-permstatChf-1-1.png "그림 2.10: 컬럼들의 행 단위 순열을 사용한 시뮬레이션을 통해 계산된 우리 통계량 statChf의 히스토그램. 관찰된 데이터에 대해 산출된 값은 빨간색 선으로 표시되었습니다.")
 
 그림 2.10: 컬럼들의 행 단위 순열을 사용한 시뮬레이션을 통해 계산된 우리 통계량 `statChf`의 히스토그램. 관찰된 데이터에 대해 산출된 값은 빨간색 선으로 표시되었습니다.
 
-그림 2.10의 히스토그램은 빨간색 선이 그려진 관측값 11.1만큼 작은 값을 갖는 것이 매우 드물다는 것을 보여줍니다. 그와 같거나 더 작은 값을 관찰할 확률은 `pChf`=1.4^{-4}입니다. 따라서 데이터는 샤가프의 통찰을 강력하게 뒷받침합니다.
+그림 2.10의 히스토그램은 빨간색 선이 그려진 관측값 11.1만큼 작은 값을 갖는 것이 매우 드물다는 것을 보여줍니다. 그와 같거나 더 작은 값을 관찰할 확률은 `pChf`=\(1.4 \times 10^{-4}\)입니다. 따라서 데이터는 샤가프의 통찰을 강력하게 뒷받침합니다.
 
-__
+
 
 질문 2.14
 
@@ -724,7 +723,7 @@ __
 
     
     
-    HairEyeColor[,, "Female"]__
+    HairEyeColor[,, "Female"]
     
     
            Eye
@@ -734,23 +733,23 @@ __
       Red      16    7     7     7
       Blond     4   64     5     8
 
-__
+
 
 질문 2.15
 
 R에서 `HairEyeColor` 객체를 탐색해 보세요. 어떤 데이터 유형, 모양, 차원을 가지고 있나요?
 
-__
+
 
 해결책
 
-__
+
 
 이는 세 가지 차원을 가진 수치형 배열(array)입니다:
 
     
     
-    str(HairEyeColor)__
+    str(HairEyeColor)
     
     
      'table' num [1:4, 1:4, 1:2] 32 53 10 3 11 50 10 30 10 25 ...
@@ -760,7 +759,7 @@ __
       ..$ Sex : chr [1:2] "Male" "Female"
     
     
-    ## ?HairEyeColor __
+    ## ?HairEyeColor
 
 #### 색맹과 성별
 
@@ -769,7 +768,7 @@ __
     
     
     load("../data/Deuteranopia.RData")
-    Deuteranopia __
+    Deuteranopia
     
     
               Men Women
@@ -780,7 +779,7 @@ __
 
     
     
-    chisq.test(Deuteranopia)__
+    chisq.test(Deuteranopia)
     
     
         Pearson's Chi-squared test with Yates' continuity correction
@@ -798,7 +797,7 @@ __
 
 \[ p_{\text{MM}}=p^2,\quad p_{\text{NN}}=q^2,\quad p_{\text{MN}}=2pq \tag{2.5}\]
 
-우리는 유전자형 MM, MN, NN에 대한 빈도 \((n_{\text{MM}},\,n_{\text{MN}},\,n_{\text{NN}})\)과 총합 \(S=n_{\text{MM}}+ n_{\text{MN}}+n_{\text{NN}}\){만을} 관찰합니다. 범주들의 확률이 식 2.5에 의해 주어질 때 관찰된 데이터의 확률인 우도를 다항 분포 공식을 사용하여 쓸 수 있습니다.
+우리는 유전자형 MM, MN, NN에 대한 빈도 \((n_{\text{MM}},\,n_{\text{MN}},\,n_{\text{NN}})\)과 총합 \(S=n_{\text{MM}}+ n_{\text{MN}}+n_{\text{NN}}\) 만을 관찰합니다. 범주들의 확률이 식 2.5에 의해 주어질 때 관찰된 데이터의 확률인 우도를 다항 분포 공식을 사용하여 쓸 수 있습니다.
 
 \[ P(n_{\text{MM}},\,n_{\text{MN}},\,n_{\text{NN}}\;|\;p) = {S \choose n_{\text{MM}},n_{\text{MN}},n_{\text{NN}}} (p^2)^{n_{\text{MM}}} \,\times\, (2pq)^{n_{\text{MN}}} \,\times\, (q^2)^{n_{\text{NN}}}, \]
 
@@ -818,7 +817,7 @@ __
     
     library("HardyWeinberg")
     data("Mourant")
-    Mourant[214:216,]__
+    Mourant[214:216,]
     
     
         Population    Country Total  MM  MN  NN
@@ -839,7 +838,7 @@ __
          xlab = "p",ylab = "로그 우도")
     imax = which.max(yv)
     abline(v = xv[imax], h = yv[imax], lwd = 1.5, col = "blue")
-    abline(h = yv[imax], lwd = 1.5, col = "purple")__
+    abline(h = yv[imax], lwd = 1.5, col = "purple")
 
 [![](02-chap_files/figure-html/fig-HardyWeinberg-1-1.png)](02-chap_files/figure-
 html/fig-HardyWeinberg-1-1.png "그림 2.11: 타히티(Tahiti) 데이터에 대한 로그 우도 플롯.")
@@ -851,7 +850,7 @@ html/fig-HardyWeinberg-1-1.png "그림 2.11: 타히티(Tahiti) 데이터에 대�
     
     
     phat  =  af(c(nMM, nMN, nNN))
-    phat __
+    phat
     
     
             A 
@@ -859,14 +858,14 @@ html/fig-HardyWeinberg-1-1.png "그림 2.11: 타히티(Tahiti) 데이터에 대�
     
     
     pMM   =  phat^2
-    qhat  =  1 - phat __
+    qhat  =  1 - phat
 
 하디-와인버그 평형 상태에서 기대되는 값은 다음과 같습니다.
 
     
     
     pHW = c(MM = phat^2, MN = 2*phat*qhat, NN = qhat^2)
-    sum(c(nMM, nMN, nNN)) * pHW __
+    sum(c(nMM, nMN, nNN)) * pHW
     
     
         MM.A     MN.A     NN.A 
@@ -885,31 +884,31 @@ html/fig-HardyWeinberg-1-1.png "그림 2.11: 타히티(Tahiti) 데이터에 대�
     HWTernaryPlot(genotypeFrequencies[pops, ],
             markerlab = Mourant$Country[pops],
             alpha = 0.0001, curvecols = c("red", rep("purple", 4)),
-            mcex = 0.75, vertex.cex = 1)__
+            mcex = 0.75, vertex.cex = 1)
 
 [![](02-chap_files/figure-html/fig-HWtern-1.png)](02-chap_files/figure-
 html/fig-HWtern-1.png "그림 2.12: 이 de Finetti 플롯은 세 유전자형의 빈도를 삼각형의 각 꼭짓점에 대한 가중치로 사용하여 무게 중심으로서 점들을 보여줍니다. 하디-와인버그 모델은 빨간색 곡선이며, 채택 영역(acceptance region)은 두 보라색 선 사이에 있습니다. 우리는 미국(US)이 HW 평형 상태에서 가장 멀리 떨어져 있음을 알 수 있습니다.")
 
 그림 2.12: 이 **de Finetti 플롯**은 세 유전자형의 빈도를 삼각형의 각 꼭짓점에 대한 가중치로 사용하여 무게 중심으로서 점들을 보여줍니다. 하디-와인버그 모델은 빨간색 곡선이며, 채택 영역(acceptance region)은 두 보라색 선 사이에 있습니다. 우리는 미국(US)이 HW 평형 상태에서 가장 멀리 떨어져 있음을 알 수 있습니다.
 
-__
+
 
 질문 2.16
 
 위의 코드와 같이 삼원 플롯(ternary plot)을 만든 다음, 다른 데이터 포인트들도 추가해 보세요. 무엇을 알 수 있나요? `HWChisq` 함수를 사용하여 여러분의 논의를 뒷받침할 수 있습니다.
 
-__
+
 
 해결책
 
-__
+
 
     
     
     HWTernaryPlot(genotypeFrequencies[-pops, ], 
-                  newframe = FALSE, alpha = 0.0001, cex = 0.5)__
+                  newframe = FALSE, alpha = 0.0001, cex = 0.5)
 
-__
+
 
 질문 2.17
 
@@ -919,11 +918,11 @@ __
 
   * 신뢰 영역(confidence regions)은 어떻게 되며 그 이유는 무엇인가요?
 
-__
+
 
 해결책
 
-__
+
 
     
     
@@ -931,7 +930,7 @@ __
     HWTernaryPlot(newgf[pops, ],
                   markerlab = Mourant$Country[pops],
                   curvecols = c("red", rep("purple", 4)),
-                  alpha = 0.0001, mcex = 0.75, vertex.cex = 1)__
+                  alpha = 0.0001, mcex = 0.75, vertex.cex = 1)
 
 ### 2.7.3 여러 다항 분포 연결하기: 서열 모티프와 로고
 
@@ -943,7 +942,7 @@ __
     
     library("seqLogo")
     load("../data/kozak.RData")
-    kozak __
+    kozak
     
     
       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9]
@@ -954,7 +953,7 @@ __
     
     
     pwm = makePWM(kozak)
-    seqLogo(pwm, ic.scale = FALSE)__
+    seqLogo(pwm, ic.scale = FALSE)
 
 [![](02-chap_files/figure-html/fig-seqlogo-1-1.png)](02-chap_files/figure-
 html/fig-seqlogo-1-1.png "그림 2.13: Kozak 모티프를 모델링하는 데 사용되는 위치 종속 다항 분포에 대한 서열 로고라 불리는 다이어그램입니다. 이는 각 위치에서의 변동량을 로그 스케일로 인코딩합니다. 큰 글자들은 어떤 뉴클레오타이드가 나타날지에 대해 불확실성이 없는 위치를 나타냅니다.")
@@ -1025,7 +1024,7 @@ _일배체형_ 이란 염색체 상에서 공간적으로 인접하여 대개 �
     
     
     haplo6 = read.table("../data/haplotype6.txt", header = TRUE)
-    haplo6 __
+    haplo6
     
     
       Individual DYS19 DXYS156Y DYS389m DYS389n DYS389p
@@ -1063,7 +1062,7 @@ html/fig-histobeta2-1.png "그림 2.19: \(\alpha=10, 20, 50\) 및 \(\beta=30, 60
     y = vapply(rp, 
                function(x) rbinom(1, prob = x, size = 300), 
                integer(1))
-    hist(y, breaks = 50, col = "orange", main = "", xlab = "")__
+    hist(y, breaks = 50, col = "orange", main = "", xlab = "")
 
 [![](02-chap_files/figure-html/fig-
 histmarginal-1-1.png)](02-chap_files/figure-html/fig-histmarginal-1-1.png
@@ -1071,17 +1070,17 @@ histmarginal-1-1.png)](02-chap_files/figure-html/fig-histmarginal-1-1.png
 
 그림 2.20: \(Y\)의 주변 분포.
 
-__
+
 
 질문 2.18
 
 R의 벡터화 기능을 사용하고 `rbinom(length(rp), rp, size = 300)`이라고 씀으로써 위의 코드 청크에서와 동일한 결과를 얻을 수 있는지 확인해 보세요.
 
-__
+
 
 해결책
 
-__
+
 
     
     
@@ -1091,7 +1090,7 @@ __
                 integer(1))
     set.seed(0xbebe)
     y2 = rbinom(length(rp), rp, size = 300)
-    stopifnot(identical(y1, y2))__
+    stopifnot(identical(y1, y2))
 
 ### 2.9.4 \(Y=40\)을 만족하는 모든 \(p\)의 히스토그램: 사후 분포
 
@@ -1105,7 +1104,7 @@ __
     
     p_seq = seq(0, 1, by = 0.001)
     densPostTheory = dbeta(p_seq, 50 + 40, 350 + 260)
-    lines(p_seq, densPostTheory, type = "l", lwd = 3)__
+    lines(p_seq, densPostTheory, type = "l", lwd = 3)
 
 [![](02-chap_files/figure-html/fig-
 densityposterior-1-1.png)](02-chap_files/figure-
@@ -1117,14 +1116,14 @@ html/fig-densityposterior-1-1.png "그림 2.21: Y=40인 분포의 값들만을 �
 
     
     
-    mean(pPostEmp)__
+    mean(pPostEmp)
     
     
     [1] 0.128726
     
     
     dp = p_seq[2] - p_seq[1]
-    sum(p_seq * densPostTheory * dp)__
+    sum(p_seq * densPostTheory * dp)
     
     
     [1] 0.1285714
@@ -1138,7 +1137,7 @@ html/fig-densityposterior-1-1.png "그림 2.21: Y=40인 분포의 값들만을 �
     
     
     pPostMC = rbeta(n = 100000, 90, 610)
-    mean(pPostMC)__
+    mean(pPostMC)
     
     
     [1] 0.1285718
@@ -1148,14 +1147,14 @@ html/fig-densityposterior-1-1.png "그림 2.21: Y=40인 분포의 값들만을 �
     
     
     qqplot(pPostMC, pPostEmp, type = "l", asp = 1)
-    abline(a = 0, b = 1, col = "blue")__
+    abline(a = 0, b = 1, col = "blue")
 
 [![](02-chap_files/figure-html/fig-qqplotbeta-1-1.png)](02-chap_files/figure-
 html/fig-qqplotbeta-1-1.png "그림 2.22: 이론적 분포로부터 얻은 우리 몬테카를로 샘플 pPostMC와 우리 시뮬레이션 샘플 pPostEmp의 분위수-분위수(QQ) 플롯. 또한 이 두 분포 중 하나를 이론적 분포 함수 pbeta(., 90, 610)와 유사하게 비교할 수도 있습니다. 곡선이 y=x 선 위에 있다면 이는 좋은 일치를 나타냅니다. 꼬리 부분에는 약간의 무작위 차이가 있습니다.")
 
 그림 2.22: 이론적 분포로부터 얻은 우리 몬테카를로 샘플 `pPostMC`와 우리 시뮬레이션 샘플 `pPostEmp`의 QQ(Quantile-Quantile) 플롯. 또한 이 두 분포 중 하나를 이론적 분포 함수 `pbeta(., 90, 610)`와 유사하게 비교할 수도 있습니다. 곡선이 \(y=x\) 선 위에 있다면 이는 좋은 일치를 나타냅니다. 꼬리 부분에는 약간의 무작위 차이가 있습니다.
 
-__
+
 
 질문 2.19
 
@@ -1181,24 +1180,24 @@ __
     
     densPost2 = dbeta(p_seq, 115, 735)
     mcPost2   = rbeta(1e6, 115, 735)
-    sum(p_seq * densPost2 * dp)   # 수치 적분에 의한 평균 __
+    sum(p_seq * densPost2 * dp)   # 수치 적분에 의한 평균
     
     
     [1] 0.1352941
     
     
-    mean(mcPost2)                 # MC에 의한 평균 __
+    mean(mcPost2)                 # MC에 의한 평균
     
     
     [1] 0.1352655
     
     
-    p_seq[which.max(densPost2)]   # MAP 추정치 __
+    p_seq[which.max(densPost2)]   # MAP 추정치
     
     
     [1] 0.134
 
-__
+
 
 질문 2.20
 
@@ -1210,11 +1209,11 @@ __
 
 ### 2.9.7 비율 매개변수에 대한 신뢰 진술
 
-이제 데이터가 주어졌을 때 비율 \(p\)가 실제로 무엇인지에 대해 결론을 내릴 차례입니다. 한 가지 요약 수치는 신뢰 구간(confidence interval)의 베이지안 대응물인 사후 신용 구간(posterior credibility interval)입니다. 우리는 사후 분포의 2.5% 및 97.5% 백분위수를 취할 수 있습니다: \(P(q_{2.5\%}} \leq p \leq q_{97.5\%})=0.95\).
+이제 데이터가 주어졌을 때 비율 \(p\)가 실제로 무엇인지에 대해 결론을 내릴 차례입니다. 한 가지 요약 수치는 신뢰 구간(confidence interval)의 베이지안 대응물인 사후 신용 구간(posterior credibility interval)입니다. 우리는 사후 분포의 2.5% 및 97.5% 백분위수를 취할 수 있습니다: \(P(q_{2.5\%} \leq p \leq q_{97.5\%})=0.95\).
 
     
     
-    quantile(mcPost2, c(0.025, 0.975))__
+    quantile(mcPost2, c(0.025, 0.975))
     
     
          2.5%     97.5% 
@@ -1235,19 +1234,19 @@ __
 
     
     
-    library("Biostrings")__
+    library("Biostrings")
 
-__
+
 
 질문 2.21
 
 튜토리얼 비네트(vignette)를 탐색하여 Biostrings 패키지에서 제공되는 유용한 데이터와 함수들을 일부 살펴보세요.
 
-__
+
 
 해결책
 
-__
+
 
 첫 번째 줄은 유전 코드 정보를 출력하고, 두 번째 줄은 IUPAC 뉴클레오타이드 모호성 코드를 반환합니다. 세 번째 줄은 **[Biostrings](https://bioconductor.org/packages/Biostrings/)** 패키지에서 가용한 모든 비네트를 나열하며, 네 번째 줄은 특정 비네트 하나를 표시합니다.
 
@@ -1256,7 +1255,7 @@ __
     GENETIC_CODE
     IUPAC_CODE_MAP
     vignette(package = "Biostrings")
-    vignette("BiostringsQuickOverview", package = "Biostrings")__
+    vignette("BiostringsQuickOverview", package = "Biostrings")
 
 이 마지막 명령은 브라우저 창에서 설명서에 접근할 수 있는 목록을 열어줄 것입니다11. **[BSgenome](https://bioconductor.org/packages/BSgenome/)** 패키지는 많은 유전체에 대한 접근을 제공하며, 다음과 같이 입력하여 전체 유전체 서열을 포함하는 데이터 패키지들의 이름을 확인할 수 있습니다.
 
@@ -1266,13 +1265,13 @@ __
     
     library("BSgenome")
     ag = available.genomes()
-    length(ag)__
+    length(ag)
     
     
     [1] 113
     
     
-    ag[1:2]__
+    ag[1:2]
     
     
     [1] "BSgenome.Alyrata.JGI.v1"              
@@ -1289,7 +1288,7 @@ __
     library("BSgenome.Ecoli.NCBI.20080805")
     Ecoli
     shineDalgarno = "AGGAGGT"
-    ecoli = Ecoli$NC_010473 __
+    ecoli = Ecoli$NC_010473
 
 우리는 `countPattern` 함수를 사용하여 너비 50,000의 윈도우에서 패턴의 발생 횟수를 셀 수 있습니다.
 
@@ -1302,24 +1301,24 @@ __
       countPattern(shineDalgarno, ecoli[starts[i]:ends[i]],
                    max.mismatch = 0)
       }, numeric(1))
-    table(numMatches)__
+    table(numMatches)
     
     
     numMatches
      0  1  2  3  4 
     48 32  8  3  2 
 
-__
+
 
 질문 2.22
 
 이 표는 어떤 분포에 잘 맞을까요?
 
-__
+
 
 해결책
 
-__
+
 
 이러한 데이터에 대한 정량적 및 그래픽 평가(그림 2.24 참조)가 보여주듯이, 푸아송 분포가 좋은 후보입니다.
 
@@ -1327,7 +1326,7 @@ __
     
     library("vcd")
     gf = goodfit(numMatches, "poisson")
-    summary(gf)__
+    summary(gf)
     
     
         Goodness-of-fit test for poisson distribution
@@ -1336,7 +1335,7 @@ __
     Likelihood Ratio 4.134932  3 0.2472577
     
     
-    distplot(numMatches, type = "poisson")__
+    distplot(numMatches, type = "poisson")
 
 [![](02-chap_files/figure-html/fig-poissonness-1.png)](02-chap_files/figure-
 html/fig-poissonness-1.png "그림 2.24: Ecoli$NC_010473 서열을 따른 모티프 카운트에 대한 푸아송 모델 평가.")
@@ -1347,13 +1346,13 @@ html/fig-poissonness-1.png "그림 2.24: Ecoli$NC_010473 서열을 따른 모티
 
     
     
-    sdMatches = matchPattern(shineDalgarno, ecoli, max.mismatch = 0)__
+    sdMatches = matchPattern(shineDalgarno, ecoli, max.mismatch = 0)
 
 R 커맨드 라인에 `sdMatches`를 입력하여 이 객체에 대한 요약을 얻을 수 있습니다. 여기에는 원래 서열 상에서의 이른바 _뷰(views)_ 들의 집합으로 표현된 모든 65개의 패턴 일치 위치들이 포함되어 있습니다. 이제 그들 사이의 거리는 얼마일까요?
 
     
     
-    betweenmotifs = gaps(sdMatches)__
+    betweenmotifs = gaps(sdMatches)
 
 따라서 이들은 사실 66개의 보충적인 영역들입니다. 이제 모티프들 사이의 간격(gap) 크기 분포에 대한 모델을 찾아봅시다. 만약 모티프들이 무작위 위치에서 발생한다면, 우리는 간격 길이가 지수 분포(exponential distribution)를 따를 것으로 기대합니다14. 아래 코드(그 출력은 그림 2.25에 나타남)는 이 가정을 평가합니다. 만약 지수 분포가 잘 맞는다면, 점들은 대략 직선 위에 놓여야 합니다. 지수 분포는 비율(rate)이라는 하나의 매개변수를 가지며, 데이터로부터 얻은 추정치에 해당하는 기울기를 가진 선 또한 표시되었습니다.
 
@@ -1363,14 +1362,14 @@ R 커맨드 라인에 `sdMatches`를 입력하여 이 객체에 대한 요약을
     
     library("Renext")
     expplot(width(betweenmotifs), rate = 1/mean(width(betweenmotifs)),
-            labels = "fit")__
+            labels = "fit")
 
 [![](02-chap_files/figure-html/fig-expplotdata-1-1.png)](02-chap_files/figure-
 html/fig-expplotdata-1-1.png "그림 2.25: 모티프 간 간격들의 지수 분포(검은색 실선) 적합도 평가.")
 
 그림 2.25: 모티프 간 간격들의 지수 분포(검은색 실선) 적합도 평가.
 
-__
+
 
 질문 2.23
 
@@ -1390,13 +1389,13 @@ __
     chr8  =  Hsapiens$chr8
     CpGtab = read.table("../data/model-based-cpg-islands-hg19.txt",
                         header = TRUE)
-    nrow(CpGtab)__
+    nrow(CpGtab)
     
     
     [1] 65699
     
     
-    head(CpGtab)__
+    head(CpGtab)
     
     
         chr  start    end length CpGcount GCcontent pctGC obsExp
@@ -1409,7 +1408,7 @@ __
     
     
     irCpG = with(dplyr::filter(CpGtab, chr == "chr8"),
-             IRanges(start = start, end = end))__
+             IRanges(start = start, end = end))
 
 [![우리는 dplyr 패키지로부터 명시적으로 filter 함수를 호출하기 위해 :: 연산자를 사용합니다 – 동일한 이름의 함수를 정의하고 있는 다른 패키지들이 로드되어 있을 수도 있기 때문입니다. 특히 filter 함수의 경우 이 명칭이 꽤 많은 다른 패키지들에서 사용되므로 이러한 예방 조치가 특히 권장됩니다. R 함수를 (:: 없이) 호출하는 일반적인 방식은 사람들을 이름으로 부르는 것과 유사하다고 생각할 수 있습니다; 반면 ::를 사용한 완전 수식 버전은 누군가를 성과 이름을 포함한 전체 이름으로 부르는 것에 해당합니다. 최소한 CRAN 및 바이오컨덕터 저장소 내에서는 이러한 완전 수식 이름들은 고유함이 보장됩니다.](imgs/devil.png)](imgs/devil.png "우리는 dplyr 패키지로부터 명시적으로 filter 함수를 호출하기 위해 :: 연산자를 사용합니다 – 동일한 이름의 함수를 정의하고 있는 다른 패키지들이 로드되어 있을 수도 있기 때문입니다. 특히 filter 함수의 경우 이 명칭이 꽤 많은 다른 패키지들에서 사용되므로 이러한 예방 조치가 특히 권장됩니다. R 함수를 (:: 없이) 호출하는 일반적인 방식은 사람들을 이름으로 부르는 것과 유사하다고 생각할 수 있습니다; 반면 ::를 사용한 완전 수식 버전은 누군가를 성과 이름을 포함한 전체 이름으로 부르는 것에 해당합니다. 최소한 CRAN 및 바이오컨덕터 저장소 내에서는 이러한 완전 수식 이름들은 고유함이 보장됩니다.")
 
@@ -1422,7 +1421,7 @@ __
     
     
     grCpG = GRanges(ranges = irCpG, seqnames = "chr8", strand = "+")
-    genome(grCpG) = "hg19"__
+    genome(grCpG) = "hg19"
 
 이제 시각화해 봅시다; 그림 2.26의 출력을 보세요.
 
@@ -1434,7 +1433,7 @@ __
       list(GenomeAxisTrack(),
         AnnotationTrack(grCpG, name = "CpG"), ideo),
         from = 2200000, to = 5800000,
-        shape = "box", fill = "#006400", stacking = "dense")__
+        shape = "box", fill = "#006400", stacking = "dense")
 
 [![](02-chap_files/figure-html/fig-freqandbayes-
 ideo-1.png)](02-chap_files/figure-html/fig-freqandbayes-ideo-1.png
@@ -1447,7 +1446,7 @@ ideo-1.png)](02-chap_files/figure-html/fig-freqandbayes-ideo-1.png
     
     
     CGIview    = Views(unmasked(Hsapiens$chr8), irCpG)
-    NonCGIview = Views(unmasked(Hsapiens$chr8), gaps(irCpG))__
+    NonCGIview = Views(unmasked(Hsapiens$chr8), gaps(irCpG))
 
 우리는 데이터를 사용하여 CpG 섬과 비섬에서의 전이(transition) 횟수를 계산합니다.
 
@@ -1457,7 +1456,7 @@ ideo-1.png)](02-chap_files/figure-html/fig-freqandbayes-ideo-1.png
     seqNonCGI   = as(NonCGIview, "DNAStringSet")
     dinucCpG    = sapply(seqCGI, dinucleotideFrequency)
     dinucNonCpG = sapply(seqNonCGI, dinucleotideFrequency)
-    dinucNonCpG[, 1]__
+    dinucNonCpG[, 1]
     
     
      AA  AC  AG  AT  CA  CC  CG  CT  GA  GC  GG  GT  TA  TC  TG  TT 
@@ -1465,7 +1464,7 @@ ideo-1.png)](02-chap_files/figure-html/fig-freqandbayes-ideo-1.png
     
     
     NonICounts = rowSums(dinucNonCpG)
-    IslCounts  = rowSums(dinucCpG)__
+    IslCounts  = rowSums(dinucCpG)
 
 우리가 가진 4-상태 마르코프 체인의 경우, 행이 'from' 상태이고 열이 'to' 상태인 전이 행렬을 정의합니다.
 
@@ -1474,7 +1473,7 @@ ideo-1.png)](02-chap_files/figure-html/fig-freqandbayes-ideo-1.png
     TI  = matrix( IslCounts, ncol = 4, byrow = TRUE)
     TnI = matrix(NonICounts, ncol = 4, byrow = TRUE)
     dimnames(TI) = dimnames(TnI) =
-      list(c("A", "C", "G", "T"), c("A", "C", "G", "T"))__
+      list(c("A", "C", "G", "T"), c("A", "C", "G", "T"))
 
 우리는 각 유형의 전이 횟수 카운트를 사용하여 빈도를 계산하고 이를 두 행렬에 담습니다.
 
@@ -1485,7 +1484,7 @@ ideo-1.png)](02-chap_files/figure-html/fig-freqandbayes-ideo-1.png
     
     
     MI = TI /rowSums(TI)
-    MI __
+    MI
     
     
                A         C         G         T 
@@ -1496,7 +1495,7 @@ ideo-1.png)](02-chap_files/figure-html/fig-freqandbayes-ideo-1.png
     
     
     MN = TnI / rowSums(TnI)
-    MN __
+    MN
     
     
               A         C          G         T 
@@ -1505,36 +1504,36 @@ ideo-1.png)](02-chap_files/figure-html/fig-freqandbayes-ideo-1.png
     G 0.2976696 0.2029017 0.24655406 0.2528746 
     T 0.2265813 0.1972407 0.24117528 0.3350027
 
-__
+
 
 질문 2.24
 
 서로 다른 행들에서 전이들이 다른가요? 이는 예를 들어 \(P(\mathtt{A}\,|\,\mathtt{C}) \neq P(\mathtt{A}\,|\,\mathtt{T})\)인 상황을 의미합니다.
 
-__
+
 
 해결책
 
-__
+
 
 전이들이 다릅니다. 예를 들어, 섬(island) 내부의 전이 행렬(MI)에서 C에서 A로의 전이와 T에서 A로의 전이는 매우 다르게 보입니다 (0.201 대 0.098).
 
-__
+
 
 질문 2.25
 
 CpG 섬에서의 서로 다른 뉴클레오타이드들의 상대적 빈도가 다른 곳과 비교했을 때 다른가요?
 
-__
+
 
 해결책
 
-__
+
 
     
     
     freqIsl = alphabetFrequency(seqCGI, baseOnly = TRUE, collapse = TRUE)[1:4]
-    freqIsl / sum(freqIsl)__
+    freqIsl / sum(freqIsl)
     
     
             A         C         G         T 
@@ -1542,7 +1541,7 @@ __
     
     
     freqNon = alphabetFrequency(seqNonCGI, baseOnly = TRUE, collapse = TRUE)[1:4]
-    freqNon / sum(freqNon)__
+    freqNon / sum(freqNon)
     
     
             A         C         G         T 
@@ -1550,17 +1549,17 @@ __
 
 이는 반대되는 패턴을 보여줍니다: CpG 섬에서는 C와 G가 약 0.32의 빈도를 가지는 반면, 비-CpG 섬에서는 A와 T가 약 0.30의 빈도를 가집니다.
 
-__
+
 
 질문 2.26
 
 이러한 차이점들을 사용하여 주어진 서열이 CpG 섬으로부터 오는지 여부를 어떻게 결정할 수 있을까요?
 
-__
+
 
 해결책
 
-__
+
 
 관찰된 빈도와 `freqIsl` 및 `freqNon` 빈도 사이를 비교하기 위해 \(\chi^2\) 통계량을 사용합니다. 더 짧은 서열의 경우, 이는 충분히 민감하지 않을 수 있으며 아래에 더 민감한 접근 방식이 제시됩니다.
 
@@ -1583,7 +1582,7 @@ __
     
     
     alpha = log((freqIsl/sum(freqIsl)) / (freqNon/sum(freqNon)))
-    beta  = log(MI / MN)__
+    beta  = log(MI / MN)
 
     
     
@@ -1596,7 +1595,7 @@ __
           score = score + beta[s[j-1], s[j]]
       score
     }
-    scorefun(x)__
+    scorefun(x)
     
     
              A 
@@ -1622,7 +1621,7 @@ __
       scores / len
     }
     scoresCGI    = generateRandomScores(seqCGI)
-    scoresNonCGI = generateRandomScores(seqNonCGI)__
+    scoresNonCGI = generateRandomScores(seqNonCGI)
 
     
     
@@ -1631,7 +1630,7 @@ __
     h1 = hist(scoresCGI,    breaks = br, plot = FALSE)
     h2 = hist(scoresNonCGI, breaks = br, plot = FALSE)
     plot(h1, col = rgb(0, 0, 1, 1/4), xlim = c(-0.5, 0.5), ylim=c(0,120))
-    plot(h2, col = rgb(1, 0, 0, 1/4), add = TRUE)__
+    plot(h2, col = rgb(1, 0, 0, 1/4), add = TRUE)
 
 [![](02-chap_files/figure-html/fig-ScoreMixture-1-1.png)](02-chap_files/figure-
 html/fig-ScoreMixture-1-1.png "그림 2.27: generateRandomScores 함수에 의해 생성된 섬 및 비섬 점수. 이는 우리가 접하게 되는 혼합물(mixture)의 첫 번째 사례입니다. 우리는 sec-mixtures에서 이들을 다시 방문할 것입니다.")
@@ -1666,7 +1665,7 @@ html/fig-ScoreMixture-1-1.png "그림 2.27: generateRandomScores 함수에 의�
 
 ## 2.13 연습 문제
 
-__
+
 
 연습 문제 2.1
 
@@ -1674,7 +1673,7 @@ __
 
 적합도 검정을 사용하여 이러한 돌연변이 합계에 대한 올바른 분포를 찾고 적합도의 품질을 시각화하는 플롯을 만드세요.
 
-__
+
 
 연습 문제 2.2
 
@@ -1682,7 +1681,7 @@ __
 크기 25인 표본의 최대 우도 추정치(이를 \(\hat{\theta}\)라고 부릅시다)는 무엇인가요?  
 이론적인 정당성과 실제 최댓값 \(\theta\)를 찾아낼 수 있나요?
 
-__
+
 
 연습 문제 2.3
 
@@ -1693,7 +1692,7 @@ __
     
     
     mtb = read.table("../data/M_tuberculosis.txt", header = TRUE)
-    head(mtb, n = 4)__
+    head(mtb, n = 4)
     
     
       AmAcid Codon Number PerThous
@@ -1707,7 +1706,7 @@ __
     
     
     pro  =  mtb[ mtb$AmAcid == "Pro", "Number"]
-    pro/sum(pro)__
+    pro/sum(pro)
     
     
     [1] 0.54302025 0.10532985 0.05859765 0.29305225
@@ -1720,7 +1719,7 @@ __
 
 \(*\)은 정규 표현식의 컴퓨터 표기법을 사용하여 임의의 4개 글자 중 하나를 나타냅니다.
 
-__
+
 
 연습 문제 2.4
 
@@ -1728,7 +1727,7 @@ __
 
     
     
-    staph = readDNAStringSet("../data/staphsequence.ffn.txt", "fasta")__
+    staph = readDNAStringSet("../data/staphsequence.ffn.txt", "fasta")
 
   1. 전체 `staph` 객체를 살펴본 다음 세트의 처음 세 서열을 표시하세요.
 
@@ -1738,17 +1737,17 @@ __
 
   4. 서열을 따른 이러한 비율의 전반적인 추세를 어떻게 시각화할 수 있을까요?
 
-__
+
 
 해결책
 
-__
+
 
   1. 데이터는 다음과 같이 표시됩니다:
 
     
     
-    staph[1:3, ]__
+    staph[1:3, ]
     
     
     DNAStringSet object of length 3:
@@ -1758,7 +1757,7 @@ __
     [3]   246 GTGATTATTTTGGTTCAAGAAGT...TCATTCATCAAGGTGAACAATGA lcl|NC_002952.2_c...
     
     
-    staph __
+    staph
     
     
     DNAStringSet object of length 2650:
@@ -1779,7 +1778,7 @@ __
 
     
     
-    letterFrequency(staph[[1]], letters = "ACGT", OR = 0)__
+    letterFrequency(staph[[1]], letters = "ACGT", OR = 0)
     
     
       A   C   G   T 
@@ -1789,7 +1788,7 @@ __
     GCstaph = data.frame(
       ID = names(staph),
       GC = rowSums(alphabetFrequency(staph)[, 2:3] / width(staph)) * 100
-    )__
+    )
 
   3. 플로팅은 다음과 같이 수행될 수 있으며, 여기서는 예시로 364번 서열을 사용합니다 (그림 2.28):
 
@@ -1798,7 +1797,7 @@ __
     window = 100
     gc = rowSums( letterFrequencyInSlidingView(staph[[364]], window,
           c("G","C")))/window
-    plot(x = seq(along = gc), y = gc, type = "l")__
+    plot(x = seq(along = gc), y = gc, type = "l")
 
 [![](02-chap_files/figure-html/fig-SlidingGC-1-1.png)](02-chap_files/figure-
 html/fig-SlidingGC-1-1.png "그림 2.28: 황색포도상구균 유전체의 364번 서열을 따른 GC 함량.")
@@ -1810,7 +1809,7 @@ html/fig-SlidingGC-1-1.png "그림 2.28: 황색포도상구균 유전체의 364�
     
     
     plot(x = seq(along = gc), y = gc, type = "l")
-    lines(lowess(x = seq(along = gc), y = gc, f = 0.2), col = 2)__
+    lines(lowess(x = seq(along = gc), y = gc, f = 0.2), col = 2)
 
 [![](02-chap_files/figure-html/fig-
 SmoothSlidingGC-1-1.png)](02-chap_files/figure-html/fig-SmoothSlidingGC-1-1.png "그림 2.29: 평활화가 적용된 그림 2.28과 유사한 플롯.")
@@ -1819,17 +1818,17 @@ SmoothSlidingGC-1-1.png)](02-chap_files/figure-html/fig-SmoothSlidingGC-1-1.png 
 
 우리는 나중에 서열을 따라 이동함에 따라 우리가 항상 여러 가능한 **상태(states)** 중 하나에 있다는 아이디어를 사용하여, 해당 윈도우가 비정상적으로 높은 GC 함량을 가지고 있는지 결정하는 적절한 방법을 보게 될 것입니다. 하지만 우리는 그 상태를 직접 관찰하지 못하고 오직 서열만을 관찰합니다. 그러한 모델들을 **은닉 (상태) 마르코프 모델(hidden (state) Markov models)** , 줄여서 HMM이라고 부릅니다 ([위키백과](http://en.wikipedia.org/wiki/Hidden_Markov_model) 참조). 이러한 모델 명칭에서의 _마르코프_ 는 이웃한 위치들 사이의 의존성을 모델링하는 방식을 뜻하며, _은닉_ 부분은 상태가 직접 관찰되지 않고 숨겨져 있음을 나타냅니다.
 
-__
+
 
 연습 문제 2.5
 
 그림 2.19와 유사한 그림을 다시 그리되, 두 가지 다른 분포를 포함시키세요: 균등 분포(Beta(1,1)임)와 Beta(\\(1/2, 1/2\\))입니다. 무엇을 발견했나요?
 
-__
+
 
 해결책
 
-__
+
 
     
     
@@ -1846,7 +1845,7 @@ __
     ggplot(dfbetas) +
       geom_line(aes(x = p, y = dbeta, colour = pars)) +
       theme(legend.title = element_blank()) +
-      geom_vline(aes(xintercept = 0.25), colour = "#990000", linetype = "dashed")__
+      geom_vline(aes(xintercept = 0.25), colour = "#990000", linetype = "dashed")
 
 [![](02-chap_files/figure-html/fig-histobeta4-1-1.png)](02-chap_files/figure-
 html/fig-histobeta4-1-1.png "그림 2.30: 서로 다른 매개변수 선택에 대한 베타 밀도 함수.")
@@ -1855,7 +1854,7 @@ html/fig-histobeta4-1-1.png "그림 2.30: 서로 다른 매개변수 선택에 �
 
 매개변수가 1보다 큰 베타 분포들이 단봉형(unimodal)인 반면, Beta(0.5, 0.5) 분포는 이봉형(bimodal)이고 Beta(1, 1)은 평평하며 모드가 없습니다.
 
-__
+
 
 연습 문제 2.6
 
@@ -1914,3 +1913,11 @@ Robert, Christian, and George Casella. 2009. _Introducing Monte Carlo Methods
 with R_. Springer Science & Business Media.
 
 페이지는 R 버전 4.5.1 (2025-06-13)을 사용하여 2025-09-01 01:33에 빌드되었습니다.
+## 2.9 요약
+
+이 장에서는 데이터로부터 모델 파라미터를 추정하는 두 가지 주요 접근 방식인 **최대 우도 추정(Maximum Likelihood Estimation, MLE)**과 **베이지안(Bayesian) 추론**을 소개했습니다.
+
+*   **MLE**: 관측된 데이터를 얻을 가능성(우도)을 최대화하는 파라미터 값을 찾습니다.
+*   **베이지안 추론**: 파라미터에 대한 사전 지식(사전 분포)을 데이터(우도)와 결합하여 사후 분포를 업데이트합니다.
+
+또한 통계적 모델링에서 **이항 분포**, **푸아송 분포** 등 다양한 확률 분포가 어떻게 사용되는지 살펴보았습니다. 이러한 기초 지식은 이후 장에서 다룰 더 복잡한 생물학적 데이터 분석의 토대가 됩니다.

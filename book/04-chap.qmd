@@ -1,3 +1,5 @@
+# 유한 혼합 모델 (Finite Mixture Models)
+
 ![](imgs/t_distribution.png)
 
 생물학적 데이터 분석의 주요 과제 중 하나는 이질성(heterogeneity)을 다루는 것입니다. 우리가 관심을 갖는 양들은 종종 단순하고 단봉형(unimodal)인 "교과서적인 분포"를 보여주지 않습니다. 예를 들어, [2장](02-chap.html)의 마지막 부분에서 [그림 2.27](02-chap.html#fig-ScoreMixture-1)의 서열 점수 히스토그램이 CpG 섬과 비섬(non-islands)에 해당하는 두 개의 별개 모드(modes)를 가지고 있음을 보았습니다. 우리는 이 데이터를 몇 가지(이 경우 두 개) 성분의 단순한 혼합물로 볼 수 있습니다. 이를 **유한 혼합물(finite mixtures)**이라고 부릅니다. 다른 혼합물은 우리가 가진 관측치 수만큼이나 많은 성분을 포함할 수도 있습니다. 이를 **무한 혼합물(infinite mixtures)**이라고 부릅니다1.
@@ -39,7 +41,7 @@
     
     
     coinflips = (runif(10000) > 0.5)
-    table(coinflips)__
+    table(coinflips)
     
     
     coinflips
@@ -58,24 +60,24 @@ fairmix = vapply(coinflips, oneFlip, numeric(1))
 library("ggplot2")
 library("dplyr")
 ggplot(tibble(value = fairmix), aes(x = value)) +
-     geom_histogram(fill = "purple", binwidth = 0.1)__
+     geom_histogram(fill = "purple", binwidth = 0.1)
 
 [![](04-chap_files/figure-html/fig-twocoins-1.png)](04-chap_files/figure-
 html/fig-twocoins-1.png "그림 4.1: 두 정규 분포의 공정한 혼합물로부터 얻은 10,000개의 난수 히스토그램. 히스토그램의 왼쪽 부분은 (A)에서 생성된 숫자들이 지배적이고, 오른쪽은 (B)에서 생성된 숫자들이 지배적입니다.")
 
 그림 4.1: 두 정규 분포의 공정한 혼합물로부터 얻은 10,000개의 난수 히스토그램. 히스토그램의 왼쪽 부분은 (A)에서 생성된 숫자들이 지배적이고, 오른쪽은 (B)에서 생성된 숫자들이 지배적입니다.
 
-__
+
 
 질문 4.1
 
 R의 벡터화된 구문을 사용하여 `vapply` 루프를 제거하고 `fairmix` 벡터를 더 효율적으로 생성하려면 어떻게 해야 할까요?
 
-__
+
 
 해결책
 
-__
+
 
     
     
@@ -83,19 +85,19 @@ __
     sds   = c(0.5, 0.5)
     values = rnorm(length(coinflips),
                    mean = ifelse(coinflips, means[1], means[2]),
-                   sd   = ifelse(coinflips, sds[1],   sds[2]))__
+                   sd   = ifelse(coinflips, sds[1],   sds[2]))
 
-__
+
 
 질문 4.2
 
 개선된 코드를 사용하여 백만 번의 동전 던지기를 수행하고 200개의 빈(bin)을 가진 히스토그램을 만들어 보세요. 무엇을 알 수 있나요?
 
-__
+
 
 해결책
 
-__
+
 
     
     
@@ -105,7 +107,7 @@ __
                      mean = ifelse(coinflips, means[1], means[2]),
                      sd   = ifelse(coinflips, sds[1],   sds[2])))
     ggplot(fair, aes(x = values)) +
-         geom_histogram(fill = "purple", bins = 200)__
+         geom_histogram(fill = "purple", bins = 200)
 
 [![](04-chap_files/figure-html/fig-
 limitinghistogram-1.png)](04-chap_files/figure-html/fig-
@@ -119,25 +121,25 @@ limitinghistogram-1.png "그림 4.2: 그림 4.1과 유사하지만 백만 개의
 
 \[ \phi(x)=\frac{1}{\sigma \sqrt{2\pi}}e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}. \]
 
-__
+
 
 질문 4.3
 
   1. `coinflips`가 `TRUE`인 `fair$values` 값들에 대한 히스토그램을 그리세요. 힌트: `aes` 호출 시 `y = after_stat(density)`를 사용하고(이는 수직축이 빈도를 나타냄을 의미함), binwidth를 0.01로 설정하세요.
   2. \(\phi(z)\)에 해당하는 선을 겹쳐서 그리세요.
 
-__
+
 
 해결책
 
-__
+
 
     
     
     ggplot(dplyr::filter(fair, coinflips), aes(x = values)) +
       geom_histogram(aes(y = after_stat(density)), fill = "purple", binwidth = 0.01) +
       stat_function(fun = dnorm, color = "red",
-                    args = list(mean = means[1], sd = sds[1]))__
+                    args = list(mean = means[1], sd = sds[1]))
 
 [![](04-chap_files/figure-html/fig-
 overlaydensity-1.png)](04-chap_files/figure-html/fig-
@@ -158,7 +160,7 @@ overlaydensity-1.png "그림 4.3: 정규 분포 N(\mu=1,\sigma^2=0.5^2)으로부
       f = 0.5 * dnorm(x, mean = means[1], sd = sds[1]) +
           0.5 * dnorm(x, mean = means[2], sd = sds[2]))
     ggplot(fairtheory, aes(x = x, y = f)) +
-      geom_line(color = "red", linewidth = 1.5) + ylab("mixture density")__
+      geom_line(color = "red", linewidth = 1.5) + ylab("mixture density")
 
 [![](04-chap_files/figure-html/fig-twodensity-1.png)](04-chap_files/figure-
 html/fig-twodensity-1.png "그림 4.4: 혼합물의 이론적 밀도.")
@@ -172,23 +174,23 @@ html/fig-histmystery-1.png "그림 4.5: 인식하기 더 어려운 두 정규 �
 
 그림 4.5: 인식하기 더 어려운 두 정규 분포의 혼합물.
 
-__
+
 
 질문 4.4
 
 그림 4.5는 분산이 동일한 두 정규 분포의 공정한 혼합물 히스토그램입니다. 성분 분포의 두 _평균_ 매개변수를 추측할 수 있나요? 힌트: 시행착오를 통해 다양한 혼합물을 시뮬레이션하여 일치하는 히스토그램을 만들 수 있는지 확인할 수 있습니다. 이 장의 R 코드를 살펴보면 데이터가 정확히 어떻게 생성되었는지 알 수 있습니다.
 
-__
+
 
 해결책
 
-__
+
 
 다음 코드는 동전의 _앞면_에서 생성된 점은 빨간색으로, _뒷면_에서 생성된 점은 파란색으로 표시합니다. 그림 4.6에 표시된 출력 결과는 두 기저 분포를 보여줍니다.
 
     
     
-    head(mystery, 3)__
+    head(mystery, 3)
     
     
     # A tibble: 3 × 2
@@ -204,7 +206,7 @@ ggplot(mystery, aes(x = values)) +
   geom_histogram(data = dplyr::filter(mystery, coinflips),
      fill = "red", alpha = 0.2, breaks = br) +
   geom_histogram(data = dplyr::filter(mystery, !coinflips),
-     fill = "darkblue", alpha = 0.2, breaks = br) __
+     fill = "darkblue", alpha = 0.2, breaks = br)
 
 [![](04-chap_files/figure-html/fig-
 betterhistogram-1-1.png)](04-chap_files/figure-html/fig-
@@ -221,7 +223,7 @@ betterhistogram-1-1.png "그림 4.6: 그림 4.5의 혼합물이지만, 두 성�
          fill = "red", alpha = 0.2, breaks = br) +
       geom_histogram(data = dplyr::filter(mystery, !coinflips),
          fill = "darkblue", alpha = 0.2, breaks = br) +
-      geom_histogram(fill = "purple", breaks = br, alpha = 0.2)__
+      geom_histogram(fill = "purple", breaks = br, alpha = 0.2)
 
 [![](04-chap_files/figure-html/fig-
 comparecomponents-1-1.png)](04-chap_files/figure-html/fig-
@@ -229,17 +231,17 @@ comparecomponents-1-1.png "그림 4.7: 그림 4.6과 유사하지만, 두 혼합
 
 그림 4.7: 그림 4.6과 유사하지만, 두 혼합 성분에 대해 누적 막대(stacked bars)를 사용한 경우.
 
-__
+
 
 질문 4.5
 
 왜 그림 4.7의 막대 높이는 그림 4.5와 같지만, 그림 4.6의 막대 높이는 그렇지 않을까요?
 
-__
+
 
 해결책
 
-__
+
 
 그림 4.7과 4.5에서 각 카운트는 빈(bin) 안의 수직 공간의 서로 다른 조각을 차지합니다. 그림 4.6에서는 겹치는(더 어두운) 영역에서 동일한 빈에 떨어지는 일부 카운트들이 서로 겹쳐서 그려지게 됩니다.
 
@@ -280,7 +282,7 @@ __
     u = sample(2, size = 100, replace = TRUE, prob = c(lambda, 1-lambda))
     x = rnorm(length(u), mean = mus[u])
     dux = tibble(u, x)
-    head(dux)__
+    head(dux)
     
     
     # A tibble: 6 × 2
@@ -301,7 +303,7 @@ __
 
     
     
-group_by(dux, u) |> summarize(mu = mean(x), sigma = sd(x))__
+group_by(dux, u) |> summarize(mu = mean(x), sigma = sd(x))
     
     
     # A tibble: 2 × 3
@@ -311,23 +313,23 @@ group_by(dux, u) |> summarize(mu = mean(x), sigma = sd(x))__
     2     2  1.41   1.04
     
     
-table(dux$u) / nrow(dux)__
+table(dux$u) / nrow(dux)
     
     
        1    2 
     0.55 0.45 
 
-__
+
 
 질문 4.6
 
 혼합 비율 \(\lambda=\frac{1}{2}\)은 알고 있지만 \(u_i\)는 모른다고 가정해 봅시다. 이 경우 밀도는 \(\frac{1}{2}\phi_1(x)+\frac{1}{2}\phi_2(x)\)입니다. (로그) 우도를 직접 써보세요. 여기서 MLE를 명시적으로 구하는 것을 방해하는 요인은 무엇인가요?
 
-__
+
 
 해결책
 
-__
+
 
 정규 분포의 유한 혼합물에 대한 우도 계산에 대해서는, 예를 들어 Shalizi ([2017](16-chap.html#ref-CosmaShalizi2017))의 _혼합 모델(Mixture Models)_ 장을 참조하세요. "혼합 모델을 추정하려 할 때, 우리는 사후 레이블 확률(posterior label probabilities)에 의해 주어지는 가중치를 사용하여 가중 최대 우도(weighted maximum likelihood)를 수행하게 됩니다. 거듭하지만, 이 확률들은 우리가 추정하려는 매개변수들에 의존하므로, 일종의 악순환이 생기는 것 같습니다."
 
@@ -367,17 +369,17 @@ E 단계는 \(Q\)의 핵심 요소인 \(p(u\,|\, x, \theta_t)\)를 계산하는 
 
 이 두 단계(E와 M)는 개선 사항이 작아질 때까지 반복됩니다; 이는 우리가 우도의 평평한 부분에 도달했으며 최댓값에 이르렀다는 수치적 지표입니다. 반복 궤적은 시작 지점에 따라 달라지겠지만, 도달하는 지점은 달라지지 않기를 바랍니다. 이는 산 정상에 오르는 것과 비슷합니다. 산 정상에 오르는 길은 시작 지점에 따라 다를 수 있고 경로도 다를 수 있지만, 산봉우리가 하나만 있고 여러 개가 아닌 이상 항상 정상으로 이어집니다. 따라서 예방 조치로서, 이러한 절차를 서로 다른 시작 지점에서 여러 번 반복하여 항상 동일한 답을 얻는지 확인하는 것이 좋습니다.
 
-__
+
 
 질문 4.7
 
 여러 R 패키지에서 **[mclust](https://cran.r-project.org/web/packages/mclust/)**, **[EMcluster](https://cran.r-project.org/web/packages/EMcluster/)**, **[EMMIXskew](https://cran.r-project.org/web/packages/EMMIXskew/)**를 포함한 EM 구현을 제공합니다. 하나를 선택하여 서로 다른 시작 값으로 EM 함수를 여러 번 실행해 보세요. 그런 다음 **[mixtools](https://cran.r-project.org/web/packages/mixtools/)** 패키지의 `normalmixEM` 함수를 사용하여 출력을 비교해 보세요.
 
-__
+
 
 해결책
 
-__
+
 
 여기서는 **[mixtools](https://cran.r-project.org/web/packages/mixtools/)**의 출력을 보여줍니다.
 
@@ -389,13 +391,13 @@ __
     gm = normalmixEM(y, k = 2, 
                         lambda = c(0.5, 0.5),
                         mu = c(-0.01, 0.01), 
-                        sigma = c(3, 3))__
+                        sigma = c(3, 3))
     
     
     number of iterations= 134 
     
     
-    with(gm, c(lambda, mu, sigma, loglik))__
+    with(gm, c(lambda, mu, sigma, loglik))
     
     
     [1]    0.9263    0.0737   -0.1859    1.9216    0.6134    0.4746 -170.5662
@@ -424,7 +426,7 @@ ChIP-Seq 데이터의 예제를 살펴봅시다. 이 데이터는 염색질 면�
 
     
     
-    binTFBS __
+    binTFBS
     
     
     Summary: bin-level data (class: BinData)
@@ -444,7 +446,7 @@ ChIP-Seq 데이터의 예제를 살펴봅시다. 이 데이터는 염색질 면�
     
     bincts = print(binTFBS)
     ggplot(bincts, aes(x = tagCount)) +
-      geom_histogram(binwidth = 1, fill = "forestgreen")__
+      geom_histogram(binwidth = 1, fill = "forestgreen")
 
 [![](04-chap_files/figure-html/fig-chipseqzeros-1.png)](04-chap_files/figure-
 html/fig-chipseqzeros-1.png "그림 4.8: ChIP-Seq 데이터 세트에서 22번 염색체를 따라 200nt 윈도우에서 발견된 결합 부위의 수.")
@@ -453,7 +455,7 @@ html/fig-chipseqzeros-1.png "그림 4.8: ChIP-Seq 데이터 세트에서 22번 �
 
 그림 4.8에서 우리는 0이 아주 많다는 것을 알 수 있는데, 비록 이 플롯만으로는 다른 작은 숫자들(\(1,2,...\))의 빈도를 고려할 때 0의 개수가 정말로 특별한지는 즉각적으로 명확하지 않습니다.
 
-__
+
 
 질문 4.8
 
@@ -461,16 +463,16 @@ __
 
   2. 카운트가 0인 빈(bin)의 비율인 \(\pi_0\)을 추정하세요.
 
-__
+
 
 해결책
 
-__
+
 
     
     
     ggplot(bincts, aes(x = tagCount)) + scale_y_log10() +
-       geom_histogram(binwidth = 1, fill = "forestgreen")__
+       geom_histogram(binwidth = 1, fill = "forestgreen")
 
 [![](04-chap_files/figure-html/fig-
 ChipseqHistlogY-1.png)](04-chap_files/figure-html/fig-
@@ -493,7 +495,7 @@ quadwts = rnorm(length(nuclt),
                 mean = masses[nuclt],
                 sd   = sd)
 ggplot(tibble(quadwts = quadwts), aes(x = quadwts)) +
-  geom_histogram(bins = 100, fill = "purple")__
+  geom_histogram(bins = 100, fill = "purple")
 
 [![](04-chap_files/figure-html/fig-
 nucleotideweights-1-1.png)](04-chap_files/figure-html/fig-
@@ -501,19 +503,19 @@ nucleotideweights-1-1.png "그림 4.10: 7,000개 뉴클레오타이드 질량 �
 
 그림 4.10: 7,000개 뉴클레오타이드 질량 측정 시뮬레이션.
 
-__
+
 
 질문 4.9
 
 이 시뮬레이션 실험을 \(N=1000\)개의 뉴클레오타이드 측정으로 반복해 보세요. 히스토그램에서 무엇을 발견했나요?
 
-__
+
 
 질문 4.10
 
 \(N=7000\)이지만 표준 편차가 10이면 어떻게 될까요?
 
-__
+
 
 질문 4.11
 
@@ -530,7 +532,7 @@ __
     
     
     library("HistData")
-    ZeaMays$diff __
+    ZeaMays$diff
     
     
      [1]  6.125 -8.375  1.000  2.000  0.750  2.875  3.500  5.125  1.750  3.625
@@ -538,7 +540,7 @@ __
     
     
     ggplot(ZeaMays, aes(x = diff, ymax = 1/15, ymin = 0)) +
-      geom_linerange(linewidth = 1, col = "forestgreen") + ylim(0, 0.1)__
+      geom_linerange(linewidth = 1, col = "forestgreen") + ylim(0, 0.1)
 
 [![](04-chap_files/figure-html/fig-ecdfZea-1.png)](04-chap_files/figure-
 html/fig-ecdfZea-1.png "그림 4.11: 관측된 표본은 각 값에서의 점 질량들의 혼합물로 보여질 수 있습니다 (실제 점 질량은 너비가 전혀 없는 막대일 것입니다).")
@@ -581,36 +583,36 @@ html/fig-ecdfZea-1.png "그림 4.11: 관측된 표본은 각 값에서의 점 �
       median(ZeaMays$diff[i])
     })
     ggplot(tibble(medians = meds), aes(x = medians)) +
-      geom_histogram(bins = 30, fill = "purple")__
+      geom_histogram(bins = 30, fill = "purple")
 
 [![](04-chap_files/figure-html/fig-bootmedian-1.png)](04-chap_files/figure-
 html/fig-bootmedian-1.png "그림 4.14: Zea Mays 차이의 중앙값에 대한 붓스트랩 표집 분포.")
 
 그림 4.14: Zea Mays 차이의 중앙값에 대한 붓스트랩 표집 분포.
 
-__
+
 
 질문 4.12
 
 이 시뮬레이션들에 기초하여 중앙값에 대한 99% 신뢰 구간을 추정해 보세요. 이 구간과 0 사이의 중첩을 보고 무엇을 결론지을 수 있나요?
 
-__
+
 
 질문 4.13
 
 **[bootstrap](https://cran.r-project.org/web/packages/bootstrap/)** 패키지의 `bootstrap` 함수를 사용하여 `median`과 `mean` 모두에 대해 동일한 분석을 다시 수행해 보세요. 평균과 중앙값의 표집 분포 사이에서 어떤 차이점을 발견했나요?
 
-__
+
 
 해결책
 
-__
+
 
     
     
     library("bootstrap")
     bootstrap(ZeaMays$diff, B, mean)
-    bootstrap(ZeaMays$diff, B, median)__
+    bootstrap(ZeaMays$diff, B, median)
 
 #### 왜 비모수적(nonparametric)인가요?
 
@@ -622,39 +624,39 @@ __
 
 이름에도 불구하고, 비모수적 방법은 매개변수를 사용하지 않는 방법이 아닙니다: 모든 통계적 방법은 알려지지 않은 양을 추정합니다.
 
-__
+
 
 질문 4.14
 
 표본이 \(n=3\)개의 서로 다른 값들로 구성되어 있다면, 몇 가지의 서로 다른 붓스트랩 재표본이 가능할까요? \(n=15\)인 경우에 대해서도 답해 보세요.
 
-__
+
 
 해결책
 
-__
+
 
 모든 붓스트랩 재표본의 집합은 합이 \(n\)인 \(n\)개 정수 벡터들의 집합과 동일합니다. 관측치 \(x_1, x_2, ..., x_n\)이 붓스트랩 표본에 나타나는 횟수를 \(\mathbf{k} = (k_1, k_2, ..., k_n)\)이라고 합시다. 각 \(k_i\)를 (다항 분포에서와 같이) 상자로 생각할 수 있으며, \(n\)개의 공을 떨어뜨릴 \(n\)개의 상자가 있습니다. 구성(configurations)의 수를 세는 방법은 \(n\)개의 공을 상자들에 나누는 방법의 수를 세는 것입니다. 즉, 공을 나타내는 `o`를 \(n\)번 쓰고 그 사이에 구분선 `|`를 \(n-1\)번 쓰는 것입니다. 따라서 우리는 `o`(공)나 `|`(구분선) 중 하나를 선택해야 하는 \(2n-1\)개의 자리를 채워야 합니다. \(n=3\)인 경우, 가능한 배치는 `oo||o`일 수 있으며, 이는 \(\mathbf{k} = (2,0,1)\)에 해당합니다. 일반적으로 이 숫자는 \({2n-1} \choose {n-1}\)이며, 따라서 \(n=3\)과 \(15\)에 대한 답은 다음과 같습니다:
 
     
     
-c(N3 = choose(5, 3), N15 = choose(29, 15))__
+c(N3 = choose(5, 3), N15 = choose(29, 15))
     
     
           N3      N15 
           10 77558760 
 
-__
+
 
 질문 4.15
 
 **[bootstrap](https://cran.r-project.org/web/packages/bootstrap/)** 패키지에 구현된 붓스트랩을 사용할 때 발생할 수 있는 두 가지 유형의 오류는 무엇인가요? 이들 중 하나를 개선하기 위해 어떤 매개변수를 수정할 수 있나요?
 
-__
+
 
 해결책
 
-__
+
 
 무작위 재표본 추출을 통한 데이터 하위 집합의 몬테카를로 시뮬레이션은 전수 조사 붓스트랩(exhaustive bootstrap)을 근사합니다 ([Diaconis and Holmes 1994](16-chap.html#ref-Diaconis1994)). `bootstrap` 함수의 `nboot` 인수 크기를 늘리면 몬테카를로 오류를 줄일 수 있지만, 전수 조사 붓스트랩 또한 여전히 정확하지는 않습니다: 우리는 여전히 실제 분포 대신 데이터의 근사적인 분포 함수를 사용하고 있기 때문입니다. 표본 크기가 작거나 원래 표본에 편향이 있는 경우, `nboot`를 아무리 크게 선택하더라도 근사는 여전히 상당히 나쁠 수 있습니다.
 
@@ -676,7 +678,7 @@ __
 
     
     
-w = rexp(10000, rate = 1)__
+w = rexp(10000, rate = 1)
 
 **레벨 2** 이 `w`들은 `rnorm`을 사용하여 생성된 평균 \(\mu\)인 정규 변수들의 분산 역할을 합니다.
 
@@ -685,7 +687,7 @@ w = rexp(10000, rate = 1)__
     mu  = 0.3
     lps = rnorm(length(w), mean = mu, sd = sqrt(w))
     ggplot(data.frame(lps), aes(x = lps)) +
-      geom_histogram(fill = "purple", binwidth = 0.1)__
+      geom_histogram(fill = "purple", binwidth = 0.1)
 
 [![](04-chap_files/figure-html/fig-
 Laplacedistribution-1.png)](04-chap_files/figure-html/fig-
@@ -699,17 +701,17 @@ Laplacedistribution-1.png "그림 4.16: 라플라스 분포로부터 샘플링�
 
 4 이에 익숙하지 않다면 걱정하지 마세요. 그 경우 이 문장은 그냥 건너뛰셔도 됩니다.
 
-__
+
 
 질문 4.16
 
 대칭 라플라스 분포를 따르는 확률 변수를 정규 및 지수 확률 변수들의 함수로 써보세요.
 
-__
+
 
 해결책
 
-__
+
 
 우리는 분산이 지수 변수 \(W\)로 생성되는 계층적 모델을 다음과 같이 쓸 수 있습니다:
 
@@ -725,7 +727,7 @@ __
     w  = rexp(10000, 1)
     alps = rnorm(length(w), theta + mu * w, sigma * sqrt(w))
     ggplot(tibble(alps), aes(x = alps)) +
-      geom_histogram(fill = "purple", binwidth = 0.1)__
+      geom_histogram(fill = "purple", binwidth = 0.1)
 
 [![](04-chap_files/figure-html/fig-
 ALaplacedistribution-1.png)](04-chap_files/figure-html/fig-
@@ -745,7 +747,7 @@ ALaplacedistribution-1.png "그림 4.17: 비대칭 라플라스 분포로부터 
 
 그림 4.18: 실제 데이터의 히스토그램. 두 분포 모두 비대칭 라플라스 분포로 모델링될 수 있습니다.
 
-__
+
 
 질문 4.17
 
@@ -776,7 +778,7 @@ __
 ggplot(tibble(x = rgamma(10000, shape = 2, rate = 1/3)),
        aes(x = x)) + geom_histogram(bins = 100, fill= "purple")
 ggplot(tibble(x = rgamma(10000, shape = 10, rate = 3/2)),
-       aes(x = x)) + geom_histogram(bins = 100, fill= "purple")__
+       aes(x = x)) + geom_histogram(bins = 100, fill= "purple")
 
 [![](04-chap_files/figure-html/fig-gammahist1-1.png)](04-chap_files/figure-
 html/fig-gammahist1-1.png "그림 4.20 (a): gamma(2, 1/3)")
@@ -801,7 +803,7 @@ html/fig-gammahist1-2.png "그림 4.20 (b): gamma(10, 3/2)")
     lambda = rgamma(10000, shape = 10, rate = 3/2)
     gp = rpois(length(lambda), lambda = lambda)
     ggplot(tibble(x = gp), aes(x = x)) +
-      geom_histogram(bins = 100, fill= "purple")__
+      geom_histogram(bins = 100, fill= "purple")
 
 [![](04-chap_files/figure-html/fig-
 generatepoissongamma-1.png)](04-chap_files/figure-html/fig-
@@ -811,7 +813,7 @@ generatepoissongamma-1.png "그림 4.21: 감마-포아송 계층 모델을 통�
 
 결과값들은 감마-포아송 혼합물로부터 왔다고 말합니다. 그림 4.21은 `gp`의 히스토그램을 보여줍니다.
 
-__
+
 
 질문 4.18
 
@@ -819,18 +821,18 @@ __
 
   2. 이 분포의 또 다른 이름은 무엇인가요? 힌트: **[vcd](https://cran.r-project.org/web/packages/vcd/)** 패키지의 `goodfit` 함수에 의해 제공되는 서로 다른 분포들을 시도해 보세요.
 
-__
+
 
 해결책
 
-__
+
 
     
     
     library("vcd")
     ofit = goodfit(gp, "nbinomial")
     plot(ofit, xlab = "")
-    ofit$par __
+    ofit$par
     
     
     $size
@@ -856,17 +858,17 @@ dgammapois-1.png "그림 4.23: 감마-포아송 분포를 생성하는 계층 �
 
 그림 4.23: 감마-포아송 분포를 생성하는 계층 모델의 시각화. 상단 패널은 평균 50(수직 검은색 선)과 분산 30인 감마 분포의 밀도를 보여줍니다. 하나의 특정 실험 반복에서 값 60이 실현되었다고 가정해 봅시다. 이것이 우리의 잠재 변수입니다. 관찰 가능한 결과는 해당 비율 매개변수를 가진 푸아송 분포에 따라 분포하며, 중간 패널에 표시되어 있습니다. 하나의 특정 실험에서 결과는 예를 들어 55일 수 있으며, 점선으로 표시된 초록색 선으로 나타나 있습니다. 전체적으로, 만약 우리가 이러한 두 개의 연속적인 무작위 과정을 여러 번 반복한다면, 결과는 하단 패널에 표시된 것과 같이 분포될 것입니다 – 이것이 감마-포아송 분포입니다.
 
-__
+
 
 질문 4.19
 
 설명을 위한 시뮬레이션보다 분석적인 유도에 더 관심이 있다면, 감마-포아송 확률 분포의 수학적 유도를 직접 작성해 보세요.
 
-__
+
 
 해결책
 
-__
+
 
 최종 분포는 2단계 과정의 결과임을 상기하세요:
 
@@ -882,7 +884,7 @@ __
 
 만약 \(x\)가 오직 유한한 값들의 집합만을 취한다면, 우리는 각각의 가능한 경우에 대해 \(f_\Gamma\)에 따른 그들의 확률로 가중치를 주어 합산함으로써 문제를 해결할 수 있을 것입니다. 하지만 \(x\)는 연속적이므로, 우리는 이산적인 합 대신 적분으로 써야 합니다. 우리는 \(K\)의 분포를 주변 분포(marginal)라고 부릅니다. 그 확률 질량 함수는 다음과 같습니다.
 
-\[ \begin{aligned} P(K=k)&=&\int_{x=0}^{\infty} \, f_\text{Pois}(k, \lambda=x)\; f_\Gamma(x, a, b) \;dx\\ &=& \int_{x=0}^{\infty} \frac{x^{k}e^{-x}}{k!}\,\frac{b^a}{\Gamma(a)} x^{a-1}e^{-bx}\; dx \end{aligned} \]
+\[ \begin{aligned} P(K=k)&=\int_{x=0}^{\infty} \, f_\text{Pois}(k, \lambda=x)\; f_\Gamma(x, a, b) \;dx\\ &= \int_{x=0}^{\infty} \frac{x^{k}e^{-x}}{k!}\,\frac{b^a}{\Gamma(a)} x^{a-1}e^{-bx}\; dx \end{aligned} \]
 
 항들을 정리하고 \(x\)와 무관한 항들을 적분 밖으로 꺼냅니다.
 
@@ -909,7 +911,7 @@ simdat = lapply(seq(10, 100, by = 10), function(lam)
       bind_rows() |
       tidyr::pivot_longer(cols = !lambda)
 ggplot(simdat, aes(x = factor(lambda), y = value)) + xlab(expression(lambda)) +
-  geom_violin() + facet_grid(rows = vars(name), scales = "free")__
+  geom_violin() + facet_grid(rows = vars(name), scales = "free")
 
 [![](04-chap_files/figure-html/fig-
 seriesofpoisson-1.png)](04-chap_files/figure-html/fig-
@@ -923,7 +925,7 @@ seriesofpoisson-1.png "그림 4.24: 여덟 가지 서로 다른 평균 lambda �
 
     
     
-    summarise(group_by(simdat, name, lambda), sd(value)) |> tidyr::pivot_wider(values_from = `sd(value)`)__
+    summarise(group_by(simdat, name, lambda), sd(value)) |> tidyr::pivot_wider(values_from = `sd(value)`)
     
     
     # A tibble: 10 × 3
@@ -954,7 +956,7 @@ seriesofpoisson-1.png "그림 4.24: 여덟 가지 서로 다른 평균 lambda �
              upper = quantile(u, 0.975),
              mu = mu)
       } ) |> bind_rows()
-    head(as.data.frame(simgp), 2)__
+    head(as.data.frame(simgp), 2)
     
     
         mean       sd lower upper mu
@@ -963,24 +965,24 @@ seriesofpoisson-1.png "그림 4.24: 여덟 가지 서로 다른 평균 lambda �
     
     
     ggplot(simgp, aes(x = mu, y = mean, ymin = lower, ymax = upper)) +
-      geom_point() + geom_errorbar()__
+      geom_point() + geom_errorbar()
 
 [![](04-chap_files/figure-html/fig-seriesofnb-1.png)](04-chap_files/figure-
 html/fig-seriesofnb-1.png "그림 4.25: 1부터 1024까지의 \mu 범위에 대한 감마-포아송 분포 측정 데이터.")
 
 그림 4.25: 1부터 1024까지의 \(\mu\) 범위에 대한 감마-포아송 분포 측정 데이터.
 
-__
+
 
 질문 4.20
 
 푸아송 분포 데이터에 대한 제곱근 함수와 유사하게, 이 데이터에 대해 분산을 안정화하는 변환을 어떻게 찾을 수 있을까요?
 
-__
+
 
 해결책
 
-__
+
 
 만약 우리가 `mu[1]`에 대응하는 (그리고 `simgp$mean[1]` 주변에 중심을 둔) 값들을 그들의 표준 편차 `simgp$sd[1]`로 나누고, `mu[2]`에 대응하는 값들을 그들의 표준 편차 `simgp$sd[2]`로 나누는 식이라면, 그 결과로 나오는 값들은 설계에 의해 1의 표준 편차(따라서 분산)를 가질 것입니다. 그리고 11개의 개별적인 변환을 정의하는 대신, 우리는 적절한 지점에서 적절한 기울기를 가진 하나의 조각별 선형(piecewise linear) **및** 연속 함수를 정의함으로써 우리의 목표를 달성할 수 있습니다.
 
@@ -990,7 +992,7 @@ simgp = mutate(simgp,
       slopes = 1 / sd,
       trsf   = cumsum(slopes * mean))
 ggplot(simgp, aes(x = mean, y = trsf)) +
-  geom_point() + geom_line() + xlab("")__
+  geom_point() + geom_line() + xlab("")
 
 [![](04-chap_files/figure-html/fig-pcwlin-1-1.png)](04-chap_files/figure-
 html/fig-pcwlin-1-1.png "그림 4.26: 그림 4.25의 데이터 분산을 안정화하는 조각별 선형 함수.")
@@ -1017,17 +1019,17 @@ html/fig-pcwlin-1-1.png "그림 4.26: 그림 4.25의 데이터 분산을 안정�
 
   * 만약 \(v(\mu)=\alpha\,\mu^2\)라면, 미분 방정식 4.19를 푸는 것은 \(g(x)=\log(x)\)를 줍니다. 이것이 왜 많은 데이터 분석 응용 분야에서 로그 변환이 그렇게 인기 있는지 설명해 줍니다: 데이터가 일정한 변동 계수(coefficient of variation)를 가질 때, 즉 표준 편차가 평균에 비례할 때마다 로그 변환은 분산 안정화 변환으로서 작용합니다.
 
-__
+
 
 질문 4.21
 
 \(v(\mu) = \mu + \alpha\,\mu^2\)와 연관된 분산 안정화 변환은 무엇인가요?
 
-__
+
 
 해결책
 
-__
+
 
 이 함수 \(v(\cdot)\)을 사용하여 미분 방정식 4.19를 풀려면, 다음 적분을 계산해야 합니다.
 
@@ -1053,7 +1055,7 @@ x  = seq(0, 24, by = 0.1)
 df = lapply(c(0, 0.05*2^(0:5)), function(a) 
   tibble(x = x, a = a, y = f(x, a))) %>% bind_rows()
 ggplot(df, aes(x = x, y = y, col = factor(a))) + 
-  geom_line() + labs(col = expression(alpha))__
+  geom_line() + labs(col = expression(alpha))
 
 [![](04-chap_files/figure-html/fig-
 plotvstgammapoisson-1-1.png)](04-chap_files/figure-
@@ -1067,7 +1069,7 @@ plotvstgammapoisson-1-1.png "그림 4.27: 서로 다른 \alpha 선택에 대한 
     
     
 f2 = function(x, a) ifelse (a==0, sqrt(x), acosh(2*a*x + 1) / (2*sqrt(a)))  
-with(df, max(abs(f2(x,a) - y)))__
+with(df, max(abs(f2(x,a) - y)))
     
     
     [1] 8.881784e-16
@@ -1081,13 +1083,13 @@ with(df, max(abs(f2(x,a) - y)))__
     
     
       a = c(0.2, 0.5, 1)
-      f(1e6, a) __
+      f(1e6, a)
     
     
     [1] 15.196731 10.259171  7.600903
     
     
-      1/(2*sqrt(a)) * (log(1e6) + log(4*a))__
+      1/(2*sqrt(a)) * (log(1e6) + log(4*a))
     
     
     [1] 15.196728 10.259170  7.600902
@@ -1140,7 +1142,7 @@ Kéry와 Royle ([2015](16-chap.html#ref-Kery2015))는 니치(niche) 및 공간 �
 
 ## 4.7 연습 문제
 
-__
+
 
 연습 문제 4.1
 
@@ -1149,20 +1151,20 @@ __
     
     
 mx = readRDS("../data/Myst.rds")$yvar
-str(mx)__
+str(mx)
     
     
      num [1:1800] 0.3038 0.0596 -0.0204 0.1849 0.2842 ...
     
     
-ggplot(tibble(mx), aes(x = mx)) + geom_histogram(binwidth = 0.025)__
+ggplot(tibble(mx), aes(x = mx)) + geom_histogram(binwidth = 0.025)
 
 우리는 먼저 `mx`에 있는 각 값들에 대해 각 성분에 대한 멤버십 가중치를 무작위로 할당하는 것으로 시작합니다.
 
     
     
 wA = runif(length(mx))
-wB = 1 - wA __
+wB = 1 - wA
 
 또한 관리용 변수들을 설정해야 합니다: `iter`는 EM 알고리즘의 반복 횟수를 셉니다; `loglik`은 현재의 로그 우도를 저장합니다; `delta`는 이전 반복에서 현재 반복까지의 로그 우도 변화를 저장합니다. 우리는 또한 알고리즘의 매개변수인 `tolerance`, `miniter`, `maxiter`를 정의합니다.
 
@@ -1173,7 +1175,7 @@ wB = 1 - wA __
     delta     = +Inf
     tolerance = 1e-12
     miniter   = 50
-    maxiter   = 1000 __
+    maxiter   = 1000
 
 아래 코드를 공부하고 다음 질문들에 답하세요:
 
@@ -1203,13 +1205,13 @@ wB = 1 - wA __
       delta = abs(loglikOld - loglik)
       iter = iter + 1
     }
-    iter __
+    iter
     
     
     [1] 447
     
     
-c(lambda, muA, muB, sdA, sdB)__
+c(lambda, muA, muB, sdA, sdB)
     
     
     [1]  0.4756 -0.1694  0.1473  0.0983  0.1498
@@ -1220,11 +1222,11 @@ EMillustrate-1-1.png "그림 4.28: EM 알고리즘 예제 데이터인 mx의 히
 
 그림 4.28: EM 알고리즘 예제 데이터인 `mx`의 히스토그램.
 
-__
+
 
 해결책
 
-__
+
 
 `while` 루프의 처음 다섯 줄은 **최대화(Maximization) 단계** 를 구현합니다. `wA`와 `wB`의 현재 값이 주어졌을 때, 우리는 최대 우도 추정량들을 사용하여 혼합 모델의 매개변수들을 추정합니다: 혼합 비율 `lambda`는 `wA`의 평균에 의해, 두 정규 분포 성분의 매개변수들(`muA`, `sdA`) 및 (`muB`, `sdB`)은 표본 평균과 표본 표준 편차에 의해 추정됩니다. 멤버십 가중치를 고려하기 위해, 우리는 가중 평균(`weighted.mean` 함수)과 가중 표준 편차를 사용합니다.
 
@@ -1238,28 +1240,28 @@ __
 
     
     
-gm = mixtools::normalmixEM(mx, k = 2)__
+gm = mixtools::normalmixEM(mx, k = 2)
     
     
     number of iterations= 215 
     
     
-    with(gm, c(lambda[1], mu, sigma))__
+    with(gm, c(lambda[1], mu, sigma))
     
     
     [1]  0.4757 -0.1694  0.1473  0.0983  0.1498
 
-__
+
 
 연습 문제 4.2
 
 우리는 왜 종종 우도 그 자체보다 우도의 로그를 고려할까요? 예를 들어 위에서의 EM 코드에서, 왜 우리는 로그 스케일에서의 확률을 가지고 작업했을까요?
 
-__
+
 
 해결책
 
-__
+
 
 (데이터 포인트들이 독립적으로 샘플링될 때마다) 우도는 종종 곱(product)의 형태를 취합니다. 예를 들어 식 4.4의 경우가 그러합니다. 우도 최적화를 위해 미분을 계산할 때, 곱의 미분법(product rule) 적용이 필요할 것입니다. 로그 스케일에서는 곱이 합으로 변하며, 합의 미분은 단지 개별 항들의 미분의 합일 뿐입니다.
 
@@ -1267,13 +1269,13 @@ __
 
 로그 확률 벡터 정규화를 위한 [Log-Sum-Exp 트릭](https://gregorygundersen.com/blog/2020/02/09/log-sum-exp/)에 관한 Gregory Gundersen의 포스팅 또한 참조하세요.
 
-__
+
 
 연습 문제 4.3
 
 4.4.3절의 추정치들인 `ofit$par`에 의해 주어진 매개변수들을 가진 감마-포아송 분포의 이론적 값들과 추정에 사용된 데이터를 QQ-플롯을 사용하여 비교하세요.
 
-__
+
 
 연습 문제 4.4
 
@@ -1282,7 +1284,7 @@ __
     
     
     library("flexmix")
-    data("NPreg")__
+    data("NPreg")
 
   1. 먼저 데이터를 플롯하고 점들이 어떻게 생성되었는지 추측해 보세요.
 
@@ -1290,21 +1292,21 @@ __
 
     
     
-m1 = flexmix(yn ~ x + I(x^2), data = NPreg, k = 2)__
+m1 = flexmix(yn ~ x + I(x^2), data = NPreg, k = 2)
 
   3. 혼합 성분들의 추정된 매개변수들을 살펴보고 실제 클래스 대 클러스터 멤버십을 교차 분류하는 정오표(truth table)를 만드세요. 객체 `m1`의 요약(summary)은 우리에게 무엇을 보여주나요?
 
   4. 데이터를 다시 플롯하되, 이번에는 각 점에 추정된 클래스에 따른 색상을 입히세요.
 
-__
+
 
 해결책
 
-__
+
 
     
     
-ggplot(NPreg, aes(x = x, y = yn)) + geom_point()__
+ggplot(NPreg, aes(x = x, y = yn)) + geom_point()
 
 [![](04-chap_files/figure-html/fig-npreg-1.png)](04-chap_files/figure-
 html/fig-npreg-1.png "그림 4.29: 점들은 두 가지 서로 다른 생성 과정으로부터 온 것처럼 보입니다. 하나는 선형이고 다른 하나는 이차(quadratic)입니다.")
@@ -1315,7 +1317,7 @@ html/fig-npreg-1.png "그림 4.29: 점들은 두 가지 서로 다른 생성 과
 
     
     
-    modeltools::parameters(m1, component = 1)__
+    modeltools::parameters(m1, component = 1)
     
     
                           Comp.1
@@ -1325,7 +1327,7 @@ html/fig-npreg-1.png "그림 4.29: 점들은 두 가지 서로 다른 생성 과
     sigma             3.47665584
     
     
-    modeltools::parameters(m1, component = 2)__
+    modeltools::parameters(m1, component = 2)
     
     
                          Comp.2
@@ -1338,7 +1340,7 @@ html/fig-npreg-1.png "그림 4.29: 점들은 두 가지 서로 다른 생성 과
 
     
     
-table(NPreg$class, modeltools::clusters(m1))__
+table(NPreg$class, modeltools::clusters(m1))
     
     
        
@@ -1350,7 +1352,7 @@ table(NPreg$class, modeltools::clusters(m1))__
 
     
     
-    summary(m1)__
+    summary(m1)
 
 요약 정보는 추정된 사전 확률 \(\hat\pi_k\), 두 클러스터에 할당된 관측치 수, \(p_{nk}>\delta\) (기본값 \(\delta=10^{-4}\))인 관측치 수, 그리고 후자 두 수치 사이의 비율을 보여줍니다. 잘 분리된 성분들의 경우, 0이 아닌 사후 확률 \(p_{nk}\)를 가진 관측치들의 큰 비율이 해당 클러스터에 할당되어야 하며, 이는 1에 가까운 비율을 주게 됩니다.
 
@@ -1359,25 +1361,25 @@ table(NPreg$class, modeltools::clusters(m1))__
     NPreg = mutate(NPreg, gr = factor(class))
     ggplot(NPreg, aes(x = x, y = yn, group = gr)) +
        geom_point(aes(colour = gr, shape = gr)) +
-       scale_colour_hue(l = 40, c = 180)__
+       scale_colour_hue(l = 40, c = 180)
 
 [![](04-chap_files/figure-html/fig-npregC-1.png)](04-chap_files/figure-
 html/fig-npregC-1.png "그림 4.30: 각 점에 추정된 클래스에 따라 색상을 입혀 flexmix를 사용한 회귀 분석 예제. 교차하는 지점에서 우리는 '식별 가능성(identifiability)' 문제를 가짐을 알 수 있습니다: 직선에 속하는 점들과 포물선에 속하는 점들을 구별할 수 없습니다.")
 
 그림 4.30: 각 점에 추정된 클래스에 따라 색상을 입혀 `flexmix`를 사용한 회귀 분석 예제. 교차하는 지점에서 우리는 '식별 가능성(identifiability)' 문제를 가짐을 알 수 있습니다: 직선에 속하는 점들과 포물선에 속하는 점들을 구별할 수 없습니다.
 
-__
+
 
 연습 문제 4.5
 
 **다른 계층적 노이즈 모델들:**  
 분자 생물학 기술적 변동 모델링을 위해 다른 무한 혼합물들의 사용을 탐구한 두 논문을 찾으세요.
 
-__
+
 
 해결책
 
-__
+
 
 Chen, Xie, Story ([2011](16-chap.html#ref-Chen2011))의 논문은 비드 어레이(bead arrays)에서의 배경 노이즈 모델링을 위해 지수-푸아송 모델을 탐구합니다. Wills 등 ([2013](16-chap.html#ref-Wills2013))은 여러 푸아송 혼합 모델들을 비교합니다.
 

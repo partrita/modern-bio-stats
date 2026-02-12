@@ -1,3 +1,5 @@
+# 군집화 (Clustering)
+
 ![](imgs/starlings_copyrightfree.jpg)
 
 세포, 질병, 유기체의 범주를 찾고 그 이름을 짓는 것은 자연 과학의 핵심 활동입니다. [4장](04-chap.html)에서 우리는 일부 데이터가 명확한 모수적 생성 모델을 가진 서로 다른 그룹이나 모집단으로부터의 혼합물로 모델링될 수 있음을 보았습니다. 우리는 그러한 예제들에서 성분들을 분리해 내기 위해 EM 알고리즘을 어떻게 사용할 수 있는지 보았습니다. 이제 우리는 **클러스터(clusters)** 가 반드시 예쁜 타원형1 모양을 가질 필요는 없는 경우로 그룹들을 풀어내는 아이디어를 확장해 보려 합니다.
@@ -59,7 +61,7 @@ David Freedman은 이 발견으로 이어진 모든 단계에 대해 훌륭하�
 
 [4장](04-chap.html)에서 우리는 이미 그룹을 찾아내기 위한 한 가지 기법인 EM 알고리즘을 공부했습니다. 이 장에서 우리가 탐구하는 기법들은 더 일반적이며 더 복잡한 데이터에 적용될 수 있습니다. 이들 중 상당수는 관측치 쌍 사이의 거리에 기초하며(이는 전체 대 전체일 수도 있고, 때로는 전체 대 일부일 수도 있음), 정규 분포, 감마-포아송 등과 같은 특정 분포군을 포함하는 데이터의 생성 메커니즘에 대해 명시적인 가정을 하지 않습니다. 문헌과 과학 소프트웨어 분야에는 군집화 알고리즘이 넘쳐나며, 이는 위협적으로 느껴질 수 있습니다. 사실 이는 데이터 유형의 다양성과 각 분야에서 추구하는 목표의 다양성과 연결되어 있습니다.
 
-__
+
 
 태스크
 
@@ -133,17 +135,17 @@ __
 
 그림 5.6: 두 클러스터 중심으로부터 새로운 데이터 점(빨간색)의 거리를 측정하기 위한 마할라노비스 거리 사용 예시.
 
-__
+
 
 질문 5.1
 
 그림 5.6의 두 클러스터 중심 중 빨간색 점은 어느 쪽에 더 가깝나요?
 
-__
+
 
 해결책
 
-__
+
 
 나이브한 대답은 유클리드 메트릭을 사용하여 그 점이 왼쪽 클러스터에 더 가깝다고 결정할 것입니다. 하지만 특징들이 서로 다른 범위와 상관관계를 가지고 있으며, 이들이 두 클러스터 사이에서조차 다르다는 것을 알 수 있으므로, 클러스터 특이적인 마할라노비스 거리를 사용하는 것이 타당합니다. 그림은 두 클러스터에 대한 등고선을 보여줍니다. 이들은 밀도 추정으로부터 얻어졌습니다. 마할라노비스 거리는 이러한 등고선들을 타원으로 근사합니다. 빨간색 점과 각 클러스터 중심 사이의 거리는 가로지르는 등고선의 수에 해당합니다. 오른쪽 그룹이 더 넓게 퍼져 있기 때문에, 빨간색 점은 사실 그 쪽에 더 가깝다는 것을 알 수 있습니다.
 
@@ -161,7 +163,7 @@ R의 `dist` 함수는 \(n\)개 객체 사이의 완전한 \(n 	imes n\) 거리 �
     my  = c(1, 0, 1, 1, 0, 1)
     mz  = c(1, 1, 1, 0, 1, 1)
     mat = rbind(mx, my, mz)
-    dist(mat)__
+    dist(mat)
     
     
              mx       my
@@ -169,7 +171,7 @@ R의 `dist` 함수는 \(n\)개 객체 사이의 완전한 \(n 	imes n\) 거리 �
     mz 2.000000 1.732051
     
     
-    dist(mat, method = "binary")__
+    dist(mat, method = "binary")
     
     
               mx        my
@@ -181,13 +183,13 @@ R의 `dist` 함수는 \(n\)개 객체 사이의 완전한 \(n 	imes n\) 거리 �
     
     
     load("../data/Morder.RData")
-    sqrt(sum((Morder[1, ] - Morder[2, ])^2))__
+    sqrt(sum((Morder[1, ] - Morder[2, ])^2))
     
     
     [1] 5.593667
     
     
-    as.matrix(dist(Morder))[2, 1]__
+    as.matrix(dist(Morder))[2, 1]
     
     
     [1] 5.593667
@@ -197,7 +199,7 @@ HIV 균주들 사이에 위에서 정의한 자카드 거리를 어떻게 계산
     
     
     mut = read.csv("../data/HIVmutations.csv")
-    mut[1:3, 10:16]__
+    mut[1:3, 10:16]
     
     
       p32I p33F p34Q p35G p43T p46I p46L
@@ -205,24 +207,24 @@ HIV 균주들 사이에 위에서 정의한 자카드 거리를 어떻게 계산
     2    0    1    0    0    0    1    0
     3    0    1    0    0    0    0    0
 
-__
+
 
 질문 5.2
 
 HIV 데이터 `mut`의 돌연변이들 사이의 자카드 거리(R 패키지 **[vegan](https://cran.r-project.org/web/packages/vegan/)** 의 `vegdist` 함수로 사용 가능)와 상관관계 기반 거리를 비교해 보세요.
 
-__
+
 
 해결책
 
-__
+
 
     
     
     library("vegan")
     mutJ = vegdist(mut, "jaccard")
     mutC = sqrt(2 * (1 - cor(t(mut))))
-    mutJ __
+    mutJ
     
     
           1     2     3     4
@@ -232,7 +234,7 @@ __
     5 1.000 0.800 0.889 0.900
     
     
-    as.dist(mutC)__
+    as.dist(mutC)
     
     
          1    2    3    4
@@ -297,17 +299,17 @@ kmeansastep1-3.png)](05-chap_files/figure-html/fig-clust-kmeansastep1-3.png
 
 이른바 \(k\)-방법들은 군집화를 위한 가장 일반적인 오프더쉘프(off-the-shelf) 방법들입니다; 이들은 클러스터들의 크기가 비슷하고 볼록한(blob 모양) 경우에 특히 잘 작동합니다. 반면에, 실제 클러스터들의 크기가 매우 다르다면 큰 클러스터들이 쪼개지는 경향이 있으며, 비구형(non-spherical)이나 비타원형 모양을 가진 그룹들의 경우에도 마찬가지입니다.
 
-__
+
 
 질문 5.3
 
 \(k\)-평균 알고리즘은 평균 지점을 계산하는 것과 점들을 클러스터에 할당하는 것을 번갈아 가며 수행합니다. 이 교대하는 반복적인 방법이 EM 알고리즘과는 어떻게 다른가요?
 
-__
+
 
 해결책
 
-__
+
 
 EM 알고리즘에서는 각 점이 자신에게 할당된 확률적 가중치를 통해 모든 그룹의 평균 계산에 참여합니다. \(k\)-평균 방법에서는 점들이 클러스터에 속하거나 속하지 않거나 둘 중 하나이므로, 각 점은 오직 하나의 클러스터 중심 계산에만 전적으로 참여합니다.
 
@@ -315,17 +317,17 @@ EM 알고리즘에서는 각 점이 자신에게 할당된 확률적 가중치�
 
 서로 다른 초기 중심이나 재표본 추출된 데이터 세트를 사용하여 과정을 여러 번 반복하는 영리한 체계들이 있습니다. 동일한 데이터에 대해 군집화 절차를 여러 번 반복하되 시작 지점을 다르게 하는 것은 Diday와 Brito ([1989](16-chap.html#ref-Diday1989))에 따르면 **강한 형태(strong forms)** 를 생성합니다. 데이터 세트를 반복적으로 하위 샘플링(subsampling)하고 군집화 방법을 적용하면 "거의 항상" 함께 묶이는 관측치 그룹들이 나타날 것입니다; 이들을 **타이트한 클러스터(tight clusters)** 라고 부릅니다 ([Tseng and Wong 2005](16-chap.html#ref-Tseng:2005)). 강한 형태나 타이트한 클러스터에 대한 연구는 클러스터 수의 선택을 용이하게 합니다. 최근에 개발된 **[clusterExperiment](https://bioconductor.org/packages/clusterExperiment/)** 패키지는 많은 서로 다른 군집화 결과들을 결합하고 비교하기 위해 만들어졌습니다. 여기서는 비네트에 나온 예시를 하나 들어보겠습니다. 단일 세포 RNA-Seq 실험은 개별 세포로부터 유전자 전사체를 나타내는 리드 카운트를 제공합니다. 단일 세포 해상도는 연구자로 하여금 무엇보다도 세포 계통(lineage)의 역학을 추적할 수 있게 해줍니다. 군집화는 그러한 데이터를 분석하는 데 매우 유용한 것으로 입증되었습니다.
 
-__
+
 
 질문 5.4
 
 **[clusterExperiment](https://bioconductor.org/packages/clusterExperiment/)** 패키지의 비네트를 따라가 보세요. 앙상블 군집화 함수인 `clusterMany`를 호출하되, 개별 군집화 노력에는 `pam`을 사용하세요. 포함할 유전자 선택은 가변성이 가장 높은 60개, 100개 또는 150개 유전자로 설정하세요. \(k\)를 4에서 9까지 변화시키며 군집화 결과들을 플롯해 보세요. 무엇을 알 수 있나요?
 
-__
+
 
 해결책
 
-__
+
 
 다음 코드는 그림 5.10을 생성합니다.
 
@@ -336,7 +338,7 @@ __
     se = fluidigm[, fluidigm$Coverage_Type == "High"]
     assays(se) = list(normalized_counts = as.matrix(limma::normalizeQuantiles(assay(se))))
     ce = clusterMany(se, clusterFunction = "pam", ks = c(5, 7, 9), run = TRUE,
-                     isCount = TRUE, reduceMethod = "var", nFilterDims = c(60, 100, 150))__
+                     isCount = TRUE, reduceMethod = "var", nFilterDims = c(60, 100, 150))
     
     
     9 parameter combinations, 0 use sequential method, 0 use subsampling method
@@ -345,7 +347,7 @@ __
     
     
     clusterLabels(ce) = sub("FilterDims", "", clusterLabels(ce))
-    plotClusters(ce, whichClusters = "workflow", axisLine = -1)__
+    plotClusters(ce, whichClusters = "workflow", axisLine = -1)
 
 [![](05-chap_files/figure-html/fig-quiltclust-1-1.png)](05-chap_files/figure-
 html/fig-quiltclust-1-1.png "그림 5.10: 포함된 유전자 수와 클러스터 수 k의 변화에 따른 군집화 결과(행)의 비교. 히트맵의 각 열은 세포에 대응하며, 색상은 할당된 클러스터를 나타냅니다.")
@@ -369,14 +371,14 @@ html/fig-quiltclust-1-1.png "그림 5.10: 포함된 유전자 수와 클러스�
     library("flowCore")
     library("flowViz")
     fcsB = read.FCS("../data/Bendall_2011.fcs", truncate_max_range = FALSE)
-    slotNames(fcsB)__
+    slotNames(fcsB)
     
     
     [1] "exprs"       "parameters"  "description"
 
 그림 5.11은 `fcsB` 데이터에서 사용 가능한 두 변수의 산점도를 보여줍니다. (이러한 플롯을 만드는 방법은 아래에서 살펴보겠습니다.) 이 두 차원에서 명확한 이봉성과 군집화를 볼 수 있습니다.
 
-__
+
 
 질문 5.5
 
@@ -393,13 +395,13 @@ __
     markersB = readr::read_csv("../data/Bendall_2011_markers.csv")
     mt = match(markersB$isotope, colnames(fcsB))
     stopifnot(!any(is.na(mt)))
-    colnames(fcsB)[mt] = markersB$marker __
+    colnames(fcsB)[mt] = markersB$marker
 
 이제 그림 5.11을 생성할 준비가 되었습니다.
 
     
     
-    flowPlot(fcsB, plotParameters = colnames(fcsB)[2:3], logy = TRUE)__
+    flowPlot(fcsB, plotParameters = colnames(fcsB)[2:3], logy = TRUE)
 
 [![](05-chap_files/figure-html/fig-ObviousClusters-1.png)](05-chap_files/figure-
 html/fig-ObviousClusters-1.png "그림 5.11: 2차원에서 명확한 군집화를 보여주는 세포 측정값.")
@@ -410,7 +412,7 @@ html/fig-ObviousClusters-1.png "그림 5.11: 2차원에서 명확한 군집화�
 
 **데이터 변환: 하이퍼볼릭 아크사인(asinh).** 유세포 분석과 질량 분석 데이터 모두를 여러 특수 함수 중 하나를 사용하여 변환하는 것이 표준입니다. 우리는 역 하이퍼볼릭 사인(asinh)의 예시를 취합니다: \(\operatorname{asinh}(x) = \log{(x + \sqrt{x^2 + 1})}\). 이로부터 우리는 큰 \(x\) 값에 대해 \(\operatorname{asinh}(x)\)가 로그 함수처럼 행동하며 실제로는 \(\log(x)+\log(2)\)와 거의 같음을 알 수 있습니다. 작은 \(x\)에 대해 이 함수는 \(x\)에 대해 거의 선형적입니다.
 
-__
+
 
 태스크
 
@@ -419,14 +421,14 @@ __
     
     
     v1 = seq(0, 1, length.out = 100)
-    plot(v1, asinh(v1), type = 'l')__
+    plot(v1, asinh(v1), type = 'l')
     
     
-     plot(log(v1), asinh(v1), type = 'l')__
+     plot(log(v1), asinh(v1), type = 'l')
     
     
     v3 = seq(30, 3000, length = 100)
-    plot(log(v3), asinh(v3), type= 'l')__
+    plot(log(v3), asinh(v3), type= 'l')
 
 이것은 [4장](04-chap.html)과 [8장](08-chap.html)에서도 언급된 분산 안정화 변환의 또 다른 예입니다. 그림 5.12는 **[flowCore](https://bioconductor.org/packages/flowCore/)** 패키지의 `arcsinhTransform` 함수를 사용하는 다음 코드로 생성되었습니다.
 
@@ -435,7 +437,7 @@ __
     asinhtrsf = arcsinhTransform(a = 0.1, b = 1)
     fcsBT = transform(fcsB, transformList(colnames(fcsB)[-c(1, 2, 41)], asinhtrsf))
     densityplot(~`CD3all`, fcsB)
-    densityplot(~`CD3all`, fcsBT)__
+    densityplot(~`CD3all`, fcsBT)
 
 [![](05-chap_files/figure-html/fig-
 plotTransformations-1.png)](05-chap_files/figure-
@@ -451,7 +453,7 @@ html/fig-plotTransformations-2.png "그림 5.12 (b): ")
 
 그림 5.12: 패널 (a)는 CD3all 변수의 히스토그램을 보여줍니다: 세포들이 0 근처에 군집해 있고 몇 개의 큰 값들이 있습니다. (b)에서는 asinh 변환 후 세포들이 군집을 이루어 두 그룹 또는 유형으로 나뉘는 것을 볼 수 있습니다.
 
-__
+
 
 질문 5.6
 
@@ -461,7 +463,7 @@ __
     
     kf = kmeansFilter("CD3all" = c("Pop1","Pop2"), filterId="myKmFilter")
     fres = flowCore::filter(fcsBT, kf)
-    summary(fres)__
+    summary(fres)
     
     
     Pop1: 33434 of 91392 events (36.58%)
@@ -469,7 +471,7 @@ __
     
     
     fcsBT1 = flowCore::split(fcsBT, fres, population = "Pop1")
-    fcsBT2 = flowCore::split(fcsBT, fres, population = "Pop2")__
+    fcsBT2 = flowCore::split(fcsBT, fres, population = "Pop2")
 
 다음 코드로 생성된 그림 5.13은 CD3와 CD56 마커에 의해 확장된 두 차원으로 데이터를 단순 투영한 것을 보여줍니다:
 
@@ -477,7 +479,7 @@ __
     
     library("flowPeaks")
     fp = flowPeaks(Biobase::exprs(fcsBT)[, c("CD3all", "CD56")])
-    plot(fp)__
+    plot(fp)
 
 [![](05-chap_files/figure-html/fig-flowCD3CD56-1-1.png)](05-chap_files/figure-
 html/fig-flowCD3CD56-1-1.png "그림 5.13: 변환 후 이 세포들은 kmeans를 사용하여 군집화되었습니다.")
@@ -489,7 +491,7 @@ html/fig-flowCD3CD56-1-1.png "그림 5.13: 변환 후 이 세포들은 kmeans를
     
     
     flowPlot(fcsBT, plotParameters = c("CD3all", "CD56"), logy = FALSE)
-    contour(fcsBT[, c(40, 19)], add = TRUE)__
+    contour(fcsBT[, c(40, 19)], add = TRUE)
 
 [![](05-chap_files/figure-html/fig-
 groupcontourCD3CD56-1.png)](05-chap_files/figure-
@@ -497,7 +499,7 @@ html/fig-groupcontourCD3CD56-1.png "그림 5.14: 그림 5.13과 유사하지만 
 
 그림 5.14: 그림 5.13과 유사하지만 등고선을 사용했습니다.
 
-__
+
 
 태스크
 
@@ -517,7 +519,7 @@ __
                                           
     p1t = ggcyto(fcsBT, aes(x = CD4))            + geom_histogram(bins = 90)
     p2t = ggcyto(fcsBT, aes(x = CD4,y = CD8))    + geom_density2d(colour = "black")
-    p3t = ggcyto(fcsBT, aes(x = CD45RA,y = CD20))+ geom_density2d(colour = "black")__
+    p3t = ggcyto(fcsBT, aes(x = CD45RA,y = CD20))+ geom_density2d(colour = "black")
 
 ### 5.5.3 밀도 기반 군집화(Density-based clustering)
 
@@ -529,7 +531,7 @@ __
     mc5 = Biobase::exprs(fcsBT)[, c(15,16,19,40,33)]
     res5 = dbscan::dbscan(mc5, eps = 0.65, minPts = 30)
     mc5df = data.frame(mc5, cluster = as.factor(res5$cluster))
-    table(mc5df$cluster)__
+    table(mc5df$cluster)
     
     
         0     1     2     3     4     5     6     7     8 
@@ -537,7 +539,7 @@ __
     
     
     ggplot(mc5df, aes(x=CD4,    y=CD8,  col=cluster))+geom_density2d()
-    ggplot(mc5df, aes(x=CD3all, y=CD20, col=cluster))+geom_density2d()__
+    ggplot(mc5df, aes(x=CD3all, y=CD20, col=cluster))+geom_density2d()
 
 [![](05-chap_files/figure-html/fig-dbscanfcs5-1.png)](05-chap_files/figure-
 html/fig-dbscanfcs5-1.png "그림 5.15 (a): ")
@@ -553,7 +555,7 @@ html/fig-dbscanfcs5-2.png "그림 5.15 (b): ")
 
 출력 결과는 그림 5.15에 나와 있습니다. 2D 투영에서의 클러스터 중첩을 통해 군집화의 다차원적 특성을 이해할 수 있습니다.
 
-__
+
 
 질문 5.7
 
@@ -561,11 +563,11 @@ __
 그런 다음 `eps`를 변화시키면서, 적어도 두 개가 100개 이상의 점을 가진 4개의 클러스터를 찾아보세요.  
 7개의 CD 마커 변수로 이 작업을 반복해 보세요. 무엇을 알 수 있나요?
 
-__
+
 
 해결책
 
-__
+
 
 다음 6개 마커를 사용한 예시입니다.
 
@@ -574,7 +576,7 @@ __
     mc6 = Biobase::exprs(fcsBT)[, c(15, 16, 19, 33, 25, 40)]
     res = dbscan::dbscan(mc6, eps = 0.65, minPts = 20)
     mc6df = data.frame(mc6, cluster = as.factor(res$cluster))
-    table(mc6df$cluster)__
+    table(mc6df$cluster)
     
     
         0     1     2     3     4     5     6 
@@ -587,7 +589,7 @@ __
     mc7 = Biobase::exprs(fcsBT)[, c(11, 15, 16, 19, 25, 33, 40)]
     res = dbscan::dbscan(mc7, eps = 0.95, minPts = 20)
     mc7df = data.frame(mc7, cluster = as.factor(res$cluster))
-    table(mc7df$cluster)__
+    table(mc7df$cluster)
     
     
         0     1     2     3     4     5     6     7     8     9    10 
@@ -679,23 +681,23 @@ dbscan의 기본 구성 요소는 밀도 도달 가능성(density-reachability) 
 
 클러스터들의 크기가 거의 같다는 사전 지식이 있다면, 그룹 내 분산을 최소화하는 평균 연결법(average linkage)이나 와드 방법(Ward’s method)을 사용하는 것이 가장 좋은 전술입니다.
 
-__
+
 
 질문 5.8
 
 **세포군에 대한 계층적 군집화** `Morder` 데이터는 10명의 환자로부터 얻은 3가지 유형(naïve, effector, memory)의 T 세포에 대한 156개 유전자의 발현 측정값입니다([Holmes et al. 2005](16-chap.html#ref-holmes2005memory)). **[pheatmap](https://cran.r-project.org/web/packages/pheatmap/)** 패키지를 사용하여, 이 데이터의 유클리드 거리와 맨해튼 거리에 대해 덴드로그램이나 재정렬 없이 두 개의 단순한 히트맵을 만드세요.
 
-__
+
 
 질문 5.9
 
 이제 이 두 거리를 사용한 계층적 군집 트리에서의 순서 차이를 살펴보세요. 어떤 차이점이 눈에 띄나요?
 
-__
+
 
 해결책
 
-__
+
 
 다음과 같이 코드를 실행합니다 (출력은 그림 5.22 참조):
 
@@ -704,7 +706,7 @@ __
     load("../data/Morder.RData")
     pheatmap(Morder, clustering_method = "single")
     pheatmap(Morder, clustering_method = "average")
-    pheatmap(Morder, clustering_method = "complete")__
+    pheatmap(Morder, clustering_method = "complete")
 
 [![](imgs/single14heatmap.png)](imgs/single14heatmap.png "그림 5.22 (a): ")
 
@@ -724,7 +726,7 @@ __
 
 그림 5.23: 이 트리는 여러 가지 다른 방식으로 그려질 수 있습니다. 여기에 나타난 잎들의 순서는 \((8,11,9,10,7,5,6,1,4,2,3)\)입니다.
 
-__
+
 
 질문 5.10
 
@@ -746,7 +748,7 @@ __
 
 한 가지 아이디어는 \(k\)의 함수로서 \(\text{WSS}_k\)를 살펴보는 것입니다. 이는 항상 감소 함수이겠지만, 급격히 감소하다가 완만해지는 뚜렷한 영역이 있다면, 우리는 이를 **엘보우(elbow)** 라고 부르며 이를 클러스터 수의 잠재적인 최적 지점으로 간주할 수 있습니다.
 
-__
+
 
 질문 5.11
 
@@ -774,7 +776,7 @@ __
                class = paste(mx, my, sep = ":"))
        }) %>% bind_rows
     }) %>% bind_rows
-    simdat __
+    simdat
     
     
     # A tibble: 400 × 3
@@ -793,11 +795,11 @@ __
     # ℹ 390 more rows
     
     
-    simdatxy = simdat[, c("x", "y")] # class 레이블 제외 __
+    simdatxy = simdat[, c("x", "y")] # class 레이블 제외
     
     
     ggplot(simdat, aes(x = x, y = y, col = class)) + geom_point() +
-      coord_fixed()__
+      coord_fixed()
 
 [![](05-chap_files/figure-html/fig-simdat-1-1.png)](05-chap_files/figure-
 html/fig-simdat-1-1.png "그림 5.24: 클래스 레이블로 색상이 입혀진 simdat 데이터. 여기서는 우리가 데이터를 생성했으므로 레이블을 알고 있습니다 – 보통은 이를 알지 못합니다.")
@@ -814,14 +816,14 @@ html/fig-simdat-1-1.png "그림 5.24: 클래스 레이블로 색상이 입혀진
       km  = kmeans(simdatxy, centers = wss$k[i])
       wss$value[i] = sum(km$withinss)
     }
-    ggplot(wss, aes(x = k, y = value)) + geom_col()__
+    ggplot(wss, aes(x = k, y = value)) + geom_col()
 
 [![](05-chap_files/figure-html/fig-WSS-1.png)](05-chap_files/figure-
 html/fig-WSS-1.png "그림 5.25: k의 함수로서 WSS 통계량의 막대 그래프는 마지막 실질적인 도약이 k=4 직전에 있음을 보여줍니다. 이는 이 데이터에 대한 최선의 선택이 k=4임을 나타냅니다.")
 
 그림 5.25: \(k\)의 함수로서 WSS 통계량의 막대 그래프는 마지막 실질적인 도약이 \(k=4\) 직전에 있음을 보여줍니다. 이는 이 데이터에 대한 최선의 선택이 \(k=4\)임을 나타냅니다.
 
-__
+
 
 질문 5.12
 
@@ -829,7 +831,7 @@ __
 
   2. `simdat`와 동일한 범위와 차원을 가진, 정규 분포 대신 균등 분포(uniform distributions)로부터 오는 데이터 세트를 만드세요. 이 데이터에 대해 WSS 값을 계산해 보세요. 무엇을 결론지을 수 있나요?
 
-__
+
 
 질문 5.13
 
@@ -839,11 +841,11 @@ __
 
 여기서 \(\bar{x}\)는 전체 질량 중심(평균점)입니다. `simdat` 데이터에 대한 칼린스키-하라바츠 지수를 플롯해 보세요.
 
-__
+
 
 해결책
 
-__
+
 
 그림 5.26을 생성하는 코드는 다음과 같습니다.
 
@@ -859,7 +861,7 @@ __
       })
     )
     ggplot(CH, aes(x = k, y = value)) + geom_line() + geom_point() +
-      ylab("CH index")__
+      ylab("CH index")
 
 [![](05-chap_files/figure-html/fig-CHIndex-1-1.png)](05-chap_files/figure-
 html/fig-CHIndex-1-1.png "그림 5.26: simdat 데이터에 대해 계산된, 서로 다른 k 선택에 대한 그룹 간 분산과 그룹 내 분산의 비율인 칼린스키-하라바츠 지수.")
@@ -896,17 +898,17 @@ html/fig-CHIndex-1-1.png "그림 5.26: simdat 데이터에 대해 계산된, 서
 
 The packages **[cluster](https://cran.r-project.org/web/packages/cluster/)** and **[clusterCrit](https://cran.r-project.org/web/packages/clusterCrit/)** provide implementations.
 
-__
+
 
 질문 5.14
 
 Make a function that plots the gap statistic as in Figure 5.27. Show the output for the `simdat` example dataset clustered with the `pam` function.
 
-__
+
 
 해결책
 
-__
+
 
     
     
@@ -924,7 +926,7 @@ __
                           ymin = gap - SE.sim), width=0.1) +
         geom_point(size = 3, col=  "red")
     }
-    plot_gap(gss)__
+    plot_gap(gss)
 
 [![](05-chap_files/figure-html/fig-GapStat-1-1.png)](05-chap_files/figure-
 html/fig-GapStat-1-1.png "그림 5.27: 갭 통계량, 질문 5.14를 참조하세요.")
@@ -935,7 +937,7 @@ Let’s now use the method on a real example. We load the **[Hiiragi](https://bi
 
     
     
-    library("Hiiragi2013")__
+    library("Hiiragi2013")
     
     
     In chunk 'Hiiragi': Warning: replacing previous import 'boot::logit' by 'gtools::logit' whenloading 'Hiiragi2013'
@@ -944,7 +946,7 @@ Let’s now use the method on a real example. We load the **[Hiiragi](https://bi
     In chunk 'Hiiragi': Warning: replacing previous import 'boot::inv.logit' by 'gtools::inv.logit'when loading 'Hiiragi2013'
     
     
-    data("x")__
+    data("x")
 
 We start by choosing the 50 most variable genes (features)7.
 
@@ -958,7 +960,7 @@ We start by choosing the 50 most variable genes (features)7.
     k1 = maxSE(embgap$Tab[, "gap"], embgap$Tab[, "SE.sim"])
     k2 = maxSE(embgap$Tab[, "gap"], embgap$Tab[, "SE.sim"],
                method = "Tibs2001SEmax")
-    c(k1, k2)__
+    c(k1, k2)
     
     
     [1] 9 7
@@ -969,7 +971,7 @@ The default choice for the number of clusters, `k1`, is the first value of \(k\)
     
     plot(embgap, main = "")
     cl = pamfun(embmat, k = k1)$cluster
-    table(pData(x)[names(cl), "sampleGroup"], cl)__
+    table(pData(x)[names(cl), "sampleGroup"], cl)
     
     
                      cl
@@ -990,7 +992,7 @@ html/fig-gapHiiragi-1-1.png "그림 5.28: Hiiragi2013 데이터에 대한 갭 �
 
 위에서 우리는 `pamfun`으로부터 얻은 군집화 결과와 데이터의 어노테이션에 포함된 샘플 레이블을 비교한 것을 볼 수 있습니다.
 
-__
+
 
 질문 5.15
 
@@ -1032,7 +1034,7 @@ __
       cons = cl_consensus(ce)
       ag = sapply(ce, cl_agreement, y = cons)
       list(agreements = ag, consensus = cons)
-    }__
+    }
 
 `clusterResampling` 함수는 다음 단계들을 수행합니다:
 
@@ -1054,7 +1056,7 @@ __
     
     iswt = (x$genotype == "WT")
     cr1 = clusterResampling(x[, x$Embryonic.day == "E3.25" & iswt])
-    cr2 = clusterResampling(x[, x$Embryonic.day == "E3.5"  & iswt])__
+    cr2 = clusterResampling(x[, x$Embryonic.day == "E3.5"  & iswt])
 
 결과는 그림 5.30에 나와 있습니다. 이들은 E3.5 데이터가 두 개의 클러스터로 나뉜다는 가설을 확인해 줍니다.
 
@@ -1071,7 +1073,7 @@ __
                   x = seq(along = y), day = "E3.5")
     p2 <- ggplot(bind_rows(mem1, mem2), aes(x = x, y = y, col = day)) +
       geom_point() + facet_grid(~ day, scales = "free_x")
-    gridExtra::grid.arrange(p1, p2, widths = c(2.4,4.0))__
+    gridExtra::grid.arrange(p1, p2, widths = c(2.4,4.0))
 
 [![](05-chap_files/figure-html/fig-figClue1-1.png)](05-chap_files/figure-
 html/fig-figClue1-1.png "그림 5.30: E3.25 및 E3.5 샘플을 이용한 클러스터 안정성 분석. 왼쪽: B개의 군집화 결과와 합의 결과 사이의 일치도에 대한 beeswarm 플롯; 1은 완벽한 일치를 나타내며, 낮은 값은 낮은 일치도를 나타냅니다. 오른쪽: 합의 군집화의 멤버십 확률. E3.25의 경우 확률이 분산되어 있어 개별 군집화 결과들이 자주 일치하지 않음을 나타내는 반면, E3.5의 경우 분포가 이봉형(bimodal)이며 모호한 샘플은 하나뿐입니다.")
@@ -1111,7 +1113,7 @@ html/fig-figClue1-1.png "그림 5.30: E3.25 및 E3.5 샘플을 이용한 클러�
     colnames(twogr)[1:2] = c("x", "y")
     library("ggplot2")
     ggplot(twogr, aes(x = x, y = y, colour = seq,fill = seq)) +
-      geom_hex(alpha = 0.5, bins = 50) + coord_fixed()__
+      geom_hex(alpha = 0.5, bins = 50) + coord_fixed()
 
 [![](05-chap_files/figure-html/fig-seqradius-1.png)](05-chap_files/figure-
 html/fig-seqradius-1.png "그림 5.31: 두 그룹 모두 동일한 분산의 노이즈 분포를 가지고 있음에도 불구하고, 그룹의 겉보기 반지름은 매우 다릅니다. seq2의 10^{5}개 인스턴스는 10^{3}개뿐인 seq1보다 오차가 발생할 기회가 훨씬 더 많습니다. 따라서 우리는 데이터를 군집화할 때 빈도가 중요하다는 것을 알 수 있습니다.")
@@ -1120,17 +1122,17 @@ html/fig-seqradius-1.png "그림 5.31: 두 그룹 모두 동일한 분산의 노
 
 관측된 값들은 그림 5.31과 같이 보일 것입니다.
 
-__
+
 
 질문 5.16
 
 데이터 `seq1`과 `seq2`를 가져와서 그룹 중심으로부터의 거리에 따라 두 그룹으로 군집화해 보세요. 결과가 두 서열 유형 각각의 빈도에 의존해야 한다고 생각하시나요?
 
-__
+
 
 해결책
 
-__
+
 
 분류학적 군집화(taxonomic clustering), 즉 OTU(operational taxonomic unit) 군집화([Caporaso et al. 2010](16-chap.html#ref-caporaso2010qiime); [P. D. Schloss et al. 2009](16-chap.html#ref-mothur)) 방법들에서 종종 사용되는 이러한 접근 방식은 최적이 아닙니다.
 
@@ -1142,7 +1144,7 @@ __
 
 우리의 자연스러운 휴리스틱과 우리가 확률 계산을 할 때 그것들이 우리를 오도할 수 있는 방식에 대한 단행본 규모의 논의는 Kahneman ([2011](16-chap.html#ref-kahneman2011))을 참조하십시오 (특히 14장과 15장을 추천합니다).
 
-__
+
 
 태스크
 
@@ -1153,13 +1155,13 @@ __
     n    = 2000
     len  = 200
     perr = 0.001
-    seqs = matrix(runif(n * len) >= perr, nrow = n, ncol = len)__
+    seqs = matrix(runif(n * len) >= perr, nrow = n, ncol = len)
 
 이제, 리드들 사이의 모든 쌍별 거리를 계산합니다.
 
     
     
-    dists = as.matrix(dist(seqs, method = "manhattan"))__
+    dists = as.matrix(dist(seqs, method = "manhattan"))
 
 서열 수 `k` (2부터 `n`까지)의 다양한 값들에 대해, 이 서열 세트의 최대 거리가 아래 코드에 의해 계산되어 그림 5.32에 표시됩니다.
 
@@ -1172,7 +1174,7 @@ __
         s = sample(n, i)
         max(dists[s, s])
         }, numeric(1)))
-    ggplot(dfseqs, aes(x = k, y = diameter)) + geom_point()+geom_smooth()__
+    ggplot(dfseqs, aes(x = k, y = diameter)) + geom_point()+geom_smooth()
 
 [![](05-chap_files/figure-html/fig-diameter-1.png)](05-chap_files/figure-
 html/fig-diameter-1.png "그림 5.32: 서열 수의 함수로서의 서열 세트의 지름.")
@@ -1193,18 +1195,18 @@ html/fig-diameter-1.png "그림 5.32: 서열 수의 함수로서의 서열 세�
 
 데이터 품질을 개선하기 위해, 종종 원시 데이터로부터 시작하여 모든 변동 원인들을 세심하게 모델링해야 합니다. 우리는 이를 **처음부터 요리하기(cooking from scratch)** 의 한 예로 생각할 수 있습니다 (Ben J. Callahan et al. ([2016](16-chap.html#ref-Callahan2016Bioc))의 자세한 내용과 연습 문제 5.5 참조).
 
-__
+
 
 질문 5.17
 
 우리 샘플에 매우 다른 풍부도로 존재하는 길이 200인 두 서열(`seq1`과 `seq2`)이 있다고 가정해 봅시다. 기술적 시퀀싱 오차는 각 뉴클레오타이드에 대해 독립적인 Bernoulli(0.0005) 무작위 사건으로 발생한다고 들었습니다.
 서열당 오차 수의 분포는 무엇일까요?
 
-__
+
 
 해결책
 
-__
+
 
 확률 이론은 200개의 독립적인 Poisson(0.0005)의 합이 Poisson(0.1)이 될 것임을 알려줍니다.
 
@@ -1213,13 +1215,13 @@ __
     
     
     simseq10K = replicate(1e5, sum(rpois(200, 0.0005)))
-    mean(simseq10K)__
+    mean(simseq10K)
     
     
     [1] 0.10143
     
     
-    vcd::distplot(simseq10K, "poisson")__
+    vcd::distplot(simseq10K, "poisson")
 
 [![](05-chap_files/figure-html/fig-seqradiusex-1.png)](05-chap_files/figure-
 html/fig-seqradiusex-1.png "그림 5.33: simseq10K 데이터에 대한 distplot.")
@@ -1244,13 +1246,13 @@ DADA 방법(Divisive Amplicon Denoising Algorithm, Rosen et al. ([2012](16-chap.
     derepRs = readRDS(file="../data/derepRs.rds")
     library("dada2")
     ddF = dada(derepFs, err = NULL, selfConsist = TRUE)
-    ddR = dada(derepRs, err = NULL, selfConsist = TRUE)__
+    ddR = dada(derepRs, err = NULL, selfConsist = TRUE)
 
 In order to verify that the error transition rates have been reasonably well estimated, we inspect the fit between the observed error rates (black points) and the fitted error rates (black lines) (Figure 5.34).
 
     
     
-    plotErrors(ddF)__
+    plotErrors(ddF)
     
     
     In chunk 'fig-rerrorprofile1': Warning: Removed 82 rows containing missing values or values outside the scale range(`geom_line()`).
@@ -1266,7 +1268,7 @@ rerrorprofile1-1.png)](05-chap_files/figure-html/fig-rerrorprofile1-1.png
     
     
     dadaFs = dada(derepFs, err=ddF[[1]]$err_out, pool = TRUE)
-    dadaRs = dada(derepRs, err=ddR[[1]]$err_out, pool = TRUE)__
+    dadaRs = dada(derepRs, err=ddR[[1]]$err_out, pool = TRUE)
 
 **참고:** 서열 추론 함수는 두 가지 다른 모드로 실행될 수 있습니다: 샘플별 독립적 추론(`pool = FALSE`)과, 모든 샘플로부터 결합된 시퀀싱 리드들로부터의 풀링된 추론입니다. 독립적 추론은 두 가지 장점이 있습니다: 샘플 수의 함수로서 계산 시간이 선형적이며 메모리 요구 사항이 일정합니다. 풀링된 추론은 계산적으로 더 부담스럽지만, 개별 샘플에서는 한두 번만 발생하지만 모든 샘플 전체에서는 더 자주 발생하는 희귀 변이의 탐지를 개선할 수 있습니다. 이 데이터 세트는 특별히 크지 않으므로, 우리는 풀링된 추론을 수행했습니다.
 
@@ -1276,7 +1278,7 @@ rerrorprofile1-1.png)](05-chap_files/figure-html/fig-rerrorprofile1-1.png
 
     
     
-    mergers = mergePairs(dadaFs, derepFs, dadaRs, derepRs)__
+    mergers = mergePairs(dadaFs, derepFs, dadaRs, derepRs)
 
 우리는 ASV 카운트의 분할표를 생성합니다. 이것은 "OTU 15 표"의 고해상도 아날로그입니다. 즉, 각 샘플에서 각 서열 변이가 관찰된 횟수를 셀에 포함하는 샘플별 특징 표입니다.
 
@@ -1284,19 +1286,19 @@ rerrorprofile1-1.png)](05-chap_files/figure-html/fig-rerrorprofile1-1.png
 
     
     
-    seqtab.all = makeSequenceTable(mergers[!grepl("Mock",names(mergers))])__
+    seqtab.all = makeSequenceTable(mergers[!grepl("Mock",names(mergers))])
 
-__
+
 
 질문 5.18
 
 `dadaRs`와 `mergers` 객체의 구성 요소들을 살펴보세요.
 
-__
+
 
 해결책
 
-__
+
 
 `dadaRs`는 길이가 20인 리스트입니다. 그 요소들은 노이즈가 제거된 리드들을 포함하는 _dada_ 클래스의 객체들입니다. 우리는 [10장](10-chap.html)에서 서열을 정렬하고, 그들의 분류학적 정보를 할당하며, 하류 분석을 위해 샘플 정보와 결합하는 방법을 보게 될 것입니다.
 
@@ -1325,9 +1327,9 @@ __
 
     
     
-    seqtab = removeBimeraDenovo(seqtab.all)__
+    seqtab = removeBimeraDenovo(seqtab.all)
 
-__
+
 
 질문 5.19
 
@@ -1335,11 +1337,11 @@ __
 `seqtab.all` 데이터에서 리드들 중 키메라의 비율은 얼마였나요?  
 고유한 서열 변이들 중 키메라의 비율은 얼마인가요?
 
-__
+
 
 해결책
 
-__
+
 
 여기서 우리는 일부 서열 변이들이 키메라인 것을 관찰했지만, 이들은 전체 리드의 7%만을 차지합니다.
 
@@ -1369,7 +1371,7 @@ Hiiragi 데이터를 분석하면서 우리는 클러스터 확률을 사용했�
 
 ## 5.11 연습 문제
 
-__
+
 
 연습 문제 5.1
 
@@ -1392,7 +1394,7 @@ Compute the silhouette index for the `simdat` data we simulated in Section
     library("cluster")
     pam4 = pam(simdatxy, 4)
     sil = silhouette(pam4, 4)
-    plot(sil, col=c("red","green","blue","purple"), main="Silhouette")__
+    plot(sil, col=c("red","green","blue","purple"), main="Silhouette")
 
 Change the number of clusters \(k\) and assess which \(k\) gives the best
 silhouette index.
@@ -1400,7 +1402,7 @@ silhouette index.
 Now, repeat this for groups that have uniform (unclustered) data distributions
 over a whole range of values.
 
-__
+
 
 연습 문제 5.2
 
@@ -1411,7 +1413,7 @@ function `symnum`.
 
 Make a heatmap plot of these distances.
 
-__
+
 
 연습 문제 5.3
 
@@ -1442,7 +1444,7 @@ data in a more useful manner.
 Repeat the `dbscan` clustering with different parameters. How robust is the
 number of groups?
 
-__
+
 
 연습 문제 5.4
 
@@ -1458,7 +1460,7 @@ incidence seem spatially clustered. Can you guess the reason(s) for this
 clustering and high incidence rates on the West and East coasts and around
 Chicago?
 
-__
+
 
 연습 문제 5.5
 
@@ -1480,7 +1482,7 @@ setting the directories and loading the downloaded data:
     filtRs = file.path(filt_path, paste0(sampleNames, "_R_filt.fastq.gz")
     fnFs = file.path(miseq_path, fnFs)
     fnRs = file.path(miseq_path, fnRs)
-    print(length(fnFs))__
+    print(length(fnFs))
     
     
     [1] 20
@@ -1504,7 +1506,7 @@ generated by:
     
     
     plotQualityProfile(fnFs[1:2]) + ggtitle("Forward")
-    plotQualityProfile(fnRs[1:2]) + ggtitle("Reverse")__
+    plotQualityProfile(fnRs[1:2]) + ggtitle("Reverse")
 
 [![](05-chap_files/figure-html/fig-profile-1-1.png)](05-chap_files/figure-
 html/fig-profile-1-1.png "Figure 5.36 (a): ")
@@ -1520,28 +1522,28 @@ Figure 5.36: Quality scores. The lines show positional summary statistics: green
 
 Note that we also see the background distribution of quality scores at each position in Figure 5.36 as a grey-scale heat map. The dark colors correspond to higher frequency.
 
-__
+
 
 연습 문제 5.6
 
 Generate similar plots for four randomly selected sets of forward and reverse
 reads. Compare forward and reverse read qualities; what do you notice?
 
-__
+
 
 해결책
 
-__
+
 
     
     
     ii = sample(length(fnFs), 4)
-    plotQualityProfile(fnFs[ii]) + ggtitle("Forward")__
+    plotQualityProfile(fnFs[ii]) + ggtitle("Forward")
     
     
-     plotQualityProfile(fnRs[ii]) + ggtitle("Reverse")__
+     plotQualityProfile(fnRs[ii]) + ggtitle("Reverse")
 
-__
+
 
 연습 문제 5.7
 
@@ -1552,11 +1554,11 @@ as these positions are of lower quality. The reverse reads are trimmed at
 position 160. Combine these trimming parameters with standard filtering
 parameters remember to enforce a maximum of 2 expected errors per-read. (Hint: Trim and filter on paired reads jointly, i.e., both reads must pass the filter for the pair to pass. The input arguments should be chosen following the **[dada2](https://bioconductor.org/packages/dada2/)** vignette carefully. We recommend filtering out all reads with any ambiguous nucleotides.)
 
-__
+
 
 해결책
 
-__
+
 
 Most Illumina sequencing data show a trend of decreasing quality towards the end of the reads.
 
@@ -1565,7 +1567,7 @@ Most Illumina sequencing data show a trend of decreasing quality towards the end
     out = filterAndTrim(fnFs, filtFs, fnRs, filtRs, truncLen=c(240,160),
             maxN=0, maxEE=2, truncQ=2, rm.phix=TRUE,  trimLeft=10,
             compress=TRUE, multithread=TRUE) # On Windows set multithread=FALSE
-    head(out)__
+    head(out)
     
     
                                   reads.in reads.out
@@ -1585,9 +1587,9 @@ The sequence data was imported into R from demultiplexed _fastq_ files (i.e. one
     derepFs = derepFastq(filtFs, verbose = FALSE)
     derepRs = derepFastq(filtRs, verbose = FALSE)
     names(derepFs) = sampleNames
-    names(derepRs) = sampleNames __
+    names(derepRs) = sampleNames
 
-__
+
 
 연습 문제 5.8
 
@@ -1596,11 +1598,11 @@ Use R to create a map like the one shown in Figure 5.2. Hint: go to the
 street addresses of hits, use an address resolution service to convert these
 into geographic coordinates, and display these as points on a map of London.
 
-__
+
 
 해결책
 
-__
+
 
 See the Gist
 <https://gist.github.com/wolfganghuber/523622aff6a156d26e77a87ccbe7bd0d> by

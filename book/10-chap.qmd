@@ -1,3 +1,5 @@
+# 네트워크와 트리 (Networks and Trees)
+
 ![](imgs/Darwin_Tree_1837_web.png)
 
 네트워크와 트리는 생물학적 시스템에 대한 지식을 표현하는 데 자주 사용됩니다. 이들은 또한 실험이나 연구로부터 얻은 관측치를 직접 인코딩하는 데 사용될 수도 있습니다. 계통수(Phylogenetic trees)는 종들 사이의 가족 관계 및 유사성 관계를 표현하기 위해 그려졌으며, 심지어 이러한 트리에 기계론적이고 인과적인 해석을 부여한 다윈(Darwin)의 유명한 노트북 스케치 이전부터 존재했습니다. 네트워크에서 노드(nodes)와 에지(edges)의 의미는 다를 수 있으며 명시되어야 합니다. 예를 들어, 네트워크는 그림 10.1에서와 같이 단백질 사이의 관계를 도식화할 수 있는데, 여기서 노드는 유전자나 그들이 인코딩하는 단백질을 나타낼 수 있고, 에지는 직접적인 물리적 상호작용이거나 실험 결과를 나타내는 좀 더 추상적인 "기능적" 또는 "유전적" 상호작용일 수 있습니다. 이 책에서 우리는 **그래프(graph)** 와 **네트워크(network)** 라는 용어를 거의 혼용하여 사용합니다. 전자는 수학적 구조를 좀 더 연상시키고, 후자는 생물학적 해석을 좀 더 연상시킵니다.
@@ -48,17 +50,17 @@ html/fig-chemo-1.png "그림 10.1: 단백질 사이의 쌍별 관계를 나타�
 
 출발-도착 표에 대한 대안적인 표현 방식은 **인접 행렬(adjacency matrix)** 입니다. 이는 그래프의 노드 수만큼의 행(및 열)을 가진 정사각 행렬입니다. 행렬의 \(i\)번째 행과 \(j\)번째 열에 0이 아닌 항목이 있으면 이는 \(i\)번째 정점과 \(j\)번째 정점 사이에 에지가 있음을 인코딩합니다.
 
-__
+
 
 질문 10.1
 
 무향 그래프의 경우, 인접 행렬 \(A\)의 어떤 점이 특별한가요?
 
-__
+
 
 해결책
 
-__
+
 
 인접 행렬은 대칭입니다. 즉, \(M = M^T\)입니다. 그림 10.2와 10.3에 예시가 나와 있습니다. `g1`은 아래 코드를 통해 (2열 행렬 `edges`에 인코딩된) 에지 리스트로부터 생성되었습니다.
 
@@ -68,7 +70,7 @@ __
     edges = matrix(c(1,3, 2,3, 3,4, 4,5, 4,6), byrow = TRUE, ncol = 2)
     g1 = graph_from_edgelist(edges, directed = FALSE)
     vertex_attr(g1, name = "name") = 1:6
-    plot(g1, vertex.size = 25, edge.width = 5, vertex.color = "coral")__
+    plot(g1, vertex.size = 25, edge.width = 5, vertex.color = "coral")
 
 [![](10-chap_files/figure-html/fig-igraphplot-1.png)](10-chap_files/figure-
 html/fig-igraphplot-1.png "그림 10.2: 번호가 매겨진 노드들이 있는 작은 무향 그래프.")
@@ -80,24 +82,24 @@ html/fig-adjmatrix-1.png "그림 10.3: 그림 10.2에 표시된 그래프의 인
 
 그림 10.3: 그림 10.2에 표시된 그래프의 인접 행렬은 0과 1로 구성된 대칭 \(n 	imes n\) 행렬이며, 여기서 \(n\)은 노드의 수입니다.
 
-__
+
 
 질문 10.2
 
 위의 질문 10.1의 답변에 나온 방법 외에, 에지 리스트 데이터 프레임으로부터 그래프를 생성하는 대안적인 방법을 제시할 수 있나요?
 
-__
+
 
 해결책
 
-__
+
 
     
     
     edges = "1,3\n2,3\n3,4\n4,6\n4,5"
     df = read.csv(textConnection(edges), header = FALSE)
     sg = graph_from_data_frame(df, directed = FALSE)
-    sg __
+    sg
     
     
     IGRAPH 1467322 UN-- 6 5 -- 
@@ -137,7 +139,7 @@ __
 
 에지가 거리를 나타내는 길이를 가질 때, 그래프의 2D 표현 문제는 [9장](09-chap.html)에서 보았던 다차원 척도법과 동일합니다. 이는 종종 정점 지점들을 가능한 한 멀리 퍼뜨림으로써 유사한 방식으로 해결됩니다. 길이가 없는 에지의 단순한 경우, 알고리듬은 서로 다른 기준을 선택할 수 있습니다. 프루히터만-라잉골드(Fruchterman and Reingold) 방법이 기본적인 선택입니다. 이는 마치 (뉴턴의) 물리적 힘의 영향을 받는 것처럼 유사한 점들이 서로 끌어당기고 밀어내는 물리 기반 모델에 기초합니다.
 
-__
+
 
 태스크
 
@@ -159,24 +161,24 @@ __
 
 그림 10.4: 이 **이분(bipartite)** 그래프는 각 분류군을 그것이 관찰된 사이트들과 연결합니다.
 
-__
+
 
 질문 10.3
 
 `finch.csv` 데이터를 불러오고, 이것이 이분 네트워크를 나타냄을 강조하도록 그리는 실험을 해보세요.
 
-__
+
 
 해결책
 
-__
+
 
 다음 코드의 출력은 그림 10.5에 나와 있습니다.
 
     
     
     finch = readr::read_csv("../data/finch.csv", comment = "#", col_types = "cc")
-    finch __
+    finch
     
     
     # A tibble: 122 × 2
@@ -201,7 +203,7 @@ __
     plot(finch.nw, vertex.cex = 2.5, displaylabels = TRUE, 
          vertex.col = ifelse(is.island, "forestgreen", "gold3"),
          label= sub(" finch", "", network.vertex.names(finch.nw)))
-    finch.nw |> as.matrix() |> t() |> (\(x) x[, order(colnames(x))])()__
+    finch.nw |> as.matrix() |> t() |> (\(x) x[, order(colnames(x))])()
     
     
                               A B C D E F G H I J K L M N O P Q
@@ -224,17 +226,17 @@ html/fig-finches-1-1.png "그림 10.5: finches 그래프. 이분 그래프의 �
 
 그림 10.5: `finches` 그래프. 이분 그래프의 특성을 더 잘 고려하도록 레이아웃을 개선하는 방법이 많이 있습니다.
 
-__
+
 
 질문 10.4
 
 **[ggraph](https://cran.r-project.org/web/packages/ggraph/)** 패키지를 사용하여 그래프 `g1`의 플롯을 만드세요. 레이아웃과 `geom_edge_link`, `geom_node_point`, `geom_node_text`와 같은 제공된 geom들을 선택하세요.
 
-__
+
 
 해결책
 
-__
+
 
 다음 코드의 출력은 그림 10.6에 나와 있습니다.
 
@@ -244,7 +246,7 @@ __
     ggraph(g1, layout = "nicely") + 
       geom_edge_link() + 
       geom_node_point(size=6,color="#8856a7") + 
-      geom_node_text(label=vertex_attr(g1)$name,  color="white")__
+      geom_node_text(label=vertex_attr(g1)$name,  color="white")
 
 [![](10-chap_files/figure-html/fig-
 ggnetworkong1-1-1.png)](10-chap_files/figure-html/fig-ggnetworkong1-1-1.png
@@ -267,7 +269,7 @@ ggnetworkong1-1-1.png)](10-chap_files/figure-html/fig-ggnetworkong1-1-1.png
          edge.arrow.width = 2.2, edge.width = 5, edge.color = "blue",
          edge.curved = TRUE, edge.label.cex = 2.5, vertex.size= 32,
          vertex.label.cex = 3.5, edge.loop.angle = 3,
-         vertex.label.family = "sans", vertex.label.color = "white")__
+         vertex.label.family = "sans", vertex.label.color = "white")
 
 [![](imgs/MarkovACGT.png)](imgs/MarkovACGT.png "그림 10.7: 상태 간의 가능한 전이를 나타내는 화살표가 있는 4개 상태 마르코프 체인.")
 
@@ -275,21 +277,21 @@ ggnetworkong1-1-1.png)](10-chap_files/figure-html/fig-ggnetworkong1-1-1.png
 
 마르코프 체인은 동역학 시스템의 단순한 모델이며, 상태는 그래프의 노드로 표현됩니다. 전이 행렬은 상태 간의 **유향** 에지(화살표)에 대한 가중치를 제공합니다.
 
-__
+
 
 질문 10.5
 
 이 마르코프 체인은 어떤 상태로 끝날 것이라고 생각하시나요?
 
-__
+
 
 해결책
 
-__
+
 
 C를 제외한 모든 노드는 나가는 에지(outgoing edges)를 가지고 있으며, C는 들어오는 에지와 자기 자신으로 향하는 에지만을 가집니다. 따라서 C는 흡수 상태(absorbing state)입니다. 이 체인의 모든 프로세스는 조만간 C에 도달하여 머물게 됩니다.
 
-__
+
 
 태스크
 
@@ -314,7 +316,7 @@ __
     ggraph(grs) + 
       geom_edge_arc(color = "black",  strength = 0.05, alpha = 0.8)+
       geom_node_point(size = 2.5, alpha = 0.5, color = "orange") + 
-      geom_node_label(aes(label=vertex_attr(grs)$name), size = 3, alpha = 0.9, color = "#8856a7", repel = TRUE) __
+      geom_node_label(aes(label=vertex_attr(grs)$name), size = 3, alpha = 0.9, color = "#8856a7", repel = TRUE)
 
 [![](10-chap_files/figure-html/fig-
 completechemokine-1.png)](10-chap_files/figure-html/fig-completechemokine-1.png
@@ -336,7 +338,7 @@ completechemokine-1.png)](10-chap_files/figure-html/fig-completechemokine-1.png
 
 가장 초기 접근 방식 중 하나는 유의미한 유전자 리스트에서 **과다하게 나타나거나(overrepresented)** **농축된(enriched)** 유전자 속성들을 찾는 것이었습니다. 이러한 유전자 클래스들은 종종 유전자 온톨로지(Gene Ontology, GO) 범주에 기반합니다 (예: 기관 성장에 관여하는 유전자, 또는 섭식 행동에 관여하는 유전자). 유전자 온톨로지(GO)는 유전자와 유전자 산물을 설명하는 세 가지 온톨로지의 모음입니다. 이러한 온톨로지들은 유향 비순환 그래프(DAGS) 구조를 가진 제한된 어휘들입니다. 가장 구체적인 용어들이 그래프의 잎(leaves)이 됩니다. GO 그래프는 노드(여기서는 유전자 온톨로지 용어)와 더 구체적인 용어(자식)에서 덜 구체적인 용어(부모)로 가는 에지들로 구성되며, 흔히 이러한 에지들은 방향성이 있습니다. 노드와 에지는 시각화될 수 있는 여러 속성을 가질 수 있습니다. 실험에서 유의미한 것으로 지정된 특정 유전자 세트에 대해 GO 어노테이션을 사용하는 주된 목적은 이 리스트에서 특정 GO 용어의 **농축(enrichment)** 을 찾는 것이며, 우리는 아래에서 이 용어에 통계적 의미를 부여할 것입니다. 다른 많은 유용한 중요 유전자 세트 리스트들이 존재합니다.
 
-__
+
 
 태스크
 
@@ -351,7 +353,7 @@ __
     fl   =  "/path/to/msigdb_v5.1.xml"
     gss  =  getBroadSets(fl) 
     organism(gss[[1]])
-    table(sapply(gss, organism))__
+    table(sapply(gss, organism))
 
 ### 10.3.2 2원 분할표 검정을 이용한 유전자 세트 분석
 
@@ -375,17 +377,17 @@ __
 
 우리는 일부 범주는 매우 수가 많고 다른 범주는 드물다는 사실을 고려하기 위해 이 초기하 2원 분할표 검정을 사용합니다.
 
-__
+
 
 질문 10.6
 
 20,000번의 시뮬레이션을 통해 몬테카를로 실험을 실행하고, 유의미한 세트에서 어떤 범주도 과다하게 나타나지 않는다는 귀무 가설하에서 파란색이 25개일 때의 유의성 p-값을 계산하세요.
 
-__
+
 
 해결책
 
-__
+
 
 귀무 가설하에서 75개는 다음과 같이 우리의 균등하지 않은 상자들로부터 무작위로 샘플링됩니다:
 
@@ -396,7 +398,7 @@ universe = c(rep("Yellow", 500), rep("Blue", 100), rep("Red", 400))
       pick75 = sample(universe, 75, replace = FALSE)
       sum(pick75 == "Blue")
     })
-    summary(countblue)__
+    summary(countblue)
     
     
        Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
@@ -421,7 +423,7 @@ html/fig-histblue-1.png "그림 10.9: 20,000번의 시뮬레이션에서도 파�
     data("EC")
     circ  =  circle_dat(EC$david, EC$genelist)
     chord =  chord_dat(circ, EC$genes, EC$process)
-    GOChord(chord, limit = c(0, 5))__
+    GOChord(chord, limit = c(0, 5))
 
 [![](10-chap_files/figure-html/fig-GOplotEC-1.jpeg)](10-chap_files/figure-
 html/fig-GOplotEC-1.jpeg "그림 10.10: 이 그래프는 두 가지 정상 상태 조직(뇌와 심장, @Nolan:2013 참조)의 내피 세포에서의 차등 발현 연구에서 GO 용어와 유의미하게 변한 유전자 사이의 대응 관계를 보여줍니다. 정규화 후 차등 발현 분석이 수행되어 유전자 리스트를 얻었습니다. 그 다음 GOplot 패키지를 사용하여 차등 발현된 유전자 세트(조정된 p-값 < 0.05)에 대한 유전자 어노테이션 농축 분석을 수행했습니다.")
@@ -458,7 +460,7 @@ html/fig-GOplotEC-1.jpeg "그림 10.10: 이 그래프는 두 가지 정상 상�
     library("DLBCL")
     data("dataLym")
     data("interactome")
-    interactome __
+    interactome
     
     
     A graphNEL graph with undirected edges
@@ -470,7 +472,7 @@ html/fig-GOplotEC-1.jpeg "그림 10.10: 이 그래프는 두 가지 정상 상�
     names(pval)  =  dataLym$label
     subnet = subNetwork(dataLym$label, interactome)
     subnet = rmSelfLoops(subnet)
-    subnet __
+    subnet
     
     
     A graphNEL graph with undirected edges
@@ -486,7 +488,7 @@ p-값은 [4장](04-chap.html)에서 공부한 혼합 모델 유형으로 적합�
     
     
     fb = fitBumModel(pval, plot = FALSE)
-    fb __
+    fb
     
     
     Beta-Uniform-Mixture (BUM) model
@@ -498,7 +500,7 @@ p-값은 [4장](04-chap.html)에서 공부한 혼합 모델 유형으로 적합�
     log-likelihood:         4471.8
     
     
-    scores=scoreNodes(subnet, fb, fdr = 0.001)__
+    scores=scoreNodes(subnet, fb, fdr = 0.001)
 
 [![](10-chap_files/figure-html/fig-plotFITBum-1.png)](10-chap_files/figure-
 html/fig-plotFITBum-1.png "그림 10.11: qqplot은 데이터에 대한 베타-균등 혼합 모델 적합의 품질을 보여줍니다. 빨간색 점은 베타 분포의 이론적 분위수를 x 좌표로, 관측된 분위수를 y 좌표로 가집니다. 파란색 선은 이 모델이 잘 들어맞음을 보여줍니다.")
@@ -515,7 +517,7 @@ html/fig-histFITBum-1.png "그림 10.12: p-값에 대한 혼합 성분의 히스
     
     
 hotSub  =  runFastHeinz(subnet, scores)
-    hotSub __
+    hotSub
     
     
 A graphNEL graph with undirected edges
@@ -524,9 +526,9 @@ A graphNEL graph with undirected edges
     
     
     logFC=dataLym$diff
-    names(logFC)=dataLym$label __
+    names(logFC)=dataLym$label
 
-__
+
 
 질문 10.7
 
@@ -535,7 +537,7 @@ __
     
     
     plotModule(hotSub, layout = layout.davidson.harel, scores = scores,
-                      diff.expr = logFC)__
+                      diff.expr = logFC)
 
 [![](10-chap_files/figure-html/fig-plotBioNet-1.png)](10-chap_files/figure-
 html/fig-plotBioNet-1.png "그림 10.13: ABC와 GCB B세포 림프종 사이의 차등 발현에 대해 최대로 농축된 것으로 찾아진 하위 그래프입니다. 노드는 빨간색과 초록색으로 칠해져 있습니다: 초록색은 ACB에서의 상향 조절을, 빨간색은 GBC에서의 상향 조절을 나타냅니다. 노드의 모양은 점수를 나타냅니다: 직사각형은 음수 점수를, 원은 양수 점수를 나타냅니다.")
@@ -597,17 +599,17 @@ HIV는 매우 빠르게 진화함으로써 (수개월 내에 여러 돌연변이
   
 **생성기(generator)** 라고 불리는 순간 변화 확률 행렬입니다. 가장 단순한 모델인 Jukes-Cantor 모델에서는 모든 돌연변이가 발생할 가능성이 동일합니다 (표 10.2의 왼쪽 참조). 좀 더 유연한 모델인 Kimura 모델은 표 10.2의 오른쪽에 나와 있습니다.
 
-__
+
 
 질문 10.8
 
 왜 Kimura 모델이 더 유연하다고 말할까요?
 
-__
+
 
 해결책
 
-__
+
 
 Jukes-Cantor 모델은 하나의 매개변수만을 가지며, 모든 전이(transitions)와 트랜스버전(transversions)이 발생할 가능성이 동일하다고 가정합니다. Kimura 모델에는 전이와 트랜스버전(퓨린 내에서 혹은 피리미딘 내에서 발생하는 돌연변이 대 퓨린에서 피리미딘으로 또는 그 반대로 발생하는 돌연변이)에 대해 각각 하나씩 매개변수가 있습니다.
 
@@ -623,9 +625,9 @@ Jukes-Cantor 모델은 하나의 매개변수만을 가지며, 모든 전이(tra
     
     library("phangorn")
     library("ggtree")
-    load(file.path("../data/tree1.RData"))__
+    load(file.path("../data/tree1.RData"))
 
-__
+
 
 태스크
 
@@ -635,7 +637,7 @@ __
     
 ggtree(tree1, lwd = 2, color = "darkgreen", alpha = 0.8, right = TRUE) + 
       geom_tiplab(size = 7, angle = 90, offset = 0.05) + 
-      geom_point(aes(shape = isTip, color = isTip), size = 5, alpha = 0.6)__
+      geom_point(aes(shape = isTip, color = isTip), size = 5, alpha = 0.6)
 
 [![](10-chap_files/figure-html/fig-Atree1b-1.png)](10-chap_files/figure-
 html/fig-Atree1b-1.png "그림 10.16: 이것은 우리가 실제 매개변수로 사용하는 트리입니다. 우리는 뿌리(root)에서 하나씩 뉴클레오타이드를 생성하여 트리를 따라 "떨어뜨립니다". 에지 길이에 비례하는 확률로 브랜치를 따라 돌연변이가 발생합니다.")
@@ -647,7 +649,7 @@ html/fig-Atree1b-1.png "그림 10.16: 이것은 우리가 실제 매개변수로
     
     
     seqs6 = simSeq(tree1, l = 60, type = "DNA", bf = c(1, 1, 3, 3)/8, rate = 0.1)
-    seqs6 __
+    seqs6
     
     
     6 sequences with 60 character and 30 different site patterns.
@@ -656,7 +658,7 @@ html/fig-Atree1b-1.png "그림 10.16: 이것은 우리가 실제 매개변수로
     
     mat6df = data.frame(as.character(seqs6))
     p = ggtree(tree1, lwd = 1.2) + geom_tiplab(aes(x = branch), size = 5, vjust = 2)
-    gheatmap(p, mat6df[, 1:60], offset = 0.01, colnames = FALSE)__
+    gheatmap(p, mat6df[, 1:60], offset = 0.01, colnames = FALSE)
 
 [![](10-chap_files/figure-html/fig-
 ggtreeAlignment-1.png)](10-chap_files/figure-html/fig-ggtreeAlignment-1.png
@@ -664,21 +666,21 @@ ggtreeAlignment-1.png)](10-chap_files/figure-html/fig-ggtreeAlignment-1.png
 
 그림 10.17: 왼쪽의 트리는 Jukes-Cantor 모델에 따라 오른쪽의 서열들을 생성하는 데 사용되었습니다. 뿌리에서 생성된 뉴클레오타이드 빈도는 꽤 균등하지 않았으며, `A`와 `C`가 더 드물게 생성되었습니다. 서열이 트리를 따라 스며들면서 돌연변이가 발생하며, 이는 긴 브랜치에서 발생할 가능성이 더 높습니다.
 
-__
+
 
 질문 10.9
 
 위의 코드로 실험해 보세요. 돌연변이가 더 잘 발생하도록 `simSeq` 함수의 `bf` 및 `rate` 인수를 변경해 보세요. 매우 높은 돌연변이율로 생성된 서열들이 그것들을 생성한 트리를 추론하는 것을 더 쉽게 만들 것이라고 생각하시나요?
 
-__
+
 
 해결책
 
-__
+
 
 매우 높은 돌연변이율은 돌연변이가 스스로를 덮어쓰게 만들어 추론을 더 어렵게 만듭니다. 물론, 브랜치를 해상(resolve)하기 위해 어느 정도의 돌연변이는 발생해야 하므로 적정 수준이 존재합니다. 특정 시간과 일정 횟수의 돌연변이가 발생한 후에는 뿌리에서 무슨 일이 일어났는지 말하기가 매우 어려울 수 있습니다. 자세한 내용은 Mossel ([2003](16-chap.html#ref-Mossel:2003))을 참조하세요.
 
-__
+
 
 질문 10.10
 
@@ -719,30 +721,30 @@ Jukes-Cantor 모델에 기반한 DNA 거리에 대해 `nj`(neighbor joining)를 
     
     
 tree.nj = nj(dist.ml(seqs6, "JC69"))
-    ggtree(tree.nj) + geom_tiplab(size = 7) __
+    ggtree(tree.nj) + geom_tiplab(size = 7)
 
 [![](10-chap_files/figure-html/fig-njtree1-1.png)](10-chap_files/figure-
 html/fig-njtree1-1.png "그림 10.19: Neighbor Joining 알고리즘으로 구축된 트리는 계산 속도가 매우 빠르며, 종종 최대 우도나 파시모니와 같은 더 비싼 추정 절차를 위한 초기 값으로 사용됩니다.")
 
 그림 10.19: Neighbor Joining 알고리즘으로 구축된 트리는 계산 속도가 매우 빠르며, 종종 최대 우도나 파시모니와 같은 더 비싼 추정 절차를 위한 초기 값으로 사용됩니다.
 
-__
+
 
 질문 10.11
 
 `seqs6` 데이터가 주어졌을 때 `tree1`의 최대 우도 점수를 생성하고 이를 neighbor joining 트리의 점수와 비교하세요.
 
-__
+
 
 해결책
 
-__
+
 
     
     
-    fit = pml(tree1, seqs6, k = 4)__
+    fit = pml(tree1, seqs6, k = 4)
 
-__
+
 
 질문 10.12
 
@@ -761,7 +763,7 @@ __
     library("dada2")
     seqtab = readRDS(file.path("../data/seqtab.rds"))
     seqs = getSequences(seqtab)
-    names(seqs) = seqs __
+    names(seqs) = seqs
 
 16S rRNA 유전자와 같이 잘 연구된 마커 유전자 좌위를 사용하는 이점 중 하나는 시퀀싱된 변이들을 분류학적으로 분류할 수 있다는 능력입니다. **[dada2](https://bioconductor.org/packages/dada2/)** 는 이 목적을 위해 나이브 베이지안 분류기(naive Bayesian classifier) 방법을 포함하고 있습니다 ([Wang et al. 2007](16-chap.html#ref-wang2007naive)). 이 분류기는 시퀀싱된 변이들을 분류된 서열의 훈련 세트와 비교합니다. 여기서는 RDP v16 훈련 세트 ([Cole et al. 2009](16-chap.html#ref-cole2009rdp))를 사용합니다 5. 예를 들어, 그러한 분류를 위한 코드는 다음과 같습니다.
 
@@ -770,33 +772,33 @@ __
     
     
     fastaRef = "../tmp/rdp_train_set_16.fa.gz"
-    taxtab = assignTaxonomy(seqtab, refFasta = fastaRef)__
+    taxtab = assignTaxonomy(seqtab, refFasta = fastaRef)
 
 `assignTaxonomy` 함수는 실행 시간이 꽤 걸리므로 위의 코드는 라이브로 실행되지 않으며, 여기서는 이전에 계산된 결과인 분류학 정보 테이블을 로드합니다:
 
     
     
 taxtab = readRDS(file.path("../data/taxtab16.rds"))
-    dim(taxtab)__
+    dim(taxtab)
     
     
     [1] 268   6
 
-__
+
 
 질문 10.13
 
 R의 파이프 연산자 `|>`를 사용하여 행 이름을 제외한 분류학 정보의 처음 6행만을 보여주는 코드 한 줄을 작성하세요.
 
-__
+
 
 해결책
 
-__
+
 
     
     
-    head(taxtab) |> `rownames<-`(NULL)__
+    head(taxtab) |> `rownames<-`(NULL)
     
     
          Kingdom    Phylum          Class         Order          
@@ -814,7 +816,7 @@ __
     [5,] "Bacteroidaceae"     "Bacteroides"
     [6,] "Porphyromonadaceae" NA           
 
-__
+
 
 질문 10.14
 
@@ -830,7 +832,7 @@ __
 
     
     
-    readLines(file.path("../data/mal2.dna.txt")) |> head(12) |> cat(sep="\n")__
+    readLines(file.path("../data/mal2.dna.txt")) |> head(12) |> cat(sep="\n")
     
     
         11   1620
@@ -850,7 +852,7 @@ __
     
     
     library("DECIPHER")
-    alignment = AlignSeqs(DNAStringSet(seqs), anchor = NA, verbose = FALSE)__
+    alignment = AlignSeqs(DNAStringSet(seqs), anchor = NA, verbose = FALSE)
 
 우리는 **[phangorn](https://cran.r-project.org/web/packages/phangorn/)** 패키지를 사용하여 (GTR 모델하에서) MLE 트리를 구축할 것이지만, neighbor-joining 트리를 시작점으로 사용할 것입니다.
 
@@ -863,7 +865,7 @@ __
     fitGTR = update(fit, k = 4, inv = 0.2)
     fitGTR = phangorn::optim.pml(fitGTR, model = "GTR", optInv = TRUE,
              optGamma = TRUE,  rearrangement = "stochastic",
-             control = phangorn::pml.control(trace = 0))__
+             control = phangorn::pml.control(trace = 0))
 
 ## 10.5 계통수를 데이터 분석에 결합하기
 
@@ -884,7 +886,7 @@ samples = read.csv("../data/MIMARKS_Data_combined.csv", header = TRUE)
     keepCols = c("collection_date", "biome", "target_gene", "target_subfragment", 
       "host_common_name", "host_subject_id", "age", "sex", "body_product", "tot_mass",
       "diet", "family_relationship", "genotype", "SampleID") 
-    samples = samples[rownames(seqtab), keepCols] __
+    samples = samples[rownames(seqtab), keepCols]
 
 샘플별 서열 특징 테이블, 샘플 (메타)데이터, 서열 분류학 정보, 그리고 계통수가 다음과 같이 하나의 객체로 결합됩니다:
 
@@ -894,11 +896,11 @@ samples = read.csv("../data/MIMARKS_Data_combined.csv", header = TRUE)
     pso = phyloseq(tax_table(taxtab), 
                    sample_data(samples),
                    otu_table(seqtab, taxa_are_rows = FALSE), 
-                   phy_tree(fitGTR$tree))__
+                   phy_tree(fitGTR$tree))
 
 우리는 [8장](08-chap.html)에서 `pasilla` 데이터를 연구했을 때처럼, 불균질한 데이터 세트들을 데이터 세트의 서로 다른 부분들을 연결하고 일관되게 유지하는 작업을 자동화해 주는 특수한 데이터 클래스로 결합하는 여러 사례들을 접했습니다.
 
-__
+
 
 태스크
 
@@ -908,7 +910,7 @@ __
 
     
     
-    prune_samples(rowSums(otu_table(pso)) > 5000, pso)__
+    prune_samples(rowSums(otu_table(pso)) > 5000, pso)
     
     
     phyloseq-class experiment-level object
@@ -919,7 +921,7 @@ __
 
 우리는 또한 데이터 구성 요소들 사이의 링크 무결성을 유지하면서 다른 데이터 변환을 수행할 수 있습니다.
 
-__
+
 
 질문 10.15
 
@@ -936,7 +938,7 @@ __
     tab = table(prevdf$Phylum)
     keepPhyla = names(tab)[tab>5]
     prevdf1   = subset(prevdf,   Phylum %in% keepPhyla)
-    ps2v      = subset_taxa(pso, Phylum %in% keepPhyla)__
+    ps2v      = subset_taxa(pso, Phylum %in% keepPhyla)
 
 특정 박테리아의 풍부도를 플로팅하는 것은 막대 차트를 사용하여 수행할 수 있습니다. **[ggplot2](https://cran.r-project.org/web/packages/ggplot2/)** 표현식들이 **[phyloseq](https://bioconductor.org/packages/phyloseq/)** 패키지의 적절한 한 줄 호출로 고정되어 있습니다. 또한 대화형 [Shiny-phyloseq](http://joey711.github.io/shiny-phyloseq/) 브라우저 기반 도구도 있습니다 ([McMurdie and Holmes 2015](16-chap.html#ref-mcmurdie2015)). 자세한 내용은 온라인 비네트를 참조하세요.
 
@@ -957,13 +959,13 @@ __
     geoMeans = apply(counts(ps_dds), 1, geometricmean)
     ps_dds = estimateSizeFactors(ps_dds, geoMeans = geoMeans)
     ps_dds = estimateDispersions(ps_dds)
-    abund = getVarianceStabilizedData(ps_dds)__
+    abund = getVarianceStabilizedData(ps_dds)
 
 우리는 계층적 검정을 수행하기 위해 **[structSSI](https://cran.r-project.org/web/packages/structSSI/)** 패키지를 사용합니다 ([Sankaran and Holmes 2014](16-chap.html#ref-sankaran2014structssi)). 더 편리한 출력을 위해, 먼저 분류군의 이름을 줄입니다:
 
     
     
-    rownames(abund) = substr(rownames(abund), 1, 5) |> make.names(unique = TRUE)__
+    rownames(abund) = substr(rownames(abund), 1, 5) |> make.names(unique = TRUE)
 
 우리가 지금 수행할 계층적 검정 절차는 표준적인 다중 가설 검정과 다른데, 단변량 검정이 모든 분류군뿐만 아니라 각 상위 수준의 분류학적 그룹에 대해서도 수행되기 때문입니다. 이를 위해 헬퍼 함수인 `treePValues`를 사용할 수 있습니다: 이 함수는 첫 번째 행에 뿌리 노드를 지정하고 부모-자식 관계를 인코딩한 에지 리스트를 기대합니다.
 
@@ -976,11 +978,11 @@ __
     el_names = c(rownames(abund), seq_len(phy_tree(ps1)$Nnode))
     el[, 1] = el_names[el0[, 1]]
     el[, 2] = el_names[el0[, 2]]
-    unadj_p = treePValues(el, abund, sample_data(ps1)$ageBin)__
+    unadj_p = treePValues(el, abund, sample_data(ps1)$ageBin)
 
 우리는 이제 계층적 검정 절차를 사용하여 FDR 계산을 수행할 수 있습니다. 검정 결과는 여러 수준에서 FDR을 제어하는 것을 보장합니다. 자세한 내용은 ([Benjamini and Yekutieli 2003](16-chap.html#ref-benjamini2003hierarchical); [Benjamini and Bogomolov 2014](16-chap.html#ref-benjamini2014selective); [Sankaran and Holmes 2014](16-chap.html#ref-sankaran2014structssi))를 참조하세요.
 
-__
+
 
 태스크
 
@@ -990,7 +992,7 @@ __
     
 hfdr_res = hFDR.adjust(unadj_p, el, 0.75)
     summary(hfdr_res)
-    #plot(hfdr_res, height = 5000) # not run: opens in a browser __
+    #plot(hfdr_res, height = 5000) # not run: opens in a browser
 
 [![](imgs/structssi-screenshot.png)](imgs/structssi-screenshot.png
 "그림 10.20: 계층적 검정 절차에 의해 결정된, 차등적으로 풍부한 미생물이 많은 하위 트리의 스냅샷입니다. 현재 사용자가 미생물 GCGAG.33과 연관된 노드 위에 마우스를 올리고 있습니다. 이로 인해 조정된 p-값(0.029)이 나타납니다.")
@@ -1007,7 +1009,7 @@ hfdr_res = hFDR.adjust(unadj_p, el, 0.75)
     tax$seq = rownames(abund)
     hfdr_res@p.vals$seq = rownames(hfdr_res@p.vals)
     left_join(tax, hfdr_res@p.vals[,-3]) |
-      arrange(adjp) |> head(9) |> dplyr::select(1,2,4,5)__
+      arrange(adjp) |> head(9) |> dplyr::select(1,2,4,5)
     
     
                   Family       Genus hypothesisName hypothesisIndex
@@ -1055,24 +1057,24 @@ html/fig-graphs-MST-2.png "그림 10.21 (b): ")
       geom_node_text(aes(label = vertex_attr(gr09)$name), color="black",size=2) + 
       theme_void() + 
       guides(color=guide_legend(keyheight=0.1,keywidth=0.1,
-          title="Countries"))__
+          title="Countries"))
 
 [![](10-chap_files/figure-html/fig-HIVMSTi-1.png)](10-chap_files/figure-
 html/fig-HIVMSTi-1.png "그림 10.22: 2009년에 채취되었고 기원 국가가 알려진 샘플들로부터 얻은 HIV 서열 간의 DNA 거리를 사용하여 계산된 최소 신장 트리. 데이터는 HIVdb 데이터베이스 [@HIVdb]에 발표되었습니다.")
 
 그림 10.22: 2009년에 채취되었고 기원 국가가 알려진 샘플들로부터 얻은 HIV 서열 간의 DNA 거리를 사용하여 계산된 최소 신장 트리. 데이터는 `HIVdb` 데이터베이스 ([Rhee et al. 2003](16-chap.html#ref-HIVdb))에 발표되었습니다.
 
-__
+
 
 질문 10.16
 
 네트워크 플롯을 다시 만드세요. 단, 겹치는 노드 레이블을 최소화하기 위해 `geom_node_text`를 서로 밀어내는 레이블로 교체하세요.
 
-__
+
 
 해결책
 
-__
+
 
 그림 10.23을 참조하세요. 아마도 더 좋거나 추가적인 접근 방식은, 먼저 매우 가깝고 동일한 국가에서 온 정점들을 군집화하는 것일 것입니다.
 
@@ -1085,7 +1087,7 @@ __
       geom_node_label(aes(label = vertex_attr(gr09)$name), color="black",size=2,repel=TRUE) + 
       theme_void() + 
       guides(color=guide_legend(keyheight=0.1,keywidth=0.1,
-          title="Countries"))__
+          title="Countries"))
 
 [![](10-chap_files/figure-html/fig-graphs-
 networklabelrepel-1.png)](10-chap_files/figure-html/fig-graphs-networklabelrepel-1.png
@@ -1121,7 +1123,7 @@ networklabelrepel-1.png)](10-chap_files/figure-html/fig-graphs-networklabelrepel
       geom_node_point(aes(color=Countries),size = 3, alpha=0.75) + 
       geom_edge_arc(color = "black", alpha = 0.5, strength=0.15) + 
       geom_label(data=dfc,aes(x=lonc,y=latc,label=labc,fill=labc),colour="white",alpha=0.8,size=3,show.legend=F) + 
-      theme_void()  __
+      theme_void()
 
 [![](10-chap_files/figure-html/fig-HIVmap-1.png)](10-chap_files/figure-
 html/fig-HIVmap-1.png "그림 10.24: HIV 사례들 간의 최소 신장 트리. 사례들의 지리적 위치는 겹침을 줄이기 위해 지터링되었습니다. HIV 균주 사이의 DNA 서열 거리가 무향 최소 신장 트리 알고리즘의 입력으로 사용되었습니다.")
@@ -1130,7 +1132,7 @@ html/fig-HIVmap-1.png "그림 10.24: HIV 사례들 간의 최소 신장 트리. 
 
 최소 신장 트리 알고리즘의 입력은 거리 행렬이나 에지 길이 속성이 있는 그래프입니다. 그림 10.24는 `HIVdb` 데이터베이스 ([Rhee et al. 2003](16-chap.html#ref-HIVdb))를 통해 균주 정보가 공개된 HIV 사례들 사이의 최소 신장 트리입니다. DNA 거리는 Jukes-Cantor 돌연변이 모델을 사용하여 계산되었습니다.
 
-__
+
 
 질문 10.17
 
@@ -1167,7 +1169,7 @@ html/fig-WWtest-1.png "그림 10.25: 1차원 2-표본 비모수적 왈드-울포
     gr = graph_from_adjacency_matrix(d1,  mode = "undirected", weighted = TRUE)
     net = igraph::mst(gr)
     V(net)$id = sampledata[names(V(net)), "host_subject_id"]
-    V(net)$litter = sampledata[names(V(net)), "family_relationship"]__
+    V(net)$litter = sampledata[names(V(net)), "family_relationship"]
 
 우리는 결과로 얻은 igraph 생성 최소 신장 트리로부터 `ggraph` 객체를 만들고, 이를 그림 10.26에서처럼 플롯합니다.
 
@@ -1176,7 +1178,7 @@ html/fig-WWtest-1.png "그림 10.25: 1차원 2-표본 비모수적 왈드-울포
 ggraph(net, layout="fr")+
       geom_edge_arc(color = "darkgray") + 
       geom_node_point(aes(color = id, shape = litter)) + 
-      theme(legend.position="bottom")__
+      theme(legend.position="bottom")
 
 [![](10-chap_files/figure-html/fig-mstplot-1.png)](10-chap_files/figure-
 html/fig-mstplot-1.png "그림 10.26: 자카드 비유사성에 기초하고 생쥐 ID 및 집단 요인으로 주석이 달린 최소 신장 트리.")
@@ -1190,7 +1192,7 @@ html/fig-mstplot-1.png "그림 10.26: 자카드 비유사성에 기초하고 생
     library("phyloseqGraphTest")
     gt = graph_perm_test(ps1, "host_subject_id", distance="jaccard",
                          type="mst",  nperm=1000)
-    gt$pval __
+    gt$pval
     
     
     [1] 0.000999
@@ -1199,7 +1201,7 @@ html/fig-mstplot-1.png "그림 10.26: 자카드 비유사성에 기초하고 생
 
     
     
-    plot_permutations(gt)__
+    plot_permutations(gt)
 
 [![](10-chap_files/figure-html/fig-mstJaccard-1.png)](10-chap_files/figure-
 html/fig-mstJaccard-1.png "그림 10.27: 자카드 유사성을 이용한 최소 신장 트리로부터 얻은 네트워크의 순수 에지 수에 대한 순열 히스토그램.")
@@ -1217,7 +1219,7 @@ html/fig-mstJaccard-1.png "그림 10.27: 자카드 유사성을 이용한 최소
 net = make_network(ps1, max.dist = 0.35)
     sampledata = data.frame(sample_data(ps1))
     V(net)$id = sampledata[names(V(net)), "host_subject_id"]
-    V(net)$litter = sampledata[names(V(net)), "family_relationship"]__
+    V(net)$litter = sampledata[names(V(net)), "family_relationship"]
     
     
 ggraph(net, layout="fr") + 
@@ -1227,7 +1229,7 @@ ggraph(net, layout="fr") +
         theme(legend.position = c(1.4, 0.3),legend.background = element_blank(),
               legend.margin=margin(0, 3, 0, 0, "cm"))+
              guides(color=guide_legend(ncol=2))+
-      theme_graph(background = "white")__
+      theme_graph(background = "white")
 
 [![](10-chap_files/figure-html/fig-
 ggnetworkplotJ-1.png)](10-chap_files/figure-html/fig-ggnetworkplotJ-1.png
@@ -1246,7 +1248,7 @@ ggnetworkplotJ-1.png)](10-chap_files/figure-html/fig-ggnetworkplotJ-1.png
 gt = graph_perm_test(ps1, "family_relationship",
             grouping = "host_subject_id",
             distance = "jaccard", type = "mst", nperm= 1000)
-    gt$pval __
+    gt$pval
     
     
     [1] 0.002
@@ -1255,31 +1257,31 @@ gt = graph_perm_test(ps1, "family_relationship",
 
     
     
-    plot_permutations(gt)__
+    plot_permutations(gt)
 
 [![](10-chap_files/figure-html/fig-
 MstpermplotNest-1.png)](10-chap_files/figure-html/fig-MstpermplotNest-1.png "그림 10.29: 자카드 유사성을 이용한 최소 신장 트리로부터 얻은 순열 히스토그램.")
 
 그림 10.29: 자카드 유사성을 이용한 최소 신장 트리로부터 얻은 순열 히스토그램.
 
-__
+
 
 질문 10.18
 
 \(k\)-최근접 이웃(nearest neighbors) 그래프는 한 샘플이 다른 샘플의 \(k\)-최근접 이웃 세트에 있을 때마다 에지로 연결됨으로써 얻어집니다. 자카드 거리로 정의된 최근접 이웃을 사용하여 그래프를 정의하고 검정을 다시 수행하세요. 무엇을 결론지으시겠습니까?
 
-__
+
 
 해결책
 
-__
+
 
     
     
 gt = graph_perm_test(ps1, "family_relationship",
                           grouping = "host_subject_id",
                           distance = "jaccard", type = "knn", knn = 1)
-    gt$pval __
+    gt$pval
     
     
     [1] 0.004
@@ -1288,7 +1290,7 @@ gt = graph_perm_test(ps1, "family_relationship",
 
     
     
-    plot_test_network(gt)__
+    plot_test_network(gt)
 
 [![](10-chap_files/figure-html/fig-knn-1-plot-1.png)](10-chap_files/figure-
 html/fig-knn-1-plot-1.png "그림 10.30: 자카드 유사성을 이용한 최근접 이웃 그래프로부터 얻은 그래프.")
@@ -1342,17 +1344,17 @@ html/fig-knn-1-plot-1.png "그림 10.30: 자카드 유사성을 이용한 최근
 
 ## 10.9 연습 문제
 
-__
+
 
 연습 문제 10.1
 
 인접 행렬(adjacency matrix)로부터 시작하여 그래프를 그리는 함수를 만드세요. 예시를 통해 어떻게 작동하는지 보여주세요.
 
-__
+
 
 해결책
 
-__
+
 
     
     
@@ -1380,26 +1382,26 @@ ggplotadjacency = function(a) {
           axis.ticks.x = element_blank(),
           axis.ticks.y = element_blank() 
         )
-    }__
+    }
 
-__
+
 
 연습 문제 10.2
 
 유전자 기능 간의 관계는 유전자 온톨로지(Gene Ontology, GO) 그래프라고 불리는 그래프로 계층적으로 조직되어 있습니다. 생물학적 프로세스는 점점 더 미세한 스케일로 조직됩니다. 여러분이 관심 있는 유기체에 대한 GO 정보를 제공하는 데이터베이스 중 하나를 선택하세요. 유전자 리스트를 선택하고 그 리스트에 대한 GO 그래프를 구축하세요.  
 힌트: 일부 예시는 패키지들에서 찾을 수 있습니다.
 
-__
+
 
 연습 문제 10.3
 
 **질 마이크로바이옴의 상태 간 전이에 대한 마르코프 체인 그래프** : DiGiulio 등 ([2015](16-chap.html#ref-DigiulioCallahan:2015))에서 저자들은 **[markovchain](https://cran.r-project.org/web/packages/markovchain/)** 패키지를 사용하여 커뮤니티 상태 유형 (CSTs) 간의 전이율을 나타내기 위해 **[igraph](https://cran.r-project.org/web/packages/igraph/)** 플롯을 사용했습니다. 데이터를 로드하고 전이율과 상태 이름을 특수 클래스인 `markovchain` 객체에 넣은 후, 정점의 공변량으로 조산율(percentage of preterm birth)을 포함하도록 레이아웃을 세심하게 조정하세요 (정점 크기를 이 변수에 비례하게 만드세요). 상태 간의 전이 크기를 화살표의 너비로 포함시키세요.
 
-__
+
 
 해결책
 
-__
+
 
 참고: 아래 코드는 라이브로 실행되지 않으며, 한때 저자들을 위해 실행되었던 버전입니다. 여기서는 독자가 마무리할 수 있도록 시작점으로 제공되며, 현대화 및 개선의 여지가 있습니다.
 
@@ -1415,7 +1417,7 @@ __
                   transitionMatrix = trans, name="PregCST")
     mcPreg
     # 마르코프 체인의 igraph 설정
-    netMC  =  markovchain:::.getNet(mcPreg, round = TRUE)__
+    netMC  =  markovchain:::.getNet(mcPreg, round = TRUE)
 
 이제 여러 플로팅 매개변수들을 정의하고, 해당 CST와 조산 결과 사이의 연관성에 기초하여 노드 색상을 할당합니다.
 
@@ -1433,7 +1435,7 @@ wts  =  E(netMC)$weight/100
     colnames(premat)  =  c("Term", "Preterm")
     premat
     premat  =  premat/rowSums(premat)
-    vert.CSTclrs  =  CSTColors __
+    vert.CSTclrs  =  CSTColors
     
     
 default.par  =  par(no.readonly = TRUE)
@@ -1484,9 +1486,9 @@ default.par  =  par(no.readonly = TRUE)
            vertex.label.font = 2, vertex.label.cex = 1, 
            vertex.label.color = vert.font.clrs, vertex.frame.color = NA, 
            layout=layout, edge.loop.angle = edge.loop.angle)
-    par(default.par)__
+    par(default.par)
 
-__
+
 
 연습 문제 10.4
 
@@ -1494,11 +1496,11 @@ __
 Cyclin B1 단백질은 CCNB1 유전자에 의해 인코딩됩니다. 위키백과 (<https://en.wikipedia.org/wiki/Cyclin_B1>)에서 이에 대해 읽을 수 있습니다.  
 STRING을 사용하여 CCNB1 유전자 주변의 에지 텍스트 파일(_ccnb1datsmall.txt_ 라고 부릅시다)을 생성하세요. 0.9보다 높은 신뢰도로 공동 발현의 증거에 의해 연결된 노드들을 선택하세요. 50개 이하의 상호작용과 그래프에서 CCNB1로부터 두 단계 떨어진 추가 노드들을 수집하세요.
 
-__
+
 
 해결책
 
-__
+
 
   1. <http://www.string-db.org> 에 접속합니다.
 
@@ -1512,17 +1514,17 @@ __
 
   6. "Text Summary (TXT - simple tab delimited flatfile)" 파일로 스크롤을 내려서 해당 문서를 _ccnb1datsmall.txt_ 로 저장합니다.
 
-__
+
 
 연습 문제 10.5
 
 _ccnb1datsmall.txt_ 파일을 R로 읽어 들이고 이 장에서 다룬 그래프 시각화 방법 중 하나를 사용하여 그래프 플롯을 만드세요.
 
-__
+
 
 해결책
 
-__
+
 
 [![](imgs/ccnb1img.png)](imgs/ccnb1img.png "그림 10.32: 이 네트워크는 STRING 웹사이트에서 공동 발현 수준  ≥  0.900에 대해 CCNB1 유전자 주변의 2단계 이웃을 설정하여 생성되었습니다.")
 
@@ -1534,7 +1536,7 @@ dat = read.table(file.path("../data/ccnb1datsmall.txt"), header = TRUE, comment.
     v = levels(unlist(dat[,1:2]))        # 정점 이름
     n = length(v)                        # 정점 수
     e = matrix(match(as.character(unlist(dat[,1:2])), v), ncol=2) # 에지 리스트
-    w = dat$coexpression                 # 에지 가중치 __
+    w = dat$coexpression                 # 에지 가중치
 
 M은 우리의 공동 발현 네트워크 인접 행렬입니다. STRING 데이터는 단지 단백질 i와 j가 공동 발현되는지만 말해주고 (i,j)와 (j,i)를 구별하지 않으므로, (i,j)의 가중치가 (j,i)와 같다고 간주하여 M을 대칭(무향)으로 만들고 싶습니다. A는 우리의 공동 발현 그래프 인접 행렬이며 공동 발현되는 경우 \(A_{ij} = 1\)로 만듭니다.
 
@@ -1544,7 +1546,7 @@ M = matrix(0, n, n)
     M[e] = w
     M = M + t(M)
     dimnames(M) = list(v, v)
-    A = 1*(M > 0)__
+    A = 1*(M > 0)
 
 우리는 기본 플로팅 매개변수를 사용하고 에지 벡터 `e`로부터 시작하여 **[igraph](https://cran.r-project.org/web/packages/igraph/)** 패키지를 사용해 그래프를 생성합니다 (대안으로는 인접 행렬 A를 사용하는 것이 있습니다).
 
@@ -1555,21 +1557,21 @@ _참고:_ 그래프가 항상 동일하게 보이도록 하기 위해 시드(see
     library(igraph)
     net = network(e, directed=FALSE)
     par(mar=rep(0,4))
-    plot(net, label=v)__
+    plot(net, label=v)
 
 **[ggraph](https://cran.r-project.org/web/packages/ggraph/)** 를 사용하여 그래프를 만들 수도 있습니다.
 
-__
+
 
 연습 문제 10.6
 
 연습 문제 10.5에서 생성된 그래프의 인접 행렬을 보여주는 히트맵을 만드세요.
 
-__
+
 
 해결책
 
-__
+
 
 기본값 외에 히트맵을 만드는 데 사용되는 옵션은 색상을 변경하는 것입니다. 추가 매개변수를 실험하고 추가할 수 있습니다.
 
@@ -1586,14 +1588,14 @@ __
             col = cols, breaks = breaks,  frame = TRUE)
     legend("topleft", c("Neighbors(CCNB1)", "CCNB1"),
            fill = c("red","blue"),
-           bty = "n", inset = 0, xpd = TRUE,  border = FALSE)__
+           bty = "n", inset = 0, xpd = TRUE,  border = FALSE)
 
 [![](10-chap_files/figure-html/fig-heatmapCCNB1-1.png)](10-chap_files/figure-
 html/fig-heatmapCCNB1-1.png "그림 10.33: 이것은 CCNB1 네트워크의 인접성을 나타냅니다 – 공동 발현 수준  ≥  0.900의 2단계 이웃, R에서 생성됨 (어두울수록 1에 가까움, 0.9 미만 값은 무시).")
 
 그림 10.33: 이것은 CCNB1 네트워크의 인접성을 나타냅니다 – 공동 발현 수준 \(\ge\) 0.900의 2단계 이웃, R에서 생성됨 (어두울수록 1에 가까움, 0.9 미만 값은 무시).
 
-__
+
 
 연습 문제 10.7
 
@@ -1602,7 +1604,7 @@ __
 반대로, CCNB1과 공동 발현되는 단백질과 공동 발현되는 단백질(두 단계 떨어진)은 서로 공동 발현되는 경향이 없습니다.
 두 그림 중 (플롯 또는 히트맵) 하나에서 이것을 다른 것보다 더 쉽게 볼 수 있나요?
 
-__
+
 
 연습 문제 10.8
 
@@ -1612,25 +1614,25 @@ HIV GAG 데이터 분석에서 **[ape](https://cran.r-project.org/web/packages/a
     
     library("ape")
     library("phangorn")
-    GAG = read.dna(file.path("../data/DNA_GAG_20.txt"))__
+    GAG = read.dna(file.path("../data/DNA_GAG_20.txt"))
 
-__
+
 
 연습 문제 10.9
 
 Bray-Curtis 비유사성을 사용하여 "two-nearest" 이웃 그래프로 프리드먼-라프스키 유형 검정을 수행하세요.
 
-__
+
 
 해결책
 
-__
+
 
     
     
 gt = graph_perm_test(ps1, "family_relationship", distance = "bray", 
                          grouping = "host_subject_id", type = "knn", knn = 2)
-    gt$pval __
+    gt$pval
     
     
     [1] 0.004
@@ -1642,7 +1644,7 @@ gt = graph_perm_test(ps1, "family_relationship", distance = "bray",
     ymax = max(gt$perm)
     ggplot(permdf, aes(x = perm)) + geom_histogram(bins = 20) + 
       geom_segment(aes(x = obs, y = 0, xend = obs, yend = ymax/10), color = "red") + 
-      geom_point(aes(x = obs, y = ymax/10), color = "red") + xlab("Number of pure edges")__
+      geom_point(aes(x = obs, y = ymax/10), color = "red") + xlab("Number of pure edges")
 
 [![](10-chap_files/figure-html/fig-knn-2-plot-1.png)](10-chap_files/figure-
 html/fig-knn-2-plot-1.png "그림 10.34 (a): \text{}")

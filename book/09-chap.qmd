@@ -1,3 +1,5 @@
+# 이질적 데이터의 다변량 분석 (Multivariate Analysis for Heterogeneous Data)
+
 ![](imgs/Brighton_West_Pier_20090214_sunset.jpg)
 
 실제 상황에는 종종 포인트 클라우드, 그래디언트, 그래프, 어트랙션 포인트, 노이즈 및 서로 다른 공간적 환경이 포함되는데, 이는 마치 단단한 뼈대, 파도, 태양, 그리고 찌르레기들이 있는 이 사진과도 비슷합니다.
@@ -37,7 +39,7 @@
     
     library("pheatmap")
     data("ukraine_dists", package = "MSMB")
-    as.matrix(ukraine_dists)[1:4, 1:4]__
+    as.matrix(ukraine_dists)[1:4, 1:4]
     
     
                    Kyiv    Odesa Sevastopol Chernihiv
@@ -50,7 +52,7 @@
     pheatmap(as.matrix(ukraine_dists), 
       color = colorRampPalette(c("#0057b7", "#ffd700"))(50),
       breaks = seq(0, max(ukraine_dists)^(1/2), length.out = 51)^2,
-      treeheight_row = 10, treeheight_col = 10)__
+      treeheight_row = 10, treeheight_col = 10)
 
 [![](09-chap_files/figure-html/fig-HeatDists-1.png)](09-chap_files/figure-
 html/fig-HeatDists-1.png "그림 9.1: ukraine_dists 거리 행렬의 히트맵. 거리는 킬로미터 단위로 측정됩니다. 함수가 도시들의 순서를 재배열하고 가장 가까운 것들을 그룹화했습니다.")
@@ -61,7 +63,7 @@ html/fig-HeatDists-1.png "그림 9.1: ukraine_dists 거리 행렬의 히트맵. 
 
     
     
-    ukraine_mds = cmdscale(ukraine_dists, eig = TRUE)__
+    ukraine_mds = cmdscale(ukraine_dists, eig = TRUE)
 
 이 장에서 여러 번 재사용하여 `cmdscale` 함수의 호출 결과로부터 스크리 플롯(screeplot)을 만드는 함수를 정의합니다:
 
@@ -74,33 +76,33 @@ html/fig-HeatDists-1.png "그림 9.1: ukraine_dists 거리 행렬의 히트맵. 
         aes(x = k, y = eig)) + theme_minimal() +
         scale_x_discrete("k", limits = as.factor(seq_len(m))) + 
         geom_bar(stat = "identity", width = 0.5, fill = "#ffd700", col = "#0057b7")
-    }__
+    }
     
     
-    plotscree(ukraine_mds, m = 4)__
+    plotscree(ukraine_mds, m = 4)
 
 [![](09-chap_files/figure-html/fig-plotscreeeig-1.png)](09-chap_files/figure-
 html/fig-plotscreeeig-1.png "그림 9.2: 처음 네 개의 고윳값에 대한 스크리 플롯. 처음 두 개의 고윳값 이후에 뚜렷한 감소가 있으며, 이는 데이터가 2차원 임베딩으로 잘 설명됨을 나타냅니다.")
 
 그림 9.2: 처음 네 개의 고윳값에 대한 스크리 플롯. 처음 두 개의 고윳값 이후에 뚜렷한 감소가 있으며, 이는 데이터가 2차원 임베딩으로 잘 설명됨을 나타냅니다.
 
-__
+
 
 질문 9.1
 
 `cmdscale` 함수에 의해 출력된 모든 고윳값들을 살펴보세요: 무엇을 발견했나요?
 
-__
+
 
 해결책
 
-__
+
 
 다음을 실행하면:
 
     
     
-    ukraine_mds$eig |> signif(3)__
+    ukraine_mds$eig |> signif(3)
     
     
      [1]  3.91e+06  1.08e+06  3.42e+02  4.84e-01  2.13e-01  3.83e-05  5.90e-06
@@ -110,7 +112,7 @@ __
     [29] -2.51e-04 -1.41e-02 -1.19e-01 -3.58e+02 -8.85e+02
     
     
-    plotscree(ukraine_mds)__
+    plotscree(ukraine_mds)
 
 [![](09-chap_files/figure-html/fig-
 plotscreeeigall-1.png)](09-chap_files/figure-html/fig-plotscreeeigall-1.png
@@ -132,7 +134,7 @@ PCA와 달리 일부 음의 고윳값들이 있음을 알 수 있습니다. 이�
     library("ggrepel")
     g = ggplot(ukraine_mds_df, aes(x = PCo1, y = PCo2, label = labs)) +
       geom_point() + geom_text_repel(col = "#0057b7") + coord_fixed() 
-    g __
+    g
 
 [![](09-chap_files/figure-html/fig-ukrainemds1-1.png)](09-chap_files/figure-
 html/fig-ukrainemds1-1.png "그림 9.4: 거리 기반의 MDS 지도.")
@@ -143,7 +145,7 @@ html/fig-ukrainemds1-1.png "그림 9.4: 거리 기반의 MDS 지도.")
 
     
     
-    g %+% mutate(ukraine_mds_df, PCo1 = PCo1, PCo2 = -PCo2)__
+    g %+% mutate(ukraine_mds_df, PCo1 = PCo1, PCo2 = -PCo2)
 
 [![](09-chap_files/figure-html/fig-ukrainemds2-1.png)](09-chap_files/figure-
 html/fig-ukrainemds2-1.png "그림 9.5: 그림 9.4와 같지만, y축이 뒤집힌 모습.")
@@ -153,7 +155,7 @@ html/fig-ukrainemds2-1.png "그림 9.5: 그림 9.4와 같지만, y축이 뒤집�
     
     
     data("ukraine_coords", package = "MSMB")
-    print.data.frame(ukraine_coords[1:4,  c("city", "lat", "lon")])__
+    print.data.frame(ukraine_coords[1:4,  c("city", "lat", "lon")])
     
     
             city      lat      lon
@@ -164,38 +166,38 @@ html/fig-ukrainemds2-1.png "그림 9.5: 그림 9.4와 같지만, y축이 뒤집�
     
     
     ggplot(ukraine_coords, aes(x = lon, y = lat, label = city)) +
-      geom_point() + geom_text_repel(col = "#0057b7")__
+      geom_point() + geom_text_repel(col = "#0057b7")
 
 [![](09-chap_files/figure-html/fig-ukrainecoord1-1.png)](09-chap_files/figure-
 html/fig-ukrainecoord1-1.png "그림 9.6: ukraine_coords 데이터 프레임에서 가져온 실제 위도와 경도.")
 
 그림 9.6: `ukraine_coords` 데이터 프레임에서 가져온 실제 위도와 경도.
 
-__
+
 
 질문 9.2
 
 우리는 종횡비에 주의를 기울이지 않고 그림 9.6의 오른쪽 패널에 경도와 위도를 그렸습니다. 이 플롯에 적절한 종횡비는 얼마일까요?
 
-__
+
 
 해결책
 
-__
+
 
 경도의 1도 변화에 해당하는 거리와 위도의 1도 변화에 해당하는 거리 사이에는 단순한 관계가 없으므로 선택하기가 어렵습니다. 지구가 구형이고 반지름이 6371km라는 단순화된 가정하에서도 복잡합니다: 위도의 1도는 항상 111km 거리(\(6371\times2\pi/360\))에 해당하며, 적도에서의 경도 1도 마찬가지입니다. 하지만 적도에서 멀어지면 경도 1도는 점점 더 짧은 거리에 해당하게 됩니다(극점에서는 거리가 아예 없습니다). 실용적으로 그림 9.6과 같은 디스플레이의 경우, 가장 북쪽 지점과 남쪽 지점의 중간 정도인 48도에 대한 코사인 값을 종횡비로 선택할 수 있습니다.
 
-__
+
 
 질문 9.3
 
 그림 9.6에 국제 경계와 강 같은 지리적 특징을 추가해 보세요.
 
-__
+
 
 해결책
 
-__
+
 
 국제 경계를 다각형으로 추가하는 아래 코드가 시작점이 될 수 있습니다 (그림 9.7).
 
@@ -207,7 +209,7 @@ __
       geom_polygon(data = ua_borders, aes(x = long, y = lat, group = subregion), fill = "#ffd700", color = "#0057b7") +
       geom_point() + 
       geom_text_repel(aes(label = city)) +
-      coord_fixed(1/cos(48/180*pi))__
+      coord_fixed(1/cos(48/180*pi))
 
 벡터 및 래스터 데이터 유형을 포함하여 [지리 공간 데이터를 위해 R에서 사용할 수 있는 추가 인프라](https://cran.r-project.org/web/views/Spatial.html)가 많이 있습니다.
 
@@ -230,7 +232,7 @@ ukrainewithborders-1.png "그림 9.7: 그림 9.6에 국제 경계가 추가된 �
     
     
     X = with(ukraine_coords, cbind(lon, lat * cos(48)))
-    DdotD = as.matrix(dist(X)^2)__
+    DdotD = as.matrix(dist(X)^2)
 
 상대적인 거리는 데이터의 원점에 의존하지 않습니다. 우리는 \(H=I-\frac{1}{n}{\mathbf{11}}^t\)로 정의된 중앙화 행렬(centering matrix) \(H\)를 사용하여 데이터를 중앙에 맞춥니다. 다음을 사용하여 \(H\)의 **중앙화** 속성을 확인해 봅시다:
 
@@ -239,7 +241,7 @@ ukrainewithborders-1.png "그림 9.7: 그림 9.6에 국제 경계가 추가된 �
     n = nrow(X)
     H = diag(rep(1,n))-(1/n) * matrix(1, nrow = n, ncol = n)
     Xc = sweep(X,2,apply(X,2,mean))
-    Xc[1:2, ]__
+    Xc[1:2, ]
     
     
                 lon          
@@ -248,7 +250,7 @@ ukrainewithborders-1.png "그림 9.7: 그림 9.6에 국제 경계가 추가된 �
     
     
     HX = H %*% X
-    HX[1:2, ]__
+    HX[1:2, ]
     
     
                 lon          
@@ -256,29 +258,29 @@ ukrainewithborders-1.png "그림 9.7: 그림 9.6에 국제 경계가 추가된 �
     [2,] -0.9641429  1.353935
     
     
-    apply(HX, 2, mean)__
+    apply(HX, 2, mean)
     
     
               lon               
     -1.618057e-15  1.747077e-16 
 
-__
+
 
 질문 9.4
 
 `DdotD`의 오른쪽과 왼쪽에 모두 중앙화 행렬을 적용하여 얻은 행렬을 `B0`라고 합시다. \(HX\) 행렬에 의해 주어지는 원점에 중앙화된 점들을 고려하고 그 교차 곱(cross product)을 계산하여 이를 `B2`라고 부릅시다. `B0`를 `B2`와 같게 만들려면 `B0`에 무엇을 해야 할까요?
 
-__
+
 
 해결책
 
-__
+
 
     
     
     B0 = H  %*% DdotD %*% H
     B2 = HX %*% t(HX)
-    B2[1:3, 1:3] / B0[1:3, 1:3]__
+    B2[1:3, 1:3] / B0[1:3, 1:3]
     
     
          [,1] [,2] [,3]
@@ -287,7 +289,7 @@ __
     [3,] -0.5 -0.5 -0.5
     
     
-    max(abs(-0.5 * B0 - B2))__
+    max(abs(-0.5 * B0 - B2))
     
     
     [1] 9.237056e-14
@@ -333,7 +335,7 @@ __
     ekm = read.table("../data/ekman.txt", header=TRUE)
     rownames(ekm) = colnames(ekm)
     disekm = 1 - ekm - diag(1, ncol(ekm))
-    disekm[1:5, 1:5]__
+    disekm[1:5, 1:5]
     
     
          w434 w445 w465 w472 w490
@@ -344,14 +346,14 @@ __
     w490 0.82 0.78 0.53 0.46 0.00
     
     
-    disekm = as.dist(disekm)__
+    disekm = as.dist(disekm)
 
 우리는 MDS 좌표와 고윳값을 계산합니다. 우리는 그림 9.8에 표시된 스크리 플롯에 고윳값들을 결합합니다:
 
     
     
     mdsekm = cmdscale(disekm, eig = TRUE)
-    plotscree(mdsekm)__
+    plotscree(mdsekm)
 
 [![](09-chap_files/figure-html/fig-ekmanMDSeig-1.png)](09-chap_files/figure-
 html/fig-ekmanMDSeig-1.png "그림 9.8: 스크리 플롯은 현상이 주로 2차원적임을 보여줍니다.")
@@ -370,7 +372,7 @@ html/fig-ekmanMDSeig-1.png "그림 9.8: 스크리 플롯은 현상이 주로 2�
         rgb = photobiology::w_length2rgb(as.numeric(sub("w", "", name))))
     ggplot(dfekm, aes(x = MDS1, y = MDS2)) +
       geom_point(col = dfekm$rgb, size = 4) +
-      geom_text_repel(aes(label = name)) + coord_fixed()__
+      geom_text_repel(aes(label = name)) + coord_fixed()
 
 [![](09-chap_files/figure-html/fig-ekmanMDS-1-1.png)](09-chap_files/figure-
 html/fig-ekmanMDS-1-1.png "그림 9.9: 처음 두 차원에서의 산점도 배치는 말편자(horseshoe) 모양을 하고 있습니다. 레이블과 색상은 아치형 구조가 파장에 대응함을 보여줍니다.")
@@ -403,7 +405,7 @@ NMDS 결과의 각 계산은 무작위적이면서 \(k\) 값에 의존하는 새
         replicate(sim, metaMDS(x, k = k, autotransform = FALSE)$stress))
     }
     stress = nmds.stress(disekm, sim = 100)
-    dim(stress)__
+    dim(stress)
 
 결과의 박스플롯을 살펴봅시다. 이는 \(k\)를 선택하기 위한 유용한 진단 플롯이 될 수 있습니다 (그림 9.10).
 
@@ -411,7 +413,7 @@ NMDS 결과의 각 계산은 무작위적이면서 \(k\) 값에 의존하는 새
     
     dfstr = reshape2::melt(stress, varnames = c("replicate","dimensions"))
     ggplot(dfstr, aes(y = value, x = dimensions, group = dimensions)) +
-      geom_boxplot()__
+      geom_boxplot()
 
 [![](09-chap_files/figure-html/fig-NMDSscreeplot-1-1.png)](09-chap_files/figure-
 html/fig-NMDSscreeplot-1-1.png "그림 9.10: 스트레스의 안정성을 평가하기 위해 각 차원에서 여러 번의 반복 실험이 수행되었습니다. 우리는 2차원 이상에서 스트레스가 급격히 떨어지는 것을 볼 수 있으며, 이는 여기서 2차원 솔루션이 적절함을 나타냅니다.")
@@ -423,7 +425,7 @@ html/fig-NMDSscreeplot-1-1.png "그림 9.10: 스트레스의 안정성을 평가
     
     
     nmdsk2 = metaMDS(disekm, k = 2, autotransform = FALSE)
-    stressplot(nmdsk2, pch = 20)__
+    stressplot(nmdsk2, pch = 20)
 
 [![](09-chap_files/figure-html/fig-Shepardsplot-1-1.png)](09-chap_files/figure-
 html/fig-Shepardsplot-1-1.png "그림 9.11: 셰퍼드 플롯은 원래의 거리 또는 비유사성(가로축)을 재구성된 거리(세로축, 이 경우 k=2)와 비교합니다.")
@@ -440,7 +442,7 @@ html/fig-Shepardsplot-1-1.png "그림 9.11: 셰퍼드 플롯은 원래의 거리
       bind_cols(dplyr::select(dfekm, rgb, name)) |>
       ggplot(aes(x = NmMDS1, y = NmMDS2)) +
         geom_point(col = dfekm$rgb, size = 4) +
-        geom_text_repel(aes(label = name))__
+        geom_text_repel(aes(label = name))
 
 [![](09-chap_files/figure-html/fig-ekmannonMDS-1-1.png)](09-chap_files/figure-
 html/fig-ekmannonMDS-1-1.png "그림 9.12 (a): ")
@@ -483,35 +485,35 @@ html/fig-ekmannonMDS-1-2.png "그림 9.12 (b): ")
     IBDchip = readRDS("../data/vsn28Exprd.rds")
     library("ade4")
     library("factoextra")
-    library("sva")__
+    library("sva")
 
-__
+
 
 질문 9.5
 
 `IBDchip`의 클래스는 무엇인가요? 행렬의 마지막 행을 살펴보세요. 무엇을 알 수 있나요?
 
-__
+
 
 해결책
 
-__
+
 
     
     
-    class(IBDchip)__
+    class(IBDchip)
     
     
     [1] "matrix" "array" 
     
     
-    dim(IBDchip)__
+    dim(IBDchip)
     
     
     [1] 8635   28
     
     
-    tail(IBDchip[,1:3])__
+    tail(IBDchip[,1:3])
     
     
                                      20CF     20DF     20MF
@@ -523,7 +525,7 @@ __
     day                          2.000000 2.000000 2.000000
     
     
-    table(IBDchip[nrow(IBDchip), ])__
+    table(IBDchip[nrow(IBDchip), ])
     
     
      1  2  3 
@@ -536,7 +538,7 @@ __
     
     
     assayIBD = IBDchip[-nrow(IBDchip), ]
-    day      = factor(IBDchip[nrow(IBDchip), ])__
+    day      = factor(IBDchip[nrow(IBDchip), ])
 
 연속형의 정규화된 데이터를 사용하는 대신, 값을 순위로 대체하는 강건한 분석을 사용합니다. 낮은 풍부도 값들은 실제 존재하는 것으로 생각되는 예상 분류군 수를 반영하도록 선택된 임계값으로 인코딩된 동점(ties)으로 간주됩니다:
 
@@ -549,7 +551,7 @@ __
       dudi.pca(t(ranksM), scannf = FALSE, nf = 2)
     }
     pcaDay12 = rankthreshPCA(assayIBD[, day != 3])
-    fviz_eig(pcaDay12, bar_width = 0.6) + ggtitle("")__
+    fviz_eig(pcaDay12, bar_width = 0.6) + ggtitle("")
 
 [![](09-chap_files/figure-html/fig-screepc12-1.png)](09-chap_files/figure-
 html/fig-screepc12-1.png "그림 9.13: 스크리 플롯은 샘플들이 2차원 임베딩으로 유용하게 표현될 수 있음을 보여줍니다.")
@@ -563,24 +565,24 @@ html/fig-screepc12-1.png "그림 9.13: 스크리 플롯은 샘플들이 2차원 
       habillage = day12, repel = TRUE, palette = "Dark2",
       addEllipses = TRUE, ellipse.type = "convex") + ggtitle("") +
       coord_fixed() 
-    rtPCA1 __
+    rtPCA1
 
 [![](09-chap_files/figure-html/fig-rankthreshPCA-1.png)](09-chap_files/figure-
 html/fig-rankthreshPCA-1.png "그림 9.14: 우리는 색상을 사용하여 서로 다른 날짜를 식별하고 샘플 레이블도 유지했습니다. 또한 각 날짜에 대해 볼록 껍질(convex hulls)을 추가했습니다. 그룹 평균은 더 큰 기호(원, 삼각형 또는 사각형)를 가진 점으로 표시됩니다.")
 
 그림 9.14: 우리는 색상을 사용하여 서로 다른 날짜를 식별하고 샘플 레이블도 유지했습니다. 또한 각 날짜에 대해 볼록 껍질(convex hulls)을 추가했습니다. 그룹 평균은 더 큰 기호(원, 삼각형 또는 사각형)를 가진 점으로 표시됩니다.
 
-__
+
 
 질문 9.6
 
 왜 순위에 임계값(threshold)을 사용하나요?
 
-__
+
 
 해결책
 
-__
+
 
 실제로 존재하지 않는 종들의 경우 노이즈 수준의 낮은 풍부도가 나타나는데, 이들이 전체의 절반 이상입니다. 이러한 관측치들에 대해 어떠한 유의미한 이유 없이 순위에서 큰 도약이 쉽게 일어날 수 있습니다. 따라서 우리는 낮은 풍부도에 대해 많은 수의 동점(ties)을 만듭니다.
 
@@ -594,7 +596,7 @@ __
     fviz(pcaDay123, element = "ind", axes = c(1, 2), geom = c("point", "text"),
       habillage = day, repel = TRUE, palette = "Dark2",
       addEllipses = TRUE, ellipse.type = "convex") + 
-      ggtitle("") + coord_fixed()__
+      ggtitle("") + coord_fixed()
 
 [![](09-chap_files/figure-html/fig-
 Threesetspca123-1.png)](09-chap_files/figure-html/fig-
@@ -610,7 +612,7 @@ Threesetspca123-2.png "그림 9.15 (b): ")
 
 그림 9.15: 3일간의 분석을 처음 이틀간의 분석과 비교해 보면, 두 번째 축 좌표의 부호가 반전된 것을 알 수 있습니다: 이는 생물학적 관련성이 없습니다. 중요한 발견은 그룹 3이 그룹 1과 크게 겹친다는 것인데, 이는 가변성을 만든 것이 2일째의 프로토콜 변경이었음을 나타냅니다.
 
-__
+
 
 질문 9.7
 
@@ -619,7 +621,7 @@ __
     
     
     fviz_pca_ind(pcaDay123, habillage = day, labelsize = 3,
-      palette = "Dark2", addEllipses = TRUE, ellipse.level = 0.69)__
+      palette = "Dark2", addEllipses = TRUE, ellipse.level = 0.69)
 
 [![](09-chap_files/figure-html/fig-screepc123-1.png)](09-chap_files/figure-
 html/fig-screepc123-1.png "그림 9.16: 3개 그룹의 경우 고윳값 스크리 플롯은 그림 9.13에 표시된 2개 그룹의 경우와 매우 유사합니다.")
@@ -643,7 +645,7 @@ html/fig-screepc123-1.png "그림 9.16: 3개 그룹의 경우 고윳값 스크�
     pcaDayBatRM = rankthreshPCA(combatIBD)
     fviz(pcaDayBatRM, element = "ind", geom = c("point", "text"),
       habillage = day, repel=TRUE, palette = "Dark2", addEllipses = TRUE,
-      ellipse.type = "convex", axes =c(1,2)) + coord_fixed() + ggtitle("")__
+      ellipse.type = "convex", axes =c(1,2)) + coord_fixed() + ggtitle("")
 
 [![](09-chap_files/figure-html/fig-CombatIBD-1.png)](09-chap_files/figure-
 html/fig-CombatIBD-1.png "그림 9.17: 배치 효과가 제거된 수정된 데이터는 이제 거의 원점에 중심을 두고 심하게 겹쳐진 세 개의 배치 그룹을 보여줍니다.")
@@ -666,7 +668,7 @@ html/fig-CombatIBD-1.png "그림 9.17: 배치 효과가 제거된 수정된 데�
     treatment  = factor(ifelse(grepl("Cntr|^C", colnames(IBDchip)), "CTL", "IBS"))
     sampledata = DataFrame(day = day, treatment = treatment)
     chipse = SummarizedExperiment(assays  = list(abundance = assayIBD),
-                                  colData = sampledata)__
+                                  colData = sampledata)
 
 이는 모든 관련 데이터를 함께 유지하는 가장 좋은 방법이며, 모든 정보를 올바르게 정렬된 상태로 유지하면서 데이터를 신속하게 필터링할 수 있게 해줍니다.
 
@@ -674,21 +676,21 @@ html/fig-CombatIBD-1.png "그림 9.17: 배치 효과가 제거된 수정된 데�
 
 RStudio의 Environment 창을 사용하여 복합 객체를 탐색할 수 있습니다. `chipse`에서 일부 슬롯은 비어 있음을 볼 수 있습니다.
 
-__
+
 
 질문 9.8
 
 2일째에 생성된 샘플들의 하위 집합을 선택하여 새로운 _SummarizedExperiment_ 객체를 만드세요.
 
-__
+
 
 해결책
 
-__
+
 
     
     
-    chipse[, day == 2]__
+    chipse[, day == 2]
     
     
     class: SummarizedExperiment 
@@ -706,25 +708,25 @@ _DataFrame_ 의 열들은 관심 있는 특징들의 서로 다른 속성들을 
     
     
     corese = readRDS("../data/normse.rds")
-    norm = assays(corese)$normalizedValues __
+    norm = assays(corese)$normalizedValues
 
 워크플로에 명시된 전처리 및 정규화 단계들을 거친 후, 우리는 747개 세포에서 측정된 1000개의 가장 가변적인 유전자들을 유지합니다.
 
-__
+
 
 질문 9.9
 
 세포들은 몇 개의 서로 다른 배치들에 속하나요?
 
-__
+
 
 해결책
 
-__
+
 
     
     
-    length(unique(colData(corese)$Batch))__
+    length(unique(colData(corese)$Batch))
     
     
     [1] 18
@@ -735,7 +737,7 @@ __
     
     respca = dudi.pca(t(norm), nf = 3, scannf = FALSE)
     plotscree(respca, 15)
-    PCS = respca$li[, 1:3]__
+    PCS = respca$li[, 1:3]
 
 [![](09-chap_files/figure-html/fig-screeplotnorm-1.png)](09-chap_files/figure-
 html/fig-screeplotnorm-1.png "그림 9.18: 정규화된 데이터의 PCA 스크리 플롯.")
@@ -754,7 +756,7 @@ html/fig-screeplotnorm-1.png "그림 9.18: 정규화된 데이터의 PCA 스크�
     batch = colData(corese)$Batch
     plot3d(PCS,aspect=sqrt(c(84,24,20)),col=col_clus[batch])
     plot3d(PCS,aspect=sqrt(c(84,24,20)),
-    col = col_clus[as.character(publishedClusters)])__
+    col = col_clus[as.character(publishedClusters)])
 
 [![](imgs/plotnormpcabatch1.png)](imgs/plotnormpcabatch1.png
 "그림 9.19 (a): ")
@@ -798,7 +800,7 @@ Mut1 | 853 | 29 | 10 |
 Mut2 | 29 | 853 | 52 |   
 Mut3 | 10 | 52 | 853 |   
   
-__
+
 
 질문 9.10
 
@@ -807,7 +809,7 @@ __
 
 여기에 HIV 데이터베이스 ([Rhee et al. 2003](16-chap.html#ref-HIVdb))로부터 얻은 공동 발생 데이터가 있습니다. 이 돌연변이들 중 일부는 함께 발생하는 경향이 있습니다.
 
-__
+
 
 질문 9.11
 
@@ -818,7 +820,7 @@ __
     
     
     cooc = read.delim2("../data/coccurHIV.txt", header = TRUE, sep = ",")
-    cooc[1:4, 1:11]__
+    cooc[1:4, 1:11]
     
     
         X4S X6D X6K X11R X20R X21I X35I X35L X35M X35T X39A
@@ -829,7 +831,7 @@ __
     
     
     HIVca = dudi.coa(cooc, nf = 4, scannf = FALSE)
-    fviz_eig(HIVca, geom = "bar", bar_width = 0.6) + ggtitle("")__
+    fviz_eig(HIVca, geom = "bar", bar_width = 0.6) + ggtitle("")
 
 [![](09-chap_files/figure-html/fig-HIVnnrti-1.png)](09-chap_files/figure-
 html/fig-HIVnnrti-1.png "그림 9.20: HIV 돌연변이들 사이의 의존성은 명백히 3차원적인 현상이며, 처음 세 개의 고윳값은 데이터에 뚜렷한 신호가 있음을 보여줍니다.")
@@ -842,7 +844,7 @@ html/fig-HIVnnrti-1.png "그림 9.20: HIV 돌연변이들 사이의 의존성은
 
 스크리 플롯을 살펴본 후, 기저 변동의 차원성이 분명히 3차원임을 알 수 있으며, 이 세 차원을 플롯합니다. 이상적으로는 그림 9.21에 표시된 것과 같이 **[rgl](https://cran.r-project.org/web/packages/rgl/)** 패키지에 의해 제공되는 대화형 3차원 플로팅 함수를 사용하여 수행될 것입니다.
 
-__
+
 
 질문 9.12
 
@@ -850,17 +852,17 @@ __
 **[rgl](https://cran.r-project.org/web/packages/rgl/)** 의 `plot3d` 함수에서 `aspect=FALSE`를 사용했을 때 얻은 플롯과 비교해 보세요.  
 점 구름을 회전시키면서 어떤 구조를 발견하셨나요?
 
-__
+
 
 해결책
 
-__
+
 
     
     
     library("rgl")
     CA1=HIVca$li[,1];CA2=HIVca$li[,2];CA3=HIVca$li[,3]
-    plot3d(CA1,CA2,CA3,aspect=FALSE,col="purple")__
+    plot3d(CA1,CA2,CA3,aspect=FALSE,col="purple")
     
     
     fviz_ca_row(HIVca,axes = c(1, 2),geom="text", col.row="purple",
@@ -868,7 +870,7 @@ __
       theme_bw() +  coord_fixed()
     fviz_ca_row(HIVca,axes = c(1, 3), geom="text",col.row="purple",
         labelsize=3)+ggtitle("")+ xlim(-0.55, 1.7)+ylim(-0.5,0.6) + 
-        theme_bw() + coord_fixed()__
+        theme_bw() + coord_fixed()
 
 [![](09-chap_files/figure-html/fig-HIVca-1.png)](09-chap_files/figure-
 html/fig-HIVca-1.png "그림 9.22 (a): ")
@@ -882,22 +884,22 @@ html/fig-HIVca-2.png "그림 9.22 (b): ")
 
 그림 9.22: 대응 분석의 첫 번째 고유벡터에 해당하는 가로축과, (a)에서는 두 번째 축, (b)에서는 세 번째 축인 세로축으로 정의된 돌연변이들의 두 평면 지도; 높이의 차이에 주목하세요.
 
-__
+
 
 질문 9.13
 
 그림 9.22의 하단 그림에 표시된 것과 같이 세로축의 스케일을 존중하면서 대응 분석의 축 1과 3에 의해 정의된 평면을 플로팅하는 코드를 보여주세요.
 
-__
+
 
 해결책
 
-__
+
 
     
     
     fviz_ca_row(HIVca, axes=c(1, 3), geom="text", col.row="purple", labelsize=3) +
-      ggtitle("") + theme_minimal() + coord_fixed()__
+      ggtitle("") + theme_minimal() + coord_fixed()
 
 이 첫 번째 예제는 PCA가 연속형 변수들을 투영하는 것과 유사한 방식으로, 하나의 범주형 변수(돌연변이들)의 모든 서로 다른 수준들을 매핑하는 방법을 보여주었습니다. 이제 이를 두 개 이상의 범주형 변수로 확장하는 방법을 살펴보겠습니다.
 
@@ -908,7 +910,7 @@ __
     
     
     HairColor = HairEyeColor[,,2]
-    chisq.test(HairColor)__
+    chisq.test(HairColor)
     
     
         Pearson's Chi-squared test
@@ -934,7 +936,7 @@ __
     
     
     rowsums = as.matrix(apply(HairColor, 1, sum))
-    rowsums __
+    rowsums
     
     
           [,1]
@@ -945,20 +947,20 @@ __
     
     
     colsums = as.matrix(apply(HairColor, 2, sum))
-    t(colsums)__
+    t(colsums)
     
     
          Brown Blue Hazel Green
     [1,]   122  114    46    31
     
     
-    HCexp = rowsums %*%t (colsums) / sum(colsums)__
+    HCexp = rowsums %*%t (colsums) / sum(colsums)
 
 이제 표의 각 셀에 대해 척도 조정된 잔차의 합인 \(\chi^2\)(카이제곱) 통계량을 계산합니다:
 
     
     
-    sum((HairColor  - HCexp)^2/HCexp)__
+    sum((HairColor  - HCexp)^2/HCexp)
     
     
     [1] 106.6637
@@ -967,7 +969,7 @@ __
 
     
     
-    round(t(HairColor-HCexp))__
+    round(t(HairColor-HCexp))
     
     
            Hair
@@ -979,7 +981,7 @@ __
     
     
     library("vcd")
-    mosaicplot(HairColor, shade=TRUE, las=1, type="pearson", cex.axis=0.7, main="")__
+    mosaicplot(HairColor, shade=TRUE, las=1, type="pearson", cex.axis=0.7, main="")
 
 [![](09-chap_files/figure-html/fig-MosaicHair-1.png)](09-chap_files/figure-
 html/fig-MosaicHair-1.png "그림 9.23: 독립성으로부터의 이탈 시각화. 이제 상자들의 크기는 실제 관측된 카운트에 비례하며, 더 이상 '직사각형' 속성을 갖지 않습니다. 독립성으로부터의 이탈은 각 상자에 대해 카이제곱 거리로 측정되며, 잔차가 크고 양(+)수인지 여부에 따라 색상이 입혀집니다. 짙은 파란색은 양의 연관성을 나타내며(예: 파란색 눈과 금발), 빨간색은 음의 연관성을 나타냅니다(예: 금발과 갈색 눈).")
@@ -1014,43 +1016,43 @@ html/fig-MosaicHair-1.png "그림 9.23: 독립성으로부터의 이탈 시각�
     
     HC = as.data.frame.matrix(HairColor)
     coaHC = dudi.coa(HC,scannf=FALSE,nf=2)
-    round(coaHC$eig[1:3]/sum(coaHC$eig)*100)__
+    round(coaHC$eig[1:3]/sum(coaHC$eig)*100)
     
     
     [1] 89 10  2
     
     
     fviz_ca_biplot(coaHC, repel=TRUE, col.col="brown", col.row="purple") +
-      ggtitle("") + ylim(c(-0.5,0.5))__
+      ggtitle("") + ylim(c(-0.5,0.5))
 
 [![](09-chap_files/figure-html/fig-HCscatter-1.png)](09-chap_files/figure-
 html/fig-HCscatter-1.png "그림 9.24: CA 플롯은 데이터와 독립성 가정하의 예상 값 사이의 카이제곱 거리의 상당 부분을 나타냅니다. 첫 번째 축은 검은 머리와 금발 학생 사이의 대비를 보여주며, 이는 갈색 눈과 파란 눈의 대립에 의해 반영됩니다. CA에서 두 범주는 대칭적인 역할을 하며, 우리는 파란 눈과 금발의 근접성을 이들 범주의 강력한 공동 발생을 의미하는 것으로 해석할 수 있습니다.")
 
 그림 9.24: CA 플롯은 데이터와 독립성 가정하의 예상 값 사이의 카이제곱 거리의 상당 부분을 나타냅니다. 첫 번째 축은 검은 머리와 금발 학생 사이의 대비를 보여주며, 이는 갈색 눈과 파란 눈의 대립에 의해 반영됩니다. CA에서 두 범주는 대칭적인 역할을 하며, 우리는 파란 눈과 금발의 근접성을 이들 범주의 강력한 공동 발생을 의미하는 것으로 해석할 수 있습니다.
 
-__
+
 
 질문 9.14
 
 카이제곱 통계량의 몇 퍼센트가 대응 분석의 처음 두 축에 의해 설명되나요?
 
-__
+
 
 질문 9.15
 
 적절한 `scaling` 매개변수 값을 사용하여 **[vegan](https://cran.r-project.org/web/packages/vegan/)** 패키지의 `CCA`로 얻은 결과와 비교해 보세요.
 
-__
+
 
 해결책
 
-__
+
 
     
     
     library("vegan")
     res.ca = vegan::cca(HairColor)
-    plot(res.ca, scaling=3)__
+    plot(res.ca, scaling=3)
 
 #### 바이플롯 해석하기
 
@@ -1069,7 +1071,7 @@ CA는 특별한 무게 중심(barycentric) 속성을 가집니다: 바이플롯 
     
     
     load("../data/lakes.RData")
-    lakelike[1:3,1:8]__
+    lakelike[1:3,1:8]
     
     
          plant1 plant2 plant3 plant4 plant5 plant6 plant7 plant8
@@ -1079,7 +1081,7 @@ CA는 특별한 무게 중심(barycentric) 속성을 가집니다: 바이플롯 
     
     
     reslake=dudi.coa(lakelike,scannf=FALSE,nf=2)
-    round(reslake$eig[1:8]/sum(reslake$eig),2)__
+    round(reslake$eig[1:8]/sum(reslake$eig),2)
     
     
     [1] 0.56 0.25 0.09 0.03 0.03 0.02 0.01 0.00
@@ -1089,7 +1091,7 @@ CA는 특별한 무게 중심(barycentric) 속성을 가집니다: 바이플롯 
     
     
     fviz_ca_row(reslake,repel=TRUE)+ggtitle("")+ylim(c(-0.55,1.7))
-    fviz_ca_biplot(reslake,repel=TRUE)+ggtitle("")+ylim(c(-0.55,1.7))__
+    fviz_ca_biplot(reslake,repel=TRUE)+ggtitle("")+ylim(c(-0.55,1.7))
 
 [![](09-chap_files/figure-html/fig-LakeCAr-1.png)](09-chap_files/figure-
 html/fig-LakeCAr-1.png "그림 9.25 (a): ")
@@ -1103,7 +1105,7 @@ html/fig-LakeCAr-2.png "그림 9.25 (b): ")
 
 그림 9.25: 호수 근처의 위치들은 (a)에서 보듯이 아치를 따라 정렬되어 있습니다. 바이플롯 (b)에서는 파란색 점들에 가장 가까운 빨간색 삼각형들을 살펴봄으로써 어떤 위치에서 어떤 식물이 가장 빈번한지 알 수 있습니다.
 
-__
+
 
 질문 9.16
 
@@ -1127,7 +1129,7 @@ __
     colsn = c("red", "purple", "orange", "green", "blue")
     blom = assay(Moignard)
     dist2n.euclid = dist(blom)
-    dist1n.l1     = dist(blom, "manhattan")__
+    dist1n.l1     = dist(blom, "manhattan")
 
 이 두 거리 행렬에 대한 고전적 다차원 척도법은 다음과 같이 수행될 수 있습니다:
 
@@ -1136,14 +1138,14 @@ __
     ce1Mds = cmdscale(dist1n.l1,     k = 20, eig = TRUE)
     ce2Mds = cmdscale(dist2n.euclid, k = 20, eig = TRUE)
     perc1  = round(100*sum(ce1Mds$eig[1:2])/sum(ce1Mds$eig))
-    perc2  = round(100*sum(ce2Mds$eig[1:2])/sum(ce2Mds$eig))__
+    perc2  = round(100*sum(ce2Mds$eig[1:2])/sum(ce2Mds$eig))
 
 우리는 기저 차원을 살펴보고, 그림 9.27에서 두 개 차원이 분산의 상당 부분을 제공할 수 있음을 확인합니다.
 
     
     
     plotscree(ce1Mds, m = 4)
-    plotscree(ce2Mds, m = 4)__
+    plotscree(ce2Mds, m = 4)
 
 [![](09-chap_files/figure-html/fig-CMDSplotscree-1.png)](09-chap_files/figure-
 html/fig-CMDSplotscree-1.png "그림 9.27 (a): ")
@@ -1172,7 +1174,7 @@ html/fig-CMDSplotscree-2.png "그림 9.27 (b): ")
             as_tibble()
     ggplot(c2mds, aes(x = L2_PCo1, y = L2_PCo2, color = cellt)) +
       geom_point(aes(color = cellt), alpha = 0.6) +
-       scale_colour_manual(values = colsn) + guides(color = "none")__
+       scale_colour_manual(values = colsn) + guides(color = "none")
 
 [![](09-chap_files/figure-html/fig-CMDSplotL2-1.png)](09-chap_files/figure-
 html/fig-CMDSplotL2-1.png "그림 9.28 (a): ")
@@ -1202,7 +1204,7 @@ html/fig-CMDSplotL2-2.png "그림 9.28 (b): ")
 
 이는 큰 거리들을 대폭 할인하는 효과가 있습니다. 점 간 거리의 정밀도는 종종 작은 범위에서 더 좋기 때문에 이는 매우 유용할 수 있습니다; 그러한 방법들의 여러 예시들이 이 장의 끝에 있는 연습 문제 9.6에서 다뤄집니다.
 
-__
+
 
 질문 9.17
 
@@ -1231,7 +1233,7 @@ __
               as_tibble()
     ggplot(dftsne3,aes(x = axis3, y = axis2, group = cellt)) +
           geom_point(aes(color = cellt), alpha = 0.6) +
-          scale_colour_manual(values = colsn) + guides(color = "none")__
+          scale_colour_manual(values = colsn) + guides(color = "none")
 
 [![](09-chap_files/figure-html/fig-tsnecells-1.jpeg)](09-chap_files/figure-
 html/fig-tsnecells-1.jpeg "그림 9.29 (a): ")
@@ -1247,7 +1249,7 @@ html/fig-tsnecells-2.jpeg "그림 9.29 (b): ")
 
 이 경우 MDS와 t-SNE 사이의 미세한 차이를 확인하려면 3D 플로팅을 사용하는 것이 정말 필요합니다.
 
-__
+
 
 태스크
 
@@ -1269,17 +1271,17 @@ __
 
 그림 9.30: 3차원 t-SNE 레이아웃에서 세포 유형 (파란색: PS, 초록색: NP, 노란색: HF, 빨간색: 4SG, 보라색: 4SFG\(^-\))에 따라 색상이 입혀진 Moignard 세포 데이터. 보라색 세포(4SFG\(^{-}\))가 점 구름 상단의 외곽 껍질에 분리되어 있는 것을 볼 수 있습니다.
 
-__
+
 
 질문 9.18
 
 9.2절의 우크라이나 거리 데이터에 대해 2차원 t-SNE 임베딩을 시각화해 보세요.
 
-__
+
 
 해결책
 
-__
+
 
     
     
@@ -1290,7 +1292,7 @@ __
       labs = attr(ukraine_dists, "Labels")
     )
     ggplot(ukraine_tsne_df, aes(x = PCo1, y = PCo2, label = labs)) +
-      geom_point() + geom_text_repel(col = "#0057b7") + coord_fixed() __
+      geom_point() + geom_text_repel(col = "#0057b7") + coord_fixed()
 
 [![](09-chap_files/figure-html/fig-ukrainetsne-1.png)](09-chap_files/figure-
 html/fig-ukrainetsne-1.png "그림 9.31: 우크라이나의 t-SNE 지도.")
@@ -1397,7 +1399,7 @@ V=Yb&=b_1 Y_1 +b_2 Y_2 +\cdots b_q Y_q
     
     library("genefilter")
     load("../data/microbe.rda")
-    metab = read.csv("../data/metabolites.csv", row.names = 1) |> as.matrix()__
+    metab = read.csv("../data/metabolites.csv", row.names = 1) |> as.matrix()
 
 우리는 먼저 관심 있는 박테리아와 대사산물로 필터링하여, 많은 샘플에서 0인 것들을 (수동으로) 제거하고 큰 값들에 대해서는 50이라는 상한 임계값을 부여합니다. 꼬리가 긴(heavy tails) 분포를 완화하기 위해 데이터를 변환합니다.
 
@@ -1408,7 +1410,7 @@ V=Yb&=b_1 Y_1 +b_2 Y_2 +\cdots b_q Y_q
     microbe = prune_taxa(taxa_sums(microbe) > 4, microbe)
     microbe = filter_taxa(microbe, filterfun(kOverA(3, 2)), TRUE)
     metab   = log(1 + metab, base = 10)
-    X       = log(1 + as.matrix(otu_table(microbe)), base = 10)__
+    X       = log(1 + as.matrix(otu_table(microbe)), base = 10)
 
 예비 분석의 두 번째 단계는 **[ade4](https://cran.r-project.org/web/packages/ade4/)** 패키지의 `RV.test`를 사용하여 두 행렬 사이에 어떤 연관성이 있는지 살펴보는 것입니다:
 
@@ -1418,7 +1420,7 @@ V=Yb&=b_1 Y_1 +b_2 Y_2 +\cdots b_q Y_q
     pca1 = dudi.pca(t(metab), scal = TRUE, scann = FALSE)
     pca2 = dudi.pca(t(X), scal = TRUE, scann = FALSE)
     rv1 = RV.rtest(pca1$tab, pca2$tab, 999)
-    rv1 __
+    rv1
     
     
     Monte-Carlo test
@@ -1441,13 +1443,13 @@ V=Yb&=b_1 Y_1 +b_2 Y_2 +\cdots b_q Y_q
     
     library("PMA")
     ccaRes = CCA(t(X), t(metab), penaltyx = 0.15, penaltyz = 0.15, 
-                 typex = "standard", typez = "standard")__
+                 typex = "standard", typez = "standard")
     
     
     123456789
     
     
-    ccaRes __
+    ccaRes
     
     
     Call: CCA(x = t(X), z = t(metab), typex = "standard", typez = "standard", 
@@ -1496,7 +1498,7 @@ CCpnA는 샘플의 위치가 종의 시그니처와 환경적 특성 모두의 �
     ps1=readRDS("../data/ps1.rds")
     ps1p=filter_taxa(ps1, function(x) sum(x) > 0, TRUE)
     psCCpnA = ordinate(ps1p, "CCA",
-                     formula = ps1p ~ ageBin + family_relationship)__
+                     formula = ps1p ~ ageBin + family_relationship)
 
 바이플롯을 위한 위치 정보에 접근하기 위해 **[vegan](https://cran.r-project.org/web/packages/vegan/)** 패키지의 `scores` 함수를 사용할 수 있습니다. 또한 그림 주석을 용이하게 하기 위해 사이트 점수(site scores)를 `sample_data` 슬롯에 있는 환경 데이터와 결합합니다. 총 23개의 목(orders) 중에서 가장 풍부한 4개만 명시적으로 주석을 답니다 — 이는 바이플롯을 읽기 쉽게 만듭니다.
 
@@ -1513,24 +1515,24 @@ CCpnA는 샘플의 위치가 종의 시그니처와 환경적 특성 모두의 �
      guides(col = guide_legend(override.aes = list(size = 2))) +
      labs(x = sprintf("Axis2 [%s%% variance]", round(evalProp[2])),
           y = sprintf("Axis1 [%s%% variance]", round(evalProp[1]))) +
-     scale_color_brewer(palette = "Set1") + theme(legend.position="bottom")__
+     scale_color_brewer(palette = "Set1") + theme(legend.position="bottom")
 
 [![](09-chap_files/figure-html/fig-ccpnaplotage-1.png)](09-chap_files/figure-
 html/fig-ccpnaplotage-1.png "그림 9.33: CCpnA에 의해 생성된 생쥐 및 분류군 점수. 사이트(생쥐 샘플)는 삼각형이고, 종은 원으로 각각 표시됩니다. 별도의 패널은 서로 다른 연령 그룹을 나타냅니다.")
 
 그림 9.33: CCpnA에 의해 생성된 생쥐 및 분류군 점수. 사이트(생쥐 샘플)는 삼각형이고, 종은 원으로 각각 표시됩니다. 별도의 패널은 서로 다른 연령 그룹을 나타냅니다.
 
-__
+
 
 질문 9.19
 
 이 책의 온라인 리소스에서 `tax` 및 `species` 객체를 생성하는 추가 코드를 찾아보세요. 그런 다음 나이 대신 집단(litter)을 패싯 변수로 사용하여 그림 9.33의 대응물을 만들어 보세요.
 
-__
+
 
 해결책
 
-__
+
 
 [![](09-chap_files/figure-html/fig-
 ccpnaplotlitter-1.png)](09-chap_files/figure-html/fig-
@@ -1574,7 +1576,7 @@ PCoA 맵과 비선형 임베딩의 해석은 보충 점 방법의 일반화를 �
 
 ## 9.9 연습 문제
 
-__
+
 
 연습 문제 9.1
 
@@ -1582,17 +1584,17 @@ Phylochip 데이터를 다시 한 번 살펴보겠습니다. 원래의 발현 �
 
     
     
-    ibd.pres = ifelse(assayIBD[, 1:28] > 8.633, 1, 0)__
+    ibd.pres = ifelse(assayIBD[, 1:28] > 8.633, 1, 0)
 
 이 이진 데이터에 대해 대응 분석을 수행하고 그림 9.15에서 보았던 것과 얻은 플롯을 비교해 보세요.
 
 7 이 값들은 이전의 임계값 선택과 유사하게 약 3,000개의 분류군을 유지하도록 선택되었습니다.
 
-__
+
 
 해결책
 
-__
+
 
 그림 9.35를 참조하세요.
 
@@ -1605,7 +1607,7 @@ __
          habillage = day, palette = "Dark2", addEllipses = TRUE, color = day,
          ellipse.type = "convex", alpha = 1, col.row.sup =  "blue",
          select = list(name = NULL, cos2 = NULL, contrib = NULL),
-         repel = TRUE)__
+         repel = TRUE)
 
 [![](09-chap_files/figure-html/fig-Threesetscoa-1.png)](09-chap_files/figure-
 html/fig-Threesetscoa-1.png "그림 9.35 (a): \text{}")
@@ -1619,7 +1621,7 @@ html/fig-Threesetscoa-2.png "그림 9.35 (b): \text{}")
 
 그림 9.35: 이진 데이터에 대한 대응 분석.
 
-__
+
 
 연습 문제 9.2
 
@@ -1641,11 +1643,11 @@ virtuous | 179 | 80 | 102 | 20 | 25 | 17 | 165
   
 이 데이터에 대해 대응 분석을 수행하세요. 2차원 바이플롯을 보았을 때 무엇을 알 수 있나요?
 
-__
+
 
 해결책
 
-__
+
 
 그림 9.36을 참조하세요. 코드는 여기에는 렌더링되지 않았지만, 문서의 소스 파일에 나와 있습니다.
 
@@ -1656,7 +1658,7 @@ html/fig-ColorBiplot-1-1.png "그림 9.36: 대응 분석은 표 9.4와 같은 �
 
 ![](imgs/PlatoTableImage.png)
 
-__
+
 
 연습 문제 9.3
 
@@ -1665,7 +1667,7 @@ __
     
     
     platof = read.table("../data/platof.txt", header = TRUE)
-    platof[1:4, ]__
+    platof[1:4, ]
     
     
           Rep Laws Crit Phil Pol Soph Tim
@@ -1677,7 +1679,7 @@ __
     
     resPlato = dudi.coa(platof, scannf = FALSE, nf = 2)
     fviz_ca_biplot(resPlato, axes=c(2, 1)) + ggtitle("")
-    fviz_eig(resPlato, geom = "bar", width = 0.6) + ggtitle("")__
+    fviz_eig(resPlato, geom = "bar", width = 0.6) + ggtitle("")
 
 그림 9.37: 플라톤 문장 끝맺음의 바이플롯.
 
@@ -1698,57 +1700,57 @@ html/fig-platoca-2.png "그림 9.37 (b): ")
 
 (b)
 
-__
+
 
 해결책
 
-__
+
 
 처음 두 축에 의해 설명되는 관성의 백분율을 계산하기 위해, 고윳값들의 누적 합을 2번째 값에서 구합니다:
 
     
     
-    names(resPlato)__
+    names(resPlato)
     
     
      [1] "tab"  "cw"   "lw"   "eig"  "rank" "nf"   "c1"   "li"   "co"   "l1"  
     [11] "call" "N"   
     
     
-    sum(resPlato$eig)__
+    sum(resPlato$eig)
     
     
     [1] 0.132618
     
     
     percentageInertia=round(100*cumsum(resPlato$eig)/sum(resPlato$eig))
-    percentageInertia __
+    percentageInertia
     
     
     [1]  69  85  92  96  98 100
     
     
-    percentageInertia[2]__
+    percentageInertia[2]
     
     
     [1] 85
 
-__
+
 
 연습 문제 9.4
 
 우리는 두 개의 데이터 세트를 살펴볼 것인데, 하나는 다른 하나의 섭동된(perturbed) 버전이며 둘 다 생태학적 데이터에서 흔히 볼 수 있는 그래디언트를 보여줍니다. `lakes.RData` 객체로 저장된 두 개의 종 카운트 행렬 `lakelike`와 `lakelikeh`를 읽어 들이세요. 두 데이터 세트 각각에 대해 대응 분석과 주성분 분석의 출력을 비교해 보세요; 두 개 차원으로 제한하세요. 플롯과 고윳값에서 무엇을 발견했나요?
 
-__
+
 
 해결책
 
-__
+
 
     
     
     load("../data/lakes.RData")
-    lakelike[ 1:3, 1:8]__
+    lakelike[ 1:3, 1:8]
     
     
          plant1 plant2 plant3 plant4 plant5 plant6 plant7 plant8
@@ -1757,7 +1759,7 @@ __
     loc3      3      4      7      4      5      2      1      1
     
     
-    lakelikeh[1:3, 1:8]__
+    lakelikeh[1:3, 1:8]
     
     
          plant1 plant2 plant3 plant4 plant5 plant6 plant7 plant8
@@ -1769,46 +1771,46 @@ __
     e_coa  = dudi.coa(lakelike,  scannf = FALSE, nf = 2)
     e_pca  = dudi.pca(lakelike,  scannf = FALSE, nf = 2)
     eh_coa = dudi.coa(lakelikeh, scannf = FALSE, nf = 2)
-    eh_pca = dudi.pca(lakelikeh, scannf = FALSE, nf = 2)__
+    eh_pca = dudi.pca(lakelikeh, scannf = FALSE, nf = 2)
 
 비교 (출력은 표시되지 않음):
 
     
     
-    scatter(e_pca)__
+    scatter(e_pca)
     
     
-     scatter(e_coa)__
+     scatter(e_coa)
     
     
-     s.label(e_pca$li)__
+     s.label(e_pca$li)
     
     
-     s.label(e_coa$li)__
+     s.label(e_coa$li)
     
     
-     s.label(eh_pca$co)__
+     s.label(eh_pca$co)
     
     
-     s.label(eh_pca$li)__
+     s.label(eh_pca$li)
     
     
-     s.label(eh_coa$li)__
+     s.label(eh_coa$li)
     
     
-     s.label(eh_coa$co)__
+     s.label(eh_coa$co)
 
-__
+
 
 연습 문제 9.5
 
 우리는 9.5.1절에서 정규화된 Moignard 데이터를 분석했습니다. 이제 **원시(raw)** 데이터(_nbt.3154-S3-raw.csv_ 파일에 있음)로 분석을 다시 수행하고 그 출력을 정규화된 값을 사용했을 때 얻은 것과 비교해 보세요.
 
-__
+
 
 해결책
 
-__
+
 
     
     
@@ -1817,18 +1819,18 @@ __
     dist1r.l1     = dist(moignard_raw, "manhattan")
     cells1.cmds = cmdscale(dist1r.l1,     k = 20, eig = TRUE)
     cells2.cmds = cmdscale(dist2r.euclid, k = 20, eig = TRUE)
-    sum(cells1.cmds$eig[1:2]) / sum(cells1.cmds$eig)__
+    sum(cells1.cmds$eig[1:2]) / sum(cells1.cmds$eig)
     
     
     [1] 0.776075
     
     
-    sum(cells2.cmds$eig[1:2]) / sum(cells2.cmds$eig)__
+    sum(cells2.cmds$eig[1:2]) / sum(cells2.cmds$eig)
     
     
     [1] 0.6297133
 
-__
+
 
 연습 문제 9.6
 
@@ -1838,11 +1840,11 @@ __
 
   2. 성분들의 대화형 3차원 표현을 만드세요: 보라색 점들을 위한 분기(branch)가 보이는 투영이 있나요?
 
-__
+
 
 해결책
 
-__
+
 
   1. 커널화된 거리들
 
@@ -1854,7 +1856,7 @@ __
     Klaplace_cellsn   = kernelMatrix(laplacedot1, blom)
     KGauss_cellsn     = kernelMatrix(rbfdot1, blom)
     Klaplace_rawcells = kernelMatrix(laplacedot1, moignard_raw)
-    KGauss_rawcells   = kernelMatrix(rbfdot1, moignard_raw)__
+    KGauss_rawcells   = kernelMatrix(rbfdot1, moignard_raw)
 
 이상치로부터 보호하고 비선형 성분의 발견을 가능하게 하기 위해 커널화된 거리들을 사용합니다.
 
@@ -1873,7 +1875,7 @@ __
     kperc2 = percentage(cells2.kcmds$eig)
     
     cellsn1.kcmds = cmdscale(dist1kn, k = 20, eig = TRUE) 
-    cellsn2.kcmds = cmdscale(dist2kn, k = 20, eig = TRUE)__
+    cellsn2.kcmds = cmdscale(dist2kn, k = 20, eig = TRUE)
 
   2. 3D 산점도를 대화형으로 사용하기:
 
@@ -1884,7 +1886,7 @@ __
     scatterplot3d(cellsn2.kcmds$points[, 1:3], color=colc, pch = 20,
        xlab = "Axis k1", ylab = "Axis k2", zlab = "Axis k3", angle=15)
     scatterplot3d(cellsn2.kcmds$points[, 1:3], color=colc, pch = 20,
-       xlab = "Axis k1", ylab = "Axis k2", zlab = "Axis k3", angle = -70)__
+       xlab = "Axis k1", ylab = "Axis k2", zlab = "Axis k3", angle = -70)
 
 [![](09-chap_files/figure-html/fig-
 KernelMDSplots-1.png)](09-chap_files/figure-html/fig-
@@ -1900,18 +1902,18 @@ KernelMDSplots-2.png "그림 9.38 (b): \text{}")
 
 그림 9.38: 커널 다차원 척도법.
 
-__
+
 
 연습 문제 9.7
 
 **세포 데이터의 고해상도 연구.**  
 9.5.1절에서 생성한 원래의 발현 데이터 `blom`을 가져오세요. 가장 가변적인 상위 10개 유전자 각각의 발현 강도를 확산 맵(diffusion mapping)으로 만든 3D 플롯 위에 매핑하세요. 어느 차원, 또는 어느 주좌표 (1,2,3,4)가 **4SG** (빨간색) 점들을 가장 많이 클러스터링하는 것으로 보이나요?
 
-__
+
 
 해결책
 
-__
+
 
     
     
@@ -1924,7 +1926,7 @@ __
     plot3d(cellsn1.kcmds$points[, 1:3], col = colc, size = 3,
            xlab = "Axis1", ylab = "Axis2", zlab = "Axis3")
     plot3d(cellsn1.kcmds$points[, c(1,2,4)], col = colc, size = 3,
-           xlab = "Axis1", ylab = "Axis2", zlab = "Axis4")__
+           xlab = "Axis1", ylab = "Axis2", zlab = "Axis4")
 
 **[LPCM](https://cran.r-project.org/web/packages/LPCM/)** 패키지 에 구현된 `lpc` 함수는 주성분 곡선을 추정합니다. 여기서 우리는 확산 맵의 출력으로부터 선택된 세 개 차원으로 우리 자신을 제한하고 평활화된 곡선들을 생성합니다.
 
@@ -1932,7 +1934,7 @@ __
     
     library("LPCM")
     library("diffusionMap")
-    dmap1 = diffuse(dist1n.l1, neigen = 10)__
+    dmap1 = diffuse(dist1n.l1, neigen = 10)
     
     
     Performing eigendecomposition
@@ -1941,7 +1943,7 @@ __
     
     
     combs = combn(4, 3)
-    lpcplots = apply(combs, 2, function(j) lpc(dmap1$X[, j], scale = FALSE))__
+    lpcplots = apply(combs, 2, function(j) lpc(dmap1$X[, j], scale = FALSE))
 
 평활화된 데이터가 우리에게 무엇을 보여주는지 감을 잡기 위해, **[rgl](https://cran.r-project.org/web/packages/rgl/)** 패키지의 `plot3d` 함수를 사용하여 대화형 그래픽을 살펴봅니다.
 
@@ -1952,7 +1954,7 @@ __
       plot(lpcplots[[i]], type = "l", lwd = 3,
       xlab = paste("Axis", combs[1, i]),
       ylab = paste("Axis", combs[2, i]),
-      zlab = paste("Axis", combs[3, i]))__
+      zlab = paste("Axis", combs[3, i]))
 
 평활화된 선과 데이터 포인트들을 함께 플로팅하는 한 가지 방법은 `plot3d` 함수를 사용하여 선을 추가하는 것입니다.
 
@@ -1967,7 +1969,7 @@ __
     plot3d(outlpce134$LPC, type="l", lwd=7,
            xlab="Axis1", ylab="Axis3", zlab="Axis4")
     plot3d(dmap1$X[,c(1,3,4)], col=colc, 
-           xlab="", ylab="", zlab="", add=TRUE)__
+           xlab="", ylab="", zlab="", add=TRUE)
 
 [![](imgs/TripleArm.png)](imgs/TripleArm.png "그림 9.39: 축 1, 3, 4에 대한 확산 맵 투영. 하단 그림은 발달 과정에서 세포들이 따르는 평활화된 경로를 보여줍니다.")
 
@@ -1977,7 +1979,7 @@ __
 
 그림 9.40: 축 1, 3, 4에 대한 확산 맵 투영. 하단 그림은 발달 과정에서 세포들이 따르는 평활화된 경로를 보여줍니다.
 
-__
+
 
 연습 문제 9.8
 
@@ -1991,16 +1993,16 @@ __
 
 그림 9.41: 3차원 확산 맵 투영으로부터의 출력.
 
-__
+
 
 해결책
 
-__
+
 
     
     
     library("diffusionMap")
-    dmap2 = diffuse(dist2n.euclid, neigen = 11)__
+    dmap2 = diffuse(dist2n.euclid, neigen = 11)
     
     
     Performing eigendecomposition
@@ -2008,7 +2010,7 @@ __
     Elapsed time: 7.243 seconds
     
     
-    dmap1 = diffuse(dist1n.l1, neigen = 11)__
+    dmap1 = diffuse(dist1n.l1, neigen = 11)
     
     
     Performing eigendecomposition
@@ -2016,7 +2018,7 @@ __
     Elapsed time: 4.849 seconds
     
     
-    plot(dmap2)__
+    plot(dmap2)
 
 _dmap_ 객체에 대한 바닐라(vanilla) 플롯은 색상의 사용을 허용하지 않음에 유의하세요. 이것이 세포 발달을 이해하는 데 필수적이므로, 우리는 수동으로 색상을 추가합니다. 물론, 여기서는 정적인 3D 플롯을 사용하지만 이들은 우리가 코드에서 제공하는 plot3d 예제들로 보완되어야 합니다.
 
@@ -2029,13 +2031,13 @@ _dmap_ 객체에 대한 바닐라(vanilla) 플롯은 색상의 사용을 허용�
                anglea = 20, pch = 20)
     scatterplot3d(dmapRes$X[, axestop], color = colc,
         xlab = paste("Axis",axestop[1]), ylab = paste("Axis", axestop[2]),
-        zlab = paste("Axis",axestop[3]), pch = pch, angle = anglea)__
+        zlab = paste("Axis",axestop[3]), pch = pch, angle = anglea)
     
     
     scp3d()
     scp3d(anglea=310)
     scp3d(anglea=210)
-    scp3d(anglea=150)__
+    scp3d(anglea=150)
 
 데이터를 시각화하는 가장 좋은 방법은 **[rgl](https://cran.r-project.org/web/packages/rgl/)** 패키지를 사용하여 회전 가능한 대화형 플롯을 만드는 것입니다.
 
@@ -2044,7 +2046,7 @@ _dmap_ 객체에 대한 바닐라(vanilla) 플롯은 색상의 사용을 허용�
     # 대화형 플롯
     library("rgl")
     plot3d(dmap1$X[,1:3], col=colc, size=3)
-    plot3d(dmap1$X[,2:4], col=colc, size=3)__
+    plot3d(dmap1$X[,2:4], col=colc, size=3)
 
 Belkin, Mikhail, and Partha Niyogi. 2003. “Laplacian Eigenmaps for
 Dimensionality Reduction and Data Representation.” _Neural Computation_ 15

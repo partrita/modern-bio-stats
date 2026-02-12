@@ -1,3 +1,5 @@
+# 부록: 통계 개념 및 방법 목록 (Appendix: Statistical Concepts and Methods)
+
 색인을 보완하기 위해, 통계 개념 및 절차와 이들이 다루어진 장의 목록을 제공합니다.
 
 **방법** | 장  

@@ -1,3 +1,5 @@
+# 고품질 그래픽 (High-Quality Graphics)
+
 ![](imgs/xkcd-plotting.png)
 
 데이터 시각화에는 (적어도) 두 가지 유형이 있습니다. 첫 번째는 과학자가 데이터를 탐색하고 작동 중인 복잡한 과정에 대한 발견을 할 수 있게 해줍니다. 다른 유형의 시각화는 과학자가 다른 사람들에게 보여주고 궁극적으로 출판물에 포함할 수 있는, 결과에 대한 유익하고 명확하며 시각적으로 매력적인 삽화를 제공합니다.
@@ -40,7 +42,7 @@
 
     
     
-    head(DNase)__
+    head(DNase)
     
     
       Run       conc density
@@ -52,7 +54,7 @@
     6   1 0.39062500   0.215
     
     
-    plot(DNase$conc, DNase$density)__
+    plot(DNase$conc, DNase$density)
 
 [![](03-chap_files/figure-html/fig-graphics-
 basicplotting1-1.png)](03-chap_files/figure-html/fig-graphics-
@@ -68,7 +70,7 @@ basicplotting1-1.png "그림 3.2: DNase의 ELISA 어세이에 대한 농도 대 
       ylab = attr(DNase, "labels")$y,
       xlab = paste(attr(DNase, "labels")$x, attr(DNase, "units")$x),
       pch = 3,
-      col = "blue")__
+      col = "blue")
 
 [![](03-chap_files/figure-html/fig-graphics-
 basicplotting2-1.png)](03-chap_files/figure-html/fig-graphics-
@@ -76,17 +78,17 @@ basicplotting2-1.png "그림 3.3: 그림 3.2와 동일한 데이터이지만 더
 
 그림 3.3: 동일한 데이터이지만 더 나은 축 레이블과 다른 플롯 기호를 사용한 모습.
 
-__
+
 
 질문 3.1
 
 데이터 프레임 열에 긴 설명, 물리적 단위, 출처 정보 등과 같은 "메타데이터"를 주석으로 다는 것은 유용한 기능인 것 같습니다. `DNase` 객체에서와 같이 이러한 정보를 저장하는 방식이 R 생태계 전반에서 표준화되어 있거나 흔한가요? 이 작업을 수행하는 다른 표준화되거나 흔한 방식이 있나요?
 
-__
+
 
 해결책
 
-__
+
 
 일반적인 R _data.frame_ 이나 tidyverse(_data_frame_ , _tibble_)에는 이를 위한 훌륭하거나 널리 사용되는 인프라가 없습니다. 하지만 바이오컨덕터 패키지 **[S4Vectors](https://bioconductor.org/packages/S4Vectors/)** 의 _DataFrame_ 클래스를 살펴보세요. 이는 무엇보다도 _SummarizedExperiment_ 의 행과 열에 주석을 다는 데 사용됩니다.
 
@@ -95,7 +97,7 @@ __
     
     
     hist(DNase$density, breaks=25, main = "")
-    boxplot(density ~ Run, data = DNase)__
+    boxplot(density ~ Run, data = DNase)
 
 [![](03-chap_files/figure-html/fig-graphics-
 basicplotting3-1.png)](03-chap_files/figure-html/fig-graphics-
@@ -129,7 +131,7 @@ basicplotting3-2.png "그림 3.4 (b): ")
 
     
     
-    library("Hiiragi2013")__
+    library("Hiiragi2013")
     
     
     In chunk 'loadHiiragi': Warning: replacing previous import 'boot::logit' by 'gtools::logit' whenloading 'Hiiragi2013'
@@ -139,7 +141,7 @@ basicplotting3-2.png "그림 3.4 (b): ")
     
     
     data("x")
-    dim(Biobase::exprs(x))__
+    dim(Biobase::exprs(x))
     
     
     [1] 45101   101
@@ -152,7 +154,7 @@ R 프롬프트에 `x`를 입력하면 _ExpressionSet_ 객체 `x`에 대한 더 �
 
     
     
-    head(pData(x), n = 2)__
+    head(pData(x), n = 2)
     
     
             File.name Embryonic.day Total.number.of.cells lineage genotype
@@ -171,7 +173,7 @@ R 프롬프트에 `x`를 입력하면 _ExpressionSet_ 객체 `x`에 대한 더 �
     library("dplyr")
     groups = group_by(pData(x), sampleGroup) |>
       summarise(n = n(), color = unique(sampleColour))
-    groups __
+    groups
     
     
     # A tibble: 8 × 3
@@ -195,7 +197,7 @@ R 프롬프트에 `x`를 입력하면 _ExpressionSet_ 객체 `x`에 대한 더 �
     
     
     f(x) |> g(y) |> h()
-    h(g(f(x), y))__
+    h(g(f(x), y))
 
 이는 " `f(x)`를 평가한 다음, 그 결과를 첫 번째 인수로 하여 함수 `g`에 전달하고, `y`는 `g`의 두 번째 인수로 전달하라. 그런 다음 `g`의 출력을 함수 `h`에 전달하라"는 뜻입니다. 이를 무한히 반복할 수 있습니다. 특히 인수 `x`와 `y` 자체가 복잡한 표현식이거나 꽤 긴 함수 체인이 관여하는 경우, 첫 번째 버전이 더 읽기 쉬운 경향이 있습니다.
 
@@ -210,7 +212,7 @@ R 프롬프트에 `x`를 입력하면 _ExpressionSet_ 객체 `x`에 대한 더 �
     
     
     library("ggplot2")
-    ggplot(DNase, aes(x = conc, y = density)) + geom_point()__
+    ggplot(DNase, aes(x = conc, y = density)) + geom_point()
 
 [![](03-chap_files/figure-html/fig-graphics-
 figredobasicplottingwithggplot-1.png)](03-chap_files/figure-html/fig-graphics-
@@ -225,7 +227,7 @@ figredobasicplottingwithggplot-1.png "그림 3.6: 기본 그래픽 그림 3.2와
     
     
     ggplot(groups, aes(x = sampleGroup, y = n)) +
-      geom_bar(stat = "identity")__
+      geom_bar(stat = "identity")
 
 [![](03-chap_files/figure-html/fig-graphics-
 qplot1-1.png)](03-chap_files/figure-html/fig-graphics-qplot1-1.png
@@ -237,7 +239,7 @@ qplot1-1.png)](03-chap_files/figure-html/fig-graphics-qplot1-1.png
 
 데이터, 기하학적 객체, 통계량이라는 이러한 개념들은 영어 문장의 구성 요소인 명사, 동사, 부사와 마찬가지로 그래픽 문법을 구성하는 재료들입니다.
 
-__
+
 
 태스크
 
@@ -249,7 +251,7 @@ __
 
     
     
-    groupColor = setNames(groups$color, groups$sampleGroup)__
+    groupColor = setNames(groups$color, groups$sampleGroup)
 
 그림 3.7에서 수정해야 할 또 다른 사항은 막대 레이블의 가독성입니다. 지금은 레이블들이 서로 겹치고 있는데, 이는 설명적인 이름을 가질 때 흔히 발생하는 문제입니다.
 
@@ -258,7 +260,7 @@ __
     ggplot(groups, aes(x = sampleGroup, y = n, fill = sampleGroup)) +
       geom_bar(stat = "identity") +
       scale_fill_manual(values = groupColor, name = "Groups") +
-      theme(axis.text.x = element_text(angle = 90, hjust = 1))__
+      theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
 [![](03-chap_files/figure-html/fig-graphics-
 qplot2-1.png)](03-chap_files/figure-html/fig-graphics-qplot2-1.png
@@ -280,14 +282,14 @@ qplot2-1.png)](03-chap_files/figure-html/fig-graphics-qplot2-1.png
 
     
     
-    gg = ggplot(DNase, aes(x = conc, y = density)) + geom_point()__
+    gg = ggplot(DNase, aes(x = conc, y = density)) + geom_point()
 
 우리는 여기서 `ggplot`의 출력을 콘솔로 직접 보내 그림 3.6을 "출력"하는 대신, `gg` 객체에 할당했습니다. 이 상황은 R 콘솔에서 작업할 때 익숙한 것과 완전히 동일합니다: `1+1`과 같은 표현식을 입력하고 "Enter"를 누르면 결과가 출력됩니다. 표현식이 `s = 1+1`과 같은 할당문인 경우, 부작용(side effect)이 일어나지만(메모리상의 객체에 `s`라는 이름이 바인딩됨) 아무것도 출력되지 않습니다. 유사하게, `source`로 호출된 스크립트의 일부로 표현식이 평가될 때도 출력되지 않습니다. 따라서 위 코드 역시 `print` 메서드가 호출되지 않았으므로 그래픽 출력을 생성하지 않습니다. `gg`를 출력하려면 (대화형 세션에서) 그 이름을 입력하거나 `print`를 호출하면 됩니다:
 
     
     
     gg
-    print(gg)__
+    print(gg)
 
 ### 3.4.2 그림 저장하기
 
@@ -295,7 +297,7 @@ qplot2-1.png)](03-chap_files/figure-html/fig-graphics-qplot2-1.png
 
     
     
-    ggplot2::ggsave("DNAse-histogram-demo.pdf", plot = gg)__
+    ggplot2::ggsave("DNAse-histogram-demo.pdf", plot = gg)
 
 플롯을 저장하는 두 가지 주요 방식은 벡터 그래픽(vector graphics)과 래스터(raster, 픽셀) 그래픽입니다. 벡터 그래픽에서 플롯은 점, 선, 곡선, 도형 및 타이포그래피 문자와 같은 일련의 기하학적 원형(primitives)으로 저장됩니다. R에서 플롯을 벡터 그래픽 형식으로 저장할 때 선호되는 형식은 PDF입니다. 래스터 그래픽에서 플롯은 도트 매트릭스 데이터 구조로 저장됩니다. 래스터 형식의 주요 한계는 가용한 픽셀 수에 따른 제한된 해상도입니다. R에서 래스터 그래픽 출력에 가장 흔히 사용되는 장치는 `png`입니다. 일반적으로 플롯을 벡터 그래픽 형식으로 저장하는 것이 바람직합니다. 나중에 언제든지 벡터 그래픽 파일을 원하는 해상도의 래스터 형식으로 변환할 수 있는 반면, 그 반대는 매우 어렵기 때문입니다. 발표 자료나 논문의 그림이 픽셀화 아티팩트 때문에 보기 흉해지는 것을 원치 않으실 것입니다!
 
@@ -328,7 +330,7 @@ qplot2-1.png)](03-chap_files/figure-html/fig-graphics-qplot2-1.png
     dftx = data.frame(t(Biobase::exprs(x)), pData(x))
     ggplot( dftx, aes( x = X1426642_at, y = X1418765_at )) +
       geom_point( shape = 1 ) +
-      geom_smooth( method = "loess" )__
+      geom_smooth( method = "loess" )
 
 [![](03-chap_files/figure-html/fig-graphics-
 scp2layers1-1.png)](03-chap_files/figure-html/fig-graphics-
@@ -345,7 +347,7 @@ scp2layers1-1.png "그림 3.9: 동일한 데이터의 서로 다른 통계량을
     ggplot(dftx, aes(x = X1426642_at, y = X1418765_at))  +
       geom_point(aes(color = sampleGroup), shape = 19) +
       scale_color_manual(values = groupColor, guide = "none") +
-      geom_smooth(method = "loess")__
+      geom_smooth(method = "loess")
 
 [![](03-chap_files/figure-html/fig-graphics-
 scp2layers2-1.png)](03-chap_files/figure-html/fig-graphics-
@@ -353,13 +355,13 @@ scp2layers2-1.png "그림 3.10: 그림 3.9와 같지만, 추가로 시점과 세
 
 그림 3.10: 그림 3.9와 같지만, 추가로 시점과 세포 계통(그림 3.8에서 정의됨)에 따라 점들에 색상이 입혀졌습니다. 이제 우리는 Timd2 유전자(\(\)y축을 따른 프로브 1418765_at에 의해 타겟팅됨)의 발현값이 초기 시점에서는 일관되게 높은 반면, E3.5와 E4.5의 EPI 샘플에서는 발현이 감소하는 것을 볼 수 있습니다. FGF4-KO에서는 이러한 감소가 지연되어 E3.5에서도 여전히 발현이 높습니다. 반대로 Fn1 유전자(1426642_at, \(\)x축)는 초기 시점에는 꺼져 있다가 E3.5와 E4.5에서 올라갑니다. PE 샘플(초록색)은 높은 수준의 세포 간 가변성을 보여줍니다.
 
-__
+
 
 질문 3.2
 
 위의 코드에서 우리는 `geom_point` 레이어에 대해서만 `color` 미학(`aes`)을 정의한 반면, `x`와 `y` 미학은 모든 레이어에 대해 정의했습니다. 만약 우리가 `color` 미학을 모든 레이어에 대해 설정한다면, 즉 `ggplot`의 인수 목록으로 옮긴다면 어떤 일이 일어날까요?
 
-__
+
 
 질문 3.3
 
@@ -375,12 +377,12 @@ __
 
     
     
-    library("mouse4302.db")__
+    library("mouse4302.db")
     
     
     AnnotationDbi::select(mouse4302.db,
        keys = c("1426642_at", "1418765_at"), keytype = "PROBEID",
-       columns = c("SYMBOL", "GENENAME"))__
+       columns = c("SYMBOL", "GENENAME"))
     
     
          PROBEID SYMBOL                                            GENENAME
@@ -392,14 +394,14 @@ __
     
     
     dfx = as.data.frame(Biobase::exprs(x))
-    ggplot(dfx, aes(x = `20 E3.25`)) + geom_histogram(binwidth = 0.2)__
+    ggplot(dfx, aes(x = `20 E3.25`)) + geom_histogram(binwidth = 0.2)
 
 [![](03-chap_files/figure-html/fig-graphics-
 hists-1.png)](03-chap_files/figure-html/fig-graphics-hists-1.png "그림 3.11: E3.25 시점의 특정 샘플 하나(세포 번호 20)에 대한 프로브 강도 히스토그램.")
 
 그림 3.11: E3.25 시점의 특정 샘플 하나(세포 번호 20)에 대한 프로브 강도 히스토그램.
 
-__
+
 
 질문 3.4
 
@@ -409,19 +411,19 @@ __
 
     
     
-    pb = ggplot(groups, aes(x = sampleGroup, y = n))__
+    pb = ggplot(groups, aes(x = sampleGroup, y = n))
 
 이는 플롯 객체 `pb`를 생성합니다. 만약 이를 표시하려 한다면, 기하학적 객체를 지정하지 않았기 때문에 빈 플롯이 생성될 것입니다. 지금까지 우리의 `pb` 객체에 들어있는 전부는 데이터와 미학뿐입니다 (그림 3.12).
 
     
     
-    class(pb)__
+    class(pb)
     
     
     [1] "gg"     "ggplot"
     
     
-    pb __
+    pb
 
 [![](03-chap_files/figure-html/fig-graphics-
 figbpempty-1.png)](03-chap_files/figure-html/fig-graphics-figbpempty-1.png
@@ -437,7 +439,7 @@ figbpempty-1.png)](03-chap_files/figure-html/fig-graphics-figbpempty-1.png
     pb = pb + aes(fill = sampleGroup)
     pb = pb + theme(axis.text.x = element_text(angle = 90, hjust = 1))
     pb = pb + scale_fill_manual(values = groupColor, name = "Groups")
-    pb __
+    pb
 
 [![](03-chap_files/figure-html/fig-graphics-
 bpgg3-1.png)](03-chap_files/figure-html/fig-graphics-bpgg3-1.png "그림 3.13: 그래픽 객체 bp의 완성된 모습.")
@@ -455,7 +457,7 @@ bpgg3-1.png)](03-chap_files/figure-html/fig-graphics-bpgg3-1.png "그림 3.13: �
             axis.text.y = element_blank(),
             axis.ticks = element_blank()) +
       xlab("") + ylab("")
-    pb.polar __
+    pb.polar
 
 [![](03-chap_files/figure-html/fig-graphics-
 bpgg7-1.png)](03-chap_files/figure-html/fig-graphics-bpgg7-1.png "그림 3.14: 극좌표계에서의 막대 그래프.")
@@ -473,7 +475,7 @@ bpgg7-1.png)](03-chap_files/figure-html/fig-graphics-bpgg7-1.png "그림 3.14: �
     
     
     selectedProbes = c( Fgf4 = "1420085_at", Gata4 = "1418863_at",
-                       Gata6 = "1425463_at",  Sox2 = "1416967_at")__
+                       Gata6 = "1425463_at",  Sox2 = "1416967_at")
 
 이 표현으로부터 데이터를 추출하여 데이터 프레임으로 변환하기 위해, 우리는 **[reshape2](https://cran.r-project.org/web/packages/reshape2/)** 패키지의 `melt` 함수를 사용합니다7.
 
@@ -483,7 +485,7 @@ bpgg7-1.png)](03-chap_files/figure-html/fig-graphics-bpgg7-1.png "그림 3.14: �
     
     library("reshape2")
     genes = melt(Biobase::exprs(x)[selectedProbes, ],
-                 varnames = c("probe", "sample"))__
+                 varnames = c("probe", "sample"))
 
 정확성을 위해, 프로브 식별자와 함께 유전자 심볼을 제공하는 열을 추가합니다.
 
@@ -491,7 +493,7 @@ bpgg7-1.png)](03-chap_files/figure-html/fig-graphics-bpgg7-1.png "그림 3.14: �
     
     genes$gene =
       names(selectedProbes)[match(genes$probe, selectedProbes)]
-    head(genes)__
+    head(genes)
     
     
            probe  sample    value  gene
@@ -509,7 +511,7 @@ bpgg7-1.png)](03-chap_files/figure-html/fig-graphics-bpgg7-1.png "그림 3.14: �
     
     
     ggplot(genes, aes(x = gene, y = value)) +
-      stat_summary(fun = mean, geom = "bar")__
+      stat_summary(fun = mean, geom = "bar")
 
 [![](03-chap_files/figure-html/fig-graphics-
 onedbp1-1.png)](03-chap_files/figure-html/fig-graphics-onedbp1-1.png
@@ -529,7 +531,7 @@ onedbp1-1.png)](03-chap_files/figure-html/fig-graphics-onedbp1-1.png
     ggplot(genes, aes( x = gene, y = value, fill = gene)) +
       stat_summary(fun = mean, geom = "bar") +
       stat_summary(fun.data = mean_cl_normal, geom = "errorbar",
-                   width = 0.25)__
+                   width = 0.25)
 
 [![](03-chap_files/figure-html/fig-graphics-
 onedbp2-1.png)](03-chap_files/figure-html/fig-graphics-onedbp2-1.png
@@ -546,7 +548,7 @@ onedbp2-1.png)](03-chap_files/figure-html/fig-graphics-onedbp2-1.png
     
     
     p = ggplot(genes, aes( x = gene, y = value, fill = gene))
-    p + geom_boxplot()__
+    p + geom_boxplot()
 
 [![](03-chap_files/figure-html/fig-graphics-
 onedboxpl-1.png)](03-chap_files/figure-html/fig-graphics-onedboxpl-1.png
@@ -566,7 +568,7 @@ onedboxpl-1.png)](03-chap_files/figure-html/fig-graphics-onedboxpl-1.png
            stackdir = "center", stackratio = 0.75,
            aes(color = gene))
     library("ggbeeswarm")
-    p + geom_beeswarm(aes(color = gene))__
+    p + geom_beeswarm(aes(color = gene))
 
 [![](03-chap_files/figure-html/fig-graphics-
 oneddot-1.png)](03-chap_files/figure-html/fig-graphics-oneddot-1.png
@@ -592,7 +594,7 @@ oneddot-2.png)](03-chap_files/figure-html/fig-graphics-oneddot-2.png
 
     
     
-    ggplot(genes, aes( x = value, color = gene)) + geom_density()__
+    ggplot(genes, aes( x = value, color = gene)) + geom_density()
 
 [![](03-chap_files/figure-html/fig-graphics-
 oneddens-1.png)](03-chap_files/figure-html/fig-graphics-oneddens-1.png
@@ -610,7 +612,7 @@ oneddens-1.png)](03-chap_files/figure-html/fig-graphics-oneddens-1.png
 
     
     
-    p + geom_violin()__
+    p + geom_violin()
 
 [![](03-chap_files/figure-html/fig-graphics-
 onedviolin-1.png)](03-chap_files/figure-html/fig-graphics-onedviolin-1.png
@@ -626,7 +628,7 @@ onedviolin-1.png)](03-chap_files/figure-html/fig-graphics-onedviolin-1.png
     
     library("ggridges")
     ggplot(genes, aes(x = value, y = gene, fill = gene)) + 
-      geom_density_ridges()__
+      geom_density_ridges()
 
 [![](03-chap_files/figure-html/fig-graphics-
 onedridge4-1.png)](03-chap_files/figure-html/fig-graphics-onedridge4-1.png
@@ -640,7 +642,7 @@ onedridge4-1.png)](03-chap_files/figure-html/fig-graphics-onedridge4-1.png
     
     top42 = order(rowMeans(Biobase::exprs(x)), decreasing = TRUE)[1:42]
     g42 = melt(Biobase::exprs(x)[rev(top42), ], varnames = c("probe", "sample"))
-    ggplot(g42, aes(x = value, y = probe)) __
+    ggplot(g42, aes(x = value, y = probe))
 
 [![](03-chap_files/figure-html/fig-graphics-
 onedridge42-1.png)](03-chap_files/figure-html/fig-graphics-onedridge42-1.png
@@ -668,7 +670,7 @@ onedridge42-1.png)](03-chap_files/figure-html/fig-graphics-onedridge42-1.png
     simdata = rnorm(70)
     tibble(index = seq(along = simdata),
               sx = sort(simdata)) %>%
-    ggplot(aes(x = sx, y = index)) + geom_step()__
+    ggplot(aes(x = sx, y = index)) + geom_step()
 
 [![](03-chap_files/figure-html/fig-graphics-
 ecdfexample-1.png)](03-chap_files/figure-html/fig-graphics-ecdfexample-1.png
@@ -680,7 +682,7 @@ ecdfexample-1.png)](03-chap_files/figure-html/fig-graphics-ecdfexample-1.png
 
     
     
-    ggplot(genes, aes( x = value, color = gene)) + stat_ecdf()__
+    ggplot(genes, aes( x = value, color = gene)) + stat_ecdf()
 
 [![](03-chap_files/figure-html/fig-graphics-
 onedecdf-1.png)](03-chap_files/figure-html/fig-graphics-onedecdf-1.png
@@ -699,7 +701,7 @@ Nature-2013-Fig1.png "그림 3.25: @Lawrence:Nature:2013 논문의 그림 1 일�
 
 그림 3.25: Lawrence 등 ([2013](16-chap.html#ref-Lawrence:Nature:2013)) 논문의 그림 1 일부. 각 점은 종양-정상 쌍에 대응하며, 수직 위치는 엑솜(exome) 내의 체세포 돌연변이 총 빈도를 나타냅니다. 결과로 나타나는 곡선들은 본질적으로 ECDF 도표이며, 개념적으로 이 플롯은 그림 3.24와 유사합니다. 다만 그래프가 90도 회전되었고(즉, \(x\\)축과 \(y\\)축의 역할이 바뀜), 개별 종양 유형에 대한 곡선들이 서로 잘 구분되도록 수평으로 변위되었습니다.
 
-__
+
 
 태스크
 
@@ -713,7 +715,7 @@ __
     
     ggplot(dfx, aes(x = `64 E4.5 (EPI)`)) + geom_histogram(bins = 100)
     ggplot(dfx, aes(x = 2 ^ `64 E4.5 (EPI)`)) + 
-      geom_histogram(binwidth = 20) + xlim(0, 1500)__
+      geom_histogram(binwidth = 20) + xlim(0, 1500)
 
 [![](03-chap_files/figure-html/fig-graphics-
 onedtrsf-1.png)](03-chap_files/figure-html/fig-graphics-onedtrsf-1.png
@@ -729,18 +731,18 @@ onedtrsf-2.png)](03-chap_files/figure-html/fig-graphics-onedtrsf-2.png
 
 그림 3.26: 로그 변환 여부에 따른 동일한 데이터의 히스토그램. (a) 데이터는 마이크로어레이 형광 강도를 로그(밑 2) 변환한 결과로 데이터 객체 `x`에 저장된 척도 그대로 보여줍니다 ([Irizarry et al. 2003](16-chap.html#ref-Irizarry:Biostat:2003)); (b) 이들을 다시 원래의 형광 척도로 되돌린 모습입니다. 공간을 더 잘 활용하기 위해 \(x\\)축 범위를 1500으로 제한했습니다.
 
-__
+
 
 질문 3.5
 
 (심화:) 확률 변수 \(X\\)와, 변환된 확률 변수 \(Y = f(X)\\)를 정의하는 비선형 1:1 변환 \(f: x \mapsto y\\)를 고려해 봅시다. \(Y\\)의 밀도 함수가 \(p(y)\\)라고 가정합시다. \(X\\)의 밀도는 무엇인가요? \(X\\)의 모드(또는 모드들)는 \(Y\\)의 모드(들)와 어떤 관련이 있나요?  
 힌트: 함수 \(p\\)의 모드는 그 도함수 \(p'=dp/dx\\)의 근(root)이라는 점에 유의하세요. \(x_0\\)가 \(X\\)의 모드라면 \(y_0=f(x_0)\\)가 \(Y\\)의 모드라는 사실이 일반적으로 성립할까요?
 
-__
+
 
 해결책
 
-__
+
 
 연쇄 법칙에 따라 \(p(y)\, dy = p(f(x))\,f'(x)\,dx\\)이므로, \(X\\)의 밀도는 \(\tilde{p}(x) = p(f(x))\,f'(x)\\)입니다. \(\tilde{p}\\)의 모드는 그 도함수 \(d\tilde{p}/dx\\)의 근이며, 즉 이들은 \(p'(f(x))\,f'^2(x) + p(f(x))f"(x) = 0\\)을 만족합니다. 합의 두 번째 항은 \(f\\)가 아핀 선형(affine linear) (\(f"\equiv0\\))인 경우 사라지지만, 일반적으로는 두 밀도의 근들 사이에, 그리고 그에 따라 \(X\\)와 \(Y\\)의 모드들 사이에 간단한 관계는 없습니다.
 
@@ -752,7 +754,7 @@ __
     
     scp = ggplot(dfx, aes(x = `59 E4.5 (PE)` ,
                           y = `92 E4.5 (FGF4-KO)`))
-    scp + geom_point()__
+    scp + geom_point()
 
 [![](03-chap_files/figure-html/fig-graphics-
 twodsp1-1.png)](03-chap_files/figure-html/fig-graphics-twodsp1-1.png
@@ -766,7 +768,7 @@ twodsp1-1.png)](03-chap_files/figure-html/fig-graphics-twodsp1-1.png
 
     
     
-    scp  + geom_point(alpha = 0.1)__
+    scp  + geom_point(alpha = 0.1)
 
 [![](03-chap_files/figure-html/fig-graphics-
 twodsp2-1.png)](03-chap_files/figure-html/fig-graphics-twodsp2-1.png
@@ -780,7 +782,7 @@ twodsp2-1.png)](03-chap_files/figure-html/fig-graphics-twodsp2-1.png
 
     
     
-    scp + geom_density2d()__
+    scp + geom_density2d()
 
 [![](03-chap_files/figure-html/fig-graphics-
 twodsp3-1.png)](03-chap_files/figure-html/fig-graphics-twodsp3-1.png
@@ -798,7 +800,7 @@ twodsp3-1.png)](03-chap_files/figure-html/fig-graphics-twodsp3-1.png
     
     scp + stat_density2d(h = 0.5, bins = 60,
               aes( fill = after_stat(level)), geom = "polygon") +
-      colorscale + coord_fixed()__
+      colorscale + coord_fixed()
 
 [![](03-chap_files/figure-html/fig-graphics-
 twodsp4-1.png)](03-chap_files/figure-html/fig-graphics-twodsp4-1.png
@@ -826,7 +828,7 @@ twodsp4-2.png)](03-chap_files/figure-html/fig-graphics-twodsp4-2.png
     
     scp + geom_hex() + coord_fixed()
     scp + geom_hex(binwidth = c(0.2, 0.2)) + colorscale +
-      coord_fixed()__
+      coord_fixed()
 
 [![](03-chap_files/figure-html/fig-graphics-
 twodsp6-1.png)](03-chap_files/figure-html/fig-graphics-twodsp6-1.png
@@ -864,7 +866,7 @@ twodsp6-2.png)](03-chap_files/figure-html/fig-graphics-twodsp6-2.png
     sp = ggplot(sunsp, aes(x = year, y = number)) + geom_line()
     sp
     ratio = with(sunsp, bank_slopes(year, number))
-    sp + coord_fixed(ratio = ratio)__
+    sp + coord_fixed(ratio = ratio)
 
 [![](03-chap_files/figure-html/fig-graphics-
 banking-1.png)](03-chap_files/figure-html/fig-graphics-banking-1.png
@@ -915,7 +917,7 @@ banking-2.png)](03-chap_files/figure-html/fig-graphics-banking-2.png
     dftx$lineage %<>% factor(levels = c("no", "EPI", "PE", "FGF4-KO"))
     
     ggplot(dftx, aes(x = X1426642_at, y = X1418765_at)) +
-      geom_point() + facet_grid( . ~ lineage )__
+      geom_point() + facet_grid( . ~ lineage )
 
 [![](03-chap_files/figure-html/fig-graphics-
 facet1-1.png)](03-chap_files/figure-html/fig-graphics-facet1-1.png
@@ -929,7 +931,7 @@ facet1-1.png)](03-chap_files/figure-html/fig-graphics-facet1-1.png
     
     ggplot(dftx,
       aes(x = X1426642_at, y = X1418765_at)) + geom_point() +
-       facet_grid( Embryonic.day ~ lineage )__
+       facet_grid( Embryonic.day ~ lineage )
 
 [![](03-chap_files/figure-html/fig-graphics-
 facet2-1.png)](03-chap_files/figure-html/fig-graphics-facet2-1.png
@@ -943,7 +945,7 @@ facet2-1.png)](03-chap_files/figure-html/fig-graphics-facet2-1.png
     
     ggplot(mutate(dftx, Tdgf1 = cut(X1450989_at, breaks = 4)),
        aes(x = X1426642_at, y = X1418765_at)) + geom_point() +
-       facet_wrap( ~ Tdgf1, ncol = 2 )__
+       facet_wrap( ~ Tdgf1, ncol = 2 )
 
 [![](03-chap_files/figure-html/fig-graphics-
 facet3-1.png)](03-chap_files/figure-html/fig-graphics-facet3-1.png
@@ -988,7 +990,7 @@ Posit(구 RStudio)의 **[shiny](https://cran.r-project.org/web/packages/shiny/)*
     
     
     library("plotly")
-    plot_ly(economics, x = ~ date, y = ~ unemploy / pop)__
+    plot_ly(economics, x = ~ date, y = ~ unemploy / pop)
 
 **[shiny](https://cran.r-project.org/web/packages/shiny/)** 및 **[ggvis](https://cran.r-project.org/web/packages/ggvis/)** 와 마찬가지로 그래픽은 HTML 브라우저에서 볼 수 있습니다; 하지만 실행 중인 R 세션이 필수적으로 요구되지는 않습니다. 그래픽은 그 "로직"이 JavaScript, 또는 더 정확하게는 D3.js 시스템으로 코딩된 자체 완비된 HTML 문서로 구성될 수 있습니다.
 
@@ -1010,7 +1012,7 @@ Posit(구 RStudio)의 **[shiny](https://cran.r-project.org/web/packages/shiny/)*
       col = terrain.colors(500)[cut(volcano, breaks = 500)]
     )
     library("rgl")
-    with(volcanoData, persp3d(x, y, z, color = col))__
+    with(volcanoData, persp3d(x, y, z, color = col))
 
 위의 코드에서 베이스 R 함수 `cut`은 `volcano` 데이터의 값 범위를 1부터 500 사이의 정수들로 매핑하는 것을 계산하며13, 우리는 이를 색상 척도인 `terrain.colors(500)`를 인덱싱하는 데 사용합니다. 더 자세한 정보는 패키지의 훌륭한 비네트를 참조하세요.
 
@@ -1022,7 +1024,7 @@ Posit(구 RStudio)의 **[shiny](https://cran.r-project.org/web/packages/shiny/)*
 
     
     
-    pie(rep(1, 8), col=1:8)__
+    pie(rep(1, 8), col=1:8)
 
 [![](03-chap_files/figure-html/fig-graphics-
 simplecolorpie-1.png)](03-chap_files/figure-html/fig-graphics-simplecolorpie-1.png
@@ -1041,7 +1043,7 @@ simplecolorpie-1.png)](03-chap_files/figure-html/fig-graphics-simplecolorpie-1.p
     ggplot(tibble(u = factor(1:8), v = 1), 
            aes(x = "",  y = v, fill = u)) +
       geom_bar(stat = "identity", width = 1) + 
-      coord_polar("y", start = 0) + theme_void()__
+      coord_polar("y", start = 0) + theme_void()
 
 [![](03-chap_files/figure-html/fig-graphics-
 ggplot2colorpie-1.png)](03-chap_files/figure-html/fig-graphics-ggplot2colorpie-1.png
@@ -1053,7 +1055,7 @@ ggplot2colorpie-1.png)](03-chap_files/figure-html/fig-graphics-ggplot2colorpie-1
 
     
     
-    display.brewer.all()__
+    display.brewer.all()
 
 [![](03-chap_files/figure-html/fig-graphics-
 RColorBrewer-1.png)](03-chap_files/figure-html/fig-graphics-RColorBrewer-1.png
@@ -1065,7 +1067,7 @@ RColorBrewer-1.png)](03-chap_files/figure-html/fig-graphics-RColorBrewer-1.png
 
     
     
-    head(brewer.pal.info)__
+    head(brewer.pal.info)
     
     
          maxcolors category colorblind
@@ -1077,7 +1079,7 @@ RColorBrewer-1.png)](03-chap_files/figure-html/fig-graphics-RColorBrewer-1.png
     RdGy        11      div      FALSE
     
     
-    table(brewer.pal.info$category)__
+    table(brewer.pal.info$category)
     
     
      div qual  seq 
@@ -1095,7 +1097,7 @@ RColorBrewer-1.png)](03-chap_files/figure-html/fig-graphics-RColorBrewer-1.png
 
     
     
-    brewer.pal(4, "RdYlGn")__
+    brewer.pal(4, "RdYlGn")
     
     
     [1] "#D7191C" "#FDAE61" "#A6D96A" "#1A9641"
@@ -1109,14 +1111,14 @@ RColorBrewer-1.png)](03-chap_files/figure-html/fig-graphics-RColorBrewer-1.png
     mypalette  = colorRampPalette(
         c("darkorange3", "white","darkblue")
       )(100)
-    head(mypalette)__
+    head(mypalette)
     
     
     [1] "#CD6600" "#CE6905" "#CF6C0A" "#D06F0F" "#D17214" "#D27519"
     
     
     image(matrix(1:100, nrow = 100, ncol = 10), col = mypalette,
-            xaxt = "n", yaxt = "n", useRaster = TRUE)__
+            xaxt = "n", yaxt = "n", useRaster = TRUE)
 
 [![](03-chap_files/figure-html/fig-graphics-
 colorRampPalette-1.png)](03-chap_files/figure-html/fig-graphics-colorRampPalette-1.png
@@ -1146,7 +1148,7 @@ colorRampPalette-1.png)](03-chap_files/figure-html/fig-graphics-colorRampPalette
         Embryonic.day = setNames(brewer.pal(9, "Blues")[c(3, 6, 9)], c("E3.25", "E3.5", "E4.5")),
         ScanDate = setNames(brewer.pal(nlevels(x$ScanDate), "YlGn"), levels(x$ScanDate))
       )
-    )__
+    )
 
 [![](03-chap_files/figure-html/fig-graphics-
 heatmap-1.png)](03-chap_files/figure-html/fig-graphics-heatmap-1.png
@@ -1166,35 +1168,35 @@ heatmap-1.png)](03-chap_files/figure-html/fig-graphics-heatmap-1.png
 
   * 덴드로그램 순서로 정하기로 했더라도, 각 내부 분기(internal branch)에서 어느 쪽을 왼쪽 혹은 오른쪽으로 둘지는 본질적으로 임의적인 선택입니다. 왜냐하면 트리의 위상(topology)을 바꾸지 않고도 각 분기를 뒤집을 수 있기 때문입니다 (또한 [그림 5.21](05-chap.html#fig-mobile)을 참조하세요).
 
-__
+
 
 질문 3.6
 
 `pheatmap` 함수는 서브트리의 어느 분기가 왼쪽 혹은 오른쪽으로 갈지 결정하는 문제를 어떻게 처리하나요?
 
-__
+
 
 해결책
 
-__
+
 
 이는 기본적으로 `pheatmap`에서 사용되는 **[stats](https://cran.r-project.org/web/packages/stats/)** 패키지의 `hclust` 함수 매뉴얼 페이지에 설명되어 있습니다.
 
-__
+
 
 질문 3.7
 
 다른 어떤 정렬 방식들을 생각할 수 있을까요?
 
-__
+
 
 해결책
 
-__
+
 
 제안된 방식들 중에는 외판원 문제(travelling salesman problem) ([McCormick Jr, Schweitzer, and White 1972](16-chap.html#ref-McCormick:1972:MatrixClustering))나 첫 번째 주성분으로의 투영(예를 들어 `pheatmap` 매뉴얼 페이지의 예제들 참조) 등이 있습니다.
 
-__
+
 
 질문 3.8
 
@@ -1208,7 +1210,7 @@ __
 
     
     
-    groupColor[1]__
+    groupColor[1]
     
     
         E3.25 
@@ -1253,7 +1255,7 @@ html/fig-graphics-hcl-2.png "그림 3.42 (b): ")
     gg = ggplot(tibble(A = Biobase::exprs(x)[, 1], M = rnorm(length(A)))),
                 aes(y = M))
     gg + geom_point(aes(x = A), size = 0.2)
-    gg + geom_point(aes(x = rank(A)), size = 0.2)__
+    gg + geom_point(aes(x = rank(A)), size = 0.2)
 
 [![](03-chap_files/figure-html/fig-graphics-MA-1.png)](03-chap_files/figure-
 html/fig-graphics-MA-1.png "그림 3.43 (a): ")
@@ -1267,13 +1269,13 @@ html/fig-graphics-MA-2.png "그림 3.43 (b): ")
 
 그림 3.43: 순위 변환(rank transformation)이 의존성에 대한 시각적 지각에 미치는 영향.
 
-__
+
 
 질문 3.9
 
 그림 3.31에서와 같이 밀도 기반 또는 구간화 기반 플로팅 방법을 사용함으로써 이러한 시각적 아티팩트를 피할 수 있을까요?
 
-__
+
 
 질문 3.10
 
@@ -1299,7 +1301,7 @@ __
     xlab(expression(nu)) + ylab(expression(Omega)) +
     geom_text(label =
     "Omega(rho,nu)==frac(pi^frac(nu,2)~rho^nu, Gamma(frac(nu,2)+1))",
-      parse = TRUE, x = 6, y = 1.5)__
+      parse = TRUE, x = 6, y = 1.5)
 
 [![](03-chap_files/figure-html/fig-graphics-
 mathnot-1.png)](03-chap_files/figure-html/fig-graphics-mathnot-1.png
@@ -1312,7 +1314,7 @@ mathnot-1.png)](03-chap_files/figure-html/fig-graphics-mathnot-1.png
     
     
     ggplot(genes, aes( x = value, color = gene)) + stat_ecdf() +
-      theme(text = element_text(family = "Times"))__
+      theme(text = element_text(family = "Times"))
 
 [![](03-chap_files/figure-html/fig-graphics-
 timesfont-1.png)](03-chap_files/figure-html/fig-graphics-timesfont-1.png
@@ -1322,7 +1324,7 @@ timesfont-1.png)](03-chap_files/figure-html/fig-graphics-timesfont-1.png
 
 사실 표준 R 설치 시 가용한 글꼴 세트는 제한적이지만, 다행히 R의 표준 PostScript 글꼴들 외의 글꼴들을 쉽게 사용할 수 있게 도와주는 **[extrafont](https://cran.r-project.org/web/packages/extrafont/)** 패키지가 있습니다. R 외부의 글꼴들을 먼저 R이 알 수 있게 해주어야 하므로 사용 전 약간의 추가 작업이 필요합니다. 글꼴들은 여러분의 운영 체제, 워드 프로세서 또는 다른 그래픽 애플리케이션과 함께 설치되어 있을 수 있습니다. 따라서 가용한 글꼴 세트와 물리적 위치는 표준화되어 있지 않으며, 운영 체제와 추가 설정에 따라 달라질 것입니다. **[extrafont](https://cran.r-project.org/web/packages/extrafont/)** 패키지를 불러온 후의 첫 세션에서, 여러분은 글꼴들을 가져와 패키지에 알리기 위해 `font_import` 함수를 실행해야 할 것입니다. 그 후 글꼴을 사용하고 싶은 각 세션마다, 하나 이상의 R 그래픽 장치에 이들을 등록하기 위해 `loadfonts` 함수를 호출해야 합니다. 마지막으로 `fonttable` 함수를 사용하여 가용한 글꼴들을 나열할 수 있습니다. 여러분의 머신에서 이를 어떻게 작동시킬지에 대해서는 **[extrafonts](https://cran.r-project.org/web/packages/extrafonts/)** 패키지 문서를 참조해야 할 것입니다.
 
-__
+
 
 태스크
 
@@ -1345,7 +1347,7 @@ __
     
     library("ggbio")
     data("hg19IdeogramCyto", package = "biovizBase")
-    plotIdeogram(hg19IdeogramCyto, subchr = "chr1")__
+    plotIdeogram(hg19IdeogramCyto, subchr = "chr1")
 
 [![](03-chap_files/figure-html/fig-graphics-
 ideogram-1-1.png)](03-chap_files/figure-html/fig-graphics-ideogram-1-1.png
@@ -1360,7 +1362,7 @@ ideogram-1-1.png)](03-chap_files/figure-html/fig-graphics-ideogram-1-1.png
     library("GenomicRanges")
     data("darned_hg19_subset500", package = "biovizBase")
     autoplot(darned_hg19_subset500, layout = "karyogram",
-             aes(color = exReg, fill = exReg))__
+             aes(color = exReg, fill = exReg))
 
 [![](03-chap_files/figure-html/fig-graphics-
 darned1-1.png)](03-chap_files/figure-html/fig-graphics-darned1-1.png
@@ -1368,17 +1370,17 @@ darned1-1.png)](03-chap_files/figure-html/fig-graphics-darned1-1.png
 
 그림 3.49: RNA 편집 사이트들이 표시된 카리오그램(Karyogram). `exReg`는 해당 사이트가 코딩 영역(C), 3’- 또는 5’-UTR에 있는지를 나타냅니다.
 
-__
+
 
 질문 3.11
 
 그림 3.49에서 염색체들의 순서를 어떻게 바로잡고 염색체 길이에 대한 경고 메시지를 어떻게 없앨 수 있을까요?
 
-__
+
 
 해결책
 
-__
+
 
 인간 유전체의 hg19 어셈블리에서의 염색체 길이에 대한 정보는 (예를 들어) `ideoCyto` 데이터 세트에 저장되어 있습니다. 우리는 `keepSeqlevels` 함수를 사용하여 염색체들의 순서를 재조정합니다. 그림 3.50을 참조하세요.
 
@@ -1388,7 +1390,7 @@ __
     dn = darned_hg19_subset500
     seqlengths(dn) = seqlengths(ideoCyto$hg19)[names(seqlengths(dn))]
     dn = keepSeqlevels(dn, paste0("chr", c(1:22, "X")))
-    autoplot(dn, layout = "karyogram", aes(color = exReg, fill = exReg))__
+    autoplot(dn, layout = "karyogram", aes(color = exReg, fill = exReg))
 
 [![](03-chap_files/figure-html/fig-graphics-
 darned2-1.png)](03-chap_files/figure-html/fig-graphics-darned2-1.png
@@ -1396,17 +1398,17 @@ darned2-1.png)](03-chap_files/figure-html/fig-graphics-darned2-1.png
 
 그림 3.50: 그림 3.49의 개선된 버전.
 
-__
+
 
 질문 3.12
 
 `darned_hg19_subset500`은 어떤 유형의 객체인가요?
 
-__
+
 
 해결책
 
-__
+
 
     
     
@@ -1445,7 +1447,7 @@ __
 
 ## 3.16 연습 문제
 
-__
+
 
 연습 문제 3.1
 
@@ -1456,11 +1458,11 @@ _테마(themes)_ 를 사용하여 플롯의 시각적 외관을 변경해 보세
     ggcars = ggplot(mtcars, aes(x = hp, y = mpg)) + geom_point()
     ggcars
     ggcars + theme_bw()
-    ggcars + theme_minimal()__
+    ggcars + theme_minimal()
 
 어떤 다른 테마들이 있나요? (힌트: [ggplot2 온라인 문서](https://ggplot2.tidyverse.org/reference)의 themes 섹션을 살펴보세요.) 이것들이 테마의 전부인가요? (힌트: **[ggthemes](https://cran.r-project.org/web/packages/ggthemes/)** 패키지를 살펴보세요.) 위의 플롯을 _Economist_ 잡지 스타일로 만들어 보세요. 평활 선(smoothing line)을 추가해 보세요.
 
-__
+
 
 연습 문제 3.2
 
@@ -1470,7 +1472,7 @@ __
 
 그림 3.41의 히트맵을 [R 패키지 **beyonce**](https://github.com/dill/beyonce)의 색상 팔레트를 사용하는 버전으로 만들어 보세요.
 
-__
+
 
 연습 문제 3.3
 
@@ -1484,19 +1486,19 @@ __
 
 ![](imgs/xkcdgraph.png)
 
-__
+
 
 연습 문제 3.4
 
 RStudio 웹사이트의 **[shiny](https://cran.r-project.org/web/packages/shiny/)** 튜토리얼을 확인해 보세요. 이 장의 플롯 중 하나를 표시하지만, 표시되는 유전자 등을 제어할 수 있는 대화형 요소가 포함된 _shiny 앱_ 을 작성해 보세요 (그림 3.33—3.35).
 
-__
+
 
 연습 문제 3.5
 
 그래픽을 _직렬화(serializing)_ 하는 방법, 즉 나중에 사용하기 위해 파일로 저장하거나 다른 소프트웨어에서 불러오기 위한 방법에는 어떤 것들이 있나요? 대화형 그래픽은 어떻게 직렬화할 수 있나요?
 
-__
+
 
 연습 문제 3.6
 
@@ -1559,3 +1561,12 @@ Wilkinson, Leland. 1999. “Dot Plots.” _The American Statistician_ 53 (3): 27
 ———. 2005. _The Grammar of Graphics_. Springer.
 
 페이지는 R 버전 4.5.1 (2025-06-13)을 사용하여 2025-09-01 01:33에 빌드되었습니다.
+
+## 3.7 요약
+
+이 장에서는 R의 기본 플로팅 시스템과 **ggplot2** 패키지를 이용한 고품질 그래픽 작성법을 다루었습니다.
+
+*   **데이터 시각화**는 데이터의 패턴을 탐색하고 발견하는 중요한 도구일 뿐만 아니라, 결과를 효과적으로 소통하는 수단입니다.
+*   **ggplot2**는 "그래픽 문법(Grammar of Graphics)"을 기반으로 하여, 데이터를 미적 속성(aesthetic mappings)에 매핑하고 기하학적 객체(geoms)를 층(layer)으로 쌓아 올리는 방식으로 복잡한 플롯을 직관적으로 생성할 수 있게 해줍니다.
+
+적절한 시각화 도구의 선택과 활용은 생물학적 데이터 분석에서 통찰력을 얻는 데 필수적입니다.

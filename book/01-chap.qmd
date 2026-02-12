@@ -1,6 +1,8 @@
+# 이산 데이터를 위한 생성 모델
+
 ![](imgs/Pile_ou_face.png)
 
-분자 생물학에서 많은 상황은 사건의 수를 세는 것과 관련이 있습니다: 얼마나 많은 코돈이 특정 철자를 사용하는지, 얼마나 많은 DNA 리드가 참조 유전체와 일치하는지, DNA 서열에서 얼마나 많은 CG 다이그램(digrams)이 관찰되는지 등입니다. 이러한 카운트는 질량이나 강도와 같이 _연속적인_ 척도로 측정되는 양과 대조적으로 우리에게 **이산(discrete)** 변수를 제공합니다.
+분자 생물학에서 많은 상황은 사건의 수를 세는 것과 관련이 있습니다: 얼마나 많은 코돈이 특정 철자를 사용하는지, 얼마나 많은 DNA 리드가 참조 유전체와 일치하는지, DNA 서열에서 얼마나 많은 CpG 다이뉴클레오타이드(dinucleotides)가 관찰되는지 등입니다. 이러한 카운트는 질량이나 강도와 같이 _연속적인_ 척도로 측정되는 양과 대조적으로 우리에게 **이산(discrete)** 변수를 제공합니다.
 
 연구 중인 메커니즘이 따르는 규칙을 알고 있다면, 비록 그 결과가 무작위일지라도 계산과 표준 확률 법칙을 통해 우리가 관심 있는 모든 사건의 확률을 생성할 수 있습니다. 이는 연역과 확률 조작 방법에 대한 우리의 지식에 기반한 **하향식(top-down)** 접근 방식입니다. [2장](02-chap.html)에서는 이를 데이터 기반(**상향식**, bottom-up) 통계 모델링과 결합하는 방법을 살펴볼 것입니다.
 
@@ -33,7 +35,7 @@
 
     
     
-    dpois(x = 3, lambda = 5)__
+    dpois(x = 3, lambda = 5)
     
     
     [1] 0.1403739
@@ -48,20 +50,20 @@ R의 출력 형식이 어떻게 지정되는지 주목하세요: 첫 번째 줄�
 
     
     
-    0:12 __
+    0:12
     
     
      [1]  0  1  2  3  4  5  6  7  8  9 10 11 12
     
     
-    dpois(x = 0:12, lambda = 5)__
+    dpois(x = 0:12, lambda = 5)
     
     
      [1] 0.0067 0.0337 0.0842 0.1404 0.1755 0.1755 0.1462 0.1044 0.0653 0.0363
     [11] 0.0181 0.0082 0.0034
     
     
-    barplot(dpois(0:12, 5), names.arg = 0:12, col = "red")__
+    barplot(dpois(0:12, 5), names.arg = 0:12, col = "red")
 
 [![](01-chap_files/figure-html/fig-Poisson5-1.png)](01-chap_files/figure-
 html/fig-Poisson5-1.png "그림 1.1: 푸아송(5) 분포에 의해 모델링된 0, 1, 2, …, 12개의 돌연변이가 나타날 확률. 플롯은 4개나 5개의 돌연변이를 자주 보게 되겠지만 12개만큼 많이 보는 경우는 드물 것임을 보여줍니다. 분포는 더 큰 숫자(13, ...)로 계속 이어지지만 확률은 점차 작아질 것이며, 여기서는 시각화하지 않았습니다.")
@@ -96,7 +98,7 @@ html/fig-Poisson5-1.png "그림 1.1: 푸아송(5) 분포에 의해 모델링된 
     
     genotype = c("AA","AO","BB","AO","OO","AO","AA","BO","BO",
                  "AO","BB","AO","BO","AB","OO","AB","BB","AO","AO")
-    table(genotype)__
+    table(genotype)
     
     
     genotype
@@ -112,30 +114,30 @@ _요인(factor)_을 생성할 때, R은 자동으로 수준을 감지합니다. 
     
     
     genotypeF = factor(genotype)
-    levels(genotypeF)__
+    levels(genotypeF)
     
     
     [1] "AA" "AB" "AO" "BB" "BO" "OO"
     
     
-    table(genotypeF)__
+    table(genotypeF)
     
     
     genotypeF
     AA AB AO BB BO OO 
      2  2  7  3  3  2 
 
-__
+
 
 질문 1.1
 
 데이터에 아직 존재하지 않는 일부 수준을 가진 _요인_을 만들고 싶다면 어떻게 해야 할까요?
 
-__
+
 
 해결책
 
-__
+
 
 `factor` 함수의 매뉴얼 페이지를 참조하세요.
 
@@ -155,7 +157,7 @@ __
 
     
     
-    rbinom(15, prob = 0.5, size = 1)__
+    rbinom(15, prob = 0.5, size = 1)
     
     
      [1] 0 0 1 1 0 0 1 1 1 1 1 0 1 0 0
@@ -164,7 +166,7 @@ __
 
 4 R 함수의 경우, 매개변수는 **인수(argument)**라고도 불립니다.
 
-__
+
 
 질문 1.2
 
@@ -176,7 +178,7 @@ __
 
     
     
-    rbinom(12, prob = 2/3, size = 1)__
+    rbinom(12, prob = 2/3, size = 1)
     
     
      [1] 1 1 1 0 0 0 1 0 1 0 1 0
@@ -193,7 +195,7 @@ __
 
     
     
-    rbinom(1, prob = 2/3, size = 12)__
+    rbinom(1, prob = 2/3, size = 12)
     
     
     [1] 9
@@ -211,22 +213,22 @@ __
     
     
     set.seed(235569515)
-    rbinom(1, prob = 0.3, size = 15)__
+    rbinom(1, prob = 0.3, size = 15)
     
     
     [1] 5
 
-__
+
 
 질문 1.3
 
 이 함수 호출을 10번 반복해 보세요. 가장 흔하게 나타나는 결과는 무엇인 것 같나요?
 
-__
+
 
 해결책
 
-__
+
 
 가장 빈번한 값은 4입니다. 사실, \\(X\\)가 \\(B(15, 0.3)\\)을 따를 때 4가 나타날 것으로 기대되는 이론적 비율은 \\(X=4\\)일 확률값입니다.
 
@@ -237,7 +239,7 @@ __
     
     
     probabilities = dbinom(0:15, prob = 0.3, size = 15)
-    round(probabilities, 2)__
+    round(probabilities, 2)
     
     
      [1] 0.00 0.03 0.09 0.17 0.22 0.21 0.15 0.08 0.03 0.01 0.00 0.00 0.00 0.00 0.00
@@ -247,7 +249,7 @@ __
 
     
     
-    barplot(probabilities, names.arg = 0:15, col = "red")__
+    barplot(probabilities, names.arg = 0:15, col = "red")
 
 [![](01-chap_files/figure-html/fig-binombarplot-1.png)](01-chap_files/figure-
 html/fig-binombarplot-1.png "그림 1.3: B(15, 0.3)의 이론적 분포. 가장 높은 막대는 x=4에 있습니다. 우리는 이론적 값을 전체적으로 빨간색으로 표현하기로 선택했습니다.")
@@ -262,7 +264,7 @@ html/fig-binombarplot-1.png "그림 1.3: B(15, 0.3)의 이론적 분포. 가장 
 
 \[ \begin{aligned} P(X=k) &=\frac{n\times (n-1)... (n-k+1)}{k\times(k-1)... 1}\; p^k\, (1-p)^{n-k}\\ &=\frac{n!}{(n-k)!k!}\;p^k\, (1-p)^{n-k}\\ &={ n \choose k}\; p^k\, (1-p)^{n-k}. \end{aligned} \]
 
-__
+
 
 질문 1.4
 
@@ -276,17 +278,17 @@ __
 
 성공 확률 \\(p\\)가 작고 시행 횟수 \\(n\\)이 클 때, 이항 분포 \\(B(n, p)\\)는 더 단순한 분포인 율 매개변수 \\(\lambda=np\\)를 가진 **푸아송(Poisson) 분포**에 의해 충실하게 근사될 수 있습니다. 우리는 이미 HIV 예제(그림 1.1)에서 이 사실과 분포를 사용했습니다.
 
-__
+
 
 질문 1.5
 
 뉴클레오타이드당 확률이 \\(p = 5 \times 10^{-4}\\)일 때, \\(n = 10^4\\) 뉴클레오타이드 게놈에서 `0:12`개의 돌연변이를 관찰할 확률 질량 분포는 무엇인가요? 이항 분포 \\(B(n, p)\\)로 모델링할 때와 푸아송 분포 \\(Poisson(\lambda=np)\\)로 모델링할 때 결과가 유사한가요?
 
-__
+
 
 해결책
 
-__
+
 
 이항 분포와 달리 푸아송 분포는 더 이상 두 개의 개별 매개변수 \\(n\\)과 \\(p\\)에 의존하지 않고, 오직 그들의 곱인 \\(np\\)에만 의존한다는 점에 유의하세요. 이항 분포의 경우와 마찬가지로, 푸아송 확률을 계산하기 위한 수학 공식도 존재합니다.
 
@@ -296,14 +298,14 @@ __
 
     
     
-    5^3 * exp(-5) / factorial(3)__
+    5^3 * exp(-5) / factorial(3)
     
     
     [1] 0.1403739
 
 이는 위에서 `dpois`를 사용하여 계산한 것과 비교할 수 있습니다.
 
-__
+
 
 태스크
 
@@ -311,20 +313,20 @@ __
 
     
     
-    rbinom(1, prob = 5e-4, size = 10000)__
+    rbinom(1, prob = 5e-4, size = 10000)
     
     
     [1] 6
     
     
     simulations = rbinom(n = 300000, prob = 5e-4, size = 10000)
-    barplot(table(simulations), col = "lavender")__
+    barplot(table(simulations), col = "lavender")
 
 [![](01-chap_files/figure-html/fig-gen-
 simpoisson-1.png)](01-chap_files/figure-html/fig-gen-simpoisson-1.png
-"그림 1.5: 300,000번의 시뮬레이션에 대한 B(10000, 10^{-4})의 시뮬레이션된 분포.")
+"그림 1.5: 300,000번의 시뮬레이션에 대한 B(10000, 5 \times 10^{-4})의 시뮬레이션된 분포.")
 
-그림 1.5: 300,000번의 시뮬레이션에 대한 B(10000, \\(10^{-4}\\))의 시뮬레이션된 분포.
+그림 1.5: 300,000번의 시뮬레이션에 대한 B(10000, \\(5 \times 10^{-4}\\))의 시뮬레이션된 분포.
 
 이제 사례 연구에서 확률 계산을 사용할 준비가 되었습니다.
 
@@ -368,7 +370,7 @@ ELISA8 어세이는 단백질을 따른 서로 다른 위치에서 특정 에피
 
 여기서 1은 히트(따라서 알레르기 반응의 가능성)를 나타내고, 0은 해당 위치에서 반응이 없음을 나타냅니다.
 
-__
+
 
 태스크
 
@@ -387,7 +389,7 @@ html/fig-typicalP-1.png "그림 1.7: 배경(즉, 위양성 히트)에 대한 우
     
     load("../data/e100.RData")
     barplot(e100, ylim = c(0, 7), width = 0.7, xlim = c(-0.5, 100.5),
-      names.arg = seq(along = e100), col = "darkolivegreen")__
+      names.arg = seq(along = e100), col = "darkolivegreen")
 
 [![](01-chap_files/figure-html/fig-epitopedata-1.png)](01-chap_files/figure-
 html/fig-epitopedata-1.png "그림 1.8: 100개 위치에서의 50명 환자에 대한 ELISA 어레이 결과 출력.")
@@ -405,18 +407,18 @@ html/fig-epitopedata-1.png "그림 1.8: 100개 위치에서의 50명 환자에 �
 
     
     
-    1 - ppois(6, 0.5)__
+    1 - ppois(6, 0.5)
     
     
     [1] 1.00238e-06
     
     
-    ppois(6, 0.5, lower.tail = FALSE)__
+    ppois(6, 0.5, lower.tail = FALSE)
     
     
     [1] 1.00238e-06
 
-__
+
 
 태스크
 
@@ -432,17 +434,17 @@ __
 
 잠깐만요! 위의 계산은 이 경우에 대한 _올바른_ 계산이 아닙니다.
 
-__
+
 
 질문 1.6
 
 에피토프가 없을 때 이 데이터를 관찰할 확률을 계산하고 싶다면, 우리의 추론에서 어떤 결함을 찾을 수 있나요?
 
-__
+
 
 해결책
 
-__
+
 
 우리는 100개 위치 모두를 살펴보고 가장 큰 값을 찾아 7임을 확인했습니다. 이러한 선택 때문에, 7만큼 큰 값이 나타날 확률은 단 하나의 위치만을 보았을 때보다 더 높습니다.
 
@@ -487,7 +489,7 @@ __
     maxes = replicate(100000, {
       max(rpois(100, 0.5))
     })
-    table(maxes)__
+    table(maxes)
     
     
     maxes
@@ -500,12 +502,12 @@ __
 
     
     
-    mean( maxes >= 7 )__
+    mean( maxes >= 7 )
     
     
     [1] 0.00016
 
-이는 우리의 이론적 계산과 어느 정도 일치합니다. 우리는 이미 몬테카를로 시뮬레이션의 잠재적인 한계 중 하나를 보았습니다: 시뮬레이션 결과의 "해상도(granularity)"는 시뮬레이션 횟수(100,000)의 역수에 의해 결정되므로 약 10^{-5} 수준이 됩니다. 추정된 확률은 이 해상도보다 더 정밀할 수 없으며, 실제로 우리 추정치의 정밀도는 그 수 배 수준일 것입니다. 지금까지 우리가 수행한 모든 작업은 위치당 위양성률을 알고, 분석된 환자 수와 단백질 길이를 알며, 모델로부터 동일하게 분포된 독립적인 추출을 한다고 가정하고 알 수 없는 매개변수가 없기 때문에 가능했습니다. 이것은 **확률 모델링** 또는 **생성 모델링(generative modeling)**의 예시입니다: 모든 매개변수가 알려져 있고 수학적 이론을 통해 **하향식** 방식으로 **연역(deduction)**을 수행할 수 있습니다.
+이는 우리의 이론적 계산과 어느 정도 일치합니다. 우리는 이미 몬테카를로 시뮬레이션의 잠재적인 한계 중 하나를 보았습니다: 시뮬레이션 결과의 "해상도(granularity)"는 시뮬레이션 횟수(100,000)의 역수에 의해 결정되므로 약 \(10^{-5}\) 수준이 됩니다. 추정된 확률은 이 해상도보다 더 정밀할 수 없으며, 실제로 우리 추정치의 정밀도는 그 수 배 수준일 것입니다. 지금까지 우리가 수행한 모든 작업은 위치당 위양성률을 알고, 분석된 환자 수와 단백질 길이를 알며, 모델로부터 동일하게 분포된 독립적인 추출을 한다고 가정하고 알 수 없는 매개변수가 없기 때문에 가능했습니다. 이것은 **확률 모델링** 또는 **생성 모델링(generative modeling)**의 예시입니다: 모든 매개변수가 알려져 있고 수학적 이론을 통해 **하향식** 방식으로 **연역(deduction)**을 수행할 수 있습니다.
 
 우리는 노이즈에 대해 푸아송 분포를 가정하고, 모든 매개변수를 알고 있는 척하며 수학적 연역을 통해 결론을 내릴 수 있었습니다.
 
@@ -527,7 +529,7 @@ __
 
 여러분은 여기서 은연중에 연속 분포인 균등 분포, `runif`를 만나고 있습니다.
 
-__
+
 
 태스크
 
@@ -541,23 +543,23 @@ __
 
 대괄호 안의 항은 다항 계수(multinomial coefficient)라고 불리며 다음의 약어입니다: \[{n\choose x_1,x_2,...,x_m}=\frac{n!}{x_1!x_2!\cdots x_m!}.\] 따라서 이는 이항 계수의 일반화입니다 – \\(m=2\\)인 경우 이항 계수와 동일합니다.
 
-__
+
 
 질문 1.7
 
 동일한 확률을 가진 네 개의 상자가 있다고 가정해 봅시다. 공식을 사용하여, 첫 번째 상자에서 4, 두 번째 상자에서 2, 그리고 나머지 두 상자에서는 아무것도 관찰되지 않을 확률은 얼마인가요?
 
-__
+
 
 해결책
 
-__
+
 
 \[ P(4,2,0,0)=\frac{6\times 5\times 4\times 3\times 2}{4\times 3\times 2 \times 2} \frac{1}{4^6} =\frac{15}{4^6}\simeq 0.0037. \]
 
     
     
-    dmultinom(c(4, 2, 0, 0), prob = rep(1/4, 4))__
+    dmultinom(c(4, 2, 0, 0), prob = rep(1/4, 4))
     
     
     [1] 0.003662109
@@ -567,19 +569,19 @@ __
     
     
     pvec = rep(1/4, 4)
-    t(rmultinom(1, prob = pvec, size = 8))__
+    t(rmultinom(1, prob = pvec, size = 8))
     
     
          [,1] [,2] [,3] [,4]
     [1,]    1    3    1    3
 
-__
+
 
 질문 1.8
 
 `t()` 함수를 사용하지 않고 코드를 시도해 보세요; `t`는 무엇의 약자인가요?
 
-__
+
 
 질문 1.9
 
@@ -610,13 +612,13 @@ __
     
     
     obsunder0 = rmultinom(1000, prob = pvec, size = 20)
-    dim(obsunder0)__
+    dim(obsunder0)
     
     
     [1]    4 1000
     
     
-    obsunder0[, 1:11]__
+    obsunder0[, 1:11]
     
     
          [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11]
@@ -644,19 +646,19 @@ __
     
     
     expected0 = pvec * 20
-    sum((obsunder0[, 1] - expected0)^2 / expected0)__
+    sum((obsunder0[, 1] - expected0)^2 / expected0)
     
     
     [1] 1.2
     
     
-    sum((obsunder0[, 2] - expected0)^2 / expected0)__
+    sum((obsunder0[, 2] - expected0)^2 / expected0)
     
     
     [1] 1.2
     
     
-    sum((obsunder0[, 3] - expected0)^2 / expected0)__
+    sum((obsunder0[, 3] - expected0)^2 / expected0)
     
     
     [1] 1.2
@@ -668,7 +670,7 @@ __
     stat = function(obsvd, exptd = 20 * pvec) {
       sum((obsvd - exptd)^2 / exptd)
     }
-    stat(obsunder0[, 1])__
+    stat(obsunder0[, 1])
     
     
     [1] 1.2
@@ -678,14 +680,14 @@ __
     
     
     S0 = apply(obsunder0, 2, stat)
-    summary(S0)__
+    summary(S0)
     
     
        Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
       0.000   1.200   2.800   3.126   4.400  17.600 
     
     
-    hist(S0, breaks = 25, col = "lavender", main = "")__
+    hist(S0, breaks = 25, col = "lavender", main = "")
 
 [![](01-chap_files/figure-html/fig-histS0-1.png)](01-chap_files/figure-
 html/fig-histS0-1.png "그림 1.10: 귀무(공정한) 분포하에서의 통계량 stat의 시뮬레이션된 값 S0의 히스토그램은 통계량 stat의 표집 분포에 대한 근사치를 제공합니다.")
@@ -701,7 +703,7 @@ html/fig-histS0-1.png "그림 1.10: 귀무(공정한) 분포하에서의 통계�
     
     
     q95 = quantile(S0, probs = 0.95)
-    q95 __
+    q95
     
     
     95% 
@@ -719,13 +721,13 @@ html/fig-histS0-1.png "그림 1.10: 귀무(공정한) 분포하에서의 통계�
     
     pvecA = c(3/8, 1/4, 1/4, 1/8)
     observed = rmultinom(1000, prob = pvecA, size = 20)
-    dim(observed)__
+    dim(observed)
     
     
     [1]    4 1000
     
     
-    observed[, 1:7]__
+    observed[, 1:7]
     
     
          [,1] [,2] [,3] [,4] [,5] [,6] [,7]
@@ -735,14 +737,14 @@ html/fig-histS0-1.png "그림 1.10: 귀무(공정한) 분포하에서의 통계�
     [4,]    2    3    2    0    6    4    5
     
     
-    apply(observed, 1, mean)__
+    apply(observed, 1, mean)
     
     
     [1] 7.469 4.974 5.085 2.472
     
     
     expectedA = pvecA * 20
-    expectedA __
+    expectedA
     
     
     [1] 7.5 5.0 5.0 2.5
@@ -753,28 +755,28 @@ html/fig-histS0-1.png "그림 1.10: 귀무(공정한) 분포하에서의 통계�
 
     
     
-    stat(observed[, 1])__
+    stat(observed[, 1])
     
     
     [1] 7.6
     
     
     S1 = apply(observed, 2, stat)
-    q95 __
+    q95
     
     
     95% 
     7.6 
     
     
-    sum(S1 > q95)__
+    sum(S1 > q95)
     
     
     [1] 199
     
     
     power = mean(S1 > q95)
-    power __
+    power
     
     
     [1] 0.199
@@ -787,7 +789,7 @@ html/fig-histS0-1.png "그림 1.10: 귀무(공정한) 분포하에서의 통계�
 
 시퀀스 길이 \\(n = 20\\)을 사용하면 공정한 생성 과정과 우리 **대립 가설** 사이의 차이를 감지할 수 있는 약 20%의 _검정력_을 가집니다.
 
-__
+
 
 태스크
 
@@ -833,54 +835,54 @@ __
 
 ## 1.7 연습 문제
 
-__
+
 
 연습 문제 1.1
 
 R은 알려진 모든 분포로부터 숫자를 생성할 수 있습니다. 우리는 이제 각 분포 유형에 맞춰진 특수한 R 함수들을 사용하여 임의의 이산 데이터를 생성하는 법을 압니다. 우리는 `rpois`, `rbinom`, `rmultinom`에서와 같이 `r`로 시작하는 함수들을 사용합니다. 만약 이러한 모델들 중 하나하에서 확률에 대한 이론적 계산이 필요하다면, 이산 이항 분포에서의 사건 확률을 계산하는 `dbinom`이나 연속 정규 분포에 대한 확률 밀도 함수를 계산하는 `dnorm`과 같이 `d`로 시작하는 함수들을 사용합니다. \\(P(X>a)\\)와 같은 꼬리 확률을 계산할 때는 `p`로 시작하는 누적 분포 함수를 사용하는 것이 편리합니다. 위의 `XXXX` 부분을 대체할 수 있는 다른 이산 분포 두 가지를 찾아보세요.
 
-__
+
 
 연습 문제 1.2
 
 이 장에서 우리는 확률이 셀 수 있는 값들의 세트에 집중되어 있는 _이산_ 확률 변수에 집중했습니다. `dbinom`을 사용하여 이항 분포 \\(B(10, 0.3)\\)에 대해 \\(X=2\\)인 값에서의 **확률 질량(probability mass)**을 어떻게 계산하시겠습니까? `dbinom`을 사용하여 \\(P(X\leq 2)\\)에 해당하는 값 2에서의 **누적(cumulative)** 분포를 계산하고, 다른 R 함수로 답을 확인해 보세요.
 
-__
+
 
 해결책
 
-__
+
 
     
     
-    dbinom(2, size = 10, prob = 0.3)__
+    dbinom(2, size = 10, prob = 0.3)
     
     
     [1] 0.2334744
     
     
-    pbinom(2, size = 10, prob = 0.3)__
+    pbinom(2, size = 10, prob = 0.3)
     
     
     [1] 0.3827828
     
     
-    sum(dbinom(0:2, size = 10, prob = 0.3)) __
+    sum(dbinom(0:2, size = 10, prob = 0.3))
     
     
     [1] 0.3827828
 
-__
+
 
 연습 문제 1.3
 
 어떤 명령어 시퀀스가 계속 필요하다는 것을 알게 될 때마다, 이를 함수로 만드는 것이 좋습니다. 함수 본문(body)은 우리가 반복해서 수행하고 싶은 지시사항들을 포함하고, 함수 인수(arguments)는 우리가 변화시키고 싶은 것들을 받습니다. 비율이 `lambda`인 `n`개의 푸아송 변수들을 살펴볼 때 최댓값이 `m`만큼 클 확률을 계산하는 함수를 작성하세요.
 
-__
+
 
 해결책
 
-__
+
 
     
     
@@ -888,52 +890,52 @@ __
       epsilon = 1 - ppois(m - 1, lambda)
       1 - exp( -n * epsilon)
     }
-    poismax(lambda = 0.5, n = 100, m = 7)__
+    poismax(lambda = 0.5, n = 100, m = 7)
     
     
     [1] 0.0001002329
     
     
-    poismax(lambda = mean(e100), n = 100, m = 7)__
+    poismax(lambda = mean(e100), n = 100, m = 7)
     
     
     [1] 0.0001870183
 
-__
+
 
 연습 문제 1.4
 
 인수에 대한 기본값(즉, 함수 호출 시 인수가 지정되지 않았을 때 사용되는 값)을 갖도록 함수를 다시 작성하세요.
 
-__
+
 
 해결책
 
-__
+
 
     
     
     poismax = function(lambda, n = 100, m = 7) {
       1 - exp( -n * (1 - ppois(m - 1, lambda)))
     }
-    poismax(0.5)__
+    poismax(0.5)
     
     
     [1] 0.0001002329
     
     
-    poismax(0.5, m = 9)__
+    poismax(0.5, m = 9)
     
     
     [1] 3.43549e-07
 
-__
+
 
 연습 문제 1.5
 
 에피토프 예제에서, 시뮬레이션을 사용하여 100번의 시행 중 최댓값이 9 이상일 확률을 찾으세요. "확률이 0.000001보다 작다"는 것을 증명하려면 몇 번의 시뮬레이션이 필요할까요?
 
-__
+
 
 연습 문제 1.6
 
@@ -941,13 +943,13 @@ R에서 `?Distributions`를 사용하여 가용한 분포 리스트를 확인해
 
 17 이들은 단지 기본 R 설치 시 함께 제공되는 것들입니다. 추가 패키지들에는 더 많이 있으며, [CRAN 태스크 뷰: 확률 분포](https://cran.r-project.org/web/views/Distributions.html)를 참조하세요.
 
-__
+
 
 연습 문제 1.7
 
 Poisson(3) 확률 변수의 인스턴스 100개를 생성하세요. 평균은 얼마인가요? R 함수 `var`로 계산된 분산은 얼마인가요?
 
-__
+
 
 연습 문제 1.8
 
@@ -961,20 +963,20 @@ __
     
     if (!requireNamespace("BiocManager", quietly = TRUE))
         install.packages("BiocManager")
-    BiocManager::install(c("Biostrings", "BSgenome.Celegans.UCSC.ce2"))__
+    BiocManager::install(c("Biostrings", "BSgenome.Celegans.UCSC.ce2"))
 
 그 후에, 다른 R 패키지들을 로드하는 것과 같이 유전체 서열 패키지를 로드할 수 있습니다.
 
-__
+
 
 해결책
 
-__
+
 
     
     
     library("BSgenome.Celegans.UCSC.ce2")
-    Celegans __
+    Celegans
     
     
     | BSgenome object for Worm
@@ -990,20 +992,20 @@ __
     | access a given sequence, see '?BSgenome' for more information.
     
     
-    seqnames(Celegans)__
+    seqnames(Celegans)
     
     
     [1] "chrI"   "chrII"  "chrIII" "chrIV"  "chrV"   "chrX"   "chrM"  
     
     
-    Celegans$chrM __
+    Celegans$chrM
     
     
     13794-letter DNAString object
     seq: CAGTAAATAGTTTAATAAAAATATAGCATTTGGGTT...TATTTATAGATATATACTTTGTATATATCTATATTA
     
     
-    class(Celegans$chrM)__
+    class(Celegans$chrM)
     
     
     [1] "DNAString"
@@ -1011,7 +1013,7 @@ __
     [1] "Biostrings"
     
     
-    length(Celegans$chrM)__
+    length(Celegans$chrM)
     
     
     [1] 13794
@@ -1019,20 +1021,20 @@ __
     
     library("Biostrings")
     lfM = letterFrequency(Celegans$chrM, letters=c("A", "C", "G", "T"))
-    lfM __
+    lfM
     
     
        A    C    G    T 
     4335 1225 2055 6179 
     
     
-    sum(lfM)__
+    sum(lfM)
     
     
     [1] 13794
     
     
-    lfM / sum(lfM)__
+    lfM / sum(lfM)
     
     
              A          C          G          T 
@@ -1042,7 +1044,7 @@ _C. elegans_ 염색체 M과 동일한 길이를 가진 무작위(각 글자가 �
 
     
     
-    t(rmultinom(1, length(Celegans$chrM), p = rep(1/4, 4)))__
+    t(rmultinom(1, length(Celegans$chrM), p = rep(1/4, 4)))
     
     
          [,1] [,2] [,3] [,4]
@@ -1052,7 +1054,7 @@ _C. elegans_ 염색체 M과 동일한 길이를 가진 무작위(각 글자가 �
 
     
     
-    length(Celegans$chrM) / 4 __
+    length(Celegans$chrM) / 4
     
     
     [1] 3448.5
@@ -1065,7 +1067,7 @@ _C. elegans_ 염색체 M과 동일한 길이를 가진 무작위(각 글자가 �
       sum((o-e)^2 / e)
     }
     oe = oestat(o = lfM, e = length(Celegans$chrM) / 4)
-    oe __
+    oe
     
     
     [1] 4386.634
@@ -1078,7 +1080,7 @@ _C. elegans_ 염색체 M과 동일한 길이를 가진 무작위(각 글자가 �
     n = length(Celegans$chrM)
     expected = rep(n / 4, 4)
     oenull = replicate(B,
-      oestat(e = expected, o = rmultinom(1, n, p = rep(1/4, 4))))__
+      oestat(e = expected, o = rmultinom(1, n, p = rep(1/4, 4))))
 
 Durbin, Richard, Sean Eddy, Anders Krogh, and Graeme Mitchison. 1998.
 _Biological Sequence Analysis_. Cambridge University Press.
@@ -1093,3 +1095,27 @@ Robert, Christian, and George Casella. 2009. _Introducing Monte Carlo Methods
 with R_. Springer Science & Business Media.
 
 페이지는 R 버전 4.5.1 (2025-06-13)을 사용하여 2025-09-01 01:33에 빌드되었습니다.
+## 1.6 요약
+
+이 장에서는 다음과 같은 핵심 개념들을 배웠습니다:
+
+*   **이산 확률 변수**: 카운트 데이터(돌연변이 수, 리드 수 등)를 모델링하는 데 사용됩니다.
+*   **베르누이 및 이항 분포**: 성공/실패와 같은 이진 사건의 횟수를 모델링합니다.
+*   **푸아송 분포**: 성공 확률이 매우 낮은 희귀 사건을 모델링하는 데 유용하며, 단일 매개변수 \(\lambda\)에 의존합니다.
+*   **다항 분포**: 결과가 세 가지 이상인 범주형 사건의 카운트를 모델링합니다.
+*   **R을 이용한 시뮬레이션**: ,  등의 함수를 사용하여 확률 모델로부터 데이터를 생성하고 시각화할 수 있습니다.
+
+## 1.6 요약 및 핵심 용어
+
+이 장에서 우리는 이산형 데이터(discrete data)를 모델링하는 데 사용되는 세 가지 중요한 확률 분포를 살펴보았습니다.
+
+*   **베르누이(Bernoulli) 시행**: 결과가 두 가지(성공/실패, 앞면/뒷면, 0/1)뿐인 단일 시행입니다.
+*   **이항(Binomial) 분포 (\(B(n, p)\))**: \(n\)번의 독립적인 베르누이 시행에서 성공 확률이 \(p\)일 때, 총 성공 횟수 \(k\)의 확률 분포입니다.
+    *   공식: \(P(X=k) = {n \choose k} p^k (1-p)^{n-k}\)
+    *   평균: \(np\), 분산: \(np(1-p)\)
+*   **푸아송(Poisson) 분포 (\(P(\lambda)\))**: 희귀한 사건이 발생하는 횟수를 모델링합니다. 이항 분포에서 \(n\)이 매우 크고 \(p\)가 매우 작을 때(\(np \approx \lambda\)) 좋은 근사치가 됩니다.
+    *   공식: \(P(X=k) = \frac{e^{-\lambda} \lambda^k}{k!}\)
+    *   평균: \(\lambda\), 분산: \(\lambda\)
+*   **다항(Multinomial) 분포**: 결과가 두 가지 이상(예: DNA의 A, C, G, T)인 시행을 \(n\)번 반복했을 때 각 결과의 카운트 분포입니다.
+
+이러한 생성 모델(generative models)을 사용하면 데이터를 시뮬레이션하고, 관측된 데이터가 우리가 가정한 모델(무작위성)과 일치하는지 통계적으로 평가할 수 있습니다.
